@@ -1,6 +1,6 @@
 
 import { ajouterBouton } from './js/btn/startBtn.js';
-import {refreshPage} from './js/event/refreshPage.js'
+import { refreshPage } from './js/event/refreshPage.js'
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "conteneur"
 ajouterBouton('conteneur');

@@ -1,5 +1,6 @@
-function refreshPage() {
-    const container = document.getElementById("container");
+export function refreshPage() {
+    const container = document.getElementById("conteneur");
+    console.log('Page refreshed');
     
     if (container) {
         container.innerHTML = ""; // Efface tout le contenu de la div "container"

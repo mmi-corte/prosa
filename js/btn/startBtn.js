@@ -17,10 +17,7 @@ export function ajouterBouton(conteneurId) {
     // Définit le texte du bouton
     bouton.textContent = "Start";
     bouton.id = "btnStart"
-    // Ajoute une action au clic
-    bouton.onclick = function () {
-        alert("Bouton cliqué !");
-    };
+   
     
     // Ajoute le bouton à la div
     conteneur.appendChild(bouton);
