@@ -1,31 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sampora</title>
-
-    <!-- <script type="module" src="js/functions.js"></script> -->
+<h<!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modules JavaScript</title>
+    </head>
+    <body>
+        <div id="conteneur"></div> <!-- La seule div de la page -->
     
-</head>
-<body>
-    
-    <script type="module" >
-    
-    import { isMobileDevice } from "./js/functions.js";
-
-        window.onload = function() {
-        
-             // Exécuter la fonction lors du chargement de la page
-             if (isMobileDevice()) {
-                console.log("Vous utilisez un appareil mobile.");
-                // Ici, vous pouvez ajouter d'autres actions spécifiques pour les appareils mobiles
-            } else {
-                console.log("Vous utilisez un ordinateur de bureau.");
-                // Ici, vous pouvez ajouter d'autres actions spécifiques pour les ordinateurs
-            }
-        }
-        
-        </script>
-</body>
-</html>
+        <!-- Import du script principal -->
+        <script type="module" src="main.js"></script>
+    </body>
+    </html>
