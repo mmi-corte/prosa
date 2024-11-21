@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-image: url('https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/05/AP_Portrait_Landscapes_Stu_Meech-16.jpg');
+    
 }
 
 #conteneur {
@@ -23,6 +23,8 @@ html, body {
     height: 100%;
     object-fit: cover; /* L'image remplit l'espace sans déformation */
     z-index: 0; /* Place l'image derrière le bouton */
+    backdrop-filter: blur(2px);
+    
 }
 
 .btn{
@@ -30,4 +32,5 @@ html, body {
     top: 70%;
     width: 100px;
     height: 25px;
+    
 }
