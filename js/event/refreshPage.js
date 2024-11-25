@@ -1,5 +1,5 @@
 export function refreshPage() {
-    const container = document.getElementById("conteneur");
+    const container = document.getElementById("container");
     console.log('Page refreshed');
     
     if (container) {
