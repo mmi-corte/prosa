@@ -21,3 +21,33 @@ export function addTxt(conteneurId) {
     // Ajoute le paragraphe à la div
     container.appendChild(txt);
 }
+export function addTxtWithBoldWord(containerId, text, boldWord) {
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`No element found with id "${containerId}"`);
+        return;
+    }
+
+    // Split the text into parts around the bold word
+    const parts = text.split(boldWord);
+
+    // Iterate over the parts to rebuild the text with the bold word
+    for (let i = 0; i < parts.length; i++) {
+        // Add the normal text part
+        container.appendChild(document.createTextNode(parts[i]));
+
+        // Add the bold word except after the last part
+        if (i < parts.length - 1) {
+            const boldText = document.createElement("strong");
+            boldText.textContent = boldWord;
+
+            // Add a class for styling if needed
+            boldText.className = "bold";
+            container.appendChild(boldText);
+        }
+    }
+}
+
+
+
