@@ -15,7 +15,7 @@ html, body {
     align-items: center;
 }
 
-#container img {
+#bgimage {
     position: absolute;
     top: 0;
     left: 0;
@@ -37,4 +37,42 @@ html, body {
     width: 100px;
     height: 25px;
     
+}
+
+.logotxt
+{
+    position: relative;
+    z-index: 2;
+    font-family: "Asap", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+        margin-bottom: 0;
+}
+
+.logoimg
+{
+    scale:0.25 ;
+}
+
+.logo
+{
+    position: relative;
+    z-index: 1;
+}
+
+.btnInv
+{
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
 }
