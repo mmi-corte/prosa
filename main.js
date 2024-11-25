@@ -1,8 +1,8 @@
-import { ajouterBouton } from './js/btn/startBtn.js';
-import { refreshPage } from './js/event/refreshPage.js';
-import { addForm } from './js/form/addForm.js';
-import { addImgBackground } from './js/imgObjet/addImg.js';
-import { addTxt } from './js/Texte/addTxt.js';
+import { ajouterBouton } from './js/button.js';
+import { refreshPage } from './js/refreshPage.js';
+import { addForm } from './js/form.js';
+import { addImgBackground } from './js/fonctionImg.js';
+import { addTxt } from './js/texte.js';
 
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
