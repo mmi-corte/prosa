@@ -6,7 +6,7 @@ import { addTxt, addTxtWithBoldWord } from './js/texte.js';
 
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
-ajouterBouton('container', 'Start', 'btnStart');
+ajouterBouton('container', 'Commencer', 'btnStart');
 
 // Récupère le bouton Start
 const boutonStart = document.getElementById("btnStart");
@@ -15,8 +15,14 @@ const boutonStart = document.getElementById("btnStart");
 boutonStart.addEventListener("click", function () {
     // Efface la page et ajoute un formulaire et un bouton Valider
     refreshPage();
+    addTxt('container', 'Veuillez entrer votre nom');
+    const labelform = document.getElementsByClassName('txt');
+    labelform[0].id='txt1'
     addForm('container');
     ajouterBouton('container', 'Valider', 'btnSubmit');
+    addImg('container','assets/logo.png','logoimg');
+    const logoimg = document.getElementsByClassName('logoimg');
+    logoimg[0].id='logoImgP2'
 
     // Récupère le bouton Submit (après sa création)
     const boutonSubmit = document.getElementById("btnSubmit");

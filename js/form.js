@@ -11,11 +11,11 @@ export function addForm(containerID) {
 
     // Création d'un formulaire
     const form = document.createElement('form');
-
+    form.className = 'form'; // Définir la class du formulaire
     // Création d'un champ de saisie
     const input = document.createElement('input');
     input.type = 'text'; // Définir le type de champ
-    input.placeholder = 'Entrez votre pseudo'; // Ajouter le texte gris
+    input.placeholder = ''; // Ajouter le texte gris
     
     // Ajouter le champ au formulaire
     form.appendChild(input);

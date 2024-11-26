@@ -3,28 +3,27 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    
+    background-color: #e6b57a;
 }
 
 #container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
 #bgimage {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* L'image remplit l'espace sans déformation */
-    z-index: 0; /* Place l'image derrière le bouton */
-    backdrop-filter: blur(2px);
-    
+    background: rgb(230,181,122);
+    background: linear-gradient(149deg, rgba(230,181,122,1) 0%, rgba(232,188,134,1) 42%, rgba(245,225,202,1) 100%); 
+    z-index: -1; /* Place l'image derrière le bouton */
+ 
 }
 #container h1 {
     z-index: 1;
@@ -32,35 +31,58 @@ html, body {
 }
 
 .btn{
-    position: absolute;
-    top: 70%;
-    width: 100px;
-    height: 25px;
-    
+    position: inherit;
+    width: auto;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #E6B57A;
+    font-family: "Asap", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+    color: inherit;
+    text-decoration: none; /* Remove underline */
+    -webkit-appearance: none; /* Remove default styling on iOS */
+    -moz-appearance: none; /* Remove default styling on Firefox */
+    appearance: none;
+    margin: 20px;
+    font-size: 20px;
 }
 
-.logotxt
-{
-    position: relative;
-    z-index: 2;
-    font-family: "Asap", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-        margin-bottom: 0;
-}
 
 .logoimg
 {
-    scale:0.25 ;
+    width: 75%;
+    margin: 25px;
 }
 
-.logo
+#logoImgP1
 {
-    position: relative;
-    z-index: 1;
+    margin-top: 230px;
+}
+
+#logoImgP2
+{
+    width: 50%;
+    margin-top: 100px;
+}
+
+.form
+{
+    display: flex;
+    justify-content: center;
+}
+
+.form input
+{
+    border-radius: 10px;
+    border-color: #DDA861;
+    background-color: #E6B57A;
+    border-style: none;
+    width: 100%;
+    height: 40px;
 }
 
 .btnInv
@@ -75,4 +97,18 @@ html, body {
     padding: 0;
     font: inherit;
     color: inherit;
+    
+}
+
+.txt
+{
+    font-family: "Asap", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#txt1
+{
+    margin-top: 300px;
 }
