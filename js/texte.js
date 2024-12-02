@@ -18,32 +18,43 @@ export function addTxt(conteneurId, content) {
     // Ajoute le paragraphe à la div
     container.appendChild(txt);
 }
-export function addTxtWithBoldWord(containerId, text, boldWord) {
+export function addTxtWithBoldWord(containerId, textContent, boldWord) {
     const container = document.getElementById(containerId);
 
-    if (!container) {
-        console.error(`No element found with id "${containerId}"`);
+    // Vérifie si le conteneur est un élément valide
+    if (!(container instanceof HTMLElement)) {
+        console.error("Le conteneur fourni n'est pas un élément HTML valide.");
         return;
     }
 
-    // Split the text into parts around the bold word
-    const parts = text.split(boldWord);
+    // Création de la balise texte (par exemple, une balise <p>)
+    const textElement = document.createElement("p");
 
-    // Iterate over the parts to rebuild the text with the bold word
-    for (let i = 0; i < parts.length; i++) {
-        // Add the normal text part
-        container.appendChild(document.createTextNode(parts[i]));
+    // Ajoute automatiquement la classe 'txt'
+    textElement.classList.add("txt");
 
-        // Add the bold word except after the last part
-        if (i < parts.length - 1) {
-            const boldText = document.createElement("strong");
-            boldText.textContent = boldWord;
+    // Remplace les occurrences du mot en gras
+    const textParts = textContent.split(new RegExp(`(${boldWord})`, 'gi'));
 
-            // Add a class for styling if needed
-            boldText.className = "bold";
-            container.appendChild(boldText);
+    textParts.forEach((part) => {
+        if (part.toLowerCase() === boldWord.toLowerCase()) {
+            // Si c'est le mot à mettre en gras
+            const boldElement = document.createElement("strong");
+            boldElement.textContent = part;
+            textElement.appendChild(boldElement);
+        } else {
+            // Remplace les caractères \n par des sauts de ligne
+            part.split('\n').forEach((line, index, array) => {
+                textElement.appendChild(document.createTextNode(line));
+                if (index < array.length - 1) {
+                    textElement.appendChild(document.createElement("br"));
+                }
+            });
         }
-    }
+    });
+
+    // Ajoute l'élément texte au conteneur
+    container.appendChild(textElement);
 }
 
 

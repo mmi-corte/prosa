@@ -3,7 +3,8 @@ import { refreshPage } from './js/refreshPage.js';
 import { addForm } from './js/form.js';
 import { addImgBackground, addImg } from './js/fonctionImg.js';
 import { addTxt, addTxtWithBoldWord } from './js/texte.js';
-
+import {addSVG} from './js/svg.js';
+import { warningSvg } from './assets/svgcode.js';
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
 ajouterBouton('container', 'Commencer', 'btnStart');
@@ -30,18 +31,23 @@ boutonStart.addEventListener("click", function () {
     // Ajoute un écouteur d'événement "click" au bouton Submit
     boutonSubmit.addEventListener("click", function () {
         refreshPage();
-        addImg('container','https://w7.pngwing.com/pngs/1012/979/png-transparent-computer-icons-picto-thumbnail.png','icon');
-        addTxtWithBoldWord('container','Pour votre sécurité, restez attentif à votre environnement et évitez les zones à risque', 'sécurité');
-        //addImgBackground ('container','https://i.pinimg.com/736x/81/1a/4c/811a4c0afe4051eb8353a563b58673b8.jpg');
-        addImg('container','https://w7.pngwing.com/pngs/1012/979/png-transparent-computer-icons-picto-thumbnail.png','logo');
-        ajouterBouton('container','','btnInv');
 
-        const btnInv = document.getElementById('btnInv');
-        btnInv.addEventListener("click", function(){
-            refreshPage();
-            addTxt('container');
-        }
-    );
+        //svg
+        addSVG('container', warningSvg);
+        const svg = document.getElementsByTagName('svg');
+        svg[0].id='svg1'
+        //attention txt
+        addTxt('container', 'ATTENTION');
+        const disclaimer = document.getElementsByClassName('txt');
+        disclaimer[0].id='txt3'
+        //text warning
+        addTxtWithBoldWord('container','Pour votre sécurité, restez\nattentif à votre\nenvironnement et évitez\nles zones à risques.','sécurité');
+        disclaimer[1].id='txt2'
+        //logo
+        addImg('container','assets/logo.png','logoimg');
+        const logoimg = document.getElementsByClassName('logoimg');
+        logoimg[0].id='logoImgP2'
+        
     });
 });
 

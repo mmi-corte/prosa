@@ -6,6 +6,10 @@ html, body {
     background-color: #e6b57a;
 }
 
+strong{
+    height: 18px;
+}
+
 #container {
     width: 100%;
     height: 100%;
@@ -61,12 +65,15 @@ html, body {
 #logoImgP1
 {
     margin-top: 230px;
+    animation: fadeIn 4s infinite;
 }
 
 #logoImgP2
 {
+    position: fixed;
     width: 50%;
-    margin-top: 100px;
+    bottom: 15px;
+    animation: fadeIn 4s infinite;
 }
 
 .form
@@ -106,9 +113,44 @@ html, body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    text-align: center;
+    max-width: 80%;
 }
 
 #txt1
 {
-    margin-top: 300px;
+    margin-top: 250px;
+}
+
+#txt2
+{
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#txt3{
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 0.6;
+        transform: translateY(0px);
+    }
+}
+
+#svg1
+{
+    margin-top: 150px;
+    width: 100px;
+    height: 100px;
 }
