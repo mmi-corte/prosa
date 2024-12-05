@@ -154,3 +154,14 @@ strong{
     width: 100px;
     height: 100px;
 }
+
+/*---------------------Style Narration----------------------*/
+.narration{
+    background-color: rgba(255, 255, 255, 0.5); /* 0.5 pour 50% de transparence */
+    padding: 10px; /* Ajoutez de l'espace autour du texte */
+    border-radius: 6px; /* Coins arrondis si nécessaire */
+    margin: 5px;
+    position: absolute;
+    bottom: 0;
+    font-family: "Asap", serif;
+}

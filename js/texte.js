@@ -1,3 +1,8 @@
+//firebase
+import { db } from '../firebaseConfig.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+
 // buttonModule.js
 export function addTxt(conteneurId, content) {
     // Sélectionne la div par son ID
@@ -56,6 +61,27 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
     // Ajoute l'élément texte au conteneur
     container.appendChild(textElement);
 }
+//---------------------------------------------------
+// firestoreFunctions.js (ou main.js si vous préférez tout garder dans un seul fichier)
 
 
 
+// Fonction pour récupérer un scénario basé sur un stepCode
+export async function recupererScenarioParStepCode(stepCode, conteneurId,txtClassName) {
+    try {
+        const querySnapshot = await getDocs(collection(db, "scenario"));
+        querySnapshot.forEach((doc) => {
+            if (doc.data().stepCode === stepCode) {
+                // Trouver le conteneur par son ID et ajouter le texte
+                const conteneur = document.getElementById(conteneurId);
+                const text = document.createElement("p");
+                text.textContent = doc.data().txt;
+                text.className = txtClassName;
+                conteneur.appendChild(text);
+                console.log("Texte trouvé :", doc.data().txt);
+            }
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données Firestore :", error);
+    }
+}
