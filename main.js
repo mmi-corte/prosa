@@ -2,7 +2,7 @@ import { addInvisibleBtn, ajouterBouton } from './js/button.js';
 import { refreshPage } from './js/refreshPage.js';
 import { addForm } from './js/form.js';
 import { addImgBackground, addImg } from './js/fonctionImg.js';
-import { addTxt, addTxtWithBoldWord ,recupererScenarioParStepCode} from './js/texte.js';
+import { addTxt, addTxtWithBoldWord ,addTxtNarration, addNameCharacter, addDiv,handleFormSubmit} from './js/texte.js';
 import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 
@@ -31,6 +31,8 @@ boutonStart.addEventListener("click", function () {
 
     // Ajoute un écouteur d'événement "click" au bouton Submit
     boutonSubmit.addEventListener("click", function () {
+        handleFormSubmit("formUser",'btnSubmit');
+
         refreshPage();
 
         //svg
@@ -54,7 +56,9 @@ boutonStart.addEventListener("click", function () {
         const boutonInv = document.getElementById("btnInv1");
         boutonInv.addEventListener("click", function () {
             refreshPage();
-            recupererScenarioParStepCode("E1Narra","container","narration");
+            addDiv("container","divNarra1","dialogBox")
+            addNameCharacter("E1Narra",'divNarra1',"nameCharacter");
+            addTxtNarration("E1Narra","divNarra1","narration");
             
         });
 

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -6,7 +7,7 @@ html, body {
     background-color: #e6b57a;
 }
 
-strong{
+strong {
     height: 18px;
 }
 
@@ -24,17 +25,19 @@ strong{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(230,181,122);
-    background: linear-gradient(149deg, rgba(230,181,122,1) 0%, rgba(232,188,134,1) 42%, rgba(245,225,202,1) 100%); 
-    z-index: -1; /* Place l'image derrière le bouton */
- 
+    background: rgb(230, 181, 122);
+    background: linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%);
+    z-index: -1;
+    /* Place l'image derrière le bouton */
+
 }
+
 #container h1 {
     z-index: 1;
     font-size: 5rem;
 }
 
-.btn{
+.btn {
     position: inherit;
     width: auto;
     height: 40px;
@@ -47,43 +50,41 @@ strong{
     font-style: normal;
     text-transform: uppercase;
     color: inherit;
-    text-decoration: none; /* Remove underline */
-    -webkit-appearance: none; /* Remove default styling on iOS */
-    -moz-appearance: none; /* Remove default styling on Firefox */
+    text-decoration: none;
+    /* Remove underline */
+    -webkit-appearance: none;
+    /* Remove default styling on iOS */
+    -moz-appearance: none;
+    /* Remove default styling on Firefox */
     appearance: none;
     margin: 20px;
     font-size: 20px;
 }
 
 
-.logoimg
-{
+.logoimg {
     width: 75%;
     margin: 25px;
 }
 
-#logoImgP1
-{
+#logoImgP1 {
     margin-top: 230px;
     animation: fadeIn 4s infinite;
 }
 
-#logoImgP2
-{
+#logoImgP2 {
     position: fixed;
     width: 50%;
     bottom: 15px;
     animation: fadeIn 4s infinite;
 }
 
-.form
-{
+.form {
     display: flex;
     justify-content: center;
 }
 
-.form input
-{
+.form input {
     border-radius: 10px;
     border-color: #DDA861;
     background-color: #E6B57A;
@@ -92,8 +93,7 @@ strong{
     height: 40px;
 }
 
-.btnInv
-{
+.btnInv {
     position: absolute;
     left: 50%;
     width: 50%;
@@ -104,11 +104,10 @@ strong{
     padding: 0;
     font: inherit;
     color: inherit;
-    
+
 }
 
-.txt
-{
+.txt {
     font-family: "Asap", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -117,18 +116,16 @@ strong{
     max-width: 80%;
 }
 
-#txt1
-{
+#txt1 {
     margin-top: 250px;
 }
 
-#txt2
-{
+#txt2 {
     margin-top: 20px;
     font-size: 18px;
 }
 
-#txt3{
+#txt3 {
     margin-top: 20px;
     font-size: 30px;
 }
@@ -138,30 +135,46 @@ strong{
         opacity: 0.6;
         transform: translateY(0);
     }
+
     50% {
         opacity: 1;
         transform: translateY(-10px);
     }
+
     100% {
         opacity: 0.6;
         transform: translateY(0px);
     }
 }
 
-#svg1
-{
+#svg1 {
     margin-top: 150px;
     width: 100px;
     height: 100px;
 }
 
 /*---------------------Style Narration----------------------*/
-.narration{
-    background-color: rgba(255, 255, 255, 0.5); /* 0.5 pour 50% de transparence */
-    padding: 10px; /* Ajoutez de l'espace autour du texte */
-    border-radius: 6px; /* Coins arrondis si nécessaire */
-    margin: 5px;
+.dialogBox {
+    background-color: rgba(255, 255, 255, 0.5);
+
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+
+
     position: absolute;
     bottom: 0;
     font-family: "Asap", serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+}
+
+.nameCharacter {
+    font-family: "Asap", serif;
+    position: relative;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
 }

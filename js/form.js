@@ -12,6 +12,7 @@ export function addForm(containerID) {
     // Création d'un formulaire
     const form = document.createElement('form');
     form.className = 'form'; // Définir la class du formulaire
+    form.id='formUser';
     // Création d'un champ de saisie
     const input = document.createElement('input');
     input.type = 'text'; // Définir le type de champ

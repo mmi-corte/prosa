@@ -67,7 +67,7 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
 
 
 // Fonction pour récupérer un scénario basé sur un stepCode
-export async function recupererScenarioParStepCode(stepCode, conteneurId,txtClassName) {
+export async function addTxtNarration(stepCode, conteneurId,txtClassName) {
     try {
         const querySnapshot = await getDocs(collection(db, "scenario"));
         querySnapshot.forEach((doc) => {
@@ -84,4 +84,88 @@ export async function recupererScenarioParStepCode(stepCode, conteneurId,txtClas
     } catch (error) {
         console.error("Erreur lors de la récupération des données Firestore :", error);
     }
+}
+
+// Fonction pour récupérer le nom du personnage
+export async function addNameCharacter(stepCode, conteneurId,txtClassName) {
+    try {
+        const querySnapshot = await getDocs(collection(db, "scenario"));
+        querySnapshot.forEach((doc) => {
+            if (doc.data().stepCode === stepCode) {
+                // Trouver le conteneur par son ID et ajouter le texte
+                const conteneur = document.getElementById(conteneurId);
+                const txtPerso = document.createElement("h2");
+                txtPerso.textContent = doc.data().personnage;
+                txtPerso.className = txtClassName;
+                conteneur.appendChild(txtPerso);
+                console.log("Texte trouvé :", doc.data().personnage);
+            }
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données Firestore :", error);
+    }
+}
+export function addDiv(conteneurId, divId, divClassName) {
+    const conteneur = document.getElementById(conteneurId);
+
+    if (!conteneur) {
+        console.error(`Conteneur avec l'ID '${conteneurId}' introuvable.`);
+        return;
+    }
+
+    // Crée l'élément div
+    const nouvelleDiv = document.createElement("div");
+    nouvelleDiv.id = divId;
+    nouvelleDiv.className = divClassName;
+    
+
+    // Ajoute la div au conteneur
+    conteneur.appendChild(nouvelleDiv);
+
+   
+}
+
+export async function handleFormSubmit(formId, buttonId) {
+    const form = document.getElementById(formId);
+    const button = document.getElementById(buttonId);
+
+    // Vérification si le formulaire et le bouton existent
+    if (!form || !button) {
+        console.error(`Aucun formulaire ou bouton trouvé avec les IDs "${formId}" et "${buttonId}"`);
+        return;
+    }
+
+    // Écouteur d'événement pour le bouton
+    button.addEventListener("click", async function (e) {
+        e.preventDefault(); // Empêche la soumission du formulaire (rechargement de la page)
+
+        // Récupérer la valeur du champ de texte
+        const input = form.querySelector('input[type="text"]');
+        if (!input) {
+            console.error("Aucun champ de texte trouvé dans le formulaire.");
+            return;
+        }
+
+        const pseudo = input.value.trim();
+        if (pseudo === "") {
+            alert("Veuillez entrer un pseudo !");
+            return;
+        }
+
+        try {
+            // Envoi des données à Firestore dans la collection 'utilisateurs'
+            const docRef = await addDoc(collection(db, "utilisateurs"), {
+                pseudo: pseudo, // Le pseudo saisi par l'utilisateur
+                timestamp: new Date() // Ajouter un timestamp
+            });
+            console.log("Données enregistrées avec succès :", docRef.id);
+
+            // Message de confirmation
+            alert("Pseudo enregistré avec succès !");
+            form.reset(); // Optionnel : Réinitialiser le formulaire après l'envoi
+        } catch (error) {
+            console.error("Erreur lors de l'ajout du document :", error);
+            alert("Une erreur est survenue, veuillez réessayer.");
+        }
+    });
 }
