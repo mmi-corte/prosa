@@ -1,10 +1,11 @@
-import { addInvisibleBtn, ajouterBouton } from './js/button.js';
+import { addBtnImg, addInvisibleBtn, ajouterBouton } from './js/button.js';
 import { refreshPage } from './js/refreshPage.js';
 import { addForm } from './js/form.js';
 import { addImgBackground, addImg } from './js/fonctionImg.js';
-import { addTxt, addTxtWithBoldWord ,addTxtNarration, addNameCharacter, addDiv,handleFormSubmit} from './js/texte.js';
+import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit } from './js/texte.js';
 import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
+import { showStaticMap } from './js/map.js';
 
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
@@ -31,7 +32,7 @@ boutonStart.addEventListener("click", function () {
 
     // Ajoute un écouteur d'événement "click" au bouton Submit
     boutonSubmit.addEventListener("click", function () {
-        handleFormSubmit("formUser",'btnSubmit');
+        handleFormSubmit("formUser", 'btnSubmit');
 
         refreshPage();
 
@@ -56,10 +57,25 @@ boutonStart.addEventListener("click", function () {
         const boutonInv = document.getElementById("btnInv1");
         boutonInv.addEventListener("click", function () {
             refreshPage();
-            addDiv("container","divNarra1","dialogBox")
-            addNameCharacter("E1Narra",'divNarra1',"nameCharacter");
-            addTxtNarration("E1Narra","divNarra1","narration");
-            
+            addDiv("container", "divNarra1", "dialogBox")
+            addNameCharacter("E1Narra", 'divNarra1', "nameCharacter");
+            addTxtNarration("E1Narra", "divNarra1", "narration");
+            ajouterBouton('container', 'Commencer', 'btnMap', 'btn');
+            const btnMap = document.getElementById("btnMap");
+            btnMap.addEventListener("click", function () {
+                refreshPage();
+                // Liste des marqueurs à ajouter sur la carte
+                const markers = [
+                    { latitude: 42.308553, longitude: 9.152054 },  // Premier marqueur
+                    { latitude: 42.315000, longitude: 9.153000 },  // Deuxième marqueur
+                    { latitude: 42.305000, longitude: 9.148000 },  // Troisième marqueur
+                ];
+                //showStaticMap("42.309409", "9.149022", '15', 'container', "8b92289a637347489b3b13811907ebdd",markers);
+                showStaticMap('container', "42.309409", '9.149022', "15","8b92289a637347489b3b13811907ebdd" , markers);
+
+            })
+
+
         });
     });
 });
