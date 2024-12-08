@@ -61,9 +61,6 @@ boutonStart.addEventListener("click", function () {
             addTxtNarration("E1Narra","divNarra1","narration");
             
         });
-
-
-
     });
 });
 
