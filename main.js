@@ -6,6 +6,9 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
+import { loadSound, suspendSound } from './js/Sound/sound.js';
+
+// Create an object to store the audio players
 
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
@@ -16,6 +19,8 @@ const boutonStart = document.getElementById("btnStart");
 
 // Ajoute un écouteur d'événement "click" au bouton Start
 boutonStart.addEventListener("click", function () {
+    // button sound
+    loadSound('assets/sound/buttoneffect.mp3');
     // Efface la page et ajoute un formulaire et un bouton Valider
     refreshPage();
     addTxt('container', 'Veuillez entrer votre nom');
@@ -34,6 +39,7 @@ boutonStart.addEventListener("click", function () {
     boutonSubmit.addEventListener("click", function () {
         handleFormSubmit("formUser", 'btnSubmit');
 
+        loadSound('assets/sound/buttoneffect.mp3');
         refreshPage();
 
         //svg
