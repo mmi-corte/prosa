@@ -51,7 +51,7 @@ boutonStart.addEventListener("click", function () {
     const labelform = document.getElementsByClassName('txt');
     labelform[0].id = 'txt1'
     addForm('container');
-    ajouterBouton('container', 'Valider', 'btnSubmit', 'btn');
+
     addImg('container', 'assets/logo.png', 'logoimg');
     const logoimg = document.getElementsByClassName('logoimg');
     logoimg[0].id = 'logoImgP2'
@@ -87,10 +87,12 @@ boutonStart.addEventListener("click", function () {
         const boutonInv = document.getElementById("btnInv1");
         boutonInv.addEventListener("click", function () {
             refreshPage();
-            addDiv("container", "divNarra1", "dialogBox")
+            addImg("container", "assets/berger.jpg", 'imgIntro');
+            addDiv("container", "divNarra1", "dialogBox");
             addNameCharacter("E1Narra", 'divNarra1', "nameCharacter");
             addTxtNarration("E1Narra", "divNarra1", "narration");
-            ajouterBouton('container', 'Commencer', 'btnMap', 'btn');
+            //-----------------MAP----------------------
+            /*ajouterBouton('container', 'Commencer', 'btnMap', 'btn');
             const btnMap = document.getElementById("btnMap");
             btnMap.addEventListener("click", function () {
                 refreshPage();
@@ -105,7 +107,7 @@ boutonStart.addEventListener("click", function () {
 
                 //test fight
                 lunchFight(weapons, enemies[0]);
-            })
+            })*/
             
 
         });
