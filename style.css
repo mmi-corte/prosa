@@ -116,6 +116,18 @@ strong {
     max-width: 80%;
 }
 
+.txtTitle {
+    font-family: "Asap", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    text-align: center;
+    font-size: 20px;
+    max-width: 80%;
+    margin: 10px;
+    margin-bottom:0;
+}
+
 #txt1 {
     margin-top: 250px;
 }
@@ -191,4 +203,77 @@ strong {
     background-color: #f9f9f9;
     overflow: hidden;
     object-fit: contain;
+}
+
+.fightContainer
+{
+    display: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgb(230, 181, 122);
+    background: linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%);
+}
+
+.fightBloc
+{
+    position: fixed;
+    top: 100px;
+    left: 150px;
+    width: 200px;
+    height: 55px;
+    background-color: rgb(255, 255, 255, .8);
+    border: black 1px solid;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.lifeGaugeContainer{
+    display: flex;
+
+    align-items: center;
+    width: 80%;
+    height: 5px;
+    border: #f9f9f9, 1px solid;
+    border-radius: 5px;
+    background-color: white; 
+    box-shadow: 0px 1px 1px black;
+    margin-top: -10px;
+}
+
+.lifeGauge{
+    width: 100%;
+    height: 100%;
+    background-color: #3BFF00;
+    border-radius: 5px;
+}
+
+#lifeCounter1
+{
+    font-size: 15px;
+    margin-top: 15px;
+    margin-right: 10px;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.enemyContainer{
+    position: fixed;
+    top: 100px;
+    left: 150px;
+    width: 250px;
+    height: 400px;
+    z-index: 0;
+}
+
+.playerContainer{
+    position: fixed;
+    top: 200px;
+    right: 150px;
+    width: 250px;
+    height: 600px;
+    z-index: 0;
+    
 }

@@ -7,6 +7,30 @@ import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
+import { lunchFight } from  './js/fight.js';
+
+var weapons = [
+    {
+        name: "Epée",
+        damage: 10
+    },
+    {
+        name: "Grimoire",
+        damage: 15
+    },
+    {
+        name: "Arc",
+        damage: 20
+    }
+]
+
+const enemies = [
+    {
+        name: "Cerf",
+        hp: 100,
+        damage: 10
+    }
+]
 
 // Create an object to store the audio players
 
@@ -77,10 +101,12 @@ boutonStart.addEventListener("click", function () {
                     { latitude: 42.305000, longitude: 9.148000 },  // Troisième marqueur
                 ];
                 //showStaticMap("42.309409", "9.149022", '15', 'container', "8b92289a637347489b3b13811907ebdd",markers);
-                showStaticMap('container', "42.309409", '9.149022', "15","8b92289a637347489b3b13811907ebdd" , markers);
+                // showStaticMap('container', "42.309409", '9.149022', "15","8b92289a637347489b3b13811907ebdd" , markers);
 
+                //test fight
+                lunchFight(weapons, enemies[0]);
             })
-
+            
 
         });
     });
