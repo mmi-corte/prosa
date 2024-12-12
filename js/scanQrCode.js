@@ -10,26 +10,31 @@ export function startQrScanner(scannerContainerId, expectedUrl) {
 
         // Ajouter l'élément vidéo au conteneur spécifié
         const container = document.getElementById(scannerContainerId);
-        if (container) {
-            container.appendChild(videoElement);
-        } else {
+        if (!container) {
             console.error('Le conteneur spécifié n\'existe pas.');
             reject('Le conteneur est introuvable');
             return;
         }
+        container.appendChild(videoElement);
 
         // Initialisation du scanner QR
         const qrScanner = new QrScanner(videoElement, (result) => {
             console.log('QR code détecté : ', result.data);
-            // Si l'URL scannée correspond à l'URL attendue
-            if (result.data === expectedUrl) {
+
+            // Vérifier si l'URL scannée correspond à l'URL attendue
+            if (result.data.trim() === expectedUrl.trim()) {
                 console.log('QR code valide!');
-                resolve(true);  // Résoudre avec `true` si QR code valide
+                qrScanner.stop(); // Arrêter le scanner immédiatement
+                resolve(true); // Résoudre avec `true` si le QR code est valide
             } else {
                 console.log('QR code invalide!');
-                resolve(false);  // Résoudre avec `false` si QR code invalide
+                qrScanner.stop(); // Arrêter le scanner même si invalide
+                resolve(false); // Résoudre avec `false` si le QR code est invalide
             }
-            qrScanner.stop(); // Arrêter le scanner après avoir trouvé un QR code
+        }, {
+            // Paramètres supplémentaires si nécessaires
+            highlightScanRegion: true, // Met en surbrillance la zone scannée
+            highlightCodeOutline: true // Met en surbrillance les contours détectés
         });
 
         // Démarrer le scanner
@@ -37,5 +42,10 @@ export function startQrScanner(scannerContainerId, expectedUrl) {
             console.error('Erreur lors du démarrage du scanner :', err);
             reject(err); // Rejeter en cas d'erreur
         });
+
+        // Nettoyage si nécessaire lorsque le scanner est arrêté
+        qrScanner._onDecodeFailure = () => {
+            console.log('Aucune détection de QR code pour le moment...');
+        };
     });
 }

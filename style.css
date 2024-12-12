@@ -279,3 +279,18 @@ strong {
     z-index: 0;
     
 }
+/*-----------------------img intro-----------------------------*/
+.imgIntro{
+    width: 110%;
+}
+/*-----------------------Scan Qrcode-----------------------------*/
+#scanner-container {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    border: 1px solid #ddd;
+  }
+  #result {
+    margin-top: 20px;
+  }
+

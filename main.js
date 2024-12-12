@@ -7,7 +7,8 @@ import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
-import { lunchFight } from  './js/fight.js';
+import { lunchFight } from './js/fight.js';
+import { startQrScanner } from './js/scanQrCode.js';
 
 var weapons = [
     {
@@ -108,7 +109,32 @@ boutonStart.addEventListener("click", function () {
                 //test fight
                 lunchFight(weapons, enemies[0]);
             })*/
-            
+            ajouterBouton('container', '', 'btnInv2', "btnInv");
+            // Récupère le bouton du btn invisible
+            const boutonInv2 = document.getElementById("btnInv2");
+            boutonInv2.addEventListener("click", function () {
+                refreshPage();
+                startQrScanner("container", "https://sainte-marthe.glitch.me/").then(result => {
+                    if (result) {
+                        // QR code valide, passer à l'étape suivante
+                        console.log('QR code valide détecté, étape suivante...');
+                        refreshPage();
+                        //--------------Ajouter l'AR----------------------------
+                        addImg("container", "assets/berger.jpg", 'imgIntro');
+                        
+                    } else {
+                        // QR code invalide
+                        console.log('QR code invalide, réessayer...');
+                    }
+                }).catch(err => {
+                    console.error('Erreur lors du scan QR :', err);
+                });
+            });
+
+
+
+
+
 
         });
     });
