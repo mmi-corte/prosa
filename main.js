@@ -9,6 +9,7 @@ import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { startQrScanner } from './js/scanQrCode.js';
+import {setupARScene,setupAudioControls} from './js/ARSaint-mart.js'
 
 var weapons = [
     {
@@ -120,7 +121,13 @@ boutonStart.addEventListener("click", function () {
                         console.log('QR code valide détecté, étape suivante...');
                         refreshPage();
                         //--------------Ajouter l'AR----------------------------
-                        addImg("container", "assets/berger.jpg", 'imgIntro');
+                        //addImg("container", "assets/berger.jpg", 'imgIntro');
+                        // Configuration de la scène AR
+                        setupARScene("container");
+
+                        // Configuration des contrôles audio
+                        setupAudioControls();
+
                         
                     } else {
                         // QR code invalide
