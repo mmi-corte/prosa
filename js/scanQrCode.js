@@ -1,4 +1,4 @@
-import QrScanner from 'https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner.min.js';
+/*import QrScanner from 'https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner.min.js';
 
 QrScanner.WORKER_PATH = 'https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner-worker.min.js';
 
@@ -43,4 +43,4 @@ export function startQrScanner(scannerContainerId, sceneUrl) {
             console.log('Aucune détection de QR code pour le moment...');
         };
     });
-}
+}*/
