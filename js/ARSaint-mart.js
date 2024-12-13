@@ -1,3 +1,5 @@
+import { loadSound, } from './Sound/sound.js';
+
 export function setupARScene(containerId) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -84,44 +86,16 @@ export function setupARScene(containerId) {
 export function setupAudioControls() {
     // Workaround for an AR.js bug (https://github.com/jeromeetienne/AR.js/issues/410)
     const sceneEl = document.querySelector('a-scene');
+    loadSound(  "../../assets/son.mp3",true);
     sceneEl.addEventListener('loaded', () => {
         newCamera = new THREE.PerspectiveCamera();
         newCamera.near = 0;
         newCamera.far = 5;
         sceneEl.camera = newCamera;
+        
     });
 }
 
 export function sonAr() {
-    //To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
-    var playing = false;
-
-    //HTML5 audio, will need user touch input to start on mobile
-    var intro = new Audio("https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/G%C3%A9n%C3%A9rique%20Oui-oui%20fran%C3%A7ais%20(cover).mp3?v=1734099814492");
-
-    //Detect end of audio
-    intro.addEventListener("ended", function () {
-        intro.currentTime = 0;
-        playing = false;
-    });
-
-    AFRAME.registerComponent('markerFound', {
-
-        init: function () {
-            intro.play();
-            // Set up the tick throttling. Will check if marker is active every 500ms
-            this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
-        },
-        tick: function (t, dt) {
-
-            if (playing == false) {
-                // MARKER IS PRESENT
-                intro.play();
-                playing = true;
-            } else {
-                // MARKER IS HIDDEN, do nothing (up to you)
-            }
-
-        }
-    });
+   
 }
