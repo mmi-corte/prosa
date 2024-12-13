@@ -9,8 +9,8 @@ import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { startQrScanner } from './js/scanQrCode.js';
-import {setupARScene,setupAudioControls} from './js/ARSaint-mart.js'
-
+import {setupARScene, setupAudioControls, setupPositionControls} from './js/ARSaint-mart.js'
+import {changeStyleBG} from './js/functionChangeStyle.js'
 var weapons = [
     {
         name: "Epée",
@@ -121,14 +121,16 @@ boutonStart.addEventListener("click", function () {
                         console.log('QR code valide détecté, étape suivante...');
                         refreshPage();
                         //--------------Ajouter l'AR----------------------------
-                        //addImg("container", "assets/berger.jpg", 'imgIntro');
-                        // Configuration de la scène AR
-                        setupARScene("container");
+                        changeStyleBG("bgimage");
+                       
+                        setupARScene('container');  // Remplacez 'ar-container' par l'ID de votre conteneur HTML
 
-                        // Configuration des contrôles audio
+                        // Initialisation des contrôles audio
                         setupAudioControls();
-
-                        
+                    
+                        // Initialisation des contrôles de position
+                        setupPositionControls(); 
+                
                     } else {
                         // QR code invalide
                         console.log('QR code invalide, réessayer...');

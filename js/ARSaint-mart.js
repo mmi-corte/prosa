@@ -7,60 +7,64 @@ export function setupARScene(containerId) {
 
     // Crée la structure HTML de la scène AR
     container.innerHTML = `
-        <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;" cursor="rayOrigin:mouse">
+        <a-scene 
+            embedded 
+            arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best; sourceWidth: 1280; sourceHeight: 720"
+            cursor="rayOrigin:mouse">
+            
             <!-- Audio -->
-            <audio id="soundtrack" src="https://cdn.glitch.me/2333a1fb-6837-486d-9b68-0315daf74449/Top%20hits%202024%20playlist%20%20~%20Trending%20music%202024%20~%20Best%20songs%202024%20updated%20weekly%20(Playlist%20Hits).mp3?v=1733924705198" preload="auto"></audio>
+            <audio id="soundtrack" 
+                   src="https://cdn.glitch.me/2333a1fb-6837-486d-9b68-0315daf74449/Top%20hits%202024%20playlist%20~%20Trending%20music%202024%20~%20Best%20songs%202024%20updated%20weekly%20(Playlist%20Hits).mp3?v=1733924705198" 
+                   preload="auto"></audio>
 
             <!-- Images AR -->
-            <a-image 
-              src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/chat.png?v=1733407555000" 
-              position="0 1.28 -1"  
-              rotation="0 0 0" 
-              scale="0.5 0.5 0.5"
-              transparent="true"
-              material="alphaTest: 0.5">
+            <a-image id="image1"
+                src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/chat.png?v=1733407555000" 
+                position="0 1 -2" 
+                rotation="0 0 0" 
+                scale="0.5 0.5 0.5"
+                transparent="true"
+                material="alphaTest: 0.5">
             </a-image> 
 
-            <a-image
-              src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/sainte_marthe.png?v=1733407548940" 
-              position="0 1 -2"  
-              rotation="0 0 0" 
-              scale="1 1 1"
-              transparent="true"
-              material="alphaTest: 0.5">
+            <a-image id="image2"
+                src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/sainte_marthe.png?v=1733407548940" 
+                position="0 1.5 -3"  
+                rotation="0 0 0" 
+                scale="1 1 1"
+                transparent="true"
+                material="alphaTest: 0.5">
             </a-image> 
 
-            <a-image
-              src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/soleil_sainte_marthe.png?v=1733407551478" 
-              position="0 0.85 -3.5"      
-              rotation="0 0 0" 
-              scale="1 1 1"
-              transparent="true"
-              material="alphaTest: 0.5">
+            <a-image id="image3"
+                src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/soleil_sainte_marthe.png?v=1733407551478" 
+                position="0 2 -4"      
+                rotation="0 0 0" 
+                scale="1 1 1"
+                transparent="true"
+                material="alphaTest: 0.5">
             </a-image>
-            
-            <!-- Boîte de dialogue -->
-            <a-entity position="0 1 -1" scale="0.25 0.25 0.25">
-                <a-plane 
-                  position="0 0 0" 
-                  width="1.5" 
-                  height="0.5" 
-                  color="grey" 
-                  material="opacity: 0.8; transparent: true" 
-                  rotation="0 0 0">
-                </a-plane>
-                <a-text 
-                  value="Salut moi c'est la Sainte Marthe" 
-                  position="0 0 0.01" 
-                  align="center" 
-                  color="#000000" 
-                  width="1.5"
-                  wrapCount="15">
-                </a-text>
-            </a-entity>
 
-            <a-entity cursor="rayOrigin:mouse"></a-entity>
+            <!-- Caméra -->
+            <a-camera position="0 0 0" fov="50"></a-camera>
         </a-scene>
+
+        <!-- Interface pour contrôler la position -->
+        <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
+            <label for="positionX">Position X:</label>
+            <input id="positionX" type="number" value="0">
+            <br>
+
+            <label for="positionY">Position Y:</label>
+            <input id="positionY" type="number" value="1">
+            <br>
+
+            <label for="positionZ">Position Z:</label>
+            <input id="positionZ" type="number" value="-2">
+            <br>
+
+            <button id="updatePosition">Mettre à jour la position</button>
+        </div>
     `;
 }
 
@@ -94,11 +98,40 @@ export function setupAudioControls() {
     });
 
     // Lecture automatique si possible
-    document.querySelector('a-scene').addEventListener('loaded', () => {
-        console.log("Scène chargée, tentative de lecture automatique du son.");
-        soundtrack.play().catch(err => {
-            console.log("Lecture automatique bloquée, nécessite une interaction utilisateur.");
+    const scene = document.querySelector('a-scene');
+    if (scene) {
+        scene.addEventListener('loaded', () => {
+            console.log("Scène chargée, tentative de lecture automatique du son.");
+            soundtrack.play().catch(err => {
+                console.log("Lecture automatique bloquée, nécessite une interaction utilisateur.");
+            });
         });
-    });
+    }
+}
 
+export function setupPositionControls() {
+    const updateButton = document.getElementById('updatePosition');
+    const positionX = document.getElementById('positionX');
+    const positionY = document.getElementById('positionY');
+    const positionZ = document.getElementById('positionZ');
+    
+    const image1 = document.getElementById('image1');
+    const image2 = document.getElementById('image2');
+    const image3 = document.getElementById('image3');
+    
+    if (!image1 || !image2 || !image3) {
+        console.error("Les images AR n'ont pas été trouvées.");
+        return;
+    }
+
+    updateButton.addEventListener('click', () => {
+        const newPosX = positionX.value;
+        const newPosY = positionY.value;
+        const newPosZ = positionZ.value;
+
+        // Mettre à jour les positions des images
+        image1.setAttribute('position', `${newPosX} ${newPosY} ${newPosZ}`);
+        image2.setAttribute('position', `${newPosX} ${parseFloat(newPosY) + 1} ${parseFloat(newPosZ) - 1}`);
+        image3.setAttribute('position', `${newPosX} ${parseFloat(newPosY) + 2} ${parseFloat(newPosZ) - 2}`);
+    });
 }
