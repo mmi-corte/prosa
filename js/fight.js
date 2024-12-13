@@ -1,5 +1,9 @@
 export function lunchFight(weapons, enemies)
 {
+    //player hp
+    const playerHp = 100;
+    var pHp= playerHp;
+
     //enemy hp var
     var hp = enemies.hp;
 
@@ -72,4 +76,72 @@ export function lunchFight(weapons, enemies)
     enemyImage.className = "playerImage"; // Add a class for styling
     // Append the image to the enemy container
     playerContainer.appendChild(playerImage);
+
+    //Create Weapons Bloc
+
+    const weaponsBloc = document.createElement("div");
+    weaponsBloc.className = "weaponsBloc";
+    fightContainer.appendChild(weaponsBloc);
+
+    weapons.forEach(element => {
+        const weapons = document.createElement("div");
+        weapons.className = "weapons";
+        weaponsBloc.appendChild(weapons);
+        const weaponName = document.createElement("p");
+        weaponName.className = "txtTitle";
+        weaponName.innerHTML = element.name;
+        weapons.appendChild(weaponName);
+        //color button
+        if(element.name == "Epée")
+        {
+            weapons.style = "background-color: #C1BBA9";
+        }
+        else if(element.name == "Grimoire")
+        {
+            weapons.style = "background-color: #856495";
+        }
+        else
+        {
+            weapons.style = "background-color: #675B39";
+        }
+    });
+
+    //Create PLayer Life Gauge
+
+    const playerLifeContainer = document.createElement("div");
+    playerLifeContainer.className = "playerLifeContainer";
+    fightContainer.appendChild(playerLifeContainer);
+    // Create image of journal icon
+    const journalIcon = document.createElement("img");
+    journalIcon.src = `../assets/journal.png`;
+    journalIcon.className = "journalIcon";
+    playerLifeContainer.appendChild(journalIcon);
+
+    //IMPORTANT
+
+    // Create a life gauge counter
+    const lifePlayerCounter = document.createElement("p");
+    lifePlayerCounter.className = "txt";
+    lifePlayerCounter.id = "lifeCounter2";
+    lifePlayerCounter.innerHTML = pHp + "/"+ playerHp;
+    playerLifeContainer.appendChild(lifePlayerCounter);
+
+    // Create a life gauge bar
+    const playerLifeGauge = document.createElement("div");
+    playerLifeGauge.className = "lifeGauge";
+    playerLifeContainer.appendChild(playerLifeGauge);
+
+    // Set initial life gauge width based on enemy's life
+    playerLifeGauge.style.width = `100%`;
+
+    // Function to update the life gauge
+    function updateLifeGauge(damage) {
+        pHp -= damage;
+        lifePlayerCounter.innerHTML = pHp + "/"+ playerHp;
+        var gaugpourcentage = (100*pHp/playerHp);
+        playerLifeGauge.style.width = `${gaugpourcentage}%`;
+    }
+
+    // Example usage: update life gauge to 50%
+    updateLifeGauge(40);
 }
