@@ -9,7 +9,7 @@ import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { startQrScanner } from './js/scanQrCode.js';
-import {setupARScene, setupAudioControls, setupPositionControls} from './js/ARSaint-mart.js'
+import { setupARScene, setupAudioControls } from './js/ARSaint-mart.js';
 import {changeStyleBG} from './js/functionChangeStyle.js'
 var weapons = [
     {
@@ -128,8 +128,7 @@ boutonStart.addEventListener("click", function () {
                         // Initialisation des contrôles audio
                         setupAudioControls();
                     
-                        // Initialisation des contrôles de position
-                        setupPositionControls(); 
+                       
                 
                     } else {
                         // QR code invalide

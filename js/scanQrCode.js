@@ -2,7 +2,7 @@ import QrScanner from 'https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner.
 
 QrScanner.WORKER_PATH = 'https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner-worker.min.js';
 
-export function startQrScanner(scannerContainerId, expectedUrl) {
+export function startQrScanner(scannerContainerId, sceneUrl) {
     return new Promise((resolve, reject) => {
         const videoElement = document.createElement('video');
         videoElement.id = 'scanner-container';
@@ -21,12 +21,13 @@ export function startQrScanner(scannerContainerId, expectedUrl) {
             console.log('QR code détecté : ', result.data);
             qrScanner.stop();
 
-            if (result.data.trim() === expectedUrl.trim()) {
-                console.log('QR code valide!');
+            if (result.data.trim() === sceneUrl.trim()) {
+                console.log('Redirection vers la scène AR.');
+                window.location.href = sceneUrl; // Redirige vers la scène AR
                 resolve(true);
             } else {
-                console.log('QR code invalide!');
-                resolve(false);
+                console.error('QR code invalide !');
+                reject('URL invalide détectée.');
             }
         }, {
             highlightScanRegion: true,
