@@ -7,88 +7,121 @@ export function setupARScene(containerId) {
 
     // Crée la structure HTML de la scène AR
     container.innerHTML = `
-        <a-scene 
-            embedded 
-            arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;">
+        <a-scene
+  embedded
+  arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
+  renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
+>
+  <a-marker
+    preset="pattern"
+    type="pattern"
+    url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996"
+  >
+    <!-- Fond 1 (en premier plan) -->
+    <a-image
+      src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/fond1.png?v=1732542507271"
+      position="0 0 0"
+      rotation="-90 0 0"
+      scale="5 5 5"
+    ></a-image>
 
-            <!-- Image 1 rattachée à un marqueur spécifique -->
-            <a-marker preset="custom" type="pattern" url="assets/QrCode/ProsaQrCode1Test.patt">
-                <a-image 
-                    src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/chat.png?v=1733407555000" 
-                    position="0 0 0" 
-                    rotation="0 0 0" 
-                    scale="0.5 0.5 0.5"
-                    transparent="true" 
-                    material="alphaTest: 0.5">
-                </a-image>
-            </a-marker>
+    <!-- Sorcière (devant) -->
+    <a-image
+      src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/sorciere.png?v=1732542517785"
+      position="0 0 0"
+      rotation="-90 0 0"
+      scale="5 5 5"
+    ></a-image>
 
-            <!-- Image 2 rattachée à un autre marqueur -->
-            <a-marker preset="custom" type="pattern" url="assets/QrCode/ProsaQrCode1Test.patt">
-                <a-image 
-                    src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/sainte_marthe.png?v=1733407548940" 
-                    position="0 0 0" 
-                    rotation="0 0 0" 
-                    scale="1 1 1"
-                    transparent="true" 
-                    material="alphaTest: 0.5">
-                </a-image>
-            </a-marker>
+    <!-- Fond 2 (derrière la sorcière) -->
+    <a-image
+      src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/fond2.png?v=1732542528465"
+      position="0 0 0"
+      rotation="-90 0 0"
+      scale="5 5 5"
+    ></a-image>
 
-            <!-- Image 3 rattachée à un autre marqueur -->
-            <a-marker preset="custom" type="pattern" url="assets/QrCode/ProsaQrCode1Test.patt">
-                <a-image 
-                    src="https://cdn.glitch.global/2333a1fb-6837-486d-9b68-0315daf74449/soleil_sainte_marthe.png?v=1733407551478" 
-                    position="0 0 0" 
-                    rotation="0 0 0" 
-                    scale="1 1 1"
-                    transparent="true" 
-                    material="alphaTest: 0.5">
-                </a-image>
-            </a-marker>
+    <!-- Fond 3 (derrière le fond 2) -->
+    <a-image
+      src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/fond3.png?v=1732542512068"
+      position="0 0 0"
+      rotation="-90 0 0"
+      scale="5 5 5"
+    ></a-image>
 
-            <!-- Caméra -->
-            <a-entity camera></a-entity>
-        </a-scene>
+    <!-- Boîte de dialogue -->
+    <a-entity camera position="0 5 2" rotation="-90 0 0" scale="3 3 3">
+      <!-- Réduction de la taille de l'ensemble -->
+      <a-plane
+        position="0 0 3.5"
+        rotation="-90 0 0"
+        scale="3 3 3"
+        width="1.5"
+        height="0.5"
+        color="grey"
+        material="opacity: 0.8; transparent: true"
+      ></a-plane>
+      <a-text
+        value="Salut moi c'est la Strega"
+        rotation="-90 0 0"
+        scale="3 3 3"
+        position="0 0 3.5"
+        align="center"
+        color="#000000"
+        width="1.5"
+        wrapCount="15"
+        ><!-- Ajustez la largeur du texte pour l'adapter -->
+      </a-text>
+    </a-entity>
+  </a-marker>
+
+  <a-entity camera position="0 0 0"></a-entity>
+</a-scene>
+
     `;
 }
 
 export function setupAudioControls() {
-    // Récupérer les éléments nécessaires
-    const soundtrack = document.createElement('audio');
-    soundtrack.id = 'soundtrack';
-    soundtrack.src = 'https://cdn.glitch.me/2333a1fb-6837-486d-9b68-0315daf74449/Top%20hits%202024%20playlist%20~%20Trending%20music%202024%20~%20Best%20songs%202024%20updated%20weekly%20(Playlist%20Hits).mp3?v=1733924705198';
-    soundtrack.preload = 'auto';
-    document.body.appendChild(soundtrack);
+    // Workaround for an AR.js bug (https://github.com/jeromeetienne/AR.js/issues/410)
+    const sceneEl = document.querySelector('a-scene');
+    sceneEl.addEventListener('loaded', () => {
+        newCamera = new THREE.PerspectiveCamera();
+        newCamera.near = 0;
+        newCamera.far = 5;
+        sceneEl.camera = newCamera;
+    });
+}
 
-    const startButton = document.createElement('button');
-    startButton.id = 'startSound';
-    startButton.textContent = 'Activer le son';
-    startButton.style.position = 'absolute';
-    startButton.style.top = '20px';
-    startButton.style.left = '20px';
-    startButton.style.zIndex = 10;
-    document.body.appendChild(startButton);
+export function sonAr() {
+    //To avoid playing from start if the marker flickers, not sure if needed, but it might be a failsafe when you have mutiple markers and want to make sure the first finishes before launching the second
+    var playing = false;
 
-    startButton.addEventListener('click', () => {
-        soundtrack.play()
-            .then(() => {
-                console.log("Lecture du son démarrée.");
-                startButton.style.display = 'none'; // Masquer le bouton après activation
-            })
-            .catch(err => {
-                console.error("Impossible de lire le son :", err);
-            });
+    //HTML5 audio, will need user touch input to start on mobile
+    var intro = new Audio("https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/G%C3%A9n%C3%A9rique%20Oui-oui%20fran%C3%A7ais%20(cover).mp3?v=1734099814492");
+
+    //Detect end of audio
+    intro.addEventListener("ended", function () {
+        intro.currentTime = 0;
+        playing = false;
     });
 
-    // Lecture automatique si possible
-    const scene = document.querySelector('a-scene');
-    if (scene) {
-        scene.addEventListener('loaded', () => {
-            console.log("Scène chargée, tentative de lecture automatique du son.");
-            soundtrack.play().catch(err => {
-                console.log("Lecture automatique bloquée, nécessite une interaction utilisateur.");
-            });
-        });
-    }
+    AFRAME.registerComponent('markerFound', {
+
+        init: function () {
+            intro.play();
+            // Set up the tick throttling. Will check if marker is active every 500ms
+            this.tick = AFRAME.utils.throttleTick(this.tick, 500, this);
+        },
+        tick: function (t, dt) {
+
+            if (playing == false) {
+                // MARKER IS PRESENT
+                intro.play();
+                playing = true;
+            } else {
+                // MARKER IS HIDDEN, do nothing (up to you)
+            }
+
+        }
+    });
 }

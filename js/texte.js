@@ -87,24 +87,29 @@ export async function addTxtNarration(stepCode, conteneurId,txtClassName) {
 }
 
 // Fonction pour récupérer le nom du personnage
-export async function addNameCharacter(stepCode, conteneurId,txtClassName) {
+export async function addNameCharacter(stepCode, conteneurId, txtClassName) {
     try {
         const querySnapshot = await getDocs(collection(db, "scenario"));
         querySnapshot.forEach((doc) => {
             if (doc.data().stepCode === stepCode) {
                 // Trouver le conteneur par son ID et ajouter le texte
                 const conteneur = document.getElementById(conteneurId);
-                const txtPerso = document.createElement("h2");
-                txtPerso.textContent = doc.data().personnage;
-                txtPerso.className = txtClassName;
-                conteneur.appendChild(txtPerso);
-                console.log("Texte trouvé :", doc.data().personnage);
+                if (conteneur) {
+                    const txtPerso = document.createElement("h2");
+                    txtPerso.textContent = doc.data().personnage.toUpperCase(); // Convertir en majuscules
+                    txtPerso.className = txtClassName;
+                    conteneur.appendChild(txtPerso);
+                    console.log("Texte ajouté :", doc.data().personnage.toUpperCase());
+                } else {
+                    console.error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
+                }
             }
         });
     } catch (error) {
         console.error("Erreur lors de la récupération des données Firestore :", error);
     }
 }
+
 export function addDiv(conteneurId, divId, divClassName) {
     const conteneur = document.getElementById(conteneurId);
 

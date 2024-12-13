@@ -10,7 +10,7 @@ import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { startQrScanner } from './js/scanQrCode.js';
 import { setupARScene, setupAudioControls } from './js/ARSaint-mart.js';
-import {changeStyleBG} from './js/functionChangeStyle.js'
+import { changeStyleBG } from './js/functionChangeStyle.js'
 var weapons = [
     {
         name: "Epée",
@@ -115,35 +115,20 @@ boutonStart.addEventListener("click", function () {
             const boutonInv2 = document.getElementById("btnInv2");
             boutonInv2.addEventListener("click", function () {
                 refreshPage();
-                startQrScanner("container", "https://sainte-marthe.glitch.me/").then(result => {
-                    if (result) {
-                        // QR code valide, passer à l'étape suivante
-                        console.log('QR code valide détecté, étape suivante...');
-                        refreshPage();
-                        //--------------Ajouter l'AR----------------------------
-                        changeStyleBG("bgimage");
-                       
-                        setupARScene('container');  // Remplacez 'ar-container' par l'ID de votre conteneur HTML
+                addTxtWithBoldWord('container', "Il est temps pour vous de vous diriger vers la fontaine.", "fontaine");
+                // Vérifiez si le bouton n'existe pas avant de l'ajouter
+                if (!document.getElementById('btnNext')) {
+                    ajouterBouton('container', 'Confirmez votre arrivée', 'btnNext', "btn");
 
-                        // Initialisation des contrôles audio
-                        setupAudioControls();
-                    
-                       
-                
-                    } else {
-                        // QR code invalide
-                        console.log('QR code invalide, réessayer...');
-                    }
-                }).catch(err => {
-                    console.error('Erreur lors du scan QR :', err);
-                });
+                    const btnNext = document.getElementById('btnNext');
+                    btnNext.addEventListener('click', function () {
+                        refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
+                        changeStyleBG('bgimage')
+                        setupARScene('container');
+                        sonAr();
+                    });
+                }
             });
-
-
-
-
-
-
         });
     });
 });

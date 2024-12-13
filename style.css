@@ -16,7 +16,7 @@ strong {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;/*start*/
     align-items: center;
 }
 
@@ -68,7 +68,7 @@ strong {
 }
 
 #logoImgP1 {
-    margin-top: 230px;
+    /*margin-top: 230px;*/
     animation: fadeIn 4s infinite;
 }
 
@@ -129,7 +129,7 @@ strong {
     margin: 10px;
     margin-bottom: 0;
 }
-
+/*
 #txt1 {
     margin-top: 250px;
 }
@@ -142,7 +142,7 @@ strong {
 #txt3 {
     margin-top: 20px;
     font-size: 30px;
-}
+}*/
 
 @keyframes fadeIn {
     0% {
@@ -162,7 +162,7 @@ strong {
 }
 
 #svg1 {
-    margin-top: 150px;
+    /*margin-top: 150px;*/
     width: 100px;
     height: 100px;
 }
@@ -186,7 +186,7 @@ strong {
 }
 
 .nameCharacter {
-    font-family: "Asap", serif;
+    font-family: "Uncial Antiqua", system-ui;
     position: relative;
     bottom: 0;
     padding: 0;
