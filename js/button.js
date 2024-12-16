@@ -58,23 +58,30 @@ export function addInvisibleBtn(containerID, buttonID) {
     container.appendChild(button);
 }
 
-export function addBtnImg(conteneurId, urlImgBtn, btnId, ) {
+export function addBtnImg(conteneurId, urlImgBtn, btnId) {
     // Sélectionne la div par son ID
     const conteneur = document.getElementById(conteneurId);
-    //verifi si la div existe
+    
+    // Vérifie si la div existe
     if (!conteneur) {
         console.error(`Aucune div trouvée avec l'id "${conteneurId}"`);
         return;
     }
 
-    // Crée un élément bouton
+    // Crée un élément img
     const btnImg = document.createElement("img");
     
-    // Définit le texte du bouton
-    bouton.textContent = txtBtn;
-    bouton.id = btnId;
+    // Définit l'URL de l'image
+    btnImg.src = urlImgBtn;
 
+    // Définit l'ID de l'image
+    btnImg.id = btnId;
 
-    // Ajoute le bouton à la div
-    conteneur.appendChild(bouton);
+    // Ajoute une classe pour styliser l'image si nécessaire (facultatif)
+    btnImg.className = "btn-image";
+
+    // Ajoute l'image au conteneur
+    conteneur.appendChild(btnImg);
+
+    console.log(`Image avec l'ID "${btnId}" ajoutée au conteneur "${conteneurId}".`);
 }

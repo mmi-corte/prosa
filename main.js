@@ -10,6 +10,8 @@ import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { setupARScene, setupAudioControls } from './js/ARSaint-mart.js';
 import { changeStyleBG } from './js/functionChangeStyle.js';
+import { addOverlay } from './js/overlay.js';
+
 
 var weapons = [
     {
@@ -39,7 +41,6 @@ const enemies = [
 
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
 ajouterBouton('container', 'Commencer', 'btnStart', 'btn');
-
 // Récupère le bouton Start
 const boutonStart = document.getElementById("btnStart");
 
@@ -125,6 +126,8 @@ boutonStart.addEventListener("click", function () {
                         refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
                         changeStyleBG('bgimage')
                         setupARScene('container');
+                        addOverlay('audioPlayer');
+
                         //loadSound(  "./assets/son.mp3",true);
                         
                     });
