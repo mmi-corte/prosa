@@ -16,7 +16,8 @@ strong {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;/*start*/
+    justify-content: center;
+    /*start*/
     align-items: center;
 }
 
@@ -129,6 +130,7 @@ strong {
     margin: 10px;
     margin-bottom: 0;
 }
+
 /*
 #txt1 {
     margin-top: 250px;
@@ -317,10 +319,9 @@ strong {
     text-align: center;
 }
 
-.weaponsBloc
-{
+.weaponsBloc {
     width: 250px;
-    height:auto;
+    height: auto;
     position: fixed;
     top: 380px;
     left: 150px;
@@ -328,8 +329,7 @@ strong {
     flex-direction: column;
 }
 
-.weapons
-{
+.weapons {
     margin: 10px;
     width: 250px;
     height: 50px;
@@ -337,39 +337,41 @@ strong {
     display: flex;
     justify-content: start;
     transform: skewX(-15deg);
-    box-shadow:inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
+    box-shadow: inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
 }
 
-.playerLifeContainer{
+.playerLifeContainer {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 55px;
     background-color: rgb(255, 255, 255, .8);
     border-top: black 2px solid;
-    box-shadow:inset 0px 2px 2px rgb(78, 78, 78);
+    box-shadow: inset 0px 2px 2px rgb(78, 78, 78);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.journalIcon{
+.journalIcon {
     width: 40px;
 }
+
 /*-------------OVERLAY----------------------*/
 /*------------Son-------------------*/
-#btnSon{
+#btnSon {
     width: 10%;
     position: absolute;
     top: 10px;
     right: 10px;
 }
+
 /*-------------------Journal--------------------*/
 #btnJ {
     width: 15%;
     position: absolute;
     left: 10px;
-    bottom: 10px;
+    bottom: 40px;
 }
 
 #popup-container {
@@ -379,16 +381,18 @@ strong {
     width: 95%;
     height: 95%;
     margin: 5px;
-    background-color: rgba(152, 152, 152, 0.747); /* Fond semi-transparent */
+    background-color: rgba(152, 152, 152, 0.747);
+    /* Fond semi-transparent */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Assurez-vous qu'il soit au-dessus du contenu */
+    z-index: 9999;
+    /* Assurez-vous qu'il soit au-dessus du contenu */
 }
 
 /* Contenu de la pop-up */
-#popup-container > div {
+#popup-container>div {
     background-color: white;
     width: 100%;
     height: 100%;
@@ -408,7 +412,7 @@ strong {
 /* Style du bouton de fermeture */
 #popup-container button {
     position: absolute;
-    bottom: 25px; 
+    bottom: 25px;
     margin-top: 10px;
     padding: 8px 16px;
     background-color: #E6B57A;
@@ -426,26 +430,31 @@ strong {
 /* Style général pour le bouton */
 .button-with-icons {
     position: absolute;
-    bottom: 10px;
+    bottom: 50px;
     right: 0;
     padding: 5px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.2);
+
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: auto; /* S'adapte à la taille des icônes */
-    min-width: 200px; /* Largeur minimale pour contenir les icônes */
+    width: auto;
+    /* S'adapte à la taille des icônes */
+    min-width: 200px;
+    /* Largeur minimale pour contenir les icônes */
 }
 
 /* Icônes à l'intérieur du bouton */
 .button-with-icons img {
-    width: 30px; /* Taille des icônes */
+    width: 30px;
+    /* Taille des icônes */
     height: 30px;
 }
+
 /*----------------Objet pop up-----------------*/
 /* -------------------- Popup principale -------------------- */
 .popup-containerObj {
@@ -454,11 +463,13 @@ strong {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fond semi-transparent */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* S'assurer que la popup soit au-dessus du contenu */
+    z-index: 9999;
+    /* S'assurer que la popup soit au-dessus du contenu */
 }
 
 /* -------------------- Contenu de la popup -------------------- */
@@ -487,6 +498,8 @@ strong {
 
 /* -------------------- Conteneur des objets -------------------- */
 .obj-container {
+    position: absolute;
+    bottom: 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -500,6 +513,7 @@ strong {
     flex-direction: column;
     align-items: center;
     width: 120px;
+
     padding: 10px;
     border-radius: 10px;
     background-color: #f9f9f9;
@@ -509,14 +523,16 @@ strong {
 }
 
 .obj-item:hover {
-    transform: scale(1.05); /* Légère animation au survol */
+    transform: scale(1.05);
+    /* Légère animation au survol */
 }
 
 /* -------------------- Bouton avec 3 points -------------------- */
 .icon-btn {
     background-color: transparent;
     border: none;
-    font-size: 2rem; /* Taille de la police pour les 3 points */
+    font-size: 2rem;
+    /* Taille de la police pour les 3 points */
     color: #333;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -525,7 +541,8 @@ strong {
 }
 
 .icon-btn:hover {
-    color: #E6B57A; /* Changer la couleur des 3 points au survol */
+    color: #E6B57A;
+    /* Changer la couleur des 3 points au survol */
 }
 
 /* -------------------- Bouton de fermeture -------------------- */
