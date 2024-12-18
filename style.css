@@ -292,71 +292,26 @@ strong {
     width: 110%;
 }
 
-/*-----------------------Scan Qrcode-----------------------------*/
-#scanner-container {
-    width: 300px;
-    height: 300px;
-    margin: auto;
-    border: 1px solid #ddd;
-}
-
-
-/* Section spécifique : Scan QR Code */
-
-#scanner-container canvas {
-    max-width: 100%;
-    height: auto;
-}
-
-#result {
-    font-family: "Asap", sans-serif;
-    margin: 10px auto;
-    padding: 10px;
-    width: 90%;
-    background-color: #fdfdfd;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.weaponsBloc {
-    width: 250px;
-    height: auto;
-    position: fixed;
-    top: 380px;
-    left: 150px;
-    display: flex;
-    flex-direction: column;
-}
-
-.weapons {
-    margin: 10px;
-    width: 250px;
-    height: 50px;
-    background-color: cadetblue;
-    display: flex;
-    justify-content: start;
-    transform: skewX(-15deg);
-    box-shadow: inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
-}
-
-.playerLifeContainer {
-    position: fixed;
-    bottom: 0;
+/*-----------------------AVATAR-----------------------------*/
+.divAvatar{
     width: 100%;
-    height: 55px;
-    background-color: rgb(255, 255, 255, .8);
-    border-top: black 2px solid;
-    box-shadow: inset 0px 2px 2px rgb(78, 78, 78);
+    height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-
-.journalIcon {
-    width: 40px;
+.imgAvatarContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 }
-
+.imgAvatarContainer img{
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.295);
+    border-radius: 60px;
+}
 /*-------------OVERLAY----------------------*/
 /*------------Son-------------------*/
 #btnSon {
@@ -475,8 +430,9 @@ strong {
 /* -------------------- Contenu de la popup -------------------- */
 .popup-contentObj {
     background-color: #fff;
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    height: 92%;
+    margin: 10px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -497,36 +453,15 @@ strong {
 }
 
 /* -------------------- Conteneur des objets -------------------- */
-.obj-container {
-    position: absolute;
-    bottom: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
 
 /* -------------------- Item d'objet -------------------- */
 .obj-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 120px;
-
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    text-align: center;
+    
+  
 }
-
-.obj-item:hover {
-    transform: scale(1.05);
-    /* Légère animation au survol */
-}
-
 /* -------------------- Bouton avec 3 points -------------------- */
 .icon-btn {
     background-color: transparent;
@@ -540,14 +475,11 @@ strong {
     display: inline-block;
 }
 
-.icon-btn:hover {
-    color: #E6B57A;
-    /* Changer la couleur des 3 points au survol */
-}
+
 
 /* -------------------- Bouton de fermeture -------------------- */
 .popup-contentObj button {
-    background-color: #E6B57A;
+    
     border: none;
     color: white;
     padding: 10px 20px;
@@ -560,6 +492,13 @@ strong {
     margin-top: 20px;
 }
 
-.popup-contentObj button:hover {
-    background-color: #dca352;
+
+
+/* -------------------- Bouton avec image -------------------- */
+.obj-item img {
+    width: 50px; /* Ajustez la taille selon vos besoins */
+    height: 50px; /* Assurez-vous que la taille est cohérente */
+    object-fit: cover; /* Gère le cadrage des images */
+    border-radius: 5px; /* Ajoutez un effet arrondi si nécessaire */
+    transition: transform 0.2s ease, opacity 0.3s ease;
 }

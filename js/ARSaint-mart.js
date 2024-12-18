@@ -12,7 +12,7 @@ export function setupARScene(containerId) {
         <a-scene embedded arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;" 
              renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;">
       <a-assets>
-        <audio id="sound" src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/MACKLEMORE%20%26%20RYAN%20LEWIS%20-%20THRIFT%20SHOP%20FEAT.%20WANZ%20(OFFICIAL%20VIDEO).mp3?v=1734185236152" preload="auto"></audio>
+        <audio id="sound" src="./assets/son.mp3" preload="auto"></audio>
       </a-assets>
 
       <a-marker id="marker" preset="pattern" type="pattern" url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996">
@@ -126,6 +126,3 @@ export function setupAudioControls() {
     document.querySelector('#marker').setAttribute('soundhandler', '');
 }
 
-export function sonAr() {
-   
-}
