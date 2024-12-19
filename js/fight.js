@@ -1,4 +1,4 @@
-import { addOverlay } from "./overlay";
+import { addOverlay } from "./overslay.js";
 
 export function lunchFight(weapons, enemies)
 {
