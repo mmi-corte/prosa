@@ -5,6 +5,10 @@ export function changeStyleBG(conatinerId) {
     element.style.backgroundImage = "none";
 
 }
+export function changeStyleBGB(conatinerId){
+    const element = document.getElementById(conatinerId);
+    element.style.backgroundColor = 'black';
+}
 
 export function selectAvatar(allAvatars) {
     allAvatars.forEach(avatar => {

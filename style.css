@@ -307,6 +307,9 @@ strong {
 .imgIntro {
     width: 110%;
 }
+.introVideo{
+    width: 100%;
+}
 
 /*-----------------------AVATAR-----------------------------*/
 .divAvatar{
@@ -345,6 +348,11 @@ strong {
     margin-left:10px;
     width: 50px;
     height: 50px;
+}
+.imgAvatarContainer img{
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.377);
+    border-radius: 60px;
 }
 /*.imgAvatarContainer img.clicked {
     border: 2px solid orange;

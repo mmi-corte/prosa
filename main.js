@@ -9,8 +9,9 @@ import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { addEsterelle, ARAfata } from './js/ARSaint-mart.js';
-import { changeStyleBG, selectAvatar ,selectButton} from './js/functionChangeStyle.js';
+import { changeStyleBG, selectAvatar ,selectButton,changeStyleBGB} from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
+import {addAutoPlayVideo} from './js/video.js';
 
 
 
@@ -128,10 +129,12 @@ boutonStart.addEventListener("click", function () {
                 btnLocV.addEventListener("click", function () {
 
                     refreshPage();
-                    addImg("container", "assets/berger.jpg", 'imgIntro');
+                    //changeStyleBGB('container');
+                    addAutoPlayVideo('container','./assets/video/IntroTourneeV1.mp4','introVideo')
+                    /*addImg("container", "assets/berger.jpg", 'imgIntro');
                     addDiv("container", "divNarra1", "dialogBox");
                     addNameCharacter("E1Narra", 'divNarra1', "nameCharacter");
-                    addTxtNarration("E1Narra", "divNarra1", "narration");
+                    addTxtNarration("E1Narra", "divNarra1", "narration");*/
                     //-----------------MAP----------------------
                     /*                
                         //test fight
