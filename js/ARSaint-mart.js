@@ -1,18 +1,18 @@
 //import { loadSound, } from './Sound/sound.js';
+//---------------STREGA------------------------------------
+export function addStrega(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
+    return;
+  }
 
-export function setupARScene(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) {
-        console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
-        return;
-    }
-
-    // Crée la structure HTML de la scène AR
-    container.innerHTML = `
+  // Crée la structure HTML de la scène AR
+  container.innerHTML = `
         <a-scene embedded arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;" 
              renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;">
       <a-assets>
-        <audio id="sound" src="./assets/son.mp3" preload="auto"></audio>
+        <audio id="sound" src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/MACKLEMORE%20%26%20RYAN%20LEWIS%20-%20THRIFT%20SHOP%20FEAT.%20WANZ%20(OFFICIAL%20VIDEO).mp3?v=1734185236152" preload="auto"></audio>
       </a-assets>
 
       <a-marker id="marker" preset="pattern" type="pattern" url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996">
@@ -78,51 +78,232 @@ export function setupARScene(containerId) {
     </a-scene>
 
     `;
+  setupAudioControls();
+}
+//---------------ESTERELLE------------------------------------
+export function addEsterelle(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
+    return;
+  }
+
+  // Crée la structure HTML de la scène AR
+  container.innerHTML = `
+      <a-scene
+      embedded
+      arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
+      renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
+    >
+      <a-assets>
+        <audio
+          id="sound"
+          src="https://cdn.glitch.global/d38faf7e-01c3-44e6-9906-e36768c14259/son-principal.mp3?v=1734604228090"
+          preload="auto"
+        ></audio>
+      </a-assets>
+
+      <a-marker
+        id="marker"
+        preset="pattern"
+        type="pattern"
+        url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996"
+      >
+        <!-- premier plan  (en avant) -->
+        <a-image
+          src="https://cdn.glitch.global/d38faf7e-01c3-44e6-9906-e36768c14259/f%C3%A9e%20des%20plantes%20textur%C3%A9e%20V1.png?v=1734346180920"
+          position="0 -0.5 0"
+          rotation="-90 0 0"
+          scale="10 10 10"
+          material="transparent: true; alphaTest: 0.5;"
+        >
+        </a-image>
+
+        <!-- Boîte de dialogue -->
+        <a-plane
+          position="0 0 8"
+          rotation="-90 0 0"
+          scale="8 8 8"
+          width="1.5"
+          height="0.5"
+          color="grey"
+          material="opacity: 0.8; transparent: true"
+        >
+        </a-plane>
+        <a-text
+          value="Salut moi c'est Esterelle"
+          rotation="-90 0 0"
+          scale="8 8 8"
+          position="0 0 8"
+          align="center"
+          color="#000000"
+          width="1.5"
+          wrapCount="15"
+        >
+        </a-text>
+      </a-marker>
+
+      <a-entity
+        sound="src: #sound; autoplay: false; loop: true;"
+        id="audioEntity"
+      ></a-entity>
+      <a-entity camera position="0 0 0"></a-entity>
+    </a-scene>
+
+  `;
+  setupAudioControls();
 }
 
-export function setupAudioControls() {
-    // Composant pour ajuster le volume selon la distance
-    AFRAME.registerComponent('soundhandler', {
-      init: function () {
-        const marker = document.querySelector('#marker');
-        const soundEntity = document.querySelector('#audioEntity');
-        const camera = document.querySelector('[camera]');
+export function ARAfata(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
+    return;
+  }
 
-        // Surveille la visibilité du marqueur
-        marker.addEventListener('markerFound', () => {
-          console.log('Marqueur détecté, lancement du son.');
-          soundEntity.components.sound.playSound();
-        });
+  // Crée la structure HTML de la scène AR
+  container.innerHTML = `
+       <a-scene
+      embedded
+      arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
+      renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
+    >
+      <a-assets>
+        <audio
+          id="sound"
+          src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/son-principal.mp3?v=1734604153963"
+          preload="auto"
+        ></audio>
+      </a-assets>
 
-        marker.addEventListener('markerLost', () => {
-          console.log('Marqueur perdu, pause du son.');
-          soundEntity.components.sound.pauseSound();
-        });
+      <a-marker
+        id="marker"
+        preset="pattern"
+        type="pattern"
+        url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996"
+      >
+        <!-- premier plan  (en avant) -->
+        <a-image
+          src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/f%C3%A9e%20de%20l'eau%20textur%C3%A9e%20v1%20premier%20plan.png?v=1734345000981"
+          position="0 -0.5 0"
+          rotation="-90 0 0"
+          scale="5 5 5"
+          material="transparent: true; alphaTest: 0.5;"
+        >
+        </a-image>
 
-        // Met à jour le volume en fonction de la distance
-        this.el.sceneEl.addEventListener('tick', () => {
-          if (marker.object3D.visible) {
-            const markerPosition = marker.object3D.position;
-            const cameraPosition = camera.object3D.position;
+        <a-image
+          src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/f%C3%A9e%20de%20l'eau%20textur%C3%A9e%20v1%20background.png?v=1734344997628"
+          position="0 -1 0"
+          rotation="-90 0 0"
+          scale="5 5 5"
+          material="transparent: true; alphaTest: 0.5;"
+        >
+        </a-image>
+        
+        <!-- Boîte de dialogue -->
+        <a-plane
+          position="0 0 4"
+          rotation="-90 0 0"
+          scale="3 3 3"
+          width="2"
+          height="1"
+          color="grey"
+          material="opacity: 0.8; transparent: true"
+        >
+        </a-plane>
+        <a-text
+          value="Après un long périple en bâteau, vous voilà enfin sur l’île de Prose. A vrai dire, vous ne saviez même pas si elle existait véritablement, alors c’est un soulagement d’y être enfin arrivé. La chose que vous n’aviez pas prévu, en revanche, c’était que le bâteau, c’est épuisant, surtout quand on doit pagayer soi-même. A à peine quelques mètres sur la plage, vous vous evanouissez, à bout de force après ce long trajet."
+          rotation="-90 0 0"
+          scale="3 3 3"
+          position="0 0 4"
+          align="center"
+          color="#000000"
+          width="1.5"
+          wrapCount="15"
+        >
+        </a-text>
+      </a-marker>
 
-            // Calcule la distance entre la caméra et le marqueur
-            const distance = markerPosition.distanceTo(cameraPosition);
+      <a-entity
+        sound="src: #sound; autoplay: false; loop: true;"
+        id="audioEntity"
+      ></a-entity>
+      <a-entity camera position="0 0 0"></a-entity>
+    </a-scene>
 
-            // Ajuste le volume selon la distance
-            const maxDistance = 2; // Distance maximale pour volume 0
-            const minDistance = 0.5; // Distance minimale pour volume 1
-            let volume = 1 - (distance - minDistance) / (maxDistance - minDistance);
-            volume = Math.max(0, Math.min(1, volume)); // Garde le volume entre 0 et 1
+  `;
+  setupAudioControls();
+  supprBtnVR();
+}
 
-            // Applique le volume au son
-            soundEntity.setAttribute('sound', 'volume', volume);
-            console.log(`Distance: ${distance}, Volume: ${volume}`);
-          }
-        });
+function supprBtnVR() {
+  // Supprime le bouton VR si AR.js est actif
+window.addEventListener('load', () => {
+  const checkVRButton = setInterval(() => {
+      const vrButton = document.querySelector('.a-enter-vr-button');
+      if (vrButton) {
+          vrButton.style.display = 'none'; // Cache le bouton VR
+          clearInterval(checkVRButton); // Arrête de surveiller une fois que le bouton est trouvé
       }
+  }, 100); // Vérifie toutes les 100 ms
+});
+}
+//--------------------SON------------------------------------
+function setupAudioControls() {
+  // Gestion du son
+  window.addEventListener('load', () => {
+    const camera = document.querySelector('[camera]');
+    const marker = document.querySelector('a-marker');
+    const soundEntity = document.querySelector('#audioEntity');
+    let isPlaying = false; // Variable pour suivre l'état du son
+    let checkInterval = null; // Référence de l'intervalle
+
+    if (!camera || !marker || !soundEntity) {
+      console.error("Certains éléments requis (camera, marker, audioEntity) sont manquants dans le DOM.");
+      return;
+    }
+
+    // Quand le marqueur est trouvé
+    marker.addEventListener('markerFound', () => {
+      const updateVolume = () => {
+        const cameraPosition = camera.object3D.position;
+        const markerPosition = marker.object3D.position;
+
+        const distance = cameraPosition.distanceTo(markerPosition);
+        const maxDistance = 20;
+        const minDistance = 0.5;
+
+        // Calcul du volume en fonction de la distance
+        let volume = 1 - (distance - minDistance) / (maxDistance - minDistance);
+        volume = Math.max(0, Math.min(1, volume));
+
+        // Mise à jour du volume du son
+        soundEntity.setAttribute('sound', 'volume', volume);
+      };
+
+      // Lancer le son si ce n'est pas déjà en cours
+      if (!isPlaying) {
+        soundEntity.components.sound.playSound();
+        isPlaying = true;
+      }
+
+      // Mettre à jour le volume régulièrement
+      checkInterval = setInterval(updateVolume, 100);
     });
 
-    // Ajoute le composant au marqueur
-    document.querySelector('#marker').setAttribute('soundhandler', '');
-}
+    // Quand le marqueur est perdu
+    marker.addEventListener('markerLost', () => {
+      if (checkInterval) {
+        clearInterval(checkInterval);
+        checkInterval = null;
+      }
 
+      // Pause du son
+      if (isPlaying) {
+        soundEntity.components.sound.pauseSound();
+        isPlaying = false;
+      }
+    });
+  });
+}

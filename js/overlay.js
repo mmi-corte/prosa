@@ -72,6 +72,7 @@ function createPopupJournal(message) {
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Fermer';
+    closeButton.className ='btn';
 
     popupContainer.appendChild(popupMessage);
     popupContainer.appendChild(closeButton);
@@ -151,6 +152,7 @@ function createPopupObj() {
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Fermer';
+    closeButton.className ='btn';
     closeButton.addEventListener('click', () => {
         document.body.removeChild(popupContainer);
     });
