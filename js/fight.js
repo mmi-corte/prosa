@@ -1,5 +1,8 @@
+import { addOverlay } from "./overlay";
+
 export function lunchFight(weapons, enemies)
 {
+
     //player hp
     const playerHp = 100;
     var pHp= playerHp;
@@ -11,6 +14,12 @@ export function lunchFight(weapons, enemies)
     const container = document.getElementById("container");
     container.appendChild(fightContainer);
     fightContainer.className = "fightContainer";
+
+    // Create Bg Image
+    const bgImage = document.createElement("img");
+    bgImage.src = `../assets/bg/bg${enemies.name}.png`; 
+    bgImage.className = "bgImage";
+    fightContainer.appendChild(bgImage);
 
     const enemyBloc = document.createElement("div");
     enemyBloc.className = "fightBloc";
@@ -43,7 +52,7 @@ export function lunchFight(weapons, enemies)
 
     // Function to update the life gauge
     function updateLifeEnemyGauge(damage) {
-        hp -= damage;
+        hp = hp-damage;
         lifeEnemyCounter.innerHTML = hp + "/"+ enemies.hp;
         var gaugpourcentage = (100*hp/enemies.hp);
         lifeGauge.style.width = `${gaugpourcentage}%`;
@@ -94,15 +103,15 @@ export function lunchFight(weapons, enemies)
         //color button
         if(element.name == "Epée")
         {
-            weapons.style = "background-color: #C1BBA9";
+            weapons.style = "background-color: #E8E6CA";
         }
         else if(element.name == "Grimoire")
         {
-            weapons.style = "background-color: #856495";
+            weapons.style = "background-color: #EDCE8E";
         }
         else
         {
-            weapons.style = "background-color: #675B39";
+            weapons.style = "background-color: #CF881B";
         }
     });
 
@@ -119,17 +128,37 @@ export function lunchFight(weapons, enemies)
 
     //IMPORTANT
 
+    //life Gauge Container again
+    const pContainer = document.createElement("div");
+    playerLifeContainer.appendChild(pContainer);
+    pContainer.className = "pContainer";
+
+    // Player Name
+
+    const playerName = document.createElement("p");
+    playerName.className = "txtTitle";
+    playerName.innerHTML = "Joueur";
+    pContainer.appendChild(playerName);
+
     // Create a life gauge counter
     const lifePlayerCounter = document.createElement("p");
     lifePlayerCounter.className = "txt";
     lifePlayerCounter.id = "lifeCounter2";
-    lifePlayerCounter.innerHTML = pHp + "/"+ playerHp;
-    playerLifeContainer.appendChild(lifePlayerCounter);
+    lifePlayerCounter.innerHTML =pHp + "/"+ playerHp;
+    pContainer.appendChild(lifePlayerCounter);
+
+    // const br = document.createElement("br");
+    // pContainer.appendChild(br);
+
+    // Create a life gauge container
+    const playerLifeGaugeContainer = document.createElement("div");
+    playerLifeGaugeContainer.className = "playerLifeGaugeContainer";
+    pContainer.appendChild(playerLifeGaugeContainer);
 
     // Create a life gauge bar
     const playerLifeGauge = document.createElement("div");
     playerLifeGauge.className = "lifeGauge";
-    playerLifeContainer.appendChild(playerLifeGauge);
+    playerLifeGaugeContainer.appendChild(playerLifeGauge);
 
     // Set initial life gauge width based on enemy's life
     playerLifeGauge.style.width = `100%`;
@@ -143,5 +172,69 @@ export function lunchFight(weapons, enemies)
     }
 
     // Example usage: update life gauge to 50%
-    updateLifeGauge(40);
+    updateLifeGauge(50);
+
+    // Create a blocker
+    const blocker = document.createElement("div");
+    blocker.className = "blocker";
+    fightContainer.appendChild(blocker);
+
+    function disableInteractions() {
+        const blocker = document.getElementsByClassName('blocker')[0];
+        blocker.style.pointerEvents = 'all'; // Active le blocage des clics
+        blocker.style.display = 'block';
+      }
+      
+      function enableInteractions() {
+        const blocker = document.getElementsByClassName('blocker')[0];
+        blocker.style.pointerEvents = 'none'; // Désactive le blocage
+        blocker.style.display = 'none';
+      }
+
+    addOverlay("C'est ton tour !");
+
+    fighting();
+
+    function fighting()
+    {
+        enableInteractions();
+        weapons.forEach((element, key) => {
+            const weapon = document.getElementsByClassName("weapons")[key];
+            const hit =()=>{
+                updateLifeEnemyGauge(element.damage);
+                weapon.removeEventListener("click", hit);
+                disableInteractions();
+                if(hp <= 0)
+                    {
+                        console.log("Vous avez gagné");
+                        return('win');
+                        fightContainer.remove();
+                    }
+                    else
+                    {
+                        
+                        setTimeout(() => {
+                            updateLifeGauge(enemies.damage);
+                        
+                            if(pHp <= 0)
+                            {
+                                console.log("Vous avez perdu");
+                                return('lose');
+                                fightContainer.remove();
+                            }
+                            else
+                            {
+                                fighting();
+                            }
+                         }, 2000);
+                    }
+            }
+            weapon.addEventListener("click", hit);
+                
+                
+                // updateLifeGauge(enemies.damage);
+                
+        });
+     };
+
 }

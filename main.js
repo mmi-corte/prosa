@@ -13,7 +13,7 @@ import { changeStyleBG } from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
 
 
-var weapons = [
+let weapons = [
     {
         name: "Epée",
         damage: 10
@@ -35,6 +35,8 @@ const enemies = [
         damage: 10
     }
 ]
+
+let playerName = "";
 
 // Create an object to store the audio players
 
