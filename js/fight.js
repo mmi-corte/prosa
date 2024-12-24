@@ -52,7 +52,7 @@ export function lunchFight(weapons, enemies)
 
     // Function to update the life gauge
     function updateLifeEnemyGauge(damage) {
-        hp = hp-damage;
+        hp -= damage;
         lifeEnemyCounter.innerHTML = hp + "/"+ enemies.hp;
         var gaugpourcentage = (100*hp/enemies.hp);
         lifeGauge.style.width = `${gaugpourcentage}%`;
@@ -174,49 +174,65 @@ export function lunchFight(weapons, enemies)
     // Example usage: update life gauge to 50%
     updateLifeGauge(50);
 
-    // Create a blocker
-    const blocker = document.createElement("div");
-    blocker.className = "blocker";
-    fightContainer.appendChild(blocker);
+    // Create a blocker/ overlay
+        const blocker = document.createElement("div");
+        blocker.className = "blocker";
+        fightContainer.appendChild(blocker);
 
-    function disableInteractions() {
-        const blocker = document.getElementsByClassName('blocker')[0];
-        blocker.style.pointerEvents = 'all'; // Active le blocage des clics
-        blocker.style.display = 'block';
-      }
-      
-      function enableInteractions() {
-        const blocker = document.getElementsByClassName('blocker')[0];
-        blocker.style.pointerEvents = 'none'; // Désactive le blocage
-        blocker.style.display = 'none';
-      }
+        function disableInteractions() {
+            const blocker = document.getElementsByClassName('blocker')[0];
+            blocker.style.pointerEvents = 'all'; // Active le blocage des clics
+            blocker.style.display = 'block';
+        }
+        
+        function enableInteractions() {
+            const blocker = document.getElementsByClassName('blocker')[0];
+            blocker.style.pointerEvents = 'none'; // Désactive le blocage
+            blocker.style.display = 'none';
+        }
+        
+        addOverlay("C'est ton tour !");
 
+        const OverlayText = document.createElement("p");
+
+        function createnewOverlay(text)
+        {
+            const overlay = document.getElementsByClassName('overlay')[0];
+
+            function fadeIn(element) {
+                element.classList.remove("fade-out");
+                element.classList.add("fade-in");
+                element.style.display = "flex"; // Rendre visible si nécessaire
+            }
+            
+            function fadeOut(element) {
+                element.classList.remove("fade-in");
+                element.classList.add("fade-out");
+                setTimeout(() => {
+                element.style.display = "none"; // Cache l'élément après l'animation
+                }, 2000); // La durée doit correspondre à celle de l'animation CSS
+            }
     
-    addOverlay("C'est ton tour !");
-    const overlay = document.getElementByClassName('overlay')[0];
-
-    function fadeIn(element) {
-        element.classList.remove("fade-out");
-        element.classList.add("fade-in");
-        element.style.display = "block"; // Rendre visible si nécessaire
-      }
-      
-      function fadeOut(element) {
-        element.classList.remove("fade-in");
-        element.classList.add("fade-out");
-        setTimeout(() => {
-          element.style.display = "none"; // Cache l'élément après l'animation
-        }, 2000); // La durée doit correspondre à celle de l'animation CSS
-      }
-
-    fadeIn(overlay);
+            fadeIn(overlay);
+            
+            setTimeout(() => {
+                fadeOut(overlay);
+            }, 3000);
     
+            
+            OverlayText.className = "OverlayTxt";
+            OverlayText.innerHTML = text;
+            overlay.appendChild(OverlayText);
+        }
     
 
     fighting();
 
+    createnewOverlay("C'est ton tour !");
+
     function fighting()
     {
+        
         enableInteractions();
         weapons.forEach((element, key) => {
             const weapon = document.getElementsByClassName("weapons")[key];
@@ -227,26 +243,41 @@ export function lunchFight(weapons, enemies)
                 if(hp <= 0)
                     {
                         console.log("Vous avez gagné");
+                        createnewOverlay("Vous avez Gagné !");
                         return('win');
                         fightContainer.remove();
                     }
                     else
                     {
+                        setTimeout(() => {
+                            createnewOverlay("Au tour de l'ennemi !");
+                        }, 1500)
                         
                         setTimeout(() => {
-                            updateLifeGauge(enemies.damage);
+                                updateLifeGauge(enemies.damage);
                         
                             if(pHp <= 0)
                             {
                                 console.log("Vous avez perdu");
+                                createnewOverlay("Vous avez Perdu !");
                                 return('lose');
                                 fightContainer.remove();
                             }
                             else
                             {
+                                //remove EventListener
+                                weapons.forEach((element, key) => {
+                                    const weapon = document.getElementsByClassName("weapons")[key];
+                                    weapon.removeEventListener("click", hit);
+                                });
+
                                 fighting();
+
+                                setTimeout(() => {
+                                    createnewOverlay("C'est ton tour !");
+                                }, 700)
                             }
-                         }, 2000);
+                         }, 7000);
                     }
             }
             weapon.addEventListener("click", hit);
