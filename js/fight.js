@@ -122,7 +122,7 @@ export function lunchFight(weapons, enemies)
     fightContainer.appendChild(playerLifeContainer);
     // Create image of journal icon
     const journalIcon = document.createElement("img");
-    journalIcon.src = `../assets/journal.png`;
+    journalIcon.src = `../assets/icons/journal.png`;
     journalIcon.className = "journalIcon";
     playerLifeContainer.appendChild(journalIcon);
 
@@ -191,7 +191,27 @@ export function lunchFight(weapons, enemies)
         blocker.style.display = 'none';
       }
 
+    
     addOverlay("C'est ton tour !");
+    const overlay = document.getElementByClassName('overlay')[0];
+
+    function fadeIn(element) {
+        element.classList.remove("fade-out");
+        element.classList.add("fade-in");
+        element.style.display = "block"; // Rendre visible si nécessaire
+      }
+      
+      function fadeOut(element) {
+        element.classList.remove("fade-in");
+        element.classList.add("fade-out");
+        setTimeout(() => {
+          element.style.display = "none"; // Cache l'élément après l'animation
+        }, 2000); // La durée doit correspondre à celle de l'animation CSS
+      }
+
+    fadeIn(overlay);
+    
+    
 
     fighting();
 

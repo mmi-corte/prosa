@@ -330,6 +330,12 @@ strong {
     gap: 50px;
 }
 
+.imgAvatarContainer img{
+    width: 25%;
+    background-color: rgba(0, 0, 0, 0.295);
+    border-radius: 60px;
+}
+
 .playerLifeContainer {
     position: fixed;
     height: 60px;
@@ -543,6 +549,15 @@ strong {
     background-color: #dca352;
 }
 
+/* -------------------- Bouton avec image -------------------- */
+.obj-item img {
+    width: 50px; /* Ajustez la taille selon vos besoins */
+    height: 50px; /* Assurez-vous que la taille est cohérente */
+    object-fit: cover; /* Gère le cadrage des images */
+    border-radius: 5px; /* Ajoutez un effet arrondi si nécessaire */
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
 .pContainer{
     width: 80%;
     display:flex;
@@ -581,5 +596,49 @@ strong {
     background: rgb(0, 0, 0); /* Couleur semi-transparente */
     z-index: 9999;
     display: flex;
-    opacity: 0;
 }
+
+.weaponsBloc
+{
+    width: 250px;
+    height:auto;
+    position: fixed;
+    top: 380px;
+    left: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.weapons
+{
+    margin: 10px;
+    width: 250px;
+    height: 50px;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: start;
+    transform: skewX(-15deg);
+    box-shadow:inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+  
+  .fade-out {
+    opacity: 1;
+    animation: fadeOut 2s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+    }
+  }
