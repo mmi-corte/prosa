@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@capacitor/haptics": "^6.0.2",
     "selfsigned": "^2.4.1"
   },
   "devDependencies": {

@@ -129,66 +129,68 @@ boutonStart.addEventListener("click", function () {
                 btnLocV.addEventListener("click", function () {
 
                     refreshPage();
-                    //changeStyleBGB('container');
-                    addAutoPlayVideo('container','./assets/video/IntroTourneeV1.mp4','introVideo')
-                    /*addImg("container", "assets/berger.jpg", 'imgIntro');
-                    addDiv("container", "divNarra1", "dialogBox");
-                    addNameCharacter("E1Narra", 'divNarra1', "nameCharacter");
-                    addTxtNarration("E1Narra", "divNarra1", "narration");*/
-                    //-----------------MAP----------------------
-                    /*                
-                        //test fight
+
+                     //test fight
                         lunchFight(weapons, enemies[0]);
-                    })*/
-                    ajouterBouton('container', '', 'btnInv2', "btnInv");
-                    // Récupère le bouton du btn invisible
-                    const boutonInv2 = document.getElementById("btnInv2");
-                    boutonInv2.addEventListener("click", function () {
-                        refreshPage();
-                        //--------MAP----------------------
-                        const containerId = 'container';
-                        const centerLatitude = 42.309409; // Exemple : Paris
-                        const centerLongitude = 9.149022;
-                        const zoom = 15;
-                        const apiKey = '8b92289a637347489b3b13811907ebdd'; // Remplacez par votre clé Geoapify
+                    // //changeStyleBGB('container');
+                    // addAutoPlayVideo('container','./assets/video/IntroTourneeV1.mp4','introVideo')
+                    // /*addImg("container", "assets/berger.jpg", 'imgIntro');
+                    // addDiv("container", "divNarra1", "dialogBox");
+                    // addNameCharacter("E1Narra", 'divNarra1', "nameCharacter");
+                    // addTxtNarration("E1Narra", "divNarra1", "narration");*/
+                    // //-----------------MAP----------------------
+                    // /*                
+                       
+                    // })*/
+                    // ajouterBouton('container', '', 'btnInv2', "btnInv");
+                    // // Récupère le bouton du btn invisible
+                    // const boutonInv2 = document.getElementById("btnInv2");
+                    // boutonInv2.addEventListener("click", function () {
+                    //     refreshPage();
+                    //     //--------MAP----------------------
+                    //     const containerId = 'container';
+                    //     const centerLatitude = 42.309409; // Exemple : Paris
+                    //     const centerLongitude = 9.149022;
+                    //     const zoom = 15;
+                    //     const apiKey = '8b92289a637347489b3b13811907ebdd'; // Remplacez par votre clé Geoapify
 
-                        // Définition des deux marqueurs
-                        const marker1 = {
-                            latitude: 42.309409,
-                            longitude: 9.149022,
-                            color: 'red' // Couleur personnalisée
-                        };
+                    //     // Définition des deux marqueurs
+                    //     const marker1 = {
+                    //         latitude: 42.309409,
+                    //         longitude: 9.149022,
+                    //         color: 'red' // Couleur personnalisée
+                    //     };
 
-                        const marker2 = {
-                            latitude: 48.8606,
-                            longitude: 2.3376,
-                            color: 'blue' // Couleur personnalisée
-                        };
+                    //     const marker2 = {
+                    //         latitude: 48.8606,
+                    //         longitude: 2.3376,
+                    //         color: 'blue' // Couleur personnalisée
+                    //     };
 
-                        // Appel de la fonction
-                        showStaticMap(containerId, centerLatitude, centerLongitude, zoom, apiKey, marker1);
+                    //     // Appel de la fonction
+                    //     showStaticMap(containerId, centerLatitude, centerLongitude, zoom, apiKey, marker1);
 
 
-                        //showStaticMap('container', "42.309409", '9.149022', "15", "8b92289a637347489b3b13811907ebdd", markers);
+                    //     //showStaticMap('container', "42.309409", '9.149022', "15", "8b92289a637347489b3b13811907ebdd", markers);
 
-                        addTxtWithBoldWord('container', "Il est temps pour vous de vous diriger vers la fontaine.", "fontaine");
-                        // Vérifiez si le bouton n'existe pas avant de l'ajouter
-                        if (!document.getElementById('btnNext')) {
-                            ajouterBouton('container', 'Confirmez votre arrivée', 'btnNext', "btn");
+                    //     addTxtWithBoldWord('container', "Il est temps pour vous de vous diriger vers la fontaine.", "fontaine");
+                    //     // Vérifiez si le bouton n'existe pas avant de l'ajouter
+                    //     if (!document.getElementById('btnNext')) {
+                    //         ajouterBouton('container', 'Confirmez votre arrivée', 'btnNext', "btn");
 
-                            const btnNext = document.getElementById('btnNext');
-                            btnNext.addEventListener('click', function () {
-                                refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
-                                changeStyleBG('bgimage')
-                                ARAfata('container');
+                    //         const btnNext = document.getElementById('btnNext');
+                    //         btnNext.addEventListener('click', function () {
+                    //             refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
+                    //             changeStyleBG('bgimage')
+                    //             ARAfata('container');
 
-                                addOverlay('audioPlayer');
+                    //             addOverlay('audioPlayer');
 
-                                //loadSound(  "./assets/son.mp3",true);
+                    //             //loadSound(  "./assets/son.mp3",true);
 
-                            });
-                        }
-                    });
+                    //         });
+                    //     }
+                    // });
                 });
 
             });

@@ -234,11 +234,18 @@ export function lunchFight(weapons, enemies)
     {
         
         enableInteractions();
+
         weapons.forEach((element, key) => {
+            const weapon = document.getElementsByClassName("weapons")[key];
+            const newWeapon = weapon.cloneNode(true);
+            weapon.parentNode.replaceChild(newWeapon, weapon);
+        });
+
+        weapons.forEach((element, key) => {
+            
             const weapon = document.getElementsByClassName("weapons")[key];
             const hit =()=>{
                 updateLifeEnemyGauge(element.damage);
-                weapon.removeEventListener("click", hit);
                 disableInteractions();
                 if(hp <= 0)
                     {
@@ -266,10 +273,7 @@ export function lunchFight(weapons, enemies)
                             else
                             {
                                 //remove EventListener
-                                weapons.forEach((element, key) => {
-                                    const weapon = document.getElementsByClassName("weapons")[key];
-                                    weapon.removeEventListener("click", hit);
-                                });
+                                
 
                                 fighting();
 
