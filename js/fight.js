@@ -1,7 +1,8 @@
 import { addOverlay } from "./overslay.js";
 
-export function lunchFight(weapons, enemies)
+export async function lunchFight(weapons, enemies)
 {
+    return new Promise((resolve) => {
 
     //player hp
     const playerHp = 100;
@@ -82,7 +83,7 @@ export function lunchFight(weapons, enemies)
     const playerImage = document.createElement("img");
     playerImage.src = `../assets/avatar/avatar.png`; // Set the source of the image
     playerImage.style = 'filter: blur(2px);'
-    enemyImage.className = "playerImage"; // Add a class for styling
+    playerImage.className = "playerImage"; // Add a class for styling
     // Append the image to the enemy container
     playerContainer.appendChild(playerImage);
 
@@ -225,6 +226,17 @@ export function lunchFight(weapons, enemies)
             overlay.appendChild(OverlayText);
         }
     
+        function damageVibration(subject)
+        {
+            const subj = document.getElementsByClassName(subject)[0];
+            
+            subj.classList.add("vibration");
+            setTimeout(() => {
+                subj.classList.remove("vibration");
+            }, 500);
+            
+            
+        }
 
     fighting();
 
@@ -245,30 +257,40 @@ export function lunchFight(weapons, enemies)
             
             const weapon = document.getElementsByClassName("weapons")[key];
             const hit =()=>{
+                damageVibration("enemyContainer");
                 updateLifeEnemyGauge(element.damage);
                 disableInteractions();
                 if(hp <= 0)
                     {
                         console.log("Vous avez gagné");
                         createnewOverlay("Vous avez Gagné !");
-                        return('win');
-                        fightContainer.remove();
+                        
+
+                            setTimeout(() => {
+                                fightContainer.remove();
+                                resolve('win');
+                            }, 2000);
                     }
                     else
                     {
                         setTimeout(() => {
                             createnewOverlay("Au tour de l'ennemi !");
-                        }, 1500)
+                        }, 750)
                         
                         setTimeout(() => {
+                                damageVibration("playerContainer");
                                 updateLifeGauge(enemies.damage);
                         
                             if(pHp <= 0)
                             {
                                 console.log("Vous avez perdu");
                                 createnewOverlay("Vous avez Perdu !");
-                                return('lose');
-                                fightContainer.remove();
+                                
+                                    setTimeout(() => {
+                                        fightContainer.remove();
+                                        resolve('lose');
+                                    }, 2000);
+                                
                             }
                             else
                             {
@@ -291,5 +313,7 @@ export function lunchFight(weapons, enemies)
                 
         });
      };
+
+    });
 
 }
