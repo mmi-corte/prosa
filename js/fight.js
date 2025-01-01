@@ -1,4 +1,5 @@
 import { addOverlay } from "./overslay.js";
+import { loadSound, suspendSound } from './Sound/sound.js';
 
 export async function lunchFight(weapons, enemies)
 {
@@ -225,6 +226,7 @@ export async function lunchFight(weapons, enemies)
             OverlayText.innerHTML = text;
             overlay.appendChild(OverlayText);
         }
+
     
         function damageVibration(subject)
         {
@@ -257,6 +259,19 @@ export async function lunchFight(weapons, enemies)
             
             const weapon = document.getElementsByClassName("weapons")[key];
             const hit =()=>{
+                //sound
+                if(element.name == "Epée")
+                {
+                    loadSound("../assets/sound/sword.wav");
+                }
+                else if(element.name == "Grimoire")
+                {
+                    loadSound("../assets/sound/Book.wav");
+                }
+                else
+                {
+                    loadSound("../assets/sound/bow.mp3");
+                }
                 damageVibration("enemyContainer");
                 updateLifeEnemyGauge(element.damage);
                 disableInteractions();
@@ -267,6 +282,7 @@ export async function lunchFight(weapons, enemies)
                         
 
                             setTimeout(() => {
+                                
                                 fightContainer.remove();
                                 resolve('win');
                             }, 2000);
@@ -276,11 +292,16 @@ export async function lunchFight(weapons, enemies)
                         setTimeout(() => {
                             createnewOverlay("Au tour de l'ennemi !");
                         }, 750)
+
+
+                        setTimeout(() => {
+                            damageVibration("playerContainer");
+                            loadSound("../assets/sound/bunch.mp3");
+                            updateLifeGauge(enemies.damage);
+                        }, 4990);
                         
                         setTimeout(() => {
-                                damageVibration("playerContainer");
-                                updateLifeGauge(enemies.damage);
-                        
+
                             if(pHp <= 0)
                             {
                                 console.log("Vous avez perdu");
@@ -303,7 +324,7 @@ export async function lunchFight(weapons, enemies)
                                     createnewOverlay("C'est ton tour !");
                                 }, 700)
                             }
-                         }, 7000);
+                         }, 5500);
                     }
             }
             weapon.addEventListener("click", hit);
