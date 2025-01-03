@@ -1,7 +1,8 @@
 import { addOverlay } from "./overslay.js";
 import { loadSound, suspendSound } from './Sound/sound.js';
+import { ajouterBouton } from './button.js';
 
-export async function lunchFight(weapons, enemies)
+export async function lunchFight(skin, weapons, enemies)
 {
     return new Promise((resolve) => {
 
@@ -15,11 +16,12 @@ export async function lunchFight(weapons, enemies)
     const fightContainer = document.createElement("div");
     const container = document.getElementById("container");
     container.appendChild(fightContainer);
+    fightContainer.id = "fightContainer";
     fightContainer.className = "fightContainer";
 
     // Create Bg Image
     const bgImage = document.createElement("img");
-    bgImage.src = `../assets/bg/bg${enemies.name}.png`; 
+    bgImage.src = `../assets/bg/bg.png`; 
     bgImage.className = "bgImage";
     fightContainer.appendChild(bgImage);
 
@@ -28,7 +30,7 @@ export async function lunchFight(weapons, enemies)
     fightContainer.appendChild(enemyBloc);
 
     const enemyName = document.createElement("p");
-    enemyName.className = "txtTitle"
+    enemyName.className = "txtName";
     enemyBloc.appendChild(enemyName);
     enemyName.innerHTML = enemies.name;
 
@@ -61,7 +63,7 @@ export async function lunchFight(weapons, enemies)
     }
 
     // Example usage: update life gauge to 50%
-    updateLifeEnemyGauge(40);
+    // updateLifeEnemyGauge(70);
 
     // Create Enemy Image
 
@@ -82,7 +84,7 @@ export async function lunchFight(weapons, enemies)
     fightContainer.appendChild(playerContainer);
 
     const playerImage = document.createElement("img");
-    playerImage.src = `../assets/avatar/avatar.png`; // Set the source of the image
+    playerImage.src = `../assets/avatar/${skin}.png`; // Set the source of the image
     playerImage.style = 'filter: blur(2px);'
     playerImage.className = "playerImage"; // Add a class for styling
     // Append the image to the enemy container
@@ -174,7 +176,7 @@ export async function lunchFight(weapons, enemies)
     }
 
     // Example usage: update life gauge to 50%
-    updateLifeGauge(50);
+    // updateLifeGauge(80);
 
     // Create a blocker/ overlay
         const blocker = document.createElement("div");
@@ -227,6 +229,21 @@ export async function lunchFight(weapons, enemies)
             overlay.appendChild(OverlayText);
         }
 
+        function createnewEndingOverlay(text)
+        {
+            const overlay = document.getElementsByClassName('overlay')[0];
+
+    
+                overlay.classList.remove("fade-out");
+                overlay.classList.add("fade-in");
+                overlay.style.display = "flex"; // Rendre visible si nécessaire
+            
+    
+            
+            OverlayText.className = "OverlayTxt";
+            OverlayText.innerHTML = text;
+            overlay.appendChild(OverlayText);
+        }
     
         function damageVibration(subject)
         {
@@ -278,14 +295,18 @@ export async function lunchFight(weapons, enemies)
                 if(hp <= 0)
                     {
                         console.log("Vous avez gagné");
-                        createnewOverlay("Vous avez Gagné !");
-                        
 
-                            setTimeout(() => {
-                                
-                                fightContainer.remove();
-                                resolve('win');
-                            }, 2000);
+                        createnewEndingOverlay("Vous avez gagné !");
+
+                        ajouterBouton('fightContainer', '', 'btnInv1', "btnInv");
+
+                        const btnInv1 = document.getElementById("btnInv1")
+                        //--------------PSEUDO-------------------------
+                        // Ajoute un écouteur d'événement "click" au bouton Submit
+                        btnInv1.addEventListener("click", function () {
+                            fightContainer.remove();
+                            resolve('win');
+                        });
                     }
                     else
                     {
@@ -304,13 +325,21 @@ export async function lunchFight(weapons, enemies)
 
                             if(pHp <= 0)
                             {
+                                setTimeout(() => {
                                 console.log("Vous avez perdu");
-                                createnewOverlay("Vous avez Perdu !");
-                                
-                                    setTimeout(() => {
-                                        fightContainer.remove();
-                                        resolve('lose');
-                                    }, 2000);
+
+                                createnewEndingOverlay("Vous avez perdu !");
+
+                                ajouterBouton('fightContainer', '', 'btnInv2', "btnInv");
+
+                                const btnInv2 = document.getElementById("btnInv2")
+                                //--------------PSEUDO-------------------------
+                                // Ajoute un écouteur d'événement "click" au bouton Submit
+                                btnInv2.addEventListener("click", function () {
+                                    fightContainer.remove();
+                                    resolve('loose');
+                                });
+                            }, 500);
                                 
                             }
                             else

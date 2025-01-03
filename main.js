@@ -13,7 +13,7 @@ import { changeStyleBG, selectAvatar ,selectButton,changeStyleBGB} from './js/fu
 import { addOverlay } from './js/overlay.js';
 import {addAutoPlayVideo} from './js/video.js';
 
-
+import {skin} from './js/functionChangeStyle.js';
 
 let weapons = [
     {
@@ -33,8 +33,23 @@ let weapons = [
 const enemies = [
     {
         name: "Cerf",
-        hp: 100,
+        hp: 50,
         damage: 10
+    },
+    {
+        name: "Sylvain",
+        hp: 80,
+        damage: 15
+    },
+    {
+        name:"Basgialiscu",
+        hp: 100,
+        damage: 20
+    },
+    {
+        name:"Tarasque",
+        hp: 100,
+        damage: 20
     }
 ]
 
@@ -132,7 +147,7 @@ boutonStart.addEventListener("click", function () {
                     //test fight
                     async function luncher() 
                     {
-                        const fightResult = await lunchFight(weapons, enemies[0]);
+                        const fightResult = await lunchFight(skin, weapons, enemies[3]);
                         console.log(fightResult); 
                     }
                     luncher();

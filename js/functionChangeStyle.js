@@ -1,3 +1,5 @@
+export let skin = "";
+
 export function changeStyleBG(conatinerId) {
     const element = document.getElementById(conatinerId);
     element.style.background = "none";
@@ -18,7 +20,8 @@ export function selectAvatar(allAvatars) {
                 otherAvatar.style.border = '';
                 otherAvatar.style.filter = '';
             });
-
+            skin = ""
+            skin = avatar.id
             // Applique le style cliqué uniquement à l'image sélectionnée
             avatar.style.border = '4px solid #9AAB5C';
             //avatar.style.filter = 'brightness(0.8)';
