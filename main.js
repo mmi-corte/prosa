@@ -53,7 +53,7 @@ const enemies = [
     }
 ]
 
-let playerName = "";
+export let playerUserName = "";
 
 // Create an object to store the audio players
 
@@ -108,6 +108,8 @@ boutonStart.addEventListener("click", function () {
         const boutonSubmit = document.getElementById("btnSubmit");
         //-----------------------AVATAR--------------------------------
         boutonSubmit.addEventListener("click", function () {
+            const usernameinput = document.getElementById("userInput")
+            playerUserName = usernameinput.value
             refreshPage();
             addDiv("container", "containerAvatar", "divAvatar");
             addDiv("containerAvatar", "imgAvatarContainer", "imgAvatarContainer")

@@ -1,6 +1,7 @@
 import { addOverlay } from "./overslay.js";
 import { loadSound, suspendSound } from './Sound/sound.js';
 import { ajouterBouton } from './button.js';
+import { playerUserName } from "../main.js";
 
 export async function lunchFight(skin, weapons, enemies)
 {
@@ -141,7 +142,7 @@ export async function lunchFight(skin, weapons, enemies)
 
     const playerName = document.createElement("p");
     playerName.className = "txtTitle";
-    playerName.innerHTML = "Joueur";
+    playerName.innerHTML = playerUserName;
     pContainer.appendChild(playerName);
 
     // Create a life gauge counter
