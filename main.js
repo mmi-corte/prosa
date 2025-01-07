@@ -11,7 +11,7 @@ import { lunchFight } from './js/fight.js';
 import { addEsterelle, ARAfata } from './js/ARSaint-mart.js';
 import { changeStyleBG, skin, selectAvatar ,selectButton,changeStyleBGB} from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
-import {addAutoPlayVideo} from './js/video.js';
+import { addAutoPlayVideo } from './js/video.js';
 
 //Variable / Constante pour les combats
 
@@ -42,12 +42,12 @@ const enemies = [
         damage: 15
     },
     {
-        name:"Basgialiscu",
+        name: "Basgialiscu",
         hp: 100,
         damage: 20
     },
     {
-        name:"Tarasque",
+        name: "Tarasque",
         hp: 100,
         damage: 20
     }
@@ -63,29 +63,34 @@ ajouterBouton('container', 'Commencer', 'btnStart', 'btn');
 
 // Récupère le bouton Start
 const boutonStart = document.getElementById("btnStart");
-
-//------------PREVENTION-------------------------------------
-// Ajoute un écouteur d'événement "click" au bouton Start
 boutonStart.addEventListener("click", function () {
-    loadSound('assets/sound/buttoneffect.mp3');
     refreshPage();
+    addImg("container",'assets/berger.jpg');
+    ajouterBouton('container', '', 'btnInvI', "btnInv");
+    const btnInvI1 = document.getElementById("btnInvI");
 
-    //svg
-    addSVG('container', warningSvg);
-    const svg = document.getElementsByTagName('svg');
-    svg[0].id = 'svg1'
-    //attention txt
-    addTxt('container', 'ATTENTION');
-    const disclaimer = document.getElementsByClassName('txt');
-    disclaimer[0].id = 'txt3'
-    //text warning
-    addTxtWithBoldWord('container', 'Pour votre sécurité, restez\nattentif à votre\nenvironnement et évitez\nles zones à risques.', 'sécurité');
-    disclaimer[1].id = 'txt2'
-    //logo
-    addImg('container', 'assets/logo.png', 'logoimg');
-    const logoimg = document.getElementsByClassName('logoimg');
-    logoimg[0].id = 'logoImgP2'
-    ajouterBouton('container', '', 'btnInv1', "btnInv");
+    //------------PREVENTION-------------------------------------
+    // Ajoute un écouteur d'événement "click" au bouton Start
+    btnInvI1.addEventListener("click", function () {
+        refreshPage();
+        loadSound('assets/sound/buttoneffect.mp3');
+        ajouterBouton('container', '', 'btnInvI', "btnInv");
+        //svg
+        addSVG('container', warningSvg);
+        const svg = document.getElementsByTagName('svg');
+        svg[0].id = 'svg1'
+        //attention txt
+        addTxt('container', 'ATTENTION');
+        const disclaimer = document.getElementsByClassName('txt');
+        disclaimer[0].id = 'txt3'
+        //text warning
+        addTxtWithBoldWord('container', 'Pour votre sécurité, restez\nattentif à votre\nenvironnement et évitez\nles zones à risques.', 'sécurité');
+        disclaimer[1].id = 'txt2'
+        //logo
+        addImg('container', 'assets/logo.png', 'logoimg');
+        const logoimg = document.getElementsByClassName('logoimg');
+        logoimg[0].id = 'logoImgP2'
+        ajouterBouton('container', '', 'btnInv1', "btnInv");
 
     const btnInv1 = document.getElementById("btnInv1")
     //--------------PSEUDO-------------------------
@@ -104,6 +109,17 @@ boutonStart.addEventListener("click", function () {
         const logoimg = document.getElementsByClassName('logoimg');
         logoimg[0].id = 'logoImgP2'
 
+            // Récupère le bouton du btn submit
+            const boutonSubmit = document.getElementById("btnSubmit");
+            //-----------------------AVATAR--------------------------------
+            boutonSubmit.addEventListener("click", function () {
+                refreshPage();
+                addDiv("container", "containerAvatar", "divAvatar");
+                addDiv("containerAvatar", "imgAvatarContainer", "imgAvatarContainer")
+                addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT1.png", "a1");
+                addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT2.png", "a2");
+                addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT3.png", "a3");
+                addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT4.png", "a4");
         // Récupère le bouton du btn submit
         const boutonSubmit = document.getElementById("btnSubmit");
         //-----------------------AVATAR--------------------------------
@@ -118,14 +134,14 @@ boutonStart.addEventListener("click", function () {
             addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT3.png", "a3");
             addBtnImg("imgAvatarContainer", "./assets/avatar/AvatarT4.png", "a4");
 
-            const avatar1 = document.getElementById("a1");
-            const avatar2 = document.getElementById("a2");
-            const avatar3 = document.getElementById("a3");
-            const avatar4 = document.getElementById("a4");
-            // Regrouper toutes les images dans une liste
-            const allAvatars = [avatar1, avatar2, avatar3, avatar4];
+                const avatar1 = document.getElementById("a1");
+                const avatar2 = document.getElementById("a2");
+                const avatar3 = document.getElementById("a3");
+                const avatar4 = document.getElementById("a4");
+                // Regrouper toutes les images dans une liste
+                const allAvatars = [avatar1, avatar2, avatar3, avatar4];
 
-            selectAvatar(allAvatars);
+                selectAvatar(allAvatars);
 
             ajouterBouton('containerAvatar', 'Confirmer', 'btnConfirm', "btn");
             const btnConfirm = document.getElementById('btnConfirm');
@@ -183,46 +199,46 @@ boutonStart.addEventListener("click", function () {
                     //         color: 'red' // Couleur personnalisée
                     //     };
 
-                    //     const marker2 = {
-                    //         latitude: 48.8606,
-                    //         longitude: 2.3376,
-                    //         color: 'blue' // Couleur personnalisée
-                    //     };
+                            const marker2 = {
+                                latitude: 48.8606,
+                                longitude: 2.3376,
+                                color: 'blue' // Couleur personnalisée
+                            };
 
-                    //     // Appel de la fonction
-                    //     showStaticMap(containerId, centerLatitude, centerLongitude, zoom, apiKey, marker1);
+                            // Appel de la fonction
+                            showStaticMap(containerId, centerLatitude, centerLongitude, zoom, apiKey, marker1);
 
 
-                    //     //showStaticMap('container', "42.309409", '9.149022', "15", "8b92289a637347489b3b13811907ebdd", markers);
+                            //showStaticMap('container', "42.309409", '9.149022', "15", "8b92289a637347489b3b13811907ebdd", markers);
 
-                    //     addTxtWithBoldWord('container', "Il est temps pour vous de vous diriger vers la fontaine.", "fontaine");
-                    //     // Vérifiez si le bouton n'existe pas avant de l'ajouter
-                    //     if (!document.getElementById('btnNext')) {
-                    //         ajouterBouton('container', 'Confirmez votre arrivée', 'btnNext', "btn");
+                            addTxtWithBoldWord('container', "Il est temps pour vous de vous diriger vers la fontaine.", "fontaine");
+                            // Vérifiez si le bouton n'existe pas avant de l'ajouter
+                            if (!document.getElementById('btnNext')) {
+                                ajouterBouton('container', 'Confirmez votre arrivée', 'btnNext', "btn");
 
-                    //         const btnNext = document.getElementById('btnNext');
-                    //         btnNext.addEventListener('click', function () {
-                    //             refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
-                    //             changeStyleBG('bgimage')
-                    //             ARAfata('container');
+                                const btnNext = document.getElementById('btnNext');
+                                btnNext.addEventListener('click', function () {
+                                    refreshPage(); // Optionnel si vous voulez nettoyer à nouveau la page
+                                    changeStyleBG('bgimage')
+                                    ARAfata('container');
 
-                    //             addOverlay('audioPlayer');
+                                    addOverlay('audioPlayer');
 
-                    //             //loadSound(  "./assets/son.mp3",true);
+                                    //loadSound(  "./assets/son.mp3",true);
 
-                    //         });
-                    //     }
-                    // });
+                                });
+                            }
+                        });
+                    });
+
                 });
 
             });
 
         });
-
     });
+
+
 });
-
-
-
 
 
