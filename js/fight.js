@@ -291,6 +291,24 @@ export async function lunchFight(skin, weapons, enemies)
                     loadSound("../assets/sound/bow.mp3");
                 }
                 damageVibration("enemyContainer");
+                const lottiePlayer = document.createElement('lottie-player');
+                lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
+                lottiePlayer.setAttribute('speed', '1');
+                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                lottiePlayer.setAttribute('loop', '');
+                lottiePlayer.setAttribute('controls', '');
+                lottiePlayer.setAttribute('autoplay', '');
+                lottiePlayer.setAttribute('direction', '1');
+                lottiePlayer.setAttribute('mode', 'normal');
+
+                // Ajoute le player dans le conteneur
+                enemyContainer.appendChild(lottiePlayer);
+
+                setTimeout(() => {
+                    lottiePlayer.remove();
+                }, 1700);
+
+                
                 updateLifeEnemyGauge(element.damage);
                 disableInteractions();
                 if(hp <= 0)
@@ -318,6 +336,21 @@ export async function lunchFight(skin, weapons, enemies)
 
                         setTimeout(() => {
                             damageVibration("playerContainer");
+                            const lottiePlayer = document.createElement('lottie-player');
+                            // lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
+                            // lottiePlayer.setAttribute('speed', '1');
+                            // lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                            // lottiePlayer.setAttribute('loop', '');
+                            // lottiePlayer.setAttribute('controls', '');
+                            // lottiePlayer.setAttribute('autoplay', '');
+                            // lottiePlayer.setAttribute('direction', '1');
+                            // lottiePlayer.setAttribute('mode', 'normal');
+
+                            // playerContainer.appendChild(lottiePlayer);
+
+                            // setTimeout(() => {
+                            //     lottiePlayer.remove();
+                            // }, 1700);
                             loadSound("../assets/sound/bunch.mp3");
                             updateLifeGauge(enemies.damage);
                         }, 4990);

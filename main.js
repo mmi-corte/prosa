@@ -9,11 +9,11 @@ import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 import { addEsterelle, ARAfata } from './js/ARSaint-mart.js';
-import { changeStyleBG, selectAvatar ,selectButton,changeStyleBGB} from './js/functionChangeStyle.js';
+import { changeStyleBG, skin, selectAvatar ,selectButton,changeStyleBGB} from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
 import {addAutoPlayVideo} from './js/video.js';
 
-import {skin} from './js/functionChangeStyle.js';
+//Variable / Constante pour les combats
 
 let weapons = [
     {
@@ -149,9 +149,9 @@ boutonStart.addEventListener("click", function () {
                     //test fight
                     async function luncher() 
                     {
-                        const fightResult = await lunchFight(skin, weapons, enemies[3]);
-                        console.log(fightResult); 
-                    }
+                        const fightResult = await lunchFight(skin, weapons, enemies[1]);
+                        console.log(fightResult);
+                    } 
                     luncher();
                     // //changeStyleBGB('container');
                     // addAutoPlayVideo('container','./assets/video/IntroTourneeV1.mp4','introVideo')
