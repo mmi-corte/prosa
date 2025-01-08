@@ -690,3 +690,8 @@ strong {
 .a-enter-vr-button {
     display: none !important;
   }
+
+  .OverlayImg {
+    width: 100px; /* Adjust the size as needed */
+    height: auto;
+}
