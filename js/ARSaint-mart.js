@@ -233,77 +233,66 @@ export function ARAfata(containerId) {
     </a-scene>
 
   `;
-  setupAudioControls();
+  const marker = document.querySelector("#marker");
+const camera = document.querySelector("[camera]");
+const audioEntity = document.querySelector("#audioEntity");
+
+// Vérifiez et ajustez l'audio toutes les 100 ms
+setInterval(() => {
+  setupAudioControls(marker, camera, audioEntity);
+}, 100);
+
+
   supprBtnVR();
 }
 
 function supprBtnVR() {
-  // Supprime le bouton VR si AR.js est actif
-window.addEventListener('load', () => {
-  const checkVRButton = setInterval(() => {
+  const scene = document.querySelector('a-scene');
+
+  if (scene) {
+    scene.addEventListener('enter-vr', () => {
       const vrButton = document.querySelector('.a-enter-vr-button');
       if (vrButton) {
-          vrButton.style.display = 'none'; // Cache le bouton VR
-          clearInterval(checkVRButton); // Arrête de surveiller une fois que le bouton est trouvé
+        vrButton.style.display = 'none'; // Masquer le bouton VR
       }
-  }, 100); // Vérifie toutes les 100 ms
-});
+    });
+  }
 }
 //--------------------SON------------------------------------
-function setupAudioControls() {
-  // Gestion du son
-  window.addEventListener('load', () => {
-    const camera = document.querySelector('[camera]');
-    const marker = document.querySelector('a-marker');
-    const soundEntity = document.querySelector('#audioEntity');
-    let isPlaying = false; // Variable pour suivre l'état du son
-    let checkInterval = null; // Référence de l'intervalle
-
-    if (!camera || !marker || !soundEntity) {
-      console.error("Certains éléments requis (camera, marker, audioEntity) sont manquants dans le DOM.");
-      return;
+function setupAudioControls(marker, camera, audioEntity, maxDistance = 5) {
+  // Vérifiez si le marqueur est visible
+  if (!marker.object3D.visible) {
+    // Si le marqueur n'est pas visible, arrêter le son
+    const soundComponent = audioEntity.components.sound;
+    if (soundComponent && soundComponent.isPlaying) {
+      soundComponent.stopSound();
     }
+    return; // Ne rien faire d'autre
+  }
 
-    // Quand le marqueur est trouvé
-    marker.addEventListener('markerFound', () => {
-      const updateVolume = () => {
-        const cameraPosition = camera.object3D.position;
-        const markerPosition = marker.object3D.position;
+  // Récupérer les positions du marqueur et de la caméra
+  const markerPosition = marker.object3D.position;
+  const cameraPosition = camera.object3D.position;
 
-        const distance = cameraPosition.distanceTo(markerPosition);
-        const maxDistance = 20;
-        const minDistance = 0.5;
+  // Calcul de la distance
+  const dx = markerPosition.x - cameraPosition.x;
+  const dy = markerPosition.y - cameraPosition.y;
+  const dz = markerPosition.z - cameraPosition.z;
+  const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-        // Calcul du volume en fonction de la distance
-        let volume = 1 - (distance - minDistance) / (maxDistance - minDistance);
-        volume = Math.max(0, Math.min(1, volume));
+  // Ajustement du volume
+  const minVolume = 0.1; // Volume minimum
+  const volume = Math.max(minVolume, 1 - distance / maxDistance);
 
-        // Mise à jour du volume du son
-        soundEntity.setAttribute('sound', 'volume', volume);
-      };
+  // Vérifiez si le composant son existe
+  const soundComponent = audioEntity.components.sound;
+  if (soundComponent) {
+    // Ajustez le volume
+    audioEntity.setAttribute("sound", "volume", volume);
 
-      // Lancer le son si ce n'est pas déjà en cours
-      if (!isPlaying) {
-        soundEntity.components.sound.playSound();
-        isPlaying = true;
-      }
-
-      // Mettre à jour le volume régulièrement
-      checkInterval = setInterval(updateVolume, 100);
-    });
-
-    // Quand le marqueur est perdu
-    marker.addEventListener('markerLost', () => {
-      if (checkInterval) {
-        clearInterval(checkInterval);
-        checkInterval = null;
-      }
-
-      // Pause du son
-      if (isPlaying) {
-        soundEntity.components.sound.pauseSound();
-        isPlaying = false;
-      }
-    });
-  });
+    // Jouez ou arrêtez le son en fonction de la distance
+    if (!soundComponent.isPlaying) {
+      soundComponent.playSound();
+    }
+  }
 }

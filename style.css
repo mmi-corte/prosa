@@ -686,3 +686,7 @@ strong {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
+/*btn VR*/
+.a-enter-vr-button {
+    display: none !important;
+  }
