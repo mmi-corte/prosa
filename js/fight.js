@@ -280,33 +280,86 @@ export async function lunchFight(skin, weapons, enemies)
                 //sound
                 if(element.name == "Epée")
                 {
-                    loadSound("../assets/sound/sword.wav");
+                    loadSound("../assets/sound/sword.mp3");
+
+                    const lottiePlayer = document.createElement('lottie-player');
+                
+
+                
+                    lottiePlayer.setAttribute('src', '../assets/animation/BladeStrike.json');
+                    
+                    lottiePlayer.setAttribute('background', 'transparent');
+                    lottiePlayer.setAttribute('speed', '1');
+                    lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                    lottiePlayer.setAttribute('loop', 'none');
+                    lottiePlayer.setAttribute('controls', '');
+                    lottiePlayer.setAttribute('autoplay', '');
+                    lottiePlayer.setAttribute('direction', '1');
+                    lottiePlayer.setAttribute('mode', 'normal');
+
+                    // Ajoute le player dans le conteneur
+                    enemyContainer.appendChild(lottiePlayer);
+                    
+                    setTimeout(() => {
+                        lottiePlayer.remove();
+                    }, 1200);
                 }
                 else if(element.name == "Grimoire")
                 {
-                    loadSound("../assets/sound/Book.wav");
+                    const lottiePlayer = document.createElement('lottie-player');
+
+                    lottiePlayer.setAttribute('src', '../assets/animation/Magic.json');
+                    
+                    lottiePlayer.setAttribute('background', 'transparent');
+                    lottiePlayer.setAttribute('speed', '1');
+                    lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                    lottiePlayer.setAttribute('loop', 'none');
+                    lottiePlayer.setAttribute('controls', '');
+                    lottiePlayer.setAttribute('autoplay', '');
+                    lottiePlayer.setAttribute('direction', '1');
+                    lottiePlayer.setAttribute('mode', 'normal');
+
+                    // Ajoute le player dans le conteneur
+                    enemyContainer.appendChild(lottiePlayer);
+                    
+                    setTimeout(() => {
+                        lottiePlayer.remove();
+                    }, 1200);
+                    loadSound("../assets/sound/Book.mp3");
                 }
                 else
                 {
+                    // if (enemies.name === "Basgialiscu")
+                    //     {
+                    //         while (weaponsBloc.firstChild) {
+                    //             weaponsBloc.removeChild(weaponsBloc.firstChild);
+                    //         }
+                    //     //    children.forEach(element => {
+                    //     //         element.remove();
+                    //     //     });
+                    //     }
+                    const lottiePlayer = document.createElement('lottie-player');
+
+                    lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                    
+                    lottiePlayer.setAttribute('background', 'transparent');
+                    lottiePlayer.setAttribute('speed', '1');
+                    lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                    lottiePlayer.setAttribute('loop', 'none');
+                    lottiePlayer.setAttribute('autoplay', '');
+                    lottiePlayer.setAttribute('direction', '1');
+                    lottiePlayer.setAttribute('mode', 'normal');
+
+                    // Ajoute le player dans le conteneur
+                    enemyContainer.appendChild(lottiePlayer);
+                    
+                    setTimeout(() => {
+                        lottiePlayer.remove();
+                    }, 1200);
                     loadSound("../assets/sound/bow.mp3");
                 }
                 damageVibration("enemyContainer");
-                const lottiePlayer = document.createElement('lottie-player');
-                lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
-                lottiePlayer.setAttribute('speed', '1');
-                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
-                lottiePlayer.setAttribute('loop', '');
-                lottiePlayer.setAttribute('controls', '');
-                lottiePlayer.setAttribute('autoplay', '');
-                lottiePlayer.setAttribute('direction', '1');
-                lottiePlayer.setAttribute('mode', 'normal');
-
-                // Ajoute le player dans le conteneur
-                enemyContainer.appendChild(lottiePlayer);
-
-                setTimeout(() => {
-                    lottiePlayer.remove();
-                }, 1700);
+                
 
                 
                 updateLifeEnemyGauge(element.damage);
@@ -337,20 +390,20 @@ export async function lunchFight(skin, weapons, enemies)
                         setTimeout(() => {
                             damageVibration("playerContainer");
                             const lottiePlayer = document.createElement('lottie-player');
-                            // lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
-                            // lottiePlayer.setAttribute('speed', '1');
-                            // lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
-                            // lottiePlayer.setAttribute('loop', '');
-                            // lottiePlayer.setAttribute('controls', '');
-                            // lottiePlayer.setAttribute('autoplay', '');
-                            // lottiePlayer.setAttribute('direction', '1');
-                            // lottiePlayer.setAttribute('mode', 'normal');
+                            lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
+                            lottiePlayer.setAttribute('background', 'none');
+                            lottiePlayer.setAttribute('speed', '1');
+                            lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: -50px; margin-right: auto;');
+                            lottiePlayer.setAttribute('loop', '');
+                            lottiePlayer.setAttribute('autoplay', '');
+                            lottiePlayer.setAttribute('direction', '1');
+                            lottiePlayer.setAttribute('mode', 'normal');
 
-                            // playerContainer.appendChild(lottiePlayer);
+                            playerContainer.appendChild(lottiePlayer);
 
-                            // setTimeout(() => {
-                            //     lottiePlayer.remove();
-                            // }, 1700);
+                            setTimeout(() => {
+                                lottiePlayer.remove();
+                            }, 1700);
                             loadSound("../assets/sound/bunch.mp3");
                             updateLifeGauge(enemies.damage);
                         }, 4990);

@@ -8,9 +8,11 @@ export function loadSound(url, loop = false) {
         // Si l'instance audio pour cette URL n'existe pas encore, on la crée
         audioPlayers[url] = new Audio(url);
         audioPlayers[url].loop = loop; // Active ou désactive la boucle
+        
     }
     // Si une instance existe déjà, on met à jour l'option de boucle
     audioPlayers[url].loop = loop;
+    audioPlayers[url].preload = 'auto'; 
 
     // On lance la lecture
     audioPlayers[url].play();
