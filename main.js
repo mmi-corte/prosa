@@ -293,9 +293,9 @@ boutonStart.addEventListener("click", function () {
                                                                                     addTxtNarration("E1Narra7", 'diagBox', 'dialogBox');
 
 
-                                                                                    ajouterBouton('diagBox', '', btnChoix1, 'btnChoix');
+                                                                                    ajouterBouton('diagBox', '', btnChoix1, 'btnChoix choix1');
                                                                                     addTxtNarration("E1Choix1", btnChoix1, "");
-                                                                                    ajouterBouton('diagBox', '', btnChoix2, 'btnChoix');
+                                                                                    ajouterBouton('diagBox', '', btnChoix2, 'btnChoix choix2');
                                                                                     addTxtNarration("E1Choix2", btnChoix2, "");
                                                                                     addOverlay('audioPlayer');
                                                                                     //-----------------ETAPE 1 BIS-------------------------------------------
@@ -332,11 +332,15 @@ boutonStart.addEventListener("click", function () {
 
                                                                                                 document.getElementById(btnNext).addEventListener("click", function () {
                                                                                                     //METTRE POP UP
+                                                                                                    refreshPage();
+                                                                                                    changeStyleBG(container);
+                                                                                                    addTxt(container,"pop up");
 
-                                                                                                    ajouterBouton('diagBox', '', btnNext, 'btnInv');
+                                                                                                    ajouterBouton(container, '', btnNext, 'btnInv');
                                                                                                     //-------------ETAPE 2  CHOIX 1
-                                                                                                    doncument.getElementById(btnNext).addEventListener("click", function () {
+                                                                                                    document.getElementById(btnNext).addEventListener("click", function () {
                                                                                                         refreshPage();
+                                                                                                        console.log('teste kk');
                                                                                                         //peut etre lancer l'AR sans perso car pas de sens
                                                                                                         ARBerger(container);
                                                                                                         addOverlay('audioPlayer');
