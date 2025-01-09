@@ -3,6 +3,7 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { refreshPage } from './refreshPage.js';
 import { addOverlay } from './overlay.js';
 import { ajouterBouton } from './button.js';
+import { AREsterelle,ARBerger, ARAfata, ARBerger } from './ARFunction.js';
 
 //var container
 const container = 'container';
@@ -15,60 +16,17 @@ const name = 'PersoTxt';
 export function step2() {
     refreshPage();
 
-    addImgBackground(container, 'assets/bg/bg.png');
-    addDiv('container', "diagBox", 'diagBox');
-    addNameCharacter('E2Narra', 'diagBox', 'nameCharacter');
-    addTxtNarration("E2Narra", 'diagBox', 'dialogBox');
-    addOverlay('audioPlayer');
+    ARBerger(container)
 
-    ajouterBouton('diagBox', '', btnNext, 'btnInv');
+    addTxtNarrationAR("E2Narra", txtNarr, "");
+    addNamePersoAR("E2Narra", Narra, "");
 
-    document.getElementById(btnNext).addEventListener("click", function () {
+    ajouterBouton('container', '', txtNarr, 'btnChoix choix2');
+
+    document.getElementById(txtNarr).addEventListener("click", function () {
         refreshPage();
-
-        addImgBackground(container, 'assets/bg/bg.png');
-        addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-        addDiv('container', "diagBox", 'diagBox');
-        addNameCharacter('E2Berger', 'diagBox', 'nameCharacter');
-        addTxtNarration("E2Berger", 'diagBox', 'dialogBox');
-        addOverlay('audioPlayer');
-
-        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-        document.getElementById(btnNext).addEventListener("click", function () {
-            refreshPage();
-
-            addImgBackground(container, 'assets/bg/bg.png');
-
-            
-            addDiv('container', "diagBox", 'diagBox');
-            addNameCharacter('E2Narra2', 'diagBox', 'nameCharacter');
-            addTxtNarration("E2Narra2", 'diagBox', 'dialogBox');
-            addOverlay('audioPlayer');
-
-            ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-            document.getElementById(btnNext).addEventListener("click", function () {
-                refreshPage();
-                addImgBackground(container, 'assets/bg/bg.png');
-                addDiv('container', "diagBox", 'diagBox');
-                addNameCharacter('E2Fata', 'diagBox', 'nameCharacter');
-                addTxtNarration("E2Fata", 'diagBox', 'dialogBox');
-                addOverlay('audioPlayer');
-
-                ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                document.getElementById(btnNext).addEventListener("click", function () {
-                    refreshPage();
-                    addImgBackground(container, 'assets/bg/bg.png');
-                    addDiv('container', "diagBox", 'diagBox');
-                    addNameCharacter('E2Esterelle', 'diagBox', 'nameCharacter');
-                    addTxtNarration("E2Esterelle", 'diagBox', 'dialogBox');
-                    addOverlay('audioPlayer');
-
-                    ajouterBouton('diagBox', '', btnNext, 'btnInv');
-                });
-            });
-        });
-    });
+        ARBerger(container)
+        addTxtNarrationAR("E2Berger", txtNarr, "");
+        addNamePersoAR("E2Berger", Berger, "");
+    })
 }
