@@ -245,13 +245,25 @@ strong {
 }
 
 .btnChoix {
+    width: 100%;
+    
+    border-radius: 6px;
     text-align: center;
     font-size: 0.9rem;
     padding: 0;
     margin: 0;
+    margin-bottom: 5px;
     border: none;
     background: none;
     color: white;
+}
+.choix1{
+
+    background-color: #E8E6CA;
+    color: black;
+}
+.choix2{
+    background-color: #8B9A86;
 }
 
 /*---------------------Style Perso narration----------------------*/

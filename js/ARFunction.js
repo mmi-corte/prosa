@@ -1,7 +1,13 @@
 //import { loadSound, } from './Sound/sound.js';
 
 //-------------BERGER----------------
-export function ARBerger(conatinerId) {
+export function ARBerger(containerId) {
+  console.log("teste b");
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
+    return;
+  }
   container.innerHTML = `
   <a-scene
             vr-mode-ui="enabled: false;"
