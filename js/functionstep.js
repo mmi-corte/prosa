@@ -19,14 +19,14 @@ export function step2() {
     ARBerger(container)
 
     addTxtNarrationAR("E2Narra", txtNarr, "");
-    addNamePersoAR("E2Narra", Narra, "");
+    addNamePersoAR("E2Narra", name, "");
 
-    ajouterBouton('container', '', txtNarr, 'btnChoix choix2');
+    ajouterBouton(container, '', txtNarr, 'btnInv' );
 
     document.getElementById(txtNarr).addEventListener("click", function () {
         refreshPage();
         ARBerger(container)
         addTxtNarrationAR("E2Berger", txtNarr, "");
-        addNamePersoAR("E2Berger", Berger, "");
+        addNamePersoAR("E2Berger", name, "");
     })
 }
