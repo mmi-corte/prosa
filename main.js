@@ -12,7 +12,7 @@ import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
 import { addAutoPlayVideo } from './js/video.js';
-
+import { step2 } from './js/functionstep.js'
 //Variable / Constante pour les combats
 
 let weapons = [
@@ -360,7 +360,7 @@ boutonStart.addEventListener("click", function () {
                                                                                     });
                                                                                     //----------------------ETAPE 2 CHOIX 2
                                                                                     document.getElementById(btnChoix2).addEventListener("click", function () {
-
+                                                                                            step2();
                                                                                     });
                                                                                 });
                                                                             });
