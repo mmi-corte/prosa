@@ -1,6 +1,89 @@
 //import { loadSound, } from './Sound/sound.js';
+
+//-------------BERGER----------------
+export function ARBerger(conatinerId) {
+  container.innerHTML = `
+  <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+        >
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="https://cdn.glitch.global/474e94da-5719-4534-b146-2b197f100328/marker.patt?v=1732481553206"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-image
+                    src="https://cdn.glitch.global/474e94da-5719-4534-b146-2b197f100328/carte.jpg?v=1732481925938"
+                    scale="1 1 1"
+                    class="clickable"
+                    rotation="-90 0 0"
+                    gesture-handler
+                ></a-image>
+            </a-marker>
+
+            <!-- Boîte de dialogue -->
+        <a-plane 
+          position="0 0 8" 
+          rotation="-90 0 0" 
+          scale="8 8 8"
+          width="1.5" 
+          height="0.5" 
+          color="grey" 
+          material="opacity: 0.8; transparent: true">
+        </a-plane>
+        <a-text 
+          id= "PersoTxt"
+          value="" 
+          rotation="-90 0 0" 
+          scale="8 8 8" 
+          position="0 0 8" 
+          align="center" 
+          color="#000000" 
+          width="1.5" 
+          wrapCount="15">
+        </a-text>
+        <a-text 
+          id= "narrationText"
+          value="" 
+          rotation="-90 0 0" 
+          scale="8 8 8" 
+          position="0 0 8" 
+          align="center" 
+          color="#000000" 
+          width="1.5" 
+          wrapCount="15">
+        </a-text>
+      </a-marker>
+
+      <a-entity sound="src: #sound; autoplay: false; loop: true;" id="audioEntity"></a-entity>
+      <a-entity camera position="0 0 0"></a-entity>
+
+            
+        </a-scene>
+  `;
+  const marker = document.querySelector("#marker");
+  const camera = document.querySelector("[camera]");
+  const audioEntity = document.querySelector("#audioEntity");
+
+  // Vérifiez et ajustez l'audio toutes les 100 ms
+  setInterval(() => {
+    setupAudioControls(marker, camera, audioEntity);
+  }, 100);
+
+
+  supprBtnVR();
+}
 //---------------STREGA------------------------------------
-export function addStrega(containerId) {
+export function ARStrega(containerId) {
   const container = document.getElementById(containerId);
   if (!container) {
     console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
@@ -78,10 +161,21 @@ export function addStrega(containerId) {
     </a-scene>
 
     `;
-  setupAudioControls();
+  const marker = document.querySelector("#marker");
+  const camera = document.querySelector("[camera]");
+  const audioEntity = document.querySelector("#audioEntity");
+
+  // Vérifiez et ajustez l'audio toutes les 100 ms
+  setInterval(() => {
+    setupAudioControls(marker, camera, audioEntity);
+  }, 100);
+
+
+  supprBtnVR();
+
 }
 //---------------ESTERELLE------------------------------------
-export function addEsterelle(containerId) {
+export function AREsterelle(containerId) {
   const container = document.getElementById(containerId);
   if (!container) {
     console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
@@ -151,9 +245,19 @@ export function addEsterelle(containerId) {
     </a-scene>
 
   `;
-  setupAudioControls();
-}
+  const marker = document.querySelector("#marker");
+  const camera = document.querySelector("[camera]");
+  const audioEntity = document.querySelector("#audioEntity");
 
+  // Vérifiez et ajustez l'audio toutes les 100 ms
+  setInterval(() => {
+    setupAudioControls(marker, camera, audioEntity);
+  }, 100);
+
+
+  supprBtnVR();
+}
+//---------------A FATA
 export function ARAfata(containerId) {
   const container = document.getElementById(containerId);
   if (!container) {
@@ -165,7 +269,7 @@ export function ARAfata(containerId) {
   container.innerHTML = `
        <a-scene
       embedded
-      arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
+      arjs="debugUIEnabled: false; smooth: true; smoothCount: 15; smoothTolerance: 0.05; smoothThreshold: 20;"
       renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
     >
       <a-assets>
@@ -180,32 +284,32 @@ export function ARAfata(containerId) {
         id="marker"
         preset="pattern"
         type="pattern"
-        url="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/ProsaQrCode1Test.patt?v=1734096265996"
+        url="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/pattern-ProsaQrCode2Test.patt?v=1736158532759"
       >
         <!-- premier plan  (en avant) -->
         <a-image
           src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/f%C3%A9e%20de%20l'eau%20textur%C3%A9e%20v1%20premier%20plan.png?v=1734345000981"
           position="0 -0.5 0"
           rotation="-90 0 0"
-          scale="5 5 5"
+          scale="6 6 6"
           material="transparent: true; alphaTest: 0.5;"
         >
         </a-image>
 
         <a-image
           src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/f%C3%A9e%20de%20l'eau%20textur%C3%A9e%20v1%20background.png?v=1734344997628"
-          position="0 -1 0"
+          position="0 -2 0"
           rotation="-90 0 0"
-          scale="5 5 5"
+          scale="6 6 6"
           material="transparent: true; alphaTest: 0.5;"
         >
         </a-image>
         
         <!-- Boîte de dialogue -->
         <a-plane
-          position="0 0 4"
+          position="0 0 3"
           rotation="-90 0 0"
-          scale="3 3 3"
+          scale="2 2 2"
           width="2"
           height="1"
           color="grey"
@@ -213,10 +317,11 @@ export function ARAfata(containerId) {
         >
         </a-plane>
         <a-text
-          value="Après un long périple en bâteau, vous voilà enfin sur l’île de Prose. A vrai dire, vous ne saviez même pas si elle existait véritablement, alors c’est un soulagement d’y être enfin arrivé. La chose que vous n’aviez pas prévu, en revanche, c’était que le bâteau, c’est épuisant, surtout quand on doit pagayer soi-même. A à peine quelques mètres sur la plage, vous vous evanouissez, à bout de force après ce long trajet."
+          id= "narrationText"
+          value=""
           rotation="-90 0 0"
-          scale="3 3 3"
-          position="0 0 4"
+          scale="2 2 2"
+          position="0 0 3"
           align="center"
           color="#000000"
           width="1.5"
@@ -233,14 +338,16 @@ export function ARAfata(containerId) {
     </a-scene>
 
   `;
-  const marker = document.querySelector("#marker");
-const camera = document.querySelector("[camera]");
-const audioEntity = document.querySelector("#audioEntity");
 
-// Vérifiez et ajustez l'audio toutes les 100 ms
-setInterval(() => {
-  setupAudioControls(marker, camera, audioEntity);
-}, 100);
+
+  const marker = document.querySelector("#marker");
+  const camera = document.querySelector("[camera]");
+  const audioEntity = document.querySelector("#audioEntity");
+
+  // Vérifiez et ajustez l'audio toutes les 100 ms
+  setInterval(() => {
+    setupAudioControls(marker, camera, audioEntity);
+  }, 100);
 
 
   supprBtnVR();

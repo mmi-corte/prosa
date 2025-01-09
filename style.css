@@ -178,43 +178,87 @@ strong {
     width: 100px;
     height: 100px;
 }
+
 /*---------------------Choix Loc----------------------*/
-#containerBtnLoc{
+#containerBtnLoc {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    
+
 }
-.btnLoc{
+
+.btnLoc {
     width: 100px;
     background-color: #C28832;
 }
 
+
 /*---------------------Style Narration----------------------*/
-.dialogBox {
-    background-color: rgba(255, 255, 255, 0.5);
+.diagBox {
+    width: 92%;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.75);
 
     padding: 10px;
     margin: 10px;
     border-radius: 6px;
-
-
     position: absolute;
-    bottom: 0;
-    font-family: "Asap", serif;
+    bottom: 60px;
     display: flex;
-    justify-content: space-between;
-    align-items: start;
     flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    z-index: 2;
+}
+
+.diagBoxN {
+    width: 92%;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 10px 10px 0 10px;
+    margin: 10px 10px 0 10px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    flex-direction: column-reverse;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    z-index: 2;
+
+}
+
+.dialogBox {
+    font-family: "Asap", serif;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .nameCharacter {
     font-family: "Uncial Antiqua", system-ui;
-    position: relative;
-    bottom: 0;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.btnChoix {
+    text-align: center;
+    font-size: 0.9rem;
     padding: 0;
     margin: 0;
+    border: none;
+    background: none;
+    color: white;
+}
+
+/*---------------------Style Perso narration----------------------*/
+.imgPerso {
+    width: 250%;
+    padding-bottom: 90px;
+    z-index: 1;
 }
 
 /*---------------------Style map----------------------*/
@@ -317,12 +361,13 @@ strong {
 .imgIntro {
     width: 110%;
 }
-.introVideo{
+
+.introVideo {
     width: 100%;
 }
 
 /*-----------------------AVATAR-----------------------------*/
-.divAvatar{
+.divAvatar {
     width: 100%;
     height: 100%;
     display: flex;
@@ -330,7 +375,8 @@ strong {
     align-items: center;
     flex-direction: column;
 }
-.imgAvatarContainer{
+
+.imgAvatarContainer {
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -340,7 +386,7 @@ strong {
     gap: 50px;
 }
 
-.imgAvatarContainer img{
+.imgAvatarContainer img {
     width: 25%;
     background-color: rgba(0, 0, 0, 0.295);
     border-radius: 60px;
@@ -361,15 +407,17 @@ strong {
 }
 
 .journalIcon {
-    margin-left:10px;
+    margin-left: 10px;
     width: 50px;
     height: 50px;
 }
-.imgAvatarContainer img{
+
+.imgAvatarContainer img {
     width: 25%;
     background-color: rgba(255, 255, 255, 0.377);
     border-radius: 60px;
 }
+
 /*.imgAvatarContainer img.clicked {
     border: 2px solid orange;
     filter: brightness(0.8); /* Rendre l'image plus sombre 
@@ -389,7 +437,7 @@ strong {
     width: 15%;
     position: absolute;
     left: 10px;
-    bottom: 40px;
+    bottom: 15px;
 }
 
 #popup-container {
@@ -448,7 +496,7 @@ strong {
 /* Style général pour le bouton */
 .button-with-icons {
     position: absolute;
-    bottom: 50px;
+    bottom: 25px;
     right: 0;
     padding: 5px;
     display: flex;
@@ -522,9 +570,10 @@ strong {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-  
+
+
 }
+
 /* -------------------- Bouton avec 3 points -------------------- */
 .icon-btn {
     background-color: transparent;
@@ -542,7 +591,7 @@ strong {
 
 /* -------------------- Bouton de fermeture -------------------- */
 .popup-contentObj button {
-    
+
     border: none;
     color: white;
     padding: 10px 20px;
@@ -561,43 +610,47 @@ strong {
 
 /* -------------------- Bouton avec image -------------------- */
 .obj-item img {
-    width: 50px; /* Ajustez la taille selon vos besoins */
-    height: 50px; /* Assurez-vous que la taille est cohérente */
-    object-fit: cover; /* Gère le cadrage des images */
-    border-radius: 5px; /* Ajoutez un effet arrondi si nécessaire */
+    width: 50px;
+    /* Ajustez la taille selon vos besoins */
+    height: 50px;
+    /* Assurez-vous que la taille est cohérente */
+    object-fit: cover;
+    /* Gère le cadrage des images */
+    border-radius: 5px;
+    /* Ajoutez un effet arrondi si nécessaire */
     transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-.pContainer{
+.pContainer {
     width: 80%;
-    display:flex;
-    align-items: start; 
+    display: flex;
+    align-items: start;
     margin-left: 20px;
     flex-wrap: wrap;
     margin-bottom: 15px;
 }
 
-.bgImage{
+.bgImage {
     position: fixed;
-    bottom:30px;
+    bottom: 30px;
     scale: 1.2;
 }
 
-.blocker
-{
+.blocker {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0); /* Couleur transparente */
-    pointer-events: none; /* N'intercepte pas les clics par défaut */
+    background: rgba(0, 0, 0, 0);
+    /* Couleur transparente */
+    pointer-events: none;
+    /* N'intercepte pas les clics par défaut */
     z-index: 9998;
     display: none;
 }
 
-.overlay
-{
+.overlay {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -607,14 +660,14 @@ strong {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(0, 0, 0); /* Couleur semi-transparente */
+    background: rgb(0, 0, 0);
+    /* Couleur semi-transparente */
     z-index: 9998;
 }
 
-.weaponsBloc
-{
+.weaponsBloc {
     width: 250px;
-    height:auto;
+    height: auto;
     position: fixed;
     top: 380px;
     left: 150px;
@@ -622,8 +675,7 @@ strong {
     flex-direction: column;
 }
 
-.weapons
-{
+.weapons {
     margin: 10px;
     width: 250px;
     height: 50px;
@@ -631,67 +683,86 @@ strong {
     display: flex;
     justify-content: start;
     transform: skewX(-15deg);
-    box-shadow:inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
+    box-shadow: inset 2px 2px 2px rgb(78, 78, 78), 5px 5px 5px rgb(92, 92, 92);
 }
 
 .fade-in {
     display: flex;
     opacity: 0;
     animation: fadeInTwo 2s forwards;
-  }
-  
-  .fade-out {
+}
+
+.fade-out {
     opacity: 0.8;
     animation: fadeOut 2s forwards;
-  }
-  
-  @keyframes fadeInTwo {
-    to {
-      opacity: 0.8;
-    }
-  }
-  
-  @keyframes fadeOut {
-    to {
-      opacity: 0;
-    }
-  }
+}
 
-  .OverlayTxt
-  {
+.OverlayTxt {
     font-family: 'Asap', sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 1.5rem;
     color: #fff;
     z-index: 9999;
-  }
+}
 
-.vibration
-{
+.vibration {
     animation: shake 0.5s;
 }
 
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-  }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
 
 /*btn VR*/
 .a-enter-vr-button {
     display: none !important;
-  }
+}
 
-  .OverlayImg {
-    width: 100px; /* Adjust the size as needed */
+.OverlayImg {
+    width: 100px;
+    /* Adjust the size as needed */
     height: auto;
 }

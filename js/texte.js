@@ -174,3 +174,61 @@ export async function handleFormSubmit(formId, buttonId) {
         }
     });
 }
+
+// fonction qui recupere le texte et qui est liée au chargement de l'AR
+export async function addTxtNarrationAR(stepCode, aTextId, className) { 
+    try {
+        const querySnapshot = await getDocs(collection(db, "scenario"));
+        querySnapshot.forEach((doc) => {
+            if (doc.data().stepCode === stepCode) {
+                const aTextElement = document.getElementById(aTextId);
+                if (aTextElement) {
+                    // Ajout d'un écouteur pour l'événement `loaded`
+                    aTextElement.addEventListener("loaded", () => {
+                        // Mise à jour du texte dans l'attribut `value`
+                        aTextElement.setAttribute("value", doc.data().txt);
+
+                        // Ajout de la classe
+                        if (className) {
+                            aTextElement.classList.add(className);
+                        }
+
+                        console.log("Texte ajouté :", doc.data().txt);
+                    });
+                } else {
+                    console.error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données Firestore :", error);
+    }
+}
+export async function addNamePersoAR(stepCode, aTextId, className) { 
+    try {
+        const querySnapshot = await getDocs(collection(db, "scenario"));
+        querySnapshot.forEach((doc) => {
+            if (doc.data().stepCode === stepCode) {
+                const aTextElement = document.getElementById(aTextId);
+                if (aTextElement) {
+                    // Ajout d'un écouteur pour l'événement `loaded`
+                    aTextElement.addEventListener("loaded", () => {
+                        // Mise à jour du texte dans l'attribut `value`
+                        aTextElement.setAttribute("value", doc.data().personnage);
+
+                        // Ajout de la classe
+                        if (className) {
+                            aTextElement.classList.add(className);
+                        }
+
+                        console.log("Texte ajouté :", doc.data().personnage);
+                    });
+                } else {
+                    console.error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données Firestore :", error);
+    }
+}
