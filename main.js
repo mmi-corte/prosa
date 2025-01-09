@@ -8,7 +8,7 @@ import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
 import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
-import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
+//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
 import { addAutoPlayVideo } from './js/video.js';
@@ -340,7 +340,8 @@ boutonStart.addEventListener("click", function () {
                                                                                                     //-------------ETAPE 2  CHOIX 1
                                                                                                     document.getElementById(btnNext).addEventListener("click", function () {
                                                                                                         refreshPage();
-                                                                                                        console.log('teste kk');
+                                                                                                        step2();
+                                                                                                        /*console.log('teste kk');
                                                                                                         //peut etre lancer l'AR sans perso car pas de sens
                                                                                                         ARBerger(container);
                                                                                                         addOverlay('audioPlayer');
@@ -353,7 +354,7 @@ boutonStart.addEventListener("click", function () {
                                                                                                             addOverlay('audioPlayer');
                                                                                                             addNamePersoAR("E2Berger",name,"nameCharacter");
                                                                                                             addTxtNarrationAR("E2Berger",txtNarr,'dialogBox');                                                                                                                                                                                                               
-                                                                                                        })
+                                                                                                        })*/
 
                                                                                                     });
 

@@ -3,7 +3,7 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { refreshPage } from './refreshPage.js';
 import { addOverlay } from './overlay.js';
 import { ajouterBouton } from './button.js';
-import { AREsterelle,ARBerger, ARAfata, ARBerger } from './ARFunction.js';
+import { AREsterelle,ARBerger, ARAfata, ARStrega } from './ARFunction.js';
 
 //var container
 const container = 'container';
@@ -16,7 +16,7 @@ const name = 'PersoTxt';
 export function step2() {
     refreshPage();
 
-    ARBerger(container)
+    ARBerger(container);
 
     addTxtNarrationAR("E2Narra", txtNarr, "");
     addNamePersoAR("E2Narra", name, "");
