@@ -140,6 +140,12 @@ strong {
     margin: 10px;
     margin-bottom: 0;
 }
+#diagBoxAR{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 /*
 #txt1 {

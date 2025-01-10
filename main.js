@@ -12,7 +12,9 @@ import { lunchFight } from './js/fight.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
 import { addOverlay } from './js/overlay.js';
 import { addAutoPlayVideo } from './js/video.js';
-import { step2 } from './js/functionstep.js'
+import { step2, step6 } from './js/functionstep.js'
+import { ARBerger } from './js/ARFunction.js';
+import { popup } from './js/popup.js';
 //Variable / Constante pour les combats
 
 let weapons = [
@@ -72,6 +74,13 @@ const boutonStart = document.getElementById("btnStart");
 
 boutonStart.addEventListener("click", function () {
     refreshPage();
+    /*changeStyleBG(container);
+    ARBerger(container);
+    addNameCharacter('E1Berger', 'diagBox', 'nameCharacter');
+    addTxtNarration("E1Berger", 'diagBox', 'dialogBox');*/
+
+    
+    
     addImg("container", 'assets/berger.jpg');
     ajouterBouton('container', '', 'btnInvI', "btnInv");
     const btnInvI1 = document.getElementById("btnInvI");
@@ -334,27 +343,20 @@ boutonStart.addEventListener("click", function () {
                                                                                                     //METTRE POP UP
                                                                                                     refreshPage();
                                                                                                     changeStyleBG(container);
-                                                                                                    addTxt(container,"pop up");
+                                                                                                    popup("Vous avez récupéré la branche d’arbre", "asstes/items/branche.png");
 
                                                                                                     ajouterBouton(container, '', btnNext, 'btnInv');
                                                                                                     //-------------ETAPE 2  CHOIX 1
                                                                                                     document.getElementById(btnNext).addEventListener("click", function () {
                                                                                                         refreshPage();
                                                                                                         step2();
-                                                                                                        /*console.log('teste kk');
-                                                                                                        //peut etre lancer l'AR sans perso car pas de sens
-                                                                                                        ARBerger(container);
-                                                                                                        addOverlay('audioPlayer');
-                                                                                                        addTxtNarrationAR("E2Narra",txtNarr,'dialogBox');
-                                                                                                        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-                                                                                                        
-                                                                                                        document.getElementById(btnNext).addEventListener("click", function(){
+
+                                                                                                        ajouterBouton(container, '', btnNext, 'btnInv');
+
+                                                                                                        document.getElementById(btnNext).addEventListener("click", function () {
                                                                                                             refreshPage();
-                                                                                                            ARBerger(container);
-                                                                                                            addOverlay('audioPlayer');
-                                                                                                            addNamePersoAR("E2Berger",name,"nameCharacter");
-                                                                                                            addTxtNarrationAR("E2Berger",txtNarr,'dialogBox');                                                                                                                                                                                                               
-                                                                                                        })*/
+                                                                                                            step6();
+                                                                                                        });
 
                                                                                                     });
 
@@ -365,7 +367,8 @@ boutonStart.addEventListener("click", function () {
                                                                                     });
                                                                                     //----------------------ETAPE 2 CHOIX 2
                                                                                     document.getElementById(btnChoix2).addEventListener("click", function () {
-                                                                                            step2();
+                                                                                        changeStyleBG(container);
+                                                                                        step2();
                                                                                     });
                                                                                 });
                                                                             });
