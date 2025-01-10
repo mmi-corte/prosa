@@ -778,3 +778,16 @@ strong {
     /* Adjust the size as needed */
     height: auto;
 }
+
+@keyframes fadeInTwo {
+    to {
+      opacity: 0.8;
+    }
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+    }
+  }
+

@@ -102,7 +102,7 @@ boutonStart.addEventListener("click", function () {
             // ----------------------- AVATAR --------------------------------
             boutonSubmit.addEventListener("click", function () {
                 const usernameInput = document.getElementById("userInput");
-                const playerUserName = usernameInput.value; // Stocke le pseudo utilisateur
+                playerUserName = usernameInput.value; // Stocke le pseudo utilisateur
                 refreshPage();
 
                 addDiv("container", "containerAvatar", "divAvatar");
