@@ -3,7 +3,7 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { refreshPage } from './refreshPage.js';
 import { addOverlay } from './overlay.js';
 import { ajouterBouton } from './button.js';
-import { ARAfata, ARBerger, AREsterelle } from './ARFunction.js';
+import { ARAfata, ARBerger, AREsterelle, ARNarra } from './ARFunction.js';
 import { lunchFight } from './fight.js';
 
 //var container
@@ -63,7 +63,7 @@ export function step2() {
                     document.getElementById(btnNext).addEventListener("click", function () {
                         refreshPage();
 
-                        AREsterelle(container);
+                        ARNarra(container);
                         addTxtNarrationAR("E2Narra3", txtNarr, "txt");
 
                         ajouterBouton(container, '', btnNext, 'btnInv');
@@ -107,7 +107,9 @@ export function step2() {
                                         document.getElementById(btnNext).addEventListener("click", function () {
                                             refreshPage();
 
-                                            ARAfata(container);
+                                            ARNarra
+                                        
+                                        (container);
                                             addTxtNarrationAR("E2Narra4", txtNarr, "txt");
 
                                             ajouterBouton(container, '', btnNext, 'btnInv');
@@ -142,7 +144,7 @@ export function step2() {
                                                         document.getElementById(btnNext).addEventListener("click", function () {
                                                             refreshPage();
 
-                                                            ARAfata(container);
+                                                            ARNarra(container);
                                                             addTxtNarrationAR("E2Narra5", txtNarr, "txt");
                                                             addNamePersoAR("E2Narra5", name, "txtName");
 
@@ -169,7 +171,7 @@ export function step2() {
                                                                     document.getElementById(btnNext).addEventListener("click", function () {
                                                                         refreshPage();
 
-                                                                        ARAfata(container);
+                                                                        ARNarra(container);
                                                                         addTxtNarrationAR("E2Narra6", txtNarr, "txt");
 
                                                                         ajouterBouton(container, '', btnNext, 'btnInv');
@@ -186,7 +188,7 @@ export function step2() {
                                                                             document.getElementById(btnNext).addEventListener("click", function () {
                                                                                 refreshPage();
 
-                                                                                ARBerger(container);
+                                                                                ARNarra(container);
                                                                                 addTxtNarrationAR("E2Narra7", txtNarr, "txt");
 
 

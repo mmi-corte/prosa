@@ -1,5 +1,58 @@
 //import { loadSound, } from './Sound/sound.js';
 
+//-------------NARRATEUR----------------
+export function ARNarra(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
+    return;
+  }
+  container.innerHTML = `
+  <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+        >
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="https://cdn.glitch.global/474e94da-5719-4534-b146-2b197f100328/marker.patt?v=1732481553206"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-image
+                    src="https://cdn.glitch.global/474e94da-5719-4534-b146-2b197f100328/carte.jpg?v=1732481925938"
+                    scale="1 1 1"
+                    class="clickable"
+                    rotation="-90 0 0"
+                    gesture-handler
+                ></a-image>
+            </a-marker>
+
+            <a-entity camera></a-entity>
+        </a-scene>
+
+  `;
+  const marker = document.querySelector("#marker");
+  const camera = document.querySelector("[camera]");
+  const audioEntity = document.querySelector("#audioEntity");
+
+  // Vérifiez et ajustez l'audio toutes les 100 ms
+  setInterval(() => {
+    setupAudioControls(marker, camera, audioEntity);
+  }, 100);
+
+
+  supprBtnVR();
+
+}
+
 //-------------BERGER----------------
 export function ARBerger(containerId) {
   const container = document.getElementById(containerId);
@@ -82,8 +135,6 @@ export function ARBerger(containerId) {
         </a-plane>
         <a-text
           id= "PersoTxt"
-          font="url(https://threejs.org/examples/fonts/helvetiker_regular.typeface.json)"
-
           value=""
           rotation="-90 0 0"
           scale="2 0.5 1"
@@ -96,7 +147,6 @@ export function ARBerger(containerId) {
         </a-text>
         <a-text
           id= "narrationText"
-          font="url(assets/fonts/Asap_Regular.json)"
           value=""
           rotation="-90 0 0"
           scale="2 2 2"
