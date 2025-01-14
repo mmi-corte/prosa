@@ -1,6 +1,6 @@
 import { addBtnImg } from './button.js';
 
-export function addOverlay(audioId) {
+export function addOverlay(audioId, audioSrc) {
     const iconUrls = [
         './assets/icons/journal.png', // URL de la première icône
         './assets/icons/journal.png', // URL de la deuxième icône
@@ -9,7 +9,7 @@ export function addOverlay(audioId) {
 
     // Ajouter un bouton pour le son
     addBtnImg("container", './assets/icons/SonActif.png', 'btnSon');
-    setupSoundButton(audioId);
+    setupSoundButton(audioId, audioSrc);
 
     // Ajouter un bouton pour le journal
     addBtnImg('container', './assets/icons/journal.png', 'btnJ');
@@ -36,32 +36,52 @@ export function addOverlay(audioId) {
     }
 }
 
-function setupSoundButton(audioId) {
-    const audioElement = document.getElementById(audioId);
+export function setupSoundButton(audioId, audioSrc) {
+    // Création de l'élément audio
+    const audioElement = document.createElement("audio");
+    audioElement.id = audioId;
+    audioElement.src = audioSrc; // Chemin dynamique du fichier audio
+    audioElement.autoplay = true; // Lecture automatique
+    audioElement.loop = true; // Lecture en boucle
+    audioElement.muted = false; // Par défaut, son activé
+    document.body.appendChild(audioElement);
+
+    // Récupération du bouton de gestion du son
     const toggleSoundBtn = document.getElementById("btnSon");
 
-    if (!audioElement) {
-        console.error(`L'élément audio avec l'ID "${audioId}" est introuvable.`);
-        return;
-    }
-
     if (!toggleSoundBtn) {
-        console.error('Le bouton "btnSon" est introuvable.');
+        console.error('Le bouton pour activer/désactiver le son ("btnSon") n\'existe pas.');
         return;
     }
 
+    // Ajout de l'événement au clic pour activer/désactiver le son
     toggleSoundBtn.addEventListener("click", () => {
         if (audioElement.volume === 0) {
             audioElement.volume = 1; // Activer le son
-            toggleSoundBtn.src = "./assets/icons/SonActif.png";
+            audioElement.muted = false; // Désactiver le mode muet
+            toggleSoundBtn.src = "./assets/icons/SonActif.png"; // Icône son actif
             console.log("Son réactivé.");
         } else {
             audioElement.volume = 0; // Couper le son
-            toggleSoundBtn.src = "./assets/icons/sonCoupe.png";
+            audioElement.muted = true; // Activer le mode muet
+            toggleSoundBtn.src = "./assets/icons/sonCoupe.png"; // Icône son coupé
             console.log("Son coupé.");
         }
     });
+
+    // Gestion des permissions utilisateur (pour certains navigateurs)
+    document.addEventListener("click", () => {
+        if (audioElement.paused) {
+            audioElement.play().catch((error) => {
+                console.error("Impossible de lire le son : ", error);
+            });
+        }
+    });
 }
+
+
+
+
 
 function createPopupJournal(message) {
     const popupContainer = document.createElement('div');

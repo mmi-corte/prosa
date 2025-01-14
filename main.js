@@ -69,6 +69,13 @@ const name = 'PersoTxt';
 // Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
 ajouterBouton('container', 'Commencer', 'btnStart', 'btn');
 
+
+addOverlay('monAudio', 'https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/son-principal.mp3?v=1734604153963')
+
+
+
+
+
 // Récupère le bouton Start
 const boutonStart = document.getElementById("btnStart");
 
