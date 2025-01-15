@@ -687,10 +687,17 @@ strong {
     width: 250px;
     height: auto;
     position: fixed;
-    top: 380px;
     left: 150px;
     display: flex;
     flex-direction: column;
+}
+
+.y-area{
+    top: 380px;
+}
+
+.y-area2{
+    top: 310px;
 }
 
 .weapons {

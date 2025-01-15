@@ -86,7 +86,7 @@ export async function lunchFight(skin, weapons, enemies)
 
     const playerImage = document.createElement("img");
     playerImage.src = `../assets/avatar/${skin}.png`; // Set the source of the image
-    playerImage.style = 'filter: blur(2px);'
+    // playerImage.style = 'filter: blur(2px);'
     playerImage.className = "playerImage"; // Add a class for styling
     // Append the image to the enemy container
     playerContainer.appendChild(playerImage);
@@ -94,7 +94,7 @@ export async function lunchFight(skin, weapons, enemies)
     //Create Weapons Bloc
 
     const weaponsBloc = document.createElement("div");
-    weaponsBloc.className = "weaponsBloc";
+    weaponsBloc.className = "weaponsBloc y-area";
     fightContainer.appendChild(weaponsBloc);
 
     weapons.forEach(element => {
@@ -329,39 +329,264 @@ export async function lunchFight(skin, weapons, enemies)
                 }
                 else
                 {
-                    // if (enemies.name === "Basgialiscu")
-                    //     {
-                    //         while (weaponsBloc.firstChild) {
-                    //             weaponsBloc.removeChild(weaponsBloc.firstChild);
-                    //         }
-                    //     //    children.forEach(element => {
-                    //     //         element.remove();
-                    //     //     });
-                    //     }
-                    const lottiePlayer = document.createElement('lottie-player');
+                    if (enemies.name === "Basgialiscu")
+                        {
+                            
+                            // while (weaponsBloc.firstChild) {
+                            //     weaponsBloc.removeChild(weaponsBloc.firstChild);
+                            // }
+                            createnewOverlay("Tu as 3s pour viser !");
 
-                    lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
-                    
-                    lottiePlayer.setAttribute('background', 'transparent');
-                    lottiePlayer.setAttribute('speed', '1');
-                    lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
-                    lottiePlayer.setAttribute('loop', 'none');
-                    lottiePlayer.setAttribute('autoplay', '');
-                    lottiePlayer.setAttribute('direction', '1');
-                    lottiePlayer.setAttribute('mode', 'normal');
+                            weaponsBloc.classList.remove("y-area");
+                            weaponsBloc.classList.add("y-area2");
+                            
+                            weaponsBloc.innerHTML = `
+                            <div class="weaponsBloc">
+                                <div class="weapons" style="background-color: rgb(207, 136, 27);">
+                                    <p class="txtTitle">Tête</p>
+                                </div>
+                                <div class="weapons" style="background-color: rgb(207, 136, 27);">
+                                    <p class="txtTitle">Cou</p>
+                                </div>
+                                <div class="weapons" style="background-color: rgb(207, 136, 27);">
+                                    <p class="txtTitle">Corp</p>
+                                </div> 
+                                <div class="weapons" style="background-color: rgb(207, 136, 27);">
+                                    <p class="txtTitle">Pattes</p>
+                                </div> 
+                            </div>`;
 
-                    // Ajoute le player dans le conteneur
-                    enemyContainer.appendChild(lottiePlayer);
+                            const head = document.querySelector("#fightContainer > div.weaponsBloc > div > div:nth-child(1)");
+                            const neck = document.querySelector("#fightContainer > div.weaponsBloc > div > div:nth-child(2)");
+                            const body = document.querySelector("#fightContainer > div.weaponsBloc > div > div:nth-child(3)");
+                            const foot = document.querySelector("#fightContainer > div.weaponsBloc > div > div:nth-child(4)");
+
+                            const headhit = () => {
+                                const lottiePlayer = document.createElement('lottie-player');
+
+                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                
+                                lottiePlayer.setAttribute('background', 'transparent');
+                                lottiePlayer.setAttribute('speed', '1');
+                                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                                lottiePlayer.setAttribute('loop', 'none');
+                                lottiePlayer.setAttribute('autoplay', '');
+                                lottiePlayer.setAttribute('direction', '1');
+                                lottiePlayer.setAttribute('mode', 'normal');
+
+                                // Ajoute le player dans le conteneur
+                                enemyContainer.appendChild(lottiePlayer);
+                                
+                                setTimeout(() => {
+                                    lottiePlayer.remove();
+                                }, 1200);
+                                loadSound("../assets/sound/bow.mp3");
+                                damageVibration("enemyContainer");
+                                updateLifeEnemyGauge(2);
+                                head.removeEventListener("click", headhit);
+                            }
+
+                            head.addEventListener("click", headhit);
+
+                            const neckhit = () => {
+                                const lottiePlayer = document.createElement('lottie-player');
+
+                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                
+                                lottiePlayer.setAttribute('background', 'transparent');
+                                lottiePlayer.setAttribute('speed', '1');
+                                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                                lottiePlayer.setAttribute('loop', 'none');
+                                lottiePlayer.setAttribute('autoplay', '');
+                                lottiePlayer.setAttribute('direction', '1');
+                                lottiePlayer.setAttribute('mode', 'normal');
+
+                                // Ajoute le player dans le conteneur
+                                enemyContainer.appendChild(lottiePlayer);
+                                
+                                setTimeout(() => {
+                                    lottiePlayer.remove();
+                                }, 1200);
+                                loadSound("../assets/sound/bow.mp3");
+                                damageVibration("enemyContainer");
+                                updateLifeEnemyGauge(80);
+                                neck.removeEventListener("click", neckhit);
+                            }
+
+                            neck.addEventListener("click", neckhit);
+
+
+                            const bodyhit = () => {
+                                const lottiePlayer = document.createElement('lottie-player');
+
+                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                
+                                lottiePlayer.setAttribute('background', 'transparent');
+                                lottiePlayer.setAttribute('speed', '1');
+                                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                                lottiePlayer.setAttribute('loop', 'none');
+                                lottiePlayer.setAttribute('autoplay', '');
+                                lottiePlayer.setAttribute('direction', '1');
+                                lottiePlayer.setAttribute('mode', 'normal');
+
+                                // Ajoute le player dans le conteneur
+                                enemyContainer.appendChild(lottiePlayer);
+                                
+                                setTimeout(() => {
+                                    lottiePlayer.remove();
+                                }, 1200);
+                                loadSound("../assets/sound/bow.mp3");
+                                damageVibration("enemyContainer");
+                                updateLifeEnemyGauge(2);
+                                body.removeEventListener("click", bodyhit);
+                            }
+
+                            body.addEventListener("click", bodyhit);
+
+                            const foothit = () => {
+                                const lottiePlayer = document.createElement('lottie-player');
+
+                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                
+                                lottiePlayer.setAttribute('background', 'transparent');
+                                lottiePlayer.setAttribute('speed', '1');
+                                lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                                lottiePlayer.setAttribute('loop', 'none');
+                                lottiePlayer.setAttribute('autoplay', '');
+                                lottiePlayer.setAttribute('direction', '1');
+                                lottiePlayer.setAttribute('mode', 'normal');
+
+                                // Ajoute le player dans le conteneur
+                                enemyContainer.appendChild(lottiePlayer);
+                                
+                                setTimeout(() => {
+                                    lottiePlayer.remove();
+                                }, 1200);
+                                loadSound("../assets/sound/bow.mp3");
+                                damageVibration("enemyContainer");
+                                updateLifeEnemyGauge(2);
+                                foot.removeEventListener("click", foothit);
+                            }
+
+                            foot.addEventListener("click", foothit);
+                            
+                           
+                        }
+                        else
+                        {
+                            const lottiePlayer = document.createElement('lottie-player');
+
+                            lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                            
+                            lottiePlayer.setAttribute('background', 'transparent');
+                            lottiePlayer.setAttribute('speed', '1');
+                            lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto;');
+                            lottiePlayer.setAttribute('loop', 'none');
+                            lottiePlayer.setAttribute('autoplay', '');
+                            lottiePlayer.setAttribute('direction', '1');
+                            lottiePlayer.setAttribute('mode', 'normal');
+        
+                            // Ajoute le player dans le conteneur
+                            enemyContainer.appendChild(lottiePlayer);
+                            
+                            setTimeout(() => {
+                                lottiePlayer.remove();
+                            }, 1200);
+                            loadSound("../assets/sound/bow.mp3");
+                            damageVibration("enemyContainer");
+                        }
                     
-                    setTimeout(() => {
-                        lottiePlayer.remove();
-                    }, 1200);
-                    loadSound("../assets/sound/bow.mp3");
                 }
-                damageVibration("enemyContainer");
                 
+                if (enemies.name === "Basgialiscu" && element.name == "Arc")
+                {
+                    setTimeout(() => {
+                        weaponsBloc.innerHTML = `<div class="weaponsBloc"><div class="weapons" style="background-color: rgb(232, 230, 202);"><p class="txtTitle">Epée</p></div><div class="weapons" style="background-color: rgb(237, 206, 142);"><p class="txtTitle">Grimoire</p></div><div class="weapons" style="background-color: rgb(207, 136, 27);"><p class="txtTitle">Arc</p></div></div>`;
+                        weaponsBloc.classList.remove("y-area2");
+                        weaponsBloc.classList.add("y-area");
+                    disableInteractions();
+                if(hp <= 0)
+                    {
+                        console.log("Vous avez gagné");
 
-                
+                        createnewEndingOverlay("Vous avez gagné !");
+
+                        ajouterBouton('fightContainer', '', 'btnInv1', "btnInv");
+
+                        const btnInv1 = document.getElementById("btnInv1")
+                        //--------------PSEUDO-------------------------
+                        // Ajoute un écouteur d'événement "click" au bouton Submit
+                        btnInv1.addEventListener("click", function () {
+                            fightContainer.remove();
+                            resolve('win');
+                        });
+                    }
+                    else
+                    {
+                        setTimeout(() => {
+                            createnewOverlay("Au tour de l'ennemi !");
+                        }, 750)
+
+
+                        setTimeout(() => {
+                            damageVibration("playerContainer");
+                            const lottiePlayer = document.createElement('lottie-player');
+                            lottiePlayer.setAttribute('src', 'https://lottie.host/fd1e19de-61e5-4d5c-a92e-0055281ad242/NIaUP3FEHA.json');
+                            lottiePlayer.setAttribute('background', 'none');
+                            lottiePlayer.setAttribute('speed', '1');
+                            lottiePlayer.setAttribute('style', 'width: 300px; height: 300px; position: absolute; top:0; left: -50px; margin-right: auto;');
+                            lottiePlayer.setAttribute('loop', '');
+                            lottiePlayer.setAttribute('autoplay', '');
+                            lottiePlayer.setAttribute('direction', '1');
+                            lottiePlayer.setAttribute('mode', 'normal');
+
+                            playerContainer.appendChild(lottiePlayer);
+
+                            setTimeout(() => {
+                                lottiePlayer.remove();
+                            }, 1700);
+                            loadSound("../assets/sound/bunch.mp3");
+                            updateLifeGauge(enemies.damage);
+                        }, 4990);
+                        
+                        setTimeout(() => {
+
+                            if(pHp <= 0)
+                            {
+                                setTimeout(() => {
+                                console.log("Vous avez perdu");
+
+                                createnewEndingOverlay("Vous avez perdu !");
+
+                                ajouterBouton('fightContainer', '', 'btnInv2', "btnInv");
+
+                                const btnInv2 = document.getElementById("btnInv2")
+                                //--------------PSEUDO-------------------------
+                                // Ajoute un écouteur d'événement "click" au bouton Submit
+                                btnInv2.addEventListener("click", function () {
+                                    fightContainer.remove();
+                                    resolve('loose');
+                                });
+                            }, 500);
+                                
+                            }
+                            else
+                            {
+                                //remove EventListener
+                                
+
+                                fighting();
+
+                                setTimeout(() => {
+                                    createnewOverlay("C'est ton tour !");
+                                }, 700)
+                            }
+                         }, 5500);
+                    }
+                    }, 7000);
+                }
+                else
+                {
                 updateLifeEnemyGauge(element.damage);
                 disableInteractions();
                 if(hp <= 0)
@@ -442,6 +667,10 @@ export async function lunchFight(skin, weapons, enemies)
                             }
                          }, 5500);
                     }
+                }
+
+                
+                
             }
             weapon.addEventListener("click", hit);
                 
