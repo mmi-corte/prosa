@@ -4,7 +4,6 @@ body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-color: #e6b57a;
 }
 
 strong {
@@ -38,7 +37,7 @@ strong {
     font-size: 5rem;
 }
 
-.btn {
+.btnclass {
     position: inherit;
     width: auto;
     height: 40px;

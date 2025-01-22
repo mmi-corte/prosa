@@ -9,19 +9,21 @@ export function ajouterBouton(conteneurId, txtBtn, btnId, btnClassName) {
     }
 
     // Crée un élément bouton
-    const bouton = document.createElement("button");
+    const new_bouton = document.createElement("button");
     //bouton.className = "btn"; // Une manière simple d'ajouter une classe
     // bouton.classList.add("mon-bouton"); // Alternative pour ajouter une ou plusieurs classes dynamiquement
 
     // Définit le texte du bouton
-    bouton.textContent = txtBtn;
-    bouton.id = btnId;
-    bouton.className=btnClassName;
+    new_bouton.textContent = txtBtn;
+    new_bouton.id = btnId;
+    new_bouton.className=btnClassName;
 
 
 
     // Ajoute le bouton à la div
-    conteneur.appendChild(bouton);
+    conteneur.appendChild(new_bouton);
+
+    return new_bouton
 }
 // a voir si on modifit pas la function add button ???
 export function addInvisibleBtn(containerID, buttonID) {
