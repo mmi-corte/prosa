@@ -11,6 +11,10 @@ export function addOverlay(audioId, audioSrc) {
     addBtnImg("container", './assets/icons/SonActif.png', 'btnSon');
     setupSoundButton(audioId, audioSrc);
 
+    // Ajouter un bouton pour le livre
+    addBtnImg('container', './assets/icons/livre.png', 'btnJ');
+    const btnJ = document.getElementById('btnJ');
+
     // Ajouter un bouton pour le journal
     addBtnImg('container', './assets/icons/journal.png', 'btnJ');
     const btnJ = document.getElementById('btnJ');

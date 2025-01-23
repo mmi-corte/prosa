@@ -441,6 +441,35 @@ strong {
 }*/
 
 /*------------OVERLAY----------------------*/
+
+.circle-button {
+    display: inline-flex; /* Centrer le contenu */
+    justify-content: center;
+    align-items: center;
+    width: 50px; /* Largeur du cercle */
+    height: 50px; /* Hauteur du cercle (égale à la largeur) */
+    border-radius: 50%; /* Rend le bouton circulaire */
+    background-color: #4CAF50; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    font-size: 16px; /* Taille de la police */
+    border: none; /* Supprime la bordure */
+    cursor: pointer; /* Change le curseur en pointeur */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+    transition: background-color 0.3s, transform 0.2s; /* Animation */
+  }
+  
+  .circle-button:hover {
+    background-color: #45a049; /* Couleur au survol */
+    transform: scale(1.1); /* Effet d'agrandissement */
+  }
+  
+  .circle-button:active {
+    background-color: #3e8e41; /* Couleur en état actif */
+    transform: scale(0.95); /* Réduction légère */
+  }
+  
+
+
 /*------------Son-------------------*/
 #btnSon {
     width: 10%;
@@ -802,4 +831,6 @@ strong {
       opacity: 0;
     }
   }
+
+
 
