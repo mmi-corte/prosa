@@ -61,6 +61,7 @@ const enemies = [
     }
 ]
 
+addOverlay('test', "./assets/son.mp3")
 //---------------------------------------------
 // logic du jeu
 //---------------------------------------------
@@ -87,5 +88,5 @@ if (isCookiePresent('screen')) {
     console.log('Le cookie "screen" n\'est pas présent');
 
     // Créer un cookie
-    document.cookie = "screen=0; level=0; path=/;";
+    /*document.cookie = "screen=0; level=0; path=/;";*/
 }

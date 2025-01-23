@@ -60,7 +60,7 @@ export function addInvisibleBtn(containerID, buttonID) {
     container.appendChild(button);
 }
 
-export function addBtnImg(conteneurId, urlImgBtn, btnId) {
+export function addBtnImg(conteneurId, urlImgBtn, btnId, className) {
     // Sélectionne la div par son ID
     const conteneur = document.getElementById(conteneurId);
     
@@ -78,7 +78,7 @@ export function addBtnImg(conteneurId, urlImgBtn, btnId) {
 
     // Définit l'ID de l'image
     btnImg.id = btnId;
-
+    btnImg.className = className
     // Ajoute une classe pour styliser l'image si nécessaire (facultatif)
     btnImg.className = "btn-image";
 

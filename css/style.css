@@ -43,7 +43,7 @@ strong {
     height: 40px;
     border: none;
     border-radius: 10px;
-    background-color: #E6B57A;
+    background-color: #CF881BE5;
     font-family: "Asap", serif;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -64,11 +64,12 @@ strong {
 
 .logoimg {
     width: 75%;
-    margin: 25px;
+    margin: 10px;
 }
 
 #logoImgP1 {
-    /*margin-top: 230px;*/
+    position:absolute;
+    top: 25%;
     animation: fadeIn 4s infinite;
 }
 
@@ -442,31 +443,33 @@ strong {
 
 /*------------OVERLAY----------------------*/
 
-.circle-button {
-    display: inline-flex; /* Centrer le contenu */
-    justify-content: center;
-    align-items: center;
-    width: 50px; /* Largeur du cercle */
-    height: 50px; /* Hauteur du cercle (égale à la largeur) */
-    border-radius: 50%; /* Rend le bouton circulaire */
-    background-color: #4CAF50; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    font-size: 16px; /* Taille de la police */
-    border: none; /* Supprime la bordure */
-    cursor: pointer; /* Change le curseur en pointeur */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
-    transition: background-color 0.3s, transform 0.2s; /* Animation */
-  }
+/* Style bouton inventaire*/
+#btnI{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    left: 80%;
+    bottom: 18px;
+}
   
-  .circle-button:hover {
-    background-color: #45a049; /* Couleur au survol */
-    transform: scale(1.1); /* Effet d'agrandissement */
-  }
   
-  .circle-button:active {
-    background-color: #3e8e41; /* Couleur en état actif */
-    transform: scale(0.95); /* Réduction légère */
-  }
+#overlaySquare{
+    position: fixed; /* Pour rester en bas de la page même en scrollant */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Prend toute la largeur de la page */
+    height: 60px; /* Hauteur du rectangle */
+    background-color: #f3da8e; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    display: flex; /* Pour centrer le texte */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    font-size: 1rem; /* Taille du texte */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+    z-index: -1000; /* Assure qu'il reste au-dessus des autres éléments */ 
+}
+  
   
 
 
@@ -480,20 +483,24 @@ strong {
 
 /*-------------------Journal--------------------*/
 #btnJ {
-    width: 15%;
+    width: 20%;
     position: absolute;
     left: 10px;
     bottom: 15px;
 }
 
+
+
 #popup-container {
     position: fixed;
-    top: 15px;
-    left: 5px;
-    width: 95%;
-    height: 95%;
+    top:55px;
+    left: 40px;;
+    width: 80%;
+    height: 80%;
     margin: 5px;
-    background-color: rgba(152, 152, 152, 0.747);
+    background-color: #f0e6c8;
+    border: solid #c28832 5px;
+    border-radius: 60px;
     /* Fond semi-transparent */
     display: flex;
     flex-direction: column;
@@ -516,7 +523,7 @@ strong {
 
 /* Style du message */
 #popup-container p {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 18px;
     margin: 0;
 }

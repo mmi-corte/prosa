@@ -1,4 +1,5 @@
-import { addBtnImg } from './button.js';
+import { addBtnImg, ajouterBouton } from './button.js';
+import { addDiv } from './texte.js';
 
 export function addOverlay(audioId, audioSrc) {
     const iconUrls = [
@@ -11,12 +12,22 @@ export function addOverlay(audioId, audioSrc) {
     addBtnImg("container", './assets/icons/SonActif.png', 'btnSon');
     setupSoundButton(audioId, audioSrc);
 
-    // Ajouter un bouton pour le livre
-    addBtnImg('container', './assets/icons/livre.png', 'btnJ');
-    const btnJ = document.getElementById('btnJ');
+
+    // Ajouter un bouton pour l'inventaire
+    addBtnImg('container', './assets/icons/inventaire.png', 'btnI', 'circle-button circle-button-right');
+    const btnI = document.getElementById('btnI');
+
+    if (btnI) {
+        btnI.addEventListener("click", () => {
+            createPopupJournal('Salut !');
+        });
+    } else {
+        console.error('Le bouton "btnI" n\'a pas été trouvé.');
+    }
+
 
     // Ajouter un bouton pour le journal
-    addBtnImg('container', './assets/icons/journal.png', 'btnJ');
+    addBtnImg('container', './assets/icons/livre.png', 'btnJ', "circle-button circle-button.left");
     const btnJ = document.getElementById('btnJ');
 
     if (btnJ) {
@@ -27,17 +38,9 @@ export function addOverlay(audioId, audioSrc) {
         console.error('Le bouton "btnJ" n\'a pas été trouvé.');
     }
 
-    // Créer un bouton avec plusieurs icônes
-    createButtonWithIcons('container', iconUrls, 'btnObj');
-    const btnObj = document.getElementById('btnObj');
-
-    if (btnObj) {
-        btnObj.addEventListener("click", () => {
-            createPopupObj();
-        });
-    } else {
-        console.error('Le bouton "btnObj" n\'a pas été trouvé.');
-    }
+    addDiv('container', 'overlaySquare')
+    addDiv('container', 'journal')
+    
 }
 
 export function setupSoundButton(audioId, audioSrc) {
