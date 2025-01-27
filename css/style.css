@@ -511,39 +511,39 @@ strong {
 }
 
 /* Contenu de la pop-up */
-#popup-container>div {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+#popup-titre {
+    font-family: ;
+    position: fixed;
+    top: 40px; /* Position verticale en haut */
+    left: 50%; /* Centré horizontalement */
+    transform: translateX(-50%); /* Ajuste le centrage horizontal */
+    font-size: 18px; /* Taille du texte */
+    padding: 10px;
+    font-weight: bold; /* Texte en gras */
+    color: #333; /* Couleur du texte */
+    border: solid #C28832 5px;
+    background-color: #f0e6c8;
+    border-radius: 20px;
     text-align: center;
+    z-index: 1001; /* Au-dessus du contenu */
 }
 
-/* Style du message */
-#popup-container p {
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    margin: 0;
-}
+
 
 /* Style du bouton de fermeture */
-#popup-container button {
+.btnFjournal {
     position: absolute;
-    bottom: 25px;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #E6B57A;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    top: -10px;
+    right: -15px; /* Espace depuis la droite */
+    width: 40px; /* Taille de l'image */
+    height: 40px;
+    border: solid #C28832 5px;
+    background-color: #f0e6c8;
+    border-radius: 50%;
 }
 
-#popup-container button:hover {
-    background-color: #E6B57A;
-}
+
+
 
 /*--------------Objets------------------------*/
 /* Style général pour le bouton */
