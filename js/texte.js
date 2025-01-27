@@ -4,7 +4,7 @@ import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/f
 
 
 // buttonModule.js
-export function addTxt(conteneurId, content) {
+export function addTxt(conteneurId, content,classNameTxt) {
     // Sélectionne la div par son ID
     const container = document.getElementById(conteneurId);
     // Vérifie si la div existe
@@ -15,7 +15,7 @@ export function addTxt(conteneurId, content) {
     
     // Crée un élément de texte (paragraphe)
     const txt = document.createElement("p");
-    txt.className = "txt"; // Ajout d'une classe
+    txt.className = classNameTxt ; // Ajout d'une classe
     
     // Définit le contenu du paragraphe
     txt.textContent = content;
@@ -23,6 +23,22 @@ export function addTxt(conteneurId, content) {
     // Ajoute le paragraphe à la div
     container.appendChild(txt);
 }
+
+export function addH1(containerId,textContent,className){
+    // Sélectionne la div par son ID
+    const container = document.getElementById(containerId);
+  
+    // Crée un élément de texte (paragraphe)
+    const txt = document.createElement("h1");
+    txt.className = className ; // Ajout d'une classe
+    
+    // Définit le contenu du paragraphe
+    txt.textContent = textContent;
+
+    // Ajoute le paragraphe à la div
+    container.appendChild(txt);
+}
+
 export function addTxtWithBoldWord(containerId, textContent, boldWord) {
     const container = document.getElementById(containerId);
 
