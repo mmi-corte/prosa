@@ -18,7 +18,9 @@ import { popup } from './js/popup.js';
 
 import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
-import { loadScreen0, loadScreen1, loadScreen2 } from './js/screen.js';
+import { loadScreen0 } from './js/screen0.js';
+import { loadScreen1 } from './js/screen1.js';
+import { loadScreen2 } from './js/screen2.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
