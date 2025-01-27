@@ -23,6 +23,10 @@ import { loadScreen0, loadScreen1 } from './js/screen.js';
 //Variable / Constante pour les combats
 export let playerUserName = "";
 
+const DEBUG = true;
+
+
+
 let weapons = [
     {
         name: "Epée",
@@ -64,13 +68,15 @@ const enemies = [
 let levelValue = 0;
 
 // Resey Home btn
-const body = document.querySelector("body");
-body.id = "body";
-addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
+if (DEBUG){
+    const body = document.querySelector("body");
+    body.id = "body";
+    addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
 
 resetGame.addEventListener("click", 
     ()=>{
         if (levelValue != 0){
+            levelValue= 0;
             loadScreen0();
         };
         
