@@ -16,7 +16,7 @@ export function addImgBackground(containerID,url) {
    container.style.backgroundRepeat = 'no-repeat'; // Éviter que l'image se répète
 }
 
-export function addImg(containerID,url,style) {
+export function addImg(containerID,url,style,targetId) {
     console.log('test1')
     // Sélectionne la div par son ID
     const container = document.getElementById(containerID);
@@ -29,6 +29,7 @@ export function addImg(containerID,url,style) {
     const img = document.createElement("img");
     img.className = style;
     img.src = url;
+    img.id = targetId;
 
     container.appendChild(img);
 }

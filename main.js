@@ -10,12 +10,22 @@ import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 //import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
-import { addOverlay } from './js/overlay.js';
 import { addAutoPlayVideo } from './js/video.js';
+import { addOverlay } from './js/overslay.js';
 import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
 import { popup } from './js/popup.js';
+
+import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
+
+import { loadScreen0, loadScreen1 } from './js/screen.js';
+
 //Variable / Constante pour les combats
+export let playerUserName = "";
+
+const DEBUG = true;
+
+
 
 let weapons = [
     {
@@ -55,352 +65,48 @@ const enemies = [
     }
 ]
 
-export let playerUserName = "";
-//var container
-const container = 'container';
-const btnNext = 'btnInvNext';
-const btnChoix1 = 'btnChoix1';
-const btnChoix2 = 'btnChoix2';
-const txtNarr = 'narrationText';
-const name = 'PersoTxt';
-// Create an object to store the audio players
-
-
-// Appelle la fonction pour ajouter un bouton dans la div avec l'id "container"
-ajouterBouton('container', 'Commencer', 'btnStart', 'btn');
-
-
-addOverlay('monAudio', 'https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/son-principal.mp3?v=1734604153963')
-
-
-
-
-
-// Récupère le bouton Start
-const boutonStart = document.getElementById("btnStart");
-
-boutonStart.addEventListener("click", function () {
-    refreshPage();
-    /*changeStyleBG(container);
-    ARBerger(container);
-    addNameCharacter('E1Berger', 'diagBox', 'nameCharacter');
-    addTxtNarration("E1Berger", 'diagBox', 'dialogBox');*/
-
-    
-    
-    addImg("container", 'assets/berger.jpg');
-    ajouterBouton('container', '', 'btnInvI', "btnInv");
-    const btnInvI1 = document.getElementById("btnInvI");
-
-    // ------------ PREVENTION -------------------------------------
-    btnInvI1.addEventListener("click", function () {
-        refreshPage();
-        loadSound('assets/sound/buttoneffect.mp3');
-        addSVG('container', warningSvg);
-        document.getElementsByTagName('svg')[0].id = 'svg1';
-        addTxt('container', 'ATTENTION');
-        addTxtWithBoldWord('container', 'Pour votre sécurité, restez\nattentif à votre\nenvironnement et évitez\nles zones à risques.', 'sécurité');
-        addImg('container', 'assets/logo.png', 'logoimg');
-        ajouterBouton('container', '', 'btnInv1', "btnInv");
-
-        const btnInv1 = document.getElementById("btnInv1");
-
-        // -------------- PSEUDO -------------------------
-        btnInv1.addEventListener("click", function () {
-            loadSound('assets/sound/buttoneffect.mp3');
-            refreshPage();
-            addTxt('container', 'Veuillez entrer votre nom');
-            addForm('container');
-            addImg('container', 'assets/logo.png', 'logoimg');
-
-            const boutonSubmit = document.getElementById("btnSubmit");
-
-            // ----------------------- AVATAR --------------------------------
-            boutonSubmit.addEventListener("click", function () {
-                const usernameInput = document.getElementById("userInput");
-                playerUserName = usernameInput.value; // Stocke le pseudo utilisateur
-                refreshPage();
-
-                addDiv("container", "containerAvatar", "divAvatar");
-                addDiv("containerAvatar", "imgAvatarContainer", "imgAvatarContainer");
-                const avatarPaths = [
-                    "./assets/avatar/AvatarT1.png",
-                    "./assets/avatar/AvatarT2.png",
-                    "./assets/avatar/AvatarT3.png",
-                    "./assets/avatar/AvatarT4.png"
-                ];
-                avatarPaths.forEach((path, index) => {
-                    addBtnImg("imgAvatarContainer", path, `a${index + 1}`);
-                });
-
-                const avatars = avatarPaths.map((_, index) => document.getElementById(`a${index + 1}`));
-                selectAvatar(avatars);
-
-                ajouterBouton('containerAvatar', 'Confirmer', 'btnConfirm', "btn");
-
-                const btnConfirm = document.getElementById('btnConfirm');
-
-                // -------------- LOCALISATION -----------------------
-                btnConfirm.addEventListener("click", function () {
-                    refreshPage();
-                    addTxtWithBoldWord("container", 'Vous êtes à :', '');
-                    addDiv('container', 'containerBtnLoc', "");
-                    ajouterBouton('containerBtnLoc', "Corte", 'btnLocCorte', 'btn btnLoc');
-                    ajouterBouton('containerBtnLoc', 'Toulon', 'btnLocToulon', 'btn btnLoc');
-
-
-                    const allButtons = document.querySelectorAll('.btnLoc');
-                    selectButton(allButtons);
-                    ajouterBouton(container, 'Confirmer', btnNext, 'btn');
-
-                    const btnLocV = document.getElementById(btnNext);
-
-                    btnLocV.addEventListener("click", function () {
-                        refreshPage();
-                        addAutoPlayVideo('container', './assets/video/IntroTourneeV1.mp4', 'introVideo');
-
-                        ajouterBouton('container', '', 'btnInv2', "btnInv");
-                        const boutonInv2 = document.getElementById("btnInv2");
-                        //-----------ETAPE 1------------------------
-                        boutonInv2.addEventListener("click", function () {
-                            refreshPage();
-                            changeStyleBG('bgimage');
-                            //ARBerger('container');
-                            addImgBackground(container, 'assets/bg/bg.png');
-                            //addImg('container', 'assets/bg/bg.png', 'imgBg');
-                            addDiv('container', "diagBox", 'diagBoxN');
-                            addTxtNarration("E1Narra", 'diagBox', 'dialogBox');
-                            ajouterBouton('diagBox', '', 'btnInvNext', 'btnInv');
-                            addOverlay('audioPlayer');
-
-                            const btnInv3 = document.getElementById('btnInvNext');
-
-                            btnInv3.addEventListener("click", function () {
-                                refreshPage();
-                                addImgBackground(container, 'assets/bg/bg.png');
-                                addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                addDiv('container', "diagBox", 'diagBox');
-                                addNameCharacter('E1Berger', 'diagBox', 'nameCharacter');
-                                addTxtNarration("E1Berger", 'diagBox', 'dialogBox');
-                                addOverlay('audioPlayer');
-
-                                ajouterBouton('diagBox', '', 'btnInvNext', 'btnInv');
-                                document.getElementById(btnNext).addEventListener("click", function () {
-                                    refreshPage();
-                                    addImgBackground(container, 'assets/bg/bg.png');
-                                    addDiv('container', "diagBox", 'diagBoxN');
-                                    addTxtNarration("E1Narra1", 'diagBox', 'dialogBox');
-                                    addOverlay('audioPlayer');
-
-                                    ajouterBouton('diagBox', '', btnNext, 'btnInv');
-                                    document.getElementById(btnNext).addEventListener("click", function () {
-                                        refreshPage();
-                                        addImgBackground(container, 'assets/bg/bg.png');
-                                        addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                        addDiv('container', "diagBox", 'diagBox');
-                                        addNameCharacter('E1Berger1', 'diagBox', 'nameCharacter');
-                                        addTxtNarration("E1Berger1", 'diagBox', 'dialogBox');
-                                        addOverlay('audioPlayer');
-
-                                        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-                                        document.getElementById(btnNext).addEventListener("click", function () {
-                                            refreshPage();
-                                            addImgBackground(container, 'assets/bg/bg.png');
-                                            addDiv('container', "diagBox", 'diagBoxN');
-                                            addTxtNarration("E1Narra2", 'diagBox', 'dialogBox');
-                                            addOverlay('audioPlayer');
-
-                                            ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                            document.getElementById(btnNext).addEventListener("click", function () {
-                                                refreshPage();
-                                                addImgBackground(container, 'assets/bg/bg.png');
-                                                addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                addDiv('container', "diagBox", 'diagBox');
-                                                addNameCharacter('E1Berger2', 'diagBox', 'nameCharacter');
-                                                addTxtNarration("E1Berger2", 'diagBox', 'dialogBox');
-                                                addOverlay('audioPlayer');
-
-                                                ajouterBouton('diagBox', '', btnNext, 'btnInv');
-                                                document.getElementById(btnNext).addEventListener('click', function () {
-                                                    refreshPage();
-                                                    addImgBackground(container, 'assets/bg/bg.png');
-                                                    addDiv('container', "diagBox", 'diagBoxN');
-                                                    addTxtNarration("E1Narra3", 'diagBox', 'dialogBox');
-                                                    addOverlay('audioPlayer');
-
-                                                    ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                    document.getElementById(btnNext).addEventListener("click", function () {
-                                                        refreshPage();
-                                                        addImgBackground(container, 'assets/bg/bg.png');
-                                                        addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                        addDiv('container', "diagBox", 'diagBox');
-                                                        addNameCharacter('E1Berger3', 'diagBox', 'nameCharacter');
-                                                        addTxtNarration("E1Berger3", 'diagBox', 'dialogBox');
-                                                        addOverlay('audioPlayer');
-
-                                                        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                        document.getElementById(btnNext).addEventListener("click", function () {
-                                                            refreshPage();
-                                                            addImgBackground(container, 'assets/bg/bg.png');
-                                                            addDiv('container', "diagBox", 'diagBoxN');
-                                                            addTxtNarration("E1Narra4", 'diagBox', 'dialogBox');
-                                                            addOverlay('audioPlayer');
-
-                                                            ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                            document.getElementById(btnNext).addEventListener("click", function () {
-                                                                refreshPage();
-                                                                addImgBackground(container, 'assets/bg/bg.png');
-                                                                addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                                addDiv('container', "diagBox", 'diagBox');
-                                                                addNameCharacter('E1Berger4', 'diagBox', 'nameCharacter');
-                                                                addTxtNarration("E1Berger4", 'diagBox', 'dialogBox');
-                                                                addOverlay('audioPlayer');
-
-                                                                ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                document.getElementById(btnNext).addEventListener("click", function () {
-                                                                    refreshPage();
-                                                                    addImgBackground(container, 'assets/bg/bg.png');
-                                                                    addDiv('container', "diagBox", 'diagBoxN');
-                                                                    addTxtNarration("E1Narra5", 'diagBox', 'dialogBox');
-                                                                    addOverlay('audioPlayer');
-
-                                                                    ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                    document.getElementById(btnNext).addEventListener("click", function () {
-                                                                        refreshPage();
-                                                                        addImgBackground(container, 'assets/bg/bg.png');
-                                                                        addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                                        addDiv('container', "diagBox", 'diagBox');
-                                                                        addNameCharacter('E1Berger5', 'diagBox', 'nameCharacter');
-                                                                        addTxtNarration("E1Berger5", 'diagBox', 'dialogBox');
-                                                                        addOverlay('audioPlayer');
-
-                                                                        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                        document.getElementById(btnNext).addEventListener("click", function () {
-                                                                            refreshPage();
-                                                                            addImgBackground(container, 'assets/bg/bg.png');
-                                                                            addDiv('container', "diagBox", 'diagBoxN');
-                                                                            addTxtNarration("E1Narra6", 'diagBox', 'dialogBox');
-                                                                            addOverlay('audioPlayer');
-
-                                                                            ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                            document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                refreshPage();
-                                                                                addImgBackground(container, 'assets/bg/bg.png');
-                                                                                addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                                                addDiv('container', "diagBox", 'diagBox');
-                                                                                addNameCharacter('E1Berger6', 'diagBox', 'nameCharacter');
-                                                                                addTxtNarration("E1Berger6", 'diagBox', 'dialogBox');
-                                                                                addOverlay('audioPlayer');
-
-                                                                                ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                                document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                    refreshPage();
-                                                                                    addImgBackground(container, 'assets/bg/bg.png');
-                                                                                    addDiv('container', "diagBox", 'diagBoxN');
-                                                                                    addTxtNarration("E1Narra7", 'diagBox', 'dialogBox');
-
-
-                                                                                    ajouterBouton('diagBox', '', btnChoix1, 'btnChoix choix1');
-                                                                                    addTxtNarration("E1Choix1", btnChoix1, "");
-                                                                                    ajouterBouton('diagBox', '', btnChoix2, 'btnChoix choix2');
-                                                                                    addTxtNarration("E1Choix2", btnChoix2, "");
-                                                                                    addOverlay('audioPlayer');
-                                                                                    //-----------------ETAPE 1 BIS-------------------------------------------
-                                                                                    document.getElementById(btnChoix1).addEventListener("click", function () {
-                                                                                        refreshPage();
-                                                                                        addImgBackground(container, 'assets/bg/bg.png');
-                                                                                        addDiv('container', "diagBox", 'diagBoxN');
-                                                                                        addTxtNarration("E1BNarra", 'diagBox', 'dialogBox');
-                                                                                        addOverlay('audioPlayer');
-
-                                                                                        ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                                        document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                            refreshPage();
-                                                                                            addImgBackground(container, 'assets/bg/bg.png');
-                                                                                            addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                                                            addDiv('container', "diagBox", 'diagBox');
-                                                                                            addNameCharacter('E1BBerger', 'diagBox', 'nameCharacter');
-                                                                                            addTxtNarration("E1BBerger", 'diagBox', 'dialogBox');
-                                                                                            addOverlay('audioPlayer');
-
-                                                                                            ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                                            document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                                refreshPage();
-                                                                                                addImgBackground(container, 'assets/bg/bg.png');
-                                                                                                addDiv('container', "diagBox", 'diagBoxN');
-                                                                                                addTxtNarration("E1BNarra2", 'diagBox', 'dialogBox');
-                                                                                                //METTRE POP UP
-
-                                                                                                addOverlay('audioPlayer');
-
-                                                                                                ajouterBouton('diagBox', '', btnNext, 'btnInv');
-
-                                                                                                document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                                    //METTRE POP UP
-                                                                                                    refreshPage();
-                                                                                                    changeStyleBG(container);
-                                                                                                    popup("Vous avez récupéré la branche d’arbre", "asstes/items/branche.png");
-
-                                                                                                    ajouterBouton(container, '', btnNext, 'btnInv');
-                                                                                                    //-------------ETAPE 2  CHOIX 1
-                                                                                                    document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                                        refreshPage();
-                                                                                                        step2();
-
-                                                                                                        ajouterBouton(container, '', btnNext, 'btnInv');
-
-                                                                                                        document.getElementById(btnNext).addEventListener("click", function () {
-                                                                                                            refreshPage();
-                                                                                                            step6();
-                                                                                                        });
-
-                                                                                                    });
-
-                                                                                                });
-                                                                                            });
-                                                                                        });
-
-                                                                                    });
-                                                                                    //----------------------ETAPE 2 CHOIX 2
-                                                                                    document.getElementById(btnChoix2).addEventListener("click", function () {
-                                                                                        changeStyleBG(container);
-                                                                                        step2();
-                                                                                    });
-                                                                                });
-                                                                            });
-                                                                        });
-                                                                    });
-                                                                });
-                                                            });
-
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    });
-                                });
-
-
-
-                            });
-
-
-                        });
-                    });
-                });
-            });
-        });
-    });
-});
+let levelValue = 0;
+
+// Resey Home btn
+if (DEBUG){
+    const body = document.querySelector("body");
+    body.id = "body";
+    addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
+
+resetGame.addEventListener("click", 
+    ()=>{
+        if (levelValue != 0){
+            loadScreen0();
+        };
+        
+    }
+);
+}
+
+//---------------------------------------------
+// logic du jeu
+//---------------------------------------------
+
+if (isCookiePresent('screen')) {
+    // Récupérer la valeur de "level"
+    levelValue = getCookieValue('screen');
+
+    console.log(`Le cookie 'screen' est présent avec la valeur level à : ${levelValue}`);
+
+  
+    switch (levelValue) {
+        case "1":
+            loadScreen1();
+            break;
+            
+        default:
+            loadScreen0();       
+    }
+
+} else {
+    console.log('Le cookie "screen" n\'est pas présent');
+
+    // Créer un cookie
+    document.cookie = "screen=0; level=0; path=/;";
+    loadScreen0(); 
+}

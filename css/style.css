@@ -4,7 +4,6 @@ body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-color: #e6b57a;
 }
 
 strong {
@@ -38,13 +37,13 @@ strong {
     font-size: 5rem;
 }
 
-.btn {
+.btnclass {
     position: inherit;
     width: auto;
     height: 40px;
     border: none;
     border-radius: 10px;
-    background-color: #E6B57A;
+    background-color: #CF881BE5;
     font-family: "Asap", serif;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -65,11 +64,12 @@ strong {
 
 .logoimg {
     width: 75%;
-    margin: 25px;
+    margin: 10px;
 }
 
 #logoImgP1 {
-    /*margin-top: 230px;*/
+    position:absolute;
+    top: 25%;
     animation: fadeIn 4s infinite;
 }
 
@@ -442,6 +442,37 @@ strong {
 }*/
 
 /*------------OVERLAY----------------------*/
+
+/* Style bouton inventaire*/
+#btnI{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    left: 80%;
+    bottom: 18px;
+}
+  
+  
+#overlaySquare{
+    position: fixed; /* Pour rester en bas de la page même en scrollant */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Prend toute la largeur de la page */
+    height: 60px; /* Hauteur du rectangle */
+    background-color: #f3da8e; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    display: flex; /* Pour centrer le texte */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    font-size: 1rem; /* Taille du texte */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+    z-index: -1000; /* Assure qu'il reste au-dessus des autres éléments */ 
+}
+  
+  
+
+
 /*------------Son-------------------*/
 #btnSon {
     width: 10%;
@@ -452,20 +483,24 @@ strong {
 
 /*-------------------Journal--------------------*/
 #btnJ {
-    width: 15%;
+    width: 20%;
     position: absolute;
     left: 10px;
     bottom: 15px;
 }
 
+
+
 #popup-container {
     position: fixed;
-    top: 15px;
-    left: 5px;
-    width: 95%;
-    height: 95%;
+    top:55px;
+    left: 40px;;
+    width: 80%;
+    height: 80%;
     margin: 5px;
-    background-color: rgba(152, 152, 152, 0.747);
+    background-color: #f0e6c8;
+    border: solid #c28832 5px;
+    border-radius: 60px;
     /* Fond semi-transparent */
     display: flex;
     flex-direction: column;
@@ -488,7 +523,7 @@ strong {
 
 /* Style du message */
 #popup-container p {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 18px;
     margin: 0;
 }
@@ -804,3 +839,12 @@ strong {
     }
   }
 
+
+.homeStyle{
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 15px;
+    width: 45px;
+}
