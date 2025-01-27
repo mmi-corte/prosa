@@ -5,9 +5,10 @@ import { setCookie, getCookie, setCityCookie } from "./cookieHandler.js";
 import { addImgBackground, addImg } from "./fonctionImg.js";
 import { refreshPage } from "./refreshPage.js";
 import { addSVG } from "./svg.js";
-
+import { addAutoPlayVideo } from "./video.js";
 import { loadSound, suspendSound, stopSound } from "./Sound/sound.js";
 import { loadScreen0 } from "./screen0.js";
+import { loadLvl1 } from "./lvl1.js";
 
 export function loadScreen5() {
   console.log("loadScreen5: je suis là");
@@ -22,8 +23,9 @@ export function loadScreen5() {
   ajouterBouton("container", "", "btnInv2", "btnInv");
   const boutonInv2 = document.getElementById("btnInv2");
   boutonInv2.addEventListener("click", function (){
-   
+    loadLvl1();
   });
+
 
   setCookie("screen", "5", 7, "/");
 }

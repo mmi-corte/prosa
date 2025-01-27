@@ -25,7 +25,7 @@ export function loadScreen3() {
 
     btnSubmit.addEventListener("click", function (event) {
         event.preventDefault();
-        playerUserName = input.value;
+        const playerUserName = input.value;
         console.log("Nom du joueur : ", playerUserName);
         setCookie("playerName", playerUserName, 7, "/");
         loadScreen4();
