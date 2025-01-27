@@ -10,7 +10,6 @@ import { loadSound, suspendSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 //import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
-import { addOverlay } from './js/overlay.js';
 import { addAutoPlayVideo } from './js/video.js';
 import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
