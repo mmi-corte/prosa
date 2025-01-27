@@ -75,10 +75,8 @@ if (DEBUG){
 
 resetGame.addEventListener("click", 
     ()=>{
-        if (levelValue != 0){
             refreshPage();
             loadScreen0();
-        };
         
     }
 );
