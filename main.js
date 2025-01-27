@@ -125,6 +125,9 @@ if (isCookiePresent('screen')) {
         case "2":
             loadScreen2();
             break;
+        case "3":
+            loadScreen3();
+            break;
             
         default:
             loadScreen0();       

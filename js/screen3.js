@@ -8,3 +8,8 @@ import { refreshPage } from './refreshPage.js';
 import { addSVG } from './svg.js';
 
 import { loadSound, suspendSound,stopSound } from './Sound/sound.js';
+
+
+export function loadScreen3() {
+    
+}
