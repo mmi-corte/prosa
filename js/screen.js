@@ -15,11 +15,12 @@ export function loadScreen0(){
 
     // add background
     //document.body.style.background = "linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%)";
-
+    
     // add logo
     addImg('container','../assets/logo.png','logoimg', 'logoImgP1');
-    addImgBackground('container',"assets/bg/Accueil.png")
-
+    addImgBackground('container',"assets/bg/Accueil.png");
+ // Ajouter un bouton pour le son
+   
     // add button
     const btn1 = ajouterBouton('container', 'JOUER MAINTENANT', 'btn1', 'btnclass');
 
