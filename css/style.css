@@ -4,7 +4,7 @@ body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background: rgb(230, 181, 122);
+    background: rgb(241, 212, 130)
 }
 
 strong {
@@ -87,12 +87,13 @@ strong {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 250px;
 }
 
 .form input {
     border-radius: 10px;
     border-color: #DDA861;
-    background-color: #E6B57A;
+    background-color: #ffffff;
     border-style: none;
     width: 100%;
     height: 40px;
@@ -130,6 +131,16 @@ strong {
     max-width: 80%;
     margin: 10px;
     margin-bottom: 0;
+}
+
+.txtFormName{
+    font-family: "Asap", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 30px;
+    font-style: normal;
+    text-align: center;
+    max-width: 80%;
 }
 
 .txtName {
@@ -645,12 +656,13 @@ strong {
 .btn {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #c28832;
-    color: white;
+    background-color: #000000;
+    color: #e6b57a;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    width: 250px;
 }
 
 .btn:hover {
