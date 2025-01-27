@@ -25,3 +25,26 @@ export function suspendSound(url) {
         audioPlayers[url].pause();
     }
 }
+
+// Fonction pour suspendre la lecture d'un fichier audio
+export function stopSound(url) {
+    if (audioPlayers[url]) {
+        audioPlayers[url].pause();
+        // On met en pause si l'instance existe
+        audioPlayers[url].currentTime = 0;
+        delete audioPlayers[url];
+        
+    }
+}
+
+export function setOffSound(){
+    Object.values(audioPlayers).forEach(element => {
+        element.pause();
+    });
+}
+
+export function setOnSound(){
+    Object.values(audioPlayers).forEach(element => {
+        element.play();
+    });
+}

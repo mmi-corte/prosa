@@ -6,7 +6,7 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
-import { loadSound, suspendSound } from './js/Sound/sound.js';
+import { loadSound, suspendSound, setOffSound,setOnSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 //import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
@@ -68,7 +68,8 @@ const enemies = [
 let levelValue = 0;
 
 
-addOverlay ('audioId' , 'audioSrc')
+
+// addOverlay ('audioId' , 'audioSrc')
 
 // Resey Home btn
 if (DEBUG){
@@ -84,6 +85,25 @@ resetGame.addEventListener("click",
     }
 );
 }
+
+
+// Ajout du bouton pour activer/désactiver le son
+const SoundBtn = document.createElement('div')
+SoundBtn.id = 'SoundBtn';
+document.body.appendChild(SoundBtn);
+const SoundIcon = document.createElement('img')
+SoundIcon.src="./assets/icons/SonActif.png";
+SoundIcon.style.width = "50px";
+SoundBtn.appendChild(SoundIcon);
+SoundBtn.addEventListener('click', function(){
+    if (SoundIcon.src.includes("SonActif")){
+        SoundIcon.src = "./assets/icons/sonCoupe.png";
+        setOffSound();
+    } else {
+        SoundIcon.src = "./assets/icons/SonActif.png";
+        setOnSound();
+    }
+});
 
 //---------------------------------------------
 // logic du jeu

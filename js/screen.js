@@ -5,12 +5,13 @@ import { addImgBackground, addImg } from './fonctionImg.js';
 import { refreshPage } from './refreshPage.js';
 import { addSVG } from './svg.js';
 import { addTxt , addTxtWithBoldWord} from './texte.js';
+import { loadSound, suspendSound,stopSound } from './Sound/sound.js';
 
 const container = document.getElementById('container');
 
 export function loadScreen0(){
 
-    
+    loadSound("../assets/sound/intro.mp3", true);
     console.log('loadScreen0: je suis là');
 
     // add background
@@ -58,7 +59,7 @@ export function loadScreen0(){
 
 export function loadScreen1(){
     console.log('loadScreen1:je suis là');
-
+    stopSound("../assets/sound/intro.mp3", true);
     // clear page
     refreshPage();
     
@@ -83,7 +84,7 @@ export function loadScreen1(){
         loadScreen2();
     });
 
-    setCookie('screen', '2', 7, '/');
+    setCookie('screen', '1', 7, '/');
 }
 
 export function loadScreen2(){
