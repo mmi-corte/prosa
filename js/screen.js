@@ -73,4 +73,20 @@ export function loadScreen1(){
     // update level dans cookie
     // setCookie('screen', 1, 7, '/');
     document.cookie = "screen=1; level=0; path=/;";
+
+    // add button
+    const btn1 = ajouterBouton('container', '', 'btn1', 'btnInv');
+
+    // binding
+    btn1.addEventListener('click', function (){
+        loadScreen2();
+    });
+
+    setCookie('screen', '2', 7, '/');
+}
+
+export function loadScreen2(){
+
+    refreshPage();
+
 }
