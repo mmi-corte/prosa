@@ -21,6 +21,9 @@ import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js'
 import { loadScreen0 } from './js/screen0.js';
 import { loadScreen1 } from './js/screen1.js';
 import { loadScreen2 } from './js/screen2.js';
+import { loadScreen5 } from './js/screen5.js';
+import { loadScreen4 } from './js/screen4.js';
+import { loadScreen3 } from './js/screen3.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
