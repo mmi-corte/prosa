@@ -18,7 +18,7 @@ import { popup } from './js/popup.js';
 
 import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
-import { loadScreen0, loadScreen1 } from './js/screen.js';
+import { loadScreen0, loadScreen1, loadScreen2 } from './js/screen.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -119,6 +119,9 @@ if (isCookiePresent('screen')) {
     switch (levelValue) {
         case "1":
             loadScreen1();
+            break;
+        case "2":
+            loadScreen2();
             break;
             
         default:
