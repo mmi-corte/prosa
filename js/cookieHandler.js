@@ -21,3 +21,11 @@ export function getCookie(name) {
     }
     return "";  // Retourne une chaîne vide si le cookie n'est pas trouvé
 }
+
+// Fonction pour définir un cookie
+export function setCookie(name, value, days = 7, path = '/') {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));  // Calculer la date d'expiration
+    const expiresString = "expires=" + expires.toUTCString();  // Formater la date d'expiration en UTC
+    document.cookie = `${name}=${encodeURIComponent(value)}; ${expiresString}; path=${path}`;  // Définir le cookie
+}

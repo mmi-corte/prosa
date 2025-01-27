@@ -16,7 +16,7 @@ import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
 import { popup } from './js/popup.js';
 
-import { getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
+import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
 import { loadScreen0, loadScreen1, loadScreen2 } from './js/screen.js';
 
@@ -71,7 +71,7 @@ if (isCookiePresent('screen')) {
     let levelValue = getCookieValue('screen');
 
     console.log(`Le cookie 'screen' est présent avec la valeur level à : ${levelValue}`);
-    
+
     switch (levelValue) {
         case "1":
             loadScreen1();
@@ -80,6 +80,7 @@ if (isCookiePresent('screen')) {
         case "2":
             loadScreen2();
             break;
+
         default:
             loadScreen0();       
     }
@@ -88,5 +89,5 @@ if (isCookiePresent('screen')) {
     console.log('Le cookie "screen" n\'est pas présent');
 
     // Créer un cookie
-    /*document.cookie = "screen=0; level=0; path=/;";*/
+    document.cookie = "screen=0; level=0; path=/;";
 }
