@@ -1,5 +1,6 @@
 
 import { ajouterBouton } from './button.js';
+import { setCookie } from './cookieHandler.js';
 import { addImgBackground, addImg } from './fonctionImg.js';
 import { refreshPage } from './refreshPage.js';
 
@@ -25,37 +26,40 @@ export function loadScreen0(){
         loadScreen1();
     });
 
+    setCookie('screen', '0', 7, '/');
+
+
 
 }
+
+// export function loadScreen1(){
+//     console.log('loadScreen1:je suis là');
+
+//     // claer page
+//     refreshPage();
+
+//     // add background
+//     addImgBackground('container', "../assets/bg/bg.png");
+
+//     // add button
+//     const btn1 = ajouterBouton('container', '', 'btn1', 'btnInv');
+
+//     // binding
+//     btn1.addEventListener('click', function (){
+//         loadScreen2();
+//     });
+
+//     // update level dans cookie
+//     document.cookie = "screen=1; level=0; path=/;";
+// }
 
 export function loadScreen1(){
     console.log('loadScreen1:je suis là');
-
-    // claer page
-    refreshPage();
-
-    // add background
-    addImgBackground('container', "../assets/bg/bg.png");
-
-    // add button
-    const btn1 = ajouterBouton('container', '', 'btn1', 'btnInv');
-
-    // binding
-    btn1.addEventListener('click', function (){
-        loadScreen2();
-    });
-
-    // update level dans cookie
-    document.cookie = "screen=1; level=0; path=/;";
-}
-
-export function loadScreen2(){
-    console.log('loadScreen2:je suis là');
 
     // clear page
     refreshPage();
     
 
     // update level dans cookie
-    document.cookie = "screen=2; level=0; path=/;";
+    setCookie('screen', '1', 7, '/');
 }

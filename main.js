@@ -18,7 +18,7 @@ import { popup } from './js/popup.js';
 
 import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
-import { loadScreen0, loadScreen1, loadScreen2 } from './js/screen.js';
+import { loadScreen0, loadScreen1 } from './js/screen.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -61,6 +61,22 @@ const enemies = [
     }
 ]
 
+let levelValue = 0;
+
+// Resey Home btn
+const body = document.querySelector("body");
+body.id = "body";
+addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
+
+resetGame.addEventListener("click", 
+    ()=>{
+        if (levelValue != 0){
+            levelValue= 0;
+            loadScreen0();
+        };
+        
+    }
+);
 
 //---------------------------------------------
 // logic du jeu
@@ -68,10 +84,11 @@ const enemies = [
 
 if (isCookiePresent('screen')) {
     // Récupérer la valeur de "level"
-    let levelValue = getCookieValue('screen');
+    levelValue = getCookieValue('screen');
 
     console.log(`Le cookie 'screen' est présent avec la valeur level à : ${levelValue}`);
 
+  
     switch (levelValue) {
         case "1":
             loadScreen1();
@@ -90,4 +107,5 @@ if (isCookiePresent('screen')) {
 
     // Créer un cookie
     document.cookie = "screen=0; level=0; path=/;";
+    loadScreen0(); 
 }
