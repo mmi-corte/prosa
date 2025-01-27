@@ -71,7 +71,6 @@ addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
 resetGame.addEventListener("click", 
     ()=>{
         if (levelValue != 0){
-            levelValue= 0;
             loadScreen0();
         };
         
@@ -93,11 +92,7 @@ if (isCookiePresent('screen')) {
         case "1":
             loadScreen1();
             break;
-
-        case "2":
-            loadScreen2();
-            break;
-
+            
         default:
             loadScreen0();       
     }
