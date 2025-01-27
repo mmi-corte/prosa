@@ -12,7 +12,7 @@ import { loadScreen1 } from "./screen1.js";
 
 loadScreen4()
 
-function loadScreen4() {
+ export function loadScreen4() {
     console.log("loadScreen4 : je suis là.");
 
     boutonSubmit.addEventListener("click", function () {
