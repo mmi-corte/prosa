@@ -8,9 +8,6 @@ export function addOverlay(audioId, audioSrc) {
         './assets/icons/journal.png'  // URL de la troisième icône
     ];
 
-    // Ajouter un bouton pour le son
-    addBtnImg("container", './assets/icons/SonActif.png', 'btnSon');
-    setupSoundButton(audioId, audioSrc);
 
 
     // Ajouter un bouton pour l'inventaire
@@ -19,7 +16,7 @@ export function addOverlay(audioId, audioSrc) {
 
     if (btnI) {
         btnI.addEventListener("click", () => {
-            createPopupJournal('Salut !');
+            createPopupObj('Salut !');
         });
     } else {
         console.error('Le bouton "btnI" n\'a pas été trouvé.');
@@ -127,7 +124,7 @@ function createPopupJournal(message) {
 
     // Flèche pour naviguer entre les pages
     const nextArrow = document.createElement('img');
-    nextArrow.src = './assets/icons/arrow.png'; // Chemin vers l'image de la flèche
+    nextArrow.src = './assets/icons/arrow-next.png'; // Chemin vers l'image de la flèche
     nextArrow.alt = 'Suivant';
     nextArrow.className = 'btn-next';
     nextArrow.style.cursor = 'pointer';
@@ -136,7 +133,7 @@ function createPopupJournal(message) {
     const closeButton = document.createElement('img');
     closeButton.src = './assets/icons/croix.png';
     closeButton.alt = 'Fermer';
-    closeButton.className = 'btnFjournal';
+    closeButton.className = 'btnFermeture';
     closeButton.style.cursor = 'pointer';
 
     // Ajout des éléments à la popup
@@ -224,17 +221,18 @@ function createPopupObj() {
     popupContent.classList.add('popup-contentObj');
 
     const popupTitle = document.createElement('h3');
-    popupTitle.textContent = 'Collectible';
+    popupTitle.textContent = 'Collectibles';
     popupContent.appendChild(popupTitle);
 
     const objContainer = document.createElement('div');
     objContainer.classList.add('obj-container');
+    
 
     // Liste des objets avec les URLs des images
     const objects = [
-        { name: 'Objet 1', imgUrl: './assets/icons/journal.png' },
-        { name: 'Objet 2', imgUrl: './assets/icons/journal.png' },
-        { name: 'Objet 3', imgUrl: './assets/icons/journal.png' }
+        { name: '', imgUrl: './assets/items/arc.png' },
+        { name: '', imgUrl: './assets/items/epee.png' },
+        { name: '', imgUrl: './assets/items/grimoire.png' }
     ];
 
     objects.forEach(obj => {
@@ -247,20 +245,32 @@ function createPopupObj() {
         objImg.classList.add('obj-img'); // Ajout d'une classe pour styliser l'image
         objImg.onerror = () => console.error(`Échec du chargement de l'image : ${obj.imgUrl}`);
 
+        const objLabel = document.createElement('p');
+        objLabel.textContent = obj.name;
+
         objItem.appendChild(objImg);
+        objItem.appendChild(objLabel);
         objContainer.appendChild(objItem);
     });
 
     popupContent.appendChild(objContainer);
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Fermer';
-    closeButton.className ='btn';
+    // Création de l'image pour fermer
+    const closeButton = document.createElement('img');
+    closeButton.src = './assets/icons/croix.png';
+    closeButton.alt = 'Fermer';
+    closeButton.className = 'btnFermeture';
+    closeButton.style.cursor = 'pointer';
+
+    // Ajout de l'événement pour fermer la popup
     closeButton.addEventListener('click', () => {
         document.body.removeChild(popupContainer);
     });
-    popupContent.appendChild(closeButton);
 
+    // Ajouter le bouton de fermeture en premier dans l'ordre des éléments
+    popupContent.insertBefore(closeButton, popupTitle);
+    
     popupContainer.appendChild(popupContent);
     document.body.appendChild(popupContainer);
 }
+
