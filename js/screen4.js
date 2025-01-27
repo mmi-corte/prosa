@@ -10,7 +10,6 @@ import { addSVG } from './svg.js';
 import { loadSound, suspendSound,stopSound } from './Sound/sound.js';
 import { loadScreen1 } from "./screen1.js";
 
-loadScreen4()
 
  export function loadScreen4() {
     console.log("loadScreen4 : je suis là.");
