@@ -493,6 +493,7 @@ strong {
 
 
 #popup-container {
+    font-family: 'Asap', sans-serif;
     position: fixed;
     top:55px;
     left: 40px;;
@@ -513,7 +514,7 @@ strong {
 
 /* Contenu de la pop-up */
 #popup-titre {
-    font-family: ;
+    font-family: 'Asap', sans-serif;
     position: fixed;
     top: 40px; /* Position verticale en haut */
     left: 50%; /* Centré horizontalement */
@@ -543,6 +544,16 @@ strong {
     border-radius: 50%;
 }
 
+
+.btn-next {
+    position: absolute;
+    
+    bottom: 20px; /* Distance par rapport au bas de la popup */
+    right: 20px; /* Distance par rapport à la droite de la popup */
+    width: 60px; /* Taille de l'image de la flèche */
+    height: 60px; /* Taille de l'image de la flèche */
+    cursor: pointer; /* Ajoute un curseur interactif */
+}
 
 
 

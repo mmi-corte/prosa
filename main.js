@@ -11,7 +11,7 @@ import { lunchFight } from './js/fight.js';
 //import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
 import { addAutoPlayVideo } from './js/video.js';
-import { addOverlay } from './js/overslay.js';
+import { addOverlay } from './js/overlay.js';
 import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
 import { popup } from './js/popup.js';
@@ -66,6 +66,9 @@ const enemies = [
 ]
 
 let levelValue = 0;
+
+
+addOverlay ('audioId' , 'audioSrc')
 
 // Resey Home btn
 if (DEBUG){
