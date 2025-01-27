@@ -76,12 +76,12 @@ if (DEBUG){
 resetGame.addEventListener("click", 
     ()=>{
         if (levelValue != 0){
-            levelValue= 0;
             loadScreen0();
         };
         
     }
 );
+}
 
 //---------------------------------------------
 // logic du jeu
