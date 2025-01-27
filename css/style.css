@@ -4,6 +4,7 @@ body {
     padding: 0;
     height: 100%;
     overflow: hidden;
+    background: rgb(230, 181, 122);
 }
 
 strong {
@@ -31,11 +32,11 @@ strong {
     /* Place l'image derrière le bouton */
 
 }
-
+/*
 #container h1 {
     z-index: 1;
     font-size: 5rem;
-}
+}*/
 
 .btnclass {
     position: inherit;
@@ -43,13 +44,14 @@ strong {
     height: 40px;
     border: none;
     border-radius: 10px;
+    color: white;
     background-color: #CF881BE5;
     font-family: "Asap", serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
     text-transform: uppercase;
-    color: inherit;
+    
     text-decoration: none;
     /* Remove underline */
     -webkit-appearance: none;
@@ -113,7 +115,7 @@ strong {
 .txt {
     font-family: "Asap", serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     text-align: center;
     max-width: 80%;
@@ -145,6 +147,11 @@ strong {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.classTxtCity{
+    font-family: "Asap", serif;
+    color: white;
+    font-size: 2rem;
 }
 
 /*
@@ -492,6 +499,7 @@ strong {
 
 
 #popup-container {
+    font-family: 'Asap', sans-serif;
     position: fixed;
     top:55px;
     left: 40px;;
@@ -511,168 +519,150 @@ strong {
 }
 
 /* Contenu de la pop-up */
-#popup-container>div {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+#popup-titre {
+    font-family: 'Asap', sans-serif;
+    position: fixed;
+    top: 40px; /* Position verticale en haut */
+    left: 50%; /* Centré horizontalement */
+    transform: translateX(-50%); /* Ajuste le centrage horizontal */
+    font-size: 18px; /* Taille du texte */
+    padding: 10px;
+    font-weight: bold; /* Texte en gras */
+    color: #333; /* Couleur du texte */
+    border: solid #C28832 5px;
+    background-color: #f0e6c8;
+    border-radius: 20px;
     text-align: center;
+    z-index: 1001; /* Au-dessus du contenu */
 }
 
-/* Style du message */
-#popup-container p {
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    margin: 0;
-}
+
 
 /* Style du bouton de fermeture */
-#popup-container button {
+.btnFermeture {
     position: absolute;
-    bottom: 25px;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #E6B57A;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#popup-container button:hover {
-    background-color: #E6B57A;
-}
-
-/*--------------Objets------------------------*/
-/* Style général pour le bouton */
-.button-with-icons {
-    position: absolute;
-    bottom: 25px;
-    right: 0;
-    padding: 5px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: auto;
-    /* S'adapte à la taille des icônes */
-    min-width: 200px;
-    /* Largeur minimale pour contenir les icônes */
-}
-
-/* Icônes à l'intérieur du bouton */
-.button-with-icons img {
-    width: 30px;
-    /* Taille des icônes */
-    height: 30px;
-}
-
-/*----------------Objet pop up-----------------*/
-/* -------------------- Popup principale -------------------- */
-.popup-containerObj {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Fond semi-transparent */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: -10px;
+    right: -15px; /* Espace depuis la droite */
+    width: 40px; /* Taille de l'image */
+    height: 40px;
+    border: solid #C28832 5px;
+    background-color: #f0e6c8;
+    border-radius: 50%;
     z-index: 9999;
-    /* S'assurer que la popup soit au-dessus du contenu */
 }
 
-/* -------------------- Contenu de la popup -------------------- */
-.popup-contentObj {
-    background-color: #fff;
-    width: 100%;
-    height: 92%;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+.btn-next {
+    position: absolute;
+    bottom: 20px; /* Distance par rapport au bas de la popup */
+    right: 20px; /* Distance par rapport à la droite de la popup */
+    width: 50px; /* Taille de l'image de la flèche */
+    height: 50px; /* Taille de l'image de la flèche */
+    cursor: pointer; /* Ajoute un curseur interactif */
+}
+
+
+
+/*--------------Inventaire------------------------*/
+
+
+/* Conteneur principal de la popup */
+.popup-containerObj {
+    font-family: 'Asap', sans-serif;
+    position: fixed;
+    top: 55px;
+    left: 40px;
+    width: 80%;
+    height: 80%;
+    margin: 5px;
+    background-color: #f0e6c8;
+    border: solid #c28832 5px;
+    border-radius: 60px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    position: relative;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Assurez-vous qu'il soit sous le bouton de fermeture */
+    overflow-y: auto; /* Permet seulement le défilement vertical */
+    overflow-x: hidden; /* Désactive le défilement horizontal */
+    box-sizing: border-box; /* Assure que les dimensions incluent les bordures et le padding */
 }
 
-/* -------------------- Titre de la popup -------------------- */
-.popup-contentObj h3 {
-    font-family: 'Asap', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+/* Conteneur pour les objets */
+.obj-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px; /* Réduit l'espace sous le titre */
+    padding: 10px; /* Ajuste l'espace autour des objets */
+    width: 100%; /* S'assure que les objets restent dans les limites de la popup */
+    box-sizing: border-box; /* Empêche le dépassement avec le padding */
 }
 
-/* -------------------- Conteneur des objets -------------------- */
-
-/* -------------------- Item d'objet -------------------- */
+/* Élément individuel dans le conteneur d'objets */
 .obj-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-
+    width: 50px; /* Taille fixe qui ne dépasse pas les limites */
+    text-align: center;
+    margin: 0;
+    box-sizing: border-box; /* Inclut les bordures et paddings */
 }
 
-/* -------------------- Bouton avec 3 points -------------------- */
-.icon-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 2rem;
-    /* Taille de la police pour les 3 points */
+/* Contenu de la popup */
+.popup-contentObj h3 {
+    font-family: 'Asap', sans-serif;
+    position: fixed;
+    top: 20px; /* Position verticale en haut */
+    left: 50%; /* Centré horizontalement */
+    transform: translateX(-50%);
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
     color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 5px;
-    display: inline-block;
+    border: solid #C28832 5px;
+    background-color: #f0e6c8;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 500; /* Z-index plus bas que le bouton de fermeture */
 }
 
 
-
-/* -------------------- Bouton de fermeture -------------------- */
-.popup-contentObj button {
-
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: center;
-    margin-top: 20px;
-}
-
-.popup-contentObj button:hover {
-    background-color: #dca352;
-}
-
-/* -------------------- Bouton avec image -------------------- */
-.obj-item img {
+/* Style des images dans les objets */
+.obj-img {
     width: 50px;
-    /* Ajustez la taille selon vos besoins */
     height: 50px;
-    /* Assurez-vous que la taille est cohérente */
     object-fit: cover;
-    /* Gère le cadrage des images */
-    border-radius: 5px;
-    /* Ajoutez un effet arrondi si nécessaire */
-    transition: transform 0.2s ease, opacity 0.3s ease;
+    border-radius: 8px;
+    border: solid #C28832 3px;
+    background-color: #f0e6c8;
+    margin-bottom: 5px; /* Réduit l'espace entre l'image et le texte */
 }
+
+/* Style du bouton dans la popup (fermeture ou action) */
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #c28832;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #a86a28;
+}
+
+
+
+
+
+
+
 
 .pContainer {
     width: 80%;
@@ -763,7 +753,7 @@ strong {
     font-style: normal;
     font-size: 1.5rem;
     color: #fff;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .vibration {
@@ -841,10 +831,18 @@ strong {
 
 
 .homeStyle{
-    z-index: 9999;
+    z-index: 999;
     position: fixed;
     top: 0;
     left: 0;
     margin: 15px;
     width: 45px;
+}
+
+
+#SoundBtn{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
 }

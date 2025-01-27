@@ -6,19 +6,21 @@ import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, 
 import { addSVG } from './js/svg.js';
 import { warningSvg } from './assets/svgcode.js';
 import { showStaticMap } from './js/map.js';
-import { loadSound, suspendSound } from './js/Sound/sound.js';
+import { loadSound, suspendSound, setOffSound,setOnSound } from './js/Sound/sound.js';
 import { lunchFight } from './js/fight.js';
 //import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
 import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
 import { addAutoPlayVideo } from './js/video.js';
-import { addOverlay } from './js/overslay.js';
+import { addOverlay } from './js/overlay.js';
 import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
 import { popup } from './js/popup.js';
 
 import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
-import { loadScreen0, loadScreen1 } from './js/screen.js';
+import { loadScreen0 } from './js/screen0.js';
+import { loadScreen1 } from './js/screen1.js';
+import { loadScreen2 } from './js/screen2.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -67,6 +69,10 @@ const enemies = [
 
 let levelValue = 0;
 
+
+
+// addOverlay ('audioId' , 'audioSrc')
+
 // Resey Home btn
 if (DEBUG){
     const body = document.querySelector("body");
@@ -75,13 +81,31 @@ if (DEBUG){
 
 resetGame.addEventListener("click", 
     ()=>{
-        if (levelValue != 0){
+            refreshPage();
             loadScreen0();
-        };
         
     }
 );
 }
+
+
+// Ajout du bouton pour activer/désactiver le son
+const SoundBtn = document.createElement('div')
+SoundBtn.id = 'SoundBtn';
+document.body.appendChild(SoundBtn);
+const SoundIcon = document.createElement('img')
+SoundIcon.src="./assets/icons/SonActif.png";
+SoundIcon.style.width = "50px";
+SoundBtn.appendChild(SoundIcon);
+SoundBtn.addEventListener('click', function(){
+    if (SoundIcon.src.includes("SonActif")){
+        SoundIcon.src = "./assets/icons/sonCoupe.png";
+        setOffSound();
+    } else {
+        SoundIcon.src = "./assets/icons/SonActif.png";
+        setOnSound();
+    }
+});
 
 //---------------------------------------------
 // logic du jeu
@@ -97,6 +121,12 @@ if (isCookiePresent('screen')) {
     switch (levelValue) {
         case "1":
             loadScreen1();
+            break;
+        case "2":
+            loadScreen2();
+            break;
+        case "3":
+            loadScreen3();
             break;
             
         default:

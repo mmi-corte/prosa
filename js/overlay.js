@@ -8,9 +8,6 @@ export function addOverlay(audioId, audioSrc) {
         './assets/icons/journal.png'  // URL de la troisième icône
     ];
 
-    // Ajouter un bouton pour le son
-    addBtnImg("container", './assets/icons/SonActif.png', 'btnSon');
-    setupSoundButton(audioId, audioSrc);
 
 
     // Ajouter un bouton pour l'inventaire
@@ -19,13 +16,13 @@ export function addOverlay(audioId, audioSrc) {
 
     if (btnI) {
         btnI.addEventListener("click", () => {
-            createPopupJournal('Salut !');
+            createPopupObj('Salut !');
         });
     } else {
         console.error('Le bouton "btnI" n\'a pas été trouvé.');
     }
 
-
+    
     // Ajouter un bouton pour le journal
     addBtnImg('container', './assets/icons/livre.png', 'btnJ', "circle-button circle-button.left");
     const btnJ = document.getElementById('btnJ');
@@ -87,29 +84,105 @@ export function setupSoundButton(audioId, audioSrc) {
 }
 
 
-
-
-
 function createPopupJournal(message) {
     const popupContainer = document.createElement('div');
     popupContainer.id = 'popup-container';
 
-    const popupMessage = document.createElement('p');
-    popupMessage.textContent = message;
+    // Titre de la première page
+    const popupTextArea = document.createElement('div');
+    popupTextArea.id = 'popup-titre';
+    popupTextArea.textContent = "Observation";
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Fermer';
-    closeButton.className ='btn';
+    // Contenu de la première page
+    const page1 = document.createElement('div');
+    page1.id = 'popup-page-1';
+    page1.textContent = message;
 
-    popupContainer.appendChild(popupMessage);
-    popupContainer.appendChild(closeButton);
+    // Titre de la deuxième page
+    const page2Title = document.createElement('div');
+    page2Title.id = 'popup-titre';
+    page2Title.textContent = "Lore";
+    page2Title.style.display = 'none';
 
+    // Contenu de la deuxième page
+    const page2 = document.createElement('div');
+    page2.id = 'popup-page-2';
+    page2.textContent = "Contenu de la deuxième page";
+    page2.style.display = 'none';
+
+    // Titre de la troisième page
+    const page3Title = document.createElement('div');
+    page3Title.id = 'popup-titre';
+    page3Title.textContent = "Recette";
+    page3Title.style.display = 'none';
+
+    // Contenu de la troisième page
+    const page3 = document.createElement('div');
+    page3.id = 'popup-page-3';
+    page3.textContent = "Contenu de la troisième page";
+    page3.style.display = 'none';
+
+    // Flèche pour naviguer entre les pages
+    const nextArrow = document.createElement('img');
+    nextArrow.src = './assets/icons/arrow-next.png'; // Chemin vers l'image de la flèche
+    nextArrow.alt = 'Suivant';
+    nextArrow.className = 'btn-next';
+    nextArrow.style.cursor = 'pointer';
+
+    // Création de l'image pour fermer
+    const closeButton = document.createElement('img');
+    closeButton.src = './assets/icons/croix.png';
+    closeButton.alt = 'Fermer';
+    closeButton.className = 'btnFermeture';
+    closeButton.style.cursor = 'pointer';
+
+    // Ajout des éléments à la popup
+    popupContainer.appendChild(popupTextArea); // Titre de la première page
+    popupContainer.appendChild(page2Title); // Titre de la deuxième page
+    popupContainer.appendChild(page3Title); // Titre de la troisième page
+    popupContainer.appendChild(page1); // Contenu de la première page
+    popupContainer.appendChild(page2); // Contenu de la deuxième page
+    popupContainer.appendChild(page3); // Contenu de la troisième page
+    popupContainer.appendChild(nextArrow); // Flèche
+    popupContainer.appendChild(closeButton); // Bouton de fermeture
+
+    // Ajout de la popup au body
     document.body.appendChild(popupContainer);
 
+    // Gestion des pages
+    let currentPage = 1;
+    nextArrow.addEventListener('click', function () {
+        if (currentPage === 1) {
+            // Passer à la page 2
+            page1.style.display = 'none';
+            popupTextArea.style.display = 'none';
+            page2.style.display = 'block';
+            page2Title.style.display = 'block';
+            currentPage = 2;
+        } else if (currentPage === 2) {
+            // Passer à la page 3
+            page2.style.display = 'none';
+            page2Title.style.display = 'none';
+            page3.style.display = 'block';
+            page3Title.style.display = 'block';
+            currentPage = 3;
+        } else if (currentPage === 3) {
+            // Revenir à la page 1
+            page3.style.display = 'none';
+            page3Title.style.display = 'none';
+            page1.style.display = 'block';
+            popupTextArea.style.display = 'block';
+            currentPage = 1;
+        }
+    });
+
+    // Ajout d'un événement de clic pour fermer
     closeButton.addEventListener('click', function () {
         document.body.removeChild(popupContainer);
     });
 }
+
+
 
 function createButtonWithIcons(containerId, iconUrls, idBtn) {
     console.log("Création du bouton avec des icônes.");
@@ -148,17 +221,18 @@ function createPopupObj() {
     popupContent.classList.add('popup-contentObj');
 
     const popupTitle = document.createElement('h3');
-    popupTitle.textContent = 'Collectible';
+    popupTitle.textContent = 'Collectibles';
     popupContent.appendChild(popupTitle);
 
     const objContainer = document.createElement('div');
     objContainer.classList.add('obj-container');
+    
 
     // Liste des objets avec les URLs des images
     const objects = [
-        { name: 'Objet 1', imgUrl: './assets/icons/journal.png' },
-        { name: 'Objet 2', imgUrl: './assets/icons/journal.png' },
-        { name: 'Objet 3', imgUrl: './assets/icons/journal.png' }
+        { name: '', imgUrl: './assets/items/arc.png' },
+        { name: '', imgUrl: './assets/items/epee.png' },
+        { name: '', imgUrl: './assets/items/grimoire.png' }
     ];
 
     objects.forEach(obj => {
@@ -171,20 +245,32 @@ function createPopupObj() {
         objImg.classList.add('obj-img'); // Ajout d'une classe pour styliser l'image
         objImg.onerror = () => console.error(`Échec du chargement de l'image : ${obj.imgUrl}`);
 
+        const objLabel = document.createElement('p');
+        objLabel.textContent = obj.name;
+
         objItem.appendChild(objImg);
+        objItem.appendChild(objLabel);
         objContainer.appendChild(objItem);
     });
 
     popupContent.appendChild(objContainer);
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Fermer';
-    closeButton.className ='btn';
+    // Création de l'image pour fermer
+    const closeButton = document.createElement('img');
+    closeButton.src = './assets/icons/croix.png';
+    closeButton.alt = 'Fermer';
+    closeButton.className = 'btnFermeture';
+    closeButton.style.cursor = 'pointer';
+
+    // Ajout de l'événement pour fermer la popup
     closeButton.addEventListener('click', () => {
         document.body.removeChild(popupContainer);
     });
-    popupContent.appendChild(closeButton);
 
+    // Ajouter le bouton de fermeture en premier dans l'ordre des éléments
+    popupContent.insertBefore(closeButton, popupTitle);
+    
     popupContainer.appendChild(popupContent);
     document.body.appendChild(popupContainer);
 }
+

@@ -17,7 +17,6 @@ export function addImgBackground(containerID,url) {
 }
 
 export function addImg(containerID,url,style,targetId) {
-    console.log('test1')
     // Sélectionne la div par son ID
     const container = document.getElementById(containerID);
 
