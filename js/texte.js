@@ -81,9 +81,27 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
 // firestoreFunctions.js (ou main.js si vous préférez tout garder dans un seul fichier)
 
 
+function typeWriter(text, elementId, txtClassName, speed = 100) {
+    const element = document.getElementById(elementId);
+    element.textContent = ""; // Réinitialise le contenu
+    element.classList.add(txtClassName);
+    let index = 0;
+
+    function writeCharacter() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index); // Ajoute un caractère au contenu
+            
+            index++;
+            setTimeout(writeCharacter, speed); // Appelle la fonction après un délai
+        }
+    }
+
+    writeCharacter(); // Démarre l'effet
+    
+}
 
 // Fonction pour récupérer un scénario basé sur un stepCode
-export async function addTxtNarration(stepCode, conteneurId,txtClassName) {
+export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
     try {
         const querySnapshot = await getDocs(collection(db, "scenario"));
         querySnapshot.forEach((doc) => {
@@ -93,8 +111,9 @@ export async function addTxtNarration(stepCode, conteneurId,txtClassName) {
                 const text = document.createElement("p");
                 text.textContent = doc.data().txt;
                 text.className = txtClassName;
-                conteneur.appendChild(text);
                 
+                conteneur.appendChild(text);
+                // typeWriter(doc.data().txt, conteneurId, txtClassName, 50); // Appel de la fonction typeWriter pour l'effet d'écriture
             }
         });
     } catch (error) {

@@ -1,61 +1,35 @@
-import { refreshPage } from "./refreshPage.js";
-import { ajouterBouton } from './button.js';
-
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
-//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
-import { changeStyleBG } from './functionChangeStyle.js';
-import { popup } from './popup.js';
+import { playSteps } from './functionMakeSteps.js';
 import { loadLvl3 } from "./lvl3.js";
 import { setCookie } from './cookieHandler.js';
-
+import {popup} from './popup.js';
 
 export function loadLvl2() {
 
-    refreshPage();
-    console.log("loadLvl2 :  je suis là");
-    addImgBackground("container", 'assets/bg/fondEtape1bis.png');
-    addDiv('container', "diagBox", 'diagBoxN');
-    addTxtNarration("E1BNarra", 'diagBox', 'dialogBox');
-
-    ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-    document.getElementById("btnNext").addEventListener("click", function () {
-        refreshPage();
-        addImgBackground("container", 'assets/bg/fondEtape1bis.png');
-        addImg('container', 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-        addDiv('container', "diagBox", 'diagBox');
-        addNameCharacter('E1BBerger', 'diagBox', 'nameCharacter');
-        addTxtNarration("E1BBerger", 'diagBox', 'dialogBox');
-
-        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-        document.getElementById("btnNext").addEventListener("click", function () {
-            refreshPage();
-            addImgBackground("container", 'assets/bg/fondEtape1bis.png');
-            addDiv('container', "diagBox", 'diagBoxN');
-            addTxtNarration("E1BNarra2", 'diagBox', 'dialogBox');
-
-            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-            document.getElementById("btnNext").addEventListener("click", function () {
-                refreshPage();
-                addImgBackground("container", 'assets/bg/fondEtape1bis.png');
-                addDiv('container', "diagBox", 'diagBoxN');
-                addTxtNarration("E1BNarra2", 'diagBox', 'dialogBox');
-                changeStyleBG('container');
+    const steps = [
+        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra", character: null },
+        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BBerger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1BBerger' },
+        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra2", character: null },
+        {
+            background: 'assets/bg/fondEtape1bis.png',
+            narration: () => {
                 popup("Vous avez récupéré la branche d’arbre", "../assets/items/branche.png");
+            },
+            character: null
+        },
+        {
+            background: 'assets/bg/fondEtape1bis.png',
+            narration: "E1BNarra3",
+            character: null,
+            choices: [
+                { text: "Aller au niveau 2", action: () => console.log("Choix : Aller au niveau 2") },
+                { text: "Aller au niveau 3", action: loadLvl3 }
+            ]
+        }
+    ];
 
-                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                document.getElementById("btnNext").addEventListener("click", function () {
-                    loadLvl3();
-                });
-            });
-        });
-    });
+    // Lance les étapes
+    playSteps(steps);
 
     // update screen cookie
     setCookie("level", "2", 7, "/");
-  
 }

@@ -1,5 +1,5 @@
 import { refreshPage } from "./refreshPage.js";
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
+import { ajouterBouton } from './button.js';
 import { addImgBackground, addImg } from './fonctionImg.js';
 import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
 
@@ -39,18 +39,24 @@ export function playSteps(steps, index = 0) {
             ajouterBouton('diagBox', '', btnId, 'btnChoix');
             
             // Appliquer la classe spécifique au bouton
-            document.getElementById(btnId).classList.add(btnClass);
+            const btn = document.getElementById(btnId);
+
+            element.classList.add("txtClassName");
+            
+            btn.classList.add(btnClass);
 
             // Ajouter le texte du choix
             addTxtNarration(choice.text, btnId, '');
 
             // Ajouter l'événement au bouton
-            document.getElementById(btnId).addEventListener("click", choice.action);
+            btn.addEventListener("click", choice.action);
 
         });
     } else {
+        console.log("passe à l'étape", index + 1);
         ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-        document.getElementById("btnNext").addEventListener("click", () => playSteps(steps, index + 1));
+        btnNext = document.getElementById("btnNext")
+        btnNext.addEventListener("click", () => playSteps(steps, index + 1));
     }
 }
 
