@@ -16,7 +16,7 @@ export function addForm(containerID) {
     // Création d'un champ de saisie
     const input = document.createElement('input');
     input.type = 'text'; // Définir le type de champ
-    input.placeholder = 'Entrez votre texte ici'; // Ajouter un texte gris
+    input.placeholder = ''; // Ajouter un texte gris
     input.name = 'userInput'; // Nom du champ pour une meilleure gestion des données
     input.id = 'userInput'; // ID du champ pour une meilleure gestion des données
     // Création d'un bouton submit
