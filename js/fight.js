@@ -22,7 +22,7 @@ export async function lunchFight(skin, weapons, enemies)
 
     // Create Bg Image
     const bgImage = document.createElement("img");
-    bgImage.src = `../assets/bg/bg.png`; 
+    bgImage.src = `assets/bg/bg.png`; 
     bgImage.className = "bgImage";
     fightContainer.appendChild(bgImage);
 
@@ -73,7 +73,7 @@ export async function lunchFight(skin, weapons, enemies)
     fightContainer.appendChild(enemyContainer);
 
     const enemyImage = document.createElement("img");
-    enemyImage.src = `../assets/enemies/${enemies.name}.png`; // Set the source of the image
+    enemyImage.src = `assets/enemies/${enemies.name}.png`; // Set the source of the image
     enemyImage.className = "enemyImage"; // Add a class for styling
     // Append the image to the enemy container
     enemyContainer.appendChild(enemyImage);
@@ -85,7 +85,7 @@ export async function lunchFight(skin, weapons, enemies)
     fightContainer.appendChild(playerContainer);
 
     const playerImage = document.createElement("img");
-    playerImage.src = `../assets/avatar/${skin}.png`; // Set the source of the image
+    playerImage.src = `assets/avatar/${skin}.png`; // Set the source of the image
     // playerImage.style = 'filter: blur(2px);'
     playerImage.className = "playerImage"; // Add a class for styling
     // Append the image to the enemy container
@@ -127,7 +127,7 @@ export async function lunchFight(skin, weapons, enemies)
     fightContainer.appendChild(playerLifeContainer);
     // Create image of journal icon
     const journalIcon = document.createElement("img");
-    journalIcon.src = `../assets/icons/journal.png`;
+    journalIcon.src = `assets/icons/journal.png`;
     journalIcon.className = "journalIcon";
     playerLifeContainer.appendChild(journalIcon);
 
@@ -280,13 +280,13 @@ export async function lunchFight(skin, weapons, enemies)
                 //sound
                 if(element.name == "Epée")
                 {
-                    loadSound("../assets/sound/sword.mp3");
+                    loadSound("assets/sound/sword.mp3");
 
                     const lottiePlayer = document.createElement('lottie-player');
                 
 
                 
-                    lottiePlayer.setAttribute('src', '../assets/animation/BladeStrike.json');
+                    lottiePlayer.setAttribute('src', 'assets/animation/BladeStrike.json');
                     
                     lottiePlayer.setAttribute('background', 'transparent');
                     lottiePlayer.setAttribute('speed', '1');
@@ -308,7 +308,7 @@ export async function lunchFight(skin, weapons, enemies)
                 {
                     const lottiePlayer = document.createElement('lottie-player');
 
-                    lottiePlayer.setAttribute('src', '../assets/animation/Magic.json');
+                    lottiePlayer.setAttribute('src', 'assets/animation/Magic.json');
                     
                     lottiePlayer.setAttribute('background', 'transparent');
                     lottiePlayer.setAttribute('speed', '1');
@@ -325,7 +325,7 @@ export async function lunchFight(skin, weapons, enemies)
                     setTimeout(() => {
                         lottiePlayer.remove();
                     }, 1200);
-                    loadSound("../assets/sound/Book.mp3");
+                    loadSound("assets/sound/Book.mp3");
                 }
                 else
                 {
@@ -364,7 +364,7 @@ export async function lunchFight(skin, weapons, enemies)
                             const headhit = () => {
                                 const lottiePlayer = document.createElement('lottie-player');
 
-                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                lottiePlayer.setAttribute('src', 'assets/animation/Cross.json');
                                 
                                 lottiePlayer.setAttribute('background', 'transparent');
                                 lottiePlayer.setAttribute('speed', '1');
@@ -380,7 +380,7 @@ export async function lunchFight(skin, weapons, enemies)
                                 setTimeout(() => {
                                     lottiePlayer.remove();
                                 }, 1200);
-                                loadSound("../assets/sound/bow.mp3");
+                                loadSound("assets/sound/bow.mp3");
                                 damageVibration("enemyContainer");
                                 updateLifeEnemyGauge(2);
                                 head.removeEventListener("click", headhit);
@@ -391,7 +391,7 @@ export async function lunchFight(skin, weapons, enemies)
                             const neckhit = () => {
                                 const lottiePlayer = document.createElement('lottie-player');
 
-                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                lottiePlayer.setAttribute('src', 'assets/animation/Cross.json');
                                 
                                 lottiePlayer.setAttribute('background', 'transparent');
                                 lottiePlayer.setAttribute('speed', '1');
@@ -407,7 +407,7 @@ export async function lunchFight(skin, weapons, enemies)
                                 setTimeout(() => {
                                     lottiePlayer.remove();
                                 }, 1200);
-                                loadSound("../assets/sound/bow.mp3");
+                                loadSound("assets/sound/bow.mp3");
                                 damageVibration("enemyContainer");
                                 updateLifeEnemyGauge(80);
                                 neck.removeEventListener("click", neckhit);
@@ -419,7 +419,7 @@ export async function lunchFight(skin, weapons, enemies)
                             const bodyhit = () => {
                                 const lottiePlayer = document.createElement('lottie-player');
 
-                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                lottiePlayer.setAttribute('src', 'assets/animation/Cross.json');
                                 
                                 lottiePlayer.setAttribute('background', 'transparent');
                                 lottiePlayer.setAttribute('speed', '1');
@@ -435,7 +435,7 @@ export async function lunchFight(skin, weapons, enemies)
                                 setTimeout(() => {
                                     lottiePlayer.remove();
                                 }, 1200);
-                                loadSound("../assets/sound/bow.mp3");
+                                loadSound("assets/sound/bow.mp3");
                                 damageVibration("enemyContainer");
                                 updateLifeEnemyGauge(2);
                                 body.removeEventListener("click", bodyhit);
@@ -446,7 +446,7 @@ export async function lunchFight(skin, weapons, enemies)
                             const foothit = () => {
                                 const lottiePlayer = document.createElement('lottie-player');
 
-                                lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                                lottiePlayer.setAttribute('src', 'assets/animation/Cross.json');
                                 
                                 lottiePlayer.setAttribute('background', 'transparent');
                                 lottiePlayer.setAttribute('speed', '1');
@@ -462,7 +462,7 @@ export async function lunchFight(skin, weapons, enemies)
                                 setTimeout(() => {
                                     lottiePlayer.remove();
                                 }, 1200);
-                                loadSound("../assets/sound/bow.mp3");
+                                loadSound("assets/sound/bow.mp3");
                                 damageVibration("enemyContainer");
                                 updateLifeEnemyGauge(2);
                                 foot.removeEventListener("click", foothit);
@@ -476,7 +476,7 @@ export async function lunchFight(skin, weapons, enemies)
                         {
                             const lottiePlayer = document.createElement('lottie-player');
 
-                            lottiePlayer.setAttribute('src', '../assets/animation/Cross.json');
+                            lottiePlayer.setAttribute('src', 'assets/animation/Cross.json');
                             
                             lottiePlayer.setAttribute('background', 'transparent');
                             lottiePlayer.setAttribute('speed', '1');
@@ -492,7 +492,7 @@ export async function lunchFight(skin, weapons, enemies)
                             setTimeout(() => {
                                 lottiePlayer.remove();
                             }, 1200);
-                            loadSound("../assets/sound/bow.mp3");
+                            loadSound("assets/sound/bow.mp3");
                             damageVibration("enemyContainer");
                         }
                     
@@ -545,7 +545,7 @@ export async function lunchFight(skin, weapons, enemies)
                             setTimeout(() => {
                                 lottiePlayer.remove();
                             }, 1700);
-                            loadSound("../assets/sound/bunch.mp3");
+                            loadSound("assets/sound/bunch.mp3");
                             updateLifeGauge(enemies.damage);
                         }, 4990);
                         
@@ -629,7 +629,7 @@ export async function lunchFight(skin, weapons, enemies)
                             setTimeout(() => {
                                 lottiePlayer.remove();
                             }, 1700);
-                            loadSound("../assets/sound/bunch.mp3");
+                            loadSound("assets/sound/bunch.mp3");
                             updateLifeGauge(enemies.damage);
                         }, 4990);
                         
