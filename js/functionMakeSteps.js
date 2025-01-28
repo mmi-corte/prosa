@@ -41,8 +41,6 @@ export function playSteps(steps, index = 0) {
             // Appliquer la classe spécifique au bouton
             const btn = document.getElementById(btnId);
 
-            element.classList.add("txtClassName");
-            
             btn.classList.add(btnClass);
 
             // Ajouter le texte du choix
