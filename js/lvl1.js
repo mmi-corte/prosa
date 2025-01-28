@@ -1,191 +1,81 @@
 import { refreshPage } from "./refreshPage.js";
 import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
-
-import { addForm } from './form.js';
 import { addImgBackground, addImg } from './fonctionImg.js';
-import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit, addTxtNarrationAR, addNamePersoAR } from './texte.js';
-import { addSVG } from './svg.js';
-import { warningSvg } from '../assets/svgcode.js';
-import { showStaticMap } from './map.js';
-import { loadSound, suspendSound } from './Sound/sound.js';
-import { lunchFight } from './fight.js';
-//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
-import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './functionChangeStyle.js';
-import { addOverlay } from './overlay.js';
-import { addAutoPlayVideo } from './video.js';
-import { step2, step6 } from './functionstep.js'
-import { ARBerger } from './ARFunction.js';
-import { popup } from './popup.js';
+import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
 import { loadLvl2 } from "./lvl2.js";
 import { loadLvl3 } from "./lvl3.js";
 
-
-
-
 export function loadLvl1() {
+    // Liste des étapes du niveau 1
+    const steps = [
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra1", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger1", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger1' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra2", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger2", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger2' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra3", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger3", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger3' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra4", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger4", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger4' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra5", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger5", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger5' },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra6", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger6", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger6' },
+        {
+            background: 'assets/bg/fondEtape1.jpg',
+            narration: "E1Narra7",
+            character: null,
+            choices: [
+                { text: "E1Choix1", action: loadLvl2 },
+                { text: "E1Choix2", action: loadLvl3 }
+            ]
+        }
+    ];
 
-    refreshPage();
-    console.log("loadLvl1 :  je suis là");
-    addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-    addDiv('container', "diagBox", 'diagBoxN');
-    addTxtNarration("E1Narra", 'diagBox', 'dialogBox');
-    ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-
-    document.getElementById("btnNext").addEventListener("click", function () {
-        refreshPage();
-        addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-        addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-        addDiv('container', "diagBox", 'diagBox');
-        addNameCharacter('E1Berger', 'diagBox', 'nameCharacter');
-        addTxtNarration("E1Berger", 'diagBox', 'dialogBox');
-
-        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-        document.getElementById("btnNext").addEventListener("click", function () {
-            refreshPage();
-            addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-            addDiv('container', "diagBox", 'diagBoxN');
-            addTxtNarration("E1Narra1", 'diagBox', 'dialogBox');
-
-            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-            document.getElementById("btnNext").addEventListener("click", function () {
-                refreshPage();
-                addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                addDiv('container', "diagBox", 'diagBox');
-                addNameCharacter('E1Berger1', 'diagBox', 'nameCharacter');
-                addTxtNarration("E1Berger1", 'diagBox', 'dialogBox');
-
-                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                document.getElementById("btnNext").addEventListener("click", function () {
-                    refreshPage();
-                    addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                    addDiv('container', "diagBox", 'diagBoxN');
-                    addTxtNarration("E1Narra2", 'diagBox', 'dialogBox');
-
-                    ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                    document.getElementById("btnNext").addEventListener("click", function () {
-                        refreshPage();
-                        addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                        addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                        addDiv('container', "diagBox", 'diagBox');
-                        addNameCharacter('E1Berger2', 'diagBox', 'nameCharacter');
-                        addTxtNarration("E1Berger2", 'diagBox', 'dialogBox');
-
-                        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                        document.getElementById("btnNext").addEventListener("click", function () {
-                            refreshPage();
-                            addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                            addDiv('container', "diagBox", 'diagBoxN');
-                            addTxtNarration("E1Narra3", 'diagBox', 'dialogBox');
-                            
-
-                            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                            document.getElementById("btnNext").addEventListener("click", function () {
-                                refreshPage();
-                                addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                addDiv('container', "diagBox", 'diagBox');
-                                addNameCharacter('E1Berger3', 'diagBox', 'nameCharacter');
-                                addTxtNarration("E1Berger3", 'diagBox', 'dialogBox');
-
-                                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                                document.getElementById("btnNext").addEventListener("click", function () {
-                                    refreshPage();
-                                    addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                    addDiv('container', "diagBox", 'diagBoxN');
-                                    addTxtNarration("E1Narra4", 'diagBox', 'dialogBox');
-
-                                    ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-                                    document.getElementById("btnNext").addEventListener("click", function () {
-                                        refreshPage();
-                                        addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                        addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                        addDiv('container', "diagBox", 'diagBox');
-                                        addNameCharacter('E1Berger4', 'diagBox', 'nameCharacter');
-                                        addTxtNarration("E1Berger4", 'diagBox', 'dialogBox');
-
-                                        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-                                        document.getElementById("btnNext").addEventListener("click", function () {
-                                            refreshPage();
-                                            addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                            addDiv('container', "diagBox", 'diagBoxN');
-                                            addTxtNarration("E1Narra5", 'diagBox', 'dialogBox');
-
-                                            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                                            document.getElementById("btnNext").addEventListener("click", function () {
-                                                refreshPage();
-                                                addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                                addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                addDiv('container', "diagBox", 'diagBox');
-                                                addNameCharacter('E1Berger5', 'diagBox', 'nameCharacter');
-                                                addTxtNarration("E1Berger5", 'diagBox', 'dialogBox');
-
-                                                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                                                document.getElementById("btnNext").addEventListener("click", function () {
-                                                    refreshPage();
-                                                    addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                                    addDiv('container', "diagBox", 'diagBoxN');
-                                                    addTxtNarration("E1Narra6", 'diagBox', 'dialogBox');
-                                                   
-
-                                                    ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-                                                    document.getElementById("btnNext").addEventListener("click", function () {
-                                                        refreshPage();
-                                                        addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                                        addImg("container", 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
-                                                        addDiv('container', "diagBox", 'diagBox');
-                                                        addNameCharacter('E1Berger6', 'diagBox', 'nameCharacter');
-                                                        addTxtNarration("E1Berger6", 'diagBox', 'dialogBox');
-
-                                                        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-
-                                                        document.getElementById("btnNext").addEventListener("click", function () {
-                                                            refreshPage();
-                                                            addImgBackground("container", 'assets/bg/fondEtape1.jpg');
-                                                            addDiv('container', "diagBox", 'diagBoxN');
-                                                            addTxtNarration("E1Narra7", 'diagBox', 'dialogBox');
-
-
-                                                            ajouterBouton('diagBox', '', "btnChoix1", 'btnChoix choix1');
-                                                            addTxtNarration("E1Choix1", "btnChoix1", "");
-                                                            ajouterBouton('diagBox', '', "btnChoix2", 'btnChoix choix2');
-                                                            addTxtNarration("E1Choix2", "btnChoix2", "");
-
-                                                            document.getElementById("btnChoix1").addEventListener("click", function () {
-                                                                loadLvl2();
-                                                            });
-                                                            document.getElementById("btnChoix2").addEventListener("click", function () {
-                                                                loadLvl3();
-                                                            });
-
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-
-                    });
-
-                });
-
-            });
-
-        });
-
-    });
-
-    setCookie("level", "1", 7, "/");
+    playSteps(steps); // Démarrage des étapes
+    //setCookie("level", "1", 7, "/");
 }
+
+function playSteps(steps, index = 0) {
+    if (index >= steps.length) return; // Fin des étapes
+
+    const step = steps[index];
+    refreshPage(); // Réinitialise la page
+
+    // Ajoute l'image de fond
+    addImgBackground("container", step.background);
+
+    // Ajoute le personnage si nécessaire
+    if (step.character) {
+        addImg("container", step.character, 'imgPerso');
+    }
+
+    // Ajoute une boîte de dialogue
+    addDiv('container', "diagBox", 'diagBoxN');
+
+    // Ajoute le nom du personnage directement au-dessus de la boîte de dialogue
+    if (step.name) {
+        addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Directement dans diagBox
+    }
+
+    // Ajoute le texte de narration
+    addTxtNarration(step.narration, 'diagBox', 'dialogBox');
+
+    // Gestion des choix ou du bouton "Suivant"
+    if (step.choices) {
+        step.choices.forEach((choice, i) => {
+            const btnId = `btnChoix${i + 1}`;
+            ajouterBouton('diagBox', '', btnId, 'btnChoix');
+            addTxtNarration(choice.text, btnId, '');
+            document.getElementById(btnId).addEventListener("click", choice.action);
+        });
+    } else {
+        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
+        document.getElementById("btnNext").addEventListener("click", () => playSteps(steps, index + 1));
+    }
+}
+
+
+
+

@@ -219,22 +219,24 @@ strong {
 
 
 /*---------------------Style Narration----------------------*/
-.diagBox {
+.diagBoxN {
     width: 92%;
     height: 250px;
-    background-color: rgba(255, 255, 255, 0.75);
-
-    padding: 10px;
-    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 10px 10px 0 10px;
+    margin: 10px 10px 0 10px;
     border-radius: 6px;
     position: absolute;
     bottom: 60px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Change 'column-reverse' to 'column' */
     justify-content: start;
     align-items: start;
     z-index: 2;
 }
+
+
 
 .diagBoxN {
     width: 92%;
