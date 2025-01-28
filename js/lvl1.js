@@ -1,9 +1,6 @@
-import { refreshPage } from "./refreshPage.js";
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
 import { loadLvl2 } from "./lvl2.js";
 import { loadLvl3 } from "./lvl3.js";
+import { playSteps } from "./functionMakeSteps.js";
 
 export function loadLvl1() {
     // Liste des étapes du niveau 1
@@ -37,44 +34,7 @@ export function loadLvl1() {
     //setCookie("level", "1", 7, "/");
 }
 
-function playSteps(steps, index = 0) {
-    if (index >= steps.length) return; // Fin des étapes
 
-    const step = steps[index];
-    refreshPage(); // Réinitialise la page
-
-    // Ajoute l'image de fond
-    addImgBackground("container", step.background);
-
-    // Ajoute le personnage si nécessaire
-    if (step.character) {
-        addImg("container", step.character, 'imgPerso');
-    }
-
-    // Ajoute une boîte de dialogue
-    addDiv('container', "diagBox", 'diagBoxN');
-
-    // Ajoute le nom du personnage directement au-dessus de la boîte de dialogue
-    if (step.name) {
-        addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Directement dans diagBox
-    }
-
-    // Ajoute le texte de narration
-    addTxtNarration(step.narration, 'diagBox', 'dialogBox');
-
-    // Gestion des choix ou du bouton "Suivant"
-    if (step.choices) {
-        step.choices.forEach((choice, i) => {
-            const btnId = `btnChoix${i + 1}`;
-            ajouterBouton('diagBox', '', btnId, 'btnChoix');
-            addTxtNarration(choice.text, btnId, '');
-            document.getElementById(btnId).addEventListener("click", choice.action);
-        });
-    } else {
-        ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-        document.getElementById("btnNext").addEventListener("click", () => playSteps(steps, index + 1));
-    }
-}
 
 
 
