@@ -1,30 +1,16 @@
 
-import { addDiv, addH1, addTxt, addTxtWithBoldWord } from "./texte.js";
-
+// Importing functions from various modules
+import { addImg, addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
-import { setCookie, getCookie } from './cookieHandler.js';
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { refreshPage } from './refreshPage.js';
-import { addSVG } from './svg.js';
-
-import { loadSound, suspendSound,stopSound } from './Sound/sound.js';
-import { loadScreen1 } from "./screen1.js";
+import { loadScreen1 } from './screen1.js';
+import { setCookie } from './cookieHandler.js';
 
 export function loadScreen0() {
   console.log("loadScreen0: je suis là");
-
-  // add background
-  //document.body.style.background = "linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%)";
     
-    console.log('loadScreen0: je suis là');
-
-    // add background
-    //document.body.style.background = "linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%)";
-    
-    // add logo
-    addImg('container','assets/logo.png','logoimg', 'logoImgP1');
-    addImgBackground('container',"assets/bg/Accueil.png");
- // Ajouter un bouton pour le son
+  // add logo
+  addImg('container','assets/logo.png','logoimg', 'logoImgP1');
+  addImgBackground('container',"assets/bg/Accueil.png");
 
   // add button
   const btn1 = ajouterBouton(

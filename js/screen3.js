@@ -1,16 +1,10 @@
 
-import { addDiv, addH1, addTxt, addTxtWithBoldWord } from "./texte.js";
-
-import { ajouterBouton } from './button.js';
-import { setCookie, getCookie } from './cookieHandler.js';
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { refreshPage } from './refreshPage.js';
-import { addSVG } from './svg.js';
-
-import { loadSound, suspendSound,stopSound } from './Sound/sound.js';
-import { addForm } from "./form.js";
+import { addForm } from './form.js';
+import { addTxt } from './texte.js';
 import { loadScreen4 } from './screen4.js';
-
+import { refreshPage } from './refreshPage.js';
+import { getCookie, isCookiePresent, setCookie } from './cookieHandler.js';
+import { popup } from './popup.js';
 
 export function loadScreen3() {
 
@@ -24,16 +18,17 @@ export function loadScreen3() {
     const input = document.getElementById("userInput");
     const btnSubmit = document.getElementById("btnSubmit");
 
+    if (isCookiePresent("playerName")) {
+        input.value=getCookie("playerName");
+    }
+
     btnSubmit.addEventListener("click", function (event) {
         event.preventDefault();
     
         const playerUserName = input.value.trim();
     
         if (playerUserName === "") {
-            // Afficher le message d'erreur dans le placeholder
-            input.value = ""; // Vider l'input si l'utilisateur a saisi des espaces
-            input.placeholder = "Ce champ est requis !";
-            input.style.border = "2px solid red"; // Ajout d'une bordure rouge
+            popup("Ce champ est requis !");
             return; // Empêche le passage à screen4
         }
     
@@ -50,8 +45,6 @@ export function loadScreen3() {
         input.style.border = "1px solid #ccc"; // Bordure par défaut
     });
     
-
      // update screen cookie
      setCookie("screen", "3", 7, "/");
-  
 }

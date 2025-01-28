@@ -1,21 +1,6 @@
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from './js/button.js';
-import { refreshPage } from './js/refreshPage.js';
-import { addForm } from './js/form.js';
-import { addImgBackground, addImg } from './js/fonctionImg.js';
-import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit, addTxtNarrationAR, addNamePersoAR } from './js/texte.js';
-import { addSVG } from './js/svg.js';
-import { warningSvg } from './assets/svgcode.js';
-import { showStaticMap } from './js/map.js';
-import { loadSound, suspendSound, setOffSound,setOnSound } from './js/Sound/sound.js';
-import { lunchFight } from './js/fight.js';
-//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
-import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './js/functionChangeStyle.js';
-import { addAutoPlayVideo } from './js/video.js';
-import { addOverlay } from './js/overlay.js';
-import { step2, step6 } from './js/functionstep.js'
-import { ARBerger } from './js/ARFunction.js';
-import { popup } from './js/popup.js';
 
+import { refreshPage } from './js/refreshPage.js';
+import { addImg } from './js/fonctionImg.js';
 import {setCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
 import { loadScreen0 } from './js/screen0.js';
@@ -31,8 +16,6 @@ import { loadLvl2 } from './js/lvl2.js';
 export let playerUserName = "";
 
 const DEBUG = true;
-
-
 
 let weapons = [
     {

@@ -1,4 +1,6 @@
-export function popup(txt, imgSrc)
+import { checkImageExists } from "./functions.js";
+
+export function popup(txt, imgSrc="")
 {
 
     //Overlay Transition
@@ -23,20 +25,23 @@ export function popup(txt, imgSrc)
         }, 2000); // La durée doit correspondre à celle de l'animation CSS
     }
 
+    checkImageExists(imgSrc, (exists) => {
+        if (exists) {
+            OverlayImage.className = "OverlayImg";
+            OverlayImage.src = imgSrc;
+            overlay.appendChild(OverlayImage);
+        } else {
+            console.error("Image not found:", imgSrc);
+        }
+    });
 
+    OverlayText.className = "OverlayTxt";
+    OverlayText.innerHTML = txt;
+    overlay.appendChild(OverlayText);
 
     fadeIn(overlay);
     
     setTimeout(() => {
         fadeOut(overlay);
     }, 3000);
-
-
-    OverlayImage.className = "OverlayImg";
-    OverlayImage.src = imgSrc;
-    overlay.appendChild(OverlayImage);
-    
-    OverlayText.className = "OverlayTxt";
-    OverlayText.innerHTML = txt+" obtenu(e) !";
-    overlay.appendChild(OverlayText);
 }

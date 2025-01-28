@@ -1,12 +1,10 @@
 
-import { addDiv, addH1} from "./texte.js";
-
+import { addDiv, addH1 } from './texte.js';
+import { addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
-import { setCookie, getCookie } from './cookieHandler.js';
-import { addImgBackground} from './fonctionImg.js';
+import { getCookie, setCookie } from './cookieHandler.js';
+import { loadScreen3 } from './screen3.js';
 import { refreshPage } from './refreshPage.js';
-
-import  {loadScreen3} from './screen3.js';
 
 export function loadScreen2() {
     console.log("loadScreen2:je suis là");
