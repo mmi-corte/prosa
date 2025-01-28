@@ -16,7 +16,7 @@ import { step2, step6 } from './js/functionstep.js'
 import { ARBerger } from './js/ARFunction.js';
 import { popup } from './js/popup.js';
 
-import {getCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
+import {setCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
 
 import { loadScreen0 } from './js/screen0.js';
 import { loadScreen1 } from './js/screen1.js';
@@ -88,7 +88,7 @@ resetGame.addEventListener("click",
     ()=>{
             refreshPage();
             loadScreen0();
-        
+            setCookie("level", "0", 7, "/");
     }
 );
 }
@@ -123,7 +123,7 @@ if (isCookiePresent('screen')) {
 
     console.log(`Le cookie 'screen' est présent avec la valeur level à : ${screenValue}`);
 
-    if(screenValue <= 5){
+    if(screenValue <= 5 && levelValue == 0){
         switch (screenValue) {
             case "1":
                 loadScreen1();
@@ -145,6 +145,7 @@ if (isCookiePresent('screen')) {
                 loadScreen0();       
         }
     }else{
+        console.log(isCookiePresent('level'), levelValue);
         if(isCookiePresent('level')){
             switch (levelValue) {
                 case "1":

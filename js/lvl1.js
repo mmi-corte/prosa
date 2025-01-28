@@ -1,6 +1,7 @@
 import { loadLvl2 } from "./lvl2.js";
 import { loadLvl3 } from "./lvl3.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { setCookie } from "./cookieHandler.js";
 
 export function loadLvl1() {
     // Liste des étapes du niveau 1
@@ -31,7 +32,10 @@ export function loadLvl1() {
     ];
 
     playSteps(steps); // Démarrage des étapes
-    //setCookie("level", "1", 7, "/");
+    
+    // update screen cookie
+    setCookie("level", "1", 7, "/");
+  
 }
 
 

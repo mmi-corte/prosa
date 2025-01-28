@@ -16,12 +16,16 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
-
+import { setCookie } from './cookieHandler.js';
 
 
 export function loadLvl3() {
 
     refreshPage();
+
     console.log("loadLvl3 :  je suis là");
+
+    // update screen cookie
+    setCookie("level", "3", 7, "/"); 
     
 }

@@ -23,5 +23,7 @@ export function loadLvl4() {
 
     refreshPage();
     console.log("loadLvl4 :  je usis là");
-    
+ 
+    // update screen cookie
+    setCookie("level", "4", 7, "/"); 
 }

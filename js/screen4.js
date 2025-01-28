@@ -1,14 +1,9 @@
 import { addDiv, addH1, addTxt, addTxtWithBoldWord } from "./texte.js";
-
 import { ajouterBouton , addBtnImg} from "./button.js";
-import { setCookie, getCookie, setCityCookie } from "./cookieHandler.js";
-import { addImgBackground, addImg } from "./fonctionImg.js";
+import { setCookie} from "./cookieHandler.js";
 import { refreshPage } from "./refreshPage.js";
-import { addSVG } from "./svg.js";
-import { selectAvatar } from "./functionChangeStyle.js";
 
-import { loadSound, suspendSound, stopSound } from "./Sound/sound.js";
-import { loadScreen1 } from "./screen1.js";
+import { selectAvatar } from "./functionChangeStyle.js";
 import { loadScreen5 } from "./screen5.js";
 
 export function loadScreen4() {
@@ -37,21 +32,31 @@ export function loadScreen4() {
   const avatars = avatarPaths.map((_, index) =>
     document.getElementById(`a${index + 1}`)
   );
+
   selectAvatar(avatars); // Gère la sélection des avatars
 
+  
   // Ajout du bouton "Confirmer"
   ajouterBouton("containerAvatar", "Confirmer", "btnConfirm", "btn");
 
   const btnConfirm = document.getElementById("btnConfirm");
-  if (btnConfirm) {
-    btnConfirm.addEventListener("click", function () {
-      console.log("Avatar confirmé.");
+  btnConfirm.addEventListener("click", function (event) {
+    event.preventDefault();
 
+    const avatarContainer = document.getElementById("imgAvatarContainer");
+    const selectedAvatar = avatarContainer.getAttribute("data-selected-avatar");
+
+    // Vérifie si un avatar a été sélectionné
+    if (!selectedAvatar) {
+        console.log("Aucun avatar sélectionné !");
+    }else{
+      console.log("Avatar sélectionné :", selectedAvatar);
+      // Passer à l'écran suivant
       loadScreen5();
-      // Ajoutez ici votre logique supplémentaire pour la confirmation
-    });
-  }
+    }
+  });
 
 
+  // update screen cookie 
   setCookie("screen", "4", 7, "/");
 }

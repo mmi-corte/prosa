@@ -3,8 +3,6 @@ import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
 import { addImgBackground, addImg } from './fonctionImg.js';
 import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
 
-
-
 export function playSteps(steps, index = 0) {
     if (index >= steps.length) return; // Fin des étapes
 
@@ -48,6 +46,7 @@ export function playSteps(steps, index = 0) {
 
             // Ajouter l'événement au bouton
             document.getElementById(btnId).addEventListener("click", choice.action);
+
         });
     } else {
         ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
