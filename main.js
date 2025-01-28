@@ -24,6 +24,8 @@ import { loadScreen2 } from './js/screen2.js';
 import { loadScreen5 } from './js/screen5.js';
 import { loadScreen4 } from './js/screen4.js';
 import { loadScreen3 } from './js/screen3.js';
+import { loadLvl1 } from './js/lvl1.js';
+import { loadLvl2 } from './js/lvl2.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -71,7 +73,7 @@ const enemies = [
 ]
 
 let levelValue = 0;
-
+let screenValue = 0;
 
 
 // addOverlay ('audioId' , 'audioSrc')
@@ -116,31 +118,46 @@ SoundBtn.addEventListener('click', function(){
 
 if (isCookiePresent('screen')) {
     // Récupérer la valeur de "level"
-    levelValue = getCookieValue('screen');
+    screenValue = getCookieValue('screen');
+    levelValue = getCookieValue('level');
 
-    console.log(`Le cookie 'screen' est présent avec la valeur level à : ${levelValue}`);
+    console.log(`Le cookie 'screen' est présent avec la valeur level à : ${screenValue}`);
 
-  
-    switch (levelValue) {
-        case "1":
-            loadScreen1();
-            break;
-        case "2":
-            loadScreen2();
-            break;
-        case "3":
-            loadScreen3();
-            break;
-        case "4":
-            loadScreen4();
-            break;
-        case "5":
-            loadScreen5();
-            break;
-            
-        default:
-            loadScreen0();       
+    if(screenValue <= 5){
+        switch (screenValue) {
+            case "1":
+                loadScreen1();
+                break;
+            case "2":
+                loadScreen2();
+                break;
+            case "3":
+                loadScreen3();
+                break;
+            case "4":
+                loadScreen4();
+                break;
+            case "5":
+                loadScreen5();
+                break;
+                
+            default:
+                loadScreen0();       
+        }
+    }else{
+        if(isCookiePresent('level')){
+            switch (levelValue) {
+                case "1":
+                    loadLvl1();
+                    break;
+                case "2":
+                    loadLvl2();
+                    break;   
+            }
+        }
+        
     }
+    
 
 } else {
     console.log('Le cookie "screen" n\'est pas présent');
