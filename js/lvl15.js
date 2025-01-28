@@ -1,4 +1,4 @@
-import { refreshPage } from "./refreshPage";
+import { refreshPage } from "./refreshPage?js";
 
 export function loadLvl1(){
     
