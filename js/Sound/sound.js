@@ -4,6 +4,7 @@ const audioPlayers = {};
 
 // Fonction pour charger et jouer un fichier audio
 export function loadSound(url, loop = false) {
+
     if (!audioPlayers[url]) {
         // Si l'instance audio pour cette URL n'existe pas encore, on la crée
         audioPlayers[url] = new Audio(url);
@@ -13,9 +14,9 @@ export function loadSound(url, loop = false) {
     // Si une instance existe déjà, on met à jour l'option de boucle
     audioPlayers[url].loop = loop;
     audioPlayers[url].preload = 'auto'; 
-
-    // On lance la lecture
+    
     audioPlayers[url].play();
+    
 }
 
 // Fonction pour suspendre la lecture d'un fichier audio

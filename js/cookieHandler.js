@@ -32,10 +32,3 @@ export function setCookie(name, value, days = 7, path = "/") {
     value
   )}; ${expiresString}; path=${path}`; // Définir le cookie
 }
-
-// Fonction pour définir un cookie avec la ville choisie
-export function setCityCookie(city) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); // Expire dans 7 jours
-  document.cookie = `ville=${city};expires=${expires.toUTCString()};path=/`; // Stocke la ville dans le cookie
-}

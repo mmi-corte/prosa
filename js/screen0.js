@@ -15,8 +15,7 @@ export function loadScreen0() {
 
   // add background
   //document.body.style.background = "linear-gradient(149deg, rgba(230, 181, 122, 1) 0%, rgba(232, 188, 134, 1) 42%, rgba(245, 225, 202, 1) 100%)";
-
-    loadSound("assets/sound/intro.mp3", true);
+    
     console.log('loadScreen0: je suis là');
 
     // add background

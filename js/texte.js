@@ -94,7 +94,7 @@ export async function addTxtNarration(stepCode, conteneurId,txtClassName) {
                 text.textContent = doc.data().txt;
                 text.className = txtClassName;
                 conteneur.appendChild(text);
-                console.log("Texte trouvé :", doc.data().txt);
+                
             }
         });
     } catch (error) {
@@ -115,7 +115,7 @@ export async function addNameCharacter(stepCode, conteneurId, txtClassName) {
                     txtPerso.textContent = doc.data().personnage.toUpperCase(); // Convertir en majuscules
                     txtPerso.className = txtClassName;
                     conteneur.appendChild(txtPerso);
-                    console.log("Texte ajouté :", doc.data().personnage.toUpperCase());
+                    
                 } else {
                     console.error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
                 }

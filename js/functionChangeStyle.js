@@ -13,6 +13,8 @@ export function changeStyleBGB(conatinerId){
 }
 
 export function selectAvatar(allAvatars) {
+    const avatarContainer = document.getElementById("imgAvatarContainer");
+
     allAvatars.forEach(avatar => {
         avatar.addEventListener("click", function () {
             // Réinitialise le style de toutes les images
@@ -20,8 +22,13 @@ export function selectAvatar(allAvatars) {
                 otherAvatar.style.border = '';
                 otherAvatar.style.filter = '';
             });
-            skin = ""
-            skin = avatar.id
+
+            // affect the skin global variable
+            skin = avatar.id;
+            
+            // Met à jour l'attribut `data-selected-avatar`
+            avatarContainer.setAttribute("data-selected-avatar", skin);
+
             // Applique le style cliqué uniquement à l'image sélectionnée
             avatar.style.border = '4px solid #9AAB5C';
             //avatar.style.filter = 'brightness(0.8)';

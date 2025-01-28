@@ -223,18 +223,19 @@ strong {
     width: 92%;
     height: 250px;
     background-color: rgba(255, 255, 255, 0.75);
-
+    flex-direction: column;
     padding: 10px;
     margin: 10px;
     border-radius: 6px;
     position: absolute;
     bottom: 60px;
     display: flex;
-    flex-direction: column;
+    
     justify-content: start;
     align-items: start;
     z-index: 2;
 }
+
 
 .diagBoxN {
     width: 92%;
