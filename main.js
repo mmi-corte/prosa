@@ -10,7 +10,7 @@ import { loadScreen5 } from './js/screen5.js';
 import { loadScreen4 } from './js/screen4.js';
 import { loadScreen3 } from './js/screen3.js';
 import { loadLvl1 } from './js/lvl1.js';
-import { loadLvl2 } from './js/lvl2.js';
+import { loadLvl2 } from './js/lvl1bis.js';
 
 //Variable / Constante pour les combats
 export let playerUserName = "";

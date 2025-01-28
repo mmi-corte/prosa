@@ -22,8 +22,8 @@ import { popup } from './popup.js';
 export function loadLvl4() {
 
     refreshPage();
-    console.log("loadLvl4 :  je usis là");
- 
+    console.log("loadLvl4 :  je suis là");
+    
     // update screen cookie
     setCookie("level", "4", 7, "/"); 
 }

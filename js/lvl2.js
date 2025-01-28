@@ -1,31 +1,26 @@
-import { playSteps } from './functionMakeSteps.js';
-import { loadLvl3 } from "./lvl3.js";
+import { refreshPage } from "./refreshPage.js";
+import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
+
+import { addForm } from './form.js';
+import { addImgBackground, addImg } from './fonctionImg.js';
+import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit, addTxtNarrationAR, addNamePersoAR } from './texte.js';
+import { addSVG } from './svg.js';
+import { warningSvg } from '../assets/svgcode.js';
+import { showStaticMap } from './map.js';
+import { loadSound, suspendSound } from './Sound/sound.js';
+import { lunchFight } from './fight.js';
+//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
+import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './functionChangeStyle.js';
+import { addOverlay } from './overlay.js';
+import { addAutoPlayVideo } from './video.js';
+import { step2, step6 } from './functionstep.js'
+import { ARBerger } from './ARFunction.js';
+import { popup } from './popup.js';
 import { setCookie } from './cookieHandler.js';
 import {popup} from './popup.js';
 
 export function loadLvl2() {
 
-    const steps = [
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra", character: null },
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BBerger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1BBerger' },
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra2", character: null },
-        {
-            background: 'assets/bg/fondEtape1bis.png',
-            narration: () => {
-                popup("Vous avez récupéré la branche d’arbre", "../assets/items/branche.png");
-            },
-            character: null
-        },
-        {
-            background: 'assets/bg/fondEtape1bis.png',
-            narration: "E1BNarra3",
-            character: null,
-            choices: [
-                { text: "Aller au niveau 2", action: () => console.log("Choix : Aller au niveau 2") },
-                { text: "Aller au niveau 3", action: loadLvl3 }
-            ]
-        }
-    ];
 
     // Lance les étapes
     playSteps(steps);

@@ -1,5 +1,5 @@
-import { loadLvl2 } from "./lvl2.js";
-import { loadLvl3 } from "./lvl3.js";
+import { loadLvl2 } from "./lvl1bis.js";
+import { loadLvl3 } from "./lvl2.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { setCookie } from "./cookieHandler.js";
 
@@ -25,8 +25,8 @@ export function loadLvl1() {
             narration: "E1Narra7",
             character: null,
             choices: [
-                { text: "E1Choix1", action: loadLvl2 },
-                { text: "E1Choix2", action: loadLvl3 }
+                { text: "E1Choix1", action: loadLvl1bis },
+                { text: "E1Choix2", action: loadLvl2 }
             ]
         }
     ];

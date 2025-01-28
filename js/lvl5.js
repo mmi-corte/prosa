@@ -20,10 +20,11 @@ import { popup } from './popup.js';
 
 
 export function loadLvl5() {
+  
 
     refreshPage();
     console.log("loadLvl5 :  je suis là");
     
     // update screen cookie
-    setCookie("level", "5", 7, "/"); 
+    setCookie("level", "5", 7, "/");
 }
