@@ -9,8 +9,6 @@ import { loadSound, isPlaying } from './Sound/sound.js';
 export function loadScreen0() {
   console.log("loadScreen0: je suis là");
   
-  const soundBtn = document.getElementById("SoundBtn");
-  
   // // load sound intro but dont play
   loadSound("assets/sound/intro.mp3", true);
 
