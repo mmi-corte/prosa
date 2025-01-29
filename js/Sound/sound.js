@@ -14,9 +14,7 @@ export function loadSound(url, loop = false) {
     // Si une instance existe déjà, on met à jour l'option de boucle
     audioPlayers[url].loop = loop;
     audioPlayers[url].preload = 'auto'; 
-    
-    audioPlayers[url].play();
-    
+       
 }
 
 // Fonction pour suspendre la lecture d'un fichier audio

@@ -5,10 +5,8 @@ export function refreshPage() {
         document.body.style.background = "";
         container.style.backgroundImage = "none";
         container.innerHTML = ""; // Efface tout le contenu de la div "container"
-        
+        console.log('refreshPage: Refreshed done!');   
     } else {
         console.error('refreshPage: Aucun élément avec l\'id "container" trouvé.');
     }
-
-    console.log('refreshPage: Refreshed done!');
 }

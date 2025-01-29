@@ -108,10 +108,12 @@ if (DEBUG){
 const SoundBtn = document.createElement('div')
 SoundBtn.id = 'SoundBtn';
 document.body.appendChild(SoundBtn);
+
 const SoundIcon = document.createElement('img')
 SoundIcon.src="assets/icons/SonCoupe.png";
 SoundIcon.style.width = "50px";
 SoundBtn.appendChild(SoundIcon);
+
 SoundBtn.addEventListener('click', function(){
     if (SoundIcon.src.includes("SonActif")){
         SoundIcon.src = "assets/icons/sonCoupe.png";

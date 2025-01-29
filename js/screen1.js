@@ -4,19 +4,15 @@ import { ajouterBouton } from './button.js';
 import { addImg } from './fonctionImg.js';
 import { loadScreen2 } from './screen2.js';
 import { setCookie } from './cookieHandler.js';
-import { stopSound } from './Sound/sound.js';
 import { addSVG } from './svg.js';
 import { refreshPage } from './refreshPage.js';
 
 export function loadScreen1(){
   console.log('loadScreen1:je suis là');
 
-  // stop sound
-  stopSound("assets/sound/intro.mp3", true);
-  
   // clear page
   refreshPage();
-  
+
   // add content
   container.style.background = "rgb(242, 216, 136)";
   addImg('container','assets/icons/headset.png','screen1style', '')

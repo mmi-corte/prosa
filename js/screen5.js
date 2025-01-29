@@ -1,13 +1,9 @@
 import { addDiv, addH1, addTxt, addTxtWithBoldWord } from "./texte.js";
 
 import { ajouterBouton } from "./button.js";
-import { setCookie, getCookie } from "./cookieHandler.js";
-import { addImgBackground, addImg } from "./fonctionImg.js";
+import { setCookie } from "./cookieHandler.js";
 import { refreshPage } from "./refreshPage.js";
-import { addSVG } from "./svg.js";
 import { addAutoPlayVideo } from "./video.js";
-import { loadSound, suspendSound, stopSound } from "./Sound/sound.js";
-import { loadScreen0 } from "./screen0.js";
 import { loadLvl1 } from "./lvl1.js";
 
 export function loadScreen5() {

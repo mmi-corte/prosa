@@ -10,13 +10,9 @@ export function loadScreen0() {
   console.log("loadScreen0: je suis là");
   
   const soundBtn = document.getElementById("SoundBtn");
-  console.log(!isPlaying("assets/sound/intro.mp3"), soundBtn.children[0].src == "assets/img/soundOn.png");
   
-  // // load sound intro
-  // if (!isPlaying("assets/sound/intro.mp3") && soundBtn.children[0].src == "assets/img/soundOn.png"){
-  //   loadSound("assets/sound/intro.mp3", true);
-  // }
-  
+  // // load sound intro but dont play
+  loadSound("assets/sound/intro.mp3", true);
 
   // add logo
   addImg('container','assets/logo.png','logoimg', 'logoImgP1');
