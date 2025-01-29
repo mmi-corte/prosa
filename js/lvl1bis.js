@@ -1,6 +1,8 @@
 import { playSteps } from './functionMakeSteps.js';
-import { loadLvl3 } from "./lvl2.js";
+
 import { setCookie } from './cookieHandler.js';
+import { popup } from './popup.js';
+import { loadLvl3 } from './lvl3.js';
 
 
 export function loadLvl1bis() {

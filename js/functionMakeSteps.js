@@ -53,7 +53,7 @@ export function playSteps(steps, index = 0) {
     } else {
         console.log("passe à l'étape", index + 1);
         ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-        const btnNext = document.getElementById("btnNext")
+        const btnNext = document.getElementById("btnNext");
         btnNext.addEventListener("click", () => playSteps(steps, index + 1));
     }
 }
