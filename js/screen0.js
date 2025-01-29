@@ -4,13 +4,18 @@ import { addImg, addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
 import { loadScreen1 } from './screen1.js';
 import { setCookie } from './cookieHandler.js';
-import { loadSound } from './Sound/sound.js';
+import { loadSound, isPlaying } from './Sound/sound.js';
 
 export function loadScreen0() {
   console.log("loadScreen0: je suis là");
   
-  // load sound intro
-  loadSound("assets/sound/intro.mp3", true);
+  const soundBtn = document.getElementById("SoundBtn");
+  console.log(!isPlaying("assets/sound/intro.mp3"), soundBtn.children[0].src == "assets/img/soundOn.png");
+  
+  // // load sound intro
+  // if (!isPlaying("assets/sound/intro.mp3") && soundBtn.children[0].src == "assets/img/soundOn.png"){
+  //   loadSound("assets/sound/intro.mp3", true);
+  // }
   
 
   // add logo

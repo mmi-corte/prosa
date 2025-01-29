@@ -49,3 +49,11 @@ export function setOnSound(){
         element.play();
     });
 }
+
+// Fonction pour vérifier si un son est en cours de lecture
+export function isPlaying(url) {
+    if (audioPlayers[url]) {
+        return !audioPlayers[url].paused && audioPlayers[url].currentTime > 0;
+    }
+    return false;
+}

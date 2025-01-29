@@ -64,17 +64,44 @@ let screenValue = 0;
 
 // Resey Home btn
 if (DEBUG){
+
     const body = document.querySelector("body");
     body.id = "body";
     addImg("body", "assets/icons/home.png", "homeStyle", 'resetGame')
+    
 
-resetGame.addEventListener("click", 
-    ()=>{
-            refreshPage();
-            loadScreen0();
-            setCookie("level", "0", 7, "/");
-    }
-);
+    resetGame.addEventListener("click", 
+        ()=>{
+                refreshPage();
+                loadScreen0();
+                setCookie("level", "0", 7, "/");
+        }
+    );
+
+    ////////////////////////////////////////////////////
+    // uncomment to activate home button dynamic display
+    ////////////////////////////////////////////////////
+    
+    // resetGame.style.display = "none"; // Caché par défaut
+
+
+    // // Détecter la position de la souris
+    // document.addEventListener("mousemove", (event) => {
+    //     const seuil = 50; // Distance en pixels pour déclencher l'affichage
+    //     if (event.clientX < seuil && event.clientY < seuil) {
+    //         resetGame.style.display = "block";
+    //         resetGame.style.opacity = "1"; // Affiche avec un fondu
+    //     } else {
+    //         resetGame.style.opacity = "0"; // Cache avec un fondu
+    //         setTimeout(() => {
+    //             if (resetGame.style.opacity === "0") {
+    //                 resetGame.style.display = "none"; // Cache totalement après l'animation
+    //             }
+    //         }, 300);
+    //     }
+    // });
+
+
 }
 
 // Ajout du bouton pour activer/désactiver le son
@@ -82,15 +109,15 @@ const SoundBtn = document.createElement('div')
 SoundBtn.id = 'SoundBtn';
 document.body.appendChild(SoundBtn);
 const SoundIcon = document.createElement('img')
-SoundIcon.src="./assets/icons/SonCoupe.png";
+SoundIcon.src="assets/icons/SonCoupe.png";
 SoundIcon.style.width = "50px";
 SoundBtn.appendChild(SoundIcon);
 SoundBtn.addEventListener('click', function(){
     if (SoundIcon.src.includes("SonActif")){
-        SoundIcon.src = "./assets/icons/sonCoupe.png";
+        SoundIcon.src = "assets/icons/sonCoupe.png";
         setOffSound();
     } else {
-        SoundIcon.src = "./assets/icons/SonActif.png";
+        SoundIcon.src = "assets/icons/SonActif.png";
         setOnSound();
     }
 });
