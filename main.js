@@ -2,6 +2,7 @@
 import { refreshPage } from './js/refreshPage.js';
 import { addImg } from './js/fonctionImg.js';
 import {setCookie, getCookieValue, isCookiePresent} from './js/cookieHandler.js';
+import { setOnSound, setOffSound } from './js/Sound/sound.js';
 
 import { loadScreen0 } from './js/screen0.js';
 import { loadScreen1 } from './js/screen1.js';
@@ -76,13 +77,12 @@ resetGame.addEventListener("click",
 );
 }
 
-
 // Ajout du bouton pour activer/désactiver le son
 const SoundBtn = document.createElement('div')
 SoundBtn.id = 'SoundBtn';
 document.body.appendChild(SoundBtn);
 const SoundIcon = document.createElement('img')
-SoundIcon.src="./assets/icons/SonActif.png";
+SoundIcon.src="./assets/icons/SonCoupe.png";
 SoundIcon.style.width = "50px";
 SoundBtn.appendChild(SoundIcon);
 SoundBtn.addEventListener('click', function(){
