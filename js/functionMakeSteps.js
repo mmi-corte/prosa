@@ -121,9 +121,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         }
         else
         {
-            if (index >= steps.length) return; // Fin des étapes
-
-            const step = steps[index];
+            
 
             const container = document.getElementById("container");
             
@@ -149,18 +147,28 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             container.style.background="none";
             document.body.style.background = "none";
 
-            
+            function charaChanger(index, steps){
+
+                if (index >= steps.length) return; // Fin des étapes
+
+                const step = steps[index];
+
             const charaContainer = document.querySelector("#marker");
+            const diagBox = document.querySelector("#diagBox");
+            diagBox.innerHTML = "";
             console.log(charaContainer);
 
             switch (step.character) {
                         case "BergerChara":
+                            charaContainer.innerHTML = "";
                             charaContainer.innerHTML = chara[0];
                             break;
                         case "EsterelleChara":
+                            charaContainer.innerHTML = "";
                             charaContainer.innerHTML = chara[1];
                             break;
                         case "FataChara":
+                            charaContainer.innerHTML = "";
                             charaContainer.innerHTML = chara[2];
                             break;    
             }
@@ -169,8 +177,11 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
             ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
             const btnNext = document.getElementById("btnNext");
-            btnNext.addEventListener("click", () => playSteps(steps, index + 1, true, marker));
+            btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
 
         }
+
+        charaChanger(index, steps);
+    }
 }
 
