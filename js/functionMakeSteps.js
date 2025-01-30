@@ -381,7 +381,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                 // Ajouter le texte du choix
                 addTxtNarration(choice.text, btnId, '');
 
-                if (step.choice.action) {
+                if (step.choices.action) {
                     // Ajouter l'événement au bouton
                     btn.addEventListener("click", choice.action);
                 }
