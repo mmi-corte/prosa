@@ -139,7 +139,7 @@ SoundBtn.id = "SoundBtn";
 document.body.appendChild(SoundBtn);
 
 const SoundIcon = document.createElement("img");
-SoundIcon.src = "assets/icons/SonCoupe.png";
+SoundIcon.src = "assets/icons/sonCoupe.png";
 SoundIcon.style.width = "50px";
 SoundBtn.appendChild(SoundIcon);
 
