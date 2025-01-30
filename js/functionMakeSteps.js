@@ -401,7 +401,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             
 
             container.innerHTML = `
-            <div id ="diagBox" class="diagBox"></div>
+            <div id ="diagBox" class="diagBox" ></div>
             <a-scene embedded
             arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
             renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
@@ -497,6 +497,9 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
 
                     btn.classList.add(btnClass);
 
+                    if (step.name) {
+                        addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
+                    }
                     // Ajouter le texte du choix
                     addTxtNarration(choice.text, btnId, '');
 
@@ -507,6 +510,9 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             }
             else if (step.nextLvl)
             {
+                if (step.name) {
+                    addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
+                }
                 addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
                 ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
                 const btnNext = document.getElementById("btnNext");
@@ -514,7 +520,23 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             }
             else 
             {
-                addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
+                if (step.name) {
+                    if (step.Txt == "Narrateur")
+                    {
+
+                        addNameCharacter(step.Txt, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
+                        addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
+                        const diagBox = document.querySelector("#diagBox");
+                        diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+                        diagBox.style.color = "rgb(255, 255, 255)";
+                    }
+                    else
+                    {
+                        addNameCharacter(step.Txt, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
+                        addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
+                    }
+                }
+                
                 ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
                 const btnNext = document.getElementById("btnNext");
                 btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
