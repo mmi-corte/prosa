@@ -34,7 +34,7 @@ const personnages = [`
                 >
                 </a-image>`,
 
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/d38faf7e-01c3-44e6-9906-e36768c14259/f%C3%A9e%20des%20plantes%20textur%C3%A9e%20V1.png?v=1734346180920"
                 position="0 -0.5 0"
@@ -44,7 +44,7 @@ const personnages = [`
                 >
                 </a-image>`,
 
-            `<!-- premier plan (en avant) -->
+    `<!-- premier plan (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/6edc1d7c-0499-4753-9956-9dfec8252444/f%C3%A9e%20de%20l'eau%20textur%C3%A9e%20v1%20premier%20plan.png?v=1734345000981"
                 position="0 -0.5 0"
@@ -60,7 +60,7 @@ const personnages = [`
                 scale="3 3 3"
                 material="transparent: true; alphaTest: 0.5;"
                 ></a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image 
                 src="https://cdn.glitch.global/b8947972-11bc-44cc-baba-0c13a7bcf225/a%20strega2-premier%20plan.png?v=1734341061681" 
                 position="0 0 0" 
@@ -94,7 +94,7 @@ const personnages = [`
                 scale="10 10 10"
                 material="transparent: true; alphaTest: 0.5;">
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/2b8c8b55-9c74-4faf-b4c8-d0db196ea145/premier%20plan.png?v=1734345923869"
                 position="0 -0.5 0"
@@ -123,7 +123,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/de3037ae-fec7-44e8-9622-a20736f62f2b/personnage.png?v=1734624420467"
                 position="0 -0.5 0"
@@ -159,7 +159,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-             `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/68c71a06-3c13-4a4b-b099-67f4abc0f7ed/a_Sciacquaghjola_6.png?v=1734614329385"
                 position="0 -0.5 0"
@@ -198,7 +198,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/86015dbb-1327-4ad6-8054-6e776b3f1bd4/Tarasque-V3-premier%20plan-plante.png?v=1734343035907"
                 position="0 -0.5 0"
@@ -217,7 +217,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/ce3019bc-7841-48cd-83b4-90ebaaaec5ff/premier%20plan1.png?v=1734337411745"
                 position="0 -0.5 0"
@@ -256,7 +256,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/4850b110-e117-4a72-bdb2-1ae577770264/premier%20plan.png?v=1734342706939"
                 position="0 -0.5 0"
@@ -295,7 +295,7 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
-            `<!-- premier plan  (en avant) -->
+    `<!-- premier plan  (en avant) -->
                 <a-image
                 src="https://cdn.glitch.global/5fe242c3-4e4d-4beb-b573-16252cb32f99/1.png?v=1736171753100"
                 position="0 -0.5 0"
@@ -334,74 +334,74 @@ const personnages = [`
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`
-            ]
+]
 
 export function playSteps(steps, index = 0, AR = false, marker = null) {
 
-    if (!AR)
-        {
-            if (index >= steps.length) return; // Fin des étapes
+    if (!AR) {
+        if (index >= steps.length) return; // Fin des étapes
 
-            const step = steps[index];
-            refreshPage(); // Réinitialise la page
+        const step = steps[index];
+        refreshPage(); // Réinitialise la page
 
-            // Ajoute l'image de fond
-            addImgBackground("container", step.background);
+        // Ajoute l'image de fond
+        addImgBackground("container", step.background);
 
-            // Ajoute une boîte de dialogue
-            const dialogClass = step.character ? 'diagBox' : 'diagBoxN'; // Utiliser diagBoxN pour narrateur, sinon diagBox
-            addDiv('container', "diagBox", dialogClass); // Ajout de la classe correcte pour chaque étape
+        // Ajoute une boîte de dialogue
+        const dialogClass = step.character ? 'diagBox' : 'diagBoxN'; // Utiliser diagBoxN pour narrateur, sinon diagBox
+        addDiv('container', "diagBox", dialogClass); // Ajout de la classe correcte pour chaque étape
 
-            // Ajoute le personnage si nécessaire
-            if (step.character) {
-                addImg("container", step.character, 'imgPerso');
-            }
+        // Ajoute le personnage si nécessaire
+        if (step.character) {
+            addImg("container", step.character, 'imgPerso');
+        }
 
-            // Ajoute le nom du personnage au-dessus de la boîte de dialogue
-            if (step.name) {
-                addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
-            }
+        // Ajoute le nom du personnage au-dessus de la boîte de dialogue
+        if (step.name) {
+            addNameCharacter(step.name, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
+        }
 
-            // Ajoute le texte de narration ou du personnage
-            addTxtNarration(step.narration, 'diagBox', 'dialogBox');
+        // Ajoute le texte de narration ou du personnage
+        addTxtNarration(step.narration, 'diagBox', 'dialogBox');
 
-            // Gestion des choix ou du bouton "Suivant"
-            if (step.choices) {
-                step.choices.forEach((choice, i) => {
-                    const btnId = `btnChoix${i + 1}`;
-                    const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
+        // Gestion des choix ou du bouton "Suivant"
+        if (step.choices) {
+            step.choices.forEach((choice, i) => {
+                const btnId = `btnChoix${i + 1}`;
+                const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
 
-                    // Ajouter un bouton avec le bon style
-                    ajouterBouton('diagBox', '', btnId, 'btnChoix');
-                    
-                    // Appliquer la classe spécifique au bouton
-                    const btn = document.getElementById(btnId);
+                // Ajouter un bouton avec le bon style
+                ajouterBouton('diagBox', '', btnId, 'btnChoix');
 
-                    btn.classList.add(btnClass);
+                // Appliquer la classe spécifique au bouton
+                const btn = document.getElementById(btnId);
 
-                    // Ajouter le texte du choix
-                    addTxtNarration(choice.text, btnId, '');
+                btn.classList.add(btnClass);
 
+                // Ajouter le texte du choix
+                addTxtNarration(choice.text, btnId, '');
+
+                if (step.choice.action) {
                     // Ajouter l'événement au bouton
                     btn.addEventListener("click", choice.action);
+                }
 
-                });
-            } else {
-                console.log("passe à l'étape", index + 1);
-                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-                const btnNext = document.getElementById("btnNext");
-                btnNext.addEventListener("click", () => playSteps(steps, index + 1));
-            }
+            });
+        } else {
+            console.log("passe à l'étape", index + 1);
+            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
+            const btnNext = document.getElementById("btnNext");
+            btnNext.addEventListener("click", () => playSteps(steps, index + 1));
         }
-        else
-        {
-            
+    }
+    else {
 
-            const container = document.getElementById("container");
-            
 
-            container.innerHTML = `
-            <div id ="diagBox" class="diagBox" ></div>
+        const container = document.getElementById("container");
+
+
+        container.innerHTML = `
+            <div id ="diagBox" class="diagBox"></div>
             <a-scene embedded
             arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
             renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
@@ -418,14 +418,14 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                 <a-entity camera position="0 0 0"></a-entity>
             </a-scene>
             `;
-            container.style.background="none";
-            document.body.style.background = "none";
+        container.style.background = "none";
+        document.body.style.background = "none";
 
-            function charaChanger(index, steps){
+        function charaChanger(index, steps) {
 
-                if (index >= steps.length) return; // Fin des étapes
+            if (index >= steps.length) return; // Fin des étapes
 
-                const step = steps[index];
+            const step = steps[index];
 
             const charaContainer = document.querySelector("#marker");
             const diagBox = document.querySelector("#diagBox");
