@@ -16,8 +16,10 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
-
-
+import { loadLvl4} from './lvl4.js';
+import { loadLvl10 } from './lvl10.js';
+import { playSteps } from './functionMakeSteps.js';
+import { setCookie } from './cookieHandler.js';
 
 export function loadLvl3() {
 

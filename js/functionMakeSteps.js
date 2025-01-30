@@ -445,13 +445,80 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                             charaContainer.innerHTML = "";
                             charaContainer.innerHTML =personnages[2];
                             break;    
+                        case "StregaChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[3];
+                            break;  
+                        case "SylvainChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[4];
+                            break;
+                        case "FulettuChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[5];
+                            break;
+                        case "SciacquaghjolaChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[6];
+                            break;
+                        case "TarrasqueChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[7];
+                            break;
+                        case "OrcuChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[8];
+                            break;
+                        case "BasgialiscuChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[9];
+                            break;
+                        case "MascoChara":
+                            charaContainer.innerHTML = "";
+                            charaContainer.innerHTML =personnages[10];
+                            break;
+                        case "NaraChara":
+                            charaContainer.innerHTML = "";
+                            break;    
+
             }
 
+            // Gestion des choix ou du bouton "Suivant"
+            if (step.choices) {
+                step.choices.forEach((choice, i) => {
+                    const btnId = `btnChoix${i + 1}`;
+                    const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
 
-            addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
-            ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
-            const btnNext = document.getElementById("btnNext");
-            btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
+                    // Ajouter un bouton avec le bon style
+                    ajouterBouton('diagBox', '', btnId, 'btnChoix');
+                    
+                    // Appliquer la classe spécifique au bouton
+                    const btn = document.getElementById(btnId);
+
+                    btn.classList.add(btnClass);
+
+                    // Ajouter le texte du choix
+                    addTxtNarration(choice.text, btnId, '');
+
+                    // Ajouter l'événement au bouton
+                    btn.addEventListener("click", choice.action);
+
+                });
+            }
+            else if (step.nextLvl)
+            {
+                addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
+                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
+                const btnNext = document.getElementById("btnNext");
+                btnNext.addEventListener("click", step.nextLvl);
+            }
+            else 
+            {
+                addTxtNarration(step.Txt, 'diagBox', 'dialogBox');
+                ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
+                const btnNext = document.getElementById("btnNext");
+                btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
+            }
 
         }
 
