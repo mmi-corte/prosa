@@ -19,9 +19,9 @@ import { popup } from './popup.js';
 
 
 
-export function loadLvl17() {
+export function loadLvlfin() {
 
     refreshPage();
-    console.log("loadLvl17 :  je suis là");
+    console.log("loadLvlfin :  je suis là");
     
 }

@@ -10,7 +10,7 @@ export function loadScreen2() {
     console.log("loadScreen2:je suis là");
   
     refreshPage();
-  
+
     addImgBackground("container", "./assets/bg/fondVille.jpg");
     addH1("container", "Où te trouves-tu ?", "classTxtCity");
   

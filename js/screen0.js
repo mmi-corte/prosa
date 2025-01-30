@@ -4,10 +4,14 @@ import { addImg, addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
 import { loadScreen1 } from './screen1.js';
 import { setCookie } from './cookieHandler.js';
+import { loadSound, isPlaying } from './Sound/sound.js';
 
 export function loadScreen0() {
   console.log("loadScreen0: je suis là");
-    
+  
+  // // load sound intro but dont play
+  loadSound("assets/sound/intro.mp3", true);
+
   // add logo
   addImg('container','assets/logo.png','logoimg', 'logoImgP1');
   addImgBackground('container',"assets/bg/Accueil.png");

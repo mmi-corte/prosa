@@ -16,16 +16,30 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
+import { loadLvl4} from './lvl4.js';
+import { loadLvl10 } from './lvl10.js';
+import { playSteps } from './functionMakeSteps.js';
 import { setCookie } from './cookieHandler.js';
-
 
 export function loadLvl3() {
 
-    refreshPage();
+    // Liste des étapes du niveau 1
+    const steps = [
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Narra", character: null },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E3Berger' },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Narra2", character: null },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger2", character: 'assets/personnages/berger V1 premier plan.png', name: 'E3Berger1' },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Overlay", character: null, action: addOverlay },// Appel de la fonction overlay ici
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger3", character: 'assets/personnages/berger V1 premier plan.png', name: 'E3Berger6',
+            choices: [
+                { text: "E3Choix1", action: loadLvl4 },
+                { text: "E3Choix2", action: loadLvl10 }
+            ]
+        }
+    ];
 
-    console.log("loadLvl3 :  je suis là");
-
+    playSteps(steps); // Démarrage des étapes
+ 
     // update screen cookie
     setCookie("level", "3", 7, "/"); 
-    
 }

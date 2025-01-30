@@ -14,9 +14,7 @@ export function loadSound(url, loop = false) {
     // Si une instance existe déjà, on met à jour l'option de boucle
     audioPlayers[url].loop = loop;
     audioPlayers[url].preload = 'auto'; 
-    
-    audioPlayers[url].play();
-    
+       
 }
 
 // Fonction pour suspendre la lecture d'un fichier audio
@@ -29,12 +27,19 @@ export function suspendSound(url) {
 
 // Fonction pour suspendre la lecture d'un fichier audio
 export function stopSound(url) {
+
     if (audioPlayers[url]) {
         audioPlayers[url].pause();
         // On met en pause si l'instance existe
         audioPlayers[url].currentTime = 0;
-        delete audioPlayers[url];
+        deleteSound(url);
         
+    }
+}
+
+export function deleteSound(url) {
+    if (audioPlayers[url]) {
+        delete audioPlayers[url];
     }
 }
 
@@ -48,4 +53,12 @@ export function setOnSound(){
     Object.values(audioPlayers).forEach(element => {
         element.play();
     });
+}
+
+// Fonction pour vérifier si un son est en cours de lecture
+export function isPlaying(url) {
+    if (audioPlayers[url]) {
+        return !audioPlayers[url].paused && audioPlayers[url].currentTime > 0;
+    }
+    return false;
 }

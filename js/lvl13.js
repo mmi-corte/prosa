@@ -21,7 +21,11 @@ import { popup } from './popup.js';
 
 export function loadLvl13() {
 
-    refreshPage();
-    console.log("loadLvl13 :  je suis là");
+    const steps = [
+        { background: 'assets/bg/fondEtape13.png', narration: "E13Narra", character: null },
+    ];
+    //faire combat
+
+    playSteps(steps); // Démarrage des étapes
     
 }
