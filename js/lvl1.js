@@ -3,8 +3,12 @@ import { loadLvl2 } from "./lvl2.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { setCookie } from "./cookieHandler.js";
 import { loadLvl1bis } from "./lvl1bis.js";
+import { stopSound} from "./Sound/sound.js";
 
 export function loadLvl1() {
+
+    stopSound('assets/sound/intro.mp3');
+    
     // Liste des étapes du niveau 1
     const steps = [
         { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra", character: null },

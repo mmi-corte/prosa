@@ -27,12 +27,19 @@ export function suspendSound(url) {
 
 // Fonction pour suspendre la lecture d'un fichier audio
 export function stopSound(url) {
+
     if (audioPlayers[url]) {
         audioPlayers[url].pause();
         // On met en pause si l'instance existe
         audioPlayers[url].currentTime = 0;
-        delete audioPlayers[url];
+        deleteSound(url);
         
+    }
+}
+
+export function deleteSound(url) {
+    if (audioPlayers[url]) {
+        delete audioPlayers[url];
     }
 }
 
