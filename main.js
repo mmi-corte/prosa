@@ -98,28 +98,17 @@ if (DEBUG) {
   // uncomment to activate home button dynamic display
   ////////////////////////////////////////////////////
 
-  // resetGame.style.display = "none"; // Caché par défaut
-    resetGame.addEventListener("click", 
-        ()=>{
-                refreshPage();
-                loadScreen0();
-                setCookie("level", "0", 7, "/");
-        }
-    );
-
-    ////////////////////////////////////////////////////
-    // uncomment to activate home button dynamic display
-    ////////////////////////////////////////////////////
     
     // Caché par défaut
-
+   resetGame.style.display = "none"; // Caché par défaut
+  
 
     if (resetGame) {
         resetGame.style.display = "none";
         resetGame.style.opacity = "0";
         resetGame.style.transform = "translateX(-50px)"; // Départ hors écran
         resetGame.style.transition = "opacity 0.3s ease-in-out, transform 0.4s ease-in-out";
-    
+
         document.addEventListener("mousemove", (event) => {
             const seuil = 50; // Distance en pixels pour déclencher l'affichage
             if (event.clientX < seuil && event.clientY < seuil) {
@@ -131,7 +120,7 @@ if (DEBUG) {
             } else {
                 resetGame.style.opacity = "0"; 
                 resetGame.style.transform = "translateX(-50px)"; // Repart vers la gauche
-    
+
                 // Ajout d'un timeout pour éviter le problème de transition ignorée
                 setTimeout(() => {
                     if (resetGame.style.opacity === "0") {
