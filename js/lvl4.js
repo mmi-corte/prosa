@@ -19,14 +19,23 @@ import { popup } from './popup.js';
 import { playSteps } from "./functionMakeSteps.js";
 
 const steps =[
-    {character : "NarraChara", Txt : "E2Narra", name : "Narrateur"},
-    {character : "BergerChara", Txt : "E2Berger", name : "Berger"},
-    {character : "NarraChara", Txt : "E2Narra2", name : "Narrateur"},
-    {character : "FataChara", Txt : "E2Fata", name : "A Fata"},
-    {character : "EsterelleChara", Txt : "E2Esterelle",name : "Esterelle"},
-    {character : "NarraChara", Txt : "E2Narra3", name : "Narrateur"},
-    {character : "EsterelleChara", Txt : "E2Esterelle2", name : "Esterelle"},
-    {character : "FataChara", Txt : "E2Fata2", name : "A Fata"},
+    {character : "NarraChara", Txt : "E4Narra", name : "Narrateur"},
+    {character : "BergerChara", Txt : "E4Berger", name : "Berger"},
+    {character : "NarraChara", Txt : "E4Narra2", name : "Narrateur"},
+    {character : "FulettuChara", Txt : "E4Fulettu", name : "Fulettu"},
+    {character : "FuletounChara", Txt : "E4Fuletoun",name : "Fuletoun"},
+    {character : "FulettuChara", Txt : "E4Fulettu2", name : "Fuletu"},
+    {character : "FuletounChara", Txt : "E4Fuletoun2",name : "Fuletoun"},
+    {character : "NarraChara", Txt : "E4Narra3",name : "Narrateur"},
+    {character : "FulettuChara", Txt : "E4Fulettu3", name : "Fuletu"},
+    {character : "FuletounChara", Txt : "E4Fuletoun3",name : "Fuletoun"},
+    {character : "NarraChara", Txt : "E4Narra4",name : "Narrateur"},
+    {character : "FulettuChara", Txt : "E4Fulettu4", name : "Fuletu"},
+    {character : "FuletounChara", Txt : "E4Fuletoun4",name : "Fuletoun"},
+    {character : "FulettuChara", Txt : "E4Fulettu5", name : "Fuletu"},
+    {character : "FuletounChara", Txt : "E4Fuletoun5",name : "Fuletoun"},
+    
+
     {character : "EsterelleChara", Txt : "E2Esterelle3", name : "Esterelle"},
     {character : "FataChara", Txt : "E2Fata3", name : "A Fata"},
     {character : "NarraChara", Txt : "E2Narra4",name : "Narrateur"},
