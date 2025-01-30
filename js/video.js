@@ -15,6 +15,7 @@ export function addAutoPlayVideo(containerId, urlVideo, className) {
     video.setAttribute('id', 'dynamicVideo');
     video.className = className;
     video.setAttribute('controls', ''); // Ajoute les contrôles pour l'utilisateur
+    video.setAttribute('crossorigin', 'anonymous'); // Ajoute les contrôles pour l'utilisateur
     video.setAttribute('autoplay', ''); // Optionnel, démarre automatiquement
     video.setAttribute('muted', ''); // Nécessaire pour autoplay sur certains navigateurs
     video.setAttribute('playsinline', ''); // Utile pour les appareils mobiles
