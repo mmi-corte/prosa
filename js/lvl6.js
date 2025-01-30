@@ -23,5 +23,55 @@ export function loadLvl6() {
 
     refreshPage();
     console.log("loadLvl6 :  je suis là");
+
+    if (Farfadet) { 
+        const steps = [
+            { background: 'assets/bg/fondEtape6.png', narration: "E6NarraFarfaT", character: null },
+        ];
+        playSteps(steps); // Démarrage des étapes
+    
+    if(Orcu){
+        const steps = [
+            { background: 'assets/bg/fondEtape6.png', narration: "E6BergerOrcuT", character: 'assets/personnages/berger V1 premier plan.png', name: 'E6Berger' },
+        ];
+        playSteps(steps); // Démarrage des étapes
+
+
+
+        
+        
+            //test fight
+            async function luncher() 
+            {
+                const fightResult = await lunchFight(skin, weapons, enemies[2]);
+                console.log(fightResult);
+
+            
+            } 
+            luncher();
+    
+        playSteps(steps); // Démarrage des étapes 
+
+    }else{ //else Orcu
+        const steps = [
+            { background: 'assets/bg/fondEtape6.png', narration: "E6BergerOrcuF", character: 'assets/personnages/berger V1 premier plan.png', name: 'E6Berger' },
+            {
+                background: 'assets/bg/fondEtape6.png', narration: "E6NarraOrcuF", character: null,
+                choices: [
+                    { text: "E3Choix1", action: loadLvl6bis },
+                    { text: "E3Choix2", action: loadLvl9 }
+                ]
+            }
+        ];
+        playSteps(steps); // Démarrage des étapes 
+    }
+
+    }
+    else{ //else farfafet
+        const steps = [
+            { background: 'assets/bg/fondEtape6.png', narration: "E6NarraFarfaF", character: null },
+        ];
+        playSteps(steps); // Démarrage des étapes
+    }
     
 }
