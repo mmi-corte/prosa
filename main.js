@@ -131,22 +131,6 @@ if (DEBUG) {
     } else {
         console.error("L'élément resetGame n'existe pas !");
     }
-
-  // // Détecter la position de la souris
-  // document.addEventListener("mousemove", (event) => {
-  //     const seuil = 50; // Distance en pixels pour déclencher l'affichage
-  //     if (event.clientX < seuil && event.clientY < seuil) {
-  //         resetGame.style.display = "block";
-  //         resetGame.style.opacity = "1"; // Affiche avec un fondu
-  //     } else {
-  //         resetGame.style.opacity = "0"; // Cache avec un fondu
-  //         setTimeout(() => {
-  //             if (resetGame.style.opacity === "0") {
-  //                 resetGame.style.display = "none"; // Cache totalement après l'animation
-  //             }
-  //         }, 300);
-  //     }
-  // });
 }
 
 // Ajout du bouton pour activer/désactiver le son
