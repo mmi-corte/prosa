@@ -8,18 +8,18 @@ import { loadLvl3 } from './lvl3.js';
 export function loadLvl1bis() {
 
     const steps = [
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra", character: null },
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BBerger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1BBerger' },
-        { background: 'assets/bg/fondEtape1bis.png', narration: "E1BNarra2", character: null },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra", character: null },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BBerger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1BBerger' },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra2", character: null },
         {
-            background: 'assets/bg/fondEtape1bis.png',
+            background: 'assets/bg/fondEtape1bis.mp4',
             narration: () => {
                 popup("Vous avez récupéré la branche d’arbre", "../assets/items/branche.png");
             },
             character: null
         },
         {
-            background: 'assets/bg/fondEtape1bis.png',
+            background: 'assets/bg/fondEtape1bis.mp4',
             narration: "E1BNarra3",
             character: null,
             choices: [

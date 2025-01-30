@@ -183,74 +183,75 @@ if (isCookiePresent("screen")) {
       case "5":
         loadScreen5();
         break;
-      case "6":
-        loadLvl6();
-        break;
-      case "7":
-        loadLvl6bis();
-        break;
-      case "8":
-        loadLvl7();
-        break;
-      case "9":
-        loadLvl8();
-        break;
-      case "10":
-        loadLvl9();
-        break;
-      case "11":
-        loadLvl10();
-        break;
-      case "12":
-        loadLvl11();
-        break;
-      case "13":
-        loadLvl12();
-        break;
-      case "14":
-        loadLvl13();
-        break;
-      case "15":
-        loadLvl14();
-        break;
-      case "16":
-        loadLvl15();
-        break;
-      case "17":
-        loadLvl16();
-        break;
-      case "18":
-        loadLvlfin();
-        break;
-      case "19":
-        loadLvlfinAlt();
-        break;
-     
       default:
         loadScreen0();
     }
   } else {
-    console.log(isCookiePresent("level"), levelValue);
+    
     if (isCookiePresent("level")) {
       switch (levelValue) {
         case "1":
           loadLvl1();
           break;
-        case "2":
+        case "1bis":
           loadLvl1bis();
           break;
-        case "3":
+        case "2":
           loadLvl2();
           break;
-        case "4":
+        case "3":
           loadLvl3();
           break;
-        case "5":
+        case "4":
           loadLvl4();
           break;
-        case "2":
+        case "5":
           loadLvl5();
           break;
+        case "6":
+          loadLvl6();
+          break;
+        case "6bis":
+          loadLvl6bis();
+          break;
+        case "7":
+          loadLvl7();
+          break;
+        case "8":
+          loadLvl8();
+          break;
+        case "9":
+          loadLvl9();
+          break;
+        case "10":
+          loadLvl10();
+          break;
+        case "11":
+          loadLvl11();
+          break;
+        case "12":
+          loadLvl12();
+          break;
+        case "13":
+          loadLvl13();
+          break;
+        case "14":
+          loadLvl14();
+          break;
+        case "15":
+          loadLvl15();
+          break;
+        case "16":
+          loadLvl16();
+          break;
+        case "fin":
+          loadLvlfin();
+          break;
+        case "finAlt":
+          loadLvlfinAlt();
+          break;
+        default:
+          loadLvl1();
       }
     }
   }

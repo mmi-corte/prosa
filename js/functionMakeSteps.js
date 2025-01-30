@@ -1,6 +1,6 @@
 import { refreshPage } from "./refreshPage.js";
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
-import { addImgBackground, addImg } from './fonctionImg.js';
+import { ajouterBouton } from './button.js';
+import { addImgBackground, addMediaBackground, addImg } from './fonctionImg.js';
 import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
 
 const personnages = [`
@@ -344,8 +344,16 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         const step = steps[index];
         refreshPage(); // Réinitialise la page
 
-        // Ajoute l'image de fond
-        addImgBackground("container", step.background);
+        // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle 
+        const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
+    
+        if (isImg) {
+            // Ajoute l'image de fond
+            addImgBackground("container", step.background);
+        }else{
+            // Ajoute la video de fond
+            addMediaBackground("container", step.background)
+        }
 
         // Ajoute une boîte de dialogue
         const dialogClass = step.character ? 'diagBox' : 'diagBoxN'; // Utiliser diagBoxN pour narrateur, sinon diagBox
@@ -381,7 +389,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                 // Ajouter le texte du choix
                 addTxtNarration(choice.text, btnId, '');
 
-                if (step.choices.action) {
+                if (choice.action) {
                     // Ajouter l'événement au bouton
                     btn.addEventListener("click", choice.action);
                 }
