@@ -31,7 +31,7 @@ export function loadLvl2() {
 
     refreshPage();
     // Lance les étapes
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
     // update screen cookie
     setCookie("level", "2", 7, "/");
