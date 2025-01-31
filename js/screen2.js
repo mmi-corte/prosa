@@ -1,4 +1,9 @@
+// fichier : screen2.js
+// auteurs : MMI IUT de Corse
+// date : 01/2025
+// description : Ce fichier contient le code pour charger l'écran 2 du jeu.
 
+// import des fonctions nécessaires
 import { addDiv, addH1 } from './texte.js';
 import { addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
@@ -6,11 +11,15 @@ import { getCookie, setCookie } from './cookieHandler.js';
 import { loadScreen3 } from './screen3.js';
 import { refreshPage } from './refreshPage.js';
 
+// fonction pour charger l'écran 2
 export function loadScreen2() {
-    console.log("loadScreen2:je suis là");
+
+    console.log("loading loadScreen2...");
   
+    // refresh the page
     refreshPage();
 
+    // add content
     addImgBackground("container", "./assets/bg/fondVille.jpg");
     addH1("container", "Où te trouves-tu ?", "classTxtCity");
   
@@ -18,26 +27,26 @@ export function loadScreen2() {
     ajouterBouton("containerBtnCity", "Corte", "btnCorte", "btnclass");
     ajouterBouton("containerBtnCity", "Toulon", "btnToulon", "btnclass");
   
-    // Ajouter les gestionnaires d'événements pour chaque bouton
+    // Add button
     const btnCorte = document.getElementById("btnCorte");
     const btnToulon = document.getElementById("btnToulon");
   
-    // Lorsque le bouton Corte est cliqué, on stocke "Corte" dans le cookie
-    btnCorte.addEventListener("click", function () {
+    // binding
+    btnCorte.addEventListener("click", () => {
       setCookie("ville", "Corte", 7, "/"); // Stocker Corte dans le cookie
       loadScreen3();
     });
   
-    // Lorsque le bouton Toulon est cliqué, on stocke "Toulon" dans le cookie
-    btnToulon.addEventListener("click", function () {
+    btnToulon.addEventListener("click", () => {
       setCookie("ville", "Toulon", 7, "/"); // Stocker Toulon dans le cookie
       loadScreen3();
     });
     
     console.log("La ville choisie est : ", getCookie("ville"));
 
-     // update screen cookie
-     setCookie("screen", "2", 7, "/");
-  
+    // update screen cookie
+    setCookie("screen", "2", 7, "/");
+
+    console.log("loadScreen2 loaded!");
   }
  
