@@ -411,7 +411,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         container.innerHTML = `
             <div id ="diagBox" class="diagBox"></div>
             <a-scene embedded
-            arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5;"
+            arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5; detectionMode: mono_and_matrix; matrixCodeType: 4x4; debugUIEnabled: false;"
             renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
             >
 
