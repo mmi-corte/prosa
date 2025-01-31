@@ -282,3 +282,11 @@ if (isCookiePresent("screen")) {
   document.cookie = "screen=0; level=0; path=/;";
   loadScreen0();
 }
+
+// TODO: decomment to activate the service worker
+// if ("serviceWorker" in navigator) {
+//   navigator.serviceWorker
+//     .register("sw.js")
+//     .then(() => console.log("Service Worker enregistré"))
+//     .catch((error) => console.log("Erreur Service Worker :", error));
+// }
