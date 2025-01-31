@@ -1,3 +1,9 @@
+// fichier : screen4.js
+// auteurs : MMI IUT de Corse
+// date : 01/2025
+// description : Ce fichier contient le code pour charger l'écran 4 du jeu.
+
+// Importer les fonctions nécessaires depuis les fichiers source
 import { addDiv} from "./texte.js";
 import { ajouterBouton , addBtnImg} from "./button.js";
 import { setCookie} from "./cookieHandler.js";
@@ -6,11 +12,15 @@ import { popup } from "./popup.js";
 import { selectAvatar } from "./functionChangeStyle.js";
 import { loadScreen5 } from "./screen5.js";
 
+// Fonction pour charger l'écran 4 du jeu
 export function loadScreen4() {
-  console.log("loadScreen4 : je suis là.");
 
-  refreshPage(); // Rafraîchit la page
+  console.log("loading loadScreen4....");
 
+  // refresh the page
+  refreshPage();
+
+  // add content
   // Création des conteneurs pour les avatars
   addDiv("container", "containerAvatar", "divAvatar");
   addDiv("containerAvatar", "imgAvatarContainer", "imgAvatarContainer");
@@ -24,7 +34,7 @@ export function loadScreen4() {
   ];
 
   // Ajout des boutons d'avatars
-  avatarPaths.forEach((path, index) => {
+  avatarPaths.forEach((path, index) =>{
     addBtnImg("imgAvatarContainer", path, `a${index + 1}`);
   });
 
@@ -56,7 +66,8 @@ export function loadScreen4() {
     }
   });
 
-
   // update screen cookie 
   setCookie("screen", "4", 7, "/");
+
+  console.log("loadScreen4 loaded!");
 }

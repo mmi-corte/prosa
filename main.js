@@ -6,6 +6,7 @@ import {
   isCookiePresent,
 } from "./js/cookieHandler.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
+import { getCookie } from "./js/cookieHandler.js";
 
 import { loadScreen0 } from "./js/screen0.js";
 import { loadScreen1 } from "./js/screen1.js";
@@ -31,7 +32,6 @@ import { loadLvl14 } from "./js/lvl14.js";
 import { loadLvl15 } from "./js/lvl15.js";
 import { loadLvl16 } from "./js/lvl16.js";
 import { loadLvlfin } from "./js/lvlfin.js";
-//import 
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -153,18 +153,7 @@ SoundBtn.addEventListener("click", function () {
   }
 });
 
-//---------------------------------------------
-// logic du jeu
-//---------------------------------------------
-
-if (isCookiePresent("screen")) {
-  // Récupérer la valeur de "level"
-  screenValue = getCookieValue("screen");
-  levelValue = getCookieValue("level");
-
-  console.log(
-    `Le cookie 'screen' est présent avec la valeur level à : ${screenValue}`
-  );
+function nextScreen(screenValue, levelValue) {
 
   if (screenValue <= 5 && levelValue == 0) {
     switch (screenValue) {
@@ -255,8 +244,39 @@ if (isCookiePresent("screen")) {
       }
     }
   }
+}
+
+//---------------------------------------------
+// logic du jeu
+//---------------------------------------------
+
+if (isCookiePresent("screen")) {
+  // Récupérer la valeur de "level"
+  screenValue = getCookieValue("screen");
+  levelValue = getCookieValue("level");
+
+  console.log(
+    `Le cookie 'screen' est présent avec la valeur level à : ${screenValue}`
+  );
+
+  nextScreen(screenValue, levelValue);
+
+    // 🔹 Gérer le bouton "Retour" du navigateur
+  window.addEventListener("popstate", (event) => {
+    if (event.state) {
+      
+        // Récupérer les données de l'historique
+        let screen = String(parseInt(getCookie("screen"))-1);
+        let level = getCookie('level');
+
+        refreshPage();
+        
+        nextScreen(screen, level);
+    }
+  });
+
 } else {
-  console.log('Le cookie "screen" n\'est pas présent');
+  console.log('create cookie!');
 
   // Créer un cookie
   document.cookie = "screen=0; level=0; path=/;";

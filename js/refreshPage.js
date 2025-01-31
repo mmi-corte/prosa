@@ -1,7 +1,8 @@
+
 const container = document.getElementById("container");
 
 export function refreshPage() {    
-    if (container) {
+    if (container) {       
         // document.body.style.background = "";
         // container.style.backgroundImage = "none";
         container.style = "";

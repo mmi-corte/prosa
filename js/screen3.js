@@ -1,4 +1,9 @@
+// fichier : screen3.js
+// auteurs : MMI IUT de Corse
+// date : 01/2025
+// description : Ce fichier contient le code pour charger l'écran 3 du jeu.
 
+// import des fonctions nécessaires
 import { addForm } from './form.js';
 import { addTxt } from './texte.js';
 import { loadScreen4 } from './screen4.js';
@@ -6,12 +11,15 @@ import { refreshPage } from './refreshPage.js';
 import { getCookie, isCookiePresent, setCookie } from './cookieHandler.js';
 import { popup } from './popup.js';
 
+// fonction pour charger l'écran 3
 export function loadScreen3() {
 
-    console.log('loadScreen3:je suis là');
+    console.log('loading loadScreen3...');
     
+    // refresh the page
     refreshPage();
 
+    // add content
     addTxt("container", "Écris ton nom de héro", "txtFormName");
     addForm("container")
 
@@ -40,11 +48,13 @@ export function loadScreen3() {
     });
     
     // Effacer l'erreur lorsque l'utilisateur se concentre sur l'input
-    input.addEventListener("focus", function () {
+    input.addEventListener("focus", () => {
         input.placeholder = "Entrez votre nom"; // Restaurer le placeholder original
         input.style.border = "1px solid #ccc"; // Bordure par défaut
     });
     
-     // update screen cookie
-     setCookie("screen", "3", 7, "/");
+    // update screen cookie
+    setCookie("screen", "3", 7, "/");
+
+    console.log('loadScreen3 loaded!');
 }
