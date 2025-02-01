@@ -2,11 +2,12 @@ import { refreshPage } from "./js/refreshPage.js";
 import { addImg } from "./js/fonctionImg.js";
 import {
   setCookie,
+  getCookie,
   getCookieValue,
   isCookiePresent,
+  deleteCookie,
 } from "./js/cookieHandler.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
-import { getCookie } from "./js/cookieHandler.js";
 
 import { loadScreen0 } from "./js/screen0.js";
 import { loadScreen1 } from "./js/screen1.js";
@@ -88,9 +89,19 @@ if (DEBUG) {
   addImg("body", "assets/icons/home.png", "homeStyle", "resetGame");
 
   resetGame.addEventListener("click", () => {
+    // refresh page
     refreshPage();
+
+    // load screen0
     loadScreen0();
+
+    // update cookies
     setCookie("level", "0", 7, "/");
+    
+    if (isCookiePresent('ville')){
+      deleteCookie('ville');
+    }
+    
   });
 
   ////////////////////////////////////////////////////
@@ -279,6 +290,14 @@ if (isCookiePresent("screen")) {
   console.log('create cookie!');
 
   // Créer un cookie
-  document.cookie = "screen=0; level=0; path=/;";
+  document.cookie = "screen=0; level=0; path=/; Secure; SameSite=None";
   loadScreen0();
 }
+
+// TODO: decomment to activate the service worker
+// if ("serviceWorker" in navigator) {
+//   navigator.serviceWorker
+//     .register("sw.js")
+//     .then(() => console.log("Service Worker enregistré"))
+//     .catch((error) => console.log("Erreur Service Worker :", error));
+// }

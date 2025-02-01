@@ -34,15 +34,15 @@ export function loadScreen2() {
     // binding
     btnCorte.addEventListener("click", () => {
       setCookie("ville", "Corte", 7, "/"); // Stocker Corte dans le cookie
+      console.log("La ville choisie est : ", getCookie("ville"));
       loadScreen3();
     });
   
     btnToulon.addEventListener("click", () => {
       setCookie("ville", "Toulon", 7, "/"); // Stocker Toulon dans le cookie
+      console.log("La ville choisie est : ", getCookie("ville"));
       loadScreen3();
     });
-    
-    console.log("La ville choisie est : ", getCookie("ville"));
 
     // update screen cookie
     setCookie("screen", "2", 7, "/");

@@ -7,8 +7,9 @@
 import { ajouterBouton } from "./button.js";
 import { setCookie } from "./cookieHandler.js";
 import { refreshPage } from "./refreshPage.js";
-import { addAutoPlayVideo } from "./video.js";
+//import { addAutoPlayVideo } from "./video.js";
 import { loadLvl1 } from "./lvl1.js";
+import { addMediaBackground } from "./fonctionImg.js";
 
 // Fonction pour charger l'écran 5 du jeu
 export function loadScreen5() {
@@ -19,11 +20,12 @@ export function loadScreen5() {
   refreshPage();
 
   // add content
-  addAutoPlayVideo(
-    "container",
-    "./assets/video/IntroTourneeV1.mp4",
-    "introVideo"
-  );
+  addMediaBackground("container", "./assets/video/IntroTourneeV1.mp4")
+  // addAutoPlayVideo(
+  //   "container",
+  //   "./assets/video/IntroTourneeV1.mp4",
+  //   "introVideo"
+  // );
 
   ajouterBouton("container", "", "btnInv2", "btnInv");
 
