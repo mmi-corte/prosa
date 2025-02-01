@@ -81,8 +81,7 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
 // firestoreFunctions.js (ou main.js si vous préférez tout garder dans un seul fichier)
 
 
-function typeWriter(text, elementId, txtClassName, speed = 100) {
-    const element = document.getElementById(elementId);
+function typeWriter(text, element, txtClassName, speed = 100) {
     element.textContent = ""; // Réinitialise le contenu
     element.classList.add(txtClassName);
     let index = 0;
@@ -92,6 +91,7 @@ function typeWriter(text, elementId, txtClassName, speed = 100) {
             element.textContent += text.charAt(index); // Ajoute un caractère au contenu
             
             index++;
+
             setTimeout(writeCharacter, speed); // Appelle la fonction après un délai
         }
     }
@@ -102,20 +102,30 @@ function typeWriter(text, elementId, txtClassName, speed = 100) {
 
 // Fonction pour récupérer un scénario basé sur un stepCode
 export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
+    const conteneur = document.getElementById(conteneurId);
+    if (!conteneur) {
+        console.error(`Le conteneur avec l'ID "${conteneurId}" est introuvable.`);
+        return;
+    }
     try {
         const querySnapshot = await getDocs(collection(db, "scenario"));
-        querySnapshot.forEach((doc) => {
-            if (doc.data().stepCode === stepCode) {
-                // Trouver le conteneur par son ID et ajouter le texte
-                const conteneur = document.getElementById(conteneurId);
-                const text = document.createElement("p");
-                text.textContent = doc.data().txt;
-                text.className = txtClassName;
-                
-                conteneur.appendChild(text);
-                // typeWriter(doc.data().txt, conteneurId, txtClassName, 50); // Appel de la fonction typeWriter pour l'effet d'écriture
+        const docFound = querySnapshot.docs.find(doc => doc.data().stepCode === stepCode);
+
+        if (!docFound) {
+            console.warn(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
+            return;
+        }
+
+        if (docFound) {
+            const p = document.createElement("p");
+            if(txtClassName == '') {
+                p.textContent = docFound.data().txt;
+                p.className = txtClassName;
+            } else {
+                typeWriter(docFound.data().txt, p, txtClassName, 50);
             }
-        });
+            conteneur.appendChild(p);
+        }
     } catch (error) {
         console.error("Erreur lors de la récupération des données Firestore :", error);
     }

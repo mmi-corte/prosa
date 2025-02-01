@@ -32,3 +32,11 @@ export function setCookie(name, value, days = 7, path = "/") {
     value
   )}; ${expiresString}; path=${path}`; // Définir le cookie
 }
+
+// Fonction pour supprimer un cookie
+export function deleteCookie(name, path = "/") {
+  // Définir la date d'expiration à une date passée
+  const expiresString = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  // Définir le cookie avec une date d'expiration passée
+  document.cookie = `${name}=; ${expiresString}; path=${path}`;
+}
