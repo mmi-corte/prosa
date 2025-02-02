@@ -32,18 +32,32 @@ self.addEventListener('activate', (event) => {
 });
 
 // Lors de la récupération d'une requête, servir à partir du cache ou du réseau
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
+  // Vérifie si la requête est de type GET avant de la mettre en cache
+  if (event.request.method !== "GET") {
+    return; // On ignore les requêtes POST, PUT, DELETE, etc.
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        return cachedResponse; // Si le fichier est dans le cache, retourne-le
+        return cachedResponse; // Renvoie la réponse mise en cache si elle existe
       }
       return fetch(event.request).then((response) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, response.clone()); // Mise en cache de la réponse
+        // Vérifie si la réponse est valide avant de la stocker dans le cache
+        if (!response || response.status !== 200 || response.type !== "basic") {
           return response;
+        }
+
+        // Stocke la réponse dans le cache
+        let responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone);
         });
+
+        return response;
       });
     })
   );
 });
+
