@@ -149,7 +149,6 @@ ReloadBtn.addEventListener("click", () => {
 
 });
 
-
 window.addEventListener("DOMContentLoaded", () => {
 
   let screenValue = localStorage.getItem("screen") || "0";
@@ -165,9 +164,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 // TODO: decomment to activate the service worker
-// if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker
-//     .register("sw.js")
-//     .then(() => console.log("Service Worker enregistré"))
-//     .catch((error) => console.log("Erreur Service Worker :", error));
-// }
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("sw.js")
+    .then(() => log("Service Worker enregistré", "orange"))
+    .catch((error) => log(`Erreur Service Worker : ${error}`, "orange"));
+}
