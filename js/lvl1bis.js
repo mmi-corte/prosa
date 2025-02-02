@@ -1,6 +1,4 @@
 import { playSteps } from './functionMakeSteps.js';
-
-import { setCookie } from './cookieHandler.js';
 import { popup } from './popup.js';
 import { loadLvl3 } from './lvl3.js';
 
@@ -32,6 +30,5 @@ export function loadLvl1bis() {
     // Lance les étapes
     playSteps(steps);
 
-     // update screen cookie
-     setCookie("level", "1bis", 7, "/"); 
+    localStorage.setItem("level", "1bis");
 }

@@ -11,9 +11,7 @@ export function checkImageExists(url, callback) {
     img.src = url;
 }   
 
-
 window.onload = function() {
-
      // Exécuter la fonction lors du chargement de la page
      if (isMobileDevice()) {
         console.log("Vous utilisez un appareil mobile.");

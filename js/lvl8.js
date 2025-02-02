@@ -16,6 +16,7 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
+import { loadLvl12 } from "./lvl12.js";
 
 
 
@@ -26,15 +27,15 @@ export function loadLvl8() {
     ]
         if (Ruse) { 
             const steps = [
-                { character : "NarraChara", Txt : "E8NarraRuseT", name : "Narrateur" },
+                { character : "NarraChara", Txt : "E8NarraRuseT"},
                 { character : "MessChara", popup : "E8Mess" },
-                { character : "NarraChara", Txt : "E8NarraRuseT2", name : "Narrateur" },
-                { character : "BergerChara", Txt : "E8BergerRuseT", name : "Berger" },
-                { character : "NarraChara", Txt : "E8NarraRuseT3", name : "Narrateur" },
-                { character : "BergerChara", Txt : "E8BergerRuseT2", name : "Berger" },
-                { character : "NarraChara", Txt : "E8NarraRuseT4", name : "Narrateur" },
-                { character : "BergerChara", Txt : "E8BergerRuseT3", name : "Berger" },
-                { character : "NarraChara", Txt : "E8NarraRuseT5", name : "Narrateur" },
+                { character : "NarraChara", Txt : "E8NarraRuseT2"},
+                { character : "BergerChara", Txt : "E8BergerRuseT", name : "E8BergerRuseT" },
+                { character : "NarraChara", Txt : "E8NarraRuseT3"},
+                { character : "BergerChara", Txt : "E8BergerRuseT2", name : "E8BergerRuseT2" },
+                { character : "NarraChara", Txt : "E8NarraRuseT4"},
+                { character : "BergerChara", Txt : "E8BergerRuseT3", name : "E8BergerRuseT3" },
+                { character : "NarraChara", Txt : "E8NarraRuseT5"},
                
             ];
             playSteps(steps); // Démarrage des étapes
@@ -44,17 +45,17 @@ export function loadLvl8() {
        
         if (lion) { 
             const steps = [
-                { character : "NarraChara", Txt : "E8NarraLeoT", name : "Narrateur" },
-                { character : "StregaChara", Txt : "E8StregaLeoT", name : "Strega" },
-                { character : "NarraChara", Txt : "E8NarraLeoT2", name : "Narrateur" },
-                { character : "StregaChara", Txt : "E8StregaT2", name : "Strega" },
-                { character : "NarraChara", Txt : "E8NarraLeoT3", name : "Narrateur" },
+                { character : "NarraChara", Txt : "E8NarraLeoT"},
+                { character : "StregaChara", Txt : "E8StregaLeoT", name : "E8StregaLeoT" },
+                { character : "NarraChara", Txt : "E8NarraLeoT2" },
+                { character : "StregaChara", Txt : "E8StregaT2", name : "E8StregaT2" },
+                { character : "NarraChara", Txt : "E8NarraLeoT3"},
                 { character : "MessChara", popup : "E8MessLeoT" },
-                { character : "NarraChara", Txt : "E8NarraLeoT4", name : "Narrateur" },
-                { character : "StregaChara", Txt : "E8StregaLeoT3", name : "Strega" },
-                { character : "NarraChara", Txt : "E8NarraLeoT5", name : "Narrateur" },
-                { character : "BergerChara", Txt : "E8BergerLeoT", name : "Berger" },
-                { character : "NarraChara", Txt : "E8NarraLeoT6", name : "Narrateur" },
+                { character : "NarraChara", Txt : "E8NarraLeoT4"},
+                { character : "StregaChara", Txt : "E8StregaLeoT3", name : "E8StregaLeoT3" },
+                { character : "NarraChara", Txt : "E8NarraLeoT5"},
+                { character : "BergerChara", Txt : "E8BergerLeoT", name : "E8BergerLeoT" },
+                { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: loadLvl12},
             ];
             playSteps(steps); // Démarrage des étapes
 
@@ -64,5 +65,7 @@ export function loadLvl8() {
 
     refreshPage();
     console.log("loadLvl8 :  je suis là");
+
+    localStorage.setItem("level", "8");
     
 }

@@ -6,19 +6,20 @@
 // Importer les fonctions nécessaires depuis les fichiers source
 import { addDiv} from "./texte.js";
 import { ajouterBouton , addBtnImg} from "./button.js";
-import { setCookie} from "./cookieHandler.js";
 import { refreshPage } from "./refreshPage.js";
 import { popup } from "./popup.js";
 import { selectAvatar } from "./functionChangeStyle.js";
-import { loadScreen5 } from "./screen5.js";
+import { nextScreen } from "./navigation.js";
+import {log} from "./trace.js"
 
 // Fonction pour charger l'écran 4 du jeu
 export function loadScreen4() {
 
-  console.log("loading loadScreen4....");
-
   // refresh the page
   refreshPage();
+  
+  // begin trace
+  log("Loading S4....","blue");
 
   // add content
   // Création des conteneurs pour les avatars
@@ -57,17 +58,16 @@ export function loadScreen4() {
 
     // Vérifie si un avatar a été sélectionné
     if (!selectedAvatar) {
-        popup("Vous n'avez pas sélectionné d'avatar !");
-        console.log("Aucun avatar sélectionné !");
-    }else{
-      console.log("Avatar sélectionné :", selectedAvatar);
-      // Passer à l'écran suivant
-      loadScreen5();
+      popup("Vous n'avez pas sélectionné d'avatar !");
+      log("Aucun avatar sélectionné !","red");
+    } else {
+      log(`Avatar sélectionné : ${selectedAvatar}`, "green");
+      
+      // move to the next page
+      nextScreen("5");
     }
+
   });
-
-  // update screen cookie 
-  setCookie("screen", "4", 7, "/");
-
-  console.log("loadScreen4 loaded!");
+  
+  log("S4 loaded!", "blue");
 }

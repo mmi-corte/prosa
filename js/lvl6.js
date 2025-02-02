@@ -104,5 +104,7 @@ export function loadLvl6() {
     ];
     playSteps(steps, 0, false, null ) ; // Démarrage des étapes
   }
-  setCookie("level", "6", 7, "/");
+  
+  localStorage.setItem("level", "6");
+
 }
