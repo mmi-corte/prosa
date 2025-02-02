@@ -6,14 +6,15 @@
 // Importer les fonctions nécessaires depuis les fichiers source
 import { addImg, addImgBackground } from './fonctionImg.js';
 import { ajouterBouton } from './button.js';
-import { loadScreen1 } from './screen1.js';
-import { setCookie } from './cookieHandler.js';
 import { loadSound } from './Sound/sound.js';
+import { nextScreen } from './navigation.js';
+import { log } from './trace.js';
 
 // Fonction pour charger l'écran 1 du jeu
 export function loadScreen0() {
 
-  console.log("loading loadScreen0...");
+  // begin trace
+  log("Loading S0...", "blue");
   
   // load sound intro but dont play
   loadSound("assets/sound/intro.mp3", true);
@@ -32,13 +33,12 @@ export function loadScreen0() {
 
   // binding
   btn1.addEventListener("click", () =>{
-    loadScreen1();
+    // move to the next page
+    nextScreen("1");
   });
-
-  // update screen cookie
-  setCookie("screen", "0", 7, "/");
-
-  console.log("loadScreen0 loaded!");
+  
+  // end trace
+  log("S0 loaded!", "blue");
 }
 
 

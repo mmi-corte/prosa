@@ -32,7 +32,6 @@ export function loadLvl9() {
 
 playSteps(steps); // Démarrage des étapes
 
-// update screen cookie
-setCookie("level", "9", 7, "/"); 
+localStorage.setItem("level", "9");
     
 }

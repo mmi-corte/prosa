@@ -18,9 +18,6 @@ import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
 import { playSteps } from "./functionMakeSteps.js";
 
-
-
-
 export function loadLvl4() {
 
     const steps1 =[
@@ -80,10 +77,8 @@ export function loadLvl4() {
     
 
     refreshPage();
-    console.log("loadLvl4 :  je suis là");
-
-    playSteps(steps, 0, true, 4);
     
-    // update screen cookie
-    setCookie("level", "4", 7, "/"); 
+    console.log("loadLvl4 :  je suis là");
+    
+    localStorage.setItem("level", "4"); 
 }

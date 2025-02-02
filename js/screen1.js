@@ -7,18 +7,19 @@
 import { addTxt, addTxtWithBoldWord } from "./texte.js";
 import { ajouterBouton } from './button.js';
 import { addImg } from './fonctionImg.js';
-import { loadScreen2 } from './screen2.js';
-import { setCookie } from './cookieHandler.js';
+import { nextScreen } from './navigation.js';
 import { addSVG } from './svg.js';
 import { refreshPage } from './refreshPage.js';
+import { log } from './trace.js';
 
 // fonction pour charger l'écran 1
 export function loadScreen1(){
 
-  console.log('loading loadScreen1...');
-
   // clear page
   refreshPage();
+
+  // begin trace
+  log('Loading S1...', "blue");
 
   // container div
   const container = document.getElementById("container");
@@ -39,12 +40,11 @@ export function loadScreen1(){
 
   // binding
   btn1.addEventListener("click", () =>{
-    loadScreen2();
+    // move to the next page
+    nextScreen("2");
   });
-
-  // update screen cookie
-  setCookie("screen", "1", 7, "/");
   
-  console.log('loadScreen1 loaded!');
+  // end trace
+  log('S1 loaded!', "blue");
 
 }

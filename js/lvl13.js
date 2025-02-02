@@ -27,5 +27,7 @@ export function loadLvl13() {
     //faire combat
 
     playSteps(steps); // Démarrage des étapes
+
+    localStorage.setItem("level", "13");
     
 }

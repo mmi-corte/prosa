@@ -2,6 +2,7 @@ import { refreshPage } from "./refreshPage.js";
 import { ajouterBouton } from './button.js';
 import { addImgBackground, addMediaBackground, addImg } from './fonctionImg.js';
 import { addTxtNarration, addNameCharacter, addDiv } from './texte.js';
+import {log} from "./trace.js";
 
 const personnages = [`
             <!-- premier plan  (en avant) -->
@@ -375,6 +376,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         // Gestion des choix ou du bouton "Suivant"
         if (step.choices) {
             step.choices.forEach((choice, i) => {
+                
                 const btnId = `btnChoix${i + 1}`;
                 const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
 
@@ -394,9 +396,11 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                     btn.addEventListener("click", choice.action);
                 }
 
+                
             });
         } else {
-            console.log("passe à l'étape", index + 1);
+            log(`Loading L${localStorage.getItem("level")+1}.E${index+1}`, "purple");
+            // console.log("passe à l'étape", index + 1);
             ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
             const btnNext = document.getElementById("btnNext");
             btnNext.addEventListener("click", () => playSteps(steps, index + 1));
@@ -404,9 +408,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     }
     else {
 
-
         const container = document.getElementById("container");
-
 
         container.innerHTML = `
             <div id ="diagBox" class="diagBox"></div>
@@ -432,6 +434,8 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         function charaChanger(index, steps) {
 
             if (index >= steps.length) return; // Fin des étapes
+
+            log(`Loading L${localStorage.getItem("level")+1}.E${i}`, "purple");
 
             const step = steps[index];
 

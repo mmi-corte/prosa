@@ -1,5 +1,3 @@
-
-import { setCookie } from './cookieHandler.js';
 import {popup} from './popup.js';
 import { refreshPage } from './refreshPage.js';
 import { playSteps } from "./functionMakeSteps.js";
@@ -30,9 +28,9 @@ export function loadLvl2() {
     ]
 
     refreshPage();
+
     // Lance les étapes
     playSteps(steps, 0, true, 2);
 
-    // update screen cookie
-    setCookie("level", "2", 7, "/");
+    localStorage.setItem("level", "2");
 }
