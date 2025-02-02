@@ -1,9 +1,6 @@
 import { refreshPage } from "./refreshPage.js";
-import { setCookie } from "./cookieHandler.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { loadLvl16 } from "./lvl16.js";
-
-
 
 export function loadLvl11() {
 
