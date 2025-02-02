@@ -23,170 +23,140 @@ import { loadLvl15 } from "./lvl15.js";
 import { loadLvl16 } from "./lvl16.js";
 import { loadLvlfin } from "./lvlfin.js";
 import { refreshPage } from "./refreshPage.js";
+import { log } from "./trace.js";
 
-export function nextScreen(screenValue="0", levelValue="0") {
+export function nextScreen(screenValue, levelValue="0", updateHistory=true) {
   
-    // Mise à jour de l'URL et historique
-    let lastScreen = screenValue;
-    let lastLevel = levelValue;
-  
-    if (screenValue <= 5 && levelValue == 0) {
-      switch (screenValue) {
+  log(`➡️ nextScreen appelé avec : ${ screenValue}, ${levelValue}, ${updateHistory}`);
+
+  // Mise à jour de l'URL et historique
+  let lastScreen = screenValue;
+  let lastLevel = levelValue;
+
+  if (screenValue <= 5 && levelValue == 0) {
+    switch (screenValue) {
+      case "1":        
+        loadScreen1();
+        break;
+      case "2":
+        loadScreen2();
+        break;
+      case "3":
+        loadScreen3();
+        break;
+      case "4":
+        loadScreen4();
+        break;
+      case "5":
+        loadScreen5();
+        break;
+      default:
+        loadScreen0();
+    }
+  } else {
+      switch (levelValue) {
         case "1":
-          lastScreen = "0"; 
-          loadScreen1();
-          localStorage.setItem("screen", "1");
+          loadLvl1();
+          break;
+        case "1bis":
+          loadLvl1bis();
           break;
         case "2":
-          lastScreen = "1";
-          loadScreen2();
-          localStorage.setItem("screen", "2");
+          loadLvl2();
           break;
         case "3":
-          lastScreen = "2";
-          loadScreen3();
-          localStorage.setItem("screen", "3");
+          loadLvl3();
           break;
         case "4":
-          lastScreen = "3";
-          loadScreen4();
-          localStorage.setItem("screen", "4");
+          loadLvl4();
           break;
         case "5":
-          lastScreen = "4";
-          loadScreen5();
-          localStorage.setItem("screen", "5");
+          loadLvl5();
+          break;
+        case "6":
+          loadLvl6();
+          break;
+        case "6bis":
+          loadLvl6bis();
+          break;
+        case "7":
+          loadLvl7();
+          break;
+        case "8":
+          loadLvl8();
+          break;
+        case "9":
+          loadLvl9();
+          break;
+        case "10":
+          loadLvl10();
+          break;
+        case "11":
+          loadLvl11();
+          break;
+        case "12":
+          loadLvl12();
+          break;
+        case "13":
+          loadLvl13();
+          break;
+        case "14":
+          loadLvl14();
+          break;
+        case "15":
+          loadLvl15();
+          break;
+        case "16":
+          loadLvl16();
+          break;
+        case "fin":
+          loadLvlfin();
+          break;
+        case "finAlt":
+          loadLvlfinAlt();
           break;
         default:
-          lastScreen = "0";
-          loadScreen0();
-          localStorage.setItem("screen", "0");
-      }
-    } else {
-        switch (levelValue) {
-          case "1":
-            lastLevel = "0";
-            loadLvl1();
-            localStorage.setItem("level", "1");
-            break;
-          case "1bis":
-            lastLevel = "1";
-            loadLvl1bis();
-            localStorage.setItem("level", "1bis");
-            break;
-          case "2":
-            lastLevel = "1";
-            loadLvl2();
-            localStorage.setItem("level", "2");
-            break;
-          case "3":
-            lastLevel = "2";
-            loadLvl3();
-            localStorage.setItem("level", "3");
-            break;
-          case "4":
-            lastLevel = "3";
-            loadLvl4();
-            localStorage.setItem("level", "4");
-            break;
-          case "5":
-            lastLevel = "4";
-            loadLvl5();
-            localStorage.setItem("level", "5");
-            break;
-          case "6":
-            lastLevel = "5";
-            loadLvl6();
-            localStorage.setItem("level", "6");
-            break;
-          case "6bis":
-            lastLevel = "5";
-            loadLvl6bis();
-            localStorage.setItem("level", "6bis");
-            break;
-          case "7":
-            lastLevel = "6";
-            loadLvl7();
-            localStorage.setItem("level", "7");
-            break;
-          case "8":
-            lastLevel = "7";
-            loadLvl8();
-            localStorage.setItem("level", "8");
-            break;
-          case "9":
-            lastLevel = "8";
-            loadLvl9();
-            localStorage.setItem("level", "9");
-            break;
-          case "10":
-            lastLevel = "9";
-            loadLvl10();
-            localStorage.setItem("level", "10");
-            break;
-          case "11":
-            lastLevel = "10";
-            loadLvl11();
-            localStorage.setItem("level", "11");
-            break;
-          case "12":
-            lastLevel = "11";
-            loadLvl12();
-            localStorage.setItem("level", "12");
-            break;
-          case "13":
-            lastLevel = "12";
-            loadLvl13();
-            localStorage.setItem("level", "13");
-            break;
-          case "14":
-            lastLevel = "13";
-            loadLvl14();
-            localStorage.setItem("level", "14");
-            break;
-          case "15":
-            lastLevel = "14";
-            loadLvl15();
-            localStorage.setItem("level", "15");
-            break;
-          case "16":
-            lastLevel = "15";
-            loadLvl16();
-            localStorage.setItem("level", "16");
-            break;
-          case "fin":
-            lastLevel = "16";
-            loadLvlfin();
-            localStorage.setItem("level", "fin");
-            break;
-          case "finAlt":
-            lastLevel = "16";
-            loadLvlfinAlt();
-            localStorage.setItem("level", "finAlt");
-            break;
-          default:
-            lastLevel = "0";
-            loadLvl1();
-            localStorage.setItem("level", "0");
-      }
+          loadLvl1();
     }
-  
-    let newState = { screen: lastScreen, level: lastLevel }
+  }
+
+  // Mise à jour du dernier écran visité
+  localStorage.setItem("screen", lastScreen);
+  localStorage.setItem("level", lastLevel);
+
+  log(`📌 lastScreen défini à :${lastScreen}`);
+  log(`📌 lastLevel défini à :${lastLevel}`);
+
+  // Mise à jour de l'historique
+  if (updateHistory) {
+    let newState = { screen: lastScreen, level: lastLevel };
+    console.log("📝 pushState avec :", newState);
     history.pushState(newState, "", "");
   }
+
+  // gestion de l'apparition du bouton qui permet de rejouer à partir du level 1 - etape 1
+  const reloadBtn = document.getElementById("ReloadBtn");
+  if(reloadBtn) {
+    reloadBtn.style.display = lastLevel > 0 ? "block" : "none";
+  }
+
+}
 
   // Handle the browser's "Back" button
 window.addEventListener("popstate", (event) => {
     if (event.state) {
-      let { screen, level } = history.state;
+      let { screen, level } = event.state;
   
       // Refresh the current view or data
       refreshPage();
-  
-      localStorage.setItem("screen", screen);
-      localStorage.setItem("level", level);
-  
+        
+      log(`🔙 popstate screen:${screen}, level:${level}`, "grey");
+
       // Navigate to the previous screen if needed
-      nextScreen(screen, level);
+      nextScreen(screen, level, false);
+
+    } else {
+      log("❌ Aucun état dans event.state, retour à l'accueil.");
+      nextScreen("0", "0", false);
     }
 });

@@ -400,7 +400,6 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             });
         } else {
             log(`Loading L${localStorage.getItem("level")+1}.E${index+1}`, "purple");
-            // console.log("passe à l'étape", index + 1);
             ajouterBouton('diagBox', '', 'btnNext', 'btnInv');
             const btnNext = document.getElementById("btnNext");
             btnNext.addEventListener("click", () => playSteps(steps, index + 1));
@@ -442,7 +441,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             const charaContainer = document.querySelector("#marker");
             const diagBox = document.querySelector("#diagBox");
             diagBox.innerHTML = "";
-            console.log(charaContainer);
+            log(charaContainer);
 
             switch (step.character) {
                         case "BergerChara":
@@ -541,8 +540,8 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                         const diagBox = document.querySelector("#diagBox");
                         diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
                         diagBox.style.color = "rgb(255, 255, 255)";
-                    }
-                    else
+                    
+                    }else
                     {
                         addNameCharacter(step.Txt, 'diagBox', 'nameCharacter'); // Le nom est ajouté dans le même div
                         addTxtNarration(step.Txt, 'diagBox', 'dialogBox');

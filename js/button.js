@@ -18,8 +18,6 @@ export function ajouterBouton(conteneurId, txtBtn, btnId, btnClassName) {
     new_bouton.id = btnId;
     new_bouton.className=btnClassName;
 
-
-
     // Ajoute le bouton à la div
     conteneur.appendChild(new_bouton);
 

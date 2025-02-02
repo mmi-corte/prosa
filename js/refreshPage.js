@@ -3,7 +3,8 @@ import {log} from "./trace.js"
 
 const container = document.getElementById("container");
 
-export function refreshPage() {    
+export function refreshPage() {  
+
     if (container) {       
         log("---------- Cleaning page ----------", "blue", "normal");
         // document.body.style.background = "";
