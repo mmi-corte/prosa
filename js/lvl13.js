@@ -16,6 +16,7 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
+import { loadLvl14 } from "./lvl14.js";
 
 
 
@@ -24,10 +25,28 @@ export function loadLvl13() {
     const steps = [
         { background: 'assets/bg/fondEtape13.png', narration: "E13Narra", character: null },
     ];
+    playSteps(steps, 0, false, 4);
     //faire combat
+    let weapons = [
+        {
+            name: "Epée",
+            damage: 10,
+        },
+    ];
 
-    playSteps(steps); // Démarrage des étapes
+    //test fight
+    async function luncher() {
+        const fightResult = await lunchFight(skin, weapons, enemies[2]);
+        console.log(fightResult);
+    }
+    luncher();
+    const steps2 = [
+        { background: 'assets/bg/fondEtape13.png', narration: "E13Narra2", character: null , nextLvl: loadLvl14},
+    ];
+    playSteps(steps, 0, false, 4); 
+   
 
+    
     localStorage.setItem("level", "13");
     
 }

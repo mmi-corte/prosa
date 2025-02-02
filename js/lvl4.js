@@ -56,21 +56,21 @@ export function loadLvl4() {
 
     if(step.choices.answear1||step.choices.answear2){
         const steps2 =[
-            {character : "FulettuChara", Txt : "E4FulettuTrue", name : "Fulettu"},
-            {character : "FuletounChara", Txt : "E4FouletounTrue", name : "Fuletoun"},
-            {character : "FulettuChara", Txt : "E4FouletounTrue2", name : "Fuletoun"},
-            {character : "NarraChara", Txt : "E4NarrateurTrue", name : "Narrateur"},
+            {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},
+            {character : "FuletounChara", Txt : "E4FouletounTrue", name : "E4FouletounTrue"},
+            {character : "FulettuChara", Txt : "E4FouletounTrue2", name : "E4FouletounTrue2"},
+            {character : "NarraChara", Txt : "E4NarrateurTrue"},
         ]
         //playSteps();
 
         const steps3 =[
-            {character : "FulettuChara", Txt : "E4FulettuFalse", name : "Fulettu"},
-            {character : "FuletounChara", Txt : "E4FouletounFalse", name : "Fuletoun"},
-            {character : "FulettuChara", Txt : "E4FulettuFalse2", name : "Fulettu"},
-            {character : "FuletounChara", Txt : "E4FouletounFalse2", name : "Fuletoun"},
-            {character : "FulettuChara", Txt : "E4FulettuFalse3", name : "Fulettu"},
-            {character : "FuletounChara", Txt : "E4FouletounFalse3", name : "Fuletoun"},
-            {character : "FulettuChara", Txt : "E4FulettuFalse4", name : "Fulettu"},
+            {character : "FulettuChara", Txt : "E4FulettuFalse", name : "E4FulettuFalse"},
+            {character : "FuletounChara", Txt : "E4FouletounFalse", name : "E4FouletounFalse"},
+            {character : "FulettuChara", Txt : "E4FulettuFalse2", name : "E4FulettuFalse2"},
+            {character : "FuletounChara", Txt : "E4FouletounFalse2", name : "E4FouletounFalse2"},
+            {character : "FulettuChara", Txt : "E4FulettuFalse3", name : "E4FulettuFalse3"},
+            {character : "FuletounChara", Txt : "E4FouletounFalse3", name : "E4FouletounFalse3"},
+            {character : "FulettuChara", Txt : "E4FulettuFalse4", name : "E4FulettuFalse4"},
         ]
     }
     
