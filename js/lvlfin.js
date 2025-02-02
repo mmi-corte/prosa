@@ -23,5 +23,5 @@ export function loadLvlfin() {
 
     refreshPage();
     console.log("loadLvlfin :  je suis là");
-    
+    localStorage.setItem("level", "fin");
 }

@@ -16,7 +16,7 @@ import { addAutoPlayVideo } from './video.js';
 import { step2, step6 } from './functionstep.js'
 import { ARBerger } from './ARFunction.js';
 import { popup } from './popup.js';
-
+import { playSteps } from "./functionMakeSteps.js";
 
 
 export function loadLvl5() {
@@ -37,9 +37,12 @@ export function loadLvl5() {
         {character : "NarraChara", Txt : "E5Narra7", name : "Narrateur"},
         
     ]
+
     refreshPage();
+    
     console.log("loadLvl5 :  je suis là");
     
-    // update screen cookie
-    setCookie("level", "5", 7, "/");
+    playSteps(steps);
+
+    localStorage.setItem("level", "5");
 }

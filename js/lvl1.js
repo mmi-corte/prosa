@@ -1,12 +1,15 @@
 import { loadLvl2 } from "./lvl2.js";
 
 import { playSteps } from "./functionMakeSteps.js";
-import { setCookie } from "./cookieHandler.js";
 import { loadLvl1bis } from "./lvl1bis.js";
 import { stopSound} from "./Sound/sound.js";
+import { log } from "./trace.js";
 
 export function loadLvl1() {
 
+    log("Enter in L1", "blue");
+
+    // stop the sounf used for the intro
     stopSound('assets/sound/intro.mp3');
     
     // Liste des étapes du niveau 1
@@ -37,10 +40,7 @@ export function loadLvl1() {
     ];
 
     playSteps(steps); // Démarrage des étapes
-    
-    // update screen cookie
-    setCookie("level", "1", 7, "/");
-  
+
 }
 
 

@@ -36,7 +36,6 @@ export function loadLvl6bis() {
 
     playSteps(steps); // Démarrage des étapes
  
-    // update screen cookie
-    setCookie("level", "6bis", 7, "/");
+    localStorage.setItem("level", "6bis");
     
 }

@@ -1,43 +1,12 @@
 import { refreshPage } from "./js/refreshPage.js";
 import { addImg } from "./js/fonctionImg.js";
-import {
-  setCookie,
-  getCookie,
-  getCookieValue,
-  isCookiePresent,
-  deleteCookie,
-} from "./js/cookieHandler.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
-
-import { loadScreen0 } from "./js/screen0.js";
-import { loadScreen1 } from "./js/screen1.js";
-import { loadScreen2 } from "./js/screen2.js";
-import { loadScreen5 } from "./js/screen5.js";
-import { loadScreen4 } from "./js/screen4.js";
-import { loadScreen3 } from "./js/screen3.js";
-import { loadLvl1 } from "./js/lvl1.js";
-import { loadLvl1bis } from "./js/lvl1bis.js";
-import { loadLvl2 } from "./js/lvl2.js";
-import { loadLvl3 } from "./js/lvl3.js";
-import { loadLvl4 } from "./js/lvl4.js";
-import { loadLvl5 } from "./js/lvl5.js";
-import { loadLvl6 } from "./js/lvl6.js";
-import { loadLvl6bis } from "./js/lvl6bis.js";
-import { loadLvl7 } from "./js/lvl7.js";
-import { loadLvl8 } from "./js/lvl8.js";
-import { loadLvl9 } from "./js/lvl9.js";
-import { loadLvl10 } from "./js/lvl10.js";
-import { loadLvl11 } from "./js/lvl11.js";
-import { loadLvl12 } from "./js/lvl12.js";
-import { loadLvl14 } from "./js/lvl14.js";
-import { loadLvl15 } from "./js/lvl15.js";
-import { loadLvl16 } from "./js/lvl16.js";
-import { loadLvlfin } from "./js/lvlfin.js";
+import { nextScreen } from "./js/navigation.js";
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
 
-const DEBUG = true;
+export const DEBUG = true;
 
 let weapons = [
   {
@@ -77,9 +46,6 @@ const enemies = [
   },
 ];
 
-let levelValue = 0;
-let screenValue = 0;
-
 // addOverlay ('audioId' , 'audioSrc')
 
 // Resey Home btn
@@ -88,20 +54,22 @@ if (DEBUG) {
   body.id = "body";
   addImg("body", "assets/icons/home.png", "homeStyle", "resetGame");
 
+  // Ajout du bouton pour revenir à l'écran d'accueil
   resetGame.addEventListener("click", () => {
     // refresh page
     refreshPage();
 
-    // load screen0
-    loadScreen0();
+    // reset local storage
+    localStorage.clear();
+    localStorage.setItem("screen", "0");
+    localStorage.setItem("level", "0");
 
-    // update cookies
-    setCookie("level", "0", 7, "/");
-    
-    if (isCookiePresent('ville')){
-      deleteCookie('ville');
-    }
-    
+    // load screen0
+    nextScreen("0","0");
+
+    let newState = { screen: "0", level: "0" }
+    history.pushState(newState, "", "");
+
   });
 
   ////////////////////////////////////////////////////
@@ -164,135 +132,14 @@ SoundBtn.addEventListener("click", function () {
   }
 });
 
-function nextScreen(screenValue, levelValue) {
+let screenValue = localStorage.getItem("screen") || "0";
+let levelValue = localStorage.getItem("level") || "0";
 
-  if (screenValue <= 5 && levelValue == 0) {
-    switch (screenValue) {
-      case "1":
-        loadScreen1();
-        break;
-      case "2":
-        loadScreen2();
-        break;
-      case "3":
-        loadScreen3();
-        break;
-      case "4":
-        loadScreen4();
-        break;
-      case "5":
-        loadScreen5();
-        break;
-      default:
-        loadScreen0();
-    }
-  } else {
-    
-    if (isCookiePresent("level")) {
-      switch (levelValue) {
-        case "1":
-          loadLvl1();
-          break;
-        case "1bis":
-          loadLvl1bis();
-          break;
-        case "2":
-          loadLvl2();
-          break;
-        case "3":
-          loadLvl3();
-          break;
-        case "4":
-          loadLvl4();
-          break;
-        case "5":
-          loadLvl5();
-          break;
-        case "6":
-          loadLvl6();
-          break;
-        case "6bis":
-          loadLvl6bis();
-          break;
-        case "7":
-          loadLvl7();
-          break;
-        case "8":
-          loadLvl8();
-          break;
-        case "9":
-          loadLvl9();
-          break;
-        case "10":
-          loadLvl10();
-          break;
-        case "11":
-          loadLvl11();
-          break;
-        case "12":
-          loadLvl12();
-          break;
-        case "13":
-          loadLvl13();
-          break;
-        case "14":
-          loadLvl14();
-          break;
-        case "15":
-          loadLvl15();
-          break;
-        case "16":
-          loadLvl16();
-          break;
-        case "fin":
-          loadLvlfin();
-          break;
-        case "finAlt":
-          loadLvlfinAlt();
-          break;
-        default:
-          loadLvl1();
-      }
-    }
-  }
-}
+localStorage.setItem("screen", screenValue);
+localStorage.setItem("level", levelValue);
 
-//---------------------------------------------
-// logic du jeu
-//---------------------------------------------
-
-if (isCookiePresent("screen")) {
-  // Récupérer la valeur de "level"
-  screenValue = getCookieValue("screen");
-  levelValue = getCookieValue("level");
-
-  console.log(
-    `Le cookie 'screen' est présent avec la valeur level à : ${screenValue}`
-  );
-
-  nextScreen(screenValue, levelValue);
-
-    // 🔹 Gérer le bouton "Retour" du navigateur
-  window.addEventListener("popstate", (event) => {
-    if (event.state) {
-      
-        // Récupérer les données de l'historique
-        let screen = String(parseInt(getCookie("screen"))-1);
-        let level = getCookie('level');
-
-        refreshPage();
-        
-        nextScreen(screen, level);
-    }
-  });
-
-} else {
-  console.log('create cookie!');
-
-  // Créer un cookie
-  document.cookie = "screen=0; level=0; path=/; Secure; SameSite=None";
-  loadScreen0();
-}
+// Load the first screen
+nextScreen(screenValue, levelValue);
 
 // TODO: decomment to activate the service worker
 // if ("serviceWorker" in navigator) {

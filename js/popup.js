@@ -31,7 +31,7 @@ export function popup(txt, imgSrc="")
             OverlayImage.src = imgSrc;
             overlay.appendChild(OverlayImage);
         } else {
-            console.error("Image not found:", imgSrc);
+            console.warn("Image not found:", imgSrc);
         }
     });
 

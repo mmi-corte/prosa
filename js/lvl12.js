@@ -23,5 +23,6 @@ export function loadLvl12() {
 
     refreshPage();
     console.log("loadLvl12 :  je suis là");
-    
+ 
+    localStorage.setItem( "level", "12" );
 }
