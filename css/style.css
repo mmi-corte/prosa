@@ -842,6 +842,7 @@ strong {
     }
   }
 
+
 .homeStyle {
     z-index: 999;
     position: fixed;
@@ -854,7 +855,6 @@ strong {
 /********************/
 /* Buttons          */
 /********************/
-
 #SoundBtn {
     right: 10px;
 }
@@ -873,7 +873,6 @@ strong {
 /********************/
 /* Icons            */
 /********************/
-
 #ReloadIcon, #SoundIcon {
     width : 40px;
 }
