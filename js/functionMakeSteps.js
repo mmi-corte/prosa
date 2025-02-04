@@ -434,7 +434,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
 
             if (index >= steps.length) return; // Fin des étapes
 
-            log(`Loading L${localStorage.getItem("level")+1}.E${i}`, "purple");
+            log(`Loading L${localStorage.getItem("level")+1}.E${index}`, "purple");
 
             const step = steps[index];
 
