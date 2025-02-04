@@ -61,7 +61,7 @@ export function addMediaBackground(containerID, mediaURL) {
     }
 }
 
-export function addImg(containerID,url,style,targetId) {
+export function addImg(containerID, url, style, targetId) {
     // Sélectionne la div par son ID
     const container = document.getElementById(containerID);
 
@@ -74,6 +74,7 @@ export function addImg(containerID,url,style,targetId) {
     img.className = style;
     img.src = url;
     img.id = targetId;
+    img.alt ="icon";
 
     container.appendChild(img);
 }

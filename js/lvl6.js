@@ -13,7 +13,6 @@ import {
   addTxtNarrationAR,
   addNamePersoAR,
 } from "./texte.js";
-import { addSVG } from "./svg.js";
 import { warningSvg } from "../assets/svgcode.js";
 import { showStaticMap } from "./map.js";
 import { loadSound, suspendSound } from "./Sound/sound.js";

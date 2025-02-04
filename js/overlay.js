@@ -63,12 +63,12 @@ export function setupSoundButton(audioId, audioSrc) {
         if (audioElement.volume === 0) {
             audioElement.volume = 1; // Activer le son
             audioElement.muted = false; // Désactiver le mode muet
-            toggleSoundBtn.src = "./assets/icons/SonActif.png"; // Icône son actif
+            toggleSoundBtn.src = "./assets/icons/unmute.svg"; // Icône son actif
             console.log("Son réactivé.");
         } else {
             audioElement.volume = 0; // Couper le son
             audioElement.muted = true; // Activer le mode muet
-            toggleSoundBtn.src = "./assets/icons/sonCoupe.png"; // Icône son coupé
+            toggleSoundBtn.src = "./assets/icons/mute.svg"; // Icône son coupé
             console.log("Son coupé.");
         }
     });
