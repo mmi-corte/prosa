@@ -420,7 +420,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
                 id="marker"
                 preset="pattern"
                 type="pattern"
-                url="../assets/markers/marker${marker}.patt"
+                url="assets/markers/marker${marker}.patt"
             >
 
             </a-marker>
