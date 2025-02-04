@@ -163,10 +163,11 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// // TODO: decomment to activate the service worker
 // if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker
-//     .register("sw.js")
-//     .then(() => log("Service Worker enregistré", "orange"))
-//     .catch((error) => log(`Erreur Service Worker : ${error}`, "orange"));
+//   window.addEventListener("load", function() {
+//     navigator.serviceWorker
+//       .register("/sw.js")
+//       .then(res => console.log("service worker registered"))
+//       .catch(err => console.log("service worker not registered", err));
+//   });
 // }
