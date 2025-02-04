@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"; // Firestore import
+import { getFirestore, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"; 
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,10 +14,16 @@ const firebaseConfig = {
   measurementId: "G-XD1BB1XH6N"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app); // Initialize Firestore
+const db = getFirestore(app);
 
-// Export Firestore instance for usage in other files
+// Active la persistance
+enableIndexedDbPersistence(db).catch((err) => {
+    if (err.code === 'failed-precondition') {
+        console.log("Persistence non activée : plusieurs onglets ouverts.");
+    } else if (err.code === 'unimplemented') {
+        console.log("Persistance non supportée par le navigateur.");
+    }
+});
+
 export { db };
