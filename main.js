@@ -53,7 +53,7 @@ const enemies = [
 if (DEBUG) {
   const body = document.querySelector("body");
   body.id = "body";
-  addImg("body", "assets/icons/home.png", "homeStyle", "resetGame");
+  addImg("body", "assets/icons/home.svg", "homeStyle", "resetGame");
 
   // Ajout du bouton pour revenir à l'écran d'accueil
   resetGame.addEventListener("click", () => {
@@ -116,15 +116,17 @@ document.body.appendChild(SoundBtn);
 
 const SoundIcon = document.createElement("img");
 SoundIcon.id = "SoundIcon";
-SoundIcon.src = "assets/icons/sonCoupe.png";
+SoundIcon.src = "assets/icons/mute.svg";
+SoundBtn.width = 50;
+SoundBtn.height = 50;
 SoundBtn.appendChild(SoundIcon);
 
 SoundBtn.addEventListener("click", () => {
-  if (SoundIcon.src.includes("SonActif")) {
-    SoundIcon.src = "assets/icons/sonCoupe.png";
+  if (SoundIcon.src.includes("unmute")) {
+    SoundIcon.src = "assets/icons/mute.svg";
     setOffSound();
   } else {
-    SoundIcon.src = "assets/icons/SonActif.png";
+    SoundIcon.src = "assets/icons/unmute.svg";
     setOnSound();
   }
 });
@@ -136,7 +138,7 @@ document.body.appendChild(ReloadBtn);
 
 const ReloadIcon = document.createElement("img");
 ReloadIcon.id = "ReloadIcon";
-ReloadIcon.src = "assets/icons/reload.png";
+ReloadIcon.src = "assets/icons/reload.svg";
 ReloadBtn.appendChild(ReloadIcon);
 
 ReloadBtn.addEventListener("click", () => {
@@ -151,6 +153,8 @@ ReloadBtn.addEventListener("click", () => {
 
 window.addEventListener("DOMContentLoaded", () => {
 
+  document.documentElement.style.opacity = "1";
+  
   let screenValue = localStorage.getItem("screen") || "0";
   let levelValue = localStorage.getItem("level") || "0";
 

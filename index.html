@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width user-scalable=no minimum-scale=1.0 maximum-scale=1.0">
-    
+
     <!-- <link rel="manifest" href="manifest.json"> -->
     <!-- ios support -->
     <!-- <link rel="apple-touch-icon" href="assets/icons/icon-72x72.png">
@@ -20,6 +20,9 @@
 
     <title>L'île de Prosa</title>
 
+    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+
     <!-- Lien vers le font -->
     <link
         href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap"
@@ -29,9 +32,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     
-    <!-- Lien vers le fichier CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
     <!-- library for QrCode 
     <script src="https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner.min.js"></script>-->
 
@@ -39,8 +39,10 @@
     <link rel="icon" type="image/png" href="assets/PLogo.png">
 
     <!-- A-Frame Library -->
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="lib/aframe.min.js"></script>
+    <script src="lib/aframe-ar.js"></script>
+    <!-- <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script> -->
     <!-- animation -->
     <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script> -->
