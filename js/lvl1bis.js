@@ -28,7 +28,7 @@ export function loadLvl1bis() {
     ];
 
     // Lance les étapes
-    playSteps(steps);
+    playSteps(steps,0 , false , 4);
 
     localStorage.setItem("level", "1bis");
 }

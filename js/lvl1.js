@@ -39,7 +39,7 @@ export function loadLvl1() {
         }
     ];
 
-    playSteps(steps); // Démarrage des étapes
+    playSteps(steps, 0 , false, 4); // Démarrage des étapes
 
 }
 

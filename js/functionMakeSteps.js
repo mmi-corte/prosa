@@ -37,7 +37,7 @@ const personnages = [
                 >
                 </a-image>`,
 
-`<!-- premier plan  (en avant) -->
+  `<!-- premier plan  (en avant) -->
              <a-image
               src="assets/personnages/Esterelle/esterelle.png"
               position="0 -0.5 0"
@@ -374,7 +374,7 @@ const personnages = [
                 >
                 </a-image>`,
 
-    `<!-- premier plan  (en avant) -->
+  `<!-- premier plan  (en avant) -->
                 <a-image
                 src="assets/personnages/Santo-Marto/fond1.png"
                 position="0 -1.5 0"
@@ -442,12 +442,17 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         "textTitle"
       );
       showStaticMap(step.map);
-      ajouterBouton("container", "Confimer votre arrivée","btnNext", 'btnclass');
+      ajouterBouton(
+        "container",
+        "Confimer votre arrivée",
+        "btnNext",
+        "btnclass"
+      );
     }
 
     // Ajoute le texte de narration ou du personnage
     addTxtNarration(step.narration, "diagBox", "dialogBox");
-    
+
     //Passe au niveau suivant
     if (step.nextLvl) {
       if (!document.getElementById("btnNext")) {
@@ -511,15 +516,13 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
             </a-scene>
             `;
 
-        container.style.background = "none";
-        document.body.style.background = "none";
+    container.style.background = "none";
+    document.body.style.background = "none";
 
     function charaChanger(index, steps) {
       if (index >= steps.length) return; // Fin des étapes
 
-      log(`Loading L${localStorage.getItem("level") + 1}.E${i}`, "purple");
-
-            log(`Loading L${localStorage.getItem("level")+1}.E${index}`, "purple");
+      log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
 
       const charaContainer = document.querySelector("#marker");
       const diagBox = document.querySelector("#diagBox");
