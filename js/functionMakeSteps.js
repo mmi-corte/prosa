@@ -4,6 +4,7 @@ import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
 import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
 import { log } from "./trace.js";
 import { showStaticMap } from "./map.js";
+import { loadSound, stopSound } from "./Sound/sound.js";
 
 const personnages = [
   `
@@ -408,7 +409,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
 
     const step = steps[index];
     refreshPage(); // Réinitialise la page
-
+    loadSound(step.sound,false);
     // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
     const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
 

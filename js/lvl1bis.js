@@ -6,9 +6,9 @@ import { loadLvl3 } from './lvl3.js';
 export function loadLvl1bis() {
 
     const steps = [
-        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra", character: null , sound: 'assets/sound/narration/NarrateurE1bis/narrateurE1bis-001.mp3' },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra", character: null , sound: 'assets/sound/narration/Narrateur-E1bis/narrateurE1bis-001.mp3' },
         { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BBerger", character: 'assets/personnages/Berger/berger.png', name: 'E1BBerger' , sound: 'asset/sound/narration/Berger-E1bis/Berger-E1bis.mp3'},
-        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra2", character: null , sound: 'assets/sound/narration/NarrateurE1bis/narrateurE1bis-002.mp3' },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra2", character: null , sound: 'assets/sound/narration/Narrateur-E1bis/narrateurE1bis-002.mp3' },
         {
             background: 'assets/bg/fondEtape1bis.mp4',
             narration: () => {
