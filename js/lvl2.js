@@ -4,7 +4,32 @@ import { playSteps } from "./functionMakeSteps.js";
 import { loadLvl3 } from './lvl3.js';
 
 export function loadLvl2() {
+    console.log("lvl2");
+    const mapData = {
+        containerId: "container", // L'ID du conteneur où la carte sera affichée
+        apiKey: "8b92289a637347489b3b13811907ebdd", // Remplace par ta vraie clé API Geoapify
+        zoom: 12,
+        maps: {
+            toulon: {
+                latitude: 43.1242,
+                longitude: 5.928,
+                markers: [
+                    { latitude: 43.125, longitude: 5.93, color: "red" },
+                    { latitude: 43.12, longitude: 5.925, color: "blue" }
+                ]
+            },
+            corte: {
+                latitude: 42.3064,
+                longitude: 9.1501,
+                markers: [
+                    { latitude: 42.308, longitude: 9.152, color: "green" },
+                    { latitude: 42.305, longitude: 9.148, color: "yellow" }
+                ]
+            }
+        }
+    };
 
+    playSteps(mapData, 0, false, 2);
     const steps =[
         {character : "NaraChara", Txt : "E2Narra"},
         {character : "BergerChara", Txt : "E2Berger", name : "E2Berger"},
