@@ -21,9 +21,9 @@ import { playSteps } from "./functionMakeSteps.js";
 export function loadLvl5() {
   
     const steps =[
-        {character : "BergerChara", Txt : "E5Narra"},
+        {character : "NarraChara", Txt : "E5Narra"},
         {character : "BergerChara", Txt : "E5Berger", name : "E5Berger"},
-        {character : "BergerChara", Txt : "E2Narra2"},
+        {character : "NarraChara", Txt : "E5Narra2"},
         {character : "MascoChara", Txt : "E5Masco", name : "E5Masco"},
         {character : "NarraChara", Txt : "E5Narra3"},
         {character : "MascoChara", Txt : "E5Masco2", name : "E5Masco2"},
