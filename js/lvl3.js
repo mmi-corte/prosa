@@ -24,11 +24,11 @@ export function loadLvl3() {
     // Liste des étapes du niveau 1
     const steps = [
         { background: 'assets/bg/fondEtape3.png', narration: "E3Narra", character: null },
-        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger", character: 'assets/personnages/berger.png', name: 'E3Berger' },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger", character: 'assets/personnages/Berger/berger.png', name: 'E3Berger' },
         { background: 'assets/bg/fondEtape3.png', narration: "E3Narra2", character: null },
-        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger2", character: 'assets/personnages/berger.png', name: 'E3Berger1' },
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger2", character: 'assets/personnages/Berger/berger.png', name: 'E3Berger1' },
         { background: 'assets/bg/fondEtape3.png', narration: "E3Overlay", character: null, action: addOverlay },// Appel de la fonction overlay ici
-        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger3", character: 'assets/personnages/berger.png', name: 'E3Berger6',
+        { background: 'assets/bg/fondEtape3.png', narration: "E3Berger3", character: 'assets/personnages/Berger/berger.png', name: 'E3Berger6',
             choices: [
                 { text: "E3Choix1", action: loadLvl4 },
                 { text: "E3Choix2", action: loadLvl10 }
