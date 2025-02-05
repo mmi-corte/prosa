@@ -325,7 +325,7 @@ const personnages = [
                 scale="6 6 6"
                 material="transparent: true; alphaTest: 0.5;"
                 >
-                </a-image>`
+                </a-image>`,
                 
     `<!-- premier plan  (en avant) -->
                 <a-image
