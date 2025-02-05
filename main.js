@@ -154,7 +154,7 @@ ReloadBtn.addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
 
   document.documentElement.style.opacity = "1";
-  
+
   let screenValue = localStorage.getItem("screen") || "0";
   let levelValue = localStorage.getItem("level") || "0";
 
@@ -165,7 +165,6 @@ window.addEventListener("DOMContentLoaded", () => {
   nextScreen(screenValue, levelValue);
 
 });
-
 
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", function() {

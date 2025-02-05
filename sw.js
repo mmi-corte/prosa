@@ -4,7 +4,7 @@ const assets = [
   "/index.html",
   "/css/style.css",
   "/main.js",
-  "/firebaseConfig.js"
+  "/firebase.js"
 ];
 
 self.addEventListener("install", installEvent => {

@@ -1,7 +1,12 @@
 //firebase
-import { db } from '../firebaseConfig.js';
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { dbPromise } from '../init-firebase.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"; 
 
+
+const db = await dbPromise; // ⏳ Attendre que Firebase soit initialisé
+if (!db) {
+    throw new Error("🔥 Firestore n'est pas disponible !");
+}
 
 // buttonModule.js
 export function addTxt(conteneurId, content,classNameTxt) {
