@@ -3,24 +3,24 @@ import {log} from "./trace.js"
 
 
 function stopAR() {
+    const container = document.getElementById("container");
+
+    // Supprimer la scène AR
     const scene = document.querySelector("a-scene");
     if (scene) {
-        scene.parentNode.removeChild(scene); // Supprime la scène AR
+        scene.remove();
     }
-}
 
-function stopCamera() {
-    const video = document.querySelector("#arjs-video"); // Vidéo utilisée par AR.js
+    // Arrêter la caméra et libérer les ressources
+    const video = document.querySelector("#arjs-video");
     if (video && video.srcObject) {
-        let stream = video.srcObject;
-        let tracks = stream.getTracks();
-
-        tracks.forEach(track => track.stop()); // Arrête chaque flux de la caméra
-        video.srcObject = null; // Supprime le flux vidéo
+        let tracks = video.srcObject.getTracks();
+        tracks.forEach(track => track.stop()); // Stopper chaque flux vidéo
+        video.srcObject = null;
     }
+
+    document.body.removeAttribute("style"); 
 }
-
-
 
 // const observer = new MutationObserver((mutations) => {
 //     mutations.forEach((mutation) => {
@@ -36,7 +36,6 @@ export function refreshPage() {
     if (container) {       
         log("---------- Cleaning page ----------", "blue", "normal"); 
         stopAR();
-        stopCamera();
         container.style = "";
         container.innerHTML = ""; // Efface tout le contenu de la div "container"
     } else {
