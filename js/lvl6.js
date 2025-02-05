@@ -50,7 +50,7 @@ export function loadLvl6() {
         {
           background: "assets/bg/fondEtape6.png",
           narration: "E6BergerOrcuT",
-          character: "assets/personnages/berger V1 premier plan.png",
+          character: "assets/personnages/berger.png",
           name: "E6Berger",
         },
       ];
@@ -77,7 +77,7 @@ export function loadLvl6() {
         {
           background: "assets/bg/fondEtape6.png",
           narration: "E6BergerOrcuF",
-          character: "assets/personnages/berger V1 premier plan.png",
+          character: "assets/personnages/berger.png",
           name: "E6Berger",
         },
         {
