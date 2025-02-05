@@ -22,7 +22,7 @@ import { loadLvl14 } from "./lvl14.js";
 export function loadLvl13() {
 
     const steps = [
-        { background: 'assets/bg/fondEtape13.png', narration: "E13Narra", character: null },
+        { background: 'assets/bg/fondEtape13.mp4', narration: "E13Narra", character: null },
     ];
     playSteps(steps, 0, false, 4);
     //faire combat
@@ -40,7 +40,7 @@ export function loadLvl13() {
     }
     luncher();
     const steps2 = [
-        { background: 'assets/bg/fondEtape13.png', narration: "E13Narra2", character: null , nextLvl: loadLvl14},
+        { background: 'assets/bg/fondEtape13.mp4', narration: "E13Narra2", character: null , nextLvl: loadLvl14},
     ];
     playSteps(steps, 0, false, 4); 
    

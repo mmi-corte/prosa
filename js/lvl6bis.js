@@ -22,10 +22,10 @@ export function loadLvl6bis() {
 
       // Liste des étapes du niveau 1
       const steps = [
-        { background: 'assets/bg/fondEtape6bis.png', narration: "E6Narra", character: null },
-        { background: 'assets/bg/fondEtape6bis.png', narration: "E6Berger", character: 'assets/personnages/Berger/berger.png', name: 'E6Berger' },
-        { background: 'assets/bg/fondEtape6bis.png', narration: "E6Narra2", character: null },
-        { background: 'assets/bg/fondEtape6bis.png', narration: "E6Berger2", character: 'assets/personnages/Berger/berger.png', name: 'E6Berger2',
+        { background: 'assets/bg/fondEtape6bis.mp4', narration: "E6Narra", character: null },
+        { background: 'assets/bg/fondEtape6bis.mp4', narration: "E6Berger", character: 'assets/personnages/Berger/berger.png', name: 'E6Berger' },
+        { background: 'assets/bg/fondEtape6bis.mp4', narration: "E6Narra2", character: null },
+        { background: 'assets/bg/fondEtape6bis.mp4', narration: "E6Berger2", character: 'assets/personnages/Berger/berger.png', name: 'E6Berger2',
             choices: [
                 { text: "E6Choix1", action: loadLvl9 },
                 { text: "E6Choix2", action: loadLvl10 }
