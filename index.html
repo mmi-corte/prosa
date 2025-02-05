@@ -3,22 +3,36 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width user-scalable=no minimum-scale=1.0 maximum-scale=1.0">
+
+    <!-- <link rel="manifest" href="manifest.json"> -->
+    <!-- ios support -->
+    <!-- <link rel="apple-touch-icon" href="assets/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-256x256.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-512x512.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-1024x1024.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#F1D482">
+    <meta name="theme-color" content="#F1D482"> -->
+
     <title>L'île de Prosa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript> -->
+    
+
     <!-- Lien vers le font -->
     <link
         href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap"
         rel="stylesheet">
     
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    <!-- Lien vers le fichier CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
+    
     <!-- library for QrCode 
     <script src="https://cdn.jsdelivr.net/npm/qr-scanner@1.4.0/qr-scanner.min.js"></script>-->
 
@@ -26,25 +40,26 @@
     <link rel="icon" type="image/png" href="assets/PLogo.png">
 
     <!-- A-Frame Library -->
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="./libs/aframe.min.js"></script>
+    <script src="./libs/aframe-ar.js"></script> -->
+
+    <!-- <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script> -->
     <!-- animation -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
-    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    
-    <meta name="viewport" content="width=device-width user-scalable=no minimum-scale=1.0 maximum-scale=1.0">
+    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script> -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div id="container">
-       
+    <div id="container">   
     </div>
 
-    <!-- Import de firebaseConfig.js en tant que module -->
+    <!-- Import de firebase.js en tant que module -->
     <script type="module" defer src="./init-firebase.js"></script>
-
+    
     <!-- Import du script principal (main.js) en tant que module -->
-    <script type="module" src="main.js"></script>
-</body>
+    <script type="module" src="./main.js"></script>
 
+</body>
 </html>
