@@ -39,8 +39,9 @@
     <link rel="icon" type="image/png" href="assets/PLogo.png">
 
     <!-- A-Frame Library -->
-    <script src="lib/aframe.min.js"></script>
-    <script src="lib/aframe-ar.js"></script>
+    <script src="./libs/aframe.min.js"></script>
+    <script src="./libs/aframe-ar.js"></script>
+
     <!-- <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script> -->
     <!-- animation -->
@@ -53,11 +54,11 @@
     <div id="container">   
     </div>
 
-    <!-- Import de firebaseConfig.js en tant que module -->
-    <script type="module" src="firebaseConfig.js"></script>
-
+    <!-- Import de firebase.js en tant que module -->
+    <script type="module" defer src="./init-firebase.js"></script>
+    
     <!-- Import du script principal (main.js) en tant que module -->
-    <script type="module" src="main.js"></script>
+    <script type="module" src="./main.js"></script>
 
 </body>
 </html>
