@@ -38,7 +38,7 @@ export function loadLvl6() {
   if (Farfadet) {
     const steps = [
       {
-        background: "assets/bg/fondEtape6.png",
+        background: "assets/bg/fondEtape6.mp4",
         narration: "E6NarraFarfaT",
         character: null,
       },
@@ -48,7 +48,7 @@ export function loadLvl6() {
     if (Orcu) {
       const steps = [
         {
-          background: "assets/bg/fondEtape6.png",
+          background: "assets/bg/fondEtape6.mp4",
           narration: "E6BergerOrcuT",
           character: "assets/personnages/Berger/berger.png",
           name: "E6Berger",
@@ -75,13 +75,13 @@ export function loadLvl6() {
       //else not see Orcu
       const steps = [
         {
-          background: "assets/bg/fondEtape6.png",
+          background: "assets/bg/fondEtape6.mp4",
           narration: "E6BergerOrcuF",
           character: "assets/personnages/Berger/berger.png",
           name: "E6Berger",
         },
         {
-          background: "assets/bg/fondEtape6.png",
+          background: "assets/bg/fondEtape6.mp4",
           narration: "E6NarraOrcuF",
           character: null,
           choices: [
@@ -96,7 +96,7 @@ export function loadLvl6() {
     //else farfafet
     const steps = [
       {
-        background: "assets/bg/fondEtape6.png",
+        background: "assets/bg/fondEtape6.mp4",
         narration: "E6NarraFarfaF",
         character: null,
       },
