@@ -21,7 +21,7 @@ export function loadScreen5() {
   log("Loading S5...", "blue");
 
   // add content
-  addMediaBackground("container", "./assets/video/IntroTourneeV1.mp4")
+  addMediaBackground("container", "./assets/video/Introprosav2.mp4")
   ajouterBouton("container", "", "btnInv2", "btnInv");
 
   const boutonInv2 = document.getElementById("btnInv2");
