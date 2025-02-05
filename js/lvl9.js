@@ -23,9 +23,9 @@ export function loadLvl9() {
    // Liste des étapes du niveau 1
    const steps = [
     { background: 'assets/bg/fondEtape9.png', narration: "E9Narra", character: null },
-    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger", character: 'assets/personnages/berger.png', name: 'E3Berger' },
+    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger", character: 'assets/personnages/Berger/berger.png', name: 'E3Berger' },
     { background: 'assets/bg/fondEtape9.png', narration: "E9Narra2", character: null },
-    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger2", character: 'assets/personnages/berger.png', name: 'E3Berger1' },
+    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger2", character: 'assets/personnages/Berger/berger.png', name: 'E3Berger1' },
     { background: 'assets/bg/fondEtape9.png', choices: [ { text: "E9Mess", action: loadLvl10 } ], character: null , },
 ];
 

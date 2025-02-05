@@ -7,7 +7,7 @@ export function loadLvl1bis() {
 
     const steps = [
         { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra", character: null },
-        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BBerger", character: 'assets/personnages/berger.png', name: 'E1BBerger' },
+        { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BBerger", character: 'assets/personnages/Berger/berger.png', name: 'E1BBerger' },
         { background: 'assets/bg/fondEtape1bis.mp4', narration: "E1BNarra2", character: null },
         {
             background: 'assets/bg/fondEtape1bis.mp4',
