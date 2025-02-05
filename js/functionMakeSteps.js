@@ -329,7 +329,7 @@ const personnages = [
                 
     `<!-- premier plan  (en avant) -->
                 <a-image
-                src="https://cdn.glitch.global/16ef3a14-1c6d-442f-bf4f-1fc5e388c3da/quatrieme%20plan.png?v=1734614629652"
+                src="assets/personnages/Masco/1.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -338,7 +338,7 @@ const personnages = [
                 </a-image>
                  <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/fuleton/second-plan.png"
+                src="assets/personnages/Masco/2.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -347,13 +347,59 @@ const personnages = [
                 </a-image>
                  <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/fuleton/arriere-plan.png"
+                src="assets/personnages/Masco/3.png"
+                position="0 -1.5 0"
+                rotation="-90 0 0"
+                scale="6 6 6"
+                material="transparent: true; alphaTest: 0.5;"
+                >
+                </a-image>
+                <!-- quatrième plan  (en avant) -->
+                <a-image
+                src="assets/personnages/Masco/4.png"
+                position="0 -1.5 0"
+                rotation="-90 0 0"
+                scale="6 6 6"
+                material="transparent: true; alphaTest: 0.5;"
+                >
+                </a-image>
+                </a-image>
+                <!-- cinquième plan  (en avant) -->
+                <a-image
+                src="assets/personnages/Masco/5.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
+    `<!-- premier plan  (en avant) -->
+                <a-image
+                src="assets/personnages/Santo-Marto/fond1.png"
+                position="0 -1.5 0"
+                rotation="-90 0 0"
+                scale="6 6 6"
+                material="transparent: true; alphaTest: 0.5;"
+                >
+                </a-image>
+                 <!-- deuxième plan  (en avant) -->
+                <a-image
+                src="assets/personnages/Santo-Marto/fond2.png"
+                position="0 -1 0"
+                rotation="-90 0 0"
+                scale="6 6 6"
+                material="transparent: true; alphaTest: 0.5;"
+                >
+                </a-image>
+                 <!-- troisième plan  (en avant) -->
+                <a-image
+                src="assets/personnages/Santo-Marto/fond3.png"
+                position="0 -1.5 0"
+                rotation="-90 0 0"
+                scale="6 6 6"
+                material="transparent: true; alphaTest: 0.5;"
+                >`,
 ];
 
 export function playSteps(steps, index = 0, AR = false, marker = null) {
