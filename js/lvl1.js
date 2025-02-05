@@ -14,7 +14,7 @@ export function loadLvl1() {
     
     // Liste des étapes du niveau 1
     const steps = [
-        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra", character: null },
+        { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra", character: null , sound: 'asset/sound/Narrateur/Narrateur-E1/narrateurE1-001.wav'},
         { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger' },
         { background: 'assets/bg/fondEtape1.jpg', narration: "E1Narra1", character: null },
         { background: 'assets/bg/fondEtape1.jpg', narration: "E1Berger1", character: 'assets/personnages/berger V1 premier plan.png', name: 'E1Berger1' },
