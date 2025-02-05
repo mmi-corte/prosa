@@ -218,7 +218,7 @@ export function step2() {
 export function step6() {
     refreshPage();
     addImgBackground(container, 'assets/bg/bg.png');
-    addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
+    addImg(container, 'assets/personnages/berger.png', 'imgPerso');
     addDiv('container', "diagBox", 'diagBox');
     addNameCharacter('E6BergerOrcuT', 'diagBox', 'nameCharacter');
     addTxtNarration("E6BergerOrcuT", 'diagBox', 'dialogBox');
@@ -229,7 +229,7 @@ export function step6() {
     document.getElementById(btnNext).addEventListener("click", function(){
         refreshPage();
         addImgBackground(container, 'assets/bg/bg.png');
-        addImg(container, 'assets/personnages/berger V1 premier plan.png', 'imgPerso');
+        addImg(container, 'assets/personnages/berger.png', 'imgPerso');
         addDiv('container', "diagBox", 'diagBox');
         addTxtNarration("E6NarraOrcuT", 'diagBox', 'dialogBoxN');
         addOverlay('audioPlayer');

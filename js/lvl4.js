@@ -1,20 +1,5 @@
 import { refreshPage } from "./refreshPage.js";
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from './button.js';
 
-import { addForm } from './form.js';
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit, addTxtNarrationAR, addNamePersoAR } from './texte.js';
-import { warningSvg } from '../assets/svgcode.js';
-import { showStaticMap } from './map.js';
-import { loadSound, suspendSound } from './Sound/sound.js';
-import { lunchFight } from './fight.js';
-//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
-import { changeStyleBG, skin, selectAvatar, selectButton, changeStyleBGB } from './functionChangeStyle.js';
-import { addOverlay } from './overlay.js';
-import { addAutoPlayVideo } from './video.js';
-import { step2, step6 } from './functionstep.js'
-import { ARBerger } from './ARFunction.js';
-import { popup } from './popup.js';
 import { playSteps } from "./functionMakeSteps.js";
 
 export function loadLvl4() {
@@ -53,15 +38,16 @@ export function loadLvl4() {
 
         //playSteps();
 
-    if(step.choices.answear1||step.choices.answear2){
+    if(steps1.choices.answear1||steps1.choices.answear2){
         const steps2 =[
             {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},
             {character : "FuletounChara", Txt : "E4FouletounTrue", name : "E4FouletounTrue"},
             {character : "FulettuChara", Txt : "E4FouletounTrue2", name : "E4FouletounTrue2"},
             {character : "NarraChara", Txt : "E4NarrateurTrue"},
         ]
-        //playSteps();
-
+        playSteps();
+        
+    }else{
         const steps3 =[
             {character : "FulettuChara", Txt : "E4FulettuFalse", name : "E4FulettuFalse"},
             {character : "FuletounChara", Txt : "E4FouletounFalse", name : "E4FouletounFalse"},
@@ -71,6 +57,7 @@ export function loadLvl4() {
             {character : "FuletounChara", Txt : "E4FouletounFalse3", name : "E4FouletounFalse3"},
             {character : "FulettuChara", Txt : "E4FulettuFalse4", name : "E4FulettuFalse4"},
         ]
+        
     }
     
     

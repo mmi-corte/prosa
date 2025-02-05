@@ -1,12 +1,8 @@
-//firebase
-import { dbPromise } from '../init-firebase.js';
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"; 
+import { db } from "../firebase.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { popup } from "./popup.js";
 
-
-const db = await dbPromise; // ⏳ Attendre que Firebase soit initialisé
-if (!db) {
-    throw new Error("🔥 Firestore n'est pas disponible !");
-}
+let querySnapshot;
 
 // buttonModule.js
 export function addTxt(conteneurId, content,classNameTxt) {
@@ -49,8 +45,7 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
 
     // Vérifie si le conteneur est un élément valide
     if (!(container instanceof HTMLElement)) {
-        console.error("Le conteneur fourni n'est pas un élément HTML valide.");
-        return;
+        throw new Error("Le conteneur fourni n'est pas un élément HTML valide.");
     }
 
     // Création de la balise texte (par exemple, une balise <p>)
@@ -107,39 +102,45 @@ function typeWriter(text, element, txtClassName, speed = 100) {
 
 // Fonction pour récupérer un scénario basé sur un stepCode
 export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
+
     const conteneur = document.getElementById(conteneurId);
     if (!conteneur) {
-        console.error(`Le conteneur avec l'ID "${conteneurId}" est introuvable.`);
-        return;
+        throw new Error(`Le conteneur avec l'ID "${conteneurId}" est introuvable.`);
     }
+
     try {
-        const querySnapshot = await getDocs(collection(db, "scenario"));
+        if (!querySnapshot) {
+            querySnapshot = await getDocs(collection(db, "scenario"));
+        };
+
         const docFound = querySnapshot.docs.find(doc => doc.data().stepCode === stepCode);
-
         if (!docFound) {
-            console.warn(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
-            return;
-        }
+            throw new Error(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
+        };
 
-        if (docFound) {
-            const p = document.createElement("p");
-            if(txtClassName == '') {
-                p.textContent = docFound.data().txt;
-                p.className = txtClassName;
-            } else {
-                typeWriter(docFound.data().txt, p, txtClassName, 50);
-            }
-            conteneur.appendChild(p);
-        }
+        const p = document.createElement("p");
+        if(txtClassName == '') {
+            p.textContent = docFound.data().txt;
+            p.className = txtClassName;
+
+        } else {
+            typeWriter(docFound.data().txt, p, txtClassName, 50);
+        };
+
+        conteneur.appendChild(p);
+        
     } catch (error) {
-        console.error("Erreur lors de la récupération des données Firestore :", error);
+        throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
     }
 }
 
 // Fonction pour récupérer le nom du personnage
 export async function addNameCharacter(stepCode, conteneurId, txtClassName) {
     try {
-        const querySnapshot = await getDocs(collection(db, "scenario"));
+
+        if (!querySnapshot) {
+            querySnapshot = await getDocs(collection(db, "scenario"));
+        };
         querySnapshot.forEach((doc) => {
             if (doc.data().stepCode === stepCode) {
                 // Trouver le conteneur par son ID et ajouter le texte
@@ -151,12 +152,12 @@ export async function addNameCharacter(stepCode, conteneurId, txtClassName) {
                     conteneur.appendChild(txtPerso);
                     
                 } else {
-                    console.error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
+                    throw new Error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
                 }
             }
         });
     } catch (error) {
-        console.error("Erreur lors de la récupération des données Firestore :", error);
+        throw new Error("Erreur lors de la récupération des données Firestore :");
     }
 }
 
@@ -164,8 +165,7 @@ export function addDiv(conteneurId, divId, divClassName) {
     const conteneur = document.getElementById(conteneurId);
 
     if (!conteneur) {
-        console.error(`Conteneur avec l'ID '${conteneurId}' introuvable.`);
-        return;
+        throw new Error(`Conteneur avec l'ID '${conteneurId}' introuvable.`);
     }
 
     // Crée l'élément div
@@ -173,10 +173,8 @@ export function addDiv(conteneurId, divId, divClassName) {
     nouvelleDiv.id = divId;
     nouvelleDiv.className = divClassName;
     
-
     // Ajoute la div au conteneur
     conteneur.appendChild(nouvelleDiv);
-
    
 }
 
@@ -186,8 +184,7 @@ export async function handleFormSubmit(formId, buttonId) {
 
     // Vérification si le formulaire et le bouton existent
     if (!form || !button) {
-        console.error(`Aucun formulaire ou bouton trouvé avec les IDs "${formId}" et "${buttonId}"`);
-        return;
+        throw new Error(`Aucun formulaire ou bouton trouvé avec les IDs "${formId}" et "${buttonId}"`);
     }
 
     // Écouteur d'événement pour le bouton
@@ -197,14 +194,12 @@ export async function handleFormSubmit(formId, buttonId) {
         // Récupérer la valeur du champ de texte
         const input = form.querySelector('input[type="text"]');
         if (!input) {
-            console.error("Aucun champ de texte trouvé dans le formulaire.");
-            return;
+            throw new Error("Aucun champ de texte trouvé dans le formulaire.");
         }
 
         const pseudo = input.value.trim();
         if (pseudo === "") {
-            alert("Veuillez entrer un pseudo !");
-            return;
+            popup("Veuillez entrer un pseudo !");
         }
 
         try {
@@ -216,11 +211,11 @@ export async function handleFormSubmit(formId, buttonId) {
             console.log("Données enregistrées avec succès :", docRef.id);
 
             // Message de confirmation
-            alert("Pseudo enregistré avec succès !");
+            popup("Pseudo enregistré avec succès !");
             form.reset(); // Optionnel : Réinitialiser le formulaire après l'envoi
         } catch (error) {
             console.error("Erreur lors de l'ajout du document :", error);
-            alert("Une erreur est survenue, veuillez réessayer.");
+            popup("Une erreur est survenue, veuillez réessayer.");
         }
     });
 }
@@ -228,7 +223,10 @@ export async function handleFormSubmit(formId, buttonId) {
 // fonction qui recupere le texte et qui est liée au chargement de l'AR
 export async function addTxtNarrationAR(stepCode, aTextId, className) { 
     try {
-        const querySnapshot = await getDocs(collection(db, "scenario"));
+        if (!querySnapshot) {
+            querySnapshot = await getDocs(collection(db, "scenario"));
+        };
+
         querySnapshot.forEach((doc) => {
             if (doc.data().stepCode === stepCode) {
                 const aTextElement = document.getElementById(aTextId);
@@ -246,18 +244,22 @@ export async function addTxtNarrationAR(stepCode, aTextId, className) {
                         console.log("Texte ajouté :", doc.data().txt);
                     });
                 } else {
-                    console.error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
+                    throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
                 }
             }
         });
     } catch (error) {
-        console.error("Erreur lors de la récupération des données Firestore :", error);
+        throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
     }
 }
+
 export async function addNamePersoAR(stepCode, aTextId, className) { 
     try {
-        const querySnapshot = await getDocs(collection(db, "scenario"));
-        querySnapshot.forEach((doc) => {
+        if (!querySnapshot) {
+         querySnapshot = await getDocs(collection(db, "scenario"));
+        };
+
+         querySnapshot.forEach((doc) => {
             if (doc.data().stepCode === stepCode) {
                 const aTextElement = document.getElementById(aTextId);
                 if (aTextElement) {
@@ -273,12 +275,14 @@ export async function addNamePersoAR(stepCode, aTextId, className) {
 
                         console.log("Texte ajouté :", doc.data().personnage);
                     });
+
                 } else {
-                    console.error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
+                    throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
                 }
             }
         });
+
     } catch (error) {
-        console.error("Erreur lors de la récupération des données Firestore :", error);
+        throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
     }
 }

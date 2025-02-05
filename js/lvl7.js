@@ -23,9 +23,9 @@ export function loadLvl7() {
     // Liste des étapes du niveau 1
     const steps = [
         { background: 'assets/bg/fondEtape7.png', narration: "E7Narra", character: null },
-        { background: 'assets/bg/fondEtape7.png', narration: "E7Narra", character: 'assets/personnages/berger V1 premier plan.png', name: 'E6Berger' },
+        { background: 'assets/bg/fondEtape7.png', narration: "E7Narra", character: 'assets/personnages/berger.png', name: 'E6Berger' },
         { background: 'assets/bg/fondEtape7.png', narration: "E7Narra2", character: null },
-        { background: 'assets/bg/fondEtape7.png', narration: "E7Berger2", character: 'assets/personnages/berger V1 premier plan.png', name: 'E6Berger2',
+        { background: 'assets/bg/fondEtape7.png', narration: "E7Berger2", character: 'assets/personnages/berger.png', name: 'E6Berger2',
             choices: [
                 { text: "E6Choix1", action: loadLvl9 },
                 { text: "E6Choix2", action: loadLvl10 }

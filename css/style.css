@@ -1,18 +1,22 @@
-html,
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
     height: 100%;
     /* overflow: hidden; */
     background: rgb(241, 212, 130);
-    
+    overflow: hidden;
 }
 
 html {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
-  
+
 .icon_style {
     width: 50px;
     height: 50px;
@@ -83,6 +87,7 @@ strong {
     /* Remove default styling on Firefox */
     appearance: none;
     margin: 20px;
+    padding: 5px;
     font-size: 20px;
 }
 
@@ -294,12 +299,11 @@ strong {
 
 .btnChoix {
     width: 100%;
-    
     border-radius: 6px;
     text-align: center;
     font-size: 0.9rem;
-    padding: 0;
-    margin: 0;
+    padding: 20px 0 20px ;
+    margin: 10px 0 10px 0;
     margin-bottom: 5px;
     border: none;
     background: none;
