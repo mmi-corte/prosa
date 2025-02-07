@@ -27,7 +27,7 @@ export function suspendSound(url) {
 
 // Fonction pour suspendre la lecture d'un fichier audio
 export function stopSound(url) {
-
+    
     if (audioPlayers[url]) {
         audioPlayers[url].pause();
         // On met en pause si l'instance existe
@@ -37,9 +37,20 @@ export function stopSound(url) {
     }
 }
 
-export function deleteSound(url) {
-    if (audioPlayers[url]) {
-        delete audioPlayers[url];
+export function deleteSound(url="") {
+    // Fonction pour supprimer un fichier audio
+    // Si url est vide, supprime tous les sons
+    // Sinon, supprime uniquement le son correspondant à l'URL fournie
+
+    // if url, delete only url, else delete all
+    if(url) {
+        if (audioPlayers[url]) {
+            delete audioPlayers[url];
+        }
+    }else{
+        Object.keys(audioPlayers).forEach(key => {
+            stopSound(key);
+        });
     }
 }
 
@@ -47,12 +58,20 @@ export function setOffSound(){
     Object.values(audioPlayers).forEach(element => {
         element.pause();
     });
+
+    document.querySelectorAll("video").forEach(video => {
+        video.muted = true;
+      });
 }
 
 export function setOnSound(){
     Object.values(audioPlayers).forEach(element => {
         element.play();
     });
+
+    document.querySelectorAll("video").forEach(video => {
+        video.muted = false;
+      });
 }
 
 // Fonction pour vérifier si un son est en cours de lecture

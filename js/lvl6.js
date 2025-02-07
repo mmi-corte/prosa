@@ -1,35 +1,8 @@
 import { refreshPage } from "./refreshPage.js";
-import { addBtnImg, addInvisibleBtn, ajouterBouton } from "./button.js";
-
-import { addForm } from "./form.js";
-import { addImgBackground, addImg } from "./fonctionImg.js";
-import {
-  addTxt,
-  addTxtWithBoldWord,
-  addTxtNarration,
-  addNameCharacter,
-  addDiv,
-  handleFormSubmit,
-  addTxtNarrationAR,
-  addNamePersoAR,
-} from "./texte.js";
-import { warningSvg } from "../assets/svgcode.js";
-import { showStaticMap } from "./map.js";
-import { loadSound, suspendSound } from "./Sound/sound.js";
 import { lunchFight } from "./fight.js";
-//import { AREsterelle, ARAfata, ARBerger } from './js/ARFunction.js';
-import {
-  changeStyleBG,
-  skin,
-  selectAvatar,
-  selectButton,
-  changeStyleBGB,
-} from "./functionChangeStyle.js";
-import { addOverlay } from "./overlay.js";
-import { addAutoPlayVideo } from "./video.js";
-import { step2, step6 } from "./functionstep.js";
-import { ARBerger } from "./ARFunction.js";
-import { popup } from "./popup.js";
+import { skin } from "./functionChangeStyle.js";
+import {path_personnages, path_backgrounds } from "./paths.js";
+import { playSteps } from "./functionMakeSteps.js";
 
 export function loadLvl6() {
   refreshPage();
@@ -38,7 +11,7 @@ export function loadLvl6() {
   if (Farfadet) {
     const steps = [
       {
-        background: "assets/bg/fondEtape6.mp4",
+        background: path_backgrounds + "fondEtape6.mp4",
         narration: "E6NarraFarfaT",
         character: null,
       },
@@ -48,9 +21,9 @@ export function loadLvl6() {
     if (Orcu) {
       const steps = [
         {
-          background: "assets/bg/fondEtape6.mp4",
+          background: path_backgrounds + "fondEtape6.png",
           narration: "E6BergerOrcuT",
-          character: "assets/personnages/Berger/berger.png",
+          character: path_personnages+"Berger/berger.png",
           name: "E6Berger",
         },
       ];
@@ -75,13 +48,13 @@ export function loadLvl6() {
       //else not see Orcu
       const steps = [
         {
-          background: "assets/bg/fondEtape6.mp4",
+          background: path_backgrounds + "fondEtape6.png",
           narration: "E6BergerOrcuF",
-          character: "assets/personnages/Berger/berger.png",
+          character: path_personnages+"Berger/berger.png",
           name: "E6Berger",
         },
         {
-          background: "assets/bg/fondEtape6.mp4",
+          background: path_backgrounds + "fondEtape6.png",
           narration: "E6NarraOrcuF",
           character: null,
           choices: [
@@ -96,7 +69,7 @@ export function loadLvl6() {
     //else farfafet
     const steps = [
       {
-        background: "assets/bg/fondEtape6.mp4",
+        background: path_backgrounds + "fondEtape6.png",
         narration: "E6NarraFarfaF",
         character: null,
       },
