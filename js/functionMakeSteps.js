@@ -452,7 +452,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
       if (step.name) {
         addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
-      
+
       // Ajoute le texte de narration ou du personnage
       addTxtNarration(step.narration, "diagBox", "dialogBox");
 
@@ -501,15 +501,16 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     // steps is dict
     } else {
       //Ajoute l'écan de la map si elle est dans
+      console.log(steps.maps);
       if (steps.map) {
         addTxt(
-          "container",
+          steps.containerId,
           "Vous devez vous dirige vers la prochaine étape",
           "textTitle"
         );
-        showStaticMap(step.map);
+        showStaticMap(steps.maps);
         ajouterBouton(
-          "container",
+          maps.containerId,
           "Confimer votre arrivée",
           "btnNext",
           "btnclass"
@@ -543,117 +544,118 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     container.style.background = "none";
     document.body.style.background = "none";
 
-    function charaChanger(index, steps) {
-      if (index >= steps.length) return; // Fin des étapes
+    charaChanger(index, steps);
+  }
+}
 
-      log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+function charaChanger(index, steps) {
+  if (index >= steps.length) return; // Fin des étapes
 
-      const charaContainer = document.querySelector("#marker");
-      const diagBox = document.querySelector("#diagBox");
-      diagBox.innerHTML = "";
-      log(charaContainer);
+  log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
 
-      switch (step.character) {
-        case "BergerChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[0];
-          break;
-        case "EsterelleChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[1];
-          break;
-        case "FataChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[2];
-          break;
-        case "StregaChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[3];
-          break;
-        case "SylvainChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[4];
-          break;
-        case "FulettuChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[5];
-          break;
-        case "SciacquaghjolaChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[6];
-          break;
-        case "TarrasqueChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[7];
-          break;
-        case "OrcuChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[8];
-          break;
-        case "BasgialiscuChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[9];
-          break;
-        case "MascoChara":
-          charaContainer.innerHTML = "";
-          charaContainer.innerHTML = personnages[10];
-          break;
-        case "NaraChara":
-          charaContainer.innerHTML = "";
-          break;
+  const step = steps[index];
+  const charaContainer = document.querySelector("#marker");
+  const diagBox = document.querySelector("#diagBox");
+  diagBox.innerHTML = "";
+  log(charaContainer);
+
+  switch (step.character) {
+    case "BergerChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[0];
+      break;
+    case "EsterelleChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[1];
+      break;
+    case "FataChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[2];
+      break;
+    case "StregaChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[3];
+      break;
+    case "SylvainChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[4];
+      break;
+    case "FulettuChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[5];
+      break;
+    case "SciacquaghjolaChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[6];
+      break;
+    case "TarrasqueChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[7];
+      break;
+    case "OrcuChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[8];
+      break;
+    case "BasgialiscuChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[9];
+      break;
+    case "MascoChara":
+      charaContainer.innerHTML = "";
+      charaContainer.innerHTML = personnages[10];
+      break;
+    case "NaraChara":
+      charaContainer.innerHTML = "";
+      break;
+  }
+
+  // Gestion des choix ou du bouton "Suivant"
+  if (step.choices) {
+    step.choices.forEach((choice, i) => {
+      const btnId = `btnChoix${i + 1}`;
+      const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
+
+      // Ajouter un bouton avec le bon style
+      ajouterBouton("diagBox", "", btnId, "btnChoix");
+
+      // Appliquer la classe spécifique au bouton
+      const btn = document.getElementById(btnId);
+
+      btn.classList.add(btnClass);
+
+      if (step.name) {
+        addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
+      // Ajouter le texte du choix
+      addTxtNarration(choice.text, btnId, "");
 
-      // Gestion des choix ou du bouton "Suivant"
-      if (step.choices) {
-        step.choices.forEach((choice, i) => {
-          const btnId = `btnChoix${i + 1}`;
-          const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
-
-          // Ajouter un bouton avec le bon style
-          ajouterBouton("diagBox", "", btnId, "btnChoix");
-
-          // Appliquer la classe spécifique au bouton
-          const btn = document.getElementById(btnId);
-
-          btn.classList.add(btnClass);
-
-          if (step.name) {
-            addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-          }
-          // Ajouter le texte du choix
-          addTxtNarration(choice.text, btnId, "");
-
-          // Ajouter l'événement au bouton
-          btn.addEventListener("click", choice.action);
-        });
-      } else if (step.nextLvl) {
-        if (step.name) {
-          addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-        }
+      // Ajouter l'événement au bouton
+      btn.addEventListener("click", choice.action);
+    });
+  } else if (step.nextLvl) {
+    if (step.name) {
+      addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
+    }
+    addTxtNarration(step.Txt, "diagBox", "dialogBox");
+    ajouterBouton("diagBox", "", "btnNext", "btnInv");
+    const btnNext = document.getElementById("btnNext");
+    btnNext.addEventListener("click", step.nextLvl);
+  } else {
+    if (step.name) {
+      if (step.Txt == "Narrateur") {
+        addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
         addTxtNarration(step.Txt, "diagBox", "dialogBox");
-        ajouterBouton("diagBox", "", "btnNext", "btnInv");
-        const btnNext = document.getElementById("btnNext");
-        btnNext.addEventListener("click", step.nextLvl);
+        const diagBox = document.querySelector("#diagBox");
+        diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        diagBox.style.color = "rgb(255, 255, 255)";
       } else {
-        if (step.name) {
-          if (step.Txt == "Narrateur") {
-            addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-            addTxtNarration(step.Txt, "diagBox", "dialogBox");
-            const diagBox = document.querySelector("#diagBox");
-            diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-            diagBox.style.color = "rgb(255, 255, 255)";
-          } else {
-            addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-            addTxtNarration(step.Txt, "diagBox", "dialogBox");
-          }
-        }
-
-        ajouterBouton("diagBox", "", "btnNext", "btnInv");
-        const btnNext = document.getElementById("btnNext");
-        btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
+        addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
+        addTxtNarration(step.Txt, "diagBox", "dialogBox");
       }
     }
 
-    charaChanger(index, steps);
+    ajouterBouton("diagBox", "", "btnNext", "btnInv");
+    const btnNext = document.getElementById("btnNext");
+    btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
   }
 }
