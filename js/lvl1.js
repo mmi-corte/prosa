@@ -1,8 +1,7 @@
 // import
-import { loadLvl2 } from "./lvl2.js";
 import { playSteps } from "./functionMakeSteps.js";
-import { loadLvl1bis } from "./lvl1bis.js";
 import { log } from "./trace.js";
+import { nextScreen } from './navigation.js';
 import { path_narration, path_personnages, path_backgrounds} from "./paths.js";
 
 export function loadLvl1() {
@@ -31,8 +30,8 @@ export function loadLvl1() {
             character: null,
             sound: path_narration+'Narrateur-E1/narrateurE1-009.mp3',
             choices: [
-                { text: "E1Choix1", action: loadLvl1bis },
-                { text: "E1Choix2", action: loadLvl2 }
+                { text: "E1Choix1", action: () => { nextScreen("5", "1bis") }},
+                { text: "E1Choix2", action: () => { nextScreen("5", "2")} }
             ]
         }
     ];

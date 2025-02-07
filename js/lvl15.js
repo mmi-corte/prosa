@@ -1,16 +1,17 @@
 import { refreshPage } from "./refreshPage.js";
 import { lunchFight } from './fight.js';
+import { log } from "./trace.js";
 
 export function loadLvl15() {
 
+    log("Enter in L5", "blue");
+
     refreshPage();
-    console.log("loadLvl15 :  je suis là");
     
     const steps = [
         { character: "NaraChara", Txt: "E15Narra" }
     ]
 
-    refreshPage();
     // Lance les étapes
     playSteps(steps, 0, true, 4);
 

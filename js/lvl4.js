@@ -1,8 +1,11 @@
 import { refreshPage } from "./refreshPage.js";
 import { path_narration } from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { log } from "./trace.js";
 
 export function loadLvl4() {
+
+    log("Enter in L4", "blue");
 
     const steps1 =[
         {character : "NarraChara", Txt : "E4Narra", name : "Narrateur" , sound: path_narration+'narrateur-E4/narrateurE4-001.mp3'},
@@ -61,8 +64,6 @@ export function loadLvl4() {
     }
     
     refreshPage();
-    
-    console.log("loadLvl4 :  je suis là");
     
     localStorage.setItem("level", "4"); 
 }

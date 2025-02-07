@@ -1,13 +1,14 @@
 import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
-import { loadLvl16 } from "./lvl16.js";
+import { log } from "./trace.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl11() {
 
-    refreshPage();
-    console.log("loadLvl11 :  je suis là");
+  log("Enter in L5", "blue");
 
-    
+    refreshPage();
+
     const steps = [
         { character : "NarraChara", Txt : "E11Narra" },
         { character : "SylvainChara", Txt : "E11Sylvain", name : "E11Sylvain" },
@@ -40,7 +41,7 @@ export function loadLvl11() {
         { character : "NarraChara", Txt : "E11Narra5" },
         { character : "BergerChara", Txt : "E11Berger3", name : "E11Berger3"},
         { character : "SylvainChara", Txt : "E11Sylvain5", name : "E11Sylvain5" },
-        { character : "NarraChara", Txt : "E11Narra6", nextLvl : loadLvl16}
+        { character : "NarraChara", Txt : "E11Narra6", nextLvl : nextScreen("5", "16")}
     ];
     playSteps(steps2, 0 , true , 4);
 

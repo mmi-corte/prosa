@@ -1,11 +1,13 @@
-import { loadLvl1 } from "./lvl1.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { refreshPage } from "./refreshPage.js";
+import { nextScreen } from "./navigation.js";
+import { log } from "./trace.js";
 
 export function loadLvlfinAlt() {
 
+    log("Enter in LFinAlt", "blue");
+
     refreshPage();
-    console.log("loadLvlfin :  je suis là");
 
     const steps = [
         { character: "NaraChara", Txt: "End2Narra" },
@@ -15,8 +17,10 @@ export function loadLvlfinAlt() {
         {character : "FataChara", Txt : "End2Fata",name : "End2Fata"},
         { character: "NaraChara", Txt: "End2Narra3" },
         {character : "FataChara", Txt : "End2Fata2",name : "End2Fata2"},
-        { character: "NaraChara", Txt: "End2Narra4" , nextLvl : loadLvl1},
+        { character: "NaraChara", Txt: "End2Narra4" , nextLvl : nextScreen("5", "1")},
     ];
+
     playSteps(steps , 0, true ,4);
+    
     localStorage.setItem("level", "finAlt");
 }
