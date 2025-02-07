@@ -1,9 +1,12 @@
 import { refreshPage } from './refreshPage.js';
 import { playSteps } from "./functionMakeSteps.js";
 import { path_narration } from "./paths.js";
+import { log } from './trace.js';
 
 export function loadLvl2() {
-    console.log("lvl2");
+
+    log("Enter in L2", "blue");
+
     const mapData = {
         containerId: "container", // L'ID du conteneur où la carte sera affichée
         apiKey: "8b92289a637347489b3b13811907ebdd", // Remplace par ta vraie clé API Geoapify

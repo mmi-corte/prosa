@@ -2,20 +2,24 @@
 // Création d'un objet pour stocker les instances audio
 const audioPlayers = {};
 
-// Fonction pour charger et jouer un fichier audio
-export function loadSound(url, loop = false) {
-
+export async function loadSound(url, loop = false) {
     if (!audioPlayers[url]) {
-        // Si l'instance audio pour cette URL n'existe pas encore, on la crée
-        audioPlayers[url] = new Audio(url);
-        audioPlayers[url].loop = loop; // Active ou désactive la boucle
-        
+      // Si l'instance audio pour cette URL n'existe pas encore, on la crée
+      audioPlayers[url] = new Audio(url);
+      audioPlayers[url].loop = loop; // Active ou désactive la boucle
+      audioPlayers[url].preload = 'auto';
+      
+      // Retourne une promesse qui se résout quand l'audio est prêt à être joué
+      await new Promise((resolve, reject) => {
+        audioPlayers[url].addEventListener("canplaythrough", resolve, { once: true });
+        audioPlayers[url].addEventListener("error", reject, { once: true });
+      });
+    } else {
+      // Si l'instance existe déjà, on met à jour l'option de boucle
+      audioPlayers[url].loop = loop;
     }
-    // Si une instance existe déjà, on met à jour l'option de boucle
-    audioPlayers[url].loop = loop;
-    audioPlayers[url].preload = 'auto'; 
-       
-}
+  }
+  
 
 // Fonction pour suspendre la lecture d'un fichier audio
 export function suspendSound(url) {

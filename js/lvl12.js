@@ -1,13 +1,14 @@
 import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
-import { loadLvl13 } from "./lvl13.js";
+import { log } from "./trace.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl12() {
 
+    log("Enter in L12", "blue");
+
     refreshPage();
-    console.log("loadLvl12 :  je suis là");
- 
-    
+
     const steps = [
         { character : "NarraChara", Txt : "E12Narra" },
         { character : "MartoChara", Txt : "E12Marto", name : "E12Marto" },
@@ -21,7 +22,7 @@ export function loadLvl12() {
         { character : "MartoChara", Txt : "E12Marto5", name : "E12Marto5" },
         { character : "NarraChara", Txt : "E12Narra5" },
         { character : "MartoChara", Txt : "E12Marto6", name : "E12Marto6" },
-        { character : "MartoChara", Txt : "E12Marto6", name : "E12Marto6" , popup: "E12Mess2", nextLvl: loadLvl13 },       
+        { character : "MartoChara", Txt : "E12Marto6", name : "E12Marto6" , popup: "E12Mess2", nextLvl: nextScreen("5","13") },       
     ];
     playSteps(steps, 0 , true , 4);
 
@@ -31,14 +32,17 @@ export function loadLvl12() {
         ];
         playSteps(steps, 1 , true , 4);
     }
+    
     const steps2 = [
         { character : "MartoChara", Txt : "E12Marto7", name : "E12Marto7" },
         { character : "NarraChara", Txt : "E12Narra6" },
         { character : "MartoChara", Txt : "E12Marto8", name : "E12Marto8" },
         { character : "NarraChara", Txt : "E12Narra7" },
-        { character : "NarraChara", Txt : "E12Narra7", nextLvl: loadLvl13 },
+        { character : "NarraChara", Txt : "E12Narra7", nextLvl: nextScreen("13") },
         
     ];
+
     playSteps(steps2, 0 , true , 4);
+
     localStorage.setItem( "level", "12" );
 }

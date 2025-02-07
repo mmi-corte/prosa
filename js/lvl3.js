@@ -1,11 +1,13 @@
 import { refreshPage } from "./refreshPage.js";
 import { addOverlay } from './overlay.js';
-import { loadLvl4} from './lvl4.js';
-import { loadLvl10 } from './lvl10.js';
+import { nextScreen } from './navigation.js';
 import { playSteps } from './functionMakeSteps.js';
 import { path_narration, path_personnages } from "./paths.js";
+import { log } from "./trace.js";
 
 export function loadLvl3() {
+
+    log("Enter in L3", "blue");
 
     // Liste des étapes du niveau 1
     const steps = [
@@ -17,8 +19,8 @@ export function loadLvl3() {
         { background: path_backgrounds + 'fondEtape3.png', narration: "E3Overlay", character: null, action: addOverlay },// Appel de la fonction overlay ici
         { background: path_backgrounds + 'fondEtape3.png', narration: "E3Berger3", character: path_personnages+'Berger/berger.png', name: 'E3Berger6' , sound: path_narration+'Berger-E3/Berger-E3-003mp3',
             choices: [
-                { text: "E3Choix1", action: loadLvl4 },
-                { text: "E3Choix2", action: loadLvl10 }
+                { text: "E3Choix1", action: nextScreen('5', '4') },
+                { text: "E3Choix2", action: nextScreen('5', '10') }
             ]
         }
     ];

@@ -103,34 +103,50 @@ function typeWriter(text, element, txtClassName, speed = 100) {
 // Fonction pour récupérer un scénario basé sur un stepCode
 export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
 
-    const conteneur = document.getElementById(conteneurId);
-    if (!conteneur) {
-        throw new Error(`Le conteneur avec l'ID "${conteneurId}" est introuvable.`);
-    }
-
-    try {
-        if (!querySnapshot) {
-            querySnapshot = await getDocs(collection(db, "scenario"));
-        };
-
-        const docFound = querySnapshot.docs.find(doc => doc.data().stepCode === stepCode);
-        if (!docFound) {
-            throw new Error(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
-        };
-
-        const p = document.createElement("p");
-        if(txtClassName == '') {
-            p.textContent = docFound.data().txt;
-            p.className = txtClassName;
-
+    // stepCode doit être une chaîne de caractères
+    if (typeof stepCode !== "string") {
+        if (typeof stepCode === "function") {
+            stepCode();
         } else {
-            typeWriter(docFound.data().txt, p, txtClassName, 50);
-        };
+            console.error("stepCode est incorrect!");
+        }
+    } else {
 
-        conteneur.appendChild(p);
-        
-    } catch (error) {
-        throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
+        const conteneur = document.getElementById(conteneurId);
+        if (!conteneur) {
+            throw new Error(`Le conteneur avec l'ID "${conteneurId}" est introuvable.`);
+        }
+
+        try {
+            if (!querySnapshot) {
+                querySnapshot = await getDocs(collection(db, "scenario"));
+            };
+
+            const docFound = querySnapshot.docs.find(doc => doc.data().stepCode === stepCode);
+            
+            // if stepCode not found, use stepCode as text content
+            let data; 
+            if (!docFound) {
+                data = stepCode;
+                console.warn(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
+            } else {
+                data = docFound.data().txt;
+            }
+
+            const p = document.createElement("p");
+            if(txtClassName == '') {
+                p.textContent = data;
+                p.className = txtClassName;
+
+            } else {
+                typeWriter(data, p, txtClassName, 50);
+            };
+
+            conteneur.appendChild(p);
+            
+        } catch (error) {
+            throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
+        }
     }
 }
 

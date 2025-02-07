@@ -1,12 +1,14 @@
 import { refreshPage } from "./refreshPage.js";
 import { lunchFight } from './fight.js';
 import { playSteps } from "./functionMakeSteps.js";
+import { log } from "./trace.js";
 
 export function loadLvl16() {
 
+    log("Enter in L16", "blue");
+
     refreshPage();
-    console.log("loadLvl16 :  je suis là");
-   
+       
     const steps = [
 
         { character: "NaraChara", Txt: "E16Narra" }

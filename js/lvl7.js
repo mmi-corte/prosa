@@ -1,7 +1,11 @@
 import { path_personnages, path_backgrounds } from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { nextScreen } from "./navigation.js";
+import { log } from "./trace.js";
 
 export function loadLvl7() {
+
+    log("Enter in L7", "blue");
 
     // Liste des étapes du niveau 1
     const steps = [
@@ -10,8 +14,8 @@ export function loadLvl7() {
         { background: path_backgrounds + 'fondEtape7.png', narration: "E7Narra2", character: null },
         { background: path_backgrounds + 'fondEtape7.png', narration: "E7Berger2", character: path_personnages+'Berger/berger.png', name: 'E6Berger2',
             choices: [
-                { text: "E6Choix1", action: loadLvl9 },
-                { text: "E6Choix2", action: loadLvl10 }
+                { text: "E6Choix1", action: nextScreen("5", "9") },
+                { text: "E6Choix2", action: nextScreen("5", "10") }
             ]
         }
     ];

@@ -1,8 +1,11 @@
 import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { log } from "./trace.js";
 
 export function loadLvl5() {
   
+    log("Enter in L5", "blue");
+
     const steps =[
         {character : "NarraChara", Txt : "E5Narra"},
         {character : "BergerChara", Txt : "E5Berger", name : "E5Berger"},
@@ -21,8 +24,6 @@ export function loadLvl5() {
     ]
 
     refreshPage();
-    
-    console.log("loadLvl5 :  je suis là");
     
     playSteps(steps);
 

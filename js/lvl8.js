@@ -1,11 +1,14 @@
 import { refreshPage } from "./refreshPage.js";
-import { loadLvl12 } from "./lvl12.js";
+import { log} from "./trace.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl8() {
 
     // const steps =[
     //     {character : "NarraChara", Txt : "E6Narra", name : "Narrateur"},
     // ]
+
+    log("Enter in L8", "blue");
 
     if (Ruse) { 
         const steps = [
@@ -21,8 +24,6 @@ export function loadLvl8() {
             
         ];
         playSteps(steps); // Démarrage des étapes
-
-        //mettre code pour étape suivante 
     }
     
     if (lion) { 
@@ -37,16 +38,14 @@ export function loadLvl8() {
             { character : "StregaChara", Txt : "E8StregaLeoT3", name : "E8StregaLeoT3" },
             { character : "NarraChara", Txt : "E8NarraLeoT5"},
             { character : "BergerChara", Txt : "E8BergerLeoT", name : "E8BergerLeoT" },
-            { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: loadLvl12},
+            { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: nextScreen("5","12")},
         ];
         playSteps(steps); // Démarrage des étapes
 
         //mettre code pour étape suivante 
     }  
 
-
     refreshPage();
-    console.log("loadLvl8 :  je suis là");
 
     localStorage.setItem("level", "8");
     

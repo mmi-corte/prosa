@@ -1,9 +1,12 @@
 
 import { lunchFight } from './fight.js';
 import { skin } from './functionChangeStyle.js';
-import { loadLvl14 } from "./lvl14.js";
+import { nextScreen } from './navigation.js';
+import { log } from './trace.js';
 
 export function loadLvl13() {
+
+    log("Enter in L13", "blue");
 
     const steps = [
         { background: 'assets/bg/fondEtape13.mp4', narration: "E13Narra", character: null },
@@ -24,7 +27,7 @@ export function loadLvl13() {
     }
     luncher();
     const steps2 = [
-        { background: 'assets/bg/fondEtape13.mp4', narration: "E13Narra2", character: null , nextLvl: loadLvl14},
+        { background: 'assets/bg/fondEtape13.mp4', narration: "E13Narra2", character: null , nextLvl: nextScreen("5","14")},
     ];
     playSteps(steps, 0, false, 4); 
    

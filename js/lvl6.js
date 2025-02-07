@@ -3,10 +3,15 @@ import { lunchFight } from "./fight.js";
 import { skin } from "./functionChangeStyle.js";
 import {path_personnages, path_backgrounds } from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { enemies } from "../main.js";
+import { log } from "./trace.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl6() {
+
+  log("Enter in L1", "blue");
+
   refreshPage();
-  console.log("loadLvl6 :  je suis là");
 
   if (Farfadet) {
     const steps = [
@@ -58,8 +63,8 @@ export function loadLvl6() {
           narration: "E6NarraOrcuF",
           character: null,
           choices: [
-            { text: "E3Choix1", action: loadLvl6bis },
-            { text: "E3Choix2", action: loadLvl9 },
+            { text: "E3Choix1", action: nextScreen("5", "6bis") },
+            { text: "E3Choix2", action: nextScreen("5", "9") },
           ],
         },
       ];

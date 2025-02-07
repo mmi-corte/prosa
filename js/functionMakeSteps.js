@@ -404,112 +404,120 @@ const personnages = [
 ];
 
 export function playSteps(steps, index = 0, AR = false, marker = null) {
+  
+  const step = steps[index];
+
   if (!AR) {
+
     if (index >= steps.length) return; // Fin des étapes
-
-    const step = steps[index];
-    
+  
     refreshPage(); // Réinitialise la page
-    
-    if (steps.sound) {
-      // delete all song before start nex one
-      deleteSound();
+  
+    if (step) {
+      if (step.sound) {
+        // delete all song before start nex one
+        deleteSound();  
 
-      // load sound
-      loadSound(steps.sound, false);
+        // load sound
+        loadSound(step.sound, false);
 
-      // play sound
-      const SoundIcon = document.getElementById("SoundIcon");
-      if (SoundIcon.src.includes("unmute")) {
-        setOnSound();
+        // play sound
+        const SoundIcon = document.getElementById("SoundIcon");
+        if (SoundIcon.src.includes("unmute")) {
+          setOnSound();
+        }
       }
-    }
 
-    // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
-    const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
+      // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
+      const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
 
-    if (isImg) {
-      // Ajoute l'image de fond
-      addImgBackground("container", step.background);
-    } else {
-      // Ajoute la video de fond
-      addMediaBackground("container", step.background);
-    }
-
-    // Ajoute une boîte de dialogue
-    const dialogClass = step.character ? "diagBox" : "diagBoxN"; // Utiliser diagBoxN pour narrateur, sinon diagBox
-    addDiv("container", "diagBox", dialogClass); // Ajout de la classe correcte pour chaque étape
-
-    // Ajoute le personnage si nécessaire
-    if (step.character) {
-      addImg("container", step.character, "imgPerso");
-    }
-
-    // Ajoute le nom du personnage au-dessus de la boîte de dialogue
-    if (step.name) {
-      addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-    }
-
-    //Ajoute l'écan de la map si elle est dans
-    if (step.map) {
-      addTxt(
-        "container",
-        "Vous devez vous dirige vers la prochaine étape",
-        "textTitle"
-      );
-      showStaticMap(step.map);
-      ajouterBouton(
-        "container",
-        "Confimer votre arrivée",
-        "btnNext",
-        "btnclass"
-      );
-    }
-
-    // Ajoute le texte de narration ou du personnage
-    addTxtNarration(step.narration, "diagBox", "dialogBox");
-
-    //Passe au niveau suivant
-    if (step.nextLvl) {
-      if (!document.getElementById("btnNext")) {
-        // Vérifie si le bouton "Suivant" n'existe pas déjà
-        ajouterBouton("diagBox", "", "btnNext", "btnInv"); // Crée le bouton "Suivant"
-      }
-      const btnNext = document.getElementById("btnNext");
-      btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
-    } else {
-      // Gestion des choix ou du bouton "Suivant"
-      if (step.choices) {
-        step.choices.forEach((choice, i) => {
-          const btnId = `btnChoix${i + 1}`;
-          const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
-
-          // Ajouter un bouton avec le bon style
-          ajouterBouton("diagBox", "", btnId, "btnChoix");
-
-          // Appliquer la classe spécifique au bouton
-          const btn = document.getElementById(btnId);
-          btn.classList.add(btnClass);
-
-          if (step.name) {
-            addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-          }
-          // Ajouter le texte du choix
-          addTxtNarration(choice.text, btnId, "");
-
-          // Ajouter l'événement au bouton
-          btn.addEventListener("click", choice.action);
-        });
+      if (isImg) {
+        // Ajoute l'image de fond
+        addImgBackground("container", step.background);
       } else {
-        // Ajouter le bouton "Suivant" si aucune étape de choix n'est présente
+        // Ajoute la video de fond
+        addMediaBackground("container", step.background);
+      }
+
+      // Ajoute une boîte de dialogue
+      const dialogClass = step.character ? "diagBox" : "diagBoxN"; // Utiliser diagBoxN pour narrateur, sinon diagBox
+      addDiv("container", "diagBox", dialogClass); // Ajout de la classe correcte pour chaque étape
+
+      // Ajoute le personnage si nécessaire
+      if (step.character) {
+        addImg("container", step.character, "imgPerso");
+      }
+
+      // Ajoute le nom du personnage au-dessus de la boîte de dialogue
+      if (step.name) {
+        addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
+      }
+      
+      // Ajoute le texte de narration ou du personnage
+      addTxtNarration(step.narration, "diagBox", "dialogBox");
+
+      //Passe au niveau suivant
+      if (step.nextLvl) {
         if (!document.getElementById("btnNext")) {
           // Vérifie si le bouton "Suivant" n'existe pas déjà
           ajouterBouton("diagBox", "", "btnNext", "btnInv"); // Crée le bouton "Suivant"
         }
         const btnNext = document.getElementById("btnNext");
-        btnNext.addEventListener("click", () => playSteps(steps, index + 1)); // Passe à l'étape suivante
+        btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
+      
+      } else {
+        // Gestion des choix ou du bouton "Suivant"
+        if (step.choices) {
+          step.choices.forEach((choice, i) => {
+            const btnId = `btnChoix${i + 1}`;
+            const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
+
+            // Ajouter un bouton avec le bon style
+            ajouterBouton("diagBox", "", btnId, "btnChoix");
+
+            // Appliquer la classe spécifique au bouton
+            const btn = document.getElementById(btnId);
+            btn.classList.add(btnClass);
+
+            if (step.name) {
+              addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
+            }
+            // Ajouter le texte du choix
+            addTxtNarration(choice.text, btnId, "");
+
+            // Ajouter l'événement au bouton
+            btn.addEventListener("click", choice.action);
+          });
+        } else {
+          // Ajouter le bouton "Suivant" si aucune étape de choix n'est présente
+          if (!document.getElementById("btnNext")) {
+            // Vérifie si le bouton "Suivant" n'existe pas déjà
+            ajouterBouton("diagBox", "", "btnNext", "btnInv"); // Crée le bouton "Suivant"
+          }
+          const btnNext = document.getElementById("btnNext");
+          btnNext.addEventListener("click", () => playSteps(steps, index + 1)); // Passe à l'étape suivante
+        }
+      }
+    // steps is dict
+    } else {
+      //Ajoute l'écan de la map si elle est dans
+      if (steps.map) {
+        addTxt(
+          "container",
+          "Vous devez vous dirige vers la prochaine étape",
+          "textTitle"
+        );
+        showStaticMap(step.map);
+        ajouterBouton(
+          "container",
+          "Confimer votre arrivée",
+          "btnNext",
+          "btnclass"
+        );
       }
     }
+    log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+  // AR part
   } else {
     const container = document.getElementById("container");
 

@@ -24,7 +24,7 @@ let weapons = [
   },
 ];
 
-const enemies = [
+export const enemies = [
   {
     name: "Cerf",
     hp: 50,

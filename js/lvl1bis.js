@@ -1,9 +1,12 @@
 import { playSteps } from './functionMakeSteps.js';
 import { popup } from './popup.js';
-import { loadLvl3 } from './lvl3.js';
-import { path_narration, path_personnages } from "./paths.js";
+import { path_narration, path_personnages, path_backgrounds } from "./paths.js";
+import { log } from './trace.js';
+import { nextScreen } from './navigation.js';
 
 export function loadLvl1bis() {
+
+    log("Enter in L1bis", "blue");
 
     const steps = [
         { background: path_backgrounds + 'fondEtape1bis.mp4', narration: "E1BNarra", character: null , sound: path_narration+'Narrateur-E1bis/narrateurE1bis-001.mp3' },
@@ -12,17 +15,17 @@ export function loadLvl1bis() {
         {
             background: path_backgrounds + 'fondEtape1bis.png',
             narration: () => {
-                popup("Vous avez récupéré la branche d’arbre", "../assets/items/branche.png");
+                popup("Vous avez récupéré la branche d’arbre", "assets/items/branche.png");
             },
             character: null
         },
         {
             background: path_backgrounds + 'fondEtape1bis.png',
-            narration: "E1BNarra3",
+            narration: "E1Berger2",
             character: null,
             choices: [
-                { text: "Aller au niveau 2", action: () => console.log("Choix : Aller au niveau 2") },
-                { text: "Aller au niveau 3", action: loadLvl3 }
+                { text: "Aller au niveau 2", action: () => {nextScreen("5", "2")} },
+                { text: "Aller au niveau 3", action: () => { nextScreen("5", "3")} }
             ]
         }
     ];
