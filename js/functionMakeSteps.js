@@ -4,7 +4,7 @@ import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
 import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
 import { log } from "./trace.js";
 import { showStaticMap } from "./map.js";
-import { loadSound, stopSound } from "./Sound/sound.js";
+import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 
 const personnages = [
   `
@@ -408,8 +408,23 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     if (index >= steps.length) return; // Fin des étapes
 
     const step = steps[index];
+    
     refreshPage(); // Réinitialise la page
-    loadSound(step.sound,false);
+    
+    if (steps.sound) {
+      // delete all song before start nex one
+      deleteSound();
+
+      // load sound
+      loadSound(steps.sound, false);
+
+      // play sound
+      const SoundIcon = document.getElementById("SoundIcon");
+      if (SoundIcon.src.includes("unmute")) {
+        setOnSound();
+      }
+    }
+
     // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
     const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
 

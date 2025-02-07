@@ -1,4 +1,6 @@
-import { loadLvl1 } from "./lvl1";
+import { loadLvl1 } from "./lvl1.js";
+import { playSteps } from "./functionMakeSteps.js";
+import { refreshPage } from "./refreshPage.js";
 
 export function loadLvlfinAlt() {
 
