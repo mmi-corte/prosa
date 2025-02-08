@@ -6,7 +6,11 @@ import { nextScreen } from './navigation.js';
 
 export function loadLvl2() {
 
+    // Trace the entry in the level 2
     log("Enter in L2", "blue");
+
+    // Set the level in localStorage
+    localStorage.setItem("level", "2"); 
 
     // const mapData = {
     //     containerId: "container", // L'ID du conteneur où la carte sera affichée
@@ -34,6 +38,7 @@ export function loadLvl2() {
 
     // playSteps(mapData, 0, false, 2);
 
+    // steps of level 2
     const steps = [
         {character: "NaraChara", Txt: "E2Narra", sound: path_narration+'Narrateur-E2/narrateurE2-001.mp3'},
         {character: "BergerChara", Txt: "E2Berger", name: "E2Berger", sound: path_narration+'Berger-E2/Berger-E2-001.mp3'},
@@ -54,14 +59,14 @@ export function loadLvl2() {
         {character: "FataChara", Txt: "E2Fata6", name: "E2Fata6", sound: path_narration+'Fata-E2/Fata-E2-006.mp3'},
         {character: "NaraChara", Txt: "E2Narra6", sound: path_narration+'Narrateur-E2/narrateurE2-006.mp3'},
         {character: "BergerChara", Txt: "E2Berger2", name: "E2Berger2", sound: path_narration+'Berger-E2/Berger-E2-002.mp3'},
-        {character: "NaraChara", Txt: "E2Narra", sound: path_narration+'Narrateur-E2/narrateurE2-006.mp3'}
+        {character: "NaraChara", Txt: "E2Narra", sound: path_narration+'Narrateur-E2/narrateurE2-006.mp3', 
+            nextLvl: () => { nextScreen("5", "3"); window.location.reload(false); }}
         ];
 
-    // besoin d'un refresh car AR ensuite
+    // besoin d'un refresh car AR ensuite (true dans playSteps)
     refreshPage();
 
-    // Lance les étapes AR
+    // Play the steps
     playSteps(steps, 0, true, 2);
-
-    localStorage.setItem("level", "2");
+    
 }

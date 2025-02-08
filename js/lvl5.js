@@ -5,8 +5,13 @@ import { path_narration } from "./paths.js";
 
 export function loadLvl5() {
   
+    // Trace the entry in the level 5
     log("Enter in L5", "blue");
 
+    // Set the level in localStorage
+    localStorage.setItem("level", "5");
+
+    // Refresh the page
     const steps =[
         {character: "NarraChara", Txt: "E5Narra", sound: path_narration+'Narrateur-E5/naratteurE5-001.mp3'},
         {character: "BergerChara", Txt: "E5Berger", name: "E5Berger", sound: path_narration+'Berger-E5/Berger-E5-001.mp3'},
@@ -23,7 +28,6 @@ export function loadLvl5() {
         {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/naratteurE5-007.mp3'}
     ]
     
+    // Play the steps
     playSteps(steps);
-
-    localStorage.setItem("level", "5");
 }

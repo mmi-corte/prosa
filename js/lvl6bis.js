@@ -5,22 +5,25 @@ import { log } from "./trace.js";
 
 export function loadLvl6bis() {
 
+    // Trace the entry in the level 6bis
     log("Enter in L6bis", "blue");
     
-    // Liste des étapes du niveau 1
+    // Set the level in localStorage
+    localStorage.setItem("level", "6bis");
+
+    // Steps for the level 6bis
     const steps = [
         { background: path_backgrounds + 'fondEtape6bis.mp4', narration: "E6Narra", character: null },
         { background: path_backgrounds + 'fondEtape6bis.png', narration: "E6Berger", character: path_personnages + 'Berger/berger.png', name: 'E6Berger' },
         { background: path_backgrounds + 'fondEtape6bis.png', narration: "E6Narra2", character: null },
         { background: path_backgrounds + 'fondEtape6bis.png', narration: "E6Berger2", character: path_personnages + 'Berger/berger.png', name: 'E6Berger2',
             choices: [
-                { text: "E6Choix1", action: nextScreen("5", "9") },
-                { text: "E6Choix2", action: nextScreen("5", "10") }
+                { text: "E6Choix1", action: () => {nextScreen("5", "9");} },
+                { text: "E6Choix2", action: () => {nextScreen("5", "10")} }
             ]}
     ];
 
-    playSteps(steps); // Démarrage des étapes
- 
-    localStorage.setItem("level", "6bis");
+    //Play the steps
+    playSteps(steps);
     
 }

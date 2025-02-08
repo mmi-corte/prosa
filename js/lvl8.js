@@ -1,4 +1,3 @@
-import { refreshPage } from "./refreshPage.js";
 import { log} from "./trace.js";
 import { nextScreen } from "./navigation.js";
 
@@ -8,22 +7,27 @@ export function loadLvl8() {
     //     {character : "NarraChara", Txt : "E6Narra", name : "Narrateur"},
     // ]
 
+    // Trace the entry in the console
     log("Enter in L8", "blue");
+
+    // Set the level in local storage
+    localStorage.setItem("level", "8");
 
     if (Ruse) { 
         const steps = [
-            { character : "NarraChara", Txt : "E8NarraRuseT"},
-            { character : "MessChara", popup : "E8Mess" },
-            { character : "NarraChara", Txt : "E8NarraRuseT2"},
-            { character : "BergerChara", Txt : "E8BergerRuseT", name : "E8BergerRuseT" },
-            { character : "NarraChara", Txt : "E8NarraRuseT3"},
-            { character : "BergerChara", Txt : "E8BergerRuseT2", name : "E8BergerRuseT2" },
-            { character : "NarraChara", Txt : "E8NarraRuseT4"},
-            { character : "BergerChara", Txt : "E8BergerRuseT3", name : "E8BergerRuseT3" },
-            { character : "NarraChara", Txt : "E8NarraRuseT5"},
+            { character: "NarraChara", Txt: "E8NarraRuseT"},
+            { character: "MessChara", popup: "E8Mess" },
+            { character: "NarraChara", Txt: "E8NarraRuseT2"},
+            { character: "BergerChara", Txt: "E8BergerRuseT", name: "E8BergerRuseT" },
+            { character: "NarraChara", Txt: "E8NarraRuseT3"},
+            { character: "BergerChara", Txt: "E8BergerRuseT2", name: "E8BergerRuseT2" },
+            { character: "NarraChara", Txt: "E8NarraRuseT4"},
+            { character: "BergerChara", Txt: "E8BergerRuseT3", name: "E8BergerRuseT3" },
+            { character: "NarraChara", Txt: "E8NarraRuseT5"},
             
         ];
-        playSteps(steps); // Démarrage des étapes
+        //Play the steps
+        playSteps(steps);
     }
     
     if (lion) { 
@@ -38,15 +42,10 @@ export function loadLvl8() {
             { character : "StregaChara", Txt : "E8StregaLeoT3", name : "E8StregaLeoT3" },
             { character : "NarraChara", Txt : "E8NarraLeoT5"},
             { character : "BergerChara", Txt : "E8BergerLeoT", name : "E8BergerLeoT" },
-            { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: nextScreen("5","12")},
+            { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: () => { nextScreen("5","12");}},
         ];
-        playSteps(steps); // Démarrage des étapes
-
-        //mettre code pour étape suivante 
+        // Play the steps
+        playSteps(steps); 
     }  
-
-    refreshPage();
-
-    localStorage.setItem("level", "8");
     
 }

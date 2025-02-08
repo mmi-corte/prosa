@@ -1,15 +1,17 @@
-import { refreshPage } from "./refreshPage.js";
-import { lunchFight } from "./fight.js";
 import { skin } from "./functionChangeStyle.js";
 import {path_personnages, path_backgrounds } from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
-import { enemies } from "../main.js";
+import { enemies, lunchFight } from "./fight.js";
 import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
 
 export function loadLvl6() {
 
+  // Set the level in localStorage
   log("Enter in L1", "blue");
+
+  // Set the level in localStorage
+  localStorage.setItem("level", "6");
 
   if (Farfadet) {
     const steps = [
@@ -83,6 +85,4 @@ export function loadLvl6() {
     playSteps(steps) ; // Démarrage des étapes
   }
   
-  localStorage.setItem("level", "6");
-
 }

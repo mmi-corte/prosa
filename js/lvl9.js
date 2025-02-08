@@ -1,22 +1,27 @@
-import { path_personnages } from "./paths.js";
+import { path_personnages, path_backgrounds } from "./paths.js";
 import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
 
 export function loadLvl9() {
 
+    // Trace the entry in the console
     log("Enter in L9", "blue");
 
-   // Liste des étapes du niveau 1
-   const steps = [
-    { background: 'assets/bg/fondEtape9.mp4', narration: "E9Narra", character: null },
-    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger' },
-    { background: 'assets/bg/fondEtape9.png', narration: "E9Narra2", character: null },
-    { background: 'assets/bg/fondEtape9.png', narration: "E9Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1' },
-    { background: 'assets/bg/fondEtape9.png', choices: [ { text: "E9Mess", action: nextScreen("5","10")} ], character: null },
-];
+    // Set the level in localStorage
+    localStorage.setItem("level", "9");
 
-playSteps(steps); // Démarrage des étapes
+    // Steps for the level
+    const steps = [
+        { background: path_backgrounds+'fondEtape9.mp4', narration: "E9Narra", character: null },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger' },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Narra2", character: null },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1' },
+        { background: path_backgrounds+'fondEtape9.png', character: null, 
+            choices: [ 
+                { text: "E9Mess", action: () => {nextScreen("5","10");}} ] }
+    ];
 
-localStorage.setItem("level", "9");
+    //Play the steps
+    playSteps(steps); 
     
 }
