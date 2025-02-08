@@ -6,6 +6,7 @@ import { log } from "./trace.js";
 export function loadLvl6bis() {
 
     log("Enter in L6bis", "blue");
+    
     // Liste des étapes du niveau 1
     const steps = [
         { background: path_backgrounds + 'fondEtape6bis.mp4', narration: "E6Narra", character: null },

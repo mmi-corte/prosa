@@ -11,6 +11,7 @@ import { popup } from "./popup.js";
 import { selectAvatar } from "./functionChangeStyle.js";
 import { nextScreen } from "./navigation.js";
 import {log} from "./trace.js"
+import { addTxt } from "./texte.js";
 
 // Fonction pour charger l'écran 4 du jeu
 export function loadScreen4() {
@@ -24,6 +25,8 @@ export function loadScreen4() {
   // add content
   // Création des conteneurs pour les avatars
   addDiv("container", "containerAvatar", "divAvatar");
+  // add content
+  addTxt("containerAvatar", "Choisis un avatar", "txtFormName");
   addDiv("containerAvatar", "imgAvatarContainer", "imgAvatarContainer");
 
   // Liste des chemins des avatars

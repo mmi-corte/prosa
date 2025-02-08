@@ -3,6 +3,7 @@ import { popup } from './popup.js';
 import { path_narration, path_personnages, path_backgrounds } from "./paths.js";
 import { log } from './trace.js';
 import { nextScreen } from './navigation.js';
+import { refreshPage } from './refreshPage.js';
 
 export function loadLvl1bis() {
 
@@ -31,7 +32,7 @@ export function loadLvl1bis() {
     ];
 
     // Lance les étapes
-    playSteps(steps, 0, false , 4);
+    playSteps(steps);
 
     localStorage.setItem("level", "1bis");
 }

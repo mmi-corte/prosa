@@ -39,8 +39,6 @@ export function loadLvl4() {
         }
     ]
 
-    refreshPage();
-
     playSteps(steps);
 
     if(steps.choices.answear1 || steps.choices.answear2){
@@ -65,8 +63,6 @@ export function loadLvl4() {
         ];
         
     }
-    
-    refreshPage();
     
     playSteps(steps);
 

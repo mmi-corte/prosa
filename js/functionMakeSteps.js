@@ -6,6 +6,7 @@ import { log } from "./trace.js";
 import { showStaticMap } from "./map.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 import { path_personnages } from "./paths.js";
+import { nextScreen } from "./navigation.js";
 
 const personnages = [
   `
@@ -548,13 +549,15 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
     document.body.style.background = "none";
 
     charaChanger(index, steps);
-    
+
   }
 }
 
 function charaChanger(index, steps) {
 
-  if (index >= steps.length) return; // Fin des étapes
+  if (index >= steps.length) {
+    return;
+  }
 
   const step = steps[index];
   const charaContainer = document.querySelector("#marker");

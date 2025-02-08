@@ -11,8 +11,6 @@ export function loadLvl6() {
 
   log("Enter in L1", "blue");
 
-  refreshPage();
-
   if (Farfadet) {
     const steps = [
       {
@@ -21,7 +19,8 @@ export function loadLvl6() {
         character: null,
       },
     ];
-    playSteps(steps,0, false, null); // Démarrage des étapes
+
+    playSteps(steps); // Démarrage des étapes
 
     if (Orcu) {
       const steps = [
@@ -32,7 +31,7 @@ export function loadLvl6() {
           name: "E6Berger",
         },
       ];
-      playSteps(steps,0, false, null); // Démarrage des étapes
+      playSteps(steps); // Démarrage des étapes
 
       let weapons = [
         {
@@ -48,7 +47,8 @@ export function loadLvl6() {
       }
       luncher();
 
-      playSteps(steps, 0, false, null); // Démarrage des étapes
+      playSteps(steps); // Démarrage des étapes
+
     } else {
       //else not see Orcu
       const steps = [
@@ -68,8 +68,9 @@ export function loadLvl6() {
           ],
         },
       ];
-      playSteps(steps, 0, false, null); // Démarrage des étapes
+      playSteps(steps); // Démarrage des étapes
     }
+
   } else {
     //else farfafet
     const steps = [
@@ -79,7 +80,7 @@ export function loadLvl6() {
         character: null,
       },
     ];
-    playSteps(steps, 0, false, null ) ; // Démarrage des étapes
+    playSteps(steps) ; // Démarrage des étapes
   }
   
   localStorage.setItem("level", "6");
