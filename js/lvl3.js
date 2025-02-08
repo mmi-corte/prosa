@@ -28,7 +28,13 @@ export function loadLvl3() {
             ]
         }
     ];
-    
+
+    // Map button should not be visible in this step
+    const MapBtn = document.getElementById("MapBtn");
+    if(MapBtn) {
+        MapBtn.style.display = "none";
+    }
+
     // Play the steps
     playSteps(steps);
 

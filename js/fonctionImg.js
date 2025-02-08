@@ -1,4 +1,5 @@
-// buttonModule.js
+// fonctionImg.js
+
 export function addImgBackground(containerID, mediaURL) {
     // Sélectionne la div par son ID
     const container = document.getElementById(containerID);
@@ -40,7 +41,7 @@ export function addMediaBackground(containerID, mediaURL) {
     // Détecte si l'URL est une vidéo ou une image
     const isVideo = /\.(mp4|webm|ogg)$/i.test(mediaURL);
     
-    const SoundIcon=document.getElementById("SoundIcon");
+    const SoundBtn=document.getElementById("SoundBtn");
 
     if (isVideo) {
         // Création de l'élément vidéo
@@ -49,8 +50,8 @@ export function addMediaBackground(containerID, mediaURL) {
         video.autoplay = true;
         video.loop = true;
         
-        if (SoundIcon) {
-            video.muted = !SoundIcon.src.includes("unmute");
+        if (SoundBtn) {
+            video.muted = !SoundBtn.src.includes("unmute");
         } else {
             video.muted = true;
         }

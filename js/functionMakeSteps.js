@@ -3,7 +3,6 @@ import { ajouterBouton } from "./button.js";
 import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
 import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
 import { log } from "./trace.js";
-import { showStaticMap } from "./map.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 import { path_personnages } from "./paths.js";
 
@@ -425,8 +424,8 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
         loadSound(step.sound, false);
 
         // play sound
-        const SoundIcon = document.getElementById("SoundIcon");
-        if (SoundIcon.src.includes("unmute")) {
+        const SoundBtn = document.getElementById("SoundBtn");
+        if (SoundBtn.src.includes("unmute")) {
           setOnSound();
         }
       }
@@ -502,24 +501,27 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
         }
       }
     // steps is dict
-    } else {
+    } 
+    // else {
       //Ajoute l'écan de la map si elle est dans
+      
+      // if (steps.maps) {
+        // addTxt(
+        //   steps.containerId,
+        //   "Vous devez vous dirige vers la prochaine étape",
+        //   "textTitle"
+        // );
 
-      if (steps.map) {
-        addTxt(
-          steps.containerId,
-          "Vous devez vous dirige vers la prochaine étape",
-          "textTitle"
-        );
-        showStaticMap(steps.maps);
-        ajouterBouton(
-          maps.containerId,
-          "Confimer votre arrivée",
-          "btnNext",
-          "btnclass"
-        );
-      }
-    }
+        // showStaticMap(steps);
+        
+        // ajouterBouton(
+        //   steps.containerId,
+        //   "Confimer votre arrivée",
+        //   "btnNext",
+        //   "btnclass"
+        // );
+      // }
+    // }
     
   // AR part
   } else {
@@ -575,8 +577,8 @@ function charaChanger(index, steps) {
       loadSound(step.sound, false);
 
       // play sound
-      const SoundIcon = document.getElementById("SoundIcon");
-      if (SoundIcon.src.includes("unmute")) {
+      const SoundBtn = document.getElementById("SoundBtn");
+      if (SoundBtn.src.includes("unmute")) {
         setOnSound();
       }
     }

@@ -5,7 +5,7 @@ import { popup } from "./popup.js";
 let querySnapshot;
 
 // buttonModule.js
-export function addTxt(conteneurId, content,classNameTxt) {
+export function addTxt(conteneurId, content, classNameTxt) {
     // Sélectionne la div par son ID
     const container = document.getElementById(conteneurId);
     // Vérifie si la div existe

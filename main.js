@@ -2,6 +2,8 @@ import { refreshPage } from "./js/refreshPage.js";
 import { addImg } from "./js/fonctionImg.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
 import { nextScreen } from "./js/navigation.js";
+import { showStaticMap } from "./js/map.js";
+import { addBtnImg } from "./js/button.js";
 
 export const DEBUG = true;
 
@@ -70,38 +72,34 @@ if (DEBUG) {
   }
 }
 
+//////////////////////////////////////////////////////
+// Sound Button
+/////////////////////////////////////////////////////
+
 // Ajout du bouton pour activer/désactiver le son
-const SoundBtn = document.createElement("div");
-SoundBtn.id = "SoundBtn";
-document.body.appendChild(SoundBtn);
+addBtnImg("body", "assets/icons/mute.svg", "SoundBtn", "SoundIcon");
 
-const SoundIcon = document.createElement("img");
-SoundIcon.id = "SoundIcon";
-SoundIcon.src = "assets/icons/mute.svg";
-SoundBtn.width = 50;
-SoundBtn.height = 50;
-SoundBtn.appendChild(SoundIcon);
-
+// Bind the sound button to the sound functions
+const SoundBtn = document.getElementById("SoundBtn");
 SoundBtn.addEventListener("click", () => {
-  if (SoundIcon.src.includes("unmute")) {
-    SoundIcon.src = "assets/icons/mute.svg";
+  if (SoundBtn.src.includes("unmute")) {
+    SoundBtn.src = "assets/icons/mute.svg";
     setOffSound();
   } else {
-    SoundIcon.src = "assets/icons/unmute.svg";
+    SoundBtn.src = "assets/icons/unmute.svg";
     setOnSound();
   }
 });
 
-// Ajout du bouton pour recharger la page
-const ReloadBtn = document.createElement('div');
-ReloadBtn.id = "ReloadBtn";
-document.body.appendChild(ReloadBtn);
+//////////////////////////////////////////////////////
+// Reload Button
+/////////////////////////////////////////////////////
 
-const ReloadIcon = document.createElement("img");
-ReloadIcon.id = "ReloadIcon";
-ReloadIcon.src = "assets/icons/reload.svg";
-ReloadBtn.appendChild(ReloadIcon);
+// Ajout du bouton pour activer/désactiver le son
+addBtnImg("body", "assets/icons/reload.svg", "ReloadBtn", "ReloadIcon");
 
+// Bind the reload button to the reload functions
+const ReloadBtn = document.getElementById("ReloadBtn");
 ReloadBtn.addEventListener("click", () => {
 
   // clear page
@@ -110,6 +108,33 @@ ReloadBtn.addEventListener("click", () => {
   // TODO add popup to choose the level. 1 restard the game sart the init phase
   // reload page
   nextScreen("5", "1", false);
+
+});
+
+//////////////////////////////////////////////////////
+// Map Button
+/////////////////////////////////////////////////////
+
+// Ajout du bouton pour activer/désactiver le son
+addBtnImg("body", "assets/icons/map_black.svg", "MapBtn", "MapIcon");
+
+// Bind the reload button to the reload functions
+const MapBtn = document.getElementById("MapBtn");
+MapBtn.addEventListener("click", () => {
+
+    //load map
+    showStaticMap("container");
+    
+    const map = document.getElementById("staticMap");
+
+    // update map icon & display map
+    if (MapBtn.src.includes("map_black")) {
+        MapBtn.src = "assets/icons/map_white.svg";
+        map.style.display = "block";
+    } else {
+        MapBtn.src = "assets/icons/map_black.svg";
+        map.style.display = "none";
+    }
 
 });
 

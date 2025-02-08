@@ -12,7 +12,7 @@ export function loadLvl2() {
     // Set the level in localStorage
     localStorage.setItem("level", "2"); 
 
-    // const mapData = {
+    // const steps = {
     //     containerId: "container", // L'ID du conteneur où la carte sera affichée
     //     apiKey: "8b92289a637347489b3b13811907ebdd", // Remplace par ta vraie clé API Geoapify
     //     zoom: 12,
@@ -36,7 +36,7 @@ export function loadLvl2() {
     //     }
     // };
 
-    // playSteps(mapData);
+    // playSteps(steps);
 
     // steps of level 2
     const steps = [
@@ -63,8 +63,14 @@ export function loadLvl2() {
             nextLvl: () => { nextScreen("5", "3"); window.location.reload(false); }}
         ];
 
-    // besoin d'un refresh car AR ensuite (true dans playSteps)
+    // Refresh the page because the AR mode is active in thos level
     refreshPage();
+
+    // Display the map button to allow the user to see the map during the AR mode
+    const MapBtn = document.getElementById("MapBtn");
+    if(MapBtn) {
+        MapBtn.style.display = "block";
+    }
 
     // Play the steps
     playSteps(steps, 0, true, 2);
