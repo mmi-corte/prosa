@@ -36,7 +36,7 @@ export function loadLvl2() {
     //     }
     // };
 
-    // playSteps(mapData, 0, false, 2);
+    // playSteps(mapData);
 
     // steps of level 2
     const steps = [

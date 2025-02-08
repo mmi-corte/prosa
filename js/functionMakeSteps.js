@@ -652,7 +652,10 @@ function charaChanger(index, steps) {
       addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
     }
 
-    addTxtNarration(step.Txt, "diagBox", "dialogBox");
+    if (step.Txt) {
+      addTxtNarration(step.Txt, "diagBox", "dialogBox");
+    }
+
     ajouterBouton("diagBox", "", "btnNext", "btnInv");
     
     const btnNext = document.getElementById("btnNext");
@@ -662,15 +665,16 @@ function charaChanger(index, steps) {
     
     if (step.name) {
       if (step.Txt == "Narrateur") {
-        addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-        addTxtNarration(step.Txt, "diagBox", "dialogBox");
         const diagBox = document.querySelector("#diagBox");
         diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
         diagBox.style.color = "rgb(255, 255, 255)";
       } else {
         addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-        addTxtNarration(step.Txt, "diagBox", "dialogBox");
       }
+    }
+
+    if (step.Txt) {
+      addTxtNarration(step.Txt, "diagBox", "dialogBox");
     }
 
     ajouterBouton("diagBox", "", "btnNext", "btnInv");

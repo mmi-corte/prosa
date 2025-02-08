@@ -23,6 +23,9 @@ if (DEBUG) {
     localStorage.setItem("screen", "0");
     localStorage.setItem("level", "0");
 
+    // reload if we are coming from AR!
+    window.location.reload(false);
+
     // load screen0
     nextScreen("0","0");
 

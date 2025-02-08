@@ -20,11 +20,12 @@ export function loadLvl1bis() {
         {
             background: path_backgrounds + 'fondEtape1bis.png',
             narration: () => {
-                popup("Vous avez récupéré la branche d’arbre", "assets/items/branche.png");
+                popup("Vous avez récupéré la branche d’arbre", "assets/items/branche.png"); // pas de branche.png
             },
             character: null
         },
         {
+            // pas sur de la naration de se bloc, pas de mp3 et pas de text pour les boutons
             background: path_backgrounds + 'fondEtape1bis.png',
             narration: "E1Berger2",
             character: null,
