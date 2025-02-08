@@ -925,3 +925,15 @@ strong {
       transform: rotate(-90deg);
     }
 } */
+
+.footer {
+    position: fixed;  /* Fixé en bas de l'écran */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-family: "Asap", serif;
+    text-align: center;  /* Centrer le texte */
+    font-style: italic;  /* Texte en italique */
+    background-color: transparent; /* Couleur de fond légère */
+    padding: 10px 0;  /* Espacement en haut et en bas */
+}

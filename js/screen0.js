@@ -9,6 +9,7 @@ import { ajouterBouton } from './button.js';
 import { loadSound } from './Sound/sound.js';
 import { nextScreen } from './navigation.js';
 import { log } from './trace.js';
+import { addTxt } from './texte.js';
 
 // Fonction pour charger l'écran 1 du jeu
 export function loadScreen0() {
@@ -30,6 +31,8 @@ export function loadScreen0() {
     "btn1",
     "btnclass"
   );
+
+  addTxt("container", "© 2025 - MMI - IUT Corte & Toulon", "footer");
 
   // binding
   btn1.addEventListener("click", () =>{
