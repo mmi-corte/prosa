@@ -6,9 +6,13 @@ import { path_narration, path_personnages, path_backgrounds} from "./paths.js";
 
 export function loadLvl1() {
 
+    // Vérification du niveau actuel
     log("Enter in L1", "blue");
 
-    // Liste des étapes du niveau 1
+    // Mise à jour du niveau actuel dans le localStorage
+    localStorage.setItem("level", "1"); 
+
+    // Définition des étapes pour le niveau 1
     const steps = [
         { background: path_backgrounds + 'fondEtape1.mp4', narration: "E1Narra", character: null, sound: path_narration + "Narrateur-E1/narrateurE1-001.mp3"},
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger", character: path_personnages + 'Berger/berger.png', name: 'E1Berger' , sound: path_narration + "Berger-E1/Berger-E1-001.mp3" },
@@ -35,8 +39,9 @@ export function loadLvl1() {
             ]
         }
     ];
-
-    playSteps(steps); // Démarrage des étapes
+    
+    // Fonction pour démarrer les étapes
+    playSteps(steps);
 
 }
 

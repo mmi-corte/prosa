@@ -6,7 +6,6 @@ import { log } from "./trace.js";
 import { showStaticMap } from "./map.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 import { path_personnages } from "./paths.js";
-import { nextScreen } from "./navigation.js";
 
 const personnages = [
   `
@@ -407,7 +406,7 @@ const personnages = [
 
 export function playSteps(steps, index=0, AR=false, marker=null) {
   
-  log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+  log(`Loading L${localStorage.getItem("level")}_E${index}`, "purple");
 
   if (index >= steps.length) return; // Fin des étapes
 
@@ -467,8 +466,8 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
           ajouterBouton("diagBox", "", "btnNext", "btnInv"); // Crée le bouton "Suivant"
         }
         const btnNext = document.getElementById("btnNext");
-        btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
-      
+        // btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
+        
       } else {
         // Gestion des choix ou du bouton "Suivant"
         if (step.choices) {
@@ -555,6 +554,8 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
 
 function charaChanger(index, steps) {
 
+  log(`Loading L${localStorage.getItem("level")}_E${index}`, "purple");
+
   if (index >= steps.length) {
     return;
   }
@@ -564,6 +565,7 @@ function charaChanger(index, steps) {
   const diagBox = document.querySelector("#diagBox");
   diagBox.innerHTML = "";
 
+  // TODO: Remove this to manage the song directly in AR code
   if (step) {
     if (step.sound) {
       // delete all song before start nex one

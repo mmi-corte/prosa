@@ -5,8 +5,13 @@ import { log } from "./trace.js";
 
 export function loadLvl4() {
 
+    // Trace the entry in the console
     log("Enter in L4", "blue");
 
+    // Set the level in localStorage
+    localStorage.setItem("level", "4"); 
+
+    // Steps of the level
     let steps = [
         {character: "NarraChara", Txt: "E4Narra", name: "Narrateur", sound: path_narration+'Narrateur-E4/narrateurE4-001.mp3'},
         {character: "BergerChara", Txt: "E4Berger", name: "Berger", sound: path_narration+'Berger-E4/Berger-E4-001.mp3'},
@@ -39,8 +44,10 @@ export function loadLvl4() {
         }
     ]
 
+    //Play the steps
     playSteps(steps);
 
+    // Check the choices
     if(steps.choices.answear1 || steps.choices.answear2){
         steps = [
             {character: "FulettuChara", Txt: "E4FulettuTrue", name: "E4FulettuTrue", sound: path_narration+'Fulettu-E4/Fulettu-E4-008.mp3'},
@@ -48,8 +55,6 @@ export function loadLvl4() {
             {character: "FulettuChara", Txt: "E4FouletounTrue2", name: "E4FouletounTrue2", sound: path_narration+'Fulettu-E4/Fulettu-E4-009.mp3'},
             {character: "NarraChara", Txt: "E4NarrateurTrue"}
         ];
-
-        
         
     }else{
         steps = [
@@ -61,10 +66,8 @@ export function loadLvl4() {
             {character: "FuletounChara", Txt: "E4FouletounFalse3", name: "E4FouletounFalse3", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-008.mp3'},
             {character: "FulettuChara", Txt: "E4FulettuFalse4", name: "E4FulettuFalse4", sound: path_narration+'Fulettu-E4/Fulettu-E4-010.mp3'}
         ];
-        
     }
     
+    // Play the steps
     playSteps(steps);
-
-    localStorage.setItem("level", "4"); 
 }

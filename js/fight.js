@@ -1,8 +1,30 @@
 import { addOverlay } from "./overslay.js";
-import { loadSound, suspendSound } from './Sound/sound.js';
+import { loadSound } from './Sound/sound.js';
 import { ajouterBouton } from './button.js';
-import { playerUserName } from "../main.js";
 
+export const enemies = [
+    {
+      name: "Cerf",
+      hp: 50,
+      damage: 10,
+    },
+    {
+      name: "Sylvain",
+      hp: 80,
+      damage: 15,
+    },
+    {
+      name: "Basgialiscu",
+      hp: 100,
+      damage: 20,
+    },
+    {
+      name: "Tarasque",
+      hp: 100,
+      damage: 20,
+    },
+  ];
+  
 export async function lunchFight(skin, weapons, enemies)
 {
     return new Promise((resolve) => {
@@ -142,7 +164,7 @@ export async function lunchFight(skin, weapons, enemies)
 
     const playerName = document.createElement("p");
     playerName.className = "txtTitle";
-    playerName.innerHTML = playerUserName;
+    playerName.innerHTML = localStorage.getItem("playerName");
     pContainer.appendChild(playerName);
 
     // Create a life gauge counter

@@ -2,50 +2,8 @@ import { refreshPage } from "./js/refreshPage.js";
 import { addImg } from "./js/fonctionImg.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
 import { nextScreen } from "./js/navigation.js";
-import {log} from "./js/trace.js";
-
-//Variable / Constante pour les combats
-export let playerUserName = "";
 
 export const DEBUG = true;
-
-let weapons = [
-  {
-    name: "Epée",
-    damage: 10,
-  },
-  {
-    name: "Grimoire",
-    damage: 15,
-  },
-  {
-    name: "Arc",
-    damage: 20,
-  },
-];
-
-export const enemies = [
-  {
-    name: "Cerf",
-    hp: 50,
-    damage: 10,
-  },
-  {
-    name: "Sylvain",
-    hp: 80,
-    damage: 15,
-  },
-  {
-    name: "Basgialiscu",
-    hp: 100,
-    damage: 20,
-  },
-  {
-    name: "Tarasque",
-    hp: 100,
-    damage: 20,
-  },
-];
 
 // addOverlay ('audioId' , 'audioSrc')
 
@@ -69,7 +27,6 @@ if (DEBUG) {
     nextScreen("0","0");
 
   });
-
 
   ////////////////////////////////////////////////////
   // uncomment to activate home button dynamic display

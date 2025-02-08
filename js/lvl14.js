@@ -5,34 +5,49 @@ import { nextScreen } from "./navigation.js";
 
 export function loadLvl14() {
 
+    // Trace the entry in the console
     log("Enter in L14", "blue");
 
-    refreshPage();
+    // Set the level in local storage
+    localStorage.setItem("level", "14");
     
-    const steps = [
+    // Steps to play
+    let steps = [
         { character: "NaraChara", Txt: "E14Narra" },
     ];
-    // Lance les étapes
+
+    // Refresh the page because AR
+    refreshPage();
+
+    // Play the steps
     playSteps(steps, 0, true, 4);
 
     if (incantation) {
-        const steps = [
+        steps = [
             { character: "NaraChara", Txt: "E14NarraSpellST" },
             { character: "NaraChara", Txt: "E14NarraSpellST2" },
         ];
-        playSteps(steps, 0, true, 4);
+
     } else {
-        const steps = [
+        steps = [
             { character: "NaraChara", Txt: "E14NarraSpellSF" },
         ];
-        playSteps(steps, 0, true, 4);
     }
 
-    const steps2 = [
-        { character: "BergerChara", Txt: "E14Berger", nextLvl : nextScreen("5","15") }
+    // Refresh the page because AR
+    refreshPage();
+    
+    // Play the steps
+    playSteps(steps, 0, true, 4);
+
+    steps = [
+        { character: "BergerChara", Txt: "E14Berger", nextLvl : () => {nextScreen("5","15");} }
     ];
     
-    playSteps(steps2, 0 , true, 4);
-    
-    localStorage.setItem("level", "14");
+    // Refresh the page because AR
+    refreshPage();
+
+    // Play the steps
+    playSteps(steps, 0 , true, 4);
+
 }

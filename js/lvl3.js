@@ -7,9 +7,13 @@ import { log } from "./trace.js";
 
 export function loadLvl3() {
 
+    // Trace the entry in the level 3
     log("Enter in L3", "blue");
 
-    // Liste des étapes du niveau 1
+    // Set the level in localStorage
+    localStorage.setItem("level", "3");
+
+    // Steps for the level 3
     const steps = [
         { background: path_backgrounds + 'fondEtape3.mp4', narration: "E3Narra", character: null, sound: path_narration+'Narrateur-E3/narrateurE3-001.mp3' },
         { background: path_backgrounds + 'fondEtape3.png', narration: "E3Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger', sound: path_narration+'Berger-E3/Berger-E3-001.mp3' },
@@ -19,14 +23,13 @@ export function loadLvl3() {
         { background: path_backgrounds + 'fondEtape3.png', narration: "E3Overlay", character: null, action: addOverlay },// Appel de la fonction overlay ici
         { background: path_backgrounds + 'fondEtape3.png', narration: "E3Berger3", character: path_personnages+'Berger/berger.png', name: 'E3Berger6', sound: path_narration+'Berger-E3/Berger-E3-003.mp3',
             choices: [
-                { text: "E3Choix1", action: nextScreen('5', '4') },
-                { text: "E3Choix2", action: nextScreen('5', '10') }
+                { text: "E3Choix1", action: () => {nextScreen("5", "4");} },
+                { text: "E3Choix2", action: () => {nextScreen("5", "10");} }
             ]
         }
     ];
+    
+    // Play the steps
+    playSteps(steps);
 
-    // Démarrage des étapes
-    playSteps(steps, 0, false);
- 
-    localStorage.setItem("level", "3"); 
 }
