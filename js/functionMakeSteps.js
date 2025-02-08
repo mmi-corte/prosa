@@ -5,12 +5,13 @@ import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
 import { log } from "./trace.js";
 import { showStaticMap } from "./map.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
+import { path_personnages } from "./paths.js";
 
 const personnages = [
   `
             <!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Berger/berger-V1-premier-plan.png"
+                src="${path_personnages}Berger/berger.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -20,7 +21,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Berger/berger-V1-plan-milieu.png"
+                src="${path_personnages}Berger/berger-V1-plan-milieu.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -30,7 +31,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Berger/berger-V1-arrière-plan.png"
+                src="${path_personnages}Berger/berger-V1-arrière-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -40,7 +41,7 @@ const personnages = [
 
   `<!-- premier plan  (en avant) -->
              <a-image
-              src="assets/personnages/Esterelle/esterelle.png"
+              src="${path_personnages}Esterelle/esterelle.png"
               position="0 -0.5 0"
               rotation="-90 0 0"
               scale="6 6 6"
@@ -50,14 +51,14 @@ const personnages = [
 
   `<!-- premier plan (en avant) -->
                <a-image
-               src="assets/personnages/A-Fata/premier-plan.png"
+               src="${path_personnages}A-Fata/premier-plan.png"
                position="0 -0.5 0"
                rotation="-90 0 0"
                scale="3 3 3"
                material="transparent: true; alphaTest: 0.5;"
                ></a-image>
                <a-image
-               src="assets/personnages/A-Fata/second-plan.png"
+               src="${path_personnages}A-Fata/second-plan.png"
                position="0 -2 0"
                rotation="-90 0 0"
                scale="3 3 3"
@@ -65,7 +66,7 @@ const personnages = [
                ></a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image 
-                src="assets/personnages/a_Strega/a-strega2-premier-plan.png" 
+                src="${path_personnages}a_Strega/a-strega2-premier-plan.png" 
                 position="0 0 0" 
                 rotation="-90 0 0" 
                 scale="10 10 10"
@@ -74,7 +75,7 @@ const personnages = [
 
                 <!-- deuxième plan (un peu plus loin) -->
                 <a-image
-                src="assets/personnages/a_Strega/a-strega2-deuxième-plan.png" 
+                src="${path_personnages}a_Strega/a-strega2-deuxième-plan.png" 
                 position="0 -0.5 0" 
                 rotation="-90 0 0" 
                 scale="10 10 10"
@@ -83,7 +84,7 @@ const personnages = [
 
                 <!-- troisième plan (encore plus loin) -->
                 <a-image 
-                src="assets/personnages/a_Strega/a-strega2-background-maison.png" 
+                src="${path_personnages}a_Strega/a-strega2-background-maison.png" 
                 position="0 -1 0" 
                 rotation="-90 0 0" 
                 scale="10 10 10"
@@ -91,7 +92,7 @@ const personnages = [
                 </a-image>
                 <!-- quatrième plan (le plus éloigné) -->
                 <a-image
-                src="assets/personnages/a_Strega/a-strega2-background-soleil.png" 
+                src="${path_personnages}a_Strega/a-strega2-background-soleil.png" 
                 position="0 -1.5 -0.5" 
                 rotation="-90 0 0" 
                 scale="10 10 10"
@@ -99,7 +100,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Sylvain/premier-plan.png"
+                src="${path_personnages}Sylvain/premier-plan.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -109,7 +110,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Sylvain/second-plan.png"
+                src="=${path_personnages}Sylvain/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -119,7 +120,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Sylvain/troisieme-plan.png"
+                src="${path_personnages}Sylvain/troisieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="2 2 2"
@@ -128,7 +129,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Fulettu/arbre.png"
+                src="${path_personnages}Fulettu/arbre.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -137,7 +138,7 @@ const personnages = [
                 </a-image>
 
                 <a-image
-                src="assets/personnages/Fulettu/personnage.png"
+                src="${path_personnages}Fulettu/personnage.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -146,7 +147,7 @@ const personnages = [
                 </a-image>
                 
                 <a-image
-                src="assets/personnages/Fulettu/montagne.png"
+                src="${path_personnages}Fulettu/montagne.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -155,7 +156,7 @@ const personnages = [
                 </a-image>
                 
                 <a-image
-                src="assets/personnages/Fulettu/soleil.png"
+                src="${path_personnages}Fulettu/soleil.png"
                 position="0 -2 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -164,7 +165,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->h
                 <a-image
-                src="assets/personnages/a-Sciacquaghjola/a_Sciacquaghjola_6.png"
+                src="${path_personnages}a-Sciacquaghjola/a_Sciacquaghjola_6.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -174,7 +175,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/a-Sciacquaghjola/a_Sciacquaghjola_2.png"
+                src="${path_personnages}a-Sciacquaghjola/a_Sciacquaghjola_2.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -184,7 +185,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/a-Sciacquaghjola/a_Sciacquaghjola_1.png"
+                src="${path_personnages}a-Sciacquaghjola/a_Sciacquaghjola_1.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -194,7 +195,7 @@ const personnages = [
                 
                 <!-- quatrième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/a-Sciacquaghjola/a_Sciacquaghjola_5.png"
+                src="${path_personnages}a-Sciacquaghjola/a_Sciacquaghjola_5.png"
                 position="0 -2 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -203,7 +204,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Tarrasque/Tarasque-V3-premier plan-plante.png"
+                src="${path_personnages}Tarrasque/Tarasque-V3-premier plan-plante.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -213,7 +214,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Tarrasque/Tarasque-V3-arriere-plan-plante.png"
+                src="${path_personnages}Tarrasque/Tarasque-V3-arriere-plan-plante.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -222,7 +223,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Orcu/premier-plan1.png"
+                src="${path_personnages}Orcu/premier-plan1.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -232,7 +233,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Orcu/second-plan.png"
+                src="${path_personnages}Orcu/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -242,7 +243,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Orcu/trosieme-plan.png"
+                src="${path_personnages}Orcu/trosieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -252,7 +253,7 @@ const personnages = [
                 
                 <!-- quatrième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Orcu/quatrieme-plan.png"
+                src="${path_personnages}Orcu/quatrieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -261,7 +262,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Bagialiscu/premier-plan.png"
+                src="${path_personnages}Bagialiscu/premier-plan.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -271,7 +272,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Bagialiscu/second-plan.png"
+                src="${path_personnages}Bagialiscu/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -281,7 +282,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Bagialiscu/trosieme-plan.png"
+                src="${path_personnages}Bagialiscu/trosieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -291,7 +292,7 @@ const personnages = [
                 
                 <!-- quatrième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Bagialiscu/fond.png"
+                src="${path_personnages}Bagialiscu/fond.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -300,7 +301,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/fuleton/premier-plan.png"
+                src="${path_personnages}fuleton/premier-plan.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -310,7 +311,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/fuleton/second-plan.png"
+                src="${path_personnages}fuleton/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -320,7 +321,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/fuleton/arriere-plan.png"
+                src="${path_personnages}fuleton/arriere-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -330,7 +331,7 @@ const personnages = [
                 
     `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Masco/1.png"
+                src="${path_personnages}Masco/1.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -339,7 +340,7 @@ const personnages = [
                 </a-image>
                  <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Masco/2.png"
+                src="${path_personnages}Masco/2.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -348,7 +349,7 @@ const personnages = [
                 </a-image>
                  <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Masco/3.png"
+                src="${path_personnages}Masco/3.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -357,7 +358,7 @@ const personnages = [
                 </a-image>
                 <!-- quatrième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Masco/4.png"
+                src="${path_personnages}Masco/4.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -367,7 +368,7 @@ const personnages = [
                 </a-image>
                 <!-- cinquième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Masco/5.png"
+                src="${path_personnages}Masco/5.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -377,7 +378,7 @@ const personnages = [
 
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Santo-Marto/fond1.png"
+                src="${path_personnages}Santo-Marto/fond1.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -386,7 +387,7 @@ const personnages = [
                 </a-image>
                  <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Santo-Marto/fond2.png"
+                src="${path_personnages}Santo-Marto/fond2.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -395,21 +396,23 @@ const personnages = [
                 </a-image>
                  <!-- troisième plan  (en avant) -->
                 <a-image
-                src="assets/personnages/Santo-Marto/fond3.png"
+                src="${path_personnages}Santo-Marto/fond3.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
                 material="transparent: true; alphaTest: 0.5;"
-                >`,
+                >`
 ];
 
-export function playSteps(steps, index = 0, AR = false, marker = null) {
+export function playSteps(steps, index=0, AR=false, marker=null) {
   
+  log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+
+  if (index >= steps.length) return; // Fin des étapes
+
   const step = steps[index];
 
   if (!AR) {
-
-    if (index >= steps.length) return; // Fin des étapes
   
     refreshPage(); // Réinitialise la page
   
@@ -501,7 +504,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     // steps is dict
     } else {
       //Ajoute l'écan de la map si elle est dans
-      console.log(steps.maps);
+
       if (steps.map) {
         addTxt(
           steps.containerId,
@@ -517,7 +520,7 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
         );
       }
     }
-    log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+    
   // AR part
   } else {
     const container = document.getElementById("container");
@@ -545,67 +548,72 @@ export function playSteps(steps, index = 0, AR = false, marker = null) {
     document.body.style.background = "none";
 
     charaChanger(index, steps);
+    
   }
 }
 
 function charaChanger(index, steps) {
-  if (index >= steps.length) return; // Fin des étapes
 
-  log(`Loading L${localStorage.getItem("level") + 1}.E${index}`, "purple");
+  if (index >= steps.length) return; // Fin des étapes
 
   const step = steps[index];
   const charaContainer = document.querySelector("#marker");
   const diagBox = document.querySelector("#diagBox");
   diagBox.innerHTML = "";
-  log(charaContainer);
+
+  if (step) {
+    if (step.sound) {
+      // delete all song before start nex one
+      deleteSound();  
+
+      // load sound
+      loadSound(step.sound, false);
+
+      // play sound
+      const SoundIcon = document.getElementById("SoundIcon");
+      if (SoundIcon.src.includes("unmute")) {
+        setOnSound();
+      }
+    }
+  }
+
+  charaContainer.innerHTML = "";
 
   switch (step.character) {
     case "BergerChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[0];
       break;
     case "EsterelleChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[1];
       break;
     case "FataChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[2];
       break;
     case "StregaChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[3];
       break;
     case "SylvainChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[4];
       break;
     case "FulettuChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[5];
       break;
     case "SciacquaghjolaChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[6];
       break;
     case "TarrasqueChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[7];
       break;
     case "OrcuChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[8];
       break;
     case "BasgialiscuChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[9];
       break;
     case "MascoChara":
-      charaContainer.innerHTML = "";
       charaContainer.innerHTML = personnages[10];
       break;
     case "NaraChara":
-      charaContainer.innerHTML = "";
       break;
   }
 
@@ -632,15 +640,21 @@ function charaChanger(index, steps) {
       // Ajouter l'événement au bouton
       btn.addEventListener("click", choice.action);
     });
+
   } else if (step.nextLvl) {
+    
     if (step.name) {
       addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
     }
+
     addTxtNarration(step.Txt, "diagBox", "dialogBox");
     ajouterBouton("diagBox", "", "btnNext", "btnInv");
+    
     const btnNext = document.getElementById("btnNext");
     btnNext.addEventListener("click", step.nextLvl);
+
   } else {
+    
     if (step.name) {
       if (step.Txt == "Narrateur") {
         addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
@@ -656,6 +670,7 @@ function charaChanger(index, steps) {
 
     ajouterBouton("diagBox", "", "btnNext", "btnInv");
     const btnNext = document.getElementById("btnNext");
+    // recursion
     btnNext.addEventListener("click", () => charaChanger(index + 1, steps));
   }
 }
