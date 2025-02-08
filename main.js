@@ -152,20 +152,20 @@ ReloadBtn.addEventListener("click", () => {
 
 });
 
-window.addEventListener("DOMContentLoaded", () => {
+// window.addEventListener("DOMContentLoaded", () => {
 
-  document.documentElement.style.opacity = "1";
+// document.documentElement.style.opacity = "1";
 
-  let screenValue = localStorage.getItem("screen") || "0";
-  let levelValue = localStorage.getItem("level") || "0";
+let screenValue = localStorage.getItem("screen") || "0";
+let levelValue = localStorage.getItem("level") || "0";
 
-  localStorage.setItem("screen", screenValue);
-  localStorage.setItem("level", levelValue);
+localStorage.setItem("screen", screenValue);
+localStorage.setItem("level", levelValue);
 
-  // Load the first screen
-  nextScreen(screenValue, levelValue);
+// Load the first screen
+nextScreen(screenValue, levelValue);
 
-});
+// });
 
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", function() {
