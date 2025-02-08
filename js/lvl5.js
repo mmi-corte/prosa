@@ -22,8 +22,6 @@ export function loadLvl5() {
         {character: "BergerChara", Txt: "E5Berger4", name: "E5Berger4", sound: path_narration+'Berger-E5/Berger-E5-002.mp3'},
         {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/naratteurE5-007.mp3'}
     ]
-
-    refreshPage();
     
     playSteps(steps);
 

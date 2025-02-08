@@ -137,7 +137,7 @@ export function nextScreen(screenValue, levelValue="0", updateHistory=true) {
   // gestion de l'apparition du bouton qui permet de rejouer à partir du level 1 - etape 1
   const reloadBtn = document.getElementById("ReloadBtn");
   if(reloadBtn) {
-    reloadBtn.style.display = lastLevel > 0 ? "block" : "none";
+    reloadBtn.style.display = lastLevel != "0" ? "block" : "none";
   }
 
 }
