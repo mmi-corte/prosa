@@ -328,14 +328,6 @@ strong {
     z-index: 1;
 }
 
-/*---------------------Style map----------------------*/
-.map {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ajuste l’image sans la déformer */
-    display: none;
-    z-index: 10;
-}
 
 .fightContainer {
     position: fixed; 
@@ -897,6 +889,12 @@ strong {
     right: 55px;
     display: none;
 }
+#mapBtn {
+    right: 97px;
+    position: fixed;
+    top: 14px;
+    z-index: 9999;  
+}
 
 #MapBtn {
     right: 100px;
@@ -908,7 +906,9 @@ strong {
     top: 10px;
     z-index: 9999;
 }
-
+#mapIcon {
+    width : 35px;
+}
 /********************/
 /* Icons            */
 /********************/
@@ -937,3 +937,58 @@ strong {
     background-color: transparent; /* Couleur de fond légère */
     padding: 10px 0;  /* Espacement en haut et en bas */
 }
+
+/*-----MAP-----*/
+/* Conteneur principal de la popup */
+.map-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assure que la popup est au-dessus des autres éléments */
+    background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+  }
+  
+  /* Contenu interne de la popup */
+  .map-popup-content {
+    width: 90%;
+    height: 85%;
+    background: rgb(241, 212, 130);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Empêche le débordement */
+  }
+  .map-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;  /* Temporairement pour voir si la croix est présente */
+    width: 30px;      /* Ajuste la taille si nécessaire */
+    height: 30px;
+    z-index: 9999;    /* Garantir qu'elle est devant tous les autres éléments */
+  }
+  
+  
+  /* Ajout d'un effet au survol de la croix */
+  .map-popup-close:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Légère surbrillance au survol */
+    border-radius: 50%;
+  }
+  
+  /* Conteneur pour la carte */
+  .map-popup-map {
+    width: 100%;
+    height: 100%;
+    background-color: #ccc; /* Placeholder si la carte n'est pas encore chargée */
+    border-radius: 10px;
+    z-index: 1000; /* Assure que la carte reste en dessous de la croix */
+  }
+  
