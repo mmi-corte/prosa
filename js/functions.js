@@ -11,7 +11,7 @@ export function checkImageExists(url, callback) {
     img.src = url;
 }   
 
-function goFullscreen() {
+export function goFullscreen() {
     const element = document.documentElement; // Prendre l'élément HTML entier
     if (element.requestFullscreen) {
         element.requestFullscreen(); // Fullscreen standard
@@ -31,7 +31,6 @@ window.onload = () => {
      if (isMobileDevice()) {
         console.log("Vous utilisez un appareil mobile.");
         // Ici, vous pouvez ajouter d'autres actions spécifiques pour les appareils mobiles
-        goFullscreen(); // Appeler la fonction de plein écran lorsque la page est chargée
     } else {
         console.log("Vous utilisez un ordinateur de bureau.");
         // Ici, vous pouvez ajouter d'autres actions spécifiques pour les ordinateurs
