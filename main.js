@@ -76,8 +76,10 @@ if (DEBUG) {
 // Sound Button
 /////////////////////////////////////////////////////
 
+
+
 // Ajout du bouton pour activer/désactiver le son
-addBtnImg("body", "assets/icons/mute.svg", "SoundBtn", "SoundIcon");
+addBtnImg("body", (localStorage.getItem("isMuted") === "true") ? "assets/icons/mute.svg": "assets/icons/unmute.svg", "SoundBtn", "SoundIcon");
 
 // Bind the sound button to the sound functions
 const SoundBtn = document.getElementById("SoundBtn");
@@ -85,9 +87,11 @@ SoundBtn.addEventListener("click", () => {
   if (SoundBtn.src.includes("unmute")) {
     SoundBtn.src = "assets/icons/mute.svg";
     setOffSound();
+    localStorage.setItem("isMuted", "true");
   } else {
     SoundBtn.src = "assets/icons/unmute.svg";
     setOnSound();
+    localStorage.setItem("isMuted", "false");
   }
 });
 
@@ -144,9 +148,11 @@ MapBtn.addEventListener("click", () => {
 
 let screenValue = localStorage.getItem("screen") || "0";
 let levelValue = localStorage.getItem("level") || "0";
+let isMuted = localStorage.getItem("isMuted") || true;
 
 localStorage.setItem("screen", screenValue);
 localStorage.setItem("level", levelValue);
+localStorage.setItem("isMuted", isMuted);
 
 // Load the first screen
 nextScreen(screenValue, levelValue);
