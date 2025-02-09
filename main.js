@@ -109,6 +109,8 @@ ReloadBtn.addEventListener("click", () => {
   // clear page
   refreshPage();
 
+  window.location.reload(false);
+  
   // TODO add popup to choose the level. 1 restard the game sart the init phase
   // reload page
   nextScreen("5", "1", false);
