@@ -416,19 +416,19 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
     refreshPage(); // Réinitialise la page
   
     if (step) {
-      // if (step.sound) {
-      //   // delete all song before start nex one
-      //   deleteSound();  
+      if (step.sound) {
+        // delete all song before start nex one
+        deleteSound();  
 
-      //   // load sound
-      //   loadSound(step.sound, false);
+        // load sound
+        loadSound(step.sound, false);
 
       //   // play sound
       //   const SoundBtn = document.getElementById("SoundBtn");
       //   if (SoundBtn.src.includes("unmute")) {
       //     setOnSound();
       //   }
-      // }
+      }
 
       // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
       const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
