@@ -35,8 +35,8 @@ let steps =[
         {character : "FouletounChara", Txt : "E4Fouletoun5",name : "Fouletoun", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-005.mp3'},
         {character:  "FulettuChara", Txt:"E4FulettuEC", name : "Fulettu", 
             choices: [
-                { text: "E4EnigmeC1", action : () => {answear1 = true; console.log(answear1);}},
-                { text: "E4EnigmeC2", action : () => {answear1 = false; console.log(answear1);}}
+                { text: "E4EnigmeC1", answer : () => {answear1 = true;}},
+                { text: "E4EnigmeC2", answer : () => {answear2 = true;}}
             ] 
         },
         {character: "FulettuChara", Txt:"E4FulettuEC", name: "Fulettu", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
@@ -48,6 +48,8 @@ let steps =[
 
         }
     ]
+
+   
 
     refreshPage();
     

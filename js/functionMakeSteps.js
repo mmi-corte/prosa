@@ -486,9 +486,21 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
             }
             // Ajouter le texte du choix
             addTxtNarration(choice.text, btnId, "");
-
+            
+            let action = function () {
+              if(choice.action) {
+                localStorage.setItem(`choice_${localStorage.getItem("level")}_E${index}}`, btn.textContent);
+                choice.action();
+              } else if (choice.answer) {
+                choice.answer();
+                localStorage.setItem(`answer_${localStorage.getItem("level")}_E${index}}`, btn.textContent);
+                playSteps(steps, index + 1, true, 2);
+              }
+            } 
+      
             // Ajouter l'événement au bouton
-            btn.addEventListener("click", choice.action);
+            btn.addEventListener("click", action);
+                           
           });
         } else {
           // Ajouter le bouton "Suivant" si aucune étape de choix n'est présente
@@ -644,8 +656,20 @@ function charaChanger(index, steps) {
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");
 
+      let action = function () {
+        if(choice.action) {
+          localStorage.setItem(`choice_${localStorage.getItem("level")}_E${index}}`, btn.textContent);
+          choice.action();
+        } else if (choice.answer) {
+          choice.answer();
+          localStorage.setItem(`answer_${localStorage.getItem("level")}_E${index}}`, btn.textContent);
+          playSteps(steps, index + 1, true, 2);
+        }
+      } 
+
       // Ajouter l'événement au bouton
-      btn.addEventListener("click", choice.action);
+      btn.addEventListener("click", action);
+      
     });
 
   } else if (step.nextLvl) {
