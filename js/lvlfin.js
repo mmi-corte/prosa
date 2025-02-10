@@ -1,6 +1,7 @@
 import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
+import { path_narration } from "./paths.js";
 
 export function loadLvlfin() {
 

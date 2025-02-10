@@ -18,9 +18,9 @@ export function loadLvl10() {
     localStorage.setItem("level", "10"); 
 
     const steps = [
-        { character: "NarraChara", Txt: "E10Narra" },
+        { character: "NarraChara", Txt: "E10Narra", sound: path_narration+'Narrateur-E10/narrateurE10-001.mp3' },
         { character: "BergerChara", Txt: "E10Berger", name: "E10Berger" },
-        { character: "NarraChara", Txt: "E10Narra2"},
+        { character: "NarraChara", Txt: "E10Narra2", sound: path_narration+'Narrateur-E10/narrateurE10-002.mp3'},
         { character: "OrcuChara", Txt: "E10Orcu", name: "E10Orcu" }
     ];
 

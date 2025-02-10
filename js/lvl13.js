@@ -2,7 +2,7 @@
 import { skin } from './functionChangeStyle.js';
 import { nextScreen } from './navigation.js';
 import { log } from './trace.js';
-import { path_backgrounds } from './paths.js';
+import { path_backgrounds, path_narration } from './paths.js';
 import { enemies, lunchFight } from "./fight.js";
 
 export function loadLvl13() {
@@ -15,7 +15,7 @@ export function loadLvl13() {
 
     // Steps for the level
     const steps = [
-        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra", character: null },
+        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra", character: null , sound: path_narration+'Narrateur-E13/narrateurE13-001.mp3'},
     ];
 
     playSteps(steps, 0, false, 4);
@@ -23,7 +23,7 @@ export function loadLvl13() {
     //faire combat
     let weapons = [
         {
-            name: "Epée",
+            name: "Grimoire",
             damage: 10,
         },
     ];
@@ -37,7 +37,7 @@ export function loadLvl13() {
     luncher();
     
     const steps2 = [
-        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra2", character: null , nextLvl: () => {nextScreen("5","14");}},
+        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra2",sound: path_narration+'Narrateur-E13/narrateurE13-002.mp3', character: null , nextLvl: () => {nextScreen("5","14");}},
     ];
     playSteps(steps, 0, false, 2); 
    
