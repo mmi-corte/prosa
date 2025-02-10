@@ -417,8 +417,8 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
   
     if (step) {
       if (step.sound) {
-      //   // delete all song before start nex one
-      //   deleteSound();  
+        // delete all song before start nex one
+        deleteSound();  
 
         // load sound
         loadSound(step.sound, false);
