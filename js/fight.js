@@ -23,6 +23,11 @@ export const enemies = [
       hp: 100,
       damage: 20,
     },
+    {
+        name: "Lion",
+        hp: 100,
+        damage: 15
+    }
   ];
   
 export function lunchFight(skin, weapons, enemies)
