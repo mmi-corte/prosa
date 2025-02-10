@@ -4,6 +4,7 @@ import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
 import { enemies } from "./fight.js";
 import { skin } from "./functionChangeStyle.js";
+import { lunchFight } from "./fight.js";
 
 export function loadLvl11() {
 
@@ -12,6 +13,34 @@ export function loadLvl11() {
 
   //Set the level in the local storage
   localStorage.setItem("level", "11");
+
+  
+  const weapons = [
+    {
+      name: "Epée",
+      damage: 30,
+    },
+];
+
+  //test fight
+  async function luncher() {
+    refreshPage();
+    const fightResult = await lunchFight(skin, weapons, enemies[1]);
+    
+    console.log(fightResult);
+    
+    const steps = [
+      { character: "SylvainChara", Txt: "E11Sylvain4", name: "E11Sylvain4" },
+      { character: "NarraChara", Txt: "E11Narra5" },
+      { character: "BergerChara", Txt: "E11Berger3", name: "E11Berger3"},
+      { character: "SylvainChara", Txt: "E11Sylvain5", name: "E11Sylvain5" },
+      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "6");}}
+    ];
+
+    refreshPage();
+
+    playSteps(steps, 0 , true , 2);
+  }
 
   const steps = [
       { character: "NarraChara", Txt: "E11Narra" },
@@ -22,42 +51,16 @@ export function loadLvl11() {
       { character: "NarraChara", Txt: "E11Narra3" },
       { character: "BergerChara", Txt: "E11Berger2", name: "E11Berger2" },
       { character: "SylvainChara", Txt: "E11Sylvain3", name: "E11Sylvain3" },
-      { character: "NarraChara", Txt: "E11Narra4" },
+      { character: "NarraChara", Txt: "E11Narra4", choices: [
+        { text: "Fight", action: () => {luncher();} }
+    ] },
   ];
 
-  // Refresh the page
   refreshPage();
-
-  //Play the steps of the level 11
+  
   playSteps(steps, 0 , true , 2);
 
-  let weapons = [
-      {
-        name: "Epée",
-        damage: 10,
-      },
-    ];
-
-    //test fight
-    async function luncher() {
-      const fightResult = await lunchFight(skin, weapons, enemies[2]);
-      console.log(fightResult);
-    }
-    luncher();
-
-    const steps2 = [
-      { character: "SylvainChara", Txt: "E11Sylvain4", name: "E11Sylvain4" },
-      { character: "NarraChara", Txt: "E11Narra5" },
-      { character: "BergerChara", Txt: "E11Berger3", name: "E11Berger3"},
-      { character: "SylvainChara", Txt: "E11Sylvain5", name: "E11Sylvain5" },
-      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "16");}}
-  ];
-
-  playSteps(steps2, 0 , true , 2);
-
-  let orcu = true;
-
-  return orcu;
+  localStorage.setItem("vue_orcu", true);
     
     
 }

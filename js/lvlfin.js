@@ -1,6 +1,7 @@
 import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
+import { path_narration } from "./paths.js";
 
 export function loadLvlfin() {
 
@@ -12,10 +13,10 @@ export function loadLvlfin() {
     
     // Define the steps for the narrative
     const steps = [
-        { character: "NaraChara", Txt: "EndNarra" },
-        { character: "EsterelleChara", Txt: "EndEsterelle", name: "EndEsterelle"},
-        { character: "FataChara", Txt: "EndFata", name: "EndFata"},
-        { character: "NaraChara", Txt: "EndNarra2" }
+        { character: "NaraChara", Txt: "EndNarra", sound: path_narration+'Narrateur-Fin2/narrateurFin1-001.mp3' },
+        { character: "EsterelleChara", Txt: "EndEsterelle", name: "EndEsterelle", sound: path_narration+'Esterelle-F1.mp3'},
+        { character: "FataChara", Txt: "EndFata", name: "EndFata", sound: path_narration+'Fata-Fin-001.mp3'},
+        { character: "NaraChara", Txt: "EndNarra2", sound: path_narration+'Narrateur-Fin2/narrateurFin2-001.mp3' }
     ];
 
     // Refresh the page because AR

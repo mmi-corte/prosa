@@ -12,16 +12,16 @@ export function loadLvl9() {
 
     // Steps for the level
     const steps = [
-        { background: path_backgrounds+'fondEtape9.mp4', narration: "E9Narra", character: null },
-        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger' },
-        { background: path_backgrounds+'fondEtape9.png', narration: "E9Narra2", character: null },
-        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1' },
+        { background: path_backgrounds+'fondEtape9.mp4', narration: "E9Narra", character: null, sound: path_narration+'Narrateur-E9/narrateurE9-001.mp3' },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger', sound: path_narration+'Berger-E9/bergerE9-001.mp3' },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Narra2", character: null, sound: path_narration+'Narrateur-E9/narrateurE9-002.mp3' },
+        { background: path_backgrounds+'fondEtape9.png', narration: "E9Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1', sound: path_narration+'Berger-E9/bergerE9-002.mp3' },
         { background: path_backgrounds+'fondEtape9.png', character: null, 
             choices: [ 
                 { text: "E9Mess", action: () => {nextScreen("5","10");}} ] }
     ];
 
     //Play the steps
-    playSteps(steps, 0 , true, 2); 
+    playSteps(steps); 
     
 }

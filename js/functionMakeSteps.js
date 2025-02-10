@@ -1,7 +1,7 @@
 import { refreshPage } from "./refreshPage.js";
 import { ajouterBouton } from "./button.js";
 import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
-import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
+import { addTxtNarration, addNameCharacter, addDiv } from "./texte.js";
 import { log } from "./trace.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 import { path_personnages } from "./paths.js";
@@ -109,7 +109,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="=${path_personnages}Sylvain/second-plan.png"
+                src="${path_personnages}Sylvain/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -242,7 +242,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}Orcu/trosieme-plan.png"
+                src="${path_personnages}Orcu/troisieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -300,7 +300,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/premier-plan.png"
+                src="${path_personnages}fouleton/fouleton-premier-plan.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -310,7 +310,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/second-plan.png"
+                src="${path_personnages}fouleton/fouleton-second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -320,7 +320,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/arriere-plan.png"
+                src="${path_personnages}fouleton/fouleton-arriere-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -486,9 +486,21 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
             }
             // Ajouter le texte du choix
             addTxtNarration(choice.text, btnId, "");
-
+            
+            let action = function () {
+              if(choice.action) {
+                localStorage.setItem(`choice_${localStorage.getItem("level")}_E${index}`, btn.textContent);
+                choice.action();
+              } else if (choice.answer) {
+                choice.answer();
+                localStorage.setItem(`answer_${localStorage.getItem("level")}_E${index}`, btn.textContent);
+                playSteps(steps, index + 1, true, 2);
+              }
+            } 
+      
             // Ajouter l'événement au bouton
-            btn.addEventListener("click", choice.action);
+            btn.addEventListener("click", action);
+                           
           });
         } else {
           // Ajouter le bouton "Suivant" si aucune étape de choix n'est présente
@@ -644,8 +656,29 @@ function charaChanger(index, steps) {
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");
 
+      let action = function () {
+        // action tag is in steps
+        if(choice.action) {
+          localStorage.setItem(`choice_${localStorage.getItem("level")}_E${index}`, btn.textContent);
+          // make action
+          choice.action();
+        // answer tag is in steps
+        } else if (choice.answer) {
+          // answer extends the steps ?
+          let new_steps = choice.answer();
+          localStorage.setItem(`answer_${localStorage.getItem("level")}_E${index}`, btn.textContent);
+          // steps must be extended depending on the answer
+          if(new_steps) {
+            steps = steps.concat(new_steps);
+          }
+          // play the extended steps
+          playSteps(steps, index + 1, true, 2);
+        }
+      } 
+
       // Ajouter l'événement au bouton
-      btn.addEventListener("click", choice.action);
+      btn.addEventListener("click", action);
+      
     });
 
   } else if (step.nextLvl) {
