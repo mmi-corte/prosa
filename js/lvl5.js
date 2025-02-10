@@ -25,9 +25,14 @@ export function loadLvl5() {
         {character: "MascoChara", Txt: "E5Masco4", name: "E5Masco4", sound: path_narration+'Masco-E5/mascoE5-004.mp3'},
         {character: "NarraChara", Txt: "E5Narra6", sound: path_narration+'Narrateur-E5/NarateurE5-006.mp3'},
         {character: "BergerChara", Txt: "E5Berger4", name: "E5Berger4", sound: path_narration+'Berger-E5/Berger-E5-002.mp3'},
-        {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/NarateurE5-007.mp3'}
+        {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/NarateurE5-007.mp3'},
+        {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
+
     ]
-    
+    refreshPage();
     // Play the steps
-    playSteps(steps);
+    playSteps(steps , 0 , true , 2 );
+
+    let Farfadet ;
+    return Farfadet = true;
 }

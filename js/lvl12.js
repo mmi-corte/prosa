@@ -32,13 +32,13 @@ export function loadLvl12() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0 , true , 4);
+    playSteps(steps, 0 , true , 2);
 
     if (leaf){
         const steps = [
             { character : "BergerChara", Txt : "E12BergerPaperST" },     
         ];
-        playSteps(steps, 1 , true , 4);
+        playSteps(steps, 1 , true , 2);
     }
     
     const steps2 = [
@@ -50,6 +50,6 @@ export function loadLvl12() {
         
     ];
 
-    playSteps(steps2, 0 , true , 4);
+    playSteps(steps2, 0 , true , 2);
 
 }

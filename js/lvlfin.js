@@ -22,6 +22,6 @@ export function loadLvlfin() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0, true , 4);
+    playSteps(steps, 0, true , 2);
       
 }

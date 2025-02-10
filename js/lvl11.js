@@ -29,7 +29,7 @@ export function loadLvl11() {
   refreshPage();
 
   //Play the steps of the level 11
-  playSteps(steps, 0 , true , 4);
+  playSteps(steps, 0 , true , 2);
 
   let weapons = [
       {
@@ -53,7 +53,7 @@ export function loadLvl11() {
       { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "16");}}
   ];
 
-  playSteps(steps2, 0 , true , 4);
+  playSteps(steps2, 0 , true , 2);
 
   let orcu = true;
 

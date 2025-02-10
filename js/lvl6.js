@@ -22,7 +22,7 @@ export function loadLvl6() {
       },
     ];
 
-    playSteps(steps); // Démarrage des étapes
+    playSteps(steps, 0 , true , 2); // Démarrage des étapes
 
     if (Orcu) {
       const steps = [
@@ -33,7 +33,7 @@ export function loadLvl6() {
           name: "E6Berger",
         },
       ];
-      playSteps(steps); // Démarrage des étapes
+      playSteps(steps, 0 , true, 2); // Démarrage des étapes
 
       let weapons = [
         {
@@ -49,7 +49,7 @@ export function loadLvl6() {
       }
       luncher();
 
-      playSteps(steps); // Démarrage des étapes
+      playSteps(steps, 0 , true, 2); // Démarrage des étapes
 
     } else {
       //else not see Orcu
@@ -70,7 +70,7 @@ export function loadLvl6() {
           ],
         },
       ];
-      playSteps(steps); // Démarrage des étapes
+      playSteps(steps, 0 , true , 2); // Démarrage des étapes
     }
 
   } else {
@@ -82,7 +82,7 @@ export function loadLvl6() {
         character: null,
       },
     ];
-    playSteps(steps) ; // Démarrage des étapes
+    playSteps(steps, 0 , true, 2) ; // Démarrage des étapes
   }
   
 }

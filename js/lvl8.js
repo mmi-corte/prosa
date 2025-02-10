@@ -27,7 +27,7 @@ export function loadLvl8() {
             
         ];
         //Play the steps
-        playSteps(steps);
+        playSteps(steps , 0 , true , 2);
     }
     
     if (lion) { 
@@ -45,7 +45,7 @@ export function loadLvl8() {
             { character : "NarraChara", Txt : "E8NarraLeoT6", nextLvl: () => { nextScreen("5","12");}},
         ];
         // Play the steps
-        playSteps(steps); 
+        playSteps(steps, 0 , true , 2); 
     }  
     
 }

@@ -20,7 +20,7 @@ export function loadLvl15() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
 
     if (Colectible) {
@@ -35,7 +35,7 @@ export function loadLvl15() {
         refreshPage();
 
         //Play the steps
-        playSteps(steps, 0, true, 4);
+        playSteps(steps, 0, true, 2);
 
         //test fight
         async function luncher() {

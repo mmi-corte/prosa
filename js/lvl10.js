@@ -18,14 +18,14 @@ export function loadLvl10() {
 
     refreshPage();
 
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
     if(fairy) {
         const steps = [
             { character: "NarraChara", Txt: "E10NarraAFairy", name: "Narrateur" },
             { character: "OrcuChara", Txt: "E10OrcuAFairy", name: "Orcus" },
         ];
-        playSteps(steps, 0, true, 8);
+        playSteps(steps, 0, true, 2);
     }
 
     if(Leo) {
@@ -33,7 +33,7 @@ export function loadLvl10() {
             { character: "NarraChara", Txt: "E10NarraALeoS"},
             { character: "OrcuChara", Txt: "E10OrcuALeoS", name: "E10OrcuALeoS" },
         ];
-        playSteps(steps, 0, true, 8);
+        playSteps(steps, 0, true, 2);
     }
 
     const steps2 = [
@@ -50,6 +50,6 @@ export function loadLvl10() {
 
     refreshPage();
 
-    playSteps(steps2, 0, true, 8);
+    playSteps(steps2, 0, true, 2);
 
 }
