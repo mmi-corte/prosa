@@ -33,7 +33,7 @@ export function loadLvl2() {
         {character: "FataChara", Txt: "E2Fata6", name: "E2Fata6", sound: path_narration+'Fata-E2/Fata-E2-006.mp3'},
         {character: "NaraChara", Txt: "E2Narra6", sound: path_narration+'Narrateur-E2/narrateurE2-006.mp3'},
         {character: "BergerChara", Txt: "E2Berger2", name: "E2Berger2", sound: path_narration+'Berger-E2/Berger-E2-002.mp3'},
-        {character: "NaraChara", Txt: "E2Narra7", sound: path_narration+'Narrateur-E2/narrateurE2-006.mp3', 
+        {character: "NaraChara", Txt: "E2Narra7", sound: path_narration+'Narrateur-E2/narrateurE2-007.mp3', 
             nextLvl: () => { nextScreen("5", "3"); window.location.reload(false); }}
         ];
 

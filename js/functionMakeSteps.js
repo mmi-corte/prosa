@@ -424,10 +424,10 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
         loadSound(step.sound, false);
 
         // play sound
-        const SoundBtn = document.getElementById("SoundBtn");
-        if (SoundBtn.src.includes("unmute")) {
-          setOnSound();
-        }
+        // const SoundBtn = document.getElementById("SoundBtn");
+        // if (SoundBtn.src.includes("unmute")) {
+        //   setOnSound();
+        // }
       }
 
       // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
