@@ -50,11 +50,11 @@ export function addMediaBackground(containerID, mediaURL) {
         video.autoplay = true;
         video.loop = true;
         
-        if (SoundBtn) {
-            video.muted = !SoundBtn.src.includes("unmute");
-        } else {
-            video.muted = true;
-        }
+        // if (SoundBtn) {
+        //     video.muted = !SoundBtn.src.includes("unmute");
+        // } else {
+        //     video.muted = true;
+        // }
 
         video.playsInline = true;
 

@@ -25,6 +25,6 @@ export function loadLvl7() {
     ];
 
     // Play the steps
-    playSteps(steps);
+    playSteps(steps, 0 , false , 2);
     
 }

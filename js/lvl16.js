@@ -22,7 +22,7 @@ export function loadLvl16() {
     refreshPage();
     
     // Play the steps
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
     //test fight
     async function luncher() {

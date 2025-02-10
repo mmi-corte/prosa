@@ -39,6 +39,6 @@ export function loadLvl13() {
     const steps2 = [
         { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra2", character: null , nextLvl: () => {nextScreen("5","14");}},
     ];
-    playSteps(steps, 0, false, 4); 
+    playSteps(steps, 0, false, 2); 
    
 }

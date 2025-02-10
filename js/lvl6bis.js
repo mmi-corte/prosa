@@ -24,6 +24,6 @@ export function loadLvl6bis() {
     ];
 
     //Play the steps
-    playSteps(steps);
+    playSteps(steps, 0 , false, 2);
     
 }

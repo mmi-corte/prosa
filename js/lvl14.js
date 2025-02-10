@@ -20,7 +20,7 @@ export function loadLvl14() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
     if (incantation) {
         steps = [
@@ -38,7 +38,7 @@ export function loadLvl14() {
     refreshPage();
     
     // Play the steps
-    playSteps(steps, 0, true, 4);
+    playSteps(steps, 0, true, 2);
 
     steps = [
         { character: "BergerChara", Txt: "E14Berger", nextLvl : () => {nextScreen("5","15");} }
@@ -48,6 +48,6 @@ export function loadLvl14() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0 , true, 4);
+    playSteps(steps, 0 , true, 2);
 
 }
