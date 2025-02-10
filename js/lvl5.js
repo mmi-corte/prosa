@@ -7,29 +7,7 @@ export function loadLvl5() {
   
     // Trace the entry in the level 5
     log("Enter in L5", "blue");
-    const steps =[
-        {character : "NarraChara", Txt : "E5Narra", sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-001.mp3'},
-        {character : "BergerChara", Txt : "E5Berger", name : "E5Berger", sound: 'assets/sound/narration/Berger-E5/BergerE5-001.mp3'}, 
-        {character : "NarraChara", Txt : "E5Narra2", sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-002.mp3'},
-        {character : "MascoChara", Txt : "E5Masco", name : "E5Masco" , sound: 'assets/sound/narration/masco-E5/mascoE5-001.mp3'},
-        {character : "NarraChara", Txt : "E5Narra3" , sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-003.mp3'},
-        {character : "MascoChara", Txt : "E5Masco2", name : "E5Masco2", sound: 'assets/sound/narration/masco-E5/mascoE5-002.mp3'},
-        {character : "NarraChara", Txt : "E5Narra4", name : "E5Narra4", sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-004.mp3'},
-        {character : "MascoChara", Txt : "E5Masco3", name : "E5Masco3", sound: 'assets/sound/narration/masco-E5/mascoE5-003.mp3'},
-        {character : "NarraChara", Txt : "E5Narra5" , sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-005.mp3'},
-        {character : "MascoChara", Txt : "E5Masco4", name : "E5Masco4", sound: 'assets/sound/narration/masco-E5/mascoE5-004.mp3'},
-        {character : "NarraChara", Txt : "E5Narra6", sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-006.mp3'},
-        {character : "BergerChara", Txt : "E5Berger4", name : "E5Berger4" , sound: 'assets/sound/narration/Berger-E5/BergerE5-002.mp3'},
-        {character : "NarraChara", Txt : "E5Narra7" , sound: 'assets/sound/narration/Narrateur-E5/narrateurE5-007.mp3'},
-        
-    ]
-
-    refreshPage();
-    
-    console.log("loadLvl5 :  je suis là");
-    
-    playSteps(steps);
-
+   
     // Set the level in localStorage
     localStorage.setItem("level", "5");
 
