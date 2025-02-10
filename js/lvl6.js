@@ -4,11 +4,12 @@ import { playSteps } from "./functionMakeSteps.js";
 import { enemies, lunchFight } from "./fight.js";
 import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
+import { path_narration } from "./paths.js";
 
 export function loadLvl6() {
 
   // Set the level in localStorage
-  log("Enter in L1", "blue");
+  log("Enter in L6", "blue");
 
   // Set the level in localStorage
   localStorage.setItem("level", "6");

@@ -2,6 +2,7 @@ import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
 import { path_narration } from "./paths.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl5() {
   
@@ -12,7 +13,7 @@ export function loadLvl5() {
     localStorage.setItem("level", "5");
 
     // Refresh the page
-    const steps =[
+    const steps = [
         {character: "NarraChara", Txt: "E5Narra", sound: path_narration+'Narrateur-E5/NarrateurE5-001.mp3'},
         {character: "BergerChara", Txt: "E5Berger", name: "E5Berger", sound: path_narration+'Berger-E5/Berger-E5-001.mp3'},
         {character: "NarraChara", Txt: "E5Narra2", sound: path_narration+'Narrateur-E5/NarrateurE5-002.mp3'},
@@ -28,11 +29,11 @@ export function loadLvl5() {
         {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/NarrateurE5-007.mp3'},
         {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
 
-    ]
+    ];
+
     refreshPage();
+    
     // Play the steps
     playSteps(steps , 0 , true , 2 );
 
-    let Farfadet ;
-    return Farfadet = true;
 }
