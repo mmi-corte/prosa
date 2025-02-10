@@ -1,5 +1,5 @@
 import { skin } from "./functionChangeStyle.js";
-import {path_personnages, path_backgrounds } from "./paths.js";
+import {path_personnages, path_backgrounds, path_narration} from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { enemies, lunchFight } from "./fight.js";
 import { log } from "./trace.js";
@@ -13,7 +13,10 @@ export function loadLvl6() {
   // Set the level in localStorage
   localStorage.setItem("level", "6");
 
-  if (localStorage.getItem("fulettu", "true")) {
+  if (localStorage.getItem("fulettu")) {
+
+    console.log("t as vu le fulettu");
+
     const steps = [
       {
         background: path_backgrounds + "fondEtape6.mp4",
@@ -75,6 +78,7 @@ export function loadLvl6() {
     }
 
   } else {
+    console.log('t as pas vu le fulettu')
     //else farfafet
     const steps = [
       {
