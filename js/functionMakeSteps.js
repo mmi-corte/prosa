@@ -1,7 +1,7 @@
 import { refreshPage } from "./refreshPage.js";
 import { ajouterBouton } from "./button.js";
 import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
-import { addTxtNarration, addNameCharacter, addDiv, addTxt } from "./texte.js";
+import { addTxtNarration, addNameCharacter, addDiv } from "./texte.js";
 import { log } from "./trace.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
 import { path_personnages } from "./paths.js";

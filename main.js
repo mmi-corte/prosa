@@ -5,7 +5,7 @@ import { nextScreen } from "./js/navigation.js";
 import { showStaticMap } from "./js/map.js";
 import { addBtnImg } from "./js/button.js";
 import { log } from "./js/trace.js";
-import { MapPopup } from "./js/popup.js";
+import { loadJSON } from "./js/jsonLoader.js";
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -163,6 +163,9 @@ localStorage.setItem("isMuted", isMuted);
 
 // Load the first screen
 nextScreen(screenValue, levelValue);
+
+// Charger le JSON automatiquement au démarrage
+loadJSON();
 
 // });
 

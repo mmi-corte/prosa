@@ -1,8 +1,5 @@
-import { db } from "../firebase.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { popup } from "./popup.js";
-
-let querySnapshot;
+import { getTextByStepCode, getPersonnageByStepCode } from "./jsonLoader.js";
 
 // buttonModule.js
 export function addTxt(conteneurId, content, classNameTxt) {
@@ -118,28 +115,17 @@ export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
         }
 
         try {
-            if (!querySnapshot) {
-                querySnapshot = await getDocs(collection(db, "scenario"));
-            };
 
-            const docFound = querySnapshot.docs.find(doc => doc.data().stepCode === stepCode);
-            
-            // if stepCode not found, use stepCode as text content
-            let data; 
-            if (!docFound) {
-                data = stepCode;
-                console.warn(`Aucun scénario trouvé pour le stepCode "${stepCode}".`);
-            } else {
-                data = docFound.data().txt;
-            }
+            // get data from Json file
+            const dialog_txt = await getTextByStepCode(stepCode);
 
             const p = document.createElement("p");
             if(txtClassName == '') {
-                p.textContent = data;
+                p.textContent = dialog_txt;
                 p.className = txtClassName;
 
             } else {
-                typeWriter(data, p, txtClassName, 50);
+                typeWriter(dialog_txt, p, txtClassName, 50);
             };
 
             conteneur.appendChild(p);
@@ -153,25 +139,19 @@ export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
 // Fonction pour récupérer le nom du personnage
 export async function addNameCharacter(stepCode, conteneurId, txtClassName) {
     try {
-
-        if (!querySnapshot) {
-            querySnapshot = await getDocs(collection(db, "scenario"));
-        };
-        querySnapshot.forEach((doc) => {
-            if (doc.data().stepCode === stepCode) {
-                // Trouver le conteneur par son ID et ajouter le texte
-                const conteneur = document.getElementById(conteneurId);
-                if (conteneur) {
-                    const txtPerso = document.createElement("h2");
-                    txtPerso.textContent = doc.data().personnage.toUpperCase(); // Convertir en majuscules
-                    txtPerso.className = txtClassName;
-                    conteneur.appendChild(txtPerso);
-                    
-                } else {
-                    throw new Error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
-                }
+  
+            const personnage_name = await getPersonnageByStepCode(stepCode);
+            const conteneur = document.getElementById(conteneurId);
+            if (conteneur) {
+                const txtPerso = document.createElement("h2");
+                txtPerso.textContent = personnage_name.toUpperCase(); // Convertir en majuscules
+                txtPerso.className = txtClassName;
+                conteneur.appendChild(txtPerso);
+                
+            } else {
+                throw new Error(`Conteneur avec l'ID ${conteneurId} introuvable.`);
             }
-        });
+          
     } catch (error) {
         throw new Error("Erreur lors de la récupération des données Firestore :");
     }
@@ -239,31 +219,26 @@ export async function handleFormSubmit(formId, buttonId) {
 // fonction qui recupere le texte et qui est liée au chargement de l'AR
 export async function addTxtNarrationAR(stepCode, aTextId, className) { 
     try {
-        if (!querySnapshot) {
-            querySnapshot = await getDocs(collection(db, "scenario"));
-        };
+        
+            const dialog_txt = await getTextByStepCode(stepCode);
+            const aTextElement = document.getElementById(aTextId);
+            if (aTextElement) {
+                // Ajout d'un écouteur pour l'événement `loaded`
+                aTextElement.addEventListener("loaded", () => {
+                    // Mise à jour du texte dans l'attribut `value`
+                    aTextElement.setAttribute("value", dialog_txt);
 
-        querySnapshot.forEach((doc) => {
-            if (doc.data().stepCode === stepCode) {
-                const aTextElement = document.getElementById(aTextId);
-                if (aTextElement) {
-                    // Ajout d'un écouteur pour l'événement `loaded`
-                    aTextElement.addEventListener("loaded", () => {
-                        // Mise à jour du texte dans l'attribut `value`
-                        aTextElement.setAttribute("value", doc.data().txt);
+                    // Ajout de la classe
+                    if (className) {
+                        aTextElement.classList.add(className);
+                    }
 
-                        // Ajout de la classe
-                        if (className) {
-                            aTextElement.classList.add(className);
-                        }
-
-                        console.log("Texte ajouté :", doc.data().txt);
-                    });
-                } else {
-                    throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
-                }
+                    console.log("Texte ajouté :", dialog_txt);
+                });
+            } else {
+                throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
             }
-        });
+            
     } catch (error) {
         throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
     }
@@ -271,32 +246,25 @@ export async function addTxtNarrationAR(stepCode, aTextId, className) {
 
 export async function addNamePersoAR(stepCode, aTextId, className) { 
     try {
-        if (!querySnapshot) {
-         querySnapshot = await getDocs(collection(db, "scenario"));
-        };
+            const personnage_name = await getPersonnageByStepCode(stepCode);
+            const aTextElement = document.getElementById(aTextId);
+            if (aTextElement) {
+                // Ajout d'un écouteur pour l'événement `loaded`
+                aTextElement.addEventListener("loaded", () => {
+                    // Mise à jour du texte dans l'attribut `value`
+                    aTextElement.setAttribute("value", personnage_name);
 
-         querySnapshot.forEach((doc) => {
-            if (doc.data().stepCode === stepCode) {
-                const aTextElement = document.getElementById(aTextId);
-                if (aTextElement) {
-                    // Ajout d'un écouteur pour l'événement `loaded`
-                    aTextElement.addEventListener("loaded", () => {
-                        // Mise à jour du texte dans l'attribut `value`
-                        aTextElement.setAttribute("value", doc.data().personnage);
+                    // Ajout de la classe
+                    if (className) {
+                        aTextElement.classList.add(className);
+                    }
 
-                        // Ajout de la classe
-                        if (className) {
-                            aTextElement.classList.add(className);
-                        }
+                    console.log("Texte ajouté :", personnage_name);
+                });
 
-                        console.log("Texte ajouté :", doc.data().personnage);
-                    });
-
-                } else {
-                    throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
-                }
+            } else {
+                throw new Error(`Balise <a-text> avec l'ID ${aTextId} non trouvée.`);
             }
-        });
 
     } catch (error) {
         throw new Error(`Erreur lors de la récupération des données Firestore : ${error}`);
