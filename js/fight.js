@@ -25,7 +25,7 @@ export const enemies = [
     },
   ];
   
-export async function lunchFight(skin, weapons, enemies)
+export function lunchFight(skin, weapons, enemies)
 {
     return new Promise((resolve) => {
 

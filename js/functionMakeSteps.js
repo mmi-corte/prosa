@@ -109,7 +109,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="=${path_personnages}Sylvain/second-plan.png"
+                src="${path_personnages}Sylvain/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -242,7 +242,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}Orcu/trosieme-plan.png"
+                src="${path_personnages}Orcu/troisieme-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"

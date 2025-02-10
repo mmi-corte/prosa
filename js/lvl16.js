@@ -3,6 +3,7 @@ import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
 import { enemies, lunchFight } from "./fight.js";
 import { skin } from "./functionChangeStyle.js";
+import { path_narration } from "./paths.js";
 
 export function loadLvl16() {
 
