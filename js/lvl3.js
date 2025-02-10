@@ -16,7 +16,7 @@ export function loadLvl3() {
     // Steps for the level 3
     const steps = [
         { background: path_backgrounds+'fondEtape3.mp4', narration: "E3Narra", character: null , sound: path_narration+'Narrateur-E3/narrateurE3-001.mp3' },
-        { background: path_backgrounds+'fondEtape3.mp4', narration: "E3Narra1_2", character: null , sound: path_narration+'Narrateur-E3/NarrateurE3-001-002.mp3' },
+        { background: path_backgrounds+'fondEtape3.png', narration: "E3Narra1_2", character: null , sound: path_narration+'Narrateur-E3/NarrateurE3-001-002.mp3' },
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger' , sound: path_narration+'Berger-E3/Berger-E3-001.mp3' },
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Narra2", character: null , sound: path_narration+'Narrateur-E3/narrateurE3-002.mp3'},
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1' , sound: path_narration+'Berger-E3/Berger-E3-002.mp3' },
