@@ -11,7 +11,7 @@ export function loadLvl10() {
 
     if(localStorage.getItem("level", "4"))
     {
-        localStorage.setItem("fairy", true);
+        localStorage.setItem("vue_fairy", true);
     }
     
 
