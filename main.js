@@ -121,36 +121,6 @@ ReloadBtn.addEventListener("click", () => {
   nextScreen("5", "1", false);
 
 });
-// Ajout du bouton pour afficher la map
-const mapBtn = document.createElement('div');
-mapBtn.id = 'mapBtn';
-document.body.appendChild(mapBtn);
-
-const mapIcon = document.createElement("img");
-mapIcon.id = "mapIcon";
-mapIcon.src = "assets/icons/map.svg";
-mapBtn.appendChild(mapIcon);
-
-mapBtn.addEventListener("click", () => {
-  const mapOptions = {
-    containerId : "map-popup-content",
-    apiKey: "8b92289a637347489b3b13811907ebdd", // Remplace par ta clé API
-    zoom: 12,
-    maps: {
-      toulon: {
-        latitude: 43.1242,
-        longitude: 5.928,
-        markers: [
-          { latitude: 43.1242, longitude: 5.928, color: "red" },
-          { latitude: 43.1300, longitude: 5.920, color: "blue" }
-        ]
-      }
-    }
-  };
-
-  MapPopup(mapOptions, () => console.log("Popup fermée"));
-
-});
 
 //////////////////////////////////////////////////////
 // Map Button
