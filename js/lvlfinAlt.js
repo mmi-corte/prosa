@@ -13,14 +13,14 @@ export function loadLvlfinAlt() {
 
     // Define the steps for the dialogue
     const steps = [
-        { character: "NaraChara", Txt: "End2Narra" },
-        { character: "BergerChara", Txt: "End2Berger", name: "End2Berger"},
-        { character: "NaraChara", Txt: "End2Narra2" },
-        { character: "EsterelleChara", Txt: "End2Esterelle", name: "End2Esterelle"},
-        { character: "FataChara", Txt: "End2Fata", name: "End2Fata"},
-        { character: "NaraChara", Txt: "End2Narra3" },
-        { character: "FataChara", Txt: "End2Fata2", name: "End2Fata2"},
-        { character: "NaraChara", Txt: "End2Narra4" , nextLvl: () => { nextScreen("5", "1"); window.location.reload(false); }}
+        { character: "NaraChara", Txt: "End2Narra", sound: path_narration+'Narrateur-E2/narrateurFin2-001.mp3' },
+        { character: "BergerChara", Txt: "End2Berger", name: "End2Berger",  sound: path_narration+'Narrateur-E2/narrateurFin2-001.mp3'},
+        { character: "NaraChara", Txt: "End2Narra2", sound: path_narration+'Narrateur-E2/narrateurFin2-002.mp3' },
+        { character: "EsterelleChara", Txt: "End2Esterelle", name: "End2Esterelle",  sound: path_narration+'Narrateur-E2/narrateurFin2-001.mp3'},
+        { character: "FataChara", Txt: "End2Fata", name: "End2Fata",  sound: path_narration+'Narrateur-E2/narrateurFin2-001.mp3'},
+        { character: "NaraChara", Txt: "End2Narra3",  sound: path_narration+'Narrateur-E2/narrateurFin2-003.mp3'},
+        { character: "FataChara", Txt: "End2Fata2", name: "End2Fata2",  sound: path_narration+'Narrateur-E2/narrateurFin2-001.mp3'},
+        { character: "NaraChara", Txt: "End2Narra4",  sound: path_narration+'Narrateur-E2/narrateurFin2-004.mp3' , nextLvl: () => { nextScreen("5", "1"); window.location.reload(false); }}
     ];
 
     // Refresh the page because AR
