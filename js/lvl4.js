@@ -14,6 +14,7 @@ log("Enter in L4", "blue");
 
 localStorage.setItem('level', '4');
 
+localStorage.setItem('fulettu', 'true');
 
 
 let steps =[

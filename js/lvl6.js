@@ -13,7 +13,7 @@ export function loadLvl6() {
   // Set the level in localStorage
   localStorage.setItem("level", "6");
 
-  if (Farfadet) {
+  if (localStorage.getItem("fulettu", "true")) {
     const steps = [
       {
         background: path_backgrounds + "fondEtape6.mp4",
