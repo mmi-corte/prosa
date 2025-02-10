@@ -65,6 +65,7 @@ export function loadScreen4() {
       log("Aucun avatar sélectionné !","red");
     } else {
       log(`Avatar sélectionné : ${selectedAvatar}`, "green");
+      localStorage.setItem("skin", selectedAvatar);
       
       // move to the next page
       nextScreen("5");

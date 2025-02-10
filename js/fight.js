@@ -2,6 +2,8 @@ import { addOverlay } from "./overslay.js";
 import { loadSound } from './Sound/sound.js';
 import { ajouterBouton } from './button.js';
 
+
+
 export const enemies = [
     {
       name: "Cerf",
@@ -30,9 +32,11 @@ export const enemies = [
     }
   ];
   
-export function lunchFight(skin, weapons, enemies)
+export function lunchFight(weapons, enemies)
 {
     return new Promise((resolve) => {
+
+    skin = localStorage.getItem("skin");
 
     //player hp
     const playerHp = 100;
