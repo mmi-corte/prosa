@@ -300,7 +300,7 @@ const personnages = [
                 </a-image>`,
   `<!-- premier plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/premier-plan.png"
+                src="${path_personnages}fouleton/premier-plan.png"
                 position="0 -0.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -310,7 +310,7 @@ const personnages = [
                 
                 <!-- deuxième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/second-plan.png"
+                src="${path_personnages}fouleton/second-plan.png"
                 position="0 -1 0"
                 rotation="-90 0 0"
                 scale="6 6 6"
@@ -320,7 +320,7 @@ const personnages = [
                 
                 <!-- troisième plan  (en avant) -->
                 <a-image
-                src="${path_personnages}fuleton/arriere-plan.png"
+                src="${path_personnages}fouleton/arriere-plan.png"
                 position="0 -1.5 0"
                 rotation="-90 0 0"
                 scale="6 6 6"

@@ -81,6 +81,7 @@ export function loadLvl6() {
         background: path_backgrounds + "fondEtape6.png",
         narration: "E6NarraFarfaF",
         character: null,
+        sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3'
       },
     ];
     playSteps(steps, 0 , true, 2) ; // Démarrage des étapes
