@@ -15,7 +15,7 @@ export function loadLvl16() {
     // Define the steps
     const steps = [
 
-        { character: "NaraChara", Txt: "E16Narra" }
+        { character: "NaraChara", Txt: "E16Narra", sound: path_narration+'Narrateur-E16/narrateurE16.mp3' }
     ];
 
     // Refresh the page because AR
