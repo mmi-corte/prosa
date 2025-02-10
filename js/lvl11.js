@@ -55,9 +55,7 @@ export function loadLvl11() {
 
   playSteps(steps2, 0 , true , 2);
 
-  let orcu = true;
-
-  return orcu;
+  localStorage.setItem("vue_orcu", true);
     
     
 }
