@@ -19,6 +19,7 @@ export function loadLvl6() {
         background: path_backgrounds + "fondEtape6.mp4",
         narration: "E6NarraFarfaT",
         character: null,
+       sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
       },
     ];
 
