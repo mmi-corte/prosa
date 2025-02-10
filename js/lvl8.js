@@ -44,6 +44,7 @@ export function loadLvl8() {
             { character : "BergerChara", Txt : "E8BergerLeoT", name : "E8BergerLeoT" },
             { character : "NarraChara", Txt : "E8NarraLeoT6", sound: path_narration+'Narrateur-E8/NarrateurE8-009.mp3', nextLvl: () => { nextScreen("5","12");}},
         ];
+        
         // Play the steps
         playSteps(steps, 0 , true , 2); 
     }  

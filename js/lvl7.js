@@ -18,13 +18,13 @@ export function loadLvl7() {
         { background: path_backgrounds + 'fondEtape7.png', narration: "E7Narra2", character: null, sound: path_narration+'Narrateur-E8/NarrateurE7-002.mp3' },
         { background: path_backgrounds + 'fondEtape7.png', narration: "E7Berger2", character: path_personnages+'Berger/berger.png', name: 'E6Berger2',sound: path_narration+'Berger-E7/BergerE7-002.mp3',
             choices: [
-                { text: "E6Choix1", action: () => { nextScreen("5", "9") }},
-                { text: "E6Choix2", action: () => { nextScreen("5", "10") }}
+                { text: "E7Choix1", action: () => { nextScreen("5", "9") }},
+                { text: "E7Choix2", action: () => { nextScreen("5", "10") }}
             ]
         }
     ];
 
     // Play the steps
-    playSteps(steps, 0 , false , 2);
+    playSteps(steps);
     
 }

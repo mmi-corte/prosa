@@ -34,7 +34,7 @@ export function loadLvl11() {
       { character: "NarraChara", Txt: "E11Narra5" },
       { character: "BergerChara", Txt: "E11Berger3", name: "E11Berger3"},
       { character: "SylvainChara", Txt: "E11Sylvain5", name: "E11Sylvain5" },
-      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "16");}}
+      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "6");}}
     ];
 
     refreshPage();

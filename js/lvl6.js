@@ -21,9 +21,15 @@ export function loadLvl6() {
         background: path_backgrounds+"fondEtape6.mp4",
         narration: "E6NarraFarfaT",
         character: null,
-       sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
+       sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3',
+       choices: [
+          { text: "E6Choix1", action: () => {nextScreen("5", "6bis");} },
+          { text: "E6Choix2", action: () => {nextScreen("5", "7");} }
+        ]
       },
     ];
+
+  } else {
 
     if (localStorage.getItem('vue_orcu')) {
       steps = steps.concat([
@@ -51,37 +57,39 @@ export function loadLvl6() {
 
       localStorage.setItem('fight_lion', true);
 
-    } else {
-      //else not see Orcu
-      steps = steps.concat([
-        {
-          background: path_backgrounds + "fondEtape6.png",
-          narration: "E6BergerOrcuF",
-          character: path_personnages+"Berger/berger.png",
-          name: "E6Berger",
-        },
-        {
-          background: path_backgrounds + "fondEtape6.png",
-          narration: "E6NarraOrcuF",
-          character: null,
-          choices: [
-            { text: "E3Choix1", action: nextScreen("5", "6bis") },
-            { text: "E3Choix2", action: nextScreen("5", "9") },
-          ],
-        },
-      ]);
+    // } else {
+    //   //else not see Orcu
+    //   steps = steps.concat([
+    //     {
+    //       background: path_backgrounds + "fondEtape6.png",
+    //       narration: "E6BergerOrcuF",
+    //       character: path_personnages+"Berger/berger.png",
+    //       name: "E6Berger",
+    //     },
+    //     {
+    //       background: path_backgrounds + "fondEtape6.png",
+    //       narration: "E6NarraOrcuF",
+    //       character: null,
+    //       choices: [
+    //         { text: "E3Choix1", action: nextScreen("5", "6bis") },
+    //         { text: "E3Choix2", action: nextScreen("5", "9") },
+    //       ],
+    //     },
+    //   ]);
 
     }
 
-  } else {
-  
     //else farfafet
     const steps = [
       {
         background: path_backgrounds + "fondEtape6.png",
         narration: "E6NarraFarfaF",
         character: null,
-        sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3'
+        sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3',
+        choices: [
+          { text: "E6Choix1", action: () => {nextScreen("5", "7");} },
+          { text: "E6Choix2", action: () => {nextScreen("5", "10");} }
+      ]
       },
     ];
   }

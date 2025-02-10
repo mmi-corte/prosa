@@ -18,8 +18,8 @@ export function loadLvl6bis() {
         { background: path_backgrounds + 'fondEtape6bis.png', narration: "E6Narra2", character: null,sound: path_narration+'Narrateur-E6bis/narrateurE6bis-002.mp3' },
         { background: path_backgrounds + 'fondEtape6bis.png', narration: "E6Berger2", character: path_personnages + 'Berger/berger.png', name: 'E6Berger2', sound: path_narration+'Berger-E6bis/BergerE6bis-002.mp3',
             choices: [
-                { text: "E6Choix1", action: () => {nextScreen("5", "9");} },
-                { text: "E6Choix2", action: () => {nextScreen("5", "10")} }
+                { text: "E6BChoix1", action: () => {nextScreen("5", "9");} },
+                { text: "E6BChoix2", action: () => {nextScreen("5", "10")} }
             ]}
     ];
 
