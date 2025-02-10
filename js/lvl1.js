@@ -15,15 +15,15 @@ export function loadLvl1() {
     // Définition des étapes pour le niveau 1
     const steps = [
         { background: path_backgrounds + 'fondEtape1.mp4', narration: "E1Narra", character: null, sound: path_narration + "Narrateur-E1/narrateurE1-001.mp3"},
-        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger", character: path_personnages + 'Berger/berger.png', name: 'E1Berger' , sound: path_narration + "Berger-E1/Berger-E1-001.mp3" }, // mp3 faux
+        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger", character: path_personnages + 'Berger/berger.png', name: 'E1Berger' , sound: path_narration + "Berger-E1/Berger-E1-001.mp3" }, 
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra1", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-003.mp3'},
-        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger1", character: path_personnages + 'Berger/berger.png', name: 'E1Berger1' , sound: path_narration + "Berger-E1/Berger-E1-002.mp3" }, // mp3 faux
+        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger1", character: path_personnages + 'Berger/berger.png', name: 'E1Berger1' , sound: path_narration + "Berger-E1/Berger-E1-002.mp3" },
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra2", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-004.mp3' },
-        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger2", character: path_personnages + 'Berger/berger.png', name: 'E1Berger2' , sound: path_narration + "Berger-E1/Berger-E1-003.mp3" }, // mp3 faux
+        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger2", character: path_personnages + 'Berger/berger.png', name: 'E1Berger2' , sound: path_narration + "Berger-E1/Berger-E1-003.mp3" }, 
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra3", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-005.mp3' },
-        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger3", character: path_personnages + 'Berger/berger.png', name: 'E1Berger3' , sound: path_narration + 'Berger-E1/Berger-E1-004.mp3' }, // mp3 faux
+        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger3", character: path_personnages + 'Berger/berger.png', name: 'E1Berger3' , sound: path_narration + 'Berger-E1/Berger-E1-004.mp3' }, 
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra4", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-006.mp3' },
-        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger4", character: path_personnages + 'Berger/berger.png', name: 'E1Berger4' , sound: path_narration + 'Berger-E1/Berger-E1-005.mp3' }, // mp3 faux
+        { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger4", character: path_personnages + 'Berger/berger.png', name: 'E1Berger4' , sound: path_narration + 'Berger-E1/Berger-E1-005.mp3' }, 
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra5", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-007.mp3' },
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Berger5", character: path_personnages + 'Berger/berger.png', name: 'E1Berger5' , sound: path_narration + 'Berger-E1/Berger-E1-006.mp3'},
         { background: path_backgrounds + 'fondEtape1.jpg', narration: "E1Narra6", character: null, sound: path_narration + 'Narrateur-E1/narrateurE1-008.mp3' },

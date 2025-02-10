@@ -4,6 +4,11 @@ import { setOnSound, setOffSound } from "./js/Sound/sound.js";
 import { nextScreen } from "./js/navigation.js";
 import { showStaticMap } from "./js/map.js";
 import { addBtnImg } from "./js/button.js";
+import { log } from "./js/trace.js";
+import { MapPopup } from "./js/popup.js";
+
+//Variable / Constante pour les combats
+export let playerUserName = "";
 
 export const DEBUG = true;
 
@@ -29,46 +34,46 @@ if (DEBUG) {
     window.location.reload(false);
 
     // load screen0
-    nextScreen("0","0");
+    nextScreen("0", "0");
 
   });
 
   ////////////////////////////////////////////////////
   // uncomment to activate home button dynamic display
   ////////////////////////////////////////////////////
-  
+
   // Caché par défaut
   resetGame.style.display = "none"; // Caché par défaut
-  
+
   if (resetGame) {
-      resetGame.style.display = "none";
-      resetGame.style.width = "40px";
-      resetGame.style.opacity = "0";
-      resetGame.style.transform = "translateX(-50px)"; // Départ hors écran
-      resetGame.style.transition = "opacity 0.3s ease-in-out, transform 0.4s ease-in-out";
+    resetGame.style.display = "none";
+    resetGame.style.width = "40px";
+    resetGame.style.opacity = "0";
+    resetGame.style.transform = "translateX(-50px)"; // Départ hors écran
+    resetGame.style.transition = "opacity 0.3s ease-in-out, transform 0.4s ease-in-out";
 
-      document.addEventListener("mousemove", (event) => {
-          const seuil = 50; // Distance en pixels pour déclencher l'affichage
-          if (event.clientX < seuil && event.clientY < seuil) {
-              resetGame.style.display = "block"; // Afficher immédiatement
-              requestAnimationFrame(() => {
-                  resetGame.style.opacity = "1"; 
-                  resetGame.style.transform = "translateX(0)"; // Revient à sa position normale
-              });
-          } else {
-              resetGame.style.opacity = "0"; 
-              resetGame.style.transform = "translateX(-50px)"; // Repart vers la gauche
+    document.addEventListener("mousemove", (event) => {
+      const seuil = 50; // Distance en pixels pour déclencher l'affichage
+      if (event.clientX < seuil && event.clientY < seuil) {
+        resetGame.style.display = "block"; // Afficher immédiatement
+        requestAnimationFrame(() => {
+          resetGame.style.opacity = "1";
+          resetGame.style.transform = "translateX(0)"; // Revient à sa position normale
+        });
+      } else {
+        resetGame.style.opacity = "0";
+        resetGame.style.transform = "translateX(-50px)"; // Repart vers la gauche
 
-              // Ajout d'un timeout pour éviter le problème de transition ignorée
-              setTimeout(() => {
-                  if (resetGame.style.opacity === "0") {
-                      resetGame.style.display = "none"; 
-                  }
-              }, 350); // Légèrement plus long que la transition
+        // Ajout d'un timeout pour éviter le problème de transition ignorée
+        setTimeout(() => {
+          if (resetGame.style.opacity === "0") {
+            resetGame.style.display = "none";
           }
-      });
+        }, 350); // Légèrement plus long que la transition
+      }
+    });
   } else {
-      console.error("L'élément resetGame n'existe pas !");
+    console.error("L'élément resetGame n'existe pas !");
   }
 }
 
@@ -114,6 +119,36 @@ ReloadBtn.addEventListener("click", () => {
   // TODO add popup to choose the level. 1 restard the game sart the init phase
   // reload page
   nextScreen("5", "1", false);
+
+});
+// Ajout du bouton pour afficher la map
+const mapBtn = document.createElement('div');
+mapBtn.id = 'mapBtn';
+document.body.appendChild(mapBtn);
+
+const mapIcon = document.createElement("img");
+mapIcon.id = "mapIcon";
+mapIcon.src = "assets/icons/map.svg";
+mapBtn.appendChild(mapIcon);
+
+mapBtn.addEventListener("click", () => {
+  const mapOptions = {
+    containerId : "map-popup-content",
+    apiKey: "8b92289a637347489b3b13811907ebdd", // Remplace par ta clé API
+    zoom: 12,
+    maps: {
+      toulon: {
+        latitude: 43.1242,
+        longitude: 5.928,
+        markers: [
+          { latitude: 43.1242, longitude: 5.928, color: "red" },
+          { latitude: 43.1300, longitude: 5.920, color: "blue" }
+        ]
+      }
+    }
+  };
+
+  MapPopup(mapOptions, () => console.log("Popup fermée"));
 
 });
 

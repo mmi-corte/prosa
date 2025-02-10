@@ -29,6 +29,8 @@ export function showStaticMap(containerId) {
     }
 
     // Récupérer la ville sélectionnée
+    console.log("j'ai la map")
+    // Récupérer la ville sélectionnée depuis localStorage
     const selectedCity = localStorage.getItem("ville") || "Toulon";
 
     // Vérifier si la ville a une configuration dans l'objet fourni
@@ -38,9 +40,9 @@ export function showStaticMap(containerId) {
         return;
     }
 
-    // Construire l'URL de la carte avec les marqueurs
+    // Construire l'URL de la carte avec uniquement des points
     const markersParam = cityMap.markers.map(marker => 
-        `lonlat:${marker.longitude},${marker.latitude};color:${marker.color};size:medium`
+        `lonlat:${marker.longitude},${marker.latitude};color:red;size:small`
     ).join('&marker=');
 
     const mapUrl = `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:${cityMap.longitude},${cityMap.latitude}&zoom=${map.zoom}&marker=${markersParam}&apiKey=${map.apiKey}`;
@@ -50,6 +52,7 @@ export function showStaticMap(containerId) {
     img.id = 'staticMap';
     img.src = mapUrl;
     // img.alt = `Carte Statique - ${selectedCity}`;
+    img.alt = `Carte avec points - ${selectedCity}`;
     img.className = 'map';
 
     container.appendChild(img);
