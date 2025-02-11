@@ -135,6 +135,9 @@ export function addImg(containerID, url, style, targetId) {
     const img = document.createElement("img");
     img.className = style;
     img.loading = "lazy";
+    img.rel = "preload";
+    img.as = "image";
+    img.type = "image/webp";
     img.src = url;
     img.id = targetId;
     img.alt ="icon";
