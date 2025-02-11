@@ -22,7 +22,7 @@ export function loadScreen0() {
   loadSound("assets/sound/intro.mp3", true);
 
   // add logo
-  addImg('container','assets/logo.png','logoimg', 'logoImgP1');
+  addImg('container','../assets/logo.png','logoimg', 'logoImgP1');
   addImgBackground('container',"assets/bg/Accueil.png");
 
   // add button
