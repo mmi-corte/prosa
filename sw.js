@@ -1,15 +1,15 @@
 const CACHE_NAME = "pwa-cache-v1";
 const ASSETS_TO_CACHE = [
-  "/prosa/",
-  "/prosa/index.html",
-  "/prosa/css/styles.css",
-  "/prosa/main.js",
-  "/prosa/assets/icons/android-launchericon-192x192.png",
-  "/prosa/assets/icons/android-launchericon-512x512.png",
-  "/prosa/assets/icons/icon-launchericon-144x144.png",
-  "/prosa/assets/icons/icon-launchericon-96x96.png",
-  "/prosa/assets/icons/icon-launchericon-72x72.png",
-  "/prosa/assets/icons/icon-launchericon-48x48.png"
+  "/",
+  "/index.html",
+  "/css/styles.css",
+  "/main.js",
+  "/assets/icons/android-launchericon-192x192.png",
+  "/assets/icons/android-launchericon-512x512.png",
+  "/assets/icons/icon-launchericon-144x144.png",
+  "/assets/icons/icon-launchericon-96x96.png",
+  "/assets/icons/icon-launchericon-72x72.png",
+  "/assets/icons/icon-launchericon-48x48.png"
 ];
 
 // Installer et mettre en cache les fichiers statiques
