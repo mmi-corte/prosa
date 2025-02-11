@@ -157,6 +157,12 @@ window.addEventListener("popstate", (event) => {
       // Navigate to the previous screen if needed
       nextScreen(screen, level, false);
 
+      // Reload the page to reset the state only if the all screens are visited
+      // Possible AR in level that disturbe the style of the body. Why ?
+      if(localStorage.getItem("screen") == "5" ) {
+        window.location.reload(false);
+      }
+
     } else {
       log("❌ Aucun état dans event.state, retour à l'accueil.");
       nextScreen("0", "0", false);
