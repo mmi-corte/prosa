@@ -48,13 +48,13 @@ let steps = [
         {character : "FouletounChara", Txt: "E4Fouletoun4",name : "Fouletoun" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-004.mp3'},
         {character : "FulettuChara", Txt: "E4Fulettu5", name : "Fuletu" , sound: path_narration+'Fulettu-E4/Fulettu-E4-005.mp3'},
         {character : "FouletounChara", Txt: "E4Fouletoun5",name : "Fouletoun", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-005.mp3'},
-        {character:  "FulettuChara", Txt:"E4FulettuEC", name : "Fulettu", 
+        {character:  "FulettuChara", Txt:"E4FulettuEC", name : "E4FulettuEC", 
             choices: [
                 { text: "E4EnigmeC1", answer: () => {return null;}},
                 { text: "E4EnigmeC2", answer: () => {return null;}}
             ] 
         },
-        {character: "FulettuChara", Txt:"E4FulettuEC", name: "Fulettu", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
+        {character: "FouletounChara", Txt:"E4FouletounET", name: "E4FouletounET", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
             choices: [
                 { text: "E4EnigmeT1", answer: () => {return steps2;} },
                 { text: "E4EnigmeT2", answer: () => {return steps1;} },
