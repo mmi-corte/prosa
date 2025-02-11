@@ -1,7 +1,7 @@
 {
     "name": "Prosa - MMI Corte / Toulon",
     "short_name": "Prosa",
-    "start_url": "prosa/index.html",
+    "start_url": "/prosa/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#F1D482",
@@ -35,7 +35,8 @@
       {
         "src": "/prosa/assets/icons/android-launchericon-512x512.png",
         "sizes": "512x512",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
       }
     ]
   }
