@@ -9,7 +9,22 @@ const ASSETS_TO_CACHE = [
   "/prosa/assets/icons/android-launchericon-144x144.png",
   "/prosa/assets/icons/android-launchericon-96x96.png",
   "/prosa/assets/icons/android-launchericon-72x72.png",
-  "/prosa/assets/icons/android-launchericon-48x48.png"
+  "/prosa/assets/icons/android-launchericon-48x48.png",
+  "/prosa/assets/icons/batterie.svg",
+  "/prosa/assets/icons/home.svg",
+  "/prosa/assets/icons/croix.png",
+  "/prosa/assets/icons/info.svg",
+  "/prosa/assets/icons/inventaire.png",
+  "/prosa/assets/icons/journal.png",
+  "/prosa/assets/icons/livre.png",
+  "/prosa/assets/icons/map.svg",
+  "/prosa/assets/icons/mute.svg",
+  "/prosa/assets/icons/unmute.svg",
+  "/prosa/assets/icons/warning.svg",
+  "/prosa/assets/icons/reload.svg",
+  "/prosa/assets/icons/map_white.svg",
+  "/prosa/assets/icons/map_black.svg",
+  "/prosa/assets/icons/click.svg"
 ];
 
 // Installer et mettre en cache les fichiers statiques
