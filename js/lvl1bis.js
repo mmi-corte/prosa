@@ -14,9 +14,9 @@ export function loadLvl1bis() {
 
     // Define the steps for the level
     const steps = [
-        { background: path_backgrounds + 'fondEtape1bis.mp4', narration: "E1BNarra", character: null, sound: path_narration+'Narrateur-E1bis/narrateurE1bis-001.mp3' },
+        { background: path_backgrounds + 'fondEtape1bis.mp4', narration: "E1BNarra", character: null, sound: path_narration+'Narrateur-E1Bis/narrateurE1bis-001.mp3' },
         { background: path_backgrounds + 'fondEtape1bis.png', narration: "E1BBerger", character: path_personnages+'Berger/berger.png', name: 'E1BBerger', sound: path_narration+'Berger-E1bis/Berger-E1bis.mp3'},
-        { background: path_backgrounds + 'fondEtape1bis.png', narration: "E1BNarra2", character: null, sound: path_narration+'Narrateur-E1bis/narrateurE1bis-002.mp3' },
+        { background: path_backgrounds + 'fondEtape1bis.png', narration: "E1BNarra2", character: null, sound: path_narration+'Narrateur-E1Bis/narrateurE1bis-002.mp3' },
         {
             background: path_backgrounds + 'fondEtape1bis.png',
             narration: () => {
