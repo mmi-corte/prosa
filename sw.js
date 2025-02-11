@@ -2,20 +2,32 @@ const CACHE_NAME = "pwa-cache-v1";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
-  "/css/styles.css",
+  "/css/style.css",
   "/main.js",
   "/assets/icons/android-launchericon-192x192.png",
   "/assets/icons/android-launchericon-512x512.png",
-  "/assets/icons/icon-launchericon-144x144.png",
-  "/assets/icons/icon-launchericon-96x96.png",
-  "/assets/icons/icon-launchericon-72x72.png",
-  "/assets/icons/icon-launchericon-48x48.png"
+  "/assets/icons/android-launchericon-144x144.png",
+  "/assets/icons/android-launchericon-96x96.png",
+  "/assets/icons/android-launchericon-72x72.png",
+  "/assets/icons/android-launchericon-48x48.png"
 ];
 
 // Installer et mettre en cache les fichiers statiques
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
+    caches.open(CACHE_NAME).then((cache) => {
+      return Promise.all(
+        ASSETS_TO_CACHE.map((url) =>
+          fetch(url).then((response) => {
+            if (!response.ok) {
+              console.warn(`⚠️ Impossible de cacher ${url}`);
+              return;
+            }
+            return cache.put(url, response);
+          })
+        )
+      );
+    })
   );
 });
 

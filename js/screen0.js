@@ -10,7 +10,7 @@ import { loadSound, setOffSound, setOnSound } from './Sound/sound.js';
 import { nextScreen } from './navigation.js';
 import { log } from './trace.js';
 import { addTxt } from './texte.js';
-import { goFullscreen, isMobileDevice } from './functions.js';
+// import { goFullscreen, isMobileDevice } from './functions.js';
 
 // Fonction pour charger l'écran 1 du jeu
 export function loadScreen0() {
@@ -41,9 +41,9 @@ export function loadScreen0() {
     nextScreen("1");
 
     // app in full screen
-    if (isMobileDevice()) {
-      goFullscreen();
-    }
+    // if (isMobileDevice()) {
+    //   goFullscreen();
+    // }
 
     // if replay and the button sound is unmuted, we need a interaction from the user to activate the sound
     const SoundBtn = document.getElementById("SoundBtn");
