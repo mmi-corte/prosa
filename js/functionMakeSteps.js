@@ -473,17 +473,14 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
           step.choices.forEach((choice, i) => {
             const btnId = `btnChoix${i + 1}`;
             const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
-
+            
             // Ajouter un bouton avec le bon style
             ajouterBouton("diagBox", "", btnId, "btnChoix");
 
             // Appliquer la classe spécifique au bouton
             const btn = document.getElementById(btnId);
             btn.classList.add(btnClass);
-
-            if (step.name) {
-              addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-            }
+            
             // Ajouter le texte du choix
             addTxtNarration(choice.text, btnId, "");
             
@@ -514,26 +511,6 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
       }
     // steps is dict
     } 
-    // else {
-      //Ajoute l'écan de la map si elle est dans
-      
-      // if (steps.maps) {
-        // addTxt(
-        //   steps.containerId,
-        //   "Vous devez vous dirige vers la prochaine étape",
-        //   "textTitle"
-        // );
-
-        // showStaticMap(steps);
-        
-        // ajouterBouton(
-        //   steps.containerId,
-        //   "Confimer votre arrivée",
-        //   "btnNext",
-        //   "btnclass"
-        // );
-      // }
-    // }
     
   // AR part
   } else {
@@ -649,10 +626,11 @@ function charaChanger(index, steps) {
       const btn = document.getElementById(btnId);
 
       btn.classList.add(btnClass);
-
+      
       if (step.name) {
         addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
+      
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");
 

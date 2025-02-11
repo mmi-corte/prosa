@@ -19,9 +19,9 @@ export function loadLvl3() {
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Narra1_2", character: null , sound: path_narration+'Narrateur-E3/NarrateurE3-001-002.mp3' },
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger", character: path_personnages+'Berger/berger.png', name: 'E3Berger' , sound: path_narration+'Berger-E3/Berger-E3-001.mp3' },
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Narra2", character: null , sound: path_narration+'Narrateur-E3/narrateurE3-002.mp3'},
-        { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger1' , sound: path_narration+'Berger-E3/Berger-E3-002.mp3' },
+        { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger2", character: path_personnages+'Berger/berger.png', name: 'E3Berger2' , sound: path_narration+'Berger-E3/Berger-E3-002.mp3' },
         { background: path_backgrounds+'fondEtape3.png', narration: "E3Narra3", character: null , sound: path_narration+'Narrateur-E3/narrateurE3-003.mp3'},
-        { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger3", character: path_personnages+'Berger/berger.png', name: 'E3Berger6' , sound: path_narration+'Berger-E3/Berger-E3-003.mp3',
+        { background: path_backgrounds+'fondEtape3.png', narration: "E3Berger3", character: path_personnages+'Berger/berger.png', name: 'E3Berger3' , sound: path_narration+'Berger-E3/Berger-E3-003.mp3',
             choices: [
                 { text: "E3Choix1", action: () => {nextScreen("5", "4");} },
                 { text: "E3Choix2", action: () => {nextScreen("5", "10");} }
