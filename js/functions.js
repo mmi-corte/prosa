@@ -11,20 +11,20 @@ export function checkImageExists(url, callback) {
     img.src = url;
 }   
 
-export function goFullscreen() {
-    const element = document.documentElement; // Prendre l'élément HTML entier
-    if (element.requestFullscreen) {
-        element.requestFullscreen(); // Fullscreen standard
-    } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // Chrome, Safari
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // IE
-        element.msRequestFullscreen();
-    } else {
-        console.error('Le navigateur ne prend pas en charge le mode plein écran');
-    }
-}
+// export function goFullscreen() {
+//     const element = document.documentElement; // Prendre l'élément HTML entier
+//     if (element.requestFullscreen) {
+//         element.requestFullscreen(); // Fullscreen standard
+//     } else if (element.mozRequestFullScreen) { // Firefox
+//         element.mozRequestFullScreen();
+//     } else if (element.webkitRequestFullscreen) { // Chrome, Safari
+//         element.webkitRequestFullscreen();
+//     } else if (element.msRequestFullscreen) { // IE
+//         element.msRequestFullscreen();
+//     } else {
+//         console.error('Le navigateur ne prend pas en charge le mode plein écran');
+//     }
+// }
 
 window.onload = () => {
      // Exécuter la fonction lors du chargement de la page
