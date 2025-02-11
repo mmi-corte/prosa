@@ -4,9 +4,9 @@ const ASSETS_TO_CACHE = [
   "/prosa/index.html",
   "/prosa/css/style.css",
   "/prosa/main.js",
-  "/prosa/libs/arframe-ar.js",
-  "/prosa/libs/arframe.min.js",
-  "/prosa/libs/arframe.min.js.map",
+  "/prosa/libs/aframe-ar.js",
+  "/prosa/libs/aframe.min.js",
+  "/prosa/libs/aframe.min.js.map",
   "/prosa/assets/icons/android-launchericon-192x192.png",
   "/prosa/assets/icons/android-launchericon-512x512.png",
   "/prosa/assets/icons/android-launchericon-144x144.png",
@@ -34,7 +34,6 @@ const ASSETS_TO_CACHE = [
   "/prosa/assets/bg/fondEtape1.jpg",
   "/prosa/assets/bg/fondEtape1bis.png",
   "/prosa/assets/bg/fondEtape3.png",
-  "/prosa/assets/bg/fondEtape1.png",
   "/prosa/assets/bg/fondEtape6.png",
   "/prosa/assets/bg/fondEtape6bis.png",
   "/prosa/assets/bg/fondEtape7.png",
@@ -60,10 +59,10 @@ const ASSETS_TO_CACHE = [
   "/prosa/assets/personnages/Berger/berger-V1-arrière-plan.png",
   "/prosa/assets/personnages/Berger/berger-V1-plan-milieu.png",
   "/prosa/assets/personnages/Berger/berger.png",
-  "/prosa/assets/video/Berger/Cinematique.mp4",
+  "/prosa/assets/video/Cinematique.mp4",
   "/prosa/assets/logo.png",
   "/prosa/assets/PLogo.png",
-  "/prosa/assets/berger.png"
+  "/prosa/assets/berger.jpg"
 
 ];
 
