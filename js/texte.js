@@ -78,7 +78,7 @@ export function addTxtWithBoldWord(containerId, textContent, boldWord) {
 // firestoreFunctions.js (ou main.js si vous préférez tout garder dans un seul fichier)
 
 
-function typeWriter(text, element, txtClassName, speed = 100) {
+function typeWriter(text, element, txtClassName, speed = 100, callback = null) {
     element.textContent = ""; // Réinitialise le contenu
     element.classList.add(txtClassName);
     let index = 0;
@@ -86,16 +86,18 @@ function typeWriter(text, element, txtClassName, speed = 100) {
     function writeCharacter() {
         if (index < text.length) {
             element.textContent += text.charAt(index); // Ajoute un caractère au contenu
-            
             index++;
 
             setTimeout(writeCharacter, speed); // Appelle la fonction après un délai
+        } else if (callback) {
+            // Si le callback est fourni, on l'appelle après avoir terminé l'écriture
+            callback();
         }
     }
 
     writeCharacter(); // Démarre l'effet
-    
 }
+
 
 // Fonction pour récupérer un scénario basé sur un stepCode
 export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
@@ -125,7 +127,51 @@ export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
                 p.className = txtClassName;
 
             } else {
-                typeWriter(dialog_txt, p, txtClassName, 50);
+                typeWriter(dialog_txt, p, txtClassName, 50, ()=> {
+                    // Fonction qui ajoutera un chevron au milieu droit de la boîte .diagBox
+                    function addChevronToDiagBox(containerID) {
+                        // Sélectionner l'élément container par son ID (qui est .diagBox)
+                        const container = document.getElementById(containerID);
+                        
+                        // Vérifier si l'élément existe
+                        if (!container) {
+                            console.error(`Aucun élément trouvé avec l'ID "${containerID}"`);
+                            return;
+                        }
+
+                        // Créer un élément <span> pour le chevron
+                        const chevron = document.createElement('span');
+                        
+                        // Ajouter une classe pour le style du chevron
+                        chevron.classList.add('chevron-up', 'blinking'); // Ajouter la classe 'blinking' pour l'animation
+    
+                        
+                        // Si tu veux ajouter un caractère de chevron :
+                        chevron.innerHTML = '<img id="next" src="assets/icons/arrows.svg" alt="Chevron" style="width: 30px; height: auto;">'; 
+
+
+                        // Positionner le chevron au centre du côté droit
+                        chevron.style.position = 'absolute';
+                        chevron.style.top = '50%'; // Centré verticalement
+                        chevron.style.right = '0px'; // Aligné à droite
+                        chevron.style.transform = 'translateY(-50%)'; // Ajuste le centrage vertical
+                        chevron.style.fontSize = '24px'; // Taille du chevron
+                        chevron.style.cursor = 'pointer'; // Changer le curseur au survol
+
+                        // Ajouter le chevron à la containerID
+                        container.appendChild(chevron);
+
+                        // Ajout d'une interaction : au clic, tu peux ajouter une action spécifique
+                        // chevron.addEventListener('click', () => {
+                        //     console.log('Chevron cliqué');
+                        //     // Appel d'une action après clic (par exemple, faire défiler ou cacher l'élément)
+                        // });
+                    }
+
+                    // Appel de la fonction avec l'ID de ton élément (par exemple, "diagBox")
+                    addChevronToDiagBox('btnNext');
+
+                });
             };
 
             conteneur.appendChild(p);

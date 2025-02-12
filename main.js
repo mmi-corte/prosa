@@ -1,5 +1,5 @@
 import { refreshPage } from "./js/refreshPage.js";
-import { addImg } from "./js/fonctionImg.js";
+import { addImg } from "./js/functionImg.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
 import { nextScreen } from "./js/navigation.js";
 import { showStaticMap } from "./js/map.js";

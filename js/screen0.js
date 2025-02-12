@@ -4,7 +4,7 @@
 // description : Ce fichier contient le code pour charger l'écran 0 du jeu.
 
 // Importer les fonctions nécessaires depuis les fichiers source
-import { addImg, addImgBackground } from './fonctionImg.js';
+import { addImg, addImgBackground } from './functionImg.js';
 import { ajouterBouton } from './button.js';
 import { loadSound, setOffSound, setOnSound } from './Sound/sound.js';
 import { nextScreen } from './navigation.js';

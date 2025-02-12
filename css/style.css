@@ -289,6 +289,40 @@ strong {
 
 }
 
+/* Style du chevron */
+.chevron-up {
+    font-size: 30px;
+    color: #fff; /* couleur du chevron */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Pour changer la couleur au survol */
+    z-index: 4;
+}
+
+/* Animation pour faire clignoter le chevron */
+.blinking {
+    animation: blink 1s infinite alternate; /* Clignote toutes les secondes, en alternant entre visible et invisible */
+}
+
+/* Définir l'animation blink */
+@keyframes blink {
+    0% {
+        opacity: 1; /* Visible */
+    }
+    50% {
+        opacity: 0; /* Invisible à 50% de l'animation */
+    }
+    100% {
+        opacity: 1; /* Visible à nouveau */
+    }
+}
+
+/* Changer la couleur du chevron lors du survol */
+.chevron-up:hover {
+    color: #f00; /* Exemple de couleur au survol */
+}
+
+
+
 .dialogBox {
     font-family: "Asap", serif;
     padding-top: 0;

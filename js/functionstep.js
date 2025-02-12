@@ -1,5 +1,5 @@
-import { addImgBackground, addImg } from './fonctionImg.js';
-import { addTxt, addTxtWithBoldWord, addTxtNarration, addNameCharacter, addDiv, handleFormSubmit, addTxtNarrationAR, addNamePersoAR } from './texte.js';
+import { addImgBackground, addImg } from './functionImg.js';
+import { addTxtNarration, addNameCharacter, addDiv, addTxtNarrationAR, addNamePersoAR } from './texte.js';
 import { refreshPage } from './refreshPage.js';
 import { addOverlay } from './overlay.js';
 import { ajouterBouton } from './button.js';

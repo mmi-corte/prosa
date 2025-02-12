@@ -30,8 +30,8 @@ export function loadLvl1bis() {
             narration: "E1Berger2",
             character: null,
             choices: [
-                { text: "Aller au niveau 2", action: () => { nextScreen("5", "2") } },
-                { text: "Aller au niveau 3", action: () => { nextScreen("5", "3") } }
+                { text: "Aller au niveau 2", action: () => { nextScreen("5", "2"); } },
+                { text: "Aller au niveau 3", action: () => { nextScreen("5", "3"); } }
             ]
         }
     ];

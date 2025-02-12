@@ -7,7 +7,7 @@
 import { ajouterBouton } from "./button.js";
 import { refreshPage } from "./refreshPage.js";
 //import { addAutoPlayVideo } from "./video.js";
-import { addMediaBackground, removeMediaBackground } from "./fonctionImg.js";
+import { addMediaBackground, removeMediaBackground } from "./functionImg.js";
 import { nextScreen } from "./navigation.js";
 import {log} from "./trace.js";
 import {path_sound, path_videos} from "./paths.js";
@@ -22,14 +22,24 @@ export function loadScreen5() {
   // begin trace
   log("Loading S5...", "blue");
 
-  const cinematique_path = path_videos + "Cinematique.mp4";
-
   // stop the intro sound
   stopSound(path_sound+"intro.mp3");
 
   // add content
-  addMediaBackground("container", cinematique_path);
+  // add video cinematique
+  const cinematique_path = path_videos + "Cinematique.mp4";
+  addMediaBackground("container", cinematique_path, () => {
+    setTimeout(() => {
+      const boutonInv2 = document.getElementById("btnInv2");
+      if (boutonInv2) {
+          boutonInv2.click(); // Simule un clic sur le bouton
+      } else {
+          console.error("Le bouton btnInv2 n'existe pas !");
+      }
+    }, 3000); // 3 secondes de délai avant le clic
+  });
 
+  // add button to go on next level
   ajouterBouton("container", "", "btnInv2", "btnInv");
 
   const boutonInv2 = document.getElementById("btnInv2");

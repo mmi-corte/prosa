@@ -5,7 +5,7 @@
 
 // import des fonctions nécessaires
 import { addDiv, addH1 } from './texte.js';
-import { addImgBackground } from './fonctionImg.js';
+import { addImgBackground } from './functionImg.js';
 import { ajouterBouton } from './button.js';
 import { nextScreen } from './navigation.js';
 import { refreshPage } from './refreshPage.js';
@@ -20,8 +20,17 @@ export function loadScreen2() {
   // begin trace
   log("Loading S2...", "blue");
 
-  // add content
-  addImgBackground("container", "./assets/bg/fondVille.jpg");
+  // add content after background image is loaded
+  // addImgBackground("container", "assets/bg/fondVille.jpg", () => {
+  //   console.log("L'image est chargée, ajout du reste du contenu...");
+    
+  //   addH1("container", "Où te trouves-tu ?", "classTxtCity");
+  //   addDiv("container", "containerBtnCity", "classContainerCity");
+  //   // ajouterBouton("containerBtnCity", "Corte", "btnCorte", "btnclass");
+  //   // ajouterBouton("containerBtnCity", "Toulon", "btnToulon", "btnclass");
+  // });
+  
+  addImgBackground("container", "assets/bg/fondVille.jpg");
   addH1("container", "Où te trouves-tu ?", "classTxtCity");
 
   addDiv("container", "containerBtnCity", "classContainerCity");
