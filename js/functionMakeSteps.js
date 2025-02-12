@@ -538,6 +538,7 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
 
     // container.style.background = "none";
     // document.body.style.background = "none";
+    
     loadAframeAndRenderScene("container", marker);
 
     // Ajoute une boîte de dialogue
@@ -746,7 +747,7 @@ function charaChanger(index, steps) {
 
   } else {
     
-    // Add name only if is not Naratteur (no name attribute for naratteur please)
+    // Add name only if is not Naratteur (no name attribute)
     if (step.name) {
       addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
     }
