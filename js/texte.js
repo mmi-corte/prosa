@@ -149,7 +149,6 @@ export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
                         // Si tu veux ajouter un caractère de chevron :
                         chevron.innerHTML = '<img id="next" src="assets/icons/arrows.svg" alt="Chevron" style="width: 30px; height: auto;">'; 
 
-
                         // Positionner le chevron au centre du côté droit
                         chevron.style.position = 'absolute';
                         chevron.style.top = '50%'; // Centré verticalement
@@ -168,8 +167,10 @@ export async function addTxtNarration(stepCode, conteneurId, txtClassName) {
                         // });
                     }
 
-                    // Appel de la fonction avec l'ID de ton élément (par exemple, "diagBox")
-                    addChevronToDiagBox('btnNext');
+                    // if(txtClassName == "dialogBox") {
+                    //     // Appel de la fonction avec l'ID de ton élément (par exemple, "diagBox")
+                    //     addChevronToDiagBox('diagBox');
+                    // }
 
                 });
             };

@@ -33,9 +33,10 @@ export function loadLvl1() {
             narration: "E1Narra7",
             character: null,
             sound: path_narration+'Narrateur-E1/narrateurE1-009.mp3',
+            style_button:"row",
             choices: [
-                { text: "E1Choix1", action: () => { nextScreen("5", "1bis") }},
-                { text: "E1Choix2", action: () => { nextScreen("5", "2")} }
+                { text: "E1Choix1", action: () => { nextScreen("5", "1bis");} },
+                { text: "E1Choix2", action: () => { nextScreen("5", "2");} }
             ]
         }
     ];

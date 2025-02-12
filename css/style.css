@@ -262,11 +262,11 @@ strong {
     position: absolute;
     bottom: 0px;
     display: flex;
-    
     justify-content: start;
     align-items: start;
     z-index: 2;
 }
+
 
 
 .diagBoxN {
@@ -280,7 +280,7 @@ strong {
     position: absolute;
     bottom: 0px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     /*flex-direction: column;*/
     flex-wrap: wrap;
     justify-content: start;
@@ -335,6 +335,14 @@ strong {
     margin: 0;
 }
 
+.btn-inline {
+    display: inline-flex;
+    gap: 10px; /* Espacement entre les boutons */
+    align-self: center; /* Centre les boutons horizontalement */
+    width: 100%;
+    justify-content: space-around; /* Répartit les boutons uniformément */
+}
+
 .btnChoix {
     width: 100%;
     border-radius: 6px;
@@ -347,6 +355,7 @@ strong {
     background: none;
     color: white;
 }
+
 .choix1{
     background-color: #E8E6CA;
     color: black;
