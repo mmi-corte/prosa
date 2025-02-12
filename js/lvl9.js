@@ -1,7 +1,7 @@
-import { path_personnages, path_backgrounds } from "./paths.js";
+import { path_backgrounds, path_narration, path_personnages } from "./paths.js";
 import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
-import { path_backgrounds, path_narration, path_personnages } from "./paths.js";
+
 export function loadLvl9() {
 
     // Trace the entry in the console

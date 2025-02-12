@@ -14,9 +14,8 @@ localStorage.setItem('level', '4');
 localStorage.setItem('vue_fulettu', 'true');
 
 const steps1 = [
-        {character : "FulettuChara", Txt : "E4FulettuTrue", name: "E4FulettuTrue"},
-        {character : "FouletounChara", Txt : "E4FouletounTrue", name: "E4FouletounTrue", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-006.mp3'},
-        {character : "FulettuChara", Txt : "E4FouletounTrue2", name: "E4FouletounTrue2"},
+        {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},
+        {character : "FouletounChara", Txt : "E4FouletounTrue", name : "E4FouletounTrue" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-006.mp3'},
         {character : "NarraChara", Txt : "E4NarrateurTrue" , sound: path_narration+'narrateur-E4/narrateurE4-005.mp3'},
         {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
 ];
