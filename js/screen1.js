@@ -6,7 +6,7 @@
 // import des fonctions nécessaires
 import { addTxt, addTxtWithBoldWord } from "./texte.js";
 import { ajouterBouton } from './button.js';
-import { addImg } from './fonctionImg.js';
+import { addImg } from './functionImg.js';
 import { nextScreen } from './navigation.js';
 import { refreshPage } from './refreshPage.js';
 import { log } from './trace.js';

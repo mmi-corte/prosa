@@ -21,8 +21,8 @@ export function loadScreen3() {
     log('Loading S3...',"blue");
         
     // add content
-    addTxt("container", "Écris ton nom de héro", "txtFormName");
-    addForm("container")
+    addTxt("container", "Nom de ton héros", "txtFormName");
+    addForm("container");
 
     const input = document.getElementById("userInput");
     const btnSubmit = document.getElementById("btnSubmit");

@@ -25,6 +25,7 @@ const ASSETS_TO_CACHE = [
   "/prosa/assets/icons/mute.svg",
   "/prosa/assets/icons/unmute.svg",
   "/prosa/assets/icons/warning.svg",
+  "/prosa/assets/icons/arrows.svg",
   "/prosa/assets/icons/reload.svg",
   "/prosa/assets/icons/map_white.svg",
   "/prosa/assets/icons/map_black.svg",

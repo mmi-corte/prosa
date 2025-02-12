@@ -1,6 +1,6 @@
 import { refreshPage } from "./refreshPage.js";
 import { ajouterBouton } from "./button.js";
-import { addImgBackground, addMediaBackground, addImg } from "./fonctionImg.js";
+import { addImgBackground, addMediaBackground, addImg } from "./functionImg.js";
 import { addTxtNarration, addNameCharacter, addDiv } from "./texte.js";
 import { log } from "./trace.js";
 import { deleteSound, loadSound, setOnSound } from "./Sound/sound.js";
@@ -411,6 +411,7 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
 
   const step = steps[index];
 
+  // not in AR mode
   if (!AR) {
   
     refreshPage(); // Réinitialise la page
@@ -432,7 +433,6 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
 
       // Ajoute le fond d'écran ou la vidéo de fond en fonction de l'URL fournie dans l'étape actuelle
       const isImg = /\.(png|jpeg|svg|jpg)$/i.test(step.background);
-
       if (isImg) {
         // Ajoute l'image de fond
         addImgBackground("container", step.background);
@@ -514,32 +514,97 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
     
   // AR part
   } else {
-    const container = document.getElementById("container");
 
-    container.innerHTML = `
-            <div id ="diagBox" class="diagBox"></div>
-            <a-scene embedded 
-            arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5; detectionMode: mono_and_matrix; matrixCodeType: 4x4;"
-            renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
-            >
+    // const container = document.getElementById("container");
 
-            <a-marker
-                id="marker"
-                preset="pattern"
-                type="pattern"
-                url="assets/markers/marker${marker}.patt"
-            >
+    // container.innerHTML = `
+    //         <div id ="diagBox" class="diagBox"></div>
+    //         <a-scene embedded 
+    //         arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5; detectionMode: mono_and_matrix; matrixCodeType: 4x4;"
+    //         renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
+    //         >
 
-            </a-marker>
-                <a-entity camera position="0 0 0"></a-entity>
-            </a-scene>
-            `;
+    //         <a-marker
+    //             id="marker"
+    //             preset="pattern"
+    //             type="pattern"
+    //             url="assets/markers/marker${marker}.patt"
+    //         >
 
-    container.style.background = "none";
-    document.body.style.background = "none";
+    //         </a-marker>
+    //             <a-entity camera position="0 0 0"></a-entity>
+    //         </a-scene>
+    //         `;
+
+    // container.style.background = "none";
+    // document.body.style.background = "none";
+    loadAframeAndRenderScene("container", marker);
+
+    // Ajoute une boîte de dialogue
+    const dialogClass = (step.name) ? "diagBox" : "diagBoxN"; // Utiliser diagBoxN pour narrateur, sinon diagBox
+    addDiv("container", "diagBox", dialogClass); // Ajout de la classe correcte pour chaque étape
 
     charaChanger(index, steps);
 
+  }
+}
+
+function loadAframeAndRenderScene(containerID, marker) {
+  const container = document.getElementById(containerID);
+  
+  if (!container) {
+      console.error(`Aucune div trouvée avec l'id "${containerID}"`);
+      return;
+  }
+
+  
+  // Vérifie si A-Frame est déjà chargé
+  if (!window.AFRAME) {
+      console.log("Chargement des bibliothèques A-Frame et AR.js...");
+
+      // Ajout du script A-Frame
+      const aframeScript = document.createElement("script");
+      aframeScript.src = "../libs/aframe.min.js";
+      aframeScript.onload = () => {
+          console.log("A-Frame chargé.");
+          loadARJSAndRender();
+      };
+      document.head.appendChild(aframeScript);
+  } else {
+      loadARJSAndRender();
+  }
+
+  function loadARJSAndRender() {
+      if (!window.ARjs) {
+          // Ajout du script AR.js
+          const arScript = document.createElement("script");
+          arScript.src = "../libs/aframe-ar.min.js";
+          arScript.onload = () => {
+              console.log("AR.js chargé.");
+              renderScene();
+          };
+          document.head.appendChild(arScript);
+      } else {
+          renderScene();
+      }
+  }
+
+  function renderScene() {
+      console.log("Affichage de la scène A-Frame avec AR.js.");
+      
+      container.innerHTML = `
+          <a-scene embedded
+              arjs="debugUIEnabled: false; smooth: true; smoothCount: 10; smoothTolerance: 0.01; smoothThreshold: 5; detectionMode: mono_and_matrix; matrixCodeType: 4x4;"
+              renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;"
+          >
+              <a-marker id="marker" preset="pattern" type="pattern" url="assets/markers/marker${marker}.patt">
+              </a-marker>
+              <a-entity camera position="0 0 0"></a-entity>
+          </a-scene>
+      `;
+
+      container.style.background = "none";
+      document.body.style.background = "none";
   }
 }
 
@@ -554,7 +619,12 @@ function charaChanger(index, steps) {
   const step = steps[index];
   const charaContainer = document.querySelector("#marker");
   const diagBox = document.querySelector("#diagBox");
+  
+  // Clear diagBox content
   diagBox.innerHTML = "";
+
+  // Apply the right class for the diagBox
+  diagBox.className = (step.name && step.name!="Narrateur") ? "diagBox" : "diagBoxN"; // Utiliser diagBoxN pour narrateur, sinon diagBox
 
   // TODO: Remove this to manage the song directly in AR code
   if (step) {
@@ -676,14 +746,9 @@ function charaChanger(index, steps) {
 
   } else {
     
+    // Add name only if is not Naratteur (no name attribute for naratteur please)
     if (step.name) {
-      if (step.Txt == "Narrateur") {
-        const diagBox = document.querySelector("#diagBox");
-        diagBox.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        diagBox.style.color = "rgb(255, 255, 255)";
-      } else {
-        addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
-      }
+      addNameCharacter(step.Txt, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
     }
 
     if (step.Txt) {
