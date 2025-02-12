@@ -14,6 +14,7 @@ export function loadLvl11() {
   //Set the level in the local storage
   localStorage.setItem("level", "11");
 
+  localStorage.setItem("vue_orcu", true);
   
   const weapons = [
     {
@@ -59,8 +60,5 @@ export function loadLvl11() {
   refreshPage();
   
   playSteps(steps, 0 , true , 2);
-
-  localStorage.setItem("vue_orcu", true);
-    
     
 }

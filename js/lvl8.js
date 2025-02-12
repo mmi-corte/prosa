@@ -1,5 +1,6 @@
 import { log} from "./trace.js";
 import { nextScreen } from "./navigation.js";
+import { path_narration } from "./path.js";
 
 export function loadLvl8() {
 
