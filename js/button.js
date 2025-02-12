@@ -17,12 +17,12 @@ export function ajouterBouton(conteneurId, txtBtn, btnId, btnClassName) {
     // Définit le texte du bouton
     new_bouton.textContent = txtBtn;
     new_bouton.id = btnId;
-    new_bouton.className=btnClassName;
+    new_bouton.className = btnClassName;
 
     // Ajoute le bouton à la div
     conteneur.appendChild(new_bouton);
 
-    return new_bouton
+    return new_bouton;
 }
 
 export function addBtnImg(conteneurId, urlImgBtn, btnId, className="btn-image") {
@@ -41,9 +41,10 @@ export function addBtnImg(conteneurId, urlImgBtn, btnId, className="btn-image") 
     // Définit l'URL de l'image
     btnImg.src = urlImgBtn;
 
-    // Définit l'ID de l'image
+    // Définit les attributs de l'image
     btnImg.id = btnId;
-    btnImg.className = className
+    btnImg.className = className;
+    btnImg.rel = "preload"; // charge dès que possible
 
     // Ajoute l'image au conteneur
     conteneur.appendChild(btnImg);
