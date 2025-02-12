@@ -22,17 +22,8 @@ export function loadLvl1bis() {
             narration: () => {
                 popup("Vous avez récupéré la branche d’arbre", "assets/items/branche.png"); // pas de branche.png
             },
-            character: null
-        },
-        {
-            // pas sur de la naration de se bloc, pas de mp3 et pas de text pour les boutons
-            background: path_backgrounds + 'fondEtape1bis.png',
-            narration: "E1Berger2",
             character: null,
-            choices: [
-                { text: "Aller au niveau 2", action: () => { nextScreen("5", "2"); } },
-                { text: "Aller au niveau 3", action: () => { nextScreen("5", "3"); } }
-            ]
+            nextLvl: () => { nextScreen("5", "2"); }
         }
     ];
     

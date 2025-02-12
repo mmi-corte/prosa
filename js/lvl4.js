@@ -48,13 +48,13 @@ let steps = [
         {character : "FouletounChara", Txt: "E4Fouletoun4",name : "E4Fouletoun4" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-004.mp3'},
         {character : "FulettuChara", Txt: "E4Fulettu5", name : "E4Fulettu5" , sound: path_narration+'Fulettu-E4/Fulettu-E4-005.mp3'},
         {character : "FouletounChara", Txt: "E4Fouletoun5",name : "E4Fouletoun5", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-005.mp3'},
-        {character:  "FulettuChara", Txt:"E4FulettuEC", name : "E4FulettuEC", 
+        {character:  "FulettuChara", Txt:"E4FulettuEC", 
             choices: [
                 { text: "E4EnigmeC1", answer: () => {return null;}},
                 { text: "E4EnigmeC2", answer: () => {return null;}}
             ] 
         },
-        {character: "FouletounChara", Txt:"E4FouletounET", name: "E4FouletounET", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
+        {character: "FouletounChara", Txt:"E4FouletounET", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
             choices: [
                 { text: "E4EnigmeT1", answer: () => {return steps2;} },
                 { text: "E4EnigmeT2", answer: () => {return steps1;} },
@@ -66,6 +66,12 @@ let steps = [
 
     // Refresh
     refreshPage();
+
+    // Display the map button to allow the user to see the map during the AR mode
+    const MapBtn = document.getElementById("MapBtn");
+    if(MapBtn) {
+        MapBtn.style.display = "block";
+    }
 
     // Play the steps
     playSteps(steps , 0 , true , 2);

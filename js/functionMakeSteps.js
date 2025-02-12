@@ -465,24 +465,29 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
           ajouterBouton("diagBox", "", "btnNext", "btnInv"); // Crée le bouton "Suivant"
         }
         const btnNext = document.getElementById("btnNext");
-        // btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
+        btnNext.addEventListener("click", step.nextLvl); // Charge le niveau suivant
         
       } else {
         // Gestion des choix ou du bouton "Suivant"
         if (step.choices) {
+          
+          if (step.style_button) {
+            addDiv("diagBox", "btnRow", "btn-inline"); // Ajout de la classe correcte pour chaque étape
+          }
+
           step.choices.forEach((choice, i) => {
             const btnId = `btnChoix${i + 1}`;
             const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
-            
+          
             // Ajouter un bouton avec le bon style
-            ajouterBouton("diagBox", "", btnId, "btnChoix");
+            ajouterBouton((step.style_button) ? "btnRow": "diagBox", "", btnId, "btnChoix");
 
             // Appliquer la classe spécifique au bouton
             const btn = document.getElementById(btnId);
             btn.classList.add(btnClass);
             
             // Ajouter le texte du choix
-            addTxtNarration(choice.text, btnId, "");
+            addTxtNarration(choice.text, btnId, "dialogBox");
             
             let action = function () {
               if(choice.action) {
@@ -695,7 +700,6 @@ function charaChanger(index, steps) {
 
       // Appliquer la classe spécifique au bouton
       const btn = document.getElementById(btnId);
-
       btn.classList.add(btnClass);
       
       if (step.name) {
