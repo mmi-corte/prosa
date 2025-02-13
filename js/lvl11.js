@@ -45,7 +45,7 @@ export function loadLvl11() {
 
   const steps = [
       { character: "NarraChara", Txt: "E11Narra" },
-      { character: "SylvainChara", Txt: "E11Sylvain", name: "E11Sylvain" },
+      { character: "SylvainChara", Txt: "E11sylvain", name: "E11sylvain" },
       { character: "BergerChara", Txt: "E11Berger", name: "E11Berger" },
       { character: "NarraChara", Txt: "E11Narra2" },
       { character: "SylvainChara", Txt: "E11Sylvain2", name: "E11Sylvain2" },
