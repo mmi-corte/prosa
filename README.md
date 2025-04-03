@@ -8,7 +8,7 @@ Prosa is a video game about corsican and provencal culture created by MMI studen
 
 You only need a phone to play.
 
-Go to this link: 'gameurl.com'
+Go to this link: https://depmmi.github.io/prosa
 
 Enjoy the game.
 
