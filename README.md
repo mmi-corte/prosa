@@ -1,4 +1,4 @@
-![Logo of the project](assets/logo.png =300x200)
+<img src="assets/logo.png" alt="Description de l'image" width="300">
 
 # Prosa
 
