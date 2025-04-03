@@ -1,4 +1,4 @@
-![Logo of the project](assets/logo.png=300x200)
+![Logo of the project](assets/logo.png =300x200)
 
 # Prosa
 
