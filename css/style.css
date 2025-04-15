@@ -27,6 +27,11 @@ strong {
     height: 18px;
 }
 
+#staticMap {
+    position: absolute;
+    cursor: grab;
+  }
+  
 #container {
     width: 100%;
     height: 100%;
