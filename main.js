@@ -2,10 +2,10 @@ import { refreshPage } from "./js/refreshPage.js";
 import { addImg } from "./js/functionImg.js";
 import { setOnSound, setOffSound } from "./js/Sound/sound.js";
 import { nextScreen } from "./js/navigation.js";
-import { showStaticMap } from "./js/map.js";
 import { addBtnImg } from "./js/button.js";
 import { log } from "./js/trace.js";
 import { loadJSON } from "./js/jsonLoader.js";
+import { addOverlay } from "./js/overlay.js";
 
 //Variable / Constante pour les combats
 export let playerUserName = "";
@@ -126,16 +126,14 @@ ReloadBtn.addEventListener("click", () => {
 // Map Button
 /////////////////////////////////////////////////////
 
-// Ajout du bouton pour activer/désactiver le son
+// add map button to the body (not visible by default)
 addBtnImg("body", "assets/icons/map_black.svg", "MapBtn", "MapIcon");
 
 // Bind the reload button to the reload functions
 const MapBtn = document.getElementById("MapBtn");
-MapBtn.addEventListener("click", () => {
-
-    //load map
-    showStaticMap("container");
-    
+MapBtn.addEventListener("click", () => {    
+  
+    //load map object
     const map = document.getElementById("staticMap");
 
     // update map icon & display map

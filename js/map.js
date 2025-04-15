@@ -21,7 +21,7 @@ const map = {
     }
 };
 
-export function showStaticMap(containerId) {
+export function createStaticMap(containerId) {
     const container = document.getElementById(containerId);
     if (!container) {
         console.error(`Conteneur avec l'ID "${containerId}" introuvable.`);
@@ -54,6 +54,7 @@ export function showStaticMap(containerId) {
     // img.alt = `Carte Statique - ${selectedCity}`;
     img.alt = `Carte avec points - ${selectedCity}`;
     img.className = 'map';
+    img.style.display = 'none';
 
     container.appendChild(img);
 }

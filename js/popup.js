@@ -1,5 +1,5 @@
 import { checkImageExists } from "./functions.js";
-import { showStaticMap } from "./map.js";
+import { createStaticMap } from "./map.js";
 
 export function popup(txt, imgSrc = "") {
 
@@ -84,7 +84,7 @@ export function MapPopup(mapOptions, onClose) {
     document.body.appendChild(popup);
 
     // Afficher la carte Geoapify
-   showStaticMap(mapOptions);
+   createStaticMap(mapOptions);
 }
 
 

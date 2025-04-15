@@ -1523,30 +1523,6 @@ export function ARMarthe(containerId) {
 
   supprBtnVR();
 }
-//-----------fouletone kk
-export function ARFarfadeKK(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) {
-    console.error(`Le conteneur avec l'ID ${containerId} n'existe pas.`);
-    return;
-  }
-
-  // Crée la structure HTML de la scène AR
-  container.innerHTML = `
-     
-  `;
-  const marker = document.querySelector("#marker");
-  const camera = document.querySelector("[camera]");
-  const audioEntity = document.querySelector("#audioEntity");
-
-  // Vérifiez et ajustez l'audio toutes les 100 ms
-  setInterval(() => {
-    setupAudioControls(marker, camera, audioEntity);
-  }, 100);
-
-
-  supprBtnVR();
-}
 
 //BTN VR
 function supprBtnVR() {
