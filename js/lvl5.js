@@ -20,7 +20,7 @@ export function loadLvl5() {
         {character: "MascoChara", Txt: "E5Masco", name: "E5Masco", sound: path_narration+'Masco-E5/mascoE5-001.mp3'},
         {character: "NarraChara", Txt: "E5Narra3", sound: path_narration+'Narrateur-E5/NarrateurE5-003.mp3'},
         {character: "MascoChara", Txt: "E5Masco2", name: "E5Masco2", sound: path_narration+'Masco-E5/mascoE5-002.mp3'},
-        {character: "NarraChara", Txt: "E5Narra4", name: "E5Narra4", sound: path_narration+'Narrateur-E5/NarrateurE5-004.mp3'},
+        {character: "NarraChara", Txt: "E5Narra4", sound: path_narration+'Narrateur-E5/NarrateurE5-004.mp3'},
         {character: "MascoChara", Txt: "E5Masco3", name: "E5Masco3", sound: path_narration+'Masco-E5/mascoE5-003.mp3'},
         {character: "NarraChara", Txt: "E5Narra5", sound: path_narration+'Narrateur-E5/NarrateurE5-005.mp3'},
         {character: "MascoChara", Txt: "E5Masco4", name: "E5Masco4", sound: path_narration+'Masco-E5/mascoE5-004.mp3'},

@@ -25,7 +25,8 @@ export function loadLvl10() {
 
     //Viens après les fées ?
     if(localStorage.getItem("fairy")) {
-        steps.push({ character: "NarraChara", Txt: "E10NarraAFairy" },{ character: "OrcuChara", Txt: "E10OrcuAFairy", name: "Orcus" });
+        steps.push( { character: "NarraChara", Txt: "E10NarraAFairy", name: "E10NarraAFairy"},
+                    { character: "OrcuChara", Txt: "E10OrcuAFairy", name: "Orcus" });
     }
 
     if (localStorage.getItem("lion")) {
@@ -33,7 +34,7 @@ export function loadLvl10() {
                     { character: "OrcuChara", Txt: "E10OrcuALeoS", name: "E10OrcuALeoS" });
     }
 
-    steps.push({ character: "NarraChara", Txt: "E10Narra3", name:"E10Narra3"},
+    steps.push({ character: "NarraChara", Txt: "E10Narra3"},
             { character: "OrcuChara", Txt: "E10Orcu2", name: "E10Orcu2" },
             { character: "BergerChara", Txt: "E10Berger2", name: "E10Berger2" },
             { character: "OrcuChara", Txt: "E10Orcu3", name: "E10Orcu3" },
