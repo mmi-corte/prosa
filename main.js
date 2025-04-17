@@ -118,7 +118,7 @@ ReloadBtn.addEventListener("click", () => {
   
   // TODO add popup to choose the level. 1 restard the game sart the init phase
   // reload page
-  nextScreen("5", "1", false);
+  nextScreen("5", localStorage.getItem("level"), false);
 
 });
 
@@ -127,25 +127,25 @@ ReloadBtn.addEventListener("click", () => {
 /////////////////////////////////////////////////////
 
 // add map button to the body (not visible by default)
-addBtnImg("body", "assets/icons/map_black.svg", "MapBtn", "MapIcon");
+// addBtnImg("body", "assets/icons/map_black.svg", "MapBtn", "MapIcon");
 
 // Bind the reload button to the reload functions
-const MapBtn = document.getElementById("MapBtn");
-MapBtn.addEventListener("click", () => {    
+// const MapBtn = document.getElementById("MapBtn");
+// MapBtn.addEventListener("click", () => {    
   
-    //load map object
-    const map = document.getElementById("staticMap");
+//     //load map object
+//     const map = document.getElementById("staticMap");
 
-    // update map icon & display map
-    if (MapBtn.src.includes("map_black")) {
-        MapBtn.src = "assets/icons/map_white.svg";
-        map.style.display = "block";
-    } else {
-        MapBtn.src = "assets/icons/map_black.svg";
-        map.style.display = "none";
-    }
+//     // update map icon & display map
+//     if (MapBtn.src.includes("map_black")) {
+//         MapBtn.src = "assets/icons/map_white.svg";
+//         map.style.display = "block";
+//     } else {
+//         MapBtn.src = "assets/icons/map_black.svg";
+//         map.style.display = "none";
+//     }
 
-});
+// });
 
 // window.addEventListener("DOMContentLoaded", () => {
 

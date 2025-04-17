@@ -2,7 +2,7 @@ import { nextScreen } from './navigation.js';
 import { playSteps } from './functionMakeSteps.js';
 import { path_narration, path_personnages, path_backgrounds } from "./paths.js";
 import { log } from "./trace.js";
-import { createStaticMap } from "./map.js";
+// import { createStaticMap } from "./map.js";
 
 export function loadLvl3() {
 
@@ -37,9 +37,9 @@ export function loadLvl3() {
     playSteps(steps);
 
     // Display the map button to allow the user to see the map during the AR mode
-    const MapBtn = document.getElementById("MapBtn");
-    if(MapBtn) {
-        MapBtn.style.display = "block";
-        createStaticMap("container");
-    }
+    // const MapBtn = document.getElementById("MapBtn");
+    // if(MapBtn) {
+    //     MapBtn.style.display = "block";
+    //     createStaticMap("container");
+    // }
 }
