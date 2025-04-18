@@ -552,7 +552,7 @@ export function lunchFight(weapons, enemies)
                     else
                     {
                         setTimeout(() => {
-                            createnewOverlay("Au tour de l'ennemi !");
+                            createnewOverlay(`Au tour de ${enemies.name} !`);
                         }, 750)
 
 
@@ -636,7 +636,7 @@ export function lunchFight(weapons, enemies)
                     else
                     {
                         setTimeout(() => {
-                            createnewOverlay("Au tour de l'ennemi !");
+                            createnewOverlay(`Au tour de ${enemies.name} !`);
                         }, 750)
 
 

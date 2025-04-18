@@ -13,85 +13,83 @@ export function loadLvl6() {
   // Set the level in localStorage
   localStorage.setItem("level", "6");
 
+
   if (localStorage.getItem("vue_fulettu")) {
 
-    const steps = [{ background: path_backgrounds+"fondEtape6.mp4",
-                      narration: "E6NarraFarfaT",
-                      character: null,
-                      sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3',
-                      choices: [
-                                { text: "E6Choix1", action: () => {nextScreen("5", "6bis");} },
-                                { text: "E6Choix2", action: () => {nextScreen("5", "7");} }
-                      ]
-                  },
-    ];
-
+    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+                narration: "E6NarraFarfaT",
+                character: null,
+                sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
+            }];
   } else {
 
-    if (localStorage.getItem('vue_orcu')) {
-      steps = steps.concat([
-        {
-          background: path_backgrounds+"fondEtape6.png",
-          narration: "E6BergerOrcuT",
-          character: path_personnages+"Berger/berger.png",
-          name: "E6Berger",
-        },
-      ]);
+    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+                narration: "E6NarraFarfaF",
+                character: null,
+                sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3'
+            }];
+  }
+  
+  // refreshPage();
 
-      let weapons = [
-        {
-          name: "Epée",
-          damage: 10,
-        },
-      ];
+  // playSteps(steps);
 
-      //test fight
-      async function luncher() {
-        const fightResult = await lunchFight(skin, weapons, enemies[2]);
-        console.log(fightResult);
+  if (localStorage.getItem('vue_orcu')) {
+
+    let weapons = [
+      {
+        name: "Epée",
+        damage: 10,
+      },
+    ];
+  
+    //test fight
+    async function luncher() {
+      const fightResult = await lunchFight(weapons, enemies[2]);
+      console.log(fightResult);
+    }
+
+    steps = steps.concat([
+      { background: path_backgrounds+"fondEtape6.png",
+        narration: "E6BergerOrcuT",
+        character: path_personnages+"Berger/berger.png",
+        sound: path_narration+'Berger-E6/bergerE6-002.mp3',
+        name: "E6Berger",
+         choices: [
+            { text: "E11Fight", action: () => {luncher();} }
+          ] 
+        },
+        {  background: path_backgrounds+"fondEtape6.mp4",
+          narration: "E6NarraOrcuT2",
+          character: null,
+          sound: path_narration+'Narrateur-E6/narrateurE6-005.mp3',
+          nextLvl: () => { nextScreen("5", "8"); window.location.reload(false);}
+        }
+    ]);
+
+    localStorage.setItem('fight_lion', true);
+  } else {
+    steps = steps.concat([
+      { background: path_backgrounds+"fondEtape6.png",
+        narration: "E6BergerOrcuF",
+        character: path_personnages+"Berger/berger.png",
+        sound: path_narration+'Berger-E6/bergerE6-001.mp3',
+        name: "E6Berger"
+      },
+      { background: path_backgrounds+"fondEtape6.mp4",
+        narration: "E6NarraOrcuF",
+        character: null,
+        sound: path_narration+'Narrateur-E6/narrateurE6-003.mp3',
+        choices: [
+                  { text: "E6ChoixOrcuF1", action: () => {nextScreen("5", "6bis");} },
+                  { text: "E6ChoixOrcuF2", action: () => {nextScreen("5", "7");} }
+        ]
       }
-      luncher();
-
-      localStorage.setItem('fight_lion', true);
-
-    // } else {
-    //   //else not see Orcu
-    //   steps = steps.concat([
-    //     {
-    //       background: path_backgrounds + "fondEtape6.png",
-    //       narration: "E6BergerOrcuF",
-    //       character: path_personnages+"Berger/berger.png",
-    //       name: "E6Berger",
-    //     },
-    //     {
-    //       background: path_backgrounds + "fondEtape6.png",
-    //       narration: "E6NarraOrcuF",
-    //       character: null,
-    //       choices: [
-    //         { text: "E3Choix1", action: nextScreen("5", "6bis") },
-    //         { text: "E3Choix2", action: nextScreen("5", "9") },
-    //       ],
-    //     },
-    //   ]);
-
-    } 
+    ]);
   }
 
-  //else farfafet
-  const steps = [
-    {
-      background: path_backgrounds + "fondEtape6.png",
-      narration: "E6NarraFarfaF",
-      character: null,
-      sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3',
-      choices: [
-        { text: "E6Choix1", action: () => {nextScreen("5", "7");} },
-        { text: "E6Choix2", action: () => {nextScreen("5", "10");} }
-      ]
-    }];
-
   refreshPage();
-
-  playSteps(steps, 0, true, 2) ; // Démarrage des étapes
   
+  playSteps(steps);
+    
 }
