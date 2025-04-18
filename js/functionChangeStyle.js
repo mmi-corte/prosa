@@ -1,4 +1,3 @@
-export let skin = "";
 
 export function changeStyleBG(conatinerId) {
     const element = document.getElementById(conatinerId);
@@ -24,8 +23,11 @@ export function selectAvatar(allAvatars) {
             });
 
             // affect the skin global variable
-            skin = avatar.id;
-            
+            let skin = avatar.id;
+
+            // Met à jour la variable skin dans le localStorage
+            localStorage.setItem("skin", skin);
+
             // Met à jour l'attribut `data-selected-avatar`
             avatarContainer.setAttribute("data-selected-avatar", skin);
 

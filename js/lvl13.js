@@ -1,5 +1,4 @@
 
-import { skin } from './functionChangeStyle.js';
 import { nextScreen } from './navigation.js';
 import { log } from './trace.js';
 import { path_backgrounds, path_narration } from './paths.js';

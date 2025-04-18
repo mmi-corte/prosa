@@ -1,4 +1,3 @@
-import { skin } from "./functionChangeStyle.js";
 import { path_personnages, path_backgrounds, path_narration} from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { enemies, lunchFight } from "./fight.js";

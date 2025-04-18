@@ -3,7 +3,6 @@ import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
 import { nextScreen } from "./navigation.js";
 import { enemies } from "./fight.js";
-import { skin } from "./functionChangeStyle.js";
 import { lunchFight } from "./fight.js";
 
 export function loadLvl11() {
@@ -15,7 +14,7 @@ export function loadLvl11() {
   localStorage.setItem("level", "11");
 
   localStorage.setItem("vue_orcu", true);
-  
+
   const weapons = [
     {
       name: "Epée",
@@ -26,7 +25,7 @@ export function loadLvl11() {
   //test fight
   async function luncher() {
     refreshPage();
-    const fightResult = await lunchFight(skin, weapons, enemies[1]);
+    const fightResult = await lunchFight(weapons, enemies[1]);
     
     console.log(fightResult);
     

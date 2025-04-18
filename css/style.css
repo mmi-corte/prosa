@@ -463,14 +463,16 @@ strong {
     z-index: 0;
 }
 
+.playerImage {
+    width: 60%;
+    height: 60%;
+}
+
 .playerContainer {
     position: fixed;
-    top: 200px;
-    right: 150px;
-    width: 250px;
-    height: 600px;
+    bottom: 100px;
+    left: 10px;
     z-index: 0;
-
 }
 
 /*-----------------------img intro-----------------------------*/
