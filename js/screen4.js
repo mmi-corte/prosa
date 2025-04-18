@@ -39,12 +39,12 @@ export function loadScreen4() {
 
   // Ajout des boutons d'avatars
   avatarPaths.forEach((path, index) =>{
-    addBtnImg("imgAvatarContainer", path, `a${index + 1}`);
+    addBtnImg("imgAvatarContainer", path, `AvatarT${index + 1}`);
   });
 
   // Récupération des éléments des avatars pour gestion de la sélection
   const avatars = avatarPaths.map((_, index) =>
-    document.getElementById(`a${index + 1}`)
+    document.getElementById(`AvatarT${index + 1}`)
   );
 
   selectAvatar(avatars); // Gère la sélection des avatars

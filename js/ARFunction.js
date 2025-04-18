@@ -779,8 +779,8 @@ export function ARASciacquaghjola(containerId) {
 
   supprBtnVR();
 }
-//--------------TARRASQUE----------------------------------
 
+//--------------TARRASQUE----------------------------------
 export function ARTarrasque(containerId) {
   const container = document.getElementById(containerId);
   if (!container) {
@@ -889,6 +889,7 @@ export function ARTarrasque(containerId) {
 
   supprBtnVR();
 }
+
 //--------------------------ORCU-----------------
 export function AROrcu(containerId) {
   const container = document.getElementById(containerId);
@@ -1143,6 +1144,7 @@ export function ARBagialiscu(containerId) {
 
   supprBtnVR();
 }
+
 //------------masco-------------------------------
 export function ARMasco(containerId) {
   const container = document.getElementById(containerId);
@@ -1273,6 +1275,7 @@ export function ARMasco(containerId) {
 
   supprBtnVR();
 }
+
 //------------A FATA
 export function ARAfata(containerId) {
   const container = document.getElementById(containerId);
@@ -1373,6 +1376,7 @@ export function ARAfata(containerId) {
 
   supprBtnVR();
 }
+
 //---------------CERF
 export function ARCerf(containerId) {
   const container = document.getElementById(containerId);
@@ -1499,6 +1503,7 @@ export function ARCerf(containerId) {
 
   supprBtnVR();
 }
+
 //------------------SAINT MARTHE
 export function ARMarthe(containerId) {
   const container = document.getElementById(containerId);

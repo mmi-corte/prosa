@@ -6,21 +6,21 @@ import { nextScreen } from "./navigation.js";
 
 export function loadLvl4() {
 
-// Trace the entry in the console
-log("Enter in L4", "blue");  
+    // Trace the entry in the console
+    log("Enter in L4", "blue");  
 
-localStorage.setItem('level', '4');
+    localStorage.setItem('level', '4');
 
-localStorage.setItem('vue_fulettu', 'true');
+    localStorage.setItem('vue_fulettu', 'true');
 
-const steps1 = [
+    const steps1 = [
         {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},
         {character : "FouletounChara", Txt : "E4FouletounTrue", name : "E4FouletounTrue" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-006.mp3'},
         {character : "NarraChara", Txt : "E4NarrateurTrue" , sound: path_narration+'narrateur-E4/narrateurE4-005.mp3'},
         {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
-];
+    ];
 
-const steps2 = [
+    const steps2 = [
         {character : "FulettuChara", Txt: "E4FulettuFalse", name: "E4FulettuFalse"},
         {character : "FouletounChara", Txt: "E4FouletounFalse", name: "E4FouletounFalse" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-007.mp3'},
         {character : "FulettuChara", Txt: "E4FulettuFalse2", name: "E4FulettuFalse2"},
@@ -31,7 +31,7 @@ const steps2 = [
         {nextLvl: () => { nextScreen("5", "5"); window.location.reload(false); }}
     ];
     
-let steps = [
+    let steps = [
         {character : "NarraChara", Txt: "E4Narra" , sound: path_narration+'Narrateur-E4/narrateurE4-001.mp3'},
         {character : "BergerChara", Txt: "E4Berger", name: "E4Berger" , sound: path_narration+'Berger-E4/Berger-E4-001.mp3'},
         {character : "NarraChara", Txt: "E4Narra2", sound: path_narration+'Narrateur-E4/narrateurE4-002.mp3'},
@@ -66,13 +66,13 @@ let steps = [
     // Refresh
     refreshPage();
 
-    // Display the map button to allow the user to see the map during the AR mode
-    const MapBtn = document.getElementById("MapBtn");
-    if(MapBtn) {
-        MapBtn.style.display = "block";
-    }
+    // // Display the map button to allow the user to see the map during the AR mode
+    // const MapBtn = document.getElementById("MapBtn");
+    // if(MapBtn) {
+    //     MapBtn.style.display = "block";
+    // }
 
     // Play the steps
     playSteps(steps , 0 , true , 2);
-    
+       
 }

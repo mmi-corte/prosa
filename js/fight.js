@@ -2,8 +2,6 @@ import { addOverlay } from "./overslay.js";
 import { loadSound } from './Sound/sound.js';
 import { ajouterBouton } from './button.js';
 
-
-
 export const enemies = [
     {
       name: "Cerf",
@@ -36,7 +34,7 @@ export function lunchFight(weapons, enemies)
 {
     return new Promise((resolve) => {
 
-    skin = localStorage.getItem("skin");
+    const skin = localStorage.getItem("skin");
 
     //player hp
     const playerHp = 100;
@@ -170,7 +168,6 @@ export function lunchFight(weapons, enemies)
     pContainer.className = "pContainer";
 
     // Player Name
-
     const playerName = document.createElement("p");
     playerName.className = "txtTitle";
     playerName.innerHTML = localStorage.getItem("playerName");
@@ -555,7 +552,7 @@ export function lunchFight(weapons, enemies)
                     else
                     {
                         setTimeout(() => {
-                            createnewOverlay("Au tour de l'ennemi !");
+                            createnewOverlay(`Au tour de ${enemies.name} !`);
                         }, 750)
 
 
@@ -639,7 +636,7 @@ export function lunchFight(weapons, enemies)
                     else
                     {
                         setTimeout(() => {
-                            createnewOverlay("Au tour de l'ennemi !");
+                            createnewOverlay(`Au tour de ${enemies.name} !`);
                         }, 750)
 
 

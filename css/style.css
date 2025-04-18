@@ -256,42 +256,32 @@ strong {
 
 
 /*---------------------Style Narration----------------------*/
-.diagBox {
+.diagBox,
+.diagBoxN {
     width: 92%;
     height: 250px;
-    background-color: rgba(255, 255, 255, 0.75);
-    flex-direction: column;
     padding: 10px;
     margin: 10px;
     border-radius: 6px;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     display: flex;
-    justify-content: start;
-    align-items: start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     z-index: 2;
 }
 
+/* Light version */
+.diagBox {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #000;
+}
 
-
+/* Dark version */
 .diagBoxN {
-    width: 92%;
-    height: 250px;
     background-color: rgba(0, 0, 0, 0.55);
     color: #fff;
-    padding: 10px 10px 0 10px;
-    margin: 10px 10px 0 10px;
-    border-radius: 6px;
-    position: absolute;
-    bottom: 0px;
-    display: flex;
-    flex-direction: column;
-    /*flex-direction: column;*/
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: start;
-    z-index: 2;
-
 }
 
 /* Style du chevron */
@@ -463,14 +453,16 @@ strong {
     z-index: 0;
 }
 
+.playerImage {
+    width: 60%;
+    height: 60%;
+}
+
 .playerContainer {
     position: fixed;
-    top: 200px;
-    right: 150px;
-    width: 250px;
-    height: 600px;
+    bottom: 100px;
+    left: 10px;
     z-index: 0;
-
 }
 
 /*-----------------------img intro-----------------------------*/

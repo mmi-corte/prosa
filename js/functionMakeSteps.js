@@ -705,6 +705,10 @@ function charaChanger(index, steps) {
       if (step.name) {
         addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
+    
+      if (step.Txt) {
+        addTxtNarration(step.Txt, "diagBox", "dialogBox");
+      }
       
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");
