@@ -167,11 +167,34 @@ loadJSON();
 
 // });
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker
-      .register("/prosa/sw.js")
-      .then(res => console.log("service worker registered"))
-      .catch(err => console.log("service worker not registered", err));
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register("/prosa/sw.js")
+      .then(reg => {
+        console.log('[PWA] Service worker enregistré', reg);
+
+        // Mise à jour auto si un nouveau service worker est dispo
+        reg.onupdatefound = () => {
+          const newWorker = reg.installing;
+          newWorker.onstatechange = () => {
+            if (newWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                console.log('[PWA] Nouvelle version disponible');
+                // Tu peux ici alerter l’utilisateur ou recharger automatiquement
+                window.location.reload();
+              }
+            }
+          };
+        };
+      });
   });
 }
+
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", function() {
+//     navigator.serviceWorker
+//       .register("/prosa/sw.js")
+//       .then(res => console.log("service worker registered"))
+//       .catch(err => console.log("service worker not registered", err));
+//   });
+// }
