@@ -3,6 +3,7 @@ import { log } from "./trace.js";
 import { enemies, lunchFight } from "./fight.js";
 import { path_narration } from "./paths.js";
 import { playSteps } from "./functionMakeSteps.js";
+import { nextScreen } from "./navigation.js";
 
 export function loadLvl15() {
 
@@ -34,7 +35,7 @@ export function loadLvl15() {
                 }
             ];
             refreshPage();
-            const fightResult = await lunchFight(skin, weapons, enemies[2]);
+            const fightResult = await lunchFight(weapons, enemies[2]);
             log(fightResult);
 
             const steps = [
