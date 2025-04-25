@@ -63,6 +63,7 @@ const personnages = [
                scale="3 3 3"
                material="transparent: true; alphaTest: 0.5;"
                ></a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image 
                 src="${path_personnages}a_Strega/a-strega2-premier-plan.png" 
@@ -97,6 +98,7 @@ const personnages = [
                 scale="10 10 10"
                 material="transparent: true; alphaTest: 0.5;">
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}Sylvain/premier-plan.png"
@@ -126,6 +128,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}Fulettu/arbre.png"
@@ -162,6 +165,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->h
                 <a-image
                 src="${path_personnages}a-Sciacquaghjola/a_Sciacquaghjola_6.png"
@@ -201,6 +205,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}Tarrasque/Tarasque-V3-premier plan-plante.png"
@@ -220,6 +225,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}Orcu/premier-plan1.png"
@@ -259,6 +265,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}Bagialiscu/premier-plan.png"
@@ -298,6 +305,7 @@ const personnages = [
                 material="transparent: true; alphaTest: 0.5;"
                 >
                 </a-image>`,
+
   `<!-- premier plan  (en avant) -->
                 <a-image
                 src="${path_personnages}fouleton/fouleton-premier-plan.png"
@@ -682,8 +690,14 @@ function charaChanger(index, steps) {
     case "BasgialiscuChara":
       charaContainer.innerHTML = personnages[9];
       break;
-    case "MascoChara":
+    case "FouletounChara":
       charaContainer.innerHTML = personnages[10];
+      break;
+    case "MascoChara":
+      charaContainer.innerHTML = personnages[11];
+      break;
+    case "MartoChara":
+      charaContainer.innerHTML = personnages[12];
       break;
     case "NaraChara":
       break;
