@@ -12,18 +12,6 @@ export function loadLvl16() {
     // Set the level in local storage
     localStorage.setItem("level", "16");
 
-    // Define the steps
-    const steps = [
-
-        { character: "NaraChara", Txt: "E16Narra", sound: path_narration+'Narrateur-E16/narrateurE16.mp3' }
-    ];
-
-    // Refresh the page because AR
-    refreshPage();
-    
-    // Play the steps
-    playSteps(steps, 0, true, 2);
-
     //test fight
     async function luncher() {
         let weapons = [
@@ -32,11 +20,25 @@ export function loadLvl16() {
                 damage: 10,
             },
         ];
+        refreshPage();
         const fightResult = await lunchFight(skin, weapons, enemies[2]);
-        console.log(fightResult);
-    }
-    luncher();
+        log(fightResult);
 
-    // voir la fonction fight si on peut savoir si on endormie lenemie ou pas ??, 
+        const steps = [
+            { nextLvl: () => { nextScreen("5", "fin"); window.location.reload(false); }
+             }
+        ];
+
+        refreshPage();
+        playSteps(steps, 0, true, 2);
+
+    }
+
+    // Define the steps
+    const steps = [
+        { character: "NaraChara", Txt: "E16Narra", sound: path_narration+'Narrateur-E16/narrateurE16.mp3', choices: [
+            { text: "E11Fight", action: () => {luncher();} }]
+        }
+    ];
 
 }

@@ -20,6 +20,7 @@ import { loadLvl9 } from "./lvl9.js";
 import { loadLvl10 } from "./lvl10.js";
 import { loadLvl11 } from "./lvl11.js";
 import { loadLvl12 } from "./lvl12.js";
+import { loadLvl13 } from "./lvl13.js";
 import { loadLvl14 } from "./lvl14.js";
 import { loadLvl15 } from "./lvl15.js";
 import { loadLvl16 } from "./lvl16.js";

@@ -267,8 +267,6 @@ export function lunchFight(weapons, enemies)
                 overlay.classList.add("fade-in");
                 overlay.style.display = "flex"; // Rendre visible si nécessaire
             
-    
-            
             OverlayText.className = "OverlayTxt";
             OverlayText.innerHTML = text;
             overlay.appendChild(OverlayText);
@@ -282,7 +280,6 @@ export function lunchFight(weapons, enemies)
             setTimeout(() => {
                 subj.classList.remove("vibration");
             }, 500);
-            
             
         }
 
@@ -305,15 +302,15 @@ export function lunchFight(weapons, enemies)
             
             const weapon = document.getElementsByClassName("weapons")[key];
             const hit =()=>{
+                
                 //sound
                 if(element.name == "Epée")
-                {
+                {   
+                    damageVibration("enemyContainer");
                     loadSound("assets/sound/sword.mp3");
 
                     const lottiePlayer = document.createElement('lottie-player');
-                
-
-                
+            
                     lottiePlayer.setAttribute('src', 'assets/animation/BladeStrike.json');
                     
                     lottiePlayer.setAttribute('background', 'transparent');
