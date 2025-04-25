@@ -3,6 +3,8 @@ import { nextScreen } from './navigation.js';
 import { log } from './trace.js';
 import { path_backgrounds, path_narration } from './paths.js';
 import { enemies, lunchFight } from "./fight.js";
+import { playSteps } from './functionMakeSteps.js';
+import { refreshPage } from './refreshPage.js';
 
 export function loadLvl13() {
 
@@ -11,13 +13,6 @@ export function loadLvl13() {
 
     // Set the level in local storage
     localStorage.setItem("level", "13");
-
-    // Steps for the level
-    const steps = [
-        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra", character: null , sound: path_narration+'Narrateur-E13/narrateurE13-001.mp3'},
-    ];
-
-    playSteps(steps, 0, false, 4);
     
     //faire combat
     let weapons = [
@@ -29,15 +24,34 @@ export function loadLvl13() {
 
     //test fight
     async function luncher() {
-        const fightResult = await lunchFight(skin, weapons, enemies[2]);
-        console.log(fightResult);
+        refreshPage();
+        // Fight with cerf
+        const fightResult = await lunchFight(weapons, enemies[0]);
+        log(fightResult);
+
+        const steps = [
+                {   background: path_backgrounds+'fondEtape13.mp4', 
+                    narration: "E13Narra2",
+                    sound: path_narration+'Narrateur-E13/narrateurE13-002.mp3', 
+                    character: null , 
+                    nextLvl: () => {nextScreen("5", "14"); window.location.reload(false);}},
+        ];
+
+        refreshPage();
+        playSteps(steps, 0, false, 2);
     }
     
-    luncher();
-    
-    const steps2 = [
-        { background: path_backgrounds+'fondEtape13.mp4', narration: "E13Narra2",sound: path_narration+'Narrateur-E13/narrateurE13-002.mp3', character: null , nextLvl: () => {nextScreen("5","14");}},
+    // Steps for the level
+    const steps = [
+        { background: path_backgrounds+'fondEtape13.png', narration: "E13Narra", character: null , sound: path_narration+'Narrateur-E13/narrateurE13-001.mp3',
+            choices: [
+                { text: "E11Fight", action: () => {luncher();} }
+              ] 
+        },
     ];
+
+    refreshPage();
+
     playSteps(steps, 0, false, 2); 
    
 }

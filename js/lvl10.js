@@ -24,12 +24,12 @@ export function loadLvl10() {
     ];
 
     //Viens après les fées ?
-    if(localStorage.getItem("fairy")) {
+    if(localStorage.getItem("fairy") == 'true') {
         steps.push( { character: "NarraChara", Txt: "E10NarraAFairy", name: "E10NarraAFairy", sound: path_narration+'Narrateur-E10/narrateurE10-005.mp3'},
                     { character: "OrcuChara", Txt: "E10OrcuAFairy", name: "Orcus", sound: path_narration+'Orcu-E10/Orcu-E10-006.mp3' });
     }
 
-    if (localStorage.getItem("lion")) {
+    if (localStorage.getItem("lion") == 'true') {
         steps.push( { character: "NarraChara", Txt: "E10NarraALeoS", name: "E10NarraALeoS", sound: path_narration+'Narrateur-E10/narrateurE10-006.mp3'},
                     { character: "OrcuChara", Txt: "E10OrcuALeoS", name: "E10OrcuALeoS", sound: path_narration+'Orcu-E10/Orcu-E10-005.mp3' });
     }

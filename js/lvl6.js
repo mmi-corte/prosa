@@ -13,16 +13,19 @@ export function loadLvl6() {
   // Set the level in localStorage
   localStorage.setItem("level", "6");
 
+  const vue_orcu = localStorage.getItem('vue_orcu') == 'true';
+  const vue_fulettu = localStorage.getItem('vue_fulettu') == 'true';
 
   var steps;
 
-  if (localStorage.getItem("vue_fulettu")) {
+  if (vue_fulettu) {
 
     steps = [{  background: path_backgrounds+"fondEtape6.mp4",
                 narration: "E6NarraFarfaT",
                 character: null,
                 sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
             }];
+  
   } else {
 
     steps = [{  background: path_backgrounds+"fondEtape6.mp4",
@@ -32,11 +35,8 @@ export function loadLvl6() {
             }];
   }
   
-  refreshPage();
-
-  playSteps(steps);
-
-  if (localStorage.getItem('vue_orcu')) {
+  
+  if (vue_orcu) {
 
     let weapons = [
       {
@@ -49,19 +49,20 @@ export function loadLvl6() {
     async function luncher() {
       refreshPage();
       const fightResult = await lunchFight(weapons, enemies[2]);
-      console.log(fightResult);
       
+      log(fightResult, "green");
+
       if (fightResult=='loose') {
         localStorage.setItem('lion_vict', false);
       }else{
         localStorage.setItem('lion_vict', true);
       }
 
-      steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+      const steps = [{  background: path_backgrounds+"fondEtape6.mp4",
         narration: "E6NarraOrcuT2",
         character: null,
         sound: path_narration+'Narrateur-E6/narrateurE6-005.mp3',
-        nextLvl: () => { nextScreen("5", "8"); window.location.reload(false);}
+        nextLvl: () => { nextScreen("5", "8");}
       }];
 
       refreshPage();
@@ -70,23 +71,27 @@ export function loadLvl6() {
 
     }
 
-    steps = [
+    steps = steps.concat([
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuT",
         character: path_personnages+"Berger/berger.png",
         sound: path_narration+'Berger-E6/bergerE6-002.mp3',
-        name: "E6Berger",
+        name: "E6BergerOrcuT",
          choices: [
             { text: "E11Fight", action: () => {luncher();} }
           ] 
         }
-    ];
+    ]);
 
     localStorage.setItem('fight_lion', true);
   
+    refreshPage();
+  
+    playSteps(steps);
+
   } else {
 
-    steps = [
+    steps = steps.concat([
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuF",
         character: path_personnages+"Berger/berger.png",
@@ -102,13 +107,13 @@ export function loadLvl6() {
                   { text: "E6ChoixOrcuF2", action: () => {nextScreen("5", "7");} }
         ]
       }
-    ];
+    ]);
 
     localStorage.setItem('fight_lion', false);
-  }
 
-  refreshPage();
+    refreshPage();
   
-  playSteps(steps);
+    playSteps(steps);
+  }
     
 }

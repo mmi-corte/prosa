@@ -13,7 +13,7 @@ export function loadLvl12() {
     localStorage.setItem( "level", "12" );
 
     // Steps to play
-    const steps = [
+    var steps = [
         { character: "NarraChara", Txt: "E12Narra", sound: path_narration+'Narrateur-E12/narrateurE12-001.mp3' },
         { character: "MartoChara", Txt: "E12Marto", name: "E12Marto", sound: path_narration+'StMarto-E12/StMarto-E12-001.mp3' },
         { character: "NarraChara", Txt: "E12Narra2", sound: path_narration+'Narrateur-E12/narrateurE12-002.mp3'},
@@ -26,31 +26,28 @@ export function loadLvl12() {
         { character: "MartoChara", Txt: "E12Marto5", name: "E12Marto5" },
         { character: "NarraChara", Txt: "E12Narra5", sound: path_narration+'Narrateur-E12/narrateurE12-005.mp3' },
         { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", sound: path_narration+'StMarto-E12/StMarto-E12-005.mp3' },
-        { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", popup: "E12Mess2", nextLvl: () => { nextScreen("5","13");} },       
+        { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", popup: "E12Mess2"}       
     ];
 
-    // Refresh the page
-    refreshPage();
-
-    // Play the steps
-    playSteps(steps, 0 , true , 2);
-
+    const leaf = localStorage.getItem('leaf') == 'true' || true;
+    
     if (leaf){
-        const steps = [
-            { character : "BergerChara", Txt : "E12BergerPaperST" },     
-        ];
-        playSteps(steps, 1 , true , 2);
+        steps = steps.concat([
+            { character : "BergerChara", Txt : "E12BergerPaperST" }
+        ]);
     }
     
-    const steps2 = [
+    steps = steps.concat([
         { character: "MartoChara", Txt: "E12Marto7", name: "E12Marto7", sound: path_narration+'StMarto-E12/StMarto-E12-006.mp3' },
         { character: "NarraChara", Txt: "E12Narra6", sound: path_narration+'Narrateur-E12/narrateurE12-006.mp3' },
         { character: "MartoChara", Txt: "E12Marto8", name: "E12Marto8", sound: path_narration+'StMarto-E12/StMarto-E12-006.mp3'},
         { character: "NarraChara", Txt: "E12Narra7", sound: path_narration+'Narrateur-E12/narrateurE12-007.mp3' },
-        { character: "NarraChara", Txt: "E12Narra7", nextLvl: () => { nextScreen("13");} },
+        { character: "NarraChara", Txt: "E12Narra7", nextLvl: () => { nextScreen("5", "13");} },
         
-    ];
+    ]);
 
-    playSteps(steps2, 0 , true , 2);
+    refreshPage();
+
+    playSteps(steps, 0 , true , 2);
 
 }

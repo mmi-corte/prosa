@@ -21,7 +21,7 @@ export function loadLvl11() {
       name: "Epée",
       damage: 30,
     },
-];
+  ];
 
   //test fight
   async function luncher() {
@@ -35,12 +35,12 @@ export function loadLvl11() {
       { character: "NarraChara", Txt: "E11Narra5" },
       { character: "BergerChara", Txt: "E11Berger3", name: "E11Berger3"},
       { character: "SylvainChara", Txt: "E11Sylvain5", name: "E11Sylvain5" },
-      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "6");}}
+      { character: "NarraChara", Txt: "E11Narra6", nextLvl: () => { nextScreen("5", "6");window.location.reload(false);}}
     ];
 
     refreshPage();
 
-    playSteps(steps, 0, true, 2);
+    playSteps(steps, 0 ,true, 2);
   }
 
   const steps = [
