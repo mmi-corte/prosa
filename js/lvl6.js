@@ -16,14 +16,14 @@ export function loadLvl6() {
 
   if (localStorage.getItem("vue_fulettu")) {
 
-    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+    var steps = [{  background: path_backgrounds+"fondEtape6.mp4",
                 narration: "E6NarraFarfaT",
                 character: null,
                 sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
             }];
   } else {
 
-    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+    var steps = [{  background: path_backgrounds+"fondEtape6.mp4",
                 narration: "E6NarraFarfaF",
                 character: null,
                 sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3'
@@ -49,7 +49,7 @@ export function loadLvl6() {
       console.log(fightResult);
     }
 
-    steps = steps.concat([
+    var steps = steps.concat([
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuT",
         character: path_personnages+"Berger/berger.png",
@@ -68,13 +68,15 @@ export function loadLvl6() {
     ]);
 
     localStorage.setItem('fight_lion', true);
+  
   } else {
-    steps = steps.concat([
+
+    var steps = steps.concat([
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuF",
         character: path_personnages+"Berger/berger.png",
         sound: path_narration+'Berger-E6/bergerE6-001.mp3',
-        name: "E6Berger"
+        name: "E6BergerOrcuF"
       },
       { background: path_backgrounds+"fondEtape6.mp4",
         narration: "E6NarraOrcuF",

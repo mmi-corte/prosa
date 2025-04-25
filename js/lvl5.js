@@ -25,10 +25,10 @@ export function loadLvl5() {
         {character: "NarraChara", Txt: "E5Narra5", sound: path_narration+'Narrateur-E5/NarrateurE5-005.mp3'},
         {character: "MascoChara", Txt: "E5Masco4", name: "E5Masco4", sound: path_narration+'Masco-E5/mascoE5-004.mp3'},
         {character: "NarraChara", Txt: "E5Narra6", sound: path_narration+'Narrateur-E5/NarrateurE5-006.mp3'},
-        {character: "BergerChara", Txt: "E5Berger4", name: "E5Berger4", sound: path_narration+'Berger-E5/Berger-E5-002.mp3'},
-        {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/NarrateurE5-007.mp3'},
-        {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
-
+        {character: "BergerChara", Txt: "E5Berger2", name: "E5Berger2", sound: path_narration+'Berger-E5/Berger-E5-002.mp3'},
+        {character: "NarraChara", Txt: "E5Narra7", sound: path_narration+'Narrateur-E5/NarrateurE5-007.mp3',
+            nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }
+        }
     ];
 
     refreshPage();
