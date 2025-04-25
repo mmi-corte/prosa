@@ -11,7 +11,8 @@ export function loadLvl4() {
 
     localStorage.setItem('level', '4');
 
-    localStorage.setItem('vue_fulettu', 'true');
+    localStorage.setItem('vue_fulettu', true);
+    localStorage.setItem('vue_orcu', false);
 
     const steps1 = [
         {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},

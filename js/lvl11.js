@@ -14,6 +14,7 @@ export function loadLvl11() {
   localStorage.setItem("level", "11");
 
   localStorage.setItem("vue_orcu", true);
+  localStorage.setItem('vue_fulettu', false);
 
   const weapons = [
     {

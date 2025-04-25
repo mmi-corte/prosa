@@ -14,25 +14,27 @@ export function loadLvl6() {
   localStorage.setItem("level", "6");
 
 
+  var steps;
+
   if (localStorage.getItem("vue_fulettu")) {
 
-    var steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
                 narration: "E6NarraFarfaT",
                 character: null,
                 sound: path_narration+'Narrateur-E6/narrateurE6-001.mp3'
             }];
   } else {
 
-    var steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+    steps = [{  background: path_backgrounds+"fondEtape6.mp4",
                 narration: "E6NarraFarfaF",
                 character: null,
                 sound: path_narration+'Narrateur-E6/narrateurE6-002.mp3'
             }];
   }
   
-  // refreshPage();
+  refreshPage();
 
-  // playSteps(steps);
+  playSteps(steps);
 
   if (localStorage.getItem('vue_orcu')) {
 
@@ -45,11 +47,30 @@ export function loadLvl6() {
   
     //test fight
     async function luncher() {
+      refreshPage();
       const fightResult = await lunchFight(weapons, enemies[2]);
       console.log(fightResult);
+      
+      if (fightResult=='loose') {
+        localStorage.setItem('lion_vict', false);
+      }else{
+        localStorage.setItem('lion_vict', true);
+      }
+
+      steps = [{  background: path_backgrounds+"fondEtape6.mp4",
+        narration: "E6NarraOrcuT2",
+        character: null,
+        sound: path_narration+'Narrateur-E6/narrateurE6-005.mp3',
+        nextLvl: () => { nextScreen("5", "8"); window.location.reload(false);}
+      }];
+
+      refreshPage();
+      
+      playSteps(steps);
+
     }
 
-    var steps = steps.concat([
+    steps = [
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuT",
         character: path_personnages+"Berger/berger.png",
@@ -58,20 +79,14 @@ export function loadLvl6() {
          choices: [
             { text: "E11Fight", action: () => {luncher();} }
           ] 
-        },
-        {  background: path_backgrounds+"fondEtape6.mp4",
-          narration: "E6NarraOrcuT2",
-          character: null,
-          sound: path_narration+'Narrateur-E6/narrateurE6-005.mp3',
-          nextLvl: () => { nextScreen("5", "8"); window.location.reload(false);}
         }
-    ]);
+    ];
 
     localStorage.setItem('fight_lion', true);
   
   } else {
 
-    var steps = steps.concat([
+    steps = [
       { background: path_backgrounds+"fondEtape6.png",
         narration: "E6BergerOrcuF",
         character: path_personnages+"Berger/berger.png",
@@ -87,7 +102,9 @@ export function loadLvl6() {
                   { text: "E6ChoixOrcuF2", action: () => {nextScreen("5", "7");} }
         ]
       }
-    ]);
+    ];
+
+    localStorage.setItem('fight_lion', false);
   }
 
   refreshPage();
