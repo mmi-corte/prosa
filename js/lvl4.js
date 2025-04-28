@@ -56,7 +56,7 @@ export function loadLvl4() {
                 { text: "E4EnigmeC2", answer: () => {return null;}}
             ] 
         },
-        {character: "FouletounChara", Txt:"E4FouletounET", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
+        {character: "FouletounChara", Txt:"E4FouletounET",
             choices: [
                 { text: "E4EnigmeT1", answer: () => {
                     const selection = localStorage.getItem('answer_4_E15');
@@ -93,6 +93,5 @@ export function loadLvl4() {
     // }
 
     // Play the steps
-    playSteps(steps , 0 , true , 2);
-       
+    playSteps(steps , 0 , true , 2);      
 }
