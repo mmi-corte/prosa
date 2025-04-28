@@ -12,7 +12,7 @@ export function loadLvl2() {
     
     // Set the level in localStorage
     localStorage.setItem("level", "2"); 
-    
+
     // steps of level 2
     const steps = [
         {character: "NaraChara", Txt: "E2Narra", sound: path_narration+'Narrateur-E2/narrateurE2-001.mp3'},

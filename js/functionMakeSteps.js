@@ -510,6 +510,7 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
       
             // Ajouter l'événement au bouton
             btn.addEventListener("click", action);
+           
                            
           });
         } else {
@@ -705,6 +706,9 @@ function charaChanger(index, steps) {
 
   // Gestion des choix ou du bouton "Suivant"
   if (step.choices) {
+    if (step.Txt) {
+      addTxtNarration(step.Txt, "diagBox", "dialogBox");
+    }
     step.choices.forEach((choice, i) => {
       const btnId = `btnChoix${i + 1}`;
       const btnClass = `choix${i + 1}`; // Classe spécifique pour chaque bouton
@@ -720,10 +724,8 @@ function charaChanger(index, steps) {
         addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
     
-      if (step.Txt) {
-        addTxtNarration(step.Txt, "diagBox", "dialogBox");
-      }
       
+
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");
 

@@ -22,7 +22,7 @@ export function loadLvl8() {
         steps = steps.concat([
             { character: "NarraChara", Txt: "E8NarraRuseT", sound: path_narration+'Narrateur-E8/NarrateurE8-002-001.mp3'},
             { character: null, narration: () => {
-                            popup("Vous avez récupéré la graine corse et une feuille… ?"); // pas de graine+feuille.png
+                            popup("Vous avez récupéré la graine corse et une feuille ?"); // pas de graine+feuille.png
             }},
             { character: "NarraChara", Txt: "E8NarraRuseT2", sound: path_narration+'Narrateur-E8/NarrateurE8-002-002.mp3'},
             { character: "BergerChara", Txt: "E8BergerRuseT", name: "E8BergerRuseT", sound: path_narration+'Berger-E8/bergerE8-001.mp3' },
@@ -32,6 +32,8 @@ export function loadLvl8() {
             { character: "BergerChara", Txt: "E8BergerRuseT3", name: "E8BergerRuseT3", sound: path_narration+'Berger-E8/bergerE8-003.mp3' },
             { character: "NarraChara", Txt: "E8NarraRuseT5",sound: path_narration+'Narrateur-E8/NarrateurE8-009.mp3', nextLvl: () => { nextScreen("5","12")}}
         ]);
+
+        localStorage.setItem('leaf', true);
 
     } else {
     
@@ -51,7 +53,7 @@ export function loadLvl8() {
                 { character : "BergerChara", Txt : "E8BergerLeoT", name: "E8BergerLeoT", sound: path_narration+'Berger-E8/bergerE8-004.mp3' },
                 { character : "NarraChara", Txt : "E8NarraLeoT6", sound: path_narration+'Narrateur-E8/NarrateurE8-009.mp3', nextLvl: () => { nextScreen("5","12");}}
             ]);
-            
+            localStorage.setItem('incantation', true)
         }  
     }
     

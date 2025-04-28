@@ -14,22 +14,24 @@ export function loadLvl4() {
     localStorage.setItem('vue_fulettu', true);
     localStorage.setItem('vue_orcu', false);
 
-    const steps1 = [
+    const steps6 = [ 
         {character : "FulettuChara", Txt : "E4FulettuTrue", name : "E4FulettuTrue"},
         {character : "FouletounChara", Txt : "E4FouletounTrue", name : "E4FouletounTrue" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-006.mp3'},
-        {character : "NarraChara", Txt : "E4NarrateurTrue" , sound: path_narration+'narrateur-E4/narrateurE4-005.mp3'},
-        {nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
+        {character : "FulettuChara", Txt : "E4FulettuTrue2", name : "E4FulettuTrue2", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3'},
+        {character : "NarraChara", Txt : "E4NarrateurTrue" , sound: path_narration+'narrateur-E4/narrateurE4-005.mp3', 
+
+            nextLvl: () => { nextScreen("5", "6"); window.location.reload(false); }}
     ];
 
-    const steps2 = [
+    const steps5 = [
         {character : "FulettuChara", Txt: "E4FulettuFalse", name: "E4FulettuFalse"},
         {character : "FouletounChara", Txt: "E4FouletounFalse", name: "E4FouletounFalse" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-007.mp3'},
         {character : "FulettuChara", Txt: "E4FulettuFalse2", name: "E4FulettuFalse2"},
         {character : "FouletounChara", Txt: "E4FouletounFalse2", name: "E4FouletounFalse2", sound: path_narration+'Fouletoun-E4/Fouletoun-E4-008.mp3'},
         {character : "FulettuChara", Txt: "E4FulettuFalse3", name: "E4FulettuFalse3"},
         {character : "FouletounChara", Txt: "E4FouletounFalse3", name: "E4FouletounFalse3" , sound: path_narration+'Fouletoun-E4/Fouletoun-E4-009.mp3'},
-        {character : "FulettuChara", Txt: "E4FulettuFalse4", name: "E4FulettuFalse4"},
-        {nextLvl: () => { nextScreen("5", "5"); window.location.reload(false); }}
+        {character : "FulettuChara", Txt: "E4FulettuFalse4", name: "E4FulettuFalse4", 
+            nextLvl: () => { nextScreen("5", "5"); window.location.reload(false); }}
     ];
     
     let steps = [
@@ -56,11 +58,28 @@ export function loadLvl4() {
         },
         {character: "FouletounChara", Txt:"E4FouletounET", sound: path_narration+'Fulettu-E4/Fulettu-E4-007.mp3',
             choices: [
-                { text: "E4EnigmeT1", answer: () => {return steps2;} },
-                { text: "E4EnigmeT2", answer: () => {return steps1;} },
-                { text: "E4EnigmeT3", answer: () => {return steps2;} }
+                { text: "E4EnigmeT1", answer: () => {
+                    const selection = localStorage.getItem('answer_4_E15');
+                    if (selection.includes('Fromage')) {
+                        return steps6;
+                    }
+                    return steps5;
+                }},
+                { text: "E4EnigmeT2", answer: () => {
+                    const selection = localStorage.getItem('answer_4_E15');
+                    if (selection.includes('Tomme')) {
+                        return steps5;
+                    }
+                    return steps6;
+                }},
+                { text: "E4EnigmeT3", answer: () => {
+                    const selection = localStorage.getItem('answer_4_E15');
+                    if (selection.includes('Fromage')) {
+                        return steps6;
+                    }
+                    return steps5;
+                }}
             ]
-
         }
     ];
 
