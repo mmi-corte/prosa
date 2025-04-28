@@ -18,12 +18,12 @@ export function loadLvl14() {
         { character: "NaraChara", Txt: "E14Narra", sound: path_narration+'Narrateur-E14/narrateurE14-001.mp3' },
     ];
 
-    const incantation = localStorage.getItem('incantation') == 'true' || true;
+    const incantation = localStorage.getItem('incantation') == "true" || true;
 
     if (incantation) {
         steps = steps.concat([
-            { character: "NaraChara", Txt: "E14NarraSpellST", sound: path_narration+'Narrateur-E14/narrateurE14-002.mp3' },//alors je sais pas si il y a pas l'incantation du Berger
-            { character: "NaraChara", Txt: "E14NarraSpellST2", sound: path_narration+'Narrateur-E14/narrateurE14-003.mp3' },
+            { character: "NaraChara", Txt: "E14NarraSpellST", sound: path_narration+'Narrateur-E14/narrateurE14-002.mp3'},
+            { character: "NaraChara", Txt: "E14NarraSpellST2", sound: path_narration+'Narrateur-E14/narrateurE14-003.mp3'}
         ]);
 
     } else {
@@ -37,7 +37,7 @@ export function loadLvl14() {
             Txt: "E14Berger", 
             name:'E14Berger', 
             sound: path_narration+'Berger-E14/bergerE14-002.mp3', 
-            nextLvl : () => {nextScreen("5", "15");} }
+            nextLvl : () => {nextScreen("5", "15"); window.location.reload(false);} }
     ]);
     
     // Refresh the page because AR

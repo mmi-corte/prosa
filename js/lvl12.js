@@ -14,34 +14,34 @@ export function loadLvl12() {
 
     // Steps to play
     var steps = [
-        { character: "NarraChara", Txt: "E12Narra", sound: path_narration+'Narrateur-E12/narrateurE12-001.mp3' },
-        { character: "MartoChara", Txt: "E12Marto", name: "E12Marto", sound: path_narration+'StMarto-E12/StMarto-E12-001.mp3' },
+        { character: "NarraChara", Txt: "E12Narra", sound: path_narration+'Narrateur-E12/narrateurE12-001.mp3'},
+        { character: "MartoChara", Txt: "E12Marto", name: "E12Marto", sound: path_narration+'StMarto-E12/StMarto-E12-001.mp3'},
         { character: "NarraChara", Txt: "E12Narra2", sound: path_narration+'Narrateur-E12/narrateurE12-002.mp3'},
-        { character: "MartoChara", Txt: "E12Marto2", name: "E12Marto", sound: path_narration+'StMarto-E12/StMarto-E12-002.mp3' },
-        { character: "NarraChara", Txt: "E12Narra3", sound: path_narration+'Narrateur-E12/narrateurE12-003.mp3' },
-        { character: "MartoChara", Txt: "E12Marto3", name: "E12Marto3", sound: path_narration+'StMarto-E12/StMarto-E12-003.mp3' },
-        { character: "NarraChara", Txt: "E12Narra4", sound: path_narration+'Narrateur-E12/narrateurE12-004.mp3' },
-        { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", sound: path_narration+'StMarto-E12/StMarto-E12-004.mp3' },
-        { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", popup: "E12Mess" },
-        { character: "MartoChara", Txt: "E12Marto5", name: "E12Marto5" },
-        { character: "NarraChara", Txt: "E12Narra5", sound: path_narration+'Narrateur-E12/narrateurE12-005.mp3' },
-        { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", sound: path_narration+'StMarto-E12/StMarto-E12-005.mp3' },
+        { character: "MartoChara", Txt: "E12Marto2", name: "E12Marto", sound: path_narration+'StMarto-E12/StMarto-E12-002.mp3'},
+        { character: "NarraChara", Txt: "E12Narra3", sound: path_narration+'Narrateur-E12/narrateurE12-003.mp3'},
+        { character: "MartoChara", Txt: "E12Marto3", name: "E12Marto3", sound: path_narration+'StMarto-E12/StMarto-E12-003.mp3'},
+        { character: "NarraChara", Txt: "E12Narra4", sound: path_narration+'Narrateur-E12/narrateurE12-004.mp3'},
+        { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", sound: path_narration+'StMarto-E12/StMarto-E12-004.mp3'},
+        { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", popup: "E12Mess"},
+        { character: "MartoChara", Txt: "E12Marto5", name: "E12Marto5"},
+        { character: "NarraChara", Txt: "E12Narra5", sound: path_narration+'Narrateur-E12/narrateurE12-005.mp3'},
+        { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", sound: path_narration+'StMarto-E12/StMarto-E12-005.mp3'},
         { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", popup: "E12Mess2"}       
     ];
 
-    const leaf = localStorage.getItem('leaf') == 'true' || true;
+    const leaf = localStorage.getItem('leaf') == "true" || true;
     
     if (leaf){
         steps = steps.concat([
-            { character : "BergerChara", Txt : "E12BergerPaperST" }
+            { character : "BergerChara", Txt: "E12BergerPaperST"}
         ]);
     }
     
     steps = steps.concat([
-        { character: "MartoChara", Txt: "E12Marto7", name: "E12Marto7", sound: path_narration+'StMarto-E12/StMarto-E12-006.mp3' },
-        { character: "NarraChara", Txt: "E12Narra6", sound: path_narration+'Narrateur-E12/narrateurE12-006.mp3' },
+        { character: "MartoChara", Txt: "E12Marto7", name: "E12Marto7", sound: path_narration+'StMarto-E12/StMarto-E12-006.mp3'},
+        { character: "NarraChara", Txt: "E12Narra6", sound: path_narration+'Narrateur-E12/narrateurE12-006.mp3'},
         { character: "MartoChara", Txt: "E12Marto8", name: "E12Marto8", sound: path_narration+'StMarto-E12/StMarto-E12-006.mp3'},
-        { character: "NarraChara", Txt: "E12Narra7", sound: path_narration+'Narrateur-E12/narrateurE12-007.mp3' },
+        { character: "NarraChara", Txt: "E12Narra7", sound: path_narration+'Narrateur-E12/narrateurE12-007.mp3'},
         { character: "NarraChara", Txt: "E12Narra7", nextLvl: () => { nextScreen("5", "13");} },
         
     ]);

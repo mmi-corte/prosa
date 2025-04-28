@@ -2,7 +2,6 @@ import { refreshPage } from "./refreshPage.js";
 import { playSteps } from "./functionMakeSteps.js";
 import { log } from "./trace.js";
 import { path_narration } from "./paths.js";
-import { nextScreen } from "./navigation.js";
 
 export function loadLvlfin() {
 
@@ -24,6 +23,5 @@ export function loadLvlfin() {
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0, true , 2);
-      
+    playSteps(steps, 0);
 }
