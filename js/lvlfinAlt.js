@@ -21,12 +21,13 @@ export function loadLvlfinAlt() {
         { character: "FataChara", Txt: "End2Fata", name: "End2Fata",  sound: path_narration+'Fata-Fin-001.mp3'},
         { character: "NaraChara", Txt: "End2Narra3",  sound: path_narration+'Narrateur-Fin2/narrateurFin2-003.mp3'},
         { character: "FataChara", Txt: "End2Fata2", name: "End2Fata2",  sound: path_narration+'Fata-Fin-002.mp3'},
-        { character: "NaraChara", Txt: "End2Narra4",  sound: path_narration+'Narrateur-Fin2/narrateurFin2-004.mp3' , nextLvl: () => { nextScreen("5", "1"); window.location.reload(false); }}
+        { character: "NaraChara", Txt: "End2Narra4",  sound: path_narration+'Narrateur-Fin2/narrateurFin2-004.mp3', 
+            nextLvl: () => { nextScreen("5", "1"); window.location.reload(false); }}
     ];
 
     // Refresh the page because AR
     refreshPage();
 
     // Play the steps
-    playSteps(steps, 0, true, 2);
+    playSteps(steps, 0);
 }
