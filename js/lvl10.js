@@ -38,7 +38,7 @@ export function loadLvl10() {
             { character: "OrcuChara", Txt: "E10Orcu2", name: "E10Orcu2", sound: path_narration+'Orcu-E10/Orcu-E10-007.mp3' },
             { character: "BergerChara", Txt: "E10Berger2", name: "E10Berger2" },
             { character: "OrcuChara", Txt: "E10Orcu3", name: "E10Orcu3" },
-            { character: "NarraChara", Txt: "E10Narra4", popup: "E8Mess"},
+            { character: "NarraChara", Txt: "E8Mess"},
             { character: "OrcuChara", Txt: "E10Orcu4", name: "E10Orcu4" },
             { character: "NarraChara", Txt: "E10Narra5", nextLvl: () => { nextScreen("5","11");}})
 

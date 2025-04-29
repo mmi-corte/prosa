@@ -21,9 +21,7 @@ export function loadLvl8() {
     if (ruse) { 
         steps = steps.concat([
             { character: "NarraChara", Txt: "E8NarraRuseT", sound: path_narration+'Narrateur-E8/NarrateurE8-002-001.mp3'},
-            { character: null, narration: () => {
-                            popup("Vous avez récupéré la graine corse et une feuille ?"); // pas de graine+feuille.png
-            }},
+            { character: null, Txt: "E8Mess"},
             { character: "NarraChara", Txt: "E8NarraRuseT2", sound: path_narration+'Narrateur-E8/NarrateurE8-002-002.mp3'},
             { character: "BergerChara", Txt: "E8BergerRuseT", name: "E8BergerRuseT", sound: path_narration+'Berger-E8/bergerE8-001.mp3' },
             { character: "NarraChara", Txt: "E8NarraRuseT3", sound: path_narration+'Narrateur-E8/NarrateurE8-003.mp3'},
@@ -41,17 +39,17 @@ export function loadLvl8() {
 
         if (lion) { 
             steps = steps.concat([
-                { character : "NarraChara", Txt : "E8NarraLeoT", sound: path_narration+'Narrateur-E8/NarrateurE8-005.mp3'},
-                { character : "StregaChara", Txt : "E8StregaLeoT", name: "E8StregaLeoT" },
-                { character : "NarraChara", Txt : "E8NarraLeoT2",sound: path_narration+'Narrateur-E8/NarrateurE8-006.mp3' },
-                { character : "StregaChara", Txt : "E8StregaT2", name: "E8StregaT2" },
-                { character : "NarraChara", Txt : "E8NarraLeoT3", sound: path_narration+'Narrateur-E8/NarrateurE8-007-001.mp3'},
-                { character : "MessChara", popup : "E8MessLeoT" },
-                { character : "NarraChara", Txt : "E8NarraLeoT4", sound: path_narration+'Narrateur-E8/NarrateurE8-007-002.mp3'},
-                { character : "StregaChara", Txt : "E8StregaLeoT3", name: "E8StregaLeoT3" },
-                { character : "NarraChara", Txt : "E8NarraLeoT5", sound: path_narration+'Narrateur-E8/NarrateurE8-008.mp3'},
-                { character : "BergerChara", Txt : "E8BergerLeoT", name: "E8BergerLeoT", sound: path_narration+'Berger-E8/bergerE8-004.mp3' },
-                { character : "NarraChara", Txt : "E8NarraLeoT6", sound: path_narration+'Narrateur-E8/NarrateurE8-009.mp3', nextLvl: () => { nextScreen("5","12");}}
+                { character : "NarraChara", Txt: "E8NarraLeoT", sound: path_narration+'Narrateur-E8/NarrateurE8-005.mp3'},
+                { character : "StregaChara", Txt: "E8StregaLeoT", name: "E8StregaLeoT" },
+                { character : "NarraChara", Txt: "E8NarraLeoT2",sound: path_narration+'Narrateur-E8/NarrateurE8-006.mp3' },
+                { character : "StregaChara", Txt: "E8StregaT2", name: "E8StregaT2" },
+                { character : "NarraChara", Txt: "E8NarraLeoT3", sound: path_narration+'Narrateur-E8/NarrateurE8-007-001.mp3'},
+                { character : "MessChara", TxT: "E8MessLeoT" },
+                { character : "NarraChara", Txt: "E8NarraLeoT4", sound: path_narration+'Narrateur-E8/NarrateurE8-007-002.mp3'},
+                { character : "StregaChara", Txt: "E8StregaLeoT3", name: "E8StregaLeoT3" },
+                { character : "NarraChara", Txt: "E8NarraLeoT5", sound: path_narration+'Narrateur-E8/NarrateurE8-008.mp3'},
+                { character : "BergerChara", Txt: "E8BergerLeoT", name: "E8BergerLeoT", sound: path_narration+'Berger-E8/bergerE8-004.mp3' },
+                { character : "NarraChara", Txt: "E8NarraLeoT6", sound: path_narration+'Narrateur-E8/NarrateurE8-009.mp3', nextLvl: () => { nextScreen("5","12");}}
             ]);
             localStorage.setItem('incantation', true)
         }  

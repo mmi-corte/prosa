@@ -504,7 +504,8 @@ export function playSteps(steps, index=0, AR=false, marker=null) {
               } else if (choice.answer) {
                 choice.answer();
                 localStorage.setItem(`answer_${localStorage.getItem("level")}_E${index}`, btn.textContent);
-                playSteps(steps, index + 1, true, 2);
+                // playSteps(steps, index + 1, true, 2);
+                playSteps(steps, index + 1);
               }
             } 
       
@@ -723,8 +724,6 @@ function charaChanger(index, steps) {
       if (step.name) {
         addNameCharacter(step.name, "diagBox", "nameCharacter"); // Le nom est ajouté dans le même div
       }
-    
-      
 
       // Ajouter le texte du choix
       addTxtNarration(choice.text, btnId, "");

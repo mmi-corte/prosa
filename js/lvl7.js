@@ -21,49 +21,44 @@ export function loadLvl7() {
                 { text: "Droite ?", answer: () => {return null;}},
                 { text: "Milieu ?", answer: () => {return null;}},
                 { text: "Gauche ?", answer: () => {return null;}}
-            ]}];
-
- //   refreshPage()  ;    
-    playSteps(steps);
-
-    // var steps = [
-    //         { background: path_backgrounds + 'fondEtape7.png', character: null,
-    //             style_button: "row",
-    //             choices: [
-    //                 { text: "Droite ?", answer: () => {return null;}},
-    //                 { text: "Milieu ?", answer: () => {return null;}},
-    //                 { text: "Gauche ?", answer: () => {return null;}}
-    //         ]},
-    //         { background: path_backgrounds + 'fondEtape7.png', character: null,
-    //             style_button: "row",
-    //             choices: [
-    //                 { text: "Droite ?", answer: () => {return null;}},
-    //                 { text: "Milieu ?", answer: () => {return null;}},
-    //                 { text: "Gauche ?", answer: () => {return null;}}
-    //         ]},
-    //         { background: path_backgrounds + 'fondEtape7.png', character: null,
-    //             style_button: "row",
-    //             choices: [
-    //                 { text: "Droite ?", answer: () => {return null;}},
-    //                 { text: "Milieu ?", answer: () => {return null;}},
-    //                 { text: "Gauche ?", answer: () => {return null;}}
-    //         ]},
-    //         { background: path_backgrounds + 'fondEtape7.png', character: null,
-    //             style_button: "row",
-    //             choices: [
-    //                 { text: "Droite ?", answer: () => {return null;}},
-    //                 { text: "Milieu ?", answer: () => {return null;}},
-    //                 { text: "Gauche ?", answer: () => {return null;}}
-    //         ]}
-    // ];
+            ]},
+            { background: path_backgrounds + 'fondEtape7.png', character: null,
+                            style_button: "row",
+                            choices: [
+                                { text: "Droite ?", answer: () => {return null;}},
+                                { text: "Milieu ?", answer: () => {return null;}},
+                                { text: "Gauche ?", answer: () => {return null;}}
+                        ]},
+                        { background: path_backgrounds + 'fondEtape7.png', character: null,
+                            style_button: "row",
+                            choices: [
+                                { text: "Droite ?", answer: () => {return null;}},
+                                { text: "Milieu ?", answer: () => {return null;}},
+                                { text: "Gauche ?", answer: () => {return null;}}
+                        ]},
+                        { background: path_backgrounds + 'fondEtape7.png', character: null,
+                            style_button: "row",
+                            choices: [
+                                { text: "Droite ?", answer: () => {return null;}},
+                                { text: "Milieu ?", answer: () => {return null;}},
+                                { text: "Gauche ?", answer: () => {return null;}}
+                        ]},
+                        { background: path_backgrounds + 'fondEtape7.png', character: null,
+                            style_button: "row",
+                            choices: [
+                                { text: "Droite ?", answer: () => {return null;}},
+                                { text: "Milieu ?", answer: () => {return null;}},
+                                { text: "Gauche ?", answer: () => {return null;}}
+                        ]}
+        ];
 
     const D0 = localStorage.getItem('answer_7_E0');
-    // const D1 = localStorage.getItem('answer_7_E1');
-    // const D2 = localStorage.getItem('answer_7_E2');
-    // const D3 = localStorage.getItem('answer_7_E3');
-    // const D4 = localStorage.getItem('answer_7_E4');
+    const D1 = localStorage.getItem('answer_7_E1');
+    const D2 = localStorage.getItem('answer_7_E2');
+    const D3 = localStorage.getItem('answer_7_E3');
+    const D4 = localStorage.getItem('answer_7_E4');
 
-    if (D0=="Gauche ?"){ //} && D1=="Gauche ?" && D2=="Droite ?" && D3=="Milieu ?" && D4=="Droite ?") {
+    if (D0=="Gauche ?" && D1=="Gauche ?" && D2=="Droite ?" && D3=="Milieu ?" && D4=="Droite ?") {
         steps = steps.concat([
             { background: path_backgrounds + 'fondEtape7.png', 
                 narration: "E7NarraTunT", 
