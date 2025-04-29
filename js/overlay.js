@@ -1,4 +1,4 @@
-import { addBtnImg, ajouterBouton } from './button.js';
+import { addBtnImg } from './button.js';
 import { addDiv } from './texte.js';
 
 export function addOverlay(audioId, audioSrc) {

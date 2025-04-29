@@ -2,49 +2,82 @@ import { checkImageExists } from "./functions.js";
 // import { createStaticMap } from "./map.js";
 
 export function popup(txt, imgSrc = "") {
+    // Find or create a container compatible with AR mode
+    let arContainer = document.getElementById('ar-container');
+    if (!arContainer) {
+        arContainer = document.createElement('div');
+        arContainer.id = 'ar-container';
+        arContainer.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2147483647;
+        `;
+        document.body.appendChild(arContainer);
+    }
 
-    //Overlay Transition
-    const Container = document.getElementById('container');
+    // Create the overlay
     const overlay = document.createElement("div");
-    const OverlayText = document.createElement("p");
-    const OverlayImage = document.createElement("img");
     overlay.className = "overlay";
-    Container.appendChild(overlay);
+    overlay.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.2em;
+        max-width: 80%;
+        border: 2px solid white;
+        pointer-events: auto;
+    `;
 
-    function fadeIn(element) {
-        element.classList.remove("fade-out");
-        element.classList.add("fade-in");
-        element.style.display = "flex"; // Rendre visible si nécessaire
-    }
-
-    function fadeOut(element) {
-        element.classList.remove("fade-in");
-        element.classList.add("fade-out");
-        setTimeout(() => {
-            element.style.display = "none"; // Cache l'élément après l'animation
-        }, 2000); // La durée doit correspondre à celle de l'animation CSS
-    }
-
-    checkImageExists(imgSrc, (exists) => {
-        if (exists) {
-            OverlayImage.className = "OverlayImg";
-            OverlayImage.src = imgSrc;
-            overlay.appendChild(OverlayImage);
-        } else {
-            console.warn("Image not found:", imgSrc);
-        }
-    });
-
+    // Add text to the overlay
+    const OverlayText = document.createElement("p");
     OverlayText.className = "OverlayTxt";
     OverlayText.innerHTML = txt;
     overlay.appendChild(OverlayText);
 
-    fadeIn(overlay);
+    // Add image if it exists
+    if (imgSrc) {
+        const OverlayImage = document.createElement("img");
+        OverlayImage.className = "OverlayImg";
+        OverlayImage.src = imgSrc;
+        OverlayImage.style.cssText = `
+            display: block;
+            margin: 10px auto;
+            max-width: 100px;
+            max-height: 100px;
+        `;
+        overlay.appendChild(OverlayImage);
+    }
 
+    // Add the overlay to the AR container
+    arContainer.appendChild(overlay);
+
+    // Fade-in effect
+    overlay.style.opacity = "0";
+    overlay.style.transition = "opacity 0.5s ease-in-out";
+    requestAnimationFrame(() => {
+        overlay.style.opacity = "1";
+    });
+
+    // Auto-remove after 3 seconds with fade-out effect
     setTimeout(() => {
-        fadeOut(overlay);
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+            if (overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }, 500); // Match the fade-out duration
     }, 3000);
-};
+}
 
 export function MapPopup(mapOptions, onClose) {
     // Vérifie et supprime une popup existante

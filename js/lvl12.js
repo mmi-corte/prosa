@@ -22,11 +22,11 @@ export function loadLvl12() {
         { character: "MartoChara", Txt: "E12Marto3", name: "E12Marto3", sound: path_narration+'StMarto-E12/StMarto-E12-003.mp3'},
         { character: "NarraChara", Txt: "E12Narra4", sound: path_narration+'Narrateur-E12/narrateurE12-004.mp3'},
         { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", sound: path_narration+'StMarto-E12/StMarto-E12-004.mp3'},
-        { character: "MartoChara", Txt: "E12Marto4", name: "E12Marto4", popup: "E12Mess"},
+        { character: "MartoChara", Txt: "E12Mess", name: "E12Marto4"},
         { character: "MartoChara", Txt: "E12Marto5", name: "E12Marto5"},
         { character: "NarraChara", Txt: "E12Narra5", sound: path_narration+'Narrateur-E12/narrateurE12-005.mp3'},
         { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", sound: path_narration+'StMarto-E12/StMarto-E12-005.mp3'},
-        { character: "MartoChara", Txt: "E12Marto6", name: "E12Marto6", popup: "E12Mess2"}       
+        { character: "MartoChara", Txt: "E12Mess2", name: "E12Marto6"}       
     ];
 
     const leaf = localStorage.getItem('leaf') == "true" || true;
