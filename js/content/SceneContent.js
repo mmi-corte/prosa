@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { ARSystem } from './systems/ARSystem.js';
-import { initUI } from './ui/UIManager.js';
+import { ARSystem } from '../systems/ARSystem.js';
+import { initUI } from '../ui/UIManager.js';
 
 // On ajoute 'targetUrl' dans les paramètres reçus
 export const loadSceneContent = (targetUrl, plane, containerId) => {

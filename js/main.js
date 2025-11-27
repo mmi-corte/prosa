@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { ARSystem } from './systems/ARSystem.js';
 import { loadSceneContent } from './content/SceneContent.js';
 
