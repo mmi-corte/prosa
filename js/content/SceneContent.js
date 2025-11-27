@@ -1,17 +1,15 @@
 import * as THREE from 'three';
 
-// L'URL est cachée ici, elle ne pollue plus le main.js
-const TARGET_URL = "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind";
-
-// La fonction prend 2 paramètres comme demandé
-export const loadSceneContent = (containerSelector, arSystem) => {
+// On ajoute 'targetUrl' dans les paramètres reçus
+export const loadSceneContent = (containerSelector, targetUrl, arSystem) => {
   
-  // 1. On initialise le système AR avec l'URL définie ici
-  arSystem.init(containerSelector, TARGET_URL);
+  // 1. Initialisation avec l'URL reçue depuis le main.js
+  arSystem.init(containerSelector, targetUrl);
 
-  // 2. On ajoute le contenu 3D (comme avant)
+  // 2. Création de l'ancre
   const anchor = arSystem.addAnchor(0);
 
+  // 3. Contenu 3D (Géométrie & Matériaux)
   const geometry = new THREE.PlaneGeometry(1, 0.55);
   const material = new THREE.MeshBasicMaterial({ 
     color: 0x00ffff, 
@@ -20,5 +18,6 @@ export const loadSceneContent = (containerSelector, arSystem) => {
   });
   const plane = new THREE.Mesh(geometry, material);
   
+  // 4. Ajout à la scène
   anchor.group.add(plane);
 };
