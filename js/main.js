@@ -7,7 +7,8 @@ const main = async () => {
   
   // --- CONFIGURATION ---
   const containerId = "#container";
-  const targetUrl = "./assets/markers/00.mind";
+  // const targetUrl = "./assets/markers/00.mind";
+  const targetUrl = "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind";
   // ---------------------
 
   // 3. Contenu 3D (Géométrie & Matériaux)
