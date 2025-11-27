@@ -1,6 +1,6 @@
 import { ARSystem } from './systems/ARSystem.js';
 import { loadSceneContent } from './content/SceneContent.js';
-import { initUI } from './ui/UIManager.js';
+
 
 const main = async () => {
   
@@ -22,11 +22,7 @@ const main = async () => {
   // Ordre des paramètres : (Selecteur, URL, Système)
   loadSceneContent(targetUrl, plane, containerId);
 
-  // 3. UI
-  initUI({
-    onStart: () => arSystem.start(),
-    onStop: () => arSystem.stop()
-  });
+  
 };
 
 document.addEventListener("DOMContentLoaded", main);
