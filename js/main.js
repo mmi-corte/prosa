@@ -4,27 +4,22 @@ import { initUI } from './ui/UIManager.js';
 
 const main = async () => {
   
-  // initialisation AR systeme
-  const arSystem = new ARSystem(
-    "#container", 
-    "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind"
-  );
+  // 1.creation du système (vide pour l'instant)
+  const arSystem = new ARSystem();
 
-  // 2. charge le contenu 3D
-  loadSceneContent(arSystem);
+  // 2. Chargement de la scène 
+  // On passe le container et le système. C'est SceneContent qui va configurer l'URL.
+  loadSceneContent("#container", arSystem);
 
-  // 3. Initialise l'IU 
+  // 3. UI
   initUI({
     onStart: () => {
-      console.log("AR Started");
       arSystem.start();
     },
     onStop: () => {
-      console.log("AR Stopped");
       arSystem.stop();
     }
   });
 };
 
-// Lancement au chargement de la page
 document.addEventListener("DOMContentLoaded", main);

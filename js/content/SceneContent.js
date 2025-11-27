@@ -1,10 +1,17 @@
 import * as THREE from 'three';
 
-export const loadSceneContent = (arSystem) => {
-  // 1. On récupère une ancre depuis notre système AR
+// L'URL est cachée ici, elle ne pollue plus le main.js
+const TARGET_URL = "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind";
+
+// La fonction prend 2 paramètres comme demandé
+export const loadSceneContent = (containerSelector, arSystem) => {
+  
+  // 1. On initialise le système AR avec l'URL définie ici
+  arSystem.init(containerSelector, TARGET_URL);
+
+  // 2. On ajoute le contenu 3D (comme avant)
   const anchor = arSystem.addAnchor(0);
 
-  // 2. On crée les objets 3D
   const geometry = new THREE.PlaneGeometry(1, 0.55);
   const material = new THREE.MeshBasicMaterial({ 
     color: 0x00ffff, 
@@ -12,10 +19,6 @@ export const loadSceneContent = (arSystem) => {
     opacity: 0.5 
   });
   const plane = new THREE.Mesh(geometry, material);
-
-  // 3. On ajoute l'objet à l'ancre
-  anchor.group.add(plane);
   
-  // (Optionnel) Retourner les objets si on veut les animer plus tard
-  return { plane };
+  anchor.group.add(plane);
 };
