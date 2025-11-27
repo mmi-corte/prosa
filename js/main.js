@@ -7,7 +7,7 @@ const main = async () => {
   
   // --- CONFIGURATION ---
   const containerId = "#container";
-  const targetUrl = "./assets/img/makers/00.mind";
+  const targetUrl = "./assets/markers/00.mind";
   // ---------------------
 
   // 3. Contenu 3D (Géométrie & Matériaux)
