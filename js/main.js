@@ -6,10 +6,10 @@ const main = async () => {
   
   // --- CONFIGURATION ---
   const containerId = "#container";
-  const targetUrl = "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind";
+  const targetUrl = "./assets/img/makers/00.mind";
   // ---------------------
 
-    // 3. Contenu 3D (Géométrie & Matériaux)
+  // 3. Contenu 3D (Géométrie & Matériaux)
   const geometry = new THREE.PlaneGeometry(1, 0.55);
   const material = new THREE.MeshBasicMaterial({ 
     color: 0x00ffff, 
