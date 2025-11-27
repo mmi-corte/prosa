@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@capacitor/haptics": "^6.0.2",
-    "selfsigned": "^2.4.1"
-  },
-  "devDependencies": {
-    "ngrok": "^5.0.0-beta.2"
-  }
-}
