@@ -1,29 +1,12 @@
-/* pages.css */
-
-#container {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    background-color: transparent;
-}
-
-#control {
-    position: fixed;
-    
-    /* 1. On place le point d'origine du bloc au centre de l'écran */
-    top: 50%;
-    left: 50%;
-    
-    
-    transform: translate(-50%, -50%);
-    
-    z-index: var(--control-z-index);
-    padding: var(--spacing-unit);
-
-    /* alignement bouton */
-    display: flex;
-    gap: 10px; /* Espace entre les boutons */
-    align-items: center;
-    justify-content: center;
-}
+    #container {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+      }
+      #control {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: var(--z-index-control);
+      }
