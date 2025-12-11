@@ -246,16 +246,17 @@
       opacity: 0.5;
     }
 
-    /* Fixed background image using direct blob URL */
+    /* Updated background to use generated post-apocalyptic image */
     .background-image {
       position: absolute;
       inset: 0;
-      background-image: url('/images/image.png');
+      background-image: url('images/background.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      filter: brightness(0.7) contrast(1.1) saturate(0.9);
+      filter: brightness(0.75) contrast(1.1) saturate(0.9);
       animation: bg-subtle-movement 60s ease-in-out infinite alternate;
+      z-index: 1;
     }
 
     @keyframes bg-subtle-movement {
@@ -269,14 +270,15 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(13, 11, 9, 0.85) 0%,
-        rgba(13, 11, 9, 0.5) 15%,
-        rgba(13, 11, 9, 0.2) 35%,
-        rgba(13, 11, 9, 0.15) 50%,
-        rgba(13, 11, 9, 0.3) 65%,
-        rgba(13, 11, 9, 0.7) 80%,
+        rgba(13, 11, 9, 0.9) 0%,
+        rgba(13, 11, 9, 0.6) 20%,
+        rgba(13, 11, 9, 0.25) 40%,
+        rgba(13, 11, 9, 0.2) 50%,
+        rgba(13, 11, 9, 0.35) 60%,
+        rgba(13, 11, 9, 0.75) 80%,
         rgba(13, 11, 9, 0.95) 100%
       );
+      z-index: 2;
     }
 
     /* Particles */
@@ -1598,19 +1600,6 @@
       }
     };
 
-    // Fonction pour vérifier le code et effectuer la redirection
-    function checkCodeAndRedirect(code, gamesData) {
-      for (let game in gamesData.games) {
-        if (gamesData.games[game].code === code) {
-          const action = gamesData.games[game].action;
-          if (action.type === "redirect") {
-            window.location = action.url; // Redirection vers l'URL
-            return;
-          }
-        }
-      }
-    }
-
     // Post-apocalyptic sound effects
     const playSound = (type) => {
       initAudio();
@@ -1908,18 +1897,8 @@
           codeInputs.forEach(input => input.classList.remove('error'));
         }, 400);
         return;
-
-       
       }
 
-      fetch('db.json')
-        .then(response => response.json())  // Convertir la réponse en JSON
-        .then(data => {
-          
-          checkCodeAndRedirect(code, data); // Appeler la fonction avec un code et les données
-        })
-        .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
-        
       if (code === SECRET_CODE) {
         playSound('success');
         vibrate([50, 100, 50, 100, 50]);
