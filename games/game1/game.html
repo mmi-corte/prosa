@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillage de l'Armurerie - Corte (Platinum Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        /* --- CONFIGURATION CUSTOM --- */
+        body {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .title-font {
+            font-family: 'Black Ops One', cursive;
+        }
+
+        /* Animation Particules */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: particle-fly 0.6s ease-out forwards;
+        }
+
+        @keyframes particle-fly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Styles spécifiques des Caisses */
+        .crate {
+            transition: transform 0.1s, filter 0.2s, border-color 0.2s, background-color 0.2s;
+        }
+
+        .crate:active {
+            transform: scale(0.92);
+        }
+
+        .crate.opened {
+            transform: scale(1);
+            filter: grayscale(0.2);
+        }
+
+        /* Zone Styles */
+        .zone-1-crate {
+            background: linear-gradient(135deg, #2f3e2b 0%, #1a2318 100%);
+            border: 1px solid #4ade80;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
+        }
+
+        .zone-1-crate:hover:not(.opened) {
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+            border-color: #86efac;
+            z-index: 10;
+            transform: scale(1.05);
+        }
+
+        .zone-2-crate {
+            background: repeating-linear-gradient(45deg, #2a2a2a, #2a2a2a 10px, #202020 10px, #202020 20px);
+            border: 1px solid #f97316;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.1);
+        }
+
+        .zone-2-crate:hover:not(.opened) {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+            border-color: #fbbf24;
+            z-index: 10;
+            transform: scale(1.05);
+        }
+
+        .zone-3-bg {
+            background-color: #000;
+        }
+
+        .zone-3-crate {
+            background-color: #000;
+            border: 1px solid #333;
+            opacity: 0.3;
+        }
+
+        .zone-3-crate:hover:not(.opened) {
+            opacity: 1;
+            border-color: #ef4444;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+            z-index: 10;
+            transform: scale(1.05);
+            background: radial-gradient(circle at center, #331111 0%, #000000 100%);
+        }
+
+        /* Animations UX */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px) rotate(-2deg);
+            }
+
+            75% {
+                transform: translateX(5px) rotate(2deg);
+            }
+        }
+
+        .shake-element {
+            animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+            border-color: #ef4444 !important;
+        }
+
+        .reveal {
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(1.5);
+            }
+        }
+
+        .floating-text {
+            animation: floatUp 0.8s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .combo-pulse {
+            animation: comboPulse 0.2s;
+        }
+
+        @keyframes comboPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes alarmPulse {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .alarm-overlay {
+            background: radial-gradient(circle, transparent 40%, rgba(220, 38, 38, 0.4) 100%);
+            animation: alarmPulse 2s infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="h-screen w-screen flex flex-col items-center justify-center bg-[#050505] text-[#e5e5e5] relative overflow-hidden select-none">
+
+    <!-- FX Layers -->
+    <div
+        class="fixed inset-0 pointer-events-none z-40 opacity-60 bg-[linear-gradient(to_bottom,rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px]">
+    </div>
+    <div id="alarm-overlay" class="alarm-overlay fixed inset-0 pointer-events-none z-0 hidden bg-red-900"></div>
+    <div id="particles-container" class="absolute inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+    <!-- Écran d'Introduction & Règles -->
+    <div id="intro-screen"
+        class="absolute inset-0 z-50 flex flex-col items-center justify-center p-4 text-center bg-black">
+        <div
+            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30">
+        </div>
+
+        <!-- Titre -->
+        <h1
+            class="text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-red-600 title-font mb-2 tracking-widest drop-shadow-lg relative z-10">
+            OPERATION: CORTE
+        </h1>
+        <div class="h-1 w-48 bg-orange-600 mb-6 shadow-[0_0_15px_orange] relative z-10"></div>
+
+        <div class="flex flex-col md:flex-row gap-6 max-w-7xl w-full relative z-10 h-3/4 md:h-auto">
+
+            <!-- Colonne Gauche: Instructions -->
+            <div
+                class="flex-1 bg-zinc-900/90 border border-zinc-700 p-6 rounded text-left shadow-2xl backdrop-blur-sm overflow-y-auto">
+                <h2
+                    class="text-2xl text-cyan-400 font-bold mb-4 flex items-center gap-2 title-font tracking-wider border-b border-zinc-700 pb-2">
+                    <i class="fas fa-terminal"></i> BRIEFING TACTIQUE
+                </h2>
+
+                <div class="space-y-4 text-sm md:text-base text-zinc-300">
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-zinc-800 p-2 rounded text-orange-500"><i class="fas fa-weight-hanging"></i></div>
+                        <div>
+                            <strong class="text-white block uppercase text-xs tracking-wider mb-1">Gestion du
+                                Poids</strong>
+                            Votre sac a une limite. Cherchez les <span class="text-pink-500 font-bold">Sacs
+                                (+10kg)</span> pour emporter plus ! Utilisez le bouton <span
+                                class="text-green-400 font-bold">EXTRACTION</span> quand vous êtes prêt à partir.
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-zinc-800 p-2 rounded text-red-500"><i class="fas fa-bomb"></i></div>
+                        <div>
+                            <strong class="text-white block uppercase text-xs tracking-wider mb-1">Dangers</strong>
+                            Les pièges explosent et réduisent votre temps.
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-zinc-800 p-2 rounded text-cyan-400"><i class="fas fa-crosshairs"></i></div>
+                        <div>
+                            <strong class="text-white block uppercase text-xs tracking-wider mb-1">Scanner
+                                Thermique</strong>
+                            Vous avez <span class="text-cyan-400 font-bold">3 Scans</span>. Révèle :
+                            <ul class="mt-1 ml-2 space-y-1 text-xs font-mono">
+                                <li class="text-green-400"><i class="fas fa-check mr-1"></i> VERT = SÛR</li>
+                                <li class="text-red-500"><i class="fas fa-bomb mr-1"></i> ROUGE = BOMBE</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne Droite: Zones & Start -->
+            <div class="flex-1 flex flex-col justify-between gap-4">
+                <div class="space-y-3">
+                    <div
+                        class="bg-zinc-900/80 p-4 rounded border-l-4 border-green-500 flex justify-between items-center group hover:bg-zinc-800 transition-colors">
+                        <div>
+                            <h3 class="font-bold text-white tracking-wider">ZONE 01: ENTRÉE</h3>
+                            <p class="text-xs text-zinc-500 font-mono">BASE: 35KG // MENACE: FAIBLE</p>
+                        </div>
+                        <i
+                            class="fas fa-door-open text-green-500 text-xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div
+                        class="bg-zinc-900/80 p-4 rounded border-l-4 border-orange-500 flex justify-between items-center group hover:bg-zinc-800 transition-colors">
+                        <div>
+                            <h3 class="font-bold text-white tracking-wider">ZONE 02: RÉSERVE</h3>
+                            <p class="text-xs text-zinc-500 font-mono">BASE: 55KG // MENACE: MOYENNE</p>
+                        </div>
+                        <i
+                            class="fas fa-boxes-stacked text-orange-500 text-xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div
+                        class="bg-zinc-900/80 p-4 rounded border-l-4 border-red-600 flex justify-between items-center group hover:bg-zinc-800 transition-colors relative overflow-hidden">
+                        <div class="absolute inset-0 bg-red-900/10 animate-pulse pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <h3 class="font-bold text-white tracking-wider">ZONE 03: BUNKER</h3>
+                            <p class="text-xs text-zinc-500 font-mono">BASE: 70KG // MENACE: CRITIQUE</p>
+                        </div>
+                        <i
+                            class="fas fa-biohazard text-red-600 text-xl relative z-10 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <button onclick="startGame()"
+                    class="w-full relative group py-6 bg-orange-700 text-white font-bold text-2xl tracking-[0.2em] title-font overflow-hidden rounded transition-all hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(234,88,12,0.6)] mt-auto">
+                    <span class="relative z-10 flex items-center justify-center gap-3">
+                        LANCER LE RAID <i class="fas fa-chevron-right text-sm"></i>
+                    </span>
+                    <div
+                        class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran de Fin de Niveau -->
+    <div id="level-screen"
+        class="absolute inset-0 z-50 flex flex-col items-center justify-center p-6 text-center hidden backdrop-blur-xl bg-black/80">
+        <h2 id="level-title" class="text-5xl text-green-400 title-font mb-2 drop-shadow-lg">EXTRACTION RÉUSSIE</h2>
+        <div class="w-24 h-1 bg-green-500 mb-8"></div>
+
+        <div class="bg-zinc-900/80 p-8 rounded border border-zinc-700 w-full max-w-lg mb-8 shadow-2xl backdrop-blur-md">
+            <div class="flex justify-between mb-4 items-end">
+                <span class="text-zinc-400 text-sm uppercase tracking-widest">Score Zone</span>
+                <span id="level-score-disp" class="text-white font-bold text-3xl font-mono">0</span>
+            </div>
+            <div class="flex justify-between mb-6 items-end">
+                <span class="text-zinc-400 text-sm uppercase tracking-widest">Max Combo</span>
+                <span id="level-combo-disp" class="text-yellow-400 font-bold text-3xl font-mono">x0</span>
+            </div>
+            <div class="h-px bg-zinc-700 w-full mb-6"></div>
+            <div class="flex justify-between items-center">
+                <span class="text-orange-500 font-bold uppercase tracking-widest text-lg">CUMUL TOTAL</span>
+                <span id="total-score-disp" class="text-orange-400 font-bold text-5xl title-font">0</span>
+            </div>
+        </div>
+
+        <button onclick="nextLevel()"
+            class="px-10 py-4 bg-white text-black font-bold text-lg uppercase tracking-widest hover:bg-zinc-200 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] rounded">
+            DÉPLOYER > ZONE SUIVANTE
+        </button>
+    </div>
+
+    <!-- Interface de Jeu -->
+    <div id="game-ui" class="w-full max-w-7xl h-full flex-col p-4 hidden relative z-10">
+
+        <!-- Top HUD -->
+        <div class="flex flex-wrap gap-4 mb-4 items-stretch">
+
+            <!-- Zone Info -->
+            <div
+                class="bg-zinc-900/90 border border-zinc-700 px-4 py-2 rounded flex flex-col justify-center items-center min-w-[100px]">
+                <span class="text-[10px] text-zinc-500 uppercase font-bold tracking-widest">ZONE</span>
+                <span id="zone-display" class="text-3xl font-bold text-white title-font">1</span>
+            </div>
+
+            <!-- Main Stats Bar -->
+            <div
+                class="flex-grow bg-zinc-900/90 border border-zinc-700 rounded p-2 grid grid-cols-12 gap-4 items-center">
+
+                <!-- Timer -->
+                <div class="col-span-4 flex flex-col justify-center border-r border-zinc-700 pr-4">
+                    <div class="flex justify-between items-end mb-1">
+                        <span class="text-xs text-zinc-400 font-bold uppercase tracking-wider"><i
+                                class="fas fa-clock mr-2"></i>TEMPS</span>
+                        <span id="time-text" class="text-xl font-mono font-bold text-white">00.0s</span>
+                    </div>
+                    <div class="w-full bg-black h-3 rounded-full overflow-hidden border border-zinc-800">
+                        <div id="timer-bar"
+                            class="bg-gradient-to-r from-red-600 to-orange-500 h-full w-full transition-all duration-200">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMBO -->
+                <div class="col-span-4 flex flex-col items-center justify-center relative group">
+                    <div id="combo-box" class="combo-container flex flex-col items-center transition-transform">
+                        <span class="text-[10px] text-yellow-500 uppercase font-bold tracking-[0.2em] mb-1">COMBO</span>
+                        <span id="combo-display"
+                            class="text-5xl font-bold text-yellow-400 title-font italic drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]">x1</span>
+                    </div>
+                    <div class="w-32 h-1 bg-zinc-800 mt-1 rounded-full overflow-hidden">
+                        <div id="combo-bar" class="bg-yellow-400 h-full w-0 transition-all duration-75"></div>
+                    </div>
+                </div>
+
+                <!-- Weight -->
+                <div class="col-span-4 flex flex-col justify-center border-l border-zinc-700 pl-4 text-right">
+                    <div class="flex justify-between items-end mb-1">
+                        <span id="weight-text" class="text-xl font-mono font-bold text-white">0 <span
+                                class="text-sm text-zinc-500">/ 35</span></span>
+                        <span class="text-xs text-zinc-400 font-bold uppercase tracking-wider">SAC<i
+                                class="fas fa-weight-hanging ml-2"></i></span>
+                    </div>
+                    <div class="w-full bg-black h-3 rounded-full overflow-hidden border border-zinc-800 dir-rtl">
+                        <div id="weight-bar" class="bg-cyan-500 h-full w-0 float-right transition-all duration-200">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls (Extraction & Scan) -->
+            <div class="flex gap-2">
+                <!-- Extraction Button -->
+                <button onclick="manualExtraction()"
+                    class="w-24 bg-green-900/60 border border-green-500/50 hover:bg-green-700/80 hover:border-green-400 rounded transition-all group flex flex-col items-center justify-center animate-[pulse_3s_infinite]">
+                    <i
+                        class="fas fa-running text-green-400 text-2xl mb-1 group-hover:translate-x-1 transition-transform"></i>
+                    <span class="text-[9px] text-green-200 font-bold uppercase">EVACUER</span>
+                </button>
+
+                <!-- Scanner Button -->
+                <button id="btn-scan" onclick="useScanner()"
+                    class="w-24 bg-cyan-900/40 border border-cyan-500/30 hover:bg-cyan-800/60 hover:border-cyan-400 rounded transition-all group relative overflow-hidden flex flex-col items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-cyan-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    </div>
+                    <i
+                        class="fas fa-crosshairs text-cyan-400 text-2xl mb-1 group-hover:rotate-90 transition-transform duration-500"></i>
+                    <span class="text-[10px] text-cyan-200 font-bold uppercase z-10">SCAN</span>
+                    <span id="scan-count"
+                        class="absolute top-1 right-1 text-[9px] bg-black text-cyan-400 border border-cyan-900 px-1 rounded font-mono">3</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Score -->
+        <div class="absolute top-28 left-1/2 -translate-x-1/2 pointer-events-none opacity-50 z-0">
+            <span id="score-display" class="text-8xl font-bold text-white/5 title-font">0</span>
+        </div>
+
+        <!-- Grid -->
+        <div id="grid-container" class="grid gap-3 flex-grow overflow-y-auto content-start p-2 relative z-10"></div>
+
+        <!-- Log Area -->
+        <div id="log-area"
+            class="h-8 mt-2 text-center text-xs font-bold flex items-center justify-center text-zinc-500 font-mono bg-black/60 rounded border-t border-zinc-800 uppercase tracking-wide backdrop-blur-sm">
+            // SYSTÈME PRÊT //
+        </div>
+    </div>
+
+    <!-- Écran de Fin -->
+    <div id="end-screen"
+        class="absolute inset-0 z-50 flex flex-col items-center justify-center p-6 text-center hidden backdrop-blur-xl bg-black/90">
+        <div
+            class="max-w-2xl w-full bg-zinc-900 border border-zinc-700 p-12 rounded shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
+            <div id="rank-stamp"
+                class="absolute top-10 right-10 border-4 border-white text-white font-bold text-8xl p-4 rotate-12 opacity-0 scale-150 transition-all duration-500 title-font shadow-lg">
+                S</div>
+            <h2 class="text-4xl text-white title-font mb-8 uppercase tracking-[0.2em] border-b border-zinc-700 pb-4">
+                RAPPORT FINAL</h2>
+            <div class="grid grid-cols-2 gap-8 mb-10">
+                <div class="bg-black/30 p-4 rounded text-left">
+                    <p class="text-zinc-500 text-xs uppercase tracking-widest mb-1">Score Total</p>
+                    <p id="final-score" class="text-5xl font-bold text-white font-mono">0</p>
+                </div>
+                <div class="bg-black/30 p-4 rounded text-left">
+                    <p class="text-zinc-500 text-xs uppercase tracking-widest mb-1">Meilleur Combo</p>
+                    <p id="final-max-combo" class="text-5xl font-bold text-yellow-500 font-mono">x0</p>
+                </div>
+            </div>
+            <p id="end-message" class="text-zinc-400 italic text-lg mb-10">Calcul du rang...</p>
+            <button onclick="location.reload()"
+                class="w-full py-5 bg-white text-black font-bold text-xl uppercase tracking-[0.3em] hover:bg-zinc-200 transition-colors rounded">
+                NOUVELLE OPÉRATION
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const LEVELS = [
+            {
+                id: 1, name: "Entrée", time: 40, maxWeight: 35, traps: 1 / 6, rows: 3, cols: 4,
+                msg: "SECTEUR CALME. CHAUFFEZ-VOUS.", crateClass: "zone-1-crate", icon: "fa-box", blackout: false
+            },
+            {
+                id: 2, name: "Réserve", time: 30, maxWeight: 55, traps: 0.25, rows: 4, cols: 5,
+                msg: "HAUTE DENSITÉ. ATTENTION AU POIDS.", crateClass: "zone-2-crate", icon: "fa-boxes-stacked", blackout: false
+            },
+            {
+                id: 3, name: "Bunker", time: 25, maxWeight: 70, traps: 0.50, rows: 4, cols: 6,
+                msg: "PANNE DE COURANT. UTILISEZ LA LAMPE.", crateClass: "zone-3-crate", icon: "fa-lock", blackout: true
+            }
+        ];
+
+        // Items dont les "Extensions" (poids = 0, type=upgrade)
+        // Utilisation d'icônes FA 6 standards et explicites
+        const lootTable = [
+            { id: 'ext_bag', name: "Poche Molle", icon: "fa-briefcase", weight: 0, value: 50, type: "upgrade", bonus: 10, color: "text-pink-500" },
+            { id: 'ext_tac', name: "Sac Tactique", icon: "fa-person-walking-luggage", weight: 0, value: 80, type: "upgrade", bonus: 15, color: "text-pink-400" },
+            { id: 'medkit', name: "Kit Chirurgical", icon: "fa-suitcase-medical", weight: 3, value: 120, type: "item", color: "text-red-500" },
+            { id: 'antibio', name: "Antibiotiques", icon: "fa-pills", weight: 0.5, value: 90, type: "item", color: "text-red-400" },
+            { id: 'water', name: "Eau Pure", icon: "fa-bottle-water", weight: 10, value: 100, type: "item", color: "text-blue-500" },
+            { id: 'food', name: "Rations", icon: "fa-bread-slice", weight: 8, value: 80, type: "item", color: "text-yellow-600" }, // Icon changed to bread
+            { id: 'radio', name: "Radio", icon: "fa-walkie-talkie", weight: 1.5, value: 110, type: "item", color: "text-purple-400" },
+            { id: 'battery', name: "Batterie Li-Ion", icon: "fa-car-battery", weight: 2, value: 60, type: "item", color: "text-yellow-400" },
+            { id: 'fuel', name: "Essence", icon: "fa-oil-can", weight: 5, value: 75, type: "item", color: "text-orange-600" },
+            { id: 'intel', name: "Disque Dur", icon: "fa-hard-drive", weight: 0.2, value: 200, type: "item", color: "text-cyan-400" },
+            { id: 'junk', name: "Débris", icon: "fa-recycle", weight: 1, value: 0, type: "junk", color: "text-zinc-600" }
+        ];
+
+        // --- GAME STATE ---
+        let gs = {
+            levelIndex: 0,
+            totalScore: 0,
+            levelScore: 0,
+            timeLeft: 0,
+            maxWeight: 0,
+            currentWeight: 0,
+            combo: 1,
+            maxComboLevel: 1,
+            maxComboTotal: 1,
+            comboTimeLeft: 0,
+            COMBO_MAX_TIME: 30,
+            scansLeft: 3,
+            isActive: false,
+            timerInterval: null
+        };
+
+        const DOM = {
+            grid: document.getElementById('grid-container'),
+            log: document.getElementById('log-area'),
+            scanBtn: document.getElementById('btn-scan'),
+            scanCount: document.getElementById('scan-count'),
+            particles: document.getElementById('particles-container'),
+            alarm: document.getElementById('alarm-overlay'),
+            comboDisp: document.getElementById('combo-display'),
+            comboBar: document.getElementById('combo-bar'),
+            comboBox: document.getElementById('combo-box'),
+            weightText: document.getElementById('weight-text'),
+            weightBar: document.getElementById('weight-bar')
+        };
+
+        function startGame() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('game-ui').classList.remove('hidden');
+            document.getElementById('game-ui').classList.add('flex');
+            gs.levelIndex = 0;
+            gs.totalScore = 0;
+            gs.scansLeft = 3;
+            gs.maxComboTotal = 1;
+            startLevel(0);
+        }
+
+        function startLevel(idx) {
+            const config = LEVELS[idx];
+            gs.timeLeft = config.time;
+            gs.maxWeight = config.maxWeight; // Reset base weight for level
+            gs.currentWeight = 0;
+            gs.levelScore = 0;
+            gs.combo = 1;
+            gs.isActive = true;
+
+            if (config.blackout) { DOM.alarm.classList.remove('hidden'); DOM.grid.classList.add('zone-3-bg'); }
+            else { DOM.alarm.classList.add('hidden'); DOM.grid.classList.remove('zone-3-bg'); }
+
+            document.getElementById('zone-display').innerText = idx + 1;
+            DOM.scanCount.innerText = gs.scansLeft;
+            updateScanButton();
+            updateHUD();
+            updateComboUI();
+            log(`/// ${config.msg} ///`, "text-white");
+            generateGrid(config);
+
+            if (gs.timerInterval) clearInterval(gs.timerInterval);
+            gs.timerInterval = setInterval(gameLoop, 100);
+        }
+
+        function gameLoop() {
+            if (!gs.isActive) return;
+            gs.timeLeft -= 0.1;
+            if (gs.timeLeft <= 0) { gs.timeLeft = 0; endLevel("TEMPS ÉCOULÉ"); }
+
+            if (gs.combo > 1) {
+                gs.comboTimeLeft--;
+                let width = (gs.comboTimeLeft / gs.COMBO_MAX_TIME) * 100;
+                DOM.comboBar.style.width = `${width}%`;
+                if (gs.comboTimeLeft <= 0) resetCombo();
+            } else { DOM.comboBar.style.width = '0%'; }
+            updateHUD();
+        }
+
+        function increaseCombo() {
+            gs.combo++;
+            if (gs.combo > gs.maxComboLevel) gs.maxComboLevel = gs.combo;
+            if (gs.combo > gs.maxComboTotal) gs.maxComboTotal = gs.combo;
+            gs.comboTimeLeft = gs.COMBO_MAX_TIME;
+            DOM.comboBox.classList.remove('combo-pulse');
+            void DOM.comboBox.offsetWidth;
+            DOM.comboBox.classList.add('combo-pulse');
+            updateComboUI();
+        }
+
+        function resetCombo() {
+            if (gs.combo > 1) spawnFloatingText(window.innerWidth / 2, window.innerHeight / 2, "COMBO PERDU", "text-red-500 font-black text-3xl fixed z-50");
+            gs.combo = 1;
+            updateComboUI();
+        }
+
+        function updateComboUI() {
+            DOM.comboDisp.innerText = `x${gs.combo}`;
+            if (gs.combo >= 5) DOM.comboDisp.className = "text-5xl font-bold text-red-500 title-font italic drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]";
+            else if (gs.combo >= 3) DOM.comboDisp.className = "text-5xl font-bold text-orange-400 title-font italic drop-shadow-[0_0_10px_rgba(251,146,60,0.6)]";
+            else DOM.comboDisp.className = "text-5xl font-bold text-yellow-400 title-font italic drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]";
+        }
+
+        function updateHUD() {
+            const config = LEVELS[gs.levelIndex];
+            document.getElementById('time-text').innerText = gs.timeLeft.toFixed(1) + "s";
+            const timePct = (gs.timeLeft / config.time) * 100;
+            const bar = document.getElementById('timer-bar');
+            bar.style.width = `${Math.min(timePct, 100)}%`;
+            bar.className = gs.timeLeft < 10 ? "h-full w-full bg-red-600 animate-pulse" : "bg-gradient-to-r from-red-600 to-orange-500 h-full w-full";
+
+            document.getElementById('score-display').innerText = gs.totalScore + gs.levelScore;
+
+            // Dynamic Weight Handling
+            DOM.weightText.innerHTML = `${gs.currentWeight.toFixed(1)} <span class="text-sm text-zinc-500">/ ${gs.maxWeight}</span>`;
+            const wPct = (gs.currentWeight / gs.maxWeight) * 100;
+            DOM.weightBar.style.width = `${Math.min(wPct, 100)}%`;
+            DOM.weightBar.className = wPct >= 100 ? "bg-red-500 h-full w-full" : "bg-cyan-500 h-full w-full";
+        }
+
+        function generateGrid(config) {
+            DOM.grid.innerHTML = '';
+            DOM.grid.style.gridTemplateColumns = `repeat(${config.cols}, minmax(0, 1fr))`;
+            const totalCrates = config.rows * config.cols;
+            for (let i = 0; i < totalCrates; i++) {
+                const crate = document.createElement('div');
+                crate.className = `crate ${config.crateClass} rounded h-24 flex flex-col items-center justify-center relative select-none`;
+                crate.innerHTML = `<div class="absolute inset-0 bg-black opacity-20 pointer-events-none"></div><i class="fas ${config.icon} text-3xl text-white/30 mb-1 relative z-10 transition-all duration-300"></i><span class="text-[9px] text-white/30 font-mono relative z-10 font-bold tracking-widest">BX-${100 + i}</span>`;
+                const rand = Math.random();
+                let type = 'loot';
+                if (rand < config.traps) type = 'trap';
+                else if (rand < config.traps + 0.1) type = 'junk';
+                crate.dataset.type = type;
+                crate.dataset.opened = "false";
+                crate.onclick = (e) => handleCrateClick(crate, e);
+                DOM.grid.appendChild(crate);
+            }
+        }
+
+        function handleCrateClick(crate, event) {
+            if (crate.dataset.opened === "true" || !gs.isActive) return;
+            const type = crate.dataset.type;
+            const x = event.clientX;
+            const y = event.clientY;
+            openCrateVisuals(crate, type);
+            spawnParticles(x, y, type === 'trap' ? '#ef4444' : '#fbbf24');
+            if (type === 'trap') triggerTrap(x, y);
+            else if (type === 'junk') { log("VIDE...", "text-zinc-500"); resetCombo(); }
+            else triggerLoot(x, y);
+            checkLevelComplete();
+        }
+
+        function openCrateVisuals(crate, type) {
+            crate.dataset.opened = "true";
+            crate.classList.add('opened');
+            crate.classList.remove('zone-1-crate', 'zone-2-crate', 'zone-3-crate', 'scanned-safe', 'scanned-trap');
+            crate.style.opacity = "1";
+            crate.style.background = "#18181b";
+            crate.style.border = "1px solid #27272a";
+            if (type === 'trap') {
+                crate.classList.add('shake-element');
+                crate.style.background = "#450a0a";
+                crate.style.borderColor = "#ef4444";
+                crate.innerHTML = `<i class="fas fa-radiation text-4xl text-red-500 animate-spin-slow"></i>`;
+            } else if (type === 'junk') {
+                crate.innerHTML = `<span class="text-xs text-zinc-700 font-mono font-bold">NÉANT</span>`;
+            }
+        }
+
+        function triggerTrap(x, y) {
+            const penalty = 5;
+            gs.timeLeft -= penalty;
+            spawnFloatingText(x, y, `-${penalty}s`, 'text-red-600 text-3xl font-black absolute z-50');
+            log("ALERTE ! PIÈGE !", "text-red-500");
+            resetCombo();
+            document.body.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px)`;
+            setTimeout(() => document.body.style.transform = 'none', 100);
+        }
+
+        function triggerLoot(x, y) {
+            let item = getRandomLootItem();
+            const config = LEVELS[gs.levelIndex];
+
+            // GESTION UPGRADE SAC
+            if (item.type === 'upgrade') {
+                gs.maxWeight += item.bonus;
+                gs.levelScore += item.value; // Petit score bonus
+                spawnFloatingText(x, y, `+${item.bonus}KG CAPACITÉ`, "text-pink-500 text-xl font-bold absolute z-50");
+                log(`SAC AMÉLIORÉ !`, "text-pink-500");
+
+                // Visual Update for specific crate
+                const crates = document.querySelectorAll('.crate.opened');
+                const lastCrate = crates[crates.length - 1];
+                if (lastCrate) {
+                    lastCrate.style.borderColor = "#ec4899";
+                    lastCrate.innerHTML = `<i class="fas ${item.icon} text-3xl text-pink-500 mb-1 reveal"></i><span class="text-[9px] text-white font-bold">UPGRADE</span>`;
+                }
+                return;
+            }
+
+            if (gs.currentWeight + item.weight > gs.maxWeight) {
+                spawnFloatingText(x, y, "TROP LOURD", "text-zinc-500 text-xl font-bold absolute z-50");
+                log(`Laissé : ${item.name}`, "text-orange-500");
+                const crates = document.querySelectorAll('.crate.opened');
+                const lastCrate = crates[crates.length - 1];
+                if (lastCrate) lastCrate.innerHTML = `<i class="fas ${item.icon} text-2xl text-zinc-600 opacity-50"></i><span class="text-[8px] text-red-500 font-bold">LOURD</span>`;
+                return;
+            }
+
+            let finalValue = item.value * gs.combo;
+            gs.currentWeight += item.weight;
+            gs.levelScore += finalValue;
+
+            spawnFloatingText(x, y, `+${finalValue}`, "text-green-400 text-2xl font-bold absolute z-50");
+            increaseCombo();
+            log(`+ ${item.name}`, "text-green-400");
+
+            const crates = document.querySelectorAll('.crate.opened');
+            const lastCrate = crates[crates.length - 1];
+            if (lastCrate && !lastCrate.querySelector('.fa-radiation')) {
+                lastCrate.style.borderColor = "#22c55e";
+                lastCrate.innerHTML = `<i class="fas ${item.icon} text-3xl ${item.color} mb-1 reveal"></i><div class="flex flex-col items-center leading-none"><span class="text-[9px] text-white font-bold mb-1 tracking-tighter">${item.name}</span></div>`;
+            }
+        }
+
+        function spawnParticles(x, y, color) {
+            for (let i = 0; i < 8; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = x + 'px'; p.style.top = y + 'px';
+                p.style.width = (Math.random() * 6 + 2) + 'px'; p.style.height = p.style.width;
+                p.style.backgroundColor = color;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 60 + 20;
+                p.style.setProperty('--tx', `${Math.cos(angle) * velocity}px`);
+                p.style.setProperty('--ty', `${Math.sin(angle) * velocity}px`);
+                DOM.particles.appendChild(p);
+                setTimeout(() => p.remove(), 600);
+            }
+        }
+
+        function useScanner() {
+            if (gs.scansLeft <= 0 || !gs.isActive) return;
+            gs.scansLeft--;
+            updateScanButton();
+            DOM.scanCount.innerText = gs.scansLeft;
+            log("SCAN TACTIQUE...", "text-cyan-400");
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-cyan-500/10 pointer-events-none z-50';
+            document.body.appendChild(overlay);
+            setTimeout(() => overlay.remove(), 200);
+
+            const closedCrates = Array.from(document.querySelectorAll('.crate:not(.opened)'));
+            const traps = closedCrates.filter(c => c.dataset.type === 'trap');
+            const safe = closedCrates.filter(c => c.dataset.type !== 'trap');
+            const shuffledTraps = traps.sort(() => 0.5 - Math.random());
+            const shuffledSafe = safe.sort(() => 0.5 - Math.random());
+            let toScan = [...shuffledTraps.slice(0, 2), ...shuffledSafe].slice(0, 3);
+            if (toScan.length < 3) toScan = closedCrates.slice(0, 3);
+
+            const activeIndicators = [];
+            toScan.forEach(crate => {
+                const type = crate.dataset.type;
+                const ind = document.createElement('div');
+                ind.className = "absolute inset-0 z-20 flex items-center justify-center bg-black/70 scan-indicator animate-pulse";
+                if (type === 'trap') {
+                    crate.style.borderColor = "#ef4444";
+                    ind.classList.add("border-4", "border-red-600");
+                    ind.innerHTML = `<i class="fas fa-bomb text-red-500 text-4xl drop-shadow-[0_0_10px_red]"></i>`;
+                } else {
+                    crate.style.borderColor = "#4ade80";
+                    ind.classList.add("border-4", "border-green-500");
+                    ind.innerHTML = `<i class="fas fa-check text-green-500 text-4xl opacity-80"></i>`;
+                }
+                crate.appendChild(ind);
+                activeIndicators.push({ crate, ind });
+            });
+            setTimeout(() => { activeIndicators.forEach(obj => { obj.ind.remove(); obj.crate.style.borderColor = ""; }); }, 1500);
+        }
+
+        function manualExtraction() {
+            if (!gs.isActive) return;
+            endLevel("EXTRACTION RAPIDE");
+        }
+
+        function updateScanButton() {
+            if (gs.scansLeft <= 0) { DOM.scanBtn.disabled = true; DOM.scanBtn.classList.add('opacity-30', 'grayscale'); }
+        }
+
+        function getRandomLootItem() {
+            const r = Math.random();
+            const pool = lootTable.filter(i => i.id !== 'junk');
+
+            // Chance augmentée d'avoir un UPGRADE SAC si on est proche de la limite
+            if (gs.currentWeight > gs.maxWeight * 0.8 && Math.random() < 0.3) {
+                return pool.find(i => i.type === 'upgrade') || pool[0];
+            }
+
+            // Standard Random
+            if (Math.random() < 0.05) return pool.find(i => i.type === 'upgrade') || pool[0]; // 5% chance base upgrade
+            if (gs.levelIndex === 2 && r < 0.4) return pool.find(i => i.id === 'intel') || pool[0];
+            if (r < 0.3) return pool.filter(i => i.value > 100 && i.type !== 'upgrade')[0] || pool[0];
+            return pool.filter(i => i.value <= 100 && i.type !== 'upgrade')[Math.floor(Math.random() * pool.filter(i => i.value <= 100 && i.type !== 'upgrade').length)] || pool[0];
+        }
+
+        function spawnFloatingText(x, y, text, classes) {
+            const el = document.createElement('div');
+            el.className = `floating-text ${classes}`;
+            el.innerHTML = text;
+            el.style.left = `${x}px`; el.style.top = `${y}px`;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 800);
+        }
+
+        function checkLevelComplete() {
+            const unopened = document.querySelectorAll('.crate:not(.opened)').length;
+            if (unopened === 0) endLevel("ZONE NETTOYÉE");
+        }
+
+        function endLevel(reason) {
+            gs.isActive = false;
+            clearInterval(gs.timerInterval);
+            gs.totalScore += gs.levelScore;
+            if (gs.levelIndex < LEVELS.length - 1) {
+                const screen = document.getElementById('level-screen');
+                document.getElementById('level-title').innerText = reason === "TEMPS ÉCOULÉ" ? "ÉVACUATION D'URGENCE" : "EXTRACTION RÉUSSIE";
+                if (reason === "TEMPS ÉCOULÉ") document.getElementById('level-title').classList.replace('text-green-400', 'text-yellow-500');
+
+                screen.classList.remove('hidden'); screen.classList.add('flex');
+                document.getElementById('level-score-disp').innerText = gs.levelScore;
+                document.getElementById('level-combo-disp').innerText = `x${gs.maxComboLevel}`;
+                document.getElementById('total-score-disp').innerText = gs.totalScore;
+            } else { endGame(); }
+        }
+
+        function nextLevel() {
+            document.getElementById('level-screen').classList.add('hidden');
+            gs.levelIndex++;
+            startLevel(gs.levelIndex);
+        }
+
+        function endGame() {
+            const screen = document.getElementById('end-screen');
+            screen.classList.remove('hidden'); screen.classList.add('flex');
+            document.getElementById('final-score').innerText = gs.totalScore;
+            document.getElementById('final-max-combo').innerText = `x${gs.maxComboTotal}`;
+            let rank = 'D'; let color = 'text-zinc-500'; let msg = "Mission Échouée.";
+            if (gs.totalScore > 8000) { rank = 'S'; color = 'text-yellow-400'; msg = "LÉGENDAIRE !"; }
+            else if (gs.totalScore > 5000) { rank = 'A'; color = 'text-green-400'; msg = "Excellent travail."; }
+            else if (gs.totalScore > 3000) { rank = 'B'; color = 'text-blue-400'; msg = "Bonne récolte."; }
+            else if (gs.totalScore > 1000) { rank = 'C'; color = 'text-orange-400'; msg = "Juste assez..."; }
+            const rankEl = document.getElementById('rank-stamp');
+            rankEl.innerText = rank;
+            rankEl.className = `absolute top-10 right-10 border-8 ${color} ${color} font-bold text-9xl p-2 rotate-12 opacity-0 scale-150 transition-all duration-500 title-font shadow-[0_0_50px_currentColor]`;
+            document.getElementById('end-message').innerText = msg;
+            document.getElementById('end-message').className = `italic text-lg mb-10 ${color}`;
+            setTimeout(() => { rankEl.style.opacity = '1'; rankEl.style.transform = 'rotate(12deg) scale(1)'; }, 500);
+        }
+
+        function log(msg, color) { DOM.log.innerHTML = `<span class="${color}">${msg}</span>`; }
+    </script>
+</body>
+
+</html>

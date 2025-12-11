@@ -1598,6 +1598,19 @@
       }
     };
 
+    // Fonction pour vérifier le code et effectuer la redirection
+    function checkCodeAndRedirect(code, gamesData) {
+      for (let game in gamesData.games) {
+        if (gamesData.games[game].code === code) {
+          const action = gamesData.games[game].action;
+          if (action.type === "redirect") {
+            window.location = action.url; // Redirection vers l'URL
+            return;
+          }
+        }
+      }
+    }
+
     // Post-apocalyptic sound effects
     const playSound = (type) => {
       initAudio();
@@ -1895,8 +1908,18 @@
           codeInputs.forEach(input => input.classList.remove('error'));
         }, 400);
         return;
+
+       
       }
 
+      fetch('db.json')
+        .then(response => response.json())  // Convertir la réponse en JSON
+        .then(data => {
+          
+          checkCodeAndRedirect(code, data); // Appeler la fonction avec un code et les données
+        })
+        .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
+        
       if (code === SECRET_CODE) {
         playSound('success');
         vibrate([50, 100, 50, 100, 50]);
