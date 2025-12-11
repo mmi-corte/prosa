@@ -111,17 +111,68 @@ const server = https.createServer(options, (req, res) => {
 const PORT = 8443;
 const HOST = '0.0.0.0';
 
+// Function to get local IP address
+function getLocalIP() {
+  const os = require('os');
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '172.20.3.86'; // Fallback to hardcoded IP
+}
+
+// Function to launch URL via ADB
+function launchADB(url) {
+  console.log('\n🔌 Attempting to launch on Android device via ADB...');
+  
+  // Check if device is connected
+  exec('adb devices', (error, stdout, stderr) => {
+    if (error) {
+      console.log('⚠️  ADB not found or not in PATH');
+      return;
+    }
+    
+    const lines = stdout.split('\n').filter(line => line.trim() && !line.includes('List of devices'));
+    if (lines.length === 0) {
+      console.log('⚠️  No Android devices connected via ADB');
+      return;
+    }
+    
+    console.log(`✅ Found ${lines.length} connected device(s)`);
+    
+    // Launch URL in Chrome on the device
+    const adbCommand = `adb shell am start -a android.intent.action.VIEW -d "${url}"`;
+    exec(adbCommand, (error, stdout, stderr) => {
+      if (error) {
+        console.log('⚠️  Failed to launch URL on device:', error.message);
+      } else {
+        console.log('✅ URL launched on Android device!');
+      }
+    });
+  });
+}
+
 server.listen(PORT, HOST, () => {
+  const localIP = getLocalIP();
+  const url = `https://${localIP}:${PORT}`;
+  
   console.log('\n==============================================');
   console.log('🚀 HTTPS Server Running!');
   console.log('==============================================');
   console.log(`Local:   https://localhost:${PORT}`);
-  console.log(`Network: https://172.20.3.86:${PORT}`);
+  console.log(`Network: ${url}`);
   console.log('==============================================');
   console.log('\n⚠️  IMPORTANT: You will see a security warning');
   console.log('   Click "Advanced" → "Proceed to site"');
   console.log('   This is safe - it\'s your local server\n');
   console.log('📱 On your tablet, go to:');
-  console.log(`   https://172.20.3.86:${PORT}\n`);
+  console.log(`   ${url}\n`);
   console.log('Press Ctrl+C to stop the server\n');
+  
+  // Launch on Android device via ADB
+  launchADB(url);
 });

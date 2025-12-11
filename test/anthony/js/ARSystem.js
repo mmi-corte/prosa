@@ -11,12 +11,21 @@ export class ARSystem {
   init(containerSelector, imageTargetSrc) {
     this.mindarThree = new MindARThree({
       container: document.querySelector(containerSelector),
-      imageTargetSrc: imageTargetSrc
+      imageTargetSrc: imageTargetSrc,
+      // Quality improvements
+      filterMinCF: 0.0001,        // Smooth tracking
+      filterBeta: 0.001,          // Reduce jitter
+      maxTrack: 1,                 // Track only one marker
+      warmupTolerance: 5,          // Faster initial detection
+      missTolerance: 5          // Keep tracking longer when marker lost
     });
 
     this.renderer = this.mindarThree.renderer;
     this.scene = this.mindarThree.scene;
     this.camera = this.mindarThree.camera;
+    
+    // Enable antialiasing for smoother rendering
+    this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
   async start() {

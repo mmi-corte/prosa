@@ -17,14 +17,20 @@ export class CharacterController {
     this.currentAction = null;
     this.clock = new THREE.Clock();
     
+    // Smoothing for position/rotation
+    this.targetPosition = new THREE.Vector3();
+    this.targetRotation = new THREE.Euler();
+    this.smoothingFactor = 0.15;
+    
     // Parameters
     this.params = {
-      scale: 1.0,
+      scale: 0.2,
       rotation: 0,
       height: 0,
       animationSpeed: 1.0,
       colorTint: new THREE.Color(0xffffff),
-      autoRotate: false
+      autoRotate: false,
+      smoothMovement: true
     };
 
     this.loader = new GLTFLoader();
@@ -43,7 +49,24 @@ export class CharacterController {
           // Initial setup
           this.model.position.set(0, this.params.height, 0);
           this.model.scale.setScalar(this.params.scale);
-          this.model.rotation.y = (this.params.rotation * Math.PI) / 180;
+          
+          // Rotate model to stand perpendicular to marker (vertical)
+          this.model.rotation.x = Math.PI / 2; // 90 degrees to stand up
+          this.model.rotation.y = 0;
+          this.model.rotation.z = (this.params.rotation * Math.PI) / 180;
+          
+          // Initialize target position and rotation
+          this.targetPosition.copy(this.model.position);
+          this.targetRotation.copy(this.model.rotation);
+          
+          // Improve model rendering
+          this.model.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              child.frustumCulled = true;
+            }
+          });
           
           // Add to scene
           this.parentGroup.add(this.model);
@@ -87,14 +110,27 @@ export class CharacterController {
    * Update the character (call every frame)
    */
   update(deltaTime) {
+    if (!this.model) return;
+    
     // Update animation mixer
     if (this.mixer) {
       this.mixer.update(deltaTime);
     }
 
-    // Auto-rotate
-    if (this.params.autoRotate && this.model) {
-      this.model.rotation.y += deltaTime * 0.5;
+    // Smooth movement interpolation
+    if (this.params.smoothMovement) {
+      this.model.position.lerp(this.targetPosition, this.smoothingFactor);
+      
+      if (!this.params.autoRotate) {
+        this.model.rotation.x += (this.targetRotation.x - this.model.rotation.x) * this.smoothingFactor;
+        this.model.rotation.y += (this.targetRotation.y - this.model.rotation.y) * this.smoothingFactor;
+        this.model.rotation.z += (this.targetRotation.z - this.model.rotation.z) * this.smoothingFactor;
+      }
+    }
+
+    // Auto-rotate (around Z axis when standing perpendicular)
+    if (this.params.autoRotate) {
+      this.model.rotation.z += deltaTime * 0.5;
     }
   }
 
@@ -165,7 +201,12 @@ export class CharacterController {
   setRotation(degrees) {
     this.params.rotation = degrees;
     if (this.model && !this.params.autoRotate) {
-      this.model.rotation.y = (degrees * Math.PI) / 180;
+      const radians = (degrees * Math.PI) / 180;
+      if (this.params.smoothMovement) {
+        this.targetRotation.z = radians; // Use Z axis since model is standing up
+      } else {
+        this.model.rotation.z = radians;
+      }
     }
   }
 
@@ -175,7 +216,11 @@ export class CharacterController {
   setHeight(height) {
     this.params.height = height;
     if (this.model) {
-      this.model.position.y = height;
+      if (this.params.smoothMovement) {
+        this.targetPosition.y = height;
+      } else {
+        this.model.position.y = height;
+      }
     }
   }
 
