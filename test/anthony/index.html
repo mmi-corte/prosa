@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR Character Experience</title>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <script type="module" src="./js/main.js"></script>
+</head>
+<body>
+  
+  <!-- AR Container -->
+  <div id="container"></div>
+
+  <!-- Control Panel -->
+  <div id="control-panel">
+    <div class="panel-header">
+      <h2>Character Controls</h2>
+      <button id="togglePanel" class="btn-icon">▼</button>
+    </div>
+    
+    <div id="panel-content" class="panel-content">
+      
+      <!-- Start/Stop Controls -->
+      <div class="control-group">
+        <button id="startButton" class="btn btn-primary">Start AR</button>
+        <button id="stopButton" class="btn btn-secondary">Stop AR</button>
+      </div>
+
+      <!-- Animation Controls -->
+      <div class="control-group">
+        <label>Animation:</label>
+        <select id="animationSelect" class="select-input">
+          <option value="">Select Animation...</option>
+        </select>
+        <button id="playAnimation" class="btn btn-small">Play</button>
+      </div>
+
+      <!-- Scale Control -->
+      <div class="control-group">
+        <label>Scale: <span id="scaleValue">1.0</span></label>
+        <input type="range" id="scaleSlider" min="0.1" max="3.0" step="0.1" value="1.0" class="slider" />
+      </div>
+
+      <!-- Rotation Control -->
+      <div class="control-group">
+        <label>Rotation: <span id="rotationValue">0°</span></label>
+        <input type="range" id="rotationSlider" min="0" max="360" step="10" value="0" class="slider" />
+      </div>
+
+      <!-- Position Y Control -->
+      <div class="control-group">
+        <label>Height: <span id="heightValue">0.0</span></label>
+        <input type="range" id="heightSlider" min="-1" max="1" step="0.05" value="0" class="slider" />
+      </div>
+
+      <!-- Animation Speed -->
+      <div class="control-group">
+        <label>Animation Speed: <span id="speedValue">1.0x</span></label>
+        <input type="range" id="speedSlider" min="0.1" max="3.0" step="0.1" value="1.0" class="slider" />
+      </div>
+
+      <!-- Color Tint -->
+      <div class="control-group">
+        <label>Color Tint:</label>
+        <input type="color" id="colorPicker" value="#ffffff" class="color-input" />
+        <button id="resetColor" class="btn btn-small">Reset</button>
+      </div>
+
+      <!-- Auto-Rotate Toggle -->
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="autoRotate" />
+          Auto-Rotate
+        </label>
+      </div>
+
+      <!-- Reset Button -->
+      <div class="control-group">
+        <button id="resetAll" class="btn btn-warning">Reset All Parameters</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Indicator -->
+  <div id="status" class="status-indicator">
+    <span id="statusText">Ready</span>
+  </div>
+
+</body>
+</html>
