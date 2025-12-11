@@ -22,21 +22,11 @@
     </script>
 
     <script type="module" src="./js/main.js"></script>
-    
+
   </head>
   <body>
     
     <div id="container"></div>
-
-<!-- 
-    <script type="module">
-      import { UIManager } from './js/UI/UIManager2.js';
-      
-      document.addEventListener('DOMContentLoaded', () => {
-        const uiManager = new UIManager('app-root');
-        uiManager.init();
-      });
-    </script> -->
 
     <script>
       if ('serviceWorker' in navigator) {
@@ -47,26 +37,6 @@
         });
       }
     </script>
-
-  
-  <div id="control">
-    <button id="startButton" class="btn">Start</button>
-    <button id="stopButton" class="btn">Stop</button>
-  </div>
-  
-  <div id="container"></div>
-  </body>
-
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('Service Worker enregistré !', reg))
-          .catch(err => console.error('Erreur SW :', err));
-      });
-    }
-  </script>
 
 </body>
 

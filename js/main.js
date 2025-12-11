@@ -72,3 +72,6 @@ const main = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", main);
+
+// redirect to start view
+window.location = "../fronts/start_view_1/index.html";
