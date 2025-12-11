@@ -4,41 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>PROSA - Zone Interdite</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Remplacement des fonts Google par la font custom upcel -->
   <style>
+    @font-face {
+      font-family: 'Upcel';
+      src: url('/images/upcel.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    /* Nouvelle palette de couleurs avec kaki #626247 comme couleur principale */
     :root {
-      --background: #0d0b09;
-      --foreground: #d4cfc4;
-      --card: #141210;
-      --card-foreground: #d4cfc4;
-      --primary: #b8956e;
-      --primary-dark: #6b5234;
-      --primary-light: #d4b896;
-      --secondary: #8b4513;
-      --rust: #a0522d;
-      --rust-dark: #6b3a1f;
-      --muted: #1f1c18;
-      --muted-foreground: #7a7265;
-      --accent: #c44536;
-      --accent-glow: #ff6b5b;
-      --success: #7cb342;
-      --dust: #a09080;
-      --sand: #c4b498;
-      --ash: #4a4540;
-      --border: #2a2520;
+      --background: #1a1812;
+      --foreground: #ECE4CB;
+      --card: #252218;
+      --card-foreground: #ECE4CB;
+      --primary: #626247;
+      --primary-dark: #4a4a35;
+      --primary-light: #7a7a5a;
+      --secondary: #300941;
+      --rust: #626247;
+      --rust-dark: #4a4a35;
+      --muted: #2a2820;
+      --muted-foreground: #9a9680;
+      --accent: #C63032;
+      --accent-glow: #ff5052;
+      --success: #81CBD6;
+      --dust: #ECE4CB;
+      --sand: #ECE4CB;
+      --ash: #4a4840;
+      --border: #3a3830;
       --radius: 0.625rem;
+      --yellow: #FFDB2C;
+      --purple: #300941;
+      --cyan: #81CBD6;
     }
 
+    /* Toutes les font-family remplacées par Upcel */
     body {
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Upcel', sans-serif;
       background: var(--background);
       color: var(--foreground);
       min-height: 100vh;
@@ -47,7 +57,7 @@
     }
 
     ::selection {
-      background: var(--rust);
+      background: var(--primary);
       color: var(--foreground);
     }
 
@@ -84,9 +94,9 @@
     .spinner {
       position: absolute;
       inset: 0;
-      border: 3px solid rgba(184, 149, 110, 0.2);
+      border: 3px solid rgba(98, 98, 71, 0.2);
       border-top-color: var(--primary);
-      border-right-color: var(--rust);
+      border-right-color: var(--accent);
       border-radius: 50%;
       animation: spin-rough 1.5s linear infinite;
     }
@@ -94,7 +104,7 @@
     .spinner-inner {
       position: absolute;
       inset: 12px;
-      border: 2px dashed rgba(160, 82, 45, 0.4);
+      border: 2px dashed rgba(98, 98, 71, 0.4);
       border-bottom-color: var(--accent);
       border-radius: 50%;
       animation: spin-reverse 2s linear infinite;
@@ -107,9 +117,9 @@
       transform: translate(-50%, -50%);
       width: 10px;
       height: 10px;
-      background: var(--rust);
+      background: var(--primary);
       border-radius: 50%;
-      box-shadow: 0 0 15px var(--rust), 0 0 30px rgba(160, 82, 45, 0.5);
+      box-shadow: 0 0 15px var(--primary), 0 0 30px rgba(98, 98, 71, 0.5);
       animation: pulse-warning 1.2s ease-in-out infinite;
     }
 
@@ -132,17 +142,17 @@
 
     .loading-text {
       color: var(--primary);
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1.4rem;
       font-weight: 400;
       letter-spacing: 0.3em;
-      text-shadow: 0 0 20px rgba(184, 149, 110, 0.5);
+      text-shadow: 0 0 20px rgba(98, 98, 71, 0.5);
       animation: text-flicker-rough 3s ease-in-out infinite;
     }
 
     .loading-subtext {
       margin-top: 12px;
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.7rem;
       color: var(--muted-foreground);
       letter-spacing: 0.1em;
@@ -175,7 +185,7 @@
 
     .loading-progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, var(--primary-dark), var(--rust), var(--primary));
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--primary-light));
       background-size: 200% 100%;
       width: 0%;
       transition: width 0.3s ease;
@@ -188,7 +198,7 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
-      background: radial-gradient(ellipse at center, #1a1510 0%, #0d0b09 100%);
+      background: radial-gradient(ellipse at center, #2a2518 0%, #1a1812 100%);
     }
 
     .game-container {
@@ -202,7 +212,7 @@
       border: 2px solid var(--border);
       box-shadow: 
         0 0 60px rgba(0, 0, 0, 0.9),
-        0 0 30px rgba(184, 149, 110, 0.05),
+        0 0 30px rgba(98, 98, 71, 0.05),
         inset 0 0 80px rgba(0, 0, 0, 0.9);
     }
 
@@ -269,13 +279,13 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(13, 11, 9, 0.85) 0%,
-        rgba(13, 11, 9, 0.5) 15%,
-        rgba(13, 11, 9, 0.2) 35%,
-        rgba(13, 11, 9, 0.15) 50%,
-        rgba(13, 11, 9, 0.3) 65%,
-        rgba(13, 11, 9, 0.7) 80%,
-        rgba(13, 11, 9, 0.95) 100%
+        rgba(26, 24, 18, 0.85) 0%,
+        rgba(26, 24, 18, 0.5) 15%,
+        rgba(26, 24, 18, 0.2) 35%,
+        rgba(26, 24, 18, 0.15) 50%,
+        rgba(26, 24, 18, 0.3) 65%,
+        rgba(26, 24, 18, 0.7) 80%,
+        rgba(26, 24, 18, 0.95) 100%
       );
     }
 
@@ -305,8 +315,8 @@
     }
 
     .particle.ember {
-      background: var(--rust);
-      box-shadow: 0 0 4px var(--rust);
+      background: var(--primary);
+      box-shadow: 0 0 4px var(--primary);
       animation: float-ember 8s ease-in-out infinite;
     }
 
@@ -370,7 +380,7 @@
       align-items: center;
       gap: 8px;
       padding: 8px 12px;
-      background: rgba(20, 18, 16, 0.8);
+      background: rgba(37, 34, 24, 0.8);
       border-radius: 6px;
       border: 1px solid var(--border);
       position: relative;
@@ -383,7 +393,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--rust), transparent);
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
       opacity: 0.5;
     }
 
@@ -411,7 +421,7 @@
     }
 
     .signal-text {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       color: var(--foreground);
@@ -421,7 +431,7 @@
       width: 48px;
       height: 48px;
       border-radius: 8px;
-      background: rgba(20, 18, 16, 0.8);
+      background: rgba(37, 34, 24, 0.8);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -441,12 +451,12 @@
     }
 
     .settings-btn:hover {
-      background: rgba(184, 149, 110, 0.1);
+      background: rgba(98, 98, 71, 0.1);
       border-color: var(--primary-dark);
     }
 
     .settings-btn:hover::after {
-      border-color: rgba(184, 149, 110, 0.3);
+      border-color: rgba(98, 98, 71, 0.3);
     }
 
     .settings-btn:active {
@@ -499,14 +509,14 @@
       position: absolute;
       width: 25px;
       height: 25px;
-      border-color: var(--rust);
+      border-color: var(--primary);
       opacity: 0.6;
       transition: all 0.3s ease;
     }
 
     .title-container:hover .bracket {
       opacity: 0.9;
-      border-color: var(--primary);
+      border-color: var(--primary-light);
     }
 
     .bracket-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
@@ -515,15 +525,15 @@
     .bracket-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
 
     .main-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 4rem;
       font-weight: 400;
       letter-spacing: 0.35em;
       color: var(--primary);
       text-shadow: 
         3px 3px 6px rgba(0, 0, 0, 0.8),
-        0 0 40px rgba(184, 149, 110, 0.3),
-        0 0 80px rgba(160, 82, 45, 0.2);
+        0 0 40px rgba(98, 98, 71, 0.3),
+        0 0 80px rgba(98, 98, 71, 0.2);
       animation: title-weather 4s ease-in-out infinite;
       position: relative;
     }
@@ -535,7 +545,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      color: var(--rust);
+      color: var(--primary-light);
       opacity: 0;
       animation: title-flicker 5s infinite;
     }
@@ -544,14 +554,14 @@
       0%, 100% {
         text-shadow: 
           3px 3px 6px rgba(0, 0, 0, 0.8),
-          0 0 40px rgba(184, 149, 110, 0.3);
+          0 0 40px rgba(98, 98, 71, 0.3);
         filter: brightness(1);
       }
       50% {
         text-shadow: 
           3px 3px 6px rgba(0, 0, 0, 0.8),
-          0 0 60px rgba(184, 149, 110, 0.5),
-          0 0 100px rgba(160, 82, 45, 0.3);
+          0 0 60px rgba(98, 98, 71, 0.5),
+          0 0 100px rgba(98, 98, 71, 0.3);
         filter: brightness(1.05);
       }
     }
@@ -564,7 +574,7 @@
     }
 
     .subtitle {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       color: var(--primary);
@@ -592,7 +602,7 @@
     .line {
       width: 50px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--rust), transparent);
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
       position: relative;
     }
 
@@ -603,7 +613,7 @@
       left: 0;
       width: 30%;
       height: 100%;
-      background: var(--primary);
+      background: var(--primary-light);
       animation: line-scan 3s ease-in-out infinite;
     }
 
@@ -640,7 +650,7 @@
       align-items: center;
       gap: 16px;
       padding: 18px 22px;
-      background: rgba(20, 18, 16, 0.85);
+      background: rgba(37, 34, 24, 0.85);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -660,7 +670,7 @@
       left: 0;
       width: 3px;
       height: 100%;
-      background: linear-gradient(180deg, var(--rust), var(--primary-dark));
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
       opacity: 0.7;
       transition: opacity 0.3s ease;
     }
@@ -672,14 +682,14 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, var(--rust), transparent);
+      background: linear-gradient(90deg, var(--primary), transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .menu-card:hover::before {
       opacity: 1;
-      background: linear-gradient(180deg, var(--primary), var(--rust));
+      background: linear-gradient(180deg, var(--primary-light), var(--primary));
     }
 
     .menu-card:hover::after {
@@ -694,12 +704,12 @@
     }
 
     .menu-card:hover {
-      background: rgba(184, 149, 110, 0.08);
-      border-color: var(--rust);
+      background: rgba(98, 98, 71, 0.08);
+      border-color: var(--primary);
       transform: translateX(6px);
       box-shadow: 
         0 8px 30px rgba(0, 0, 0, 0.5),
-        inset 0 0 30px rgba(184, 149, 110, 0.03);
+        inset 0 0 30px rgba(98, 98, 71, 0.03);
     }
 
     .menu-card:active {
@@ -710,7 +720,7 @@
       width: 60px;
       height: 60px;
       border-radius: 8px;
-      background: rgba(13, 11, 9, 0.9);
+      background: rgba(26, 24, 18, 0.9);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -724,15 +734,15 @@
       content: '';
       position: absolute;
       inset: 3px;
-      border: 1px dashed rgba(184, 149, 110, 0.2);
+      border: 1px dashed rgba(98, 98, 71, 0.2);
       border-radius: 4px;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .menu-card:hover .menu-icon {
-      background: rgba(160, 82, 45, 0.15);
-      border-color: var(--rust);
+      background: rgba(98, 98, 71, 0.15);
+      border-color: var(--primary);
     }
 
     .menu-card:hover .menu-icon::before {
@@ -756,7 +766,7 @@
     }
 
     .menu-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1.2rem;
       font-weight: 400;
       letter-spacing: 0.08em;
@@ -770,7 +780,7 @@
     }
 
     .menu-subtitle {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.08em;
       color: var(--muted-foreground);
@@ -795,7 +805,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 18px;
-      background: rgba(20, 18, 16, 0.85);
+      background: rgba(37, 34, 24, 0.85);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -831,7 +841,7 @@
     }
 
     .status-text {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       color: var(--muted-foreground);
@@ -896,14 +906,14 @@
     }
 
     .footer-text {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.08em;
       color: var(--muted-foreground);
     }
 
     .coordinates {
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.7rem;
       color: var(--dust);
       letter-spacing: 0.05em;
@@ -962,7 +972,7 @@
       width: 44px;
       height: 44px;
       border-radius: 8px;
-      background: rgba(184, 149, 110, 0.1);
+      background: rgba(98, 98, 71, 0.1);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -976,7 +986,7 @@
     }
 
     .modal-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1.4rem;
       letter-spacing: 0.15em;
       color: var(--foreground);
@@ -1031,14 +1041,14 @@
     }
 
     .slider-label span {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       color: var(--foreground);
     }
 
     .slider-value {
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.85rem;
       color: var(--primary);
     }
@@ -1057,7 +1067,7 @@
       top: 0;
       left: 0;
       height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--rust));
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
       border-radius: 4px;
       transition: width 0.1s ease;
     }
@@ -1070,7 +1080,7 @@
       height: 20px;
       background: var(--foreground);
       border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(184, 149, 110, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(98, 98, 71, 0.3);
       transition: transform 0.1s ease;
       cursor: grab;
     }
@@ -1102,7 +1112,7 @@
     }
 
     .toggle-label span {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       color: var(--foreground);
@@ -1137,7 +1147,7 @@
 
     .toggle.active .toggle-knob {
       transform: translateX(24px);
-      box-shadow: 0 0 10px rgba(184, 149, 110, 0.5);
+      box-shadow: 0 0 10px rgba(98, 98, 71, 0.5);
     }
 
     /* Save Button */
@@ -1145,13 +1155,13 @@
       width: 100%;
       padding: 16px;
       margin-top: 20px;
-      background: linear-gradient(135deg, var(--primary-dark), var(--rust-dark));
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       border: 1px solid var(--primary-dark);
       border-radius: 10px;
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1rem;
       letter-spacing: 0.2em;
-      color: var(--primary-light);
+      color: var(--foreground);
       cursor: pointer;
       transition: all 0.3s ease;
       position: relative;
@@ -1170,10 +1180,10 @@
     }
 
     .save-btn:hover {
-      background: linear-gradient(135deg, var(--primary), var(--rust));
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
       border-color: var(--primary);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(184, 149, 110, 0.2);
+      box-shadow: 0 8px 20px rgba(98, 98, 71, 0.2);
     }
 
     .save-btn:hover::before {
@@ -1195,7 +1205,7 @@
     }
 
     .code-subtitle {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       color: var(--muted-foreground);
@@ -1215,7 +1225,7 @@
       background: var(--muted);
       border: 2px solid var(--border);
       border-radius: 10px;
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 2rem;
       color: var(--foreground);
       text-align: center;
@@ -1226,7 +1236,7 @@
     .code-input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(184, 149, 110, 0.2);
+      box-shadow: 0 0 20px rgba(98, 98, 71, 0.2);
     }
 
     .code-input.error {
@@ -1244,10 +1254,10 @@
       width: 100%;
       padding: 16px;
       margin-bottom: 12px;
-      background: rgba(184, 149, 110, 0.1);
+      background: rgba(98, 98, 71, 0.1);
       border: 1px solid var(--border);
       border-radius: 10px;
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1rem;
       letter-spacing: 0.15em;
       color: var(--foreground);
@@ -1256,22 +1266,22 @@
     }
 
     .code-btn:hover {
-      background: rgba(184, 149, 110, 0.15);
+      background: rgba(98, 98, 71, 0.15);
       border-color: var(--primary-dark);
     }
 
     .code-btn.primary {
-      background: linear-gradient(135deg, var(--primary-dark), var(--rust-dark));
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       border-color: var(--primary-dark);
-      color: var(--primary-light);
+      color: var(--foreground);
     }
 
     .code-btn.primary:hover {
-      background: linear-gradient(135deg, var(--primary), var(--rust));
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
     }
 
     .attempts {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       color: var(--muted-foreground);
@@ -1293,7 +1303,7 @@
       width: 80px;
       height: 80px;
       margin: 0 auto 24px;
-      background: rgba(124, 179, 66, 0.15);
+      background: rgba(129, 203, 214, 0.15);
       border: 2px solid var(--success);
       border-radius: 50%;
       display: flex;
@@ -1315,7 +1325,7 @@
     }
 
     .success-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Upcel', sans-serif;
       font-size: 1.8rem;
       letter-spacing: 0.15em;
       color: var(--success);
@@ -1323,7 +1333,7 @@
     }
 
     .success-text {
-      font-family: 'Special Elite', cursive;
+      font-family: 'Upcel', sans-serif;
       font-size: 0.75rem;
       color: var(--muted-foreground);
       letter-spacing: 0.05em;
