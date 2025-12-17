@@ -82,6 +82,8 @@ const server = https.createServer(options, (req, res) => {
   let filePath = '.' + req.url;
   if (filePath === './') {
     filePath = './index.html';
+  } else if (filePath === './immersive' || filePath === './immersive/') {
+    filePath = './immersive.html';
   }
 
   // Get file extension

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Immersive AR World</title>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./css/immersive.css">
+</head>
+<body>
+  <div id="container">
+    <!-- AR Scene Container -->
+  </div>
+
+  <!-- Asset Selection Menu -->
+  <div id="asset-menu" class="menu" style="pointer-events: auto;">
+    <h3>Select Asset to Place</h3>
+    <div class="asset-grid">
+      <button class="asset-btn" data-model="character.glb">
+        <span class="asset-icon">👤</span>
+        <span>Character</span>
+      </button>
+      <button class="asset-btn" data-model="conifer_tree.glb">
+        <span class="asset-icon">🌲</span>
+        <span>Tree</span>
+      </button>
+      <button class="asset-btn" data-model="stone.glb">
+        <span class="asset-icon">🪨</span>
+        <span>Stone</span>
+      </button>
+    </div>
+    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <input type="checkbox" id="placement-mode" style="width: 20px; height: 20px; cursor: pointer;">
+        <span style="font-size: 14px;">🎯 Enable Placement Mode</span>
+      </label>
+    </div>
+    <button id="clear-all-btn" class="clear-btn">🗑️ Clear All</button>
+    <button id="toggle-menu" class="toggle-btn">▼</button>
+  </div>
+
+  <!-- Instructions Overlay -->
+  <div id="instructions" class="overlay">
+    <div class="overlay-content">
+      <h2>🌍 Immersive AR World</h2>
+      <p>Configure your settings for the best experience</p>
+      
+      <div style="margin: 20px 0; text-align: left;">
+        <label style="display: block; margin-bottom: 15px;">
+          <span style="display: block; margin-bottom: 5px; font-weight: 600;">Your Height (cm):</span>
+          <input type="number" id="user-height" value="170" min="120" max="220" style="width: 100%; padding: 10px; font-size: 16px; border-radius: 8px; border: 2px solid #667eea;">
+        </label>
+        
+        <label style="display: block; margin-bottom: 15px;">
+          <span style="display: block; margin-bottom: 5px; font-weight: 600;">Playstyle:</span>
+          <select id="playstyle" style="width: 100%; padding: 10px; font-size: 16px; border-radius: 8px; border: 2px solid #667eea;">
+            <option value="standing">Standing</option>
+            <option value="sitting">Sitting</option>
+          </select>
+        </label>
+      </div>
+      
+      <button id="start-ar-btn" class="primary-btn">Start AR Experience</button>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div id="status-bar" class="status-bar" style="pointer-events: none;">
+    <span id="status-text">Initializing...</span>
+  </div>
+
+  <!-- Exit AR Button -->
+  <button id="exit-ar-btn" class="exit-btn hidden" style="pointer-events: auto;">❌ Exit AR</button>
+
+  <script type="module" src="./js/immersive.js"></script>
+</body>
+</html>
