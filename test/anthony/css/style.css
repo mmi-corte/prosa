@@ -18,6 +18,34 @@ body {
   overflow: hidden;
 }
 
+/* Subtitles */
+.subtitles {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 80%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.subtitles span {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.85);
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+
 /* Control Panel */
 #control-panel {
   position: fixed;

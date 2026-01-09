@@ -33,6 +33,9 @@ let staticBackground = null; // Store reference to static background objects
  */
 async function init() {
   updateStatus('Initializing AR system...');
+  
+  // Setup subtitle test button
+  setupSubtitleTest();
 
   // Create AR system
   arSystem = new ARSystem();
@@ -411,6 +414,55 @@ function updateStatus(message) {
     statusText.textContent = message;
   }
   console.log('[Status]', message);
+}
+
+/**
+ * Setup subtitle test functionality
+ */
+function setupSubtitleTest() {
+  const btn = document.getElementById('subtitleTestBtn');
+  const subtitles = document.getElementById('subtitles');
+  const subtitleText = document.getElementById('subtitleText');
+  
+  const testSubtitles = [
+    "Welcome to the AR experience!",
+    "This is a test of the subtitle system.",
+    "Subtitles are designed for maximum readability.",
+    "High contrast and clear typography ensure accessibility.",
+    "You can read this comfortably in any lighting condition."
+  ];
+  
+  let isPlaying = false;
+  let currentIndex = 0;
+  let intervalId = null;
+  
+  btn.addEventListener('click', () => {
+    if (isPlaying) {
+      // Stop subtitles
+      isPlaying = false;
+      clearInterval(intervalId);
+      subtitles.style.display = 'none';
+      btn.textContent = '💬 Test Subtitles';
+    } else {
+      // Start subtitles
+      isPlaying = true;
+      currentIndex = 0;
+      btn.textContent = '⏹️ Stop Subtitles';
+      
+      // Show first subtitle
+      subtitleText.textContent = testSubtitles[currentIndex];
+      subtitles.style.display = 'block';
+      
+      // Cycle through subtitles
+      intervalId = setInterval(() => {
+        currentIndex++;
+        if (currentIndex >= testSubtitles.length) {
+          currentIndex = 0;
+        }
+        subtitleText.textContent = testSubtitles[currentIndex];
+      }, 3000);
+    }
+  });
 }
 
 // Initialize when DOM is ready

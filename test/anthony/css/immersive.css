@@ -19,6 +19,56 @@ body {
   left: 0;
 }
 
+/* Subtitles */
+.subtitles {
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 80%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.subtitles span {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.85);
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.subtitle-test-btn {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #2196F3;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 150;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.subtitle-test-btn:active {
+  transform: scale(0.95);
+  background: #1976D2;
+}
+
 /* Asset Selection Menu */
 .menu {
   position: fixed;

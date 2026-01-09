@@ -71,6 +71,9 @@ async function init() {
 
   // Setup UI
   setupUI();
+  
+  // Setup subtitle test
+  setupSubtitleTest();
 
   // Handle window resize
   window.addEventListener('resize', onWindowResize);
@@ -583,6 +586,55 @@ function onScreenClick(event) {
       updateStatus('Great job! You found the hidden key!');
     }, 2000);
   }
+}
+
+/**
+ * Setup subtitle test functionality
+ */
+function setupSubtitleTest() {
+  const btn = document.getElementById('subtitleTestBtn');
+  const subtitles = document.getElementById('subtitles');
+  const subtitleText = document.getElementById('subtitleText');
+  
+  const testSubtitles = [
+    "Welcome to the Immersive AR World!",
+    "Follow the sound to find the hidden key.",
+    "Subtitles enhance accessibility and understanding.",
+    "Clear text with high contrast ensures readability.",
+    "Explore the environment and discover secrets!"
+  ];
+  
+  let isPlaying = false;
+  let currentIndex = 0;
+  let intervalId = null;
+  
+  btn.addEventListener('click', () => {
+    if (isPlaying) {
+      // Stop subtitles
+      isPlaying = false;
+      clearInterval(intervalId);
+      subtitles.style.display = 'none';
+      btn.textContent = '💬 Test Subtitles';
+    } else {
+      // Start subtitles
+      isPlaying = true;
+      currentIndex = 0;
+      btn.textContent = '⏹️ Stop Subtitles';
+      
+      // Show first subtitle
+      subtitleText.textContent = testSubtitles[currentIndex];
+      subtitles.style.display = 'block';
+      
+      // Cycle through subtitles
+      intervalId = setInterval(() => {
+        currentIndex++;
+        if (currentIndex >= testSubtitles.length) {
+          currentIndex = 0;
+        }
+        subtitleText.textContent = testSubtitles[currentIndex];
+      }, 3000);
+    }
+  });
 }
 
 // Initialize on load
