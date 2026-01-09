@@ -24,9 +24,37 @@
     <div id="container"></div>
     
     <!-- Navigation Button -->
-    <a href="./immersive.html" style="position: fixed; top: 10px; left: 10px; z-index: 9999; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    <a href="./immersive.html" id="immersive-link" style="position: fixed; top: 10px; left: 10px; z-index: 9999; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         🌍 Immersive AR
     </a>
+    
+    <!-- iOS Notice -->
+    <div id="ios-notice" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; padding: 12px 20px; background: rgba(33, 150, 243, 0.95); color: white; border-radius: 8px; font-size: 14px; max-width: 90%; text-align: center;">
+      ℹ️ iOS detected - This marker-based AR works on Safari! Point camera at the marker.
+    </div>
+    
+    <script>
+      (function() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (isIOS) {
+          document.addEventListener('DOMContentLoaded', function() {
+            // Show iOS notice
+            const notice = document.getElementById('ios-notice');
+            if (notice) {
+              notice.style.display = 'block';
+              setTimeout(() => { notice.style.display = 'none'; }, 8000);
+            }
+            // Update immersive link to warn about iOS
+            const link = document.getElementById('immersive-link');
+            if (link) {
+              link.title = 'Note: Immersive AR not supported on iOS';
+              link.style.opacity = '0.7';
+            }
+          });
+        }
+      })();
+    </script>
     
     <!-- Audio Test Button -->
     <button id="audioTestBtn" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebXR Viewer Test</title>
+  <style>
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+      padding: 20px; 
+      background: #1a1a2e; 
+      color: white; 
+    }
+    .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+    .success { background: #2d5a27; }
+    .error { background: #5a2727; }
+    .pending { background: #5a5a27; }
+    button { 
+      padding: 15px 30px; 
+      font-size: 18px; 
+      margin: 10px 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #log { 
+      background: #000; 
+      padding: 15px; 
+      border-radius: 8px; 
+      font-family: monospace; 
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>WebXR Viewer Compatibility Test</h1>
+  
+  <div id="results"></div>
+  
+  <h3>Test Log:</h3>
+  <div id="log"></div>
+  
+  <br>
+  <button onclick="runTests()">Run Tests Again</button>
+  <button onclick="testAR()">Test AR Session</button>
+  <br><br>
+  <a href="./immersive.html" style="color: #667eea;">Go to Immersive AR</a>
+
+  <script>
+    var log = document.getElementById('log');
+    var results = document.getElementById('results');
+    
+    function addLog(msg) {
+      log.textContent += new Date().toLocaleTimeString() + ': ' + msg + '\n';
+      log.scrollTop = log.scrollHeight;
+    }
+    
+    function addResult(name, success, details) {
+      var div = document.createElement('div');
+      div.className = 'status ' + (success ? 'success' : 'error');
+      div.textContent = (success ? '✓ ' : '✗ ') + name + (details ? ' - ' + details : '');
+      results.appendChild(div);
+    }
+    
+    function runTests() {
+      results.innerHTML = '';
+      addLog('Starting tests...');
+      
+      // Test 1: Basic JS
+      addLog('Test 1: Basic JavaScript');
+      try {
+        var x = 1 + 1;
+        addResult('Basic JavaScript', true);
+      } catch(e) {
+        addResult('Basic JavaScript', false, e.message);
+      }
+      
+      // Test 2: var declarations
+      addLog('Test 2: var declarations');
+      try {
+        var test1 = 'hello';
+        var test2 = { a: 1 };
+        addResult('var declarations', true);
+      } catch(e) {
+        addResult('var declarations', false, e.message);
+      }
+      
+      // Test 3: Functions
+      addLog('Test 3: Functions');
+      try {
+        function testFunc() { return 42; }
+        var result = testFunc();
+        addResult('Functions', true, 'returned ' + result);
+      } catch(e) {
+        addResult('Functions', false, e.message);
+      }
+      
+      // Test 4: DOM
+      addLog('Test 4: DOM manipulation');
+      try {
+        var el = document.createElement('div');
+        el.textContent = 'test';
+        addResult('DOM manipulation', true);
+      } catch(e) {
+        addResult('DOM manipulation', false, e.message);
+      }
+      
+      // Test 5: WebGL
+      addLog('Test 5: WebGL');
+      try {
+        var canvas = document.createElement('canvas');
+        var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        addResult('WebGL', !!gl, gl ? 'supported' : 'not supported');
+      } catch(e) {
+        addResult('WebGL', false, e.message);
+      }
+      
+      // Test 6: navigator.xr
+      addLog('Test 6: WebXR API');
+      if (navigator.xr) {
+        addResult('WebXR API', true, 'navigator.xr exists');
+      } else {
+        addResult('WebXR API', false, 'navigator.xr not found');
+      }
+      
+      // Test 7: Promises
+      addLog('Test 7: Promises');
+      try {
+        var p = new Promise(function(resolve) { resolve(1); });
+        p.then(function(v) {
+          addLog('Promise resolved: ' + v);
+        });
+        addResult('Promises', true);
+      } catch(e) {
+        addResult('Promises', false, e.message);
+      }
+      
+      // Test 8: Load Three.js
+      addLog('Test 8: Three.js');
+      var script = document.createElement('script');
+      script.src = './js/three.min.js';
+      script.onload = function() {
+        addLog('Three.js loaded');
+        if (typeof THREE !== 'undefined') {
+          addResult('Three.js', true, 'v' + THREE.REVISION);
+          
+          // Test 9: GLTFLoader
+          addLog('Test 9: GLTFLoader');
+          var script2 = document.createElement('script');
+          script2.src = './js/GLTFLoader.js';
+          script2.onload = function() {
+            addLog('GLTFLoader loaded');
+            if (typeof THREE.GLTFLoader !== 'undefined') {
+              addResult('GLTFLoader', true);
+            } else {
+              addResult('GLTFLoader', false, 'not attached to THREE');
+            }
+          };
+          script2.onerror = function() {
+            addResult('GLTFLoader', false, 'failed to load');
+          };
+          document.head.appendChild(script2);
+        } else {
+          addResult('Three.js', false, 'THREE undefined after load');
+        }
+      };
+      script.onerror = function() {
+        addResult('Three.js', false, 'failed to load');
+      };
+      document.head.appendChild(script);
+      
+      addLog('Tests initiated');
+    }
+    
+    function testAR() {
+      addLog('Testing AR session...');
+      if (!navigator.xr) {
+        addLog('ERROR: WebXR not available');
+        alert('WebXR not available on this browser');
+        return;
+      }
+      
+      navigator.xr.isSessionSupported('immersive-ar').then(function(supported) {
+        addLog('immersive-ar supported: ' + supported);
+        if (supported) {
+          addLog('Requesting AR session...');
+          navigator.xr.requestSession('immersive-ar').then(function(session) {
+            addLog('AR session created!');
+            alert('AR session created successfully!');
+            session.end();
+          }).catch(function(err) {
+            addLog('AR session error: ' + err.message);
+            alert('AR session error: ' + err.message);
+          });
+        } else {
+          alert('immersive-ar not supported');
+        }
+      }).catch(function(err) {
+        addLog('Support check error: ' + err.message);
+      });
+    }
+    
+    // Run tests on load
+    runTests();
+  </script>
+</body>
+</html>

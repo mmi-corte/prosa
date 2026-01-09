@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Test</title>
+</head>
+<body style="background:#000;color:#fff;font-family:sans-serif;padding:20px;">
+<h1>Page Loaded!</h1>
+<p id="time"></p>
+<p>If you see this, basic HTML works.</p>
+<script>
+document.getElementById('time').textContent = 'Loaded at: ' + new Date().toLocaleTimeString();
+</script>
+</body>
+</html>

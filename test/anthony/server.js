@@ -1,4 +1,5 @@
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
@@ -177,4 +178,49 @@ server.listen(PORT, HOST, () => {
   
   // Launch on Android device via ADB
   launchADB(url);
+});
+
+// Also start HTTP server on port 8080 for WebXR Viewer
+const httpHandler = (req, res) => {
+  console.log(`[HTTP] ${req.method} ${req.url}`);
+
+  let filePath = '.' + req.url;
+  if (filePath === './') {
+    filePath = './index.html';
+  } else if (filePath === './immersive' || filePath === './immersive/') {
+    filePath = './immersive.html';
+  }
+
+  const extname = String(path.extname(filePath)).toLowerCase();
+  const contentType = mimeTypes[extname] || 'application/octet-stream';
+
+  fs.readFile(filePath, (error, content) => {
+    if (error) {
+      if (error.code === 'ENOENT') {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<h1>404 - File Not Found</h1>', 'utf-8');
+      } else {
+        res.writeHead(500);
+        res.end('Server Error: ' + error.code, 'utf-8');
+      }
+    } else {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(content, 'utf-8');
+    }
+  });
+};
+
+const httpServer = http.createServer(httpHandler);
+const HTTP_PORT = 8080;
+
+httpServer.listen(HTTP_PORT, HOST, () => {
+  const localIP = getLocalIP();
+  console.log('\n==============================================');
+  console.log('🔓 HTTP Server also running (for WebXR Viewer)');
+  console.log('==============================================');
+  console.log(`HTTP URL: http://${localIP}:${HTTP_PORT}`);
+  console.log('==============================================\n');
 });

@@ -1,12 +1,21 @@
 /**
  * Immersive AR World - Markerless AR with Tap-to-Place
+ * ES5 Compatible for WebXR Viewer on iOS
  */
 
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+// Debug helper
+function debugLog(msg) {
+  console.log(msg);
+  var debugEl = document.getElementById('debug-info');
+  if (debugEl) {
+    debugEl.textContent = msg;
+  }
+}
+
+// Use global THREE object (loaded via script tags)
 
 // Configuration
-const CONFIG = {
+var CONFIG = {
   models: {
     'character.glb': { scale: 0.2, rotationX: Math.PI / 2 },
     'conifer_tree.glb': { scale: 0.3, rotationX: 0 },
@@ -16,43 +25,71 @@ const CONFIG = {
 };
 
 // Global state
-let scene, camera, renderer;
-let reticle;
-let hitTestSource = null;
-let hitTestSourceRequested = false;
-let selectedModel = 'character.glb';
-let placedObjects = [];
-const gltfLoader = new GLTFLoader();
-const textureLoader = new THREE.TextureLoader();
+var scene, camera, renderer;
+var reticle;
+var hitTestSource = null;
+var hitTestSourceRequested = false;
+var selectedModel = 'character.glb';
+var placedObjects = [];
+var gltfLoader;
+var textureLoader;
 
 // Puzzle state
-let puzzleSetup = false;
-let keyObject = null;
-let hasKey = false;
-let placementModeEnabled = false;
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
+var puzzleSetup = false;
+var keyObject = null;
+var hasKey = false;
+var placementModeEnabled = false;
+var raycaster;
+var mouse;
 
 // User configuration
-let userHeight = 170; // cm
-let playstyle = 'standing';
-let groundOffset = -1.5; // Will be calculated based on user config
+var userHeight = 170;
+var playstyle = 'standing';
+var groundOffset = -1.5;
+
+debugLog('Script loaded, waiting for DOM...');
 
 /**
  * Initialize the AR experience
  */
-async function init() {
+function init() {
+  debugLog('Init starting...');
+  
+  // Check if THREE is loaded
+  if (typeof THREE === 'undefined') {
+    debugLog('ERROR: THREE.js not loaded');
+    alert('Error: Three.js library failed to load.');
+    return;
+  }
+  
+  debugLog('THREE v' + THREE.REVISION + ' loaded');
+  
+  // Initialize loaders
+  if (typeof THREE.GLTFLoader === 'undefined') {
+    debugLog('ERROR: GLTFLoader not loaded');
+    alert('Error: GLTFLoader failed to load.');
+    return;
+  }
+  
+  debugLog('Creating loaders...');
+  gltfLoader = new THREE.GLTFLoader();
+  textureLoader = new THREE.TextureLoader();
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
+  
+  debugLog('Creating scene...');
   // Create scene
   scene = new THREE.Scene();
 
   // Create camera
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
   
-  // Add audio listener to camera for spatial audio
-  const listener = new THREE.AudioListener();
+  // Add audio listener
+  var listener = new THREE.AudioListener();
   camera.add(listener);
   camera.userData.audioListener = listener;
 
+  debugLog('Creating renderer...');
   // Create renderer
   renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -63,12 +100,14 @@ async function init() {
   renderer.xr.enabled = true;
   document.getElementById('container').appendChild(renderer.domElement);
 
+  debugLog('Setting up lighting...');
   // Setup lighting
   setupLighting();
 
-  // Create reticle (placement indicator)
+  // Create reticle
   createReticle();
 
+  debugLog('Setting up UI...');
   // Setup UI
   setupUI();
   
@@ -78,9 +117,16 @@ async function init() {
   // Handle window resize
   window.addEventListener('resize', onWindowResize);
   
-  // Handle clicks for key collection
+  // Handle clicks
   window.addEventListener('click', onScreenClick);
 
+  // Hide loading screen
+  var loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen) {
+    loadingScreen.style.display = 'none';
+  }
+
+  debugLog('Init complete!');
   updateStatus('Tap "Start AR Experience" to begin');
 }
 
@@ -88,15 +134,15 @@ async function init() {
  * Setup scene lighting
  */
 function setupLighting() {
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  var ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
   directionalLight.position.set(2, 5, 2);
   directionalLight.castShadow = true;
   scene.add(directionalLight);
 
-  const fillLight = new THREE.DirectionalLight(0x8888ff, 0.3);
+  var fillLight = new THREE.DirectionalLight(0x8888ff, 0.3);
   fillLight.position.set(-2, 1, -2);
   scene.add(fillLight);
 }
@@ -105,8 +151,8 @@ function setupLighting() {
  * Create placement reticle
  */
 function createReticle() {
-  const geometry = new THREE.RingGeometry(0.15, 0.2, 32).rotateX(-Math.PI / 2);
-  const material = new THREE.MeshBasicMaterial({ color: 0x667eea });
+  var geometry = new THREE.RingGeometry(0.15, 0.2, 32).rotateX(-Math.PI / 2);
+  var material = new THREE.MeshBasicMaterial({ color: 0x667eea });
   reticle = new THREE.Mesh(geometry, material);
   reticle.matrixAutoUpdate = false;
   reticle.visible = false;
@@ -118,128 +164,157 @@ function createReticle() {
  */
 function setupUI() {
   // Start AR button
-  document.getElementById('start-ar-btn').addEventListener('click', startAR);
+  var startBtn = document.getElementById('start-ar-btn');
+  if (startBtn) {
+    startBtn.addEventListener('click', startAR);
+  }
 
   // Asset selection buttons
-  document.querySelectorAll('.asset-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.asset-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedModel = btn.dataset.model;
-      updateStatus(`Selected: ${btn.textContent.trim()}`);
-    });
-  });
+  var assetBtns = document.querySelectorAll('.asset-btn');
+  for (var i = 0; i < assetBtns.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        var allBtns = document.querySelectorAll('.asset-btn');
+        for (var j = 0; j < allBtns.length; j++) {
+          allBtns[j].classList.remove('selected');
+        }
+        btn.classList.add('selected');
+        selectedModel = btn.getAttribute('data-model');
+        updateStatus('Selected: ' + btn.textContent.trim());
+      });
+    })(assetBtns[i]);
+  }
 
   // Toggle menu
-  document.getElementById('toggle-menu').addEventListener('click', () => {
-    document.getElementById('asset-menu').classList.toggle('collapsed');
-  });
+  var toggleBtn = document.getElementById('toggle-menu');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      document.getElementById('asset-menu').classList.toggle('collapsed');
+    });
+  }
 
   // Clear all objects
-  document.getElementById('clear-all-btn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    clearAllObjects();
-  });
+  var clearBtn = document.getElementById('clear-all-btn');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      clearAllObjects();
+    });
+  }
 
   // Exit AR button
-  document.getElementById('exit-ar-btn').addEventListener('click', (e) => {
-    e.stopPropagation();
-    exitAR();
-  });
+  var exitBtn = document.getElementById('exit-ar-btn');
+  if (exitBtn) {
+    exitBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      exitAR();
+    });
+  }
   
   // Placement mode toggle
-  document.getElementById('placement-mode').addEventListener('change', (e) => {
-    placementModeEnabled = e.target.checked;
-    if (placementModeEnabled) {
-      updateStatus('Placement mode enabled - Tap to place objects');
-    } else {
-      updateStatus('Placement mode disabled - Click objects to interact');
-    }
-  });
-
-  // Prevent UI taps from triggering AR select (will be set up after AR starts)
-  // This needs to be added to the session select event listener
+  var placementCheckbox = document.getElementById('placement-mode');
+  if (placementCheckbox) {
+    placementCheckbox.addEventListener('change', function(e) {
+      placementModeEnabled = e.target.checked;
+      if (placementModeEnabled) {
+        updateStatus('Placement mode enabled - Tap to place objects');
+      } else {
+        updateStatus('Placement mode disabled - Click objects to interact');
+      }
+    });
+  }
 
   // Select first asset by default
-  document.querySelector('.asset-btn').classList.add('selected');
+  var firstBtn = document.querySelector('.asset-btn');
+  if (firstBtn) {
+    firstBtn.classList.add('selected');
+  }
 }
 
 /**
- * Clear all placed objects from the scene
+ * Clear all placed objects
  */
 function clearAllObjects() {
-  placedObjects.forEach(obj => {
-    scene.remove(obj);
-  });
+  for (var i = 0; i < placedObjects.length; i++) {
+    scene.remove(placedObjects[i]);
+  }
   placedObjects = [];
   updateStatus('All objects cleared', 'success');
-  setTimeout(() => updateStatus('Tap to place more objects'), 2000);
+  setTimeout(function() { updateStatus('Tap to place more objects'); }, 2000);
 }
 
 /**
  * Start AR session
  */
-async function startAR() {
-  try {
+function startAR() {
+  console.log('Starting AR...');
+  
+  // Check if WebXR is available
+  if (!navigator.xr) {
+    updateStatus('WebXR not supported on this browser', 'error');
+    alert('WebXR is not supported on this browser.\n\nAlternatives:\n- Use the marker-based AR\n- Use Chrome on Android\n- Use WebXR Viewer app on iOS');
+    return;
+  }
+  
+  // Check if immersive-ar is supported
+  navigator.xr.isSessionSupported('immersive-ar').then(function(isARSupported) {
+    if (!isARSupported) {
+      updateStatus('Immersive AR not supported', 'error');
+      alert('Immersive AR is not supported on this device/browser.');
+      return;
+    }
+    
     // Get user configuration
-    userHeight = parseInt(document.getElementById('user-height').value) || 170;
-    playstyle = document.getElementById('playstyle').value;
+    var heightInput = document.getElementById('user-height');
+    var playstyleInput = document.getElementById('playstyle');
     
-    // Calculate ground offset based on height and playstyle
-    // Eye level is typically 90-95% of height when standing, 60-70% when sitting
-    const eyeLevelRatio = playstyle === 'standing' ? 0.93 : 0.65;
-    const eyeLevel = (userHeight / 100) * eyeLevelRatio; // Convert cm to meters
-    groundOffset = -eyeLevel; // Negative because ground is below eye level
+    userHeight = heightInput ? parseInt(heightInput.value) || 170 : 170;
+    playstyle = playstyleInput ? playstyleInput.value : 'standing';
     
-    console.log(`User config: ${userHeight}cm, ${playstyle}, ground offset: ${groundOffset.toFixed(2)}m`);
+    // Calculate ground offset
+    var eyeLevelRatio = playstyle === 'standing' ? 0.93 : 0.65;
+    var eyeLevel = (userHeight / 100) * eyeLevelRatio;
+    groundOffset = -eyeLevel;
     
-    // Check if WebXR is supported
-    if (!navigator.xr) {
-      updateStatus('WebXR not supported on this device', 'error');
-      return;
-    }
-
-    // Check if AR is supported
-    const supported = await navigator.xr.isSessionSupported('immersive-ar');
-    if (!supported) {
-      updateStatus('AR not supported on this device', 'error');
-      return;
-    }
+    console.log('User config: ' + userHeight + 'cm, ' + playstyle + ', ground offset: ' + groundOffset.toFixed(2) + 'm');
 
     // Hide instructions
     document.getElementById('instructions').classList.add('hidden');
 
-    // Request AR session with fallback options
-    let session;
-    try {
-      // Try with hit-test first
-      session = await navigator.xr.requestSession('immersive-ar', {
+    // Request AR session - try with features first
+    navigator.xr.requestSession('immersive-ar', {
+      requiredFeatures: [],
+      optionalFeatures: ['hit-test', 'dom-overlay', 'local-floor'],
+      domOverlay: { root: document.body }
+    }).then(function(session) {
+      onSessionStarted(session);
+    }).catch(function(err) {
+      console.warn('Full session failed, trying minimal:', err);
+      // Fallback to minimal session
+      navigator.xr.requestSession('immersive-ar', {
         requiredFeatures: [],
-        optionalFeatures: ['hit-test', 'dom-overlay', 'local-floor'],
-        domOverlay: { root: document.body }
+        optionalFeatures: ['local-floor']
+      }).then(function(session) {
+        onSessionStarted(session);
+      }).catch(function(fallbackErr) {
+        console.error('Session creation error:', fallbackErr);
+        updateStatus('AR mode not available on this device', 'error');
+        document.getElementById('instructions').classList.remove('hidden');
       });
-    } catch (sessionError) {
-      console.error('Session creation error:', sessionError);
-      updateStatus('AR mode not available on this device', 'error');
-      document.getElementById('instructions').classList.remove('hidden');
-      return;
-    }
-
-    await onSessionStarted(session);
-    updateStatus('AR Session Started - Tap to place objects', 'success');
-
-  } catch (error) {
-    console.error('AR Error:', error);
-    updateStatus('Failed to start AR: ' + error.message, 'error');
-    document.getElementById('instructions').classList.remove('hidden');
-  }
+    });
+    
+  }).catch(function(err) {
+    console.error('AR support check failed:', err);
+    updateStatus('Failed to check AR support', 'error');
+  });
 }
 
 /**
  * Handle AR session start
  */
-async function onSessionStarted(session) {
-  // Store session reference for exit functionality
+function onSessionStarted(session) {
+  console.log('AR Session started');
+  
   renderer.xr.session = session;
   
   session.addEventListener('end', onSessionEnded);
@@ -248,71 +323,70 @@ async function onSessionStarted(session) {
   // Show exit button
   document.getElementById('exit-ar-btn').classList.remove('hidden');
 
-  try {
-    await renderer.xr.setSession(session);
-
-    // Request hit test source with fallback
-    try {
-      const referenceSpace = await session.requestReferenceSpace('viewer');
-      const source = await session.requestHitTestSource({ space: referenceSpace });
-      hitTestSource = source;
-      updateStatus('Hit test ready - Move device to find surfaces', 'success');
-    } catch (hitTestError) {
-      console.warn('Hit test not available:', hitTestError);
-      updateStatus('Hit test unavailable - Manual placement mode', 'warning');
-      // Continue without hit test - objects will be placed at fixed distance
-    }
+  renderer.xr.setSession(session).then(function() {
+    // Try to request hit test source
+    session.requestReferenceSpace('viewer').then(function(referenceSpace) {
+      session.requestHitTestSource({ space: referenceSpace }).then(function(source) {
+        hitTestSource = source;
+        updateStatus('Hit test ready - Move device to find surfaces', 'success');
+      }).catch(function(err) {
+        console.warn('Hit test source not available:', err);
+        updateStatus('Hit test unavailable - Manual placement mode', 'warning');
+      });
+    }).catch(function(err) {
+      console.warn('Reference space not available:', err);
+    });
 
     session.requestAnimationFrame(onXRFrame);
     
-    // Setup puzzle scene after a short delay
-    setTimeout(() => {
+    // Setup puzzle scene after delay
+    setTimeout(function() {
       if (!puzzleSetup) {
         setupPuzzleScene();
         puzzleSetup = true;
       }
     }, 1000);
-  } catch (error) {
-    console.error('Session setup error:', error);
-    updateStatus('Failed to initialize AR session: ' + error.message, 'error');
-    throw error;
-  }
+    
+    updateStatus('AR Session Started - Tap to place objects', 'success');
+  }).catch(function(err) {
+    console.error('Session setup error:', err);
+    updateStatus('Failed to initialize AR session', 'error');
+  });
 }
 
 /**
- * Setup the puzzle scene with background, road, rock, and key
+ * Setup the puzzle scene
  */
 function setupPuzzleScene() {
-  // Get camera position as reference
-  const cameraPos = camera.position.clone();
+  var cameraPos = camera.position.clone();
   
-  // Create cylindrical background around player
-  const bgGeometry = new THREE.CylinderGeometry(5, 5, 4, 32, 1, true);
-  const bgTexture = textureLoader.load('./assets/img/ciel.png');
+  // Create cylindrical background
+  var bgGeometry = new THREE.CylinderGeometry(5, 5, 4, 32, 1, true);
+  var bgTexture = textureLoader.load('./assets/img/ciel.png');
   bgTexture.wrapS = THREE.RepeatWrapping;
   bgTexture.repeat.x = 4;
-  const bgMaterial = new THREE.MeshBasicMaterial({ 
+  var bgMaterial = new THREE.MeshBasicMaterial({ 
     map: bgTexture, 
     side: THREE.BackSide 
   });
-  const background = new THREE.Mesh(bgGeometry, bgMaterial);
+  var background = new THREE.Mesh(bgGeometry, bgMaterial);
   background.position.set(cameraPos.x, cameraPos.y + groundOffset + 2, cameraPos.z);
   scene.add(background);
   
-  // Create large ground texture
-  const groundGeometry = new THREE.PlaneGeometry(20, 20);
-  const groundTexture = textureLoader.load('./assets/img/ground.jpg');
+  // Create ground
+  var groundGeometry = new THREE.PlaneGeometry(20, 20);
+  var groundTexture = textureLoader.load('./assets/img/ground.jpg');
   groundTexture.wrapS = THREE.RepeatWrapping;
   groundTexture.wrapT = THREE.RepeatWrapping;
   groundTexture.repeat.set(1, 1);
-  const groundMaterial = new THREE.MeshBasicMaterial({ map: groundTexture });
-  const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+  var groundMaterial = new THREE.MeshBasicMaterial({ map: groundTexture });
+  var ground = new THREE.Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2;
   ground.position.set(cameraPos.x, cameraPos.y + groundOffset, cameraPos.z);
   scene.add(ground);
   
-  // Place multiple rocks around the player
-  const rockPositions = [
+  // Place rocks
+  var rockPositions = [
     { x: 1.5, z: -2.0 },
     { x: -1.8, z: -1.5 },
     { x: 2.2, z: 0.5 },
@@ -322,24 +396,25 @@ function setupPuzzleScene() {
     { x: 1.2, z: 1.8 }
   ];
   
-  rockPositions.forEach((pos, index) => {
-    gltfLoader.load('./assets/3D/stone.glb', (gltf) => {
-      const rock = gltf.scene.clone();
-      const scale = 0.3 + Math.random() * 0.2; // Random scale variation (doubled)
-      rock.scale.setScalar(scale);
-      rock.position.set(
-        cameraPos.x + pos.x, 
-        cameraPos.y + groundOffset, 
-        cameraPos.z + pos.z
-      );
-      // Add random Y rotation for variety, no X rotation needed
-      rock.rotation.y = Math.random() * Math.PI * 2;
-      scene.add(rock);
-    });
-  });
+  for (var i = 0; i < rockPositions.length; i++) {
+    (function(pos) {
+      gltfLoader.load('./assets/3D/stone.glb', function(gltf) {
+        var rock = gltf.scene.clone();
+        var scale = 0.3 + Math.random() * 0.2;
+        rock.scale.setScalar(scale);
+        rock.position.set(
+          cameraPos.x + pos.x, 
+          cameraPos.y + groundOffset, 
+          cameraPos.z + pos.z
+        );
+        rock.rotation.y = Math.random() * Math.PI * 2;
+        scene.add(rock);
+      });
+    })(rockPositions[i]);
+  }
   
-  // Place trees scattered around
-  const treePositions = [
+  // Place trees
+  var treePositions = [
     { x: -2.0, z: -2.5 },
     { x: 2.8, z: -1.2 },
     { x: -1.2, z: 2.5 },
@@ -347,25 +422,26 @@ function setupPuzzleScene() {
     { x: -3.0, z: 0.0 }
   ];
   
-  treePositions.forEach((pos) => {
-    gltfLoader.load('./assets/3D/conifer_tree.glb', (gltf) => {
-      const tree = gltf.scene.clone();
-      const scale = 1.5 + Math.random() * 0.6; // Random scale variation (3x larger)
-      tree.scale.setScalar(scale);
-      tree.position.set(
-        cameraPos.x + pos.x,
-        cameraPos.y + groundOffset,
-        cameraPos.z + pos.z
-      );
-      // Random Y rotation for variety
-      tree.rotation.y = Math.random() * Math.PI * 2;
-      scene.add(tree);
-    });
-  });
+  for (var j = 0; j < treePositions.length; j++) {
+    (function(pos) {
+      gltfLoader.load('./assets/3D/conifer_tree.glb', function(gltf) {
+        var tree = gltf.scene.clone();
+        var scale = 1.5 + Math.random() * 0.6;
+        tree.scale.setScalar(scale);
+        tree.position.set(
+          cameraPos.x + pos.x,
+          cameraPos.y + groundOffset,
+          cameraPos.z + pos.z
+        );
+        tree.rotation.y = Math.random() * Math.PI * 2;
+        scene.add(tree);
+      });
+    })(treePositions[j]);
+  }
   
-  // Place key next to one of the farther rocks
-  const keyRockPos = { x: 2.2, z: 0.5 }; // Far rock position
-  gltfLoader.load('./assets/3D/key.glb', (gltf) => {
+  // Place key
+  var keyRockPos = { x: 2.2, z: 0.5 };
+  gltfLoader.load('./assets/3D/key.glb', function(gltf) {
     keyObject = gltf.scene;
     keyObject.scale.setScalar(0.1);
     keyObject.position.set(
@@ -373,40 +449,40 @@ function setupPuzzleScene() {
       cameraPos.y + groundOffset + 0.3, 
       cameraPos.z + keyRockPos.z + 0.6
     );
-    keyObject.traverse((child) => {
+    keyObject.traverse(function(child) {
       if (child.isMesh) {
         child.rotation.x = Math.PI / 2;
-        child.userData.isKey = true; // Mark for click detection
+        child.userData.isKey = true;
       }
     });
     scene.add(keyObject);
     
-    // Add spatial audio to key
-    const audioLoader = new THREE.AudioLoader();
-    const keySound = new THREE.PositionalAudio(camera.userData.audioListener);
-    audioLoader.load('./assets/sound/SON1.mp3', (buffer) => {
+    // Add spatial audio
+    var audioLoader = new THREE.AudioLoader();
+    var keySound = new THREE.PositionalAudio(camera.userData.audioListener);
+    audioLoader.load('./assets/sound/SON1.mp3', function(buffer) {
       keySound.setBuffer(buffer);
-      keySound.setRefDistance(0.5); // Distance where volume is normal
-      keySound.setRolloffFactor(2); // How quickly sound fades
-      keySound.setVolume(0.05); // Very low volume for searching
+      keySound.setRefDistance(0.5);
+      keySound.setRolloffFactor(2);
+      keySound.setVolume(0.05);
       keySound.setLoop(true);
       keySound.play();
     });
     keyObject.add(keySound);
     keyObject.userData.sound = keySound;
     
-    // Add floating animation
-    const animate = () => {
+    // Floating animation
+    function animateKey() {
       if (keyObject && !hasKey) {
         keyObject.position.y = cameraPos.y + groundOffset + 0.3 + Math.sin(Date.now() * 0.003) * 0.05;
         keyObject.rotation.z += 0.01;
       }
-      requestAnimationFrame(animate);
-    };
-    animate();
+      requestAnimationFrame(animateKey);
+    }
+    animateKey();
   });
   
-  updateStatus('Puzzle scene loaded! Find the key hidden near the rocks', 'success');
+  updateStatus('Puzzle scene loaded! Find the hidden key', 'success');
 }
 
 /**
@@ -424,7 +500,7 @@ function onSessionEnded() {
  * Exit AR session
  */
 function exitAR() {
-  const session = renderer.xr.getSession();
+  var session = renderer.xr.getSession();
   if (session) {
     session.end();
     updateStatus('Exiting AR...', 'warning');
@@ -432,74 +508,126 @@ function exitAR() {
 }
 
 /**
- * Handle tap/select event to place objects
+ * Handle tap/select event
  */
 function onSelect(event) {
-  // Only place objects if placement mode is enabled
+  // First, try to collect the key if it exists
+  if (keyObject && !hasKey) {
+    // Check distance to key - if close enough, collect it
+    var keyPosition = new THREE.Vector3();
+    keyObject.getWorldPosition(keyPosition);
+    var distanceToKey = camera.position.distanceTo(keyPosition);
+    
+    // If within 2 meters, collect the key (proximity-based)
+    if (distanceToKey < 2) {
+      collectKey();
+      return;
+    }
+    
+    // Also try raycast with a wider cone (multiple rays)
+    var collected = false;
+    var offsets = [
+      {x: 0, y: 0},      // center
+      {x: 0.1, y: 0},    // right
+      {x: -0.1, y: 0},   // left
+      {x: 0, y: 0.1},    // up
+      {x: 0, y: -0.1},   // down
+      {x: 0.07, y: 0.07},  // diagonals
+      {x: -0.07, y: 0.07},
+      {x: 0.07, y: -0.07},
+      {x: -0.07, y: -0.07}
+    ];
+    
+    for (var i = 0; i < offsets.length; i++) {
+      var tempRaycaster = new THREE.Raycaster();
+      var direction = new THREE.Vector3(offsets[i].x, offsets[i].y, -1);
+      direction.normalize();
+      direction.applyQuaternion(camera.quaternion);
+      tempRaycaster.set(camera.position, direction);
+      
+      var intersects = tempRaycaster.intersectObject(keyObject, true);
+      
+      if (intersects.length > 0 && intersects[0].distance < 5) {
+        collectKey();
+        collected = true;
+        break;
+      }
+    }
+    
+    if (collected) return;
+  }
+  
+  // If not collecting key, check placement mode
   if (!placementModeEnabled) {
     return;
   }
   
-  console.log('onSelect triggered, reticle visible:', reticle.visible);
-  
   if (reticle.visible) {
     placeObject(reticle.matrix);
   } else {
-    // Fallback: place object in front of camera if hit test unavailable
-    const matrix = new THREE.Matrix4();
-    matrix.makeTranslation(0, 0, -1.5); // 1.5m in front of camera
+    var matrix = new THREE.Matrix4();
+    matrix.makeTranslation(0, 0, -1.5);
     matrix.premultiply(camera.matrixWorld);
     placeObject(matrix);
   }
 }
 
 /**
- * Place a 3D object at the reticle position
+ * Collect the key
+ */
+function collectKey() {
+  hasKey = true;
+  
+  // Stop the audio
+  if (keyObject.userData.sound) {
+    keyObject.userData.sound.stop();
+  }
+  
+  scene.remove(keyObject);
+  keyObject = null;
+  
+  updateStatus('🔑 Key collected! Puzzle solved!', 'success');
+  
+  setTimeout(function() {
+    updateStatus('Great job! You found the hidden key!');
+  }, 2000);
+}
+
+/**
+ * Place a 3D object
  */
 function placeObject(matrix) {
-  const modelPath = `./assets/3D/${selectedModel}`;
-  const config = CONFIG.models[selectedModel];
+  var modelPath = './assets/3D/' + selectedModel;
+  var config = CONFIG.models[selectedModel];
 
   gltfLoader.load(
     modelPath,
-    (gltf) => {
-      const model = gltf.scene;
+    function(gltf) {
+      var model = gltf.scene;
+      var placementMatrix = matrix.clone();
       
-      // Clone the matrix to avoid reference issues
-      const placementMatrix = matrix.clone();
-      
-      // Extract position and rotation from matrix
-      const position = new THREE.Vector3();
-      const quaternion = new THREE.Quaternion();
-      const matrixScale = new THREE.Vector3();
+      var position = new THREE.Vector3();
+      var quaternion = new THREE.Quaternion();
+      var matrixScale = new THREE.Vector3();
       placementMatrix.decompose(position, quaternion, matrixScale);
       
-      // Set position first
       model.position.copy(position);
-      
-      // Apply scale
       model.scale.setScalar(config.scale);
       
-      // Traverse the model and apply rotation to each mesh
-      model.traverse((child) => {
+      model.traverse(function(child) {
         if (child.isMesh) {
           child.rotation.x = config.rotationX;
         }
       });
       
-      console.log('Model rotation applied - X:', config.rotationX);
-      
-      // Add to scene
       scene.add(model);
       placedObjects.push(model);
       
-      console.log('Placed object at:', position, 'Camera at:', camera.position);
-      
-      updateStatus(`Placed ${selectedModel.replace('.glb', '')} (#${placedObjects.length})`, 'success');
-      setTimeout(() => updateStatus('Tap to place more objects'), 2000);
+      updateStatus('Placed ' + selectedModel.replace('.glb', '') + ' (#' + placedObjects.length + ')', 'success');
+      setTimeout(function() { updateStatus('Tap to place more objects'); }, 2000);
     },
     undefined,
-    (error) => {
+    function(error) {
       console.error('Error loading model:', error);
       updateStatus('Failed to load model', 'error');
     }
@@ -510,16 +638,16 @@ function placeObject(matrix) {
  * XR Frame update loop
  */
 function onXRFrame(time, frame) {
-  const session = frame.session;
+  var session = frame.session;
   session.requestAnimationFrame(onXRFrame);
 
   if (hitTestSource) {
-    const referenceSpace = renderer.xr.getReferenceSpace();
-    const hitTestResults = frame.getHitTestResults(hitTestSource);
+    var referenceSpace = renderer.xr.getReferenceSpace();
+    var hitTestResults = frame.getHitTestResults(hitTestSource);
 
     if (hitTestResults.length > 0) {
-      const hit = hitTestResults[0];
-      const pose = hit.getPose(referenceSpace);
+      var hit = hitTestResults[0];
+      var pose = hit.getPose(referenceSpace);
 
       reticle.visible = true;
       reticle.matrix.fromArray(pose.transform.matrix);
@@ -543,12 +671,17 @@ function onWindowResize() {
 /**
  * Update status message
  */
-function updateStatus(message, type = '') {
-  const statusBar = document.getElementById('status-bar');
-  const statusText = document.getElementById('status-text');
+function updateStatus(message, type) {
+  type = type || '';
+  var statusBar = document.getElementById('status-bar');
+  var statusText = document.getElementById('status-text');
   
-  statusText.textContent = message;
-  statusBar.className = 'status-bar ' + type;
+  if (statusText) {
+    statusText.textContent = message;
+  }
+  if (statusBar) {
+    statusBar.className = 'status-bar ' + type;
+  }
 }
 
 /**
@@ -557,76 +690,55 @@ function updateStatus(message, type = '') {
 function onScreenClick(event) {
   if (!keyObject || hasKey) return;
   
-  // Calculate mouse position
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   
-  // Update raycaster
   raycaster.setFromCamera(mouse, camera);
   
-  // Check for intersections with key
-  const intersects = raycaster.intersectObject(keyObject, true);
+  var intersects = raycaster.intersectObject(keyObject, true);
   
   if (intersects.length > 0) {
-    // Collect the key
-    hasKey = true;
-    
-    // Stop the audio
-    if (keyObject.userData.sound) {
-      keyObject.userData.sound.stop();
-    }
-    
-    scene.remove(keyObject);
-    keyObject = null;
-    
-    updateStatus('🔑 Key collected! Puzzle solved!', 'success');
-    
-    // Show celebration message
-    setTimeout(() => {
-      updateStatus('Great job! You found the hidden key!');
-    }, 2000);
+    collectKey();
   }
 }
 
 /**
- * Setup subtitle test functionality
+ * Setup subtitle test
  */
 function setupSubtitleTest() {
-  const btn = document.getElementById('subtitleTestBtn');
-  const subtitles = document.getElementById('subtitles');
-  const subtitleText = document.getElementById('subtitleText');
+  var btn = document.getElementById('subtitleTestBtn');
+  var subtitles = document.getElementById('subtitles');
+  var subtitleText = document.getElementById('subtitleText');
   
-  const testSubtitles = [
+  if (!btn || !subtitles || !subtitleText) return;
+  
+  var testSubtitles = [
     "Welcome to the Immersive AR World!",
     "Follow the sound to find the hidden key.",
-    "Subtitles enhance accessibility and understanding.",
-    "Clear text with high contrast ensures readability.",
-    "Explore the environment and discover secrets!"
+    "Subtitles enhance accessibility.",
+    "Clear text with high contrast.",
+    "Explore and discover secrets!"
   ];
   
-  let isPlaying = false;
-  let currentIndex = 0;
-  let intervalId = null;
+  var isPlaying = false;
+  var currentIndex = 0;
+  var intervalId = null;
   
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', function() {
     if (isPlaying) {
-      // Stop subtitles
       isPlaying = false;
       clearInterval(intervalId);
       subtitles.style.display = 'none';
       btn.textContent = '💬 Test Subtitles';
     } else {
-      // Start subtitles
       isPlaying = true;
       currentIndex = 0;
       btn.textContent = '⏹️ Stop Subtitles';
       
-      // Show first subtitle
       subtitleText.textContent = testSubtitles[currentIndex];
       subtitles.style.display = 'block';
       
-      // Cycle through subtitles
-      intervalId = setInterval(() => {
+      intervalId = setInterval(function() {
         currentIndex++;
         if (currentIndex >= testSubtitles.length) {
           currentIndex = 0;
@@ -637,5 +749,9 @@ function setupSubtitleTest() {
   });
 }
 
-// Initialize on load
-init();
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
