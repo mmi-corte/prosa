@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Defusal - QTE Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="game-container">
+        <header>
+            <h1>Cyber Defusal</h1>
+            <div id="level-indicator">INITIALISATION...</div>
+            <div id="timer-bar-container">
+                <div id="timer-bar"></div>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="current-instruction" class="instruction"></div>
+
+            <div id="qte-mash" class="qte-module">
+                <button id="mash-btn">TAP !</button>
+                <div class="progress-container">
+                    <div id="mash-progress"></div>
+                </div>
+                <p style="font-size: 0.8rem; color: #777;">Touche: ESPACE</p>
+            </div>
+
+            <div id="qte-sequence" class="qte-module">
+                <div id="seq-display"></div>
+                <div class="sequence-grid">
+                    <div class="arrow-key" id="key-up">▲</div>
+                </div>
+                <div class="sequence-grid">
+                    <div class="arrow-key" id="key-left">◀</div>
+                    <div class="arrow-key" id="key-down">▼</div>
+                    <div class="arrow-key" id="key-right">▶</div>
+                </div>
+                <p style="font-size: 0.8rem; color: #777;">Touches: FLÈCHES</p>
+            </div>
+
+            <div id="qte-timing" class="qte-module">
+                <div id="timing-track">
+                    <div id="timing-target"></div>
+                    <div id="timing-cursor"></div>
+                </div>
+                <button id="timing-btn">STOP</button>
+                <p style="font-size: 0.8rem; color: #777; margin-top: 10px;">Touche: ENTREÉ</p>
+            </div>
+
+            <div id="qte-reflex" class="qte-module">
+                <div id="reflex-container">
+                </div>
+                <p style="font-size: 0.8rem; color: #777; margin-top: 10px;">Cliquez sur le carré BLEU</p>
+            </div>
+
+            <div id="qte-hold" class="qte-module">
+                <div class="hold-wrapper">
+                    <button id="hold-btn">MAINTENIR</button>
+                    <div id="hold-gauge-container">
+                        <div id="hold-target-zone"></div>
+                        <div id="hold-gauge-fill"></div>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: #777; margin-top: 10px;">Touche: H (Hold)</p>
+            </div>
+        </div>
+
+        <div id="controls-hint">Compatible Souris / Tactile / Clavier</div>
+
+        <div id="start-screen" class="screen">
+            <h1 style="color: var(--primary); font-size: 2.5rem; margin-bottom: 20px;">CYBER DEFUSAL</h1>
+            <p>5 protocoles de sécurité à pirater.</p>
+            <p>Ne ratez aucun QTE.</p>
+            <button class="menu-btn" onclick="game.start()">Lancer le Hack</button>
+        </div>
+
+        <div id="game-over-screen" class="screen hidden">
+            <h1 style="color: var(--danger); font-size: 2.5rem;">ÉCHEC SYSTÈME</h1>
+            <p id="fail-reason">Temps écoulé.</p>
+            <button class="menu-btn" onclick="game.start()">Réessayer</button>
+        </div>
+
+        <div id="win-screen" class="screen hidden">
+            <h1 style="color: var(--success); font-size: 2.5rem;">ACCÈS AUTORISÉ</h1>
+            <p>Système piraté avec succès.</p>
+            <button class="menu-btn" onclick="game.start()">Rejouer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
