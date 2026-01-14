@@ -56,20 +56,19 @@ const settings = {
   camera: false,
 }
 
-// ========== DATA LOADING ==========
-async function loadData() {
-  try {
-    const response = await fetch("fronts/start_view_1/db.json")
-    const data = await response.json()
+const data = await fetch("fronts/start_view_1/db.json").then(res => res.json());
+const funFacts = data.funFacts;
+const characters = data.characters;
 
-    funFacts = data.funFacts || []
-    characters = data.characters || []
-    gamesData = data.games || {}
+<<<<<<< HEAD
+// Sample characters data
+const characters = [
+]
+=======
+>>>>>>> 1aaf693 (pull)
 
-    initLoadingScreen()
-  } catch (error) {
-    console.error("Erreur chargement JSON :", error)
-  }
+// Games data (codes)
+let gamesData = {
 }
 
 // ========== LOADING SCREEN ==========
