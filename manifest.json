@@ -1,0 +1,16 @@
+{
+  "name": "PROSA - Réalité Augmentée",
+  "short_name": "PROSA",
+  "description": "Application éducative de réalité augmentée",
+  "start_url": "/prosa/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F1D482",
+  "icons": [
+    {
+      "src": "./assets/img/icon1.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
