@@ -53,17 +53,16 @@ const settings = {
   camera: false,
 }
 
-// Fun facts for loading screen
-const funFacts = [
-  "En Corse, on dit qu'un serpent à sept têtes gardait une source sacrée et qu'aucun berger n'osait s'en approcher.",
-  "L'Orcu est une créature mythique corse qui fait passer les voyageurs d'un monde à l'autre.",
-  "Les bergers corses gardent jalousement la recette secrète du Brocciu depuis des siècles.",
-  "Dans les montagnes corses, on raconte que certaines pierres murmurent des secrets aux initiés.",
-]
+const data = await fetch("fronts/start_view_1/db.json").then(res => res.json());
+const funFacts = data.funFacts;
+const characters = data.characters;
 
+<<<<<<< HEAD
 // Sample characters data
 const characters = [
 ]
+=======
+>>>>>>> 1aaf693 (pull)
 
 // Games data (codes)
 let gamesData = {
