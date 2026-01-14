@@ -4,14 +4,12 @@ const CACHE_NAME = 'ar-cache-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style.css',   // Corrigé (était ./style.css)
-  './js/main.js',      // Corrigé (était ./script.js)
+  './css/style.css',   
+  './js/main.js',      
   './manifest.json',
   './assets',
-  // './assets/mon-modele.glb', // DÉCOMMENTEZ SI LE FICHIER EXISTE VRAIMENT
   
-  // NOTE : J'ai retiré three.js du cache ici car vous l'importez via un CDN dans l'importmap
-  // Si vous voulez le cacher, il faut mettre l'URL exacte de l'importmap
+  
 ];
 
 self.addEventListener('install', (event) => {
