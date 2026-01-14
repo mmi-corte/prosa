@@ -56,17 +56,6 @@ const settings = {
   camera: false,
 }
 
-const data = await fetch("fronts/start_view_1/db.json").then(res => res.json());
-const funFacts = data.funFacts;
-const characters = data.characters;
-
-<<<<<<< HEAD
-// Sample characters data
-const characters = [
-]
-=======
->>>>>>> 1aaf693 (pull)
-
 // Games data (codes)
 let gamesData = {
 }
@@ -213,7 +202,7 @@ function vibrate(pattern) {
 // ========== EVENTS ==========
 codeBtn.addEventListener("click", goToCodeScreen)
 charactersBtn.addEventListener("click", goToCharactersScreen)
-qrBtn.addEventListener("click", () => (window.location.href = "../../AR/index.html"))
+qrBtn.addEventListener("click", () => (window.location.href = "AR/index.html"))
 seasonsBtn.addEventListener("click", () => alert("Fonction à venir"))
 
 settingsButtons.forEach(btn => btn && btn.addEventListener("click", openSettings))
