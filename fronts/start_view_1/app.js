@@ -63,36 +63,10 @@ const funFacts = [
 
 // Sample characters data
 const characters = [
-  {
-    id: 1,
-    name: "L'ORCU",
-    image: "/mythical-creature-orc-guardian-corsican-folklore.jpg",
-    description: "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
-    role: "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu.",
-  },
-  {
-    id: 2,
-    name: "LA STREGA",
-    image: "/witch-sorceress-corsican-folklore-mysterious.jpg",
-    description: "Gardienne des secrets anciens et maîtresse des potions mystiques.",
-    role: "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions.",
-  },
-  {
-    id: 3,
-    name: "U MAZZERU",
-    image: "/dark-hunter-dream-walker-corsican-mythology.jpg",
-    description: "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-    role: "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-  },
 ]
 
 // Games data (codes)
 let gamesData = {
-  games: {
-    game1: { code: "0000", action: { type: "redirect", url: "../../games/game1/game.html" } },
-    game2: { code: "1000", action: { type: "redirect", url: "../../games/game2/game.html" } },
-    game3: { code: "1234", action: { type: "redirect", url: "../../games/game1/game.html" } },
-  },
 }
 
 // ========== LOADING SCREEN ==========
