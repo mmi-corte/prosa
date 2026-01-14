@@ -214,7 +214,7 @@ function vibrate(pattern) {
 // ========== EVENTS ==========
 codeBtn.addEventListener("click", goToCodeScreen)
 charactersBtn.addEventListener("click", goToCharactersScreen)
-qrBtn.addEventListener("click", () => (window.location.href = "../../AR/index.html"))
+qrBtn.addEventListener("click", () => (window.location.href = "../../prosa/AR/index.html"))
 seasonsBtn.addEventListener("click", () => alert("Fonction à venir"))
 
 settingsButtons.forEach(btn => btn && btn.addEventListener("click", openSettings))
