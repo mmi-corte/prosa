@@ -7,7 +7,8 @@ const ASSETS_TO_CACHE = [
   './css/style.css',   
   './js/main.js',      
   './manifest.json',
-  './assets',
+  './assets/img',
+  './assets/icons',
   
   
 ];
