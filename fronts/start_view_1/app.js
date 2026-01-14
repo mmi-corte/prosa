@@ -57,21 +57,28 @@ const settings = {
 }
 
 // ========== DATA LOADING ==========
-async function loadData() {
-  try {
-    const response = await fetch("fronts/start_view_1/db.json")
-    const data = await response.json()
-
-    funFacts = data.funFacts || []
-    characters = data.characters || []
-    gamesData = data.games || {}
-
-    initLoadingScreen()
-  } catch (error) {
-    console.error("Erreur chargement JSON :", error)
+  // Try production path first, fallback to local path
+  async function loadData() {
+  const paths = ["fronts/start_view_1/db.json", "./db.json"]
+  
+  for (const path of paths) {
+    try {
+      const response = await fetch(path)
+      if (!response.ok) continue
+      
+      const data = await response.json()
+      funFacts = data.funFacts || []
+      characters = data.characters || []
+      gamesData = data.games || {}
+      
+      initLoadingScreen()
+      return
+    } catch (error) {
+      // Try next path
+    }
   }
+  console.error("Erreur chargement JSON : aucun chemin valide")
 }
-
 // ========== LOADING SCREEN ==========
 function initLoadingScreen() {
   const funFactText = document.getElementById("funFactText")
@@ -214,7 +221,10 @@ function vibrate(pattern) {
 // ========== EVENTS ==========
 codeBtn.addEventListener("click", goToCodeScreen)
 charactersBtn.addEventListener("click", goToCharactersScreen)
-qrBtn.addEventListener("click", () => (window.location.href = "../../prosa/AR/index.html"))
+qrBtn.addEventListener("click", () => {
+  // Production (root): AR/index.html | Local (fronts/start_view_1): ../../AR/index.html
+  const isLocal = window.location.pathname.includes("fronts/start_view_1")
+  window.location.href = isLocal ? "../../AR/index.html" : "AR/index.html"})
 seasonsBtn.addEventListener("click", () => (window.location.href = "../../assets/cinematiques/test.mp4"))
 
 settingsButtons.forEach(btn => btn && btn.addEventListener("click", openSettings))
