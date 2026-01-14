@@ -1,3 +1,8 @@
+// ========== GLOBAL DATA ==========
+let funFacts = []
+let characters = []
+let gamesData = {}
+
 // ========== DOM ELEMENTS ==========
 const loadingScreen = document.getElementById("loadingScreen")
 const menuScreen = document.getElementById("menuScreen")
@@ -12,7 +17,7 @@ const qrBtn = document.getElementById("qrBtn")
 const charactersBtn = document.getElementById("charactersBtn")
 const seasonsBtn = document.getElementById("seasonsBtn")
 
-// Settings buttons (all screens)
+// Settings buttons
 const settingsButtons = [
   document.getElementById("settingsBtn"),
   document.getElementById("settingsBtnCode"),
@@ -26,20 +31,18 @@ const closeCharactersScreen = document.getElementById("closeCharactersScreen")
 const closeCharacterDetail = document.getElementById("closeCharacterDetail")
 const closeSettingsModal = document.getElementById("closeSettingsModal")
 
-// Code screen elements
+// Code screen
 const codeDisplay = document.getElementById("codeDisplay")
 const keypadKeys = document.querySelectorAll(".key[data-value]")
 const keyDelete = document.getElementById("keyDelete")
 const keyValidate = document.getElementById("keyValidate")
 
-// Settings elements
+// Settings
 const vibrationToggle = document.getElementById("vibrationToggle")
 const cameraToggle = document.getElementById("cameraToggle")
 
-// Characters grid
+// Characters
 const charactersGrid = document.getElementById("charactersGrid")
-
-// Character detail elements
 const characterDetailImage = document.getElementById("characterDetailImage")
 const characterDetailName = document.getElementById("characterDetailName")
 const characterDescription = document.getElementById("characterDescription")
@@ -53,29 +56,34 @@ const settings = {
   camera: false,
 }
 
-const data = await fetch("fronts/start_view_1/db.json").then(res => res.json());
-const funFacts = data.funFacts;
-const characters = data.characters;
+// ========== DATA LOADING ==========
+async function loadData() {
+  try {
+    const response = await fetch("fronts/start_view_1/db.json")
+    const data = await response.json()
 
-<<<<<<< HEAD
-// Sample characters data
-const characters = [
-]
-=======
->>>>>>> 1aaf693 (pull)
+    funFacts = data.funFacts || []
+    characters = data.characters || []
+    gamesData = data.games || {}
 
-// Games data (codes)
-let gamesData = {
+    initLoadingScreen()
+  } catch (error) {
+    console.error("Erreur chargement JSON :", error)
+  }
 }
 
 // ========== LOADING SCREEN ==========
 function initLoadingScreen() {
-  // Set random fun fact
   const funFactText = document.getElementById("funFactText")
+
+  if (!funFacts.length) {
+    funFactText.textContent = "Chargement..."
+    return
+  }
+
   const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)]
   funFactText.innerHTML = `<em>${randomFact}</em>`
 
-  // Hide loading screen after delay
   setTimeout(() => {
     loadingScreen.classList.add("hidden")
   }, 3000)
@@ -83,19 +91,14 @@ function initLoadingScreen() {
 
 // ========== NAVIGATION ==========
 function showScreen(screen) {
-  // Hide all screens
   menuScreen.classList.add("hidden")
   codeScreen.classList.add("hidden")
   charactersScreen.classList.add("hidden")
   characterDetailScreen.classList.add("hidden")
-
-  // Show target screen
   screen.classList.remove("hidden")
 }
 
-function goToMenu() {
-  showScreen(menuScreen)
-}
+const goToMenu = () => showScreen(menuScreen)
 
 function goToCodeScreen() {
   currentCode = ""
@@ -109,7 +112,7 @@ function goToCharactersScreen() {
 }
 
 function goToCharacterDetail(character) {
-  characterDetailImage.src = character.image
+  characterDetailImage.src = character.image || "assets/characters/default.png"
   characterDetailImage.alt = character.name
   characterDetailName.textContent = character.name
   characterDescription.innerHTML = `
@@ -124,7 +127,7 @@ function updateCodeDisplay() {
   const digits = codeDisplay.querySelectorAll(".code-digit")
   digits.forEach((digit, index) => {
     digit.textContent = currentCode[index] || ""
-    digit.classList.toggle("filled", currentCode[index] !== undefined)
+    digit.classList.toggle("filled", !!currentCode[index])
     digit.classList.remove("error")
   })
 }
@@ -138,95 +141,54 @@ function addDigit(value) {
 }
 
 function deleteDigit() {
-  if (currentCode.length > 0) {
-    currentCode = currentCode.slice(0, -1)
-    updateCodeDisplay()
-    vibrate(10)
-  }
+  currentCode = currentCode.slice(0, -1)
+  updateCodeDisplay()
+  vibrate(10)
 }
 
 function validateCode() {
-  if (currentCode.length !== 4) {
-    showCodeError()
-    return
-  }
+  if (currentCode.length !== 4) return showCodeError()
 
-  // Check code against games data
   let found = false
-  for (const game in gamesData.games) {
-    if (gamesData.games[game].code === currentCode) {
-      const action = gamesData.games[game].action
+
+  for (const key in gamesData) {
+    if (gamesData[key].code === currentCode) {
+      const action = gamesData[key].action
       if (action.type === "redirect") {
-        showSuccess(() => {
-          window.location.href = action.url
-        })
+        showSuccess(() => (window.location.href = action.url))
         found = true
         break
       }
     }
   }
 
-  if (!found) {
-    showCodeError()
-  }
+  if (!found) showCodeError()
 }
 
 function showCodeError() {
-  const digits = codeDisplay.querySelectorAll(".code-digit")
-  digits.forEach((digit) => digit.classList.add("error"))
+  document.querySelectorAll(".code-digit").forEach(d => d.classList.add("error"))
   vibrate([50, 30, 50])
-
   setTimeout(() => {
     currentCode = ""
     updateCodeDisplay()
   }, 500)
 }
 
-function showSuccess(callback) {
-  // Create success overlay
-  const overlay = document.createElement("div")
-  overlay.className = "success-overlay"
-  overlay.innerHTML = `
-    <div class="success-content">
-      <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-        <polyline points="20 6 9 17 4 12"/>
-      </svg>
-      <p class="success-text">ACCÈS AUTORISÉ</p>
-    </div>
-  `
-  document.body.appendChild(overlay)
-
-  setTimeout(() => overlay.classList.add("show"), 10)
-  vibrate([50, 100, 50])
-
-  setTimeout(() => {
-    if (callback) callback()
-  }, 1500)
-}
-
 // ========== CHARACTERS ==========
 function renderCharactersGrid() {
   charactersGrid.innerHTML = ""
 
-  // Render actual characters
-  characters.forEach((char) => {
+  characters.forEach(char => {
     const card = document.createElement("div")
     card.className = "character-card"
     card.innerHTML = `
-      <div class="character-card-image" style="background-image: url('${char.image}')"></div>
+      <div class="character-card-image"
+           style="background-image:url('${char.image || "assets/characters/default.png"}')"></div>
       <div class="character-card-name">${char.name}</div>
     `
     card.addEventListener("click", () => goToCharacterDetail(char))
     charactersGrid.appendChild(card)
   })
-
-  // Add empty placeholder cards to fill grid
-  const emptyCount = 12 - characters.length
-  for (let i = 0; i < emptyCount; i++) {
-    const emptyCard = document.createElement("div")
-    emptyCard.className = "character-card empty"
-    charactersGrid.appendChild(emptyCard)
-  }
 }
 
 // ========== SETTINGS ==========
@@ -238,100 +200,37 @@ function closeSettings() {
   settingsModal.classList.add("hidden")
 }
 
-function toggleSetting(toggle, settingKey) {
+function toggleSetting(toggle, key) {
   toggle.classList.toggle("active")
-  settings[settingKey] = toggle.classList.contains("active")
+  settings[key] = toggle.classList.contains("active")
   vibrate(30)
 }
 
-// ========== HAPTIC FEEDBACK ==========
+// ========== HAPTIC ==========
 function vibrate(pattern) {
-  if (navigator.vibrate && settings.vibration) {
-    navigator.vibrate(pattern)
-  }
+  if (navigator.vibrate && settings.vibration) navigator.vibrate(pattern)
 }
 
-// ========== EVENT LISTENERS ==========
-// Menu buttons
+// ========== EVENTS ==========
 codeBtn.addEventListener("click", goToCodeScreen)
-qrBtn.addEventListener("click", () => {
-  // Redirect to AR card scanner
-  window.location.href = "../../AR/index.html"
-})
 charactersBtn.addEventListener("click", goToCharactersScreen)
-seasonsBtn.addEventListener("click", () => {
-  alert("Saisons - Fonctionnalité à venir")
-})
+qrBtn.addEventListener("click", () => (window.location.href = "../../AR/index.html"))
+seasonsBtn.addEventListener("click", () => alert("Fonction à venir"))
 
-// Settings buttons
-settingsButtons.forEach((btn) => {
-  if (btn) btn.addEventListener("click", openSettings)
-})
-
-// Close buttons
+settingsButtons.forEach(btn => btn && btn.addEventListener("click", openSettings))
 closeCodeScreen.addEventListener("click", goToMenu)
 closeCharactersScreen.addEventListener("click", goToMenu)
 closeCharacterDetail.addEventListener("click", goToCharactersScreen)
 closeSettingsModal.addEventListener("click", closeSettings)
 
-// Settings modal overlay click
-settingsModal.addEventListener("click", (e) => {
-  if (e.target === settingsModal) {
-    closeSettings()
-  }
-})
-
-// Keypad
-keypadKeys.forEach((key) => {
-  key.addEventListener("click", () => {
-    addDigit(key.dataset.value)
-  })
-})
-
+keypadKeys.forEach(key =>
+  key.addEventListener("click", () => addDigit(key.dataset.value))
+)
 keyDelete.addEventListener("click", deleteDigit)
 keyValidate.addEventListener("click", validateCode)
 
-// Toggle switches
 vibrationToggle.addEventListener("click", () => toggleSetting(vibrationToggle, "vibration"))
 cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
 
-// Keyboard support
-document.addEventListener("keydown", (e) => {
-  if (!codeScreen.classList.contains("hidden")) {
-    if (e.key >= "0" && e.key <= "9") {
-      addDigit(e.key)
-    } else if (e.key === "Backspace") {
-      deleteDigit()
-    } else if (e.key === "Enter") {
-      validateCode()
-    }
-  }
-
-  if (e.key === "Escape") {
-    if (!settingsModal.classList.contains("hidden")) {
-      closeSettings()
-    } else if (!characterDetailScreen.classList.contains("hidden")) {
-      goToCharactersScreen()
-    } else if (!charactersScreen.classList.contains("hidden") || !codeScreen.classList.contains("hidden")) {
-      goToMenu()
-    }
-  }
-})
-
-// Load games data from JSON
-async function loadGamesData() {
-  try {
-    const response = await fetch("db.json")
-    if (response.ok) {
-      gamesData = await response.json()
-    }
-  } catch (error) {
-    console.log("Using default games data")
-  }
-}
-
-// ========== INITIALIZATION ==========
-document.addEventListener("DOMContentLoaded", () => {
-  initLoadingScreen()
-  loadGamesData()
-})
+// ========== INIT ==========
+document.addEventListener("DOMContentLoaded", loadData)

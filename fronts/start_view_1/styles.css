@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Upcel";
   /* Correction du chemin vers la police Upcel */
-  src: url("/fonts/upcel.ttf") format("truetype");
+  src: url("public/fonts/upcel.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
