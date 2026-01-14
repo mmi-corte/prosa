@@ -59,7 +59,7 @@ const settings = {
 // ========== DATA LOADING ==========
 async function loadData() {
   try {
-    const response = await fetch("db.json")
+    const response = await fetch("fronts/start_view_1/db.json")
     const data = await response.json()
 
     funFacts = data.funFacts || []
