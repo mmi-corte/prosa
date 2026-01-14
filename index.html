@@ -9,7 +9,7 @@
 
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./assets/img/icon1.svg">
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./fronts/start_view_1/styles.css" />
 
   <script type="importmap">
     {
@@ -20,14 +20,263 @@
       }
     }
     </script>
-
-    <script type="module" src="./js/main.js"></script>
-
   </head>
   <body>
     
-    <div id="container"></div>
+<!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="logo-container">
+        <!-- Logo PROSA officiel -->
+        <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-main">
+      </div>
+      <!-- Serpent spirale comme icône de chargement -->
+      <div class="spinner-spiral">
+        <img src="fronts/start_view_1/public/images/chargement.png" alt="Chargement" class="spiral-img">
+      </div>
+    </div>
+    <div class="fun-fact-card">
+      <h3>Le saviez-vous ?</h3>
+      <p id="funFactText"><em>En Corse, on dit qu'un serpent à sept têtes gardait une source sacrée et qu'aucun berger n'osait s'en approcher.</em></p>
+    </div>
+  </div>
 
+  <!-- Main Menu Screen -->
+  <div class="screen menu-screen" id="menuScreen">
+    <header class="header">
+      <div class="logo-small">
+        <!-- Logo PROSA officiel -->
+        <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-img">
+      </div>
+      <button class="settings-btn" id="settingsBtn" aria-label="Réglages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="menu-content">
+      <h1 class="menu-title">QUE VOULEZ-VOUS FAIRE ?</h1>
+
+      <nav class="menu-buttons">
+        <button class="menu-btn" id="codeBtn">
+          <span class="btn-title">Découvrir mon énigme :</span>
+          <span class="btn-subtitle">saisir un code</span>
+          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </button>
+
+        <button class="menu-btn" id="qrBtn">
+          <span class="btn-title">Découvrir la réalité augmentée :</span>
+          <span class="btn-subtitle">scanner un QR code</span>
+          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </button>
+
+        <button class="menu-btn" id="charactersBtn">
+          <span class="btn-title">Découvrir les personnages :</span>
+          <span class="btn-subtitle">pouvoirs, histoire</span>
+          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+
+        <button class="menu-btn" id="seasonsBtn">
+          <span class="btn-title">Découvrir les saisons :</span>
+          <span class="btn-subtitle">épisodes, aventures</span>
+          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </button>
+      </nav>
+    </main>
+  </div>
+
+  <!-- Code Entry Screen -->
+  <div class="screen code-screen hidden" id="codeScreen">
+    <header class="header">
+      <div class="logo-small">
+        <!-- Logo PROSA officiel -->
+        <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-img">
+      </div>
+      <button class="settings-btn" id="settingsBtnCode" aria-label="Réglages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="code-content">
+      <div class="code-header">
+        <div class="code-title-section">
+          <h1 class="code-title">SAISISSEZ LE CODE</h1>
+          <p class="code-subtitle">pour découvrir l'énigme.</p>
+        </div>
+        <button class="close-btn" id="closeCodeScreen" aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="code-display" id="codeDisplay">
+        <span class="code-digit" data-index="0"></span>
+        <span class="code-digit" data-index="1"></span>
+        <span class="code-digit" data-index="2"></span>
+        <span class="code-digit" data-index="3"></span>
+      </div>
+
+      <div class="keypad">
+        <button class="key" data-value="1">1</button>
+        <button class="key" data-value="2">2</button>
+        <button class="key" data-value="3">3</button>
+        <button class="key" data-value="4">4</button>
+        <button class="key" data-value="5">5</button>
+        <button class="key" data-value="6">6</button>
+        <button class="key" data-value="7">7</button>
+        <button class="key" data-value="8">8</button>
+        <button class="key" data-value="9">9</button>
+        <button class="key key-delete" id="keyDelete" aria-label="Effacer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
+            <line x1="18" y1="9" x2="12" y2="15"/>
+            <line x1="12" y1="9" x2="18" y2="15"/>
+          </svg>
+        </button>
+        <button class="key" data-value="0">0</button>
+        <button class="key key-validate" id="keyValidate" aria-label="Valider">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Characters List Screen -->
+  <div class="screen characters-screen hidden" id="charactersScreen">
+    <header class="header">
+      <div class="logo-small">
+        <!-- Logo PROSA officiel -->
+        <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-img">
+      </div>
+      <button class="settings-btn" id="settingsBtnCharacters" aria-label="Réglages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="characters-content">
+      <div class="characters-header">
+        <div class="characters-title-section">
+          <h1 class="characters-title">LES PERSONNAGES</h1>
+          <p class="characters-region">CORSE</p>
+        </div>
+        <div class="characters-actions">
+          <button class="close-btn" id="closeCharactersScreen" aria-label="Fermer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+          <button class="filter-btn" id="filterBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+            filtrer
+          </button>
+        </div>
+      </div>
+
+      <div class="characters-grid" id="charactersGrid">
+        <!-- Characters will be populated by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Character Detail Screen -->
+  <div class="screen character-detail-screen hidden" id="characterDetailScreen">
+    <header class="header">
+      <div class="logo-small">
+        <!-- Logo PROSA officiel -->
+        <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-img">
+      </div>
+      <button class="settings-btn" id="settingsBtnDetail" aria-label="Réglages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="character-detail-content">
+      <button class="close-btn close-detail" id="closeCharacterDetail" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="character-card-large" id="characterCardLarge">
+        <div class="character-image-frame">
+          <img src="/placeholder.svg" alt="" id="characterDetailImage" class="character-detail-img">
+        </div>
+        <h2 class="character-name" id="characterDetailName"></h2>
+      </div>
+
+      <div class="character-description" id="characterDescription">
+        <!-- Description will be populated by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Settings Modal Overlay -->
+  <div class="modal-overlay hidden" id="settingsModal">
+    <div class="settings-panel">
+      <button class="close-modal-btn" id="closeSettingsModal" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M15 9l-6 6M9 9l6 6"/>
+        </svg>
+      </button>
+
+      <div class="setting-item">
+        <label class="setting-label">Musique</label>
+        <div class="slider-container">
+          <input type="range" min="0" max="100" value="70" class="slider" id="musicSlider">
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Effets sonores</label>
+        <div class="slider-container">
+          <input type="range" min="0" max="100" value="80" class="slider" id="sfxSlider">
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Vibration</label>
+        <button class="toggle-switch active" id="vibrationToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Caméra</label>
+        <button class="toggle-switch" id="cameraToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="./fronts/start_view_1/app.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
