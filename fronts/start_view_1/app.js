@@ -56,8 +56,20 @@ const settings = {
   camera: false,
 }
 
-// Games data (codes)
-let gamesData = {
+// ========== DATA LOADING ==========
+async function loadData() {
+  try {
+    const response = await fetch("db.json")
+    const data = await response.json()
+
+    funFacts = data.funFacts || []
+    characters = data.characters || []
+    gamesData = data.games || {}
+
+    initLoadingScreen()
+  } catch (error) {
+    console.error("Erreur chargement JSON :", error)
+  }
 }
 
 // ========== LOADING SCREEN ==========
@@ -202,7 +214,7 @@ function vibrate(pattern) {
 // ========== EVENTS ==========
 codeBtn.addEventListener("click", goToCodeScreen)
 charactersBtn.addEventListener("click", goToCharactersScreen)
-qrBtn.addEventListener("click", () => (window.location.href = "AR/index.html"))
+qrBtn.addEventListener("click", () => (window.location.href = "../../AR/index.html"))
 seasonsBtn.addEventListener("click", () => alert("Fonction à venir"))
 
 settingsButtons.forEach(btn => btn && btn.addEventListener("click", openSettings))
