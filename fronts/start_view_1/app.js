@@ -282,7 +282,8 @@ function vibrate(pattern) {
 // Menu buttons
 codeBtn.addEventListener("click", goToCodeScreen)
 qrBtn.addEventListener("click", () => {
-  alert("Scanner QR code - Fonctionnalité à venir")
+  // Redirect to AR card scanner
+  window.location.href = "../../AR/index.html"
 })
 charactersBtn.addEventListener("click", goToCharactersScreen)
 seasonsBtn.addEventListener("click", () => {

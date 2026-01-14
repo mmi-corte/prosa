@@ -729,6 +729,14 @@ document.addEventListener('keydown', (e) => {
 
 // UI button event listeners
 document.addEventListener('DOMContentLoaded', () => {
+  // Back button
+  const backBtn = document.getElementById('back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      window.location.href = '../index.html';
+    });
+  }
+  
   // Mute button
   const muteBtn = document.getElementById('mute-btn');
   if (muteBtn) {

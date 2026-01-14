@@ -16,13 +16,10 @@
     }
   </script>
   
-  <link rel="stylesheet" href="cards/css/cards.css">
+  <link rel="stylesheet" href="css/cards.css">
   
-  <!-- Character Configuration (non-module, loads first) -->
-  <script src="cards/js/characters-config.js"></script>
-  
-  <!-- Main App (ES Module) -->
-  <script type="module" src="cards/js/card-scanner.js"></script>
+  <!-- Main App (ES Module) - loads JSON config internally -->
+  <script type="module" src="js/card-scanner.js"></script>
 </head>
 <body>
   <!-- Loading Screen -->
@@ -38,6 +35,9 @@
   <div id="ui-overlay">
     <!-- Control Buttons (top right) -->
     <div id="control-buttons">
+      <button id="back-btn" class="control-btn" title="Back to Menu">
+        ←
+      </button>
       <button id="mute-btn" class="control-btn" title="Mute/Unmute">
         🔊
       </button>

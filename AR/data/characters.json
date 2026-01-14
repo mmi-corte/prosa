@@ -15,7 +15,7 @@
       "portrait": "assets/img/characters/strega_portrait.png",
       
       "marker": {
-        "file": "../assets/markers/strega.mind",
+        "file": "assets/markers/strega.mind",
         "targetIndex": 0
       },
       
@@ -50,7 +50,7 @@
       
       "sounds": {
         "intro": {
-          "path": "../assets/sound/SON1.mp3",
+          "path": "assets/sound/SON1.mp3",
           "volume": 0.7,
           "loop": false
         }
