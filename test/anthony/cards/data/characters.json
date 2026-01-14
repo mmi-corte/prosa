@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "settings": {
+    "useIndividualMarkers": true,
+    "maxTrack": 1,
+    "defaultAssetScale": 2,
+    "defaultThemeColor": "#6366F1"
+  },
+  "characters": [
+    {
+      "id": "strega",
+      "name": "La Strega",
+      "description": "Una potente strega della foresta, maestra delle arti oscure e guardiana dei segreti antichi. I suoi poteri magici sono temuti in tutto il regno.",
+      "themeColor": "#8B5CF6",
+      "portrait": "cards/assets/img/characters/strega_portrait.png",
+      
+      "marker": {
+        "file": "assets/markers/strega.mind",
+        "targetIndex": 0
+      },
+      
+      "stats": {
+        "forza": 45,
+        "magia": 90,
+        "velocità": 60,
+        "difesa": 50
+      },
+      
+      "assets": {
+        "2d": [
+          {
+            "id": "main",
+            "path": "cards/assets/img/characters/strega.png",
+            "scale": 1,
+            "position": { "x": 0, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          }
+        ],
+        "3d": []
+      },
+      
+      "sounds": {
+        "intro": {
+          "path": "cards/assets/sound/strega_intro.mp3",
+          "volume": 0.8,
+          "loop": false
+        },
+        "ambient": {
+          "path": "cards/assets/sound/strega_ambient.mp3",
+          "volume": 0.3,
+          "loop": true
+        }
+      },
+      
+      "abilities": [
+        {
+          "id": "fireball",
+          "name": "Palla di Fuoco",
+          "description": "Lancia una palla di fuoco devastante",
+          "icon": "🔥",
+          "cost": 20
+        },
+        {
+          "id": "hex",
+          "name": "Maledizione",
+          "description": "Infligge una maledizione al nemico",
+          "icon": "💀",
+          "cost": 30
+        }
+      ]
+    }
+  ]
+}

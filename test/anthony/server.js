@@ -85,6 +85,8 @@ const server = https.createServer(options, (req, res) => {
     filePath = './index.html';
   } else if (filePath === './immersive' || filePath === './immersive/') {
     filePath = './immersive.html';
+  } else if (filePath === './cards' || filePath === './cards/') {
+    filePath = './cards/index.html';
   }
 
   // Get file extension
@@ -189,6 +191,8 @@ const httpHandler = (req, res) => {
     filePath = './index.html';
   } else if (filePath === './immersive' || filePath === './immersive/') {
     filePath = './immersive.html';
+  } else if (filePath === './cards' || filePath === './cards/') {
+    filePath = './cards/index.html';
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();
