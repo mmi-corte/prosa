@@ -1,3 +1,3 @@
 export function qrView() {
-    window.location.href = "../../../AR/index.html"
+    window.location.href = "./AR/index.html"
 }
