@@ -1,3 +1,4 @@
+import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { settingView } from "./js/views/main/settingView.js"
 
@@ -8,6 +9,7 @@ export function clearContainer() {
 }
 //Load main menu by default
 menuView()
+loadingView()
 
 // ====================================
 // ============= SETTINGS =============
