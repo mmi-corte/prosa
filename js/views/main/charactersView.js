@@ -34,7 +34,6 @@ export function charactersView() {
     `
 
     let charactersData;
-    console.log(charactersData)
     async function loadCharacters() {
         if (charactersData) {
             return;
