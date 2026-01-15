@@ -42,7 +42,7 @@ export function charactersView() {
 
 
             try {
-                const response = await fetch('../../data/characters.json');
+                const response = await fetch('./data/characters.json');
                 if (!response.ok) throw new Error('Failed to load characters data');
 
                 // Store data in memory for access later
