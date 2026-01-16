@@ -76,32 +76,3 @@ export function menuView() {
   })
 }
 
-
-// ========== DOM ELEMENTS ==========
-const loadingScreen = document.getElementById("loadingScreen")
-const menuScreen = document.getElementById("menuScreen")
-const codeScreen = document.getElementById("codeScreen")
-const charactersScreen = document.getElementById("charactersScreen")
-const characterDetailScreen = document.getElementById("characterDetailScreen")
-const settingsModal = document.getElementById("settingsModal")
-
-
-
-const qrBtn = document.getElementById("qrBtn")
-
-const charactersBtn = document.getElementById("charactersBtn")
-
-const seasonsBtn = document.getElementById("seasonsBtn")
-
-// Settings buttons
-const settingsButtons = [
-  document.getElementById("settingsBtn"),
-]
-
-// Close button
-const closeCodeScreen = document.getElementById("closeCodeScreen")
-
-// Settings
-const vibrationToggle = document.getElementById("vibrationToggle")
-const cameraToggle = document.getElementById("cameraToggle")
-
