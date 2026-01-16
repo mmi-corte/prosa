@@ -1,58 +1,60 @@
-[
-  {
-    "id": "1",
-    "actionId": "",
-    "default": {
-      "backgroundUrl": "",
-      "foregroundUrl": "",
-      "sound": "",
-      "music": ""
-    },
-    "dialog": [
-      {
-        "text": {
-          "fr": "",
-          "cor": ""
-        },
-        "overrideForeground": ""
+{
+  "1": {
+    "1": {
+      "actionId": "",
+      "default": {
+        "backgroundUrl": "",
+        "foregroundUrl": "",
+        "sound": "",
+        "music": ""
       },
-      {
-        "text": {
-          "fr": "",
-          "cor": ""
+      "dialog": [
+        {
+          "text": {
+            "fr": "",
+            "cor": ""
+          },
+          "overrideForeground": ""
         },
-        "overrideForeground": ""
-      }
-    ],
-    "nextActionType": "dialog",
-    "nextAction": "2"
+        {
+          "text": {
+            "fr": "",
+            "cor": ""
+          },
+          "overrideForeground": ""
+        }
+      ],
+      "nextActionType": "dialog",
+      "nextAction": "2"
+    },
+    "2": {
+      "actionId": "",
+      "default": {
+        "backgroundUrl": "",
+        "foregroundUrl": "",
+        "sound": "",
+        "music": ""
+      },
+      "dialog": [
+        {
+          "text": {
+            "fr": "",
+            "cor": ""
+          },
+          "overrideForeground": ""
+        },
+        {
+          "text": {
+            "fr": "",
+            "cor": ""
+          },
+          "overrideForeground": ""
+        }
+      ],
+      "nextActionType": "end",
+      "nextAction": "1"
+    }
   },
-  {
-    "id": "2",
-    "actionId": "",
-    "default": {
-      "backgroundUrl": "",
-      "foregroundUrl": "",
-      "sound": "",
-      "music": ""
-    },
-    "dialog": [
-      {
-        "text": {
-          "fr": "",
-          "cor": ""
-        },
-        "overrideForeground": ""
-      },
-      {
-        "text": {
-          "fr": "",
-          "cor": ""
-        },
-        "overrideForeground": ""
-      }
-    ],
-    "nextActionType": "end",
-    "nextAction": "1"
-  }
-]
+  "2": {},
+  "3": {}
+}

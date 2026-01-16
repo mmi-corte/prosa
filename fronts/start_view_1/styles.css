@@ -770,7 +770,6 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 420px;
   height: 100%;
   background: rgba(129, 203, 214, 0.9);
   display: flex;

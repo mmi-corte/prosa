@@ -1,6 +1,56 @@
-[
-  {
-    "id": "1",
-    "stepId": ""
+{
+  "1": {
+    "01010": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    },
+    "02010": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    }
+  },
+  "2": {
+    "0101": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    },
+    "0201": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    }
+  },
+  "3": {
+    "0101": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    },
+    "0201": {
+      "actionType": "dialog",
+      "action": "1",
+      "endStepWin": "2",
+      "endStepStill": "3",
+      "endStepLoose": "4",
+      "endStepContinue": "5"
+    }
   }
-]
+}

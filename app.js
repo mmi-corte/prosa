@@ -1,3 +1,4 @@
+import { initGameData } from "./js/initGameData.js"
 import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { settingView } from "./js/views/main/settingView.js"
@@ -5,11 +6,17 @@ import { settingView } from "./js/views/main/settingView.js"
 export const gameContainer = document.getElementById('gameContainer')
 
 export function clearContainer() {
-    gameContainer.innerHTML = ''
+  gameContainer.innerHTML = ''
 }
 //Load main menu by default
 menuView()
 loadingView()
+
+
+// ========================================
+// ============= DATA LOADING =============
+// ========================================
+initGameData()
 
 // ====================================
 // ============= SETTINGS =============
@@ -29,7 +36,7 @@ settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.c
 //Setup the button
 const settingButton = document.getElementById('settingButton')
 settingButton.addEventListener('click', () => {
-    settingView()
+  settingView()
 })
 
 // ===================================

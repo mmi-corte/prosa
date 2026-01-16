@@ -1,4 +1,6 @@
 import { clearContainer, gameContainer, vibrate } from "../../../app.js";
+import { startStep } from "../../gameEventHandler.js";
+import { nextStepVariant, stepsData } from "../../initGameData.js";
 import { menuView } from "./menuView.js";
 
 export function codeView() {
@@ -56,68 +58,86 @@ export function codeView() {
     const keyDelete = document.getElementById("keyDelete")
     const keyValidate = document.getElementById("keyValidate")
 
-    let currentCode = ''
-
     keypadKeys.forEach(key =>
         key.addEventListener("click", () => addDigit(key.dataset.value))
     )
     keyDelete.addEventListener("click", deleteDigit)
-    keyValidate.addEventListener("click", validateCode)
+    keyValidate.addEventListener("click", submitCode)
 
     const closeScreen = document.getElementById('closeScreen')
     closeScreen.addEventListener('click', () => {
         menuView()
     })
 
+    let currentCode = []
+
     function addDigit(value) {
         if (currentCode.length < 4) {
             currentCode += value
-            updateCodeDisplay()
+            updateCode()
             vibrate(10)
         }
     }
 
     function deleteDigit() {
         currentCode = currentCode.slice(0, -1)
-        updateCodeDisplay()
+        updateCode()
         vibrate(10)
     }
 
-    function updateCodeDisplay() {
-      codeDisplay.forEach((digit, index) => {
-        digit.textContent = currentCode[index] || ""
-        digit.classList.toggle("filled", !!currentCode[index])
-        digit.classList.remove("error")
-      })
+    function updateCode() {
+        codeDisplay.forEach((digit, index) => {
+            digit.textContent = currentCode[index] || ""
+            digit.classList.toggle("filled", !!currentCode[index])
+            digit.classList.remove("error")
+        })
+        if (currentCode.length == 4) {
+            submitCode()
+        }
     }
 
-    function validateCode() {
-        if (currentCode.length !== 4) return showCodeError()
+    function submitCode() {
+        if (currentCode.length !== 4) return codeError()
 
-        let found = false
+        const searchId = `${currentCode}${nextStepVariant}`
 
-        // Placeholder: Assume gamesData is defined elsewhere or import it
-        // for (const key in gamesData) {
-        //     if (gamesData[key].code === currentCode) {
-        //         const action = gamesData[key].action
-        //         if (action.type === "redirect") {
-        //             // showSuccess(() => (window.location.href = action.url))
-        //             //startStep(currentCode)
-        //             found = true
-        //             break
-        //         }
-        //     }
-        // }
-
-        if (!found) showCodeError()
+        if (searchId in stepsData) {
+            console.log("Found step ", currentCode)
+            codeSuccess()
+        } else {
+            codeError()
+        }
     }
 
-    function showCodeError() {
+    function codeSuccess() {
+        // Create success overlay
+        const overlay = document.createElement("div")
+        overlay.className = "success-overlay"
+        overlay.innerHTML = `
+            <div class="success-content">
+            <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <p class="success-text">ACCÈS AUTORISÉ</p>
+            </div>
+        `
+        document.body.appendChild(overlay)
+
+        setTimeout(() => overlay.classList.add("show"), 10)
+        vibrate([50, 100, 50])
+
+        setTimeout(() => {
+            overlay.classList.remove('show')
+            startStep(currentCode)
+        }, 1500)
+    }
+
+    function codeError() {
         document.querySelectorAll(".code-digit").forEach(d => d.classList.add("error"))
         vibrate([50, 30, 50])
         setTimeout(() => {
             currentCode = ""
-            updateCodeDisplay()
+            updateCode()
         }, 500)
     }
 }
