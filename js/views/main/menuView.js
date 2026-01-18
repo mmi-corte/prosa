@@ -1,4 +1,5 @@
 import { clearContainer, gameContainer } from "../../../app.js"
+import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
 import { codeView } from "./codeView.js"
 import { qrView } from "./qrView.js"
@@ -48,6 +49,10 @@ export function menuView() {
           <polyline points="12 6 12 12 16 14" />
         </svg>
       </button>
+
+      <!-- <button class="menu-btn" id="debugBtn" style="background-color:red;">
+        <span class="btn-title" style="color:white;">DEBUG SCREEN</span>
+      </button> -->
     </nav>
   `
 
@@ -74,5 +79,11 @@ export function menuView() {
   seasonsBtn.addEventListener('click', () => {
     seasonsView()
   })
+
+  //debug screen button
+  // const debugBtn = document.getElementById("debugBtn")
+  // debugBtn.addEventListener('click', () => {
+  //   debugView()
+  // })
 }
 

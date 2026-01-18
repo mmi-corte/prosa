@@ -1,7 +1,7 @@
 {
   "1": {
     "1": {
-      "actionId": "",
+      "actionId": "1",
       "default": {
         "backgroundUrl": "",
         "foregroundUrl": "",
@@ -11,24 +11,40 @@
       "dialog": [
         {
           "text": {
-            "fr": "",
+            "fr": "Le spallistu apparait devant vous.",
             "cor": ""
           },
           "overrideForeground": ""
         },
         {
           "text": {
-            "fr": "",
+            "fr": "\"Bois ça, tu en auras besoin. Lorem ipsum dolor ? sit amet. \"",
+            "cor": ""
+          },
+          "overrideForeground": "",
+          "pitch": "200"
+        },
+        {
+          "text": {
+            "fr": "Le fulettu apparait.",
             "cor": ""
           },
           "overrideForeground": ""
+        },
+        {
+          "text": {
+            "fr": "Eh, toi, reviens un peu par ici ! Il faut qu'on cause !",
+            "cor": ""
+          },
+          "overrideForeground": "",
+          "pitch": "1200"
         }
       ],
       "nextActionType": "dialog",
       "nextAction": "2"
     },
     "2": {
-      "actionId": "",
+      "actionId": "2",
       "default": {
         "backgroundUrl": "",
         "foregroundUrl": "",
@@ -38,21 +54,21 @@
       "dialog": [
         {
           "text": {
-            "fr": "",
+            "fr": "Vous avez vaincu, le spallistu !",
             "cor": ""
           },
           "overrideForeground": ""
         },
         {
           "text": {
-            "fr": "",
+            "fr": "Vous etes super fort",
             "cor": ""
           },
           "overrideForeground": ""
         }
       ],
       "nextActionType": "end",
-      "nextAction": "1"
+      "nextAction": "3"
     }
   },
   "2": {},

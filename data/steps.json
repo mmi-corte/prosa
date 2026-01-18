@@ -3,13 +3,13 @@
     "01010": {
       "actionType": "dialog",
       "action": "1",
-      "endStepWin": "2",
-      "endStepStill": "3",
-      "endStepLoose": "4",
-      "endStepContinue": "5"
+      "endStepWin": "0201",
+      "endStepStill": "0101",
+      "endStepLoose": "0101",
+      "endStepContinue": "0201"
     },
     "02010": {
-      "actionType": "dialog",
+      "actionType": "jb",
       "action": "1",
       "endStepWin": "2",
       "endStepStill": "3",

@@ -1,5 +1,7 @@
 import { nextStepVariant, stepsData } from "./initGameData.js";
 import { dialogView } from "./views/actions/dialogView.js";
+import { endView } from "./views/actions/endView.js";
+import { menuView } from "./views/main/menuView.js";
 
 export let activeStep
 
@@ -36,34 +38,11 @@ export function callAction(actionType, action) {
         case "ar":
             break;
         case "end":
-            endStep(action)
+            endView(action)
             break;
-    }
-}
-
-// ==================================
-// ====== Fonction fin d'étape ======
-// ==================================
-function endStep(action) {
-    switch (action) {
-        //Avancez à la case X
-        case "0":
-            console.log("Avancez à la case", activeStep.endStepWin)
-            break;
-
-        //Restez à la case X
-        case "1":
-            console.log("Restez à la case", activeStep.endStepStill)
-            break;
-
-        //Reculez à la case X
-        case "2":
-            console.log("Reculez à la case", activeStep.endStepLoose)
-            break;
-
-        //Avancez à la case X, mais continuez votre tour
-        case "3":
-            console.log("Avancez à la case", activeStep.endStepContinue, ", mais continuez votre tour",)
+        default:
+            console.error(`Incorrect data: action type ${actionType} doesn't exist`)
+            menuView()
             break;
     }
 }
