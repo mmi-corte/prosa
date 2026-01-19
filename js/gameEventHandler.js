@@ -1,4 +1,5 @@
 import { nextStepVariant, stepsData } from "./initGameData.js";
+import { choiceView } from "./views/actions/choiceView.js";
 import { dialogView } from "./views/actions/dialogView.js";
 import { endView } from "./views/actions/endView.js";
 import { menuView } from "./views/main/menuView.js";
@@ -32,6 +33,9 @@ export function callAction(actionType, action) {
     switch (actionType) {
         case "dialog":
             dialogView(action);
+            break;
+        case "choice":
+            choiceView(action);
             break;
         case "game":
             break;

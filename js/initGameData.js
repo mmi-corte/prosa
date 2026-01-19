@@ -1,5 +1,6 @@
 export let stepsData = [];
 export let dialogsData = [];
+export let choicesData = [];
 
 // ==================================
 // A insérer: logique d'initailisation du jeu
@@ -44,5 +45,17 @@ export async function initGameData() {
         console.log("Game data loaded:", Object.keys(dialogsData).length, "dialogs for localisation", playerLocalisation);
     } catch (error) {
         console.error("Critical: Could not load dialogs data", error);
+    }
+
+    try {
+        const response = await fetch('./data/choices.json');
+        if (!response.ok) throw new Error('Failed to load choices data');
+
+        // Store data in memory for instant access later
+        dataFetch = await response.json();
+        choicesData = dataFetch[playerLocalisation]
+        console.log("Game data loaded:", Object.keys(choicesData).length, "choices for localisation", playerLocalisation);
+    } catch (error) {
+        console.error("Critical: Could not load choices data", error);
     }
 }
