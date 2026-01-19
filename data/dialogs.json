@@ -23,25 +23,10 @@
           },
           "overrideForeground": "",
           "pitch": "200"
-        },
-        {
-          "text": {
-            "fr": "Le fulettu apparait.",
-            "cor": ""
-          },
-          "overrideForeground": ""
-        },
-        {
-          "text": {
-            "fr": "Eh, toi, reviens un peu par ici ! Il faut qu'on cause !",
-            "cor": ""
-          },
-          "overrideForeground": "",
-          "pitch": "1200"
         }
       ],
-      "nextActionType": "dialog",
-      "nextAction": "2"
+      "nextActionType": "choice",
+      "nextAction": "1"
     },
     "2": {
       "actionId": "2",
@@ -61,10 +46,18 @@
         },
         {
           "text": {
-            "fr": "Vous etes super fort",
+            "fr": "Le fulettu apparait.",
             "cor": ""
           },
           "overrideForeground": ""
+        },
+        {
+          "text": {
+            "fr": "Eh, toi, reviens un peu par ici ! Il faut qu'on cause !",
+            "cor": ""
+          },
+          "overrideForeground": "",
+          "pitch": "1200"
         }
       ],
       "nextActionType": "end",
