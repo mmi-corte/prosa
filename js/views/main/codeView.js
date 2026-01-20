@@ -128,6 +128,7 @@ export function codeView() {
 
         setTimeout(() => {
             overlay.classList.remove('show')
+            overlay.remove()
             startStep(currentCode)
         }, 1500)
     }
