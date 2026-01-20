@@ -5,6 +5,7 @@ import { endView } from "./views/actions/endView.js";
 import { gameView } from "./views/actions/gameView.js";
 import { menuView } from "./views/main/menuView.js";
 
+export let activeStepId
 export let activeStep
 
 // ====================================
@@ -16,6 +17,7 @@ export function startStep(step) {
     const searchId = `${step}${nextStepVariant}`
 
     if (searchId in stepsData) {
+        activeStepId = step
         activeStep = stepsData[searchId];
         console.log(`Loading step ${step}`)
         callAction(activeStep.actionType, activeStep.action)

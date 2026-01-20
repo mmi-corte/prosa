@@ -1,75 +1,77 @@
 {
   "1": {
-    "1": {
-      "default": {
-        "backgroundUrl": "",
-        "foregroundUrl": "",
-        "sound": "",
-        "music": ""
-      },
-      "dialog": [
-        {
-          "text": {
-            "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
-            "cor": ""
+    "0101": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
+              "cor": ""
+            }
+          },
+          {
+            "text": {
+              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
+              "cor": ""
+            },
+            "pitch": "600"
           }
-        },
-        {
-          "text": {
-            "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
-            "cor": ""
-          },
-          "pitch": "600"
-        }
-      ],
-      "nextActionType": "game",
-      "nextAction": "1"
-    },
-    "2": {
-      "default": {
-        "backgroundUrl": "",
-        "foregroundUrl": "",
-        "sound": "",
-        "music": ""
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
       },
-      "dialog": [
-        {
-          "text": {
-            "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
-            "cor": ""
-          },
-          "pitch": "600"
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
         },
-        {
-          "text": {
-            "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-            "cor": ""
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
+              "cor": ""
+            },
+            "pitch": "600"
           },
-          "pitch": "600"
-        },
-        {
-          "text": {
-            "fr": "\"J’ai tenté de résister, mais j’ai échoué…\"",
-            "cor": ""
+          {
+            "text": {
+              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
+              "cor": ""
+            },
+            "pitch": "600"
           },
-          "pitch": "600"
-        },
-        {
-          "text": {
-            "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
-            "cor": ""
+          {
+            "text": {
+              "fr": "\"J’ai tenté de résister, mais j’ai échoué…\"",
+              "cor": ""
+            },
+            "pitch": "600"
           },
-          "pitch": "600"
-        },
-        {
-          "text": {
-            "fr": "La voix s’interrompt soudainement…",
-            "cor": ""
+          {
+            "text": {
+              "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
+              "cor": ""
+            },
+            "pitch": "600"
+          },
+          {
+            "text": {
+              "fr": "La voix s’interrompt soudainement…",
+              "cor": ""
+            }
           }
-        }
-      ],
-      "nextActionType": "end",
-      "nextAction": "4"
+        ],
+        "nextActionType": "end",
+        "nextAction": "4"
+      }
     }
   },
   "2": {},

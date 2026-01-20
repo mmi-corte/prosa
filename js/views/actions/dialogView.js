@@ -1,17 +1,18 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { callAction } from "../../gameEventHandler.js";
+import { activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { dialogsData } from "../../initGameData.js";
 
 let textBox = "";
-let dialogData = "";
+let data = "";
 let currentDialogIndex = 0;
 let currentPitch = 400;
 
 export function dialogView(action) {
     clearContainer();
     currentDialogIndex = 0;
-    dialogData = dialogsData[action];
+
+    data = dialogsData[activeStepId][action];
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('dialogWrapper');
@@ -24,7 +25,7 @@ export function dialogView(action) {
     updateDialog();
 
     textBox.addEventListener('click', () => {
-        const fullText = dialogData.dialog[currentDialogIndex].text.fr;
+        const fullText = data.dialog[currentDialogIndex].text.fr;
 
         if (isTyping) {
             skipTypeWrite()
@@ -32,18 +33,18 @@ export function dialogView(action) {
         } else {
             //Go to next dialog if the text is fully displayed
             currentDialogIndex += 1;
-            if (dialogData.dialog.length > currentDialogIndex) {
+            if (data.dialog.length > currentDialogIndex) {
                 updateDialog();
             } else {
-                callAction(dialogData.nextActionType, dialogData.nextAction);
+                callAction(data.nextActionType, data.nextAction);
             }
         }
     });
 }
 
 function updateDialog() {
-    const fullText = dialogData.dialog[currentDialogIndex].text.fr;
-    currentPitch = dialogData.dialog[currentDialogIndex].pitch || undefined;
+    const fullText = data.dialog[currentDialogIndex].text.fr;
+    currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
     typeWriteEffect(textBox, fullText, currentPitch);
 }
 
