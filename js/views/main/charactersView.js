@@ -66,7 +66,7 @@ export function charactersView() {
 }
 
 function renderCharactersGrid(charactersData) {
-    charactersGrid = document.getElementById('charactersGrid')
+    const charactersGrid = document.getElementById('charactersGrid')
     charactersGrid.innerHTML = ""
 
     charactersData.forEach(char => {
