@@ -2,6 +2,7 @@ import { nextStepVariant, stepsData } from "./initGameData.js";
 import { choiceView } from "./views/actions/choiceView.js";
 import { dialogView } from "./views/actions/dialogView.js";
 import { endView } from "./views/actions/endView.js";
+import { gameView } from "./views/actions/gameView.js";
 import { menuView } from "./views/main/menuView.js";
 
 export let activeStep
@@ -38,6 +39,7 @@ export function callAction(actionType, action) {
             choiceView(action);
             break;
         case "game":
+            gameView(action);
             break;
         case "ar":
             break;

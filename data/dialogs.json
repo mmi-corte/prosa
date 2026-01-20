@@ -1,7 +1,6 @@
 {
   "1": {
     "1": {
-      "actionId": "1",
       "default": {
         "backgroundUrl": "",
         "foregroundUrl": "",
@@ -11,25 +10,22 @@
       "dialog": [
         {
           "text": {
-            "fr": "Le spallistu apparait devant vous.",
+            "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
             "cor": ""
-          },
-          "overrideForeground": ""
+          }
         },
         {
           "text": {
-            "fr": "\"Bois ça, tu en auras besoin. Lorem ipsum dolor ? sit amet. \"",
+            "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
             "cor": ""
           },
-          "overrideForeground": "",
-          "pitch": "200"
+          "pitch": "600"
         }
       ],
-      "nextActionType": "choice",
+      "nextActionType": "game",
       "nextAction": "1"
     },
     "2": {
-      "actionId": "2",
       "default": {
         "backgroundUrl": "",
         "foregroundUrl": "",
@@ -39,29 +35,41 @@
       "dialog": [
         {
           "text": {
-            "fr": "Vous avez vaincu, le spallistu !",
+            "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
             "cor": ""
           },
-          "overrideForeground": ""
+          "pitch": "600"
         },
         {
           "text": {
-            "fr": "Le fulettu apparait.",
+            "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
             "cor": ""
           },
-          "overrideForeground": ""
+          "pitch": "600"
         },
         {
           "text": {
-            "fr": "Eh, toi, reviens un peu par ici ! Il faut qu'on cause !",
+            "fr": "\"J’ai tenté de résister, mais j’ai échoué…\"",
             "cor": ""
           },
-          "overrideForeground": "",
-          "pitch": "1200"
+          "pitch": "600"
+        },
+        {
+          "text": {
+            "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
+            "cor": ""
+          },
+          "pitch": "600"
+        },
+        {
+          "text": {
+            "fr": "La voix s’interrompt soudainement…",
+            "cor": ""
+          }
         }
       ],
       "nextActionType": "end",
-      "nextAction": "3"
+      "nextAction": "4"
     }
   },
   "2": {},

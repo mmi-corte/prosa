@@ -10,38 +10,51 @@ export function endView(action) {
 
     gameContainer.appendChild(wrapper)
 
-    const textBox = document.createElement('p')
-    textBox.innerText = ""
-    gameContainer.appendChild(textBox)
+    const textIndication = document.createElement('div')
+    textIndication.classList.add('text_indication')
+    const textNextStep = document.createElement('div')
+    textNextStep.classList.add('next_step')
 
-    //SAMPLE DATA
-    //Devra etre remplacé par les fetch des data
+    wrapper.appendChild(textIndication)
+    wrapper.appendChild(textNextStep)
+
+    //Prepare another div if there is text after the step div
+    const extraIndication = document.createElement('div')
+    extraIndication.classList.add('text_indication')
+
+
     // ==================================
     // ====== Fonction fin d'étape ======
     // ==================================
     switch (action) {
         //Avancez à la case X
-        case "0":
-            textBox.innerText = `Avancez à la case ${activeStep.endStepWin}`
+        case "1":
+            textIndication.innerText = "Avancez à la case"
+            textNextStep.innerText = `${activeStep.endStepWin}`
             break;
 
         //Restez à la case X
-        case "1":
-            textBox.innerText = `Restez à la case ${activeStep.endStepStill}`
+        case "2":
+            textIndication.innerText = "Restez à la case"
+            textNextStep.innerText = activeStep.endStepStill
             break;
 
         //Reculez à la case X
-        case "2":
-            textBox.innerText = `Reculez à la case ${activeStep.endStepLoose}`
+        case "3":
+            textIndication.innerText = "Reculez à la case"
+            textNextStep.innerText = activeStep.endStepLoose
             break;
 
         //Avancez à la case X, mais continuez votre tour
-        case "3":
-            textBox.innerText = `Avancez à la case ${activeStep.endStepContinue} et continuez votre tour.`
+        case "4":
+            textIndication.innerText = "Avancez à la case"
+            textNextStep.innerText = activeStep.endStepContinue
+            extraIndication.innerText = "et continuez votre tour"
+            wrapper.appendChild(extraIndication)
             break;
     }
 
-    textBox.addEventListener('click', () => {
+    wrapper.addEventListener('click', () => {
         menuView()
     })
 }

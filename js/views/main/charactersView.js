@@ -5,31 +5,33 @@ export function charactersView() {
     clearContainer()
 
     gameContainer.innerHTML = `
-        <div class="characters-header">
-            <div class="characters-title-section">
-                <h1 class="characters-title">LES PERSONNAGES</h1>
-                <p class="characters-region">CORSE</p>
-            </div>
+        <div class="menuWrapper">
+            <div class="characters-header">
+                <div class="characters-title-section">
+                    <h1 class="characters-title">LES PERSONNAGES</h1>
+                    <p class="characters-region">CORSE</p>
+                </div>
 
-            <div class="characters-actions">
-                <button class="close-btn" id="closeScreen" aria-label="Fermer">
+                <div class="characters-actions">
+                    <button class="close-btn" id="closeScreen" aria-label="Fermer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M15 9l-6 6M9 9l6 6" />
+                        </svg>
+                    </button>
+
+                    <button class="filter-btn" id="filterBtn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M15 9l-6 6M9 9l6 6" />
+                        <polyline points="6 9 12 15 18 9" />
                     </svg>
-                </button>
-
-                <button class="filter-btn" id="filterBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="6 9 12 15 18 9" />
-                </svg>
-                filtrer
-                </button>
+                    filtrer
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="characters-grid" id="charactersGrid">
-            <!-- Characters will be populated by JS -->
+            <div class="characters-grid" id="charactersGrid">
+                <!-- Characters will be populated by JS -->
+            </div>
         </div>
     `
 
@@ -85,19 +87,19 @@ function goToCharacterDetail(char) {
     container.classList.add('modal-overlay', 'character-detail-content')
 
     container.innerHTML = `
-        <button class="close-btn close-detail" id="closeModal" aria-label="Fermer">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M15 9l-6 6M9 9l6 6" />
-            </svg>
-        </button>
+            <button class="close-btn close-detail" id="closeModal" aria-label="Fermer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M15 9l-6 6M9 9l6 6" />
+                </svg>
+            </button>
 
-        <div class="character-card-large" id="characterCardLarge">
-            <div class="character-image-frame">
-            <img src="assets/characters/default.png" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
+            <div class="character-card-large" id="characterCardLarge">
+                <div class="character-image-frame">
+                    <img src="assets/characters/default.png" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
+                </div>
+                <h2 class="character-name" id="characterDetailName"></h2>
             </div>
-            <h2 class="character-name" id="characterDetailName"></h2>
-        </div>
 
         <div class="character-description" id="characterDescription">
         </div>

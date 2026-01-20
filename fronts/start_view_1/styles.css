@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Futura';
-    src: url('public/fonts/FuturaCondMedium.woff2') format('woff2'),
-        url('public/fonts/FuturaCondMedium.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Futura';
+  src: url('public/fonts/FuturaCondMedium.woff2') format('woff2'),
+    url('public/fonts/FuturaCondMedium.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -51,6 +51,8 @@ body {
   margin: 0 auto;
   position: relative;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
 }
 
 /* ========== LOADING SCREEN ========== */
@@ -113,6 +115,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -145,15 +148,18 @@ body {
 
 /* ========== SCREENS ========== */
 .screen {
-  min-height: 100vh;
   background: var(--background);
   display: flex;
   flex-direction: column;
-  padding: 40px 24px 40px;
+  height: 100%;
 }
 
 .screen.hidden {
   display: none;
+}
+
+.menuWrapper {
+  padding: 40px 24px 40px;
 }
 
 /* ========== HEADER ========== */
@@ -304,6 +310,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 40px;
+  padding: 20px 40px;
 }
 
 .code-title-section {
@@ -374,14 +381,17 @@ body {
 }
 
 @keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
   }
+
   20%,
   60% {
     transform: translateX(-5px);
   }
+
   40%,
   80% {
     transform: translateX(5px);
@@ -800,4 +810,52 @@ body {
 .success-text {
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+/* ===================================
+========= Actions Wrapper =========
+=================================== */
+.dialogWrapper, .endWrapper {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding: 100px 50px;
+}
+
+.dialogWrapper {
+  align-items: end;
+}
+
+.dialogWrapper p {
+  padding: 30px;
+  width: 100%;
+  font-size: 1.4rem;
+  height: 10rem;
+  display: flex;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+/* EndWrapper */
+.endWrapper {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.endWrapper .text_indication {
+  font-size: 2.4rem;
+  max-width: 20rem;
+  text-align: center;
+}
+
+.endWrapper .next_step {
+  padding: 20px 100px;
+  font-size: 3rem;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  font-weight: 900;
+  text-align: center;
 }

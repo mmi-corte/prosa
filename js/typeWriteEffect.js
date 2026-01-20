@@ -1,16 +1,16 @@
 let typingTimeout = ""
 export let isTyping = ""
 
-export function typeWriteEffect(contaner, text, pitch = 400) {
+export function typeWriteEffect(container, text, pitch = 400) {
     return new Promise((resolve) => {
-        contaner.innerHTML = "";
+        container.innerHTML = "";
         isTyping = true;
         let i = 0;
 
         function type() {
             if (i < text.length) {
                 const char = text.charAt(i);
-                contaner.innerHTML += char;
+                container.innerHTML += char;
 
                 let currentDelay = 30;
 
@@ -21,7 +21,9 @@ export function typeWriteEffect(contaner, text, pitch = 400) {
                 if (char === "." || char === "!" || char === "?") {
                     currentDelay = 500;
                 } else if (char === "," || char === ":" || char === ";") {
-                    currentDelay = 200;
+                    currentDelay = 300;
+                } else if (char === "…") {
+                    currentDelay = 700
                 }
 
                 i++;

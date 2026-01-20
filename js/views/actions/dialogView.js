@@ -19,7 +19,7 @@ export function dialogView(action) {
 
     textBox = document.createElement('p');
     textBox.innerText = "";
-    gameContainer.appendChild(textBox);
+    wrapper.appendChild(textBox);
 
     updateDialog();
 
@@ -43,7 +43,7 @@ export function dialogView(action) {
 
 function updateDialog() {
     const fullText = dialogData.dialog[currentDialogIndex].text.fr;
-    currentPitch = dialogData.dialog[currentDialogIndex].pitch || 400;
+    currentPitch = dialogData.dialog[currentDialogIndex].pitch || undefined;
     typeWriteEffect(textBox, fullText, currentPitch);
 }
 
