@@ -830,7 +830,7 @@ body {
   padding: 30px;
   width: 100%;
   font-size: 1.4rem;
-  height: 10rem;
+  min-height: 10rem;
   display: flex;
   background: var(--card);
   border-radius: 16px;
