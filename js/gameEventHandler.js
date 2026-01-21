@@ -3,6 +3,7 @@ import { choiceView } from "./views/actions/choiceView.js";
 import { dialogView } from "./views/actions/dialogView.js";
 import { endView } from "./views/actions/endView.js";
 import { gameView } from "./views/actions/gameView.js";
+import { riddleView } from "./views/actions/riddleView.js";
 import { menuView } from "./views/main/menuView.js";
 
 export let activeStepId
@@ -39,6 +40,9 @@ export function callAction(actionType, action) {
             break;
         case "choice":
             choiceView(action);
+            break;
+        case "riddle":
+            riddleView(action);
             break;
         case "game":
             gameView(action);

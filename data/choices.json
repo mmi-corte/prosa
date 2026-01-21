@@ -1,27 +1,5 @@
 {
     "1": {
-        "0101": {
-            "1": {
-                "question": "Que voulez-vous faire ?",
-                "choices": [
-                    {
-                        "text": "Battre le spallistu",
-                        "nextActionType": "dialog",
-                        "nextAction": "2"
-                    },
-                    {
-                        "text": "Battre la fata",
-                        "nextActionType": "end",
-                        "nextAction": "1"
-                    },
-                    {
-                        "text": "Ne rien faire",
-                        "nextActionType": "end",
-                        "nextAction": "3"
-                    }
-                ]
-            }
-        }
     },
     "2": {},
     "3": {}

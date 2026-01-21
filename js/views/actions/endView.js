@@ -17,6 +17,9 @@ export function endView(action) {
     wrapper.appendChild(textIndication)
     wrapper.appendChild(textNextStep)
 
+    //Store the type of ending
+    const endType = activeStep.end[action].type
+    const nextStep = activeStep.end[action].type
 
     //Prepare another div if there is text after the step div
     const extraIndication = document.createElement('div')
@@ -26,29 +29,29 @@ export function endView(action) {
     // ==================================
     // ====== Fonction fin d'étape ======
     // ==================================
-    switch (action) {
+    switch (endType) {
         //Avancez à la case X
-        case "1":
+        case "win":
             textIndication.innerText = "Avancez à la case"
-            textNextStep.innerText = `${activeStep.endStepWin}`
+            textNextStep.innerText = nextStep
             break;
 
         //Restez à la case X
-        case "2":
+        case "still":
             textIndication.innerText = "Restez à la case"
-            textNextStep.innerText = activeStep.endStepStill
+            textNextStep.innerText = nextStep
             break;
 
         //Reculez à la case X
-        case "3":
+        case "loose":
             textIndication.innerText = "Reculez à la case"
-            textNextStep.innerText = activeStep.endStepLoose
+            textNextStep.innerText = nextStep
             break;
 
         //Avancez à la case X, mais continuez votre tour
-        case "4":
+        case "continue":
             textIndication.innerText = "Avancez à la case"
-            textNextStep.innerText = activeStep.endStepContinue
+            textNextStep.innerText = nextStep
             extraIndication.innerText = "et continuez votre tour"
             wrapper.appendChild(extraIndication)
             break;

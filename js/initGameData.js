@@ -1,6 +1,7 @@
 export let stepsData = [];
 export let dialogsData = [];
 export let choicesData = [];
+export let riddlesData = [];
 export let gamesData = [];
 
 // ==================================
@@ -58,6 +59,18 @@ export async function initGameData() {
         console.log("Game data loaded:", Object.keys(choicesData).length, "choices for localisation", playerLocalisation);
     } catch (error) {
         console.error("Critical: Could not load choices data", error);
+    }
+
+    try {
+        const response = await fetch('./data/riddles.json');
+        if (!response.ok) throw new Error('Failed to load riddles data');
+
+        // Store data in memory for instant access later
+        dataFetch = await response.json();
+        riddlesData = dataFetch[playerLocalisation]
+        console.log("Game data loaded:", Object.keys(riddlesData).length, "riddles for localisation", playerLocalisation);
+    } catch (error) {
+        console.error("Critical: Could not load riddles data", error);
     }
 
     try {

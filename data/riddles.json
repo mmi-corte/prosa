@@ -1,0 +1,56 @@
+{
+    "1": {
+        "0200": {
+            "1": {
+                "random": true,
+                "text": [
+                    {
+                        "question": "TODO Énigme Fata 1",
+                        "choices": [
+                            {
+                                "text": "Réponse neutre",
+                                "score": 0
+                            },
+                            {
+                                "text": "Réponse neutre",
+                                "score": 0
+                            }
+                        ]
+                    },
+                    {
+                        "question": "TODO Énigme Fata 2",
+                        "choices": [
+                            {
+                                "text": "Bonne réponse",
+                                "score": 1
+                            },
+                            {
+                                "text": "Mauvaise réponse",
+                                "score": -1
+                            }
+                        ]
+                    },
+                    {
+                        "question": "TODO Énigme Fata 3",
+                        "choices": [
+                            {
+                                "text": "Réponse neutre",
+                                "score": 0
+                            },
+                            {
+                                "text": "Réponse neutre",
+                                "score": 0
+                            }
+                        ]
+                    }
+                ],
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLoose": "dialog",
+                "nextActionLoose": "3"
+            }
+        }
+    },
+    "2": {},
+    "3": {}
+}
