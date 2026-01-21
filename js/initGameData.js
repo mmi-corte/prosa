@@ -25,6 +25,9 @@ export const nextStepVariant = parseInt(localStorage.getItem('nextStepVariant'))
 export async function initGameData() {
     let dataFetch = ''
 
+    // ===================
+    // ====== STEPS ======
+    // ===================
     try {
         const response = await fetch('./data/steps.json');
         if (!response.ok) throw new Error('Failed to load steps data');
@@ -37,6 +40,9 @@ export async function initGameData() {
         console.error("Critical: Could not load steps data", error);
     }
 
+    // =====================
+    // ====== DIALOGS ======
+    // =====================
     try {
         const response = await fetch('./data/dialogs.json');
         if (!response.ok) throw new Error('Failed to load dialogs data');
@@ -49,6 +55,9 @@ export async function initGameData() {
         console.error("Critical: Could not load dialogs data", error);
     }
 
+    // =====================
+    // ====== CHOICES ======
+    // =====================
     try {
         const response = await fetch('./data/choices.json');
         if (!response.ok) throw new Error('Failed to load choices data');
@@ -61,6 +70,9 @@ export async function initGameData() {
         console.error("Critical: Could not load choices data", error);
     }
 
+    // =====================
+    // ====== RIDDLES ======
+    // =====================
     try {
         const response = await fetch('./data/riddles.json');
         if (!response.ok) throw new Error('Failed to load riddles data');
@@ -73,6 +85,9 @@ export async function initGameData() {
         console.error("Critical: Could not load riddles data", error);
     }
 
+    // =====================
+    // ====== GAMES ======
+    // =====================
     try {
         const response = await fetch('./data/games.json');
         if (!response.ok) throw new Error('Failed to load games data');

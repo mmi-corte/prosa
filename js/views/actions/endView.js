@@ -17,7 +17,7 @@ export function endView(action) {
     wrapper.appendChild(textIndication)
     wrapper.appendChild(textNextStep)
 
-    //Store the type of ending
+    //Store the type of ending and the next step number
     const endType = activeStep.end[action].type
     const nextStep = activeStep.end[action].type
 

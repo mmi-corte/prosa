@@ -11,7 +11,6 @@ let currentPitch = 400;
 
 export function dialogView(action) {
     clearContainer();
-    currentDialogIndex = 0;
 
     data = dialogsData[activeStepId][action];
 
@@ -24,16 +23,19 @@ export function dialogView(action) {
     textBox.innerText = "";
     wrapper.appendChild(textBox);
 
+    //Reset var for index
+    currentDialogIndex = 0;
+
     updateDialog();
 
+    //Add click event logic for next dialog
     textBox.addEventListener('click', () => {
-        const fullText = data.dialog[currentDialogIndex].text.fr;
+        const activeText = data.dialog[currentDialogIndex].text.fr;
 
-        if (isTyping) {
+        if (isTyping) { //If typerite effect is still active...
             skipTypeWrite()
-            textBox.innerHTML = fullText;
-        } else {
-            //Go to next dialog if the text is fully displayed
+            textBox.innerHTML = activeText;
+        } else { //Go to next dialog if the text is fully displayed
             currentDialogIndex += 1;
             if (data.dialog.length > currentDialogIndex) {
                 updateDialog();
@@ -45,8 +47,8 @@ export function dialogView(action) {
 }
 
 function updateDialog() {
-    const fullText = data.dialog[currentDialogIndex].text.fr;
+    const activeText = data.dialog[currentDialogIndex].text.fr;
     currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
-    typeWriteEffect(textBox, fullText, currentPitch);
+    typeWriteEffect(textBox, activeText, currentPitch);
 }
 

@@ -14,12 +14,14 @@ export let activeStep
 // ====================================
 export function startStep(step) {
     // step: Input, issu de la case du plateau
-
     const searchId = `${step}${nextStepVariant}`
 
+    //Search if the step exist in the database
     if (searchId in stepsData) {
         activeStepId = step
         activeStep = stepsData[searchId];
+
+        //Call the action from the selected step
         console.log(`Loading step ${step}`)
         callAction(activeStep.actionType, activeStep.action)
     } else {
@@ -53,7 +55,7 @@ export function callAction(actionType, action) {
             endView(action)
             break;
         default:
-            console.error(`Incorrect data: action type ${actionType} doesn't exist`)
+            console.error(`Incorrect data: action type ${actionType} doesn't exist for action ${activeStepId}`)
             menuView()
             break;
     }

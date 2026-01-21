@@ -18,7 +18,7 @@ export async function riddleView(action) {
     wrapper.classList.add('riddleWrapper')
     gameContainer.appendChild(wrapper)
 
-    //Set score for riddle and index
+    //Reset var for riddle and index
     score = 0
     currentRiddleIndex = 0
 
@@ -40,15 +40,16 @@ export async function riddleView(action) {
 }
 
 async function updateRiddle() {
-    if (riddles.length > currentRiddleIndex) {
+    if (riddles.length > currentRiddleIndex) { //If there's still riddle left...
+
+        //Empty container
         questionContainer.innerHTML = ""
         choiceContainer.innerHTML = ""
 
-        console.log(riddles)
-        console.log(data)
-
+        //Type write question
         await typeWriteEffect(questionContainer, riddles[currentRiddleIndex].question)
 
+        //Show availables answers
         riddles[currentRiddleIndex].choices.forEach(riddle => {
             const button = document.createElement('button')
             button.innerHTML = riddle.text
@@ -56,15 +57,15 @@ async function updateRiddle() {
 
             button.addEventListener('click', () => {
                 score += riddle.score
-                console.log(score)
                 updateRiddle()
             })
 
             choiceContainer.appendChild(button)
         });
-
+        //Update riddle index for next question
         currentRiddleIndex += 1;
-    } else {
+
+    } else { //If no riddle left, continue no next action, depending on the score fo the player
         if (score < 0) {
             callAction(data.nextActionTypeLoose, data.nextActionLoose)
         } else {
