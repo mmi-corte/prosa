@@ -1,11 +1,12 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
-import { dialogsData } from "../../initGameData.js";
+import { dialogsData, playerLocalisation } from "../../initGameData.js";
 
-let textBox = "";
-let data = "";
+let textBox
+let data
 let currentDialogIndex = 0;
+let currentBackground
 let currentPitch = 400;
 
 export function dialogView(action) {
@@ -16,6 +17,7 @@ export function dialogView(action) {
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('dialogWrapper');
+    wrapper.style.backgroundImage = `url(./assets/steps/${playerLocalisation}/${activeStepId}/${data.default.backgroundUrl})`
     gameContainer.appendChild(wrapper);
 
     textBox = document.createElement('p');

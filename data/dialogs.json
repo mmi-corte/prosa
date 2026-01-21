@@ -3,7 +3,7 @@
     "0101": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -28,7 +28,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -70,7 +70,7 @@
           }
         ],
         "nextActionType": "end",
-        "nextAction": "4"
+        "nextAction": "1"
       }
     }
   },

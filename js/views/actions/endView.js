@@ -3,7 +3,6 @@ import { activeStep } from "../../gameEventHandler.js";
 import { menuView } from "../main/menuView.js";
 
 export function endView(action) {
-    clearContainer()
 
     const wrapper = document.createElement('div')
     wrapper.classList.add('endWrapper')
@@ -17,6 +16,7 @@ export function endView(action) {
 
     wrapper.appendChild(textIndication)
     wrapper.appendChild(textNextStep)
+
 
     //Prepare another div if there is text after the step div
     const extraIndication = document.createElement('div')
@@ -53,6 +53,8 @@ export function endView(action) {
             wrapper.appendChild(extraIndication)
             break;
     }
+
+    setTimeout(() => wrapper.classList.add("show"), 10)
 
     wrapper.addEventListener('click', () => {
         menuView()
