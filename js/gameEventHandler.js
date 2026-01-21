@@ -9,9 +9,10 @@ import { menuView } from "./views/main/menuView.js";
 export let activeStepId
 export let activeStep
 
-// ====================================
-// ====== Fonction début d'étape ======
-// ====================================
+/**
+ * Fonction début d'étape
+ * @param  {[number]} step Numéro d'étape appelé
+ */
 export function startStep(step) {
     // step: Input, issu de la case du plateau
     const searchId = `${step}${nextStepVariant}`
@@ -30,9 +31,11 @@ export function startStep(step) {
     }
 }
 
-// =======================================
-// ====== Fonction d'appel d'action ======
-// =======================================
+/**
+ * Fonction d'appel d'action
+ * @param  {'dialog'|'choice'|'riddle'|'game'|'ar'|'end'} actionType Type d'action appelé.
+ * @param  {[number]} action Numéro d'action appelé pour l'étape active
+ */
 export function callAction(actionType, action) {
     console.log("Calling action", actionType, action)
 

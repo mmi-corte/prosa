@@ -66,7 +66,7 @@ export function codeView() {
 
     const closeScreen = document.getElementById('closeScreen')
     closeScreen.addEventListener('click', () => {
-        menuView()
+        window.history.back();
     })
 
     let currentCode = []

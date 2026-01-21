@@ -2,6 +2,13 @@ let typingTimeout = ""
 export let isTyping = ""
 const defaultDelay = 30
 
+
+/**
+ * Fonction d'affichage texte
+ * @param  {[object]} container Conteneur où le texte sera affiché.
+ * @param  {[string]} text Texte à afficher
+ * @param  {[number]} action Tonalité du texte
+ */
 export function typeWriteEffect(container, text, pitch = 400) {
     return new Promise((resolve) => {
         container.innerHTML = "";

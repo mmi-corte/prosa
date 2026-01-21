@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js"
+import { clearContainer, gameContainer, navigate } from "../../../app.js"
 import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
 import { codeView } from "./codeView.js"
@@ -61,31 +61,31 @@ export function menuView() {
   // Code Input button
   const codeBtn = document.getElementById("codeBtn")
   codeBtn.addEventListener('click', () => {
-    codeView()
+    navigate("code", codeView)
   })
 
   //QR Scan button
   const qrBtn = document.getElementById("qrBtn")
   qrBtn.addEventListener('click', () => {
-    qrView()
+    navigate("qr", qrView)
   })
 
   //Characters view button
   const charactersBtn = document.getElementById("charactersBtn")
   charactersBtn.addEventListener('click', () => {
-    charactersView()
+    navigate("encyclopedie", charactersView)
   })
 
   //Seasons button
   const seasonsBtn = document.getElementById("seasonsBtn")
   seasonsBtn.addEventListener('click', () => {
-    seasonsView()
+    navigate("saisons", seasonsView)
   })
 
   // debug screen button
   const debugBtn = document.getElementById("debugBtn")
   debugBtn.addEventListener('click', () => {
-    debugView()
+    navigate("debug", debugView)
   })
 }
 

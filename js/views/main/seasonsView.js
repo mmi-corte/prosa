@@ -21,6 +21,7 @@ export function seasonsView() {
 
     const closeModal = document.getElementById('closeModal')
     closeModal.addEventListener('click', () => {
+        window.history.back();
         container.remove()
     })
 }

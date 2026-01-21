@@ -78,6 +78,7 @@ export function settingView() {
     const closeModal = document.getElementById('closeModal')
     closeModal.addEventListener('click', () => {
         saveSettings()
+        window.history.back();
         container.remove()
     })
 
