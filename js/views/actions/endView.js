@@ -19,7 +19,7 @@ export function endView(action) {
 
     //Store the type of ending and the next step number
     const endType = activeStep.end[action].type
-    const nextStep = activeStep.end[action].type
+    const nextStep = activeStep.end[action].nextStep
 
     //Prepare another div if there is text after the step div
     const extraIndication = document.createElement('div')
