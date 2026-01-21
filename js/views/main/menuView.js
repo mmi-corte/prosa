@@ -51,9 +51,9 @@ export function menuView() {
             </svg>
           </button>
 
-          <!-- <button class="menu-btn" id="debugBtn" style="background-color:red;">
+          <button class="menu-btn" id="debugBtn" style="background-color:red;">
             <span class="btn-title" style="color:white;">DEBUG SCREEN</span>
-          </button> -->
+          </button>
         </nav>
     </div>
   `
@@ -82,10 +82,10 @@ export function menuView() {
     seasonsView()
   })
 
-  //debug screen button
-  // const debugBtn = document.getElementById("debugBtn")
-  // debugBtn.addEventListener('click', () => {
-  //   debugView()
-  // })
+  // debug screen button
+  const debugBtn = document.getElementById("debugBtn")
+  debugBtn.addEventListener('click', () => {
+    debugView()
+  })
 }
 
