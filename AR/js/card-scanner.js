@@ -54,7 +54,7 @@ let statusText;
  */
 async function loadConfig() {
   try {
-    updateStatus('Loading character data...');
+    updateStatus('Chargement des données...');
     const response = await fetch(CONFIG_PATH);
     if (!response.ok) {
       throw new Error('Failed to load config: ' + response.status);
@@ -72,7 +72,7 @@ async function loadConfig() {
     return true;
   } catch (error) {
     console.error('Error loading config:', error);
-    updateStatus('Error loading character data');
+    updateStatus('Erreur de chargement');
     return false;
   }
 }
@@ -154,7 +154,7 @@ async function initCardScanner() {
  * Start MindAR with the marker configuration
  */
 async function startMindAR() {
-  updateStatus('Loading AR system...');
+  updateStatus('Chargement AR...');
   
   // Determine which marker file to use
   let markerFile;
@@ -197,17 +197,17 @@ async function startMindAR() {
   await setupCharacterAnchors();
   
   // Start AR
-  updateStatus('Starting camera...');
+  updateStatus('Démarrage caméra...');
   
   try {
     await mindarThree.start();
     console.log('MindAR started successfully');
     hideLoading();
-    updateStatus('Scan a character card');
+    updateStatus('Scannez une carte personnage');
     showScanPrompt();
   } catch (err) {
     console.error('MindAR start error:', err);
-    updateStatus('Error: ' + err.message);
+    updateStatus('Erreur: ' + err.message);
   }
 }
 
@@ -233,14 +233,14 @@ async function setupCharacterAnchors() {
     const characterToSetup = characters.find(c => c.markerFile === loadedMarkerFile);
     
     if (characterToSetup) {
-      updateStatus('Setting up ' + characterToSetup.name + '...');
+      updateStatus('Configuration de ' + characterToSetup.name + '...');
       await setupSingleCharacter(characterToSetup);
     } else {
       console.error('No character found for loaded marker file');
     }
   } else {
     // Combined marker file - set up all characters
-    updateStatus('Setting up ' + characters.length + ' character(s)...');
+    updateStatus('Configuration de ' + characters.length + ' personnage(s)...');
     
     for (const character of characters) {
       await setupSingleCharacter(character);
@@ -440,7 +440,7 @@ function onCharacterFound(character) {
   activeCharacters[character.id] = true;
   
   hideScanPrompt();
-  updateStatus('Detected: ' + character.name);
+  updateStatus('Détecté: ' + character.name);
   
   // Store current character for modal
   currentCharacter = character;
@@ -481,7 +481,7 @@ function onCharacterLost(character) {
   if (!anyActive) {
     showScanPrompt();
     currentCharacter = null;
-    updateStatus('Scan a character card');
+    updateStatus('Scannez une carte personnage');
   }
   
   updateDebugPanel();

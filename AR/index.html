@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Character Card Scanner</title>
+  <title>Scanner de Cartes</title>
   
   <!-- Import Map for ES Modules -->
   <script type="importmap">
@@ -22,34 +22,43 @@
   <script type="module" src="js/card-scanner.js"></script>
 </head>
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen">
-    <div class="loader"></div>
-    <p id="loading-text">Loading Card Scanner...</p>
-  </div>
-
   <!-- AR Container -->
   <div id="ar-container"></div>
+  
+  <!-- Scanning Animation -->
+  <div id="scan-animation">
+    <div class="scan-line"></div>
+  </div>
 
   <!-- UI Overlay -->
   <div id="ui-overlay">
     <!-- Control Buttons (top right) -->
     <div id="control-buttons">
       <button id="back-btn" class="control-btn" title="Back to Menu">
-        ←
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
       </button>
       <button id="mute-btn" class="control-btn" title="Mute/Unmute">
-        🔊
+        <svg id="sound-on-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg id="sound-off-icon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
       </button>
       <button id="zoom-btn" class="control-btn" title="Expand Info">
-        🔍
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="11" y1="8" x2="11" y2="14"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
       </button>
-    </div>
-    
-    <!-- Scan Prompt -->
-    <div id="scan-prompt">
-      <div class="scan-icon">📷</div>
-      <p>Point camera at a character card</p>
     </div>
     
     <!-- Expanded Info Modal (fullscreen description) -->
@@ -65,17 +74,6 @@
           <div id="modal-stats"></div>
         </div>
       </div>
-    </div>
-    
-    <!-- Status Bar -->
-    <div id="status-bar">
-      <span id="status-text">Initializing...</span>
-    </div>
-    
-    <!-- Debug Panel (toggle with 'd' key) -->
-    <div id="debug-panel" class="hidden">
-      <h4>Detected Characters:</h4>
-      <ul id="detected-list"></ul>
     </div>
   </div>
 
