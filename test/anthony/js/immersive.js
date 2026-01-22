@@ -27,8 +27,6 @@ var CONFIG = {
 // Global state
 var scene, camera, renderer;
 var reticle;
-var hitTestSource = null;
-var hitTestSourceRequested = false;
 var selectedModel = 'character.glb';
 var placedObjects = [];
 var gltfLoader;
@@ -38,7 +36,6 @@ var textureLoader;
 var puzzleSetup = false;
 var keyObject = null;
 var hasKey = false;
-var placementModeEnabled = false;
 var raycaster;
 var mouse;
 
@@ -46,6 +43,40 @@ var mouse;
 var userHeight = 170;
 var playstyle = 'standing';
 var groundOffset = -1.5;
+
+// AR mode state
+var isARActive = false;
+var videoElement = null;
+var deviceOrientation = { alpha: 0, beta: 0, gamma: 0 };
+var initialOrientation = null;
+
+// Position tracking (step detection)
+var userPosition = { x: 0, y: 0, z: 0 };
+var targetPosition = { x: 0, y: 0, z: 0 }; // Target position for smooth interpolation
+var positionSmoothing = 0.08; // Lower = smoother movement (0-1)
+var lastMotionTime = 0;
+var isMoving = false;
+var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
+var lastQuaternion = null;
+
+// Step detection parameters
+var stepLength = 0.65; // Average step length in meters
+var stepThreshold = 12; // Acceleration magnitude threshold for step detection
+var stepCooldown = 300; // Minimum ms between steps
+var lastStepTime = 0;
+var accelHistory = [];
+var accelHistorySize = 5; // Number of samples to average
+var lastPeak = 0;
+var inStep = false;
+
+// Height tracking for crouching
+var standingHeight = 1.7; // Standing eye height in meters
+var currentHeight = 1.7; // Current eye height
+var minCrouchHeight = 0.5; // Minimum crouch height (about kneeling)
+var heightVelocity = 0;
+var verticalAccelHistory = [];
+var verticalHistorySize = 8;
+var isCrouching = false;
 
 debugLog('Script loaded, waiting for DOM...');
 
@@ -97,7 +128,12 @@ function init() {
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.xr.enabled = true;
+  renderer.domElement.style.position = 'fixed';
+  renderer.domElement.style.top = '0';
+  renderer.domElement.style.left = '0';
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
+  renderer.domElement.style.zIndex = '1';
   document.getElementById('container').appendChild(renderer.domElement);
 
   debugLog('Setting up lighting...');
@@ -117,8 +153,9 @@ function init() {
   // Handle window resize
   window.addEventListener('resize', onWindowResize);
   
-  // Handle clicks
+  // Handle clicks and touches for key pickup
   window.addEventListener('click', onScreenClick);
+  window.addEventListener('touchstart', onScreenTouch);
 
   // Hide loading screen
   var loadingScreen = document.getElementById('loading-screen');
@@ -127,7 +164,19 @@ function init() {
   }
 
   debugLog('Init complete!');
-  updateStatus('Tap "Start AR Experience" to begin');
+  updateStatus('Tap anywhere to start AR');
+  
+  // Wait for user tap to start AR (required for iOS permissions)
+  function startOnTap(e) {
+    e.preventDefault();
+    document.removeEventListener('touchstart', startOnTap);
+    document.removeEventListener('click', startOnTap);
+    updateStatus('Starting AR...');
+    startAR();
+  }
+  
+  document.addEventListener('touchstart', startOnTap, { once: true });
+  document.addEventListener('click', startOnTap, { once: true });
 }
 
 /**
@@ -244,124 +293,424 @@ function clearAllObjects() {
 }
 
 /**
- * Start AR session
+ * Request device orientation and motion permission (required for iOS)
  */
-function startAR() {
-  console.log('Starting AR...');
-  
-  // Check if WebXR is available
-  if (!navigator.xr) {
-    updateStatus('WebXR not supported on this browser', 'error');
-    alert('WebXR is not supported on this browser.\n\nAlternatives:\n- Use the marker-based AR\n- Use Chrome on Android\n- Use WebXR Viewer app on iOS');
-    return;
-  }
-  
-  // Check if immersive-ar is supported
-  navigator.xr.isSessionSupported('immersive-ar').then(function(isARSupported) {
-    if (!isARSupported) {
-      updateStatus('Immersive AR not supported', 'error');
-      alert('Immersive AR is not supported on this device/browser.');
-      return;
+function requestDeviceOrientationPermission() {
+  return new Promise(function(resolve) {
+    var promises = [];
+    
+    // Request orientation permission
+    if (typeof DeviceOrientationEvent !== 'undefined' && 
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      promises.push(
+        DeviceOrientationEvent.requestPermission()
+          .then(function(state) {
+            console.log('DeviceOrientation permission:', state);
+            return state === 'granted';
+          })
+          .catch(function(err) {
+            console.error('DeviceOrientation permission error:', err);
+            return false;
+          })
+      );
+    } else {
+      promises.push(Promise.resolve(true));
     }
     
-    // Get user configuration
-    var heightInput = document.getElementById('user-height');
-    var playstyleInput = document.getElementById('playstyle');
+    // Request motion permission (for accelerometer)
+    if (typeof DeviceMotionEvent !== 'undefined' && 
+        typeof DeviceMotionEvent.requestPermission === 'function') {
+      promises.push(
+        DeviceMotionEvent.requestPermission()
+          .then(function(state) {
+            console.log('DeviceMotion permission:', state);
+            return state === 'granted';
+          })
+          .catch(function(err) {
+            console.error('DeviceMotion permission error:', err);
+            return false;
+          })
+      );
+    } else {
+      promises.push(Promise.resolve(true));
+    }
     
-    userHeight = heightInput ? parseInt(heightInput.value) || 170 : 170;
-    playstyle = playstyleInput ? playstyleInput.value : 'standing';
-    
-    // Calculate ground offset
-    var eyeLevelRatio = playstyle === 'standing' ? 0.93 : 0.65;
-    var eyeLevel = (userHeight / 100) * eyeLevelRatio;
-    groundOffset = -eyeLevel;
-    
-    console.log('User config: ' + userHeight + 'cm, ' + playstyle + ', ground offset: ' + groundOffset.toFixed(2) + 'm');
-
-    // Hide instructions
-    document.getElementById('instructions').classList.add('hidden');
-
-    // Request AR session - try with features first
-    navigator.xr.requestSession('immersive-ar', {
-      requiredFeatures: [],
-      optionalFeatures: ['hit-test', 'dom-overlay', 'local-floor'],
-      domOverlay: { root: document.body }
-    }).then(function(session) {
-      onSessionStarted(session);
-    }).catch(function(err) {
-      console.warn('Full session failed, trying minimal:', err);
-      // Fallback to minimal session
-      navigator.xr.requestSession('immersive-ar', {
-        requiredFeatures: [],
-        optionalFeatures: ['local-floor']
-      }).then(function(session) {
-        onSessionStarted(session);
-      }).catch(function(fallbackErr) {
-        console.error('Session creation error:', fallbackErr);
-        updateStatus('AR mode not available on this device', 'error');
-        document.getElementById('instructions').classList.remove('hidden');
-      });
+    Promise.all(promises).then(function(results) {
+      var allGranted = results.every(function(r) { return r; });
+      resolve(allGranted);
     });
-    
-  }).catch(function(err) {
-    console.error('AR support check failed:', err);
-    updateStatus('Failed to check AR support', 'error');
   });
 }
 
 /**
- * Handle AR session start
+ * Start AR session
  */
-function onSessionStarted(session) {
-  console.log('AR Session started');
+function startAR() {
+  console.log('Starting AR...');
+  debugLog('Starting AR...');
   
-  renderer.xr.session = session;
-  
-  session.addEventListener('end', onSessionEnded);
-  session.addEventListener('select', onSelect);
-  
-  // Show exit button
-  document.getElementById('exit-ar-btn').classList.remove('hidden');
-
-  renderer.xr.setSession(session).then(function() {
-    // Try to request hit test source
-    session.requestReferenceSpace('viewer').then(function(referenceSpace) {
-      session.requestHitTestSource({ space: referenceSpace }).then(function(source) {
-        hitTestSource = source;
-        updateStatus('Hit test ready - Move device to find surfaces', 'success');
-      }).catch(function(err) {
-        console.warn('Hit test source not available:', err);
-        updateStatus('Hit test unavailable - Manual placement mode', 'warning');
-      });
-    }).catch(function(err) {
-      console.warn('Reference space not available:', err);
-    });
-
-    session.requestAnimationFrame(onXRFrame);
+  // Request device orientation permission first (for iOS)
+  requestDeviceOrientationPermission().then(function(granted) {
+    if (!granted) {
+      console.warn('Device orientation permission not granted, AR may have limited functionality');
+    }
     
-    // Setup puzzle scene after delay
-    setTimeout(function() {
-      if (!puzzleSetup) {
-        setupPuzzleScene();
-        puzzleSetup = true;
-      }
-    }, 1000);
-    
-    updateStatus('AR Session Started - Tap to place objects', 'success');
-  }).catch(function(err) {
-    console.error('Session setup error:', err);
-    updateStatus('Failed to initialize AR session', 'error');
+    // Start camera + gyroscope AR
+    startCameraAR();
   });
+}
+
+/**
+ * Start AR mode using camera + gyroscope
+ */
+function startCameraAR() {
+  console.log('Starting camera + gyroscope AR...');
+  debugLog('Starting camera + gyroscope AR...');
+  isARActive = true;
+  
+  // Reset position tracking
+  userPosition = { x: 0, y: 0, z: 0 };
+  targetPosition = { x: 0, y: 0, z: 0 };
+  lastMotionTime = 0;
+  initialOrientation = null;
+  
+  // Hide instructions if it exists
+  var instructions = document.getElementById('instructions');
+  if (instructions) {
+    instructions.classList.add('hidden');
+  }
+  
+  // Fixed camera height at 1.7m (170cm)
+  var fixedEyeHeight = 1.7;
+  groundOffset = -fixedEyeHeight;
+  
+  // Create video element for camera
+  videoElement = document.createElement('video');
+  videoElement.setAttribute('playsinline', '');
+  videoElement.setAttribute('autoplay', '');
+  videoElement.setAttribute('muted', ''); // Muted to allow autoplay
+  videoElement.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;';
+  document.body.insertBefore(videoElement, document.body.firstChild);
+  
+  // Request camera access
+  navigator.mediaDevices.getUserMedia({
+    video: { 
+      facingMode: 'environment',
+      width: { ideal: 1280 },
+      height: { ideal: 720 }
+    }
+  }).then(function(stream) {
+    videoElement.srcObject = stream;
+    videoElement.play();
+    debugLog('Camera started');
+    
+    // Setup device orientation
+    setupDeviceOrientation();
+    
+    // Show exit button
+    document.getElementById('exit-ar-btn').classList.remove('hidden');
+    
+    // Make renderer transparent
+    renderer.setClearColor(0x000000, 0);
+    
+    // Setup the puzzle scene with key and spatialized audio
+    setupPuzzleScene();
+    
+    // Start fallback render loop
+    updateStatus('Find the key! Listen for the sound.');
+    fallbackAnimate();
+    
+  }).catch(function(err) {
+    console.error('Camera access error:', err);
+    debugLog('Camera error: ' + err.message);
+    alert('Could not access camera.\nError: ' + err.message);
+    document.getElementById('instructions').classList.remove('hidden');
+    isARActive = false;
+  });
+}
+
+/**
+ * Setup device orientation tracking
+ */
+function setupDeviceOrientation() {
+  // Orientation tracking (rotation)
+  window.addEventListener('deviceorientation', function(event) {
+    if (event.alpha !== null) {
+      // Store initial orientation on first reading
+      if (initialOrientation === null) {
+        initialOrientation = {
+          alpha: event.alpha,
+          beta: event.beta,
+          gamma: event.gamma
+        };
+      }
+      
+      deviceOrientation.alpha = event.alpha;
+      deviceOrientation.beta = event.beta;
+      deviceOrientation.gamma = event.gamma;
+    }
+  }, true);
+  
+  // Motion tracking (position/movement)
+  window.addEventListener('devicemotion', function(event) {
+    if (!event.accelerationIncludingGravity) return;
+    
+    var now = Date.now();
+    var dt = lastMotionTime > 0 ? (now - lastMotionTime) / 1000 : 0;
+    lastMotionTime = now;
+    
+    if (dt <= 0 || dt > 0.5) return; // Skip invalid time deltas
+    
+    // Get acceleration including gravity (more reliable for step detection)
+    var accel = event.accelerationIncludingGravity || event.acceleration || { x: 0, y: 0, z: 0 };
+    
+    // Calculate acceleration magnitude
+    var ax = accel.x || 0;
+    var ay = accel.y || 0;
+    var az = accel.z || 0;
+    var magnitude = Math.sqrt(ax * ax + ay * ay + az * az);
+    
+    // Add to history for smoothing
+    accelHistory.push(magnitude);
+    if (accelHistory.length > accelHistorySize) {
+      accelHistory.shift();
+    }
+    
+    // Calculate smoothed magnitude
+    var smoothedMag = 0;
+    for (var i = 0; i < accelHistory.length; i++) {
+      smoothedMag += accelHistory[i];
+    }
+    smoothedMag /= accelHistory.length;
+    
+    // Step detection: look for peak above threshold followed by dip
+    var now = Date.now();
+    var timeSinceLastStep = now - lastStepTime;
+    
+    if (!inStep && smoothedMag > stepThreshold && timeSinceLastStep > stepCooldown) {
+      // Detected upward acceleration (foot hitting ground)
+      inStep = true;
+      lastPeak = smoothedMag;
+    } else if (inStep && smoothedMag < lastPeak - 2) {
+      // Detected downward acceleration after peak - step complete!
+      inStep = false;
+      lastStepTime = now;
+      isMoving = true;
+      
+      // Move forward in the direction the camera is facing
+      var forward = new THREE.Vector3(0, 0, -1);
+      forward.applyQuaternion(camera.quaternion);
+      forward.y = 0; // Keep movement horizontal
+      forward.normalize();
+      
+      // Update target position (camera will smoothly interpolate toward this)
+      targetPosition.x += forward.x * stepLength;
+      targetPosition.z += forward.z * stepLength;
+      
+      // Clamp target position to reasonable bounds (5 meter radius)
+      var maxDist = 5;
+      var dist = Math.sqrt(targetPosition.x * targetPosition.x + targetPosition.z * targetPosition.z);
+      if (dist > maxDist) {
+        targetPosition.x *= maxDist / dist;
+        targetPosition.z *= maxDist / dist;
+      }
+    } else if (timeSinceLastStep > 500) {
+      isMoving = false;
+    }
+    
+  }, true);
+  
+  // Crouch detection using phone tilt angle
+  // When the phone points towards the ground, crouch
+  // Works in both portrait and landscape orientation
+  window.addEventListener('deviceorientation', function(event) {
+    if (!isARActive) return;
+    
+    var beta = event.beta || 0; // -180 to 180, phone tilt front/back
+    var gamma = event.gamma || 0; // -90 to 90, phone tilt left/right
+    var screenOrientation = window.orientation || 0;
+    
+    // Calculate the "looking down" angle based on screen orientation
+    // Positive = looking DOWN at ground, Negative = looking UP at sky
+    var lookDownAngle;
+    
+    if (screenOrientation === 0) {
+      // Portrait: beta 90 = looking straight, beta < 90 = looking down at ground
+      lookDownAngle = 90 - beta;
+      // Handle looking straight down (beta goes negative when past vertical)
+      if (beta < 0) lookDownAngle = 90 + Math.abs(beta);
+    } else if (screenOrientation === 90) {
+      // Landscape left (home button on right)
+      // gamma ranges from -90 to 90, use beta to detect looking past vertical
+      lookDownAngle = -gamma;
+      // When beta is close to 0 or negative, we're looking past vertical
+      if (Math.abs(beta) < 30) lookDownAngle = 90 - Math.abs(gamma);
+    } else if (screenOrientation === -90 || screenOrientation === 270) {
+      // Landscape right (home button on left)
+      lookDownAngle = gamma;
+      if (Math.abs(beta) < 30) lookDownAngle = 90 - Math.abs(gamma);
+    } else if (screenOrientation === 180) {
+      // Portrait upside down
+      lookDownAngle = beta - 90;
+    } else {
+      lookDownAngle = 90 - beta;
+    }
+    
+    // lookDownAngle: 0 = looking at horizon, positive = looking down, negative = looking up
+    // Map looking down angle to crouch height
+    // Different thresholds for portrait vs landscape
+    var isLandscape = Math.abs(screenOrientation) === 90 || screenOrientation === 270;
+    var crouchStartAngle = isLandscape ? 35 : 20; // Less sensitive in landscape
+    var maxCrouchAngle = 80; // Full crouch when looking down 80+ degrees
+    
+    if (lookDownAngle > crouchStartAngle) {
+      // Calculate crouch amount (0 to 1)
+      var crouchAmount = (lookDownAngle - crouchStartAngle) / (maxCrouchAngle - crouchStartAngle);
+      crouchAmount = Math.min(1, Math.max(0, crouchAmount)); // Clamp 0-1
+      
+      // Interpolate height from standing to crouch
+      var targetHeight = standingHeight - (standingHeight - minCrouchHeight) * crouchAmount;
+      
+      // Smooth transition to target height
+      currentHeight += (targetHeight - currentHeight) * 0.1;
+    } else {
+      // Not looking down enough - return to standing
+      currentHeight += (standingHeight - currentHeight) * 0.05;
+    }
+    
+    // Clamp height between crouch and standing
+    if (currentHeight > standingHeight) {
+      currentHeight = standingHeight;
+    } else if (currentHeight < minCrouchHeight) {
+      currentHeight = minCrouchHeight;
+    }
+    
+    isCrouching = currentHeight < standingHeight - 0.3;
+    
+  }, true);
+}
+
+/**
+ * Fallback mode animation loop
+ */
+function fallbackAnimate() {
+  if (!isARActive) return;
+  
+  requestAnimationFrame(fallbackAnimate);
+  
+  // Update camera rotation based on device orientation
+  if (deviceOrientation.alpha !== null && deviceOrientation.beta !== null) {
+    // Convert degrees to radians
+    var alpha = THREE.MathUtils.degToRad(deviceOrientation.alpha); // Z axis (compass)
+    var beta = THREE.MathUtils.degToRad(deviceOrientation.beta);   // X axis (tilt front/back)
+    var gamma = THREE.MathUtils.degToRad(deviceOrientation.gamma); // Y axis (tilt left/right)
+    
+    // Get screen orientation
+    var screenOrientation = window.orientation || 0;
+    var orient = THREE.MathUtils.degToRad(screenOrientation);
+    
+    // Create quaternion from device orientation
+    // This properly handles the phone held in portrait mode
+    var quaternion = new THREE.Quaternion();
+    var euler = new THREE.Euler();
+    
+    // Set euler angles for device orientation
+    // Beta is the front-to-back tilt (x rotation)
+    // Gamma is the left-to-right tilt (y rotation)  
+    // Alpha is the compass direction (z rotation)
+    euler.set(beta, alpha, -gamma, 'YXZ');
+    
+    quaternion.setFromEuler(euler);
+    
+    // Apply correction for phone being held upright (screen facing user)
+    var q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); // -90 deg around X
+    quaternion.multiply(q1);
+    
+    // Apply screen orientation correction
+    var q2 = new THREE.Quaternion(0, 0, Math.sin(-orient / 2), Math.cos(-orient / 2));
+    quaternion.multiply(q2);
+    
+    // Smooth the orientation to reduce jitter
+    if (lastQuaternion === null) {
+      lastQuaternion = quaternion.clone();
+    } else {
+      lastQuaternion.slerp(quaternion, orientationSmoothing);
+      quaternion.copy(lastQuaternion);
+    }
+    
+    camera.quaternion.copy(quaternion);
+  }
+  
+  // Update camera position with smooth interpolation
+  // Smoothly move toward target position
+  userPosition.x += (targetPosition.x - userPosition.x) * positionSmoothing;
+  userPosition.z += (targetPosition.z - userPosition.z) * positionSmoothing;
+  
+  camera.position.x = userPosition.x;
+  camera.position.y = currentHeight;
+  camera.position.z = userPosition.z;
+  
+  // Debug: show position and height
+  var posInfo = 'Pos: ' + userPosition.x.toFixed(2) + ', ' + userPosition.z.toFixed(2) + ' H:' + currentHeight.toFixed(2);
+  if (isMoving) posInfo += ' [WALK]';
+  if (isCrouching) posInfo += ' [CROUCH]';
+  updateStatus(posInfo);
+  
+  // Animate the key (bob and rotate)
+  if (keyObject && !hasKey) {
+    keyObject.rotation.z += 0.01;
+    keyObject.position.y = 0.5 + Math.sin(Date.now() * 0.003) * 0.05;
+  }
+  
+  // Render scene
+  renderer.render(scene, camera);
+}
+
+/**
+ * Stop fallback AR mode
+ */
+function stopARSession() {
+  isARActive = false;
+  
+  // Stop camera
+  if (videoElement && videoElement.srcObject) {
+    var tracks = videoElement.srcObject.getTracks();
+    tracks.forEach(function(track) { track.stop(); });
+    videoElement.srcObject = null;
+  }
+  
+  // Remove video element
+  if (videoElement && videoElement.parentNode) {
+    videoElement.parentNode.removeChild(videoElement);
+  }
+  videoElement = null;
+  
+  // Reset orientation
+  initialOrientation = null;
+  
+  // Hide UI
+  document.getElementById('exit-ar-btn').classList.add('hidden');
+  document.getElementById('instructions').classList.remove('hidden');
+  
+  // Clear placed objects
+  clearAllObjects();
+  
+  debugLog('AR stopped');
+  updateStatus('AR session ended');
 }
 
 /**
  * Setup the puzzle scene
  */
 function setupPuzzleScene() {
-  var cameraPos = camera.position.clone();
+  // Position scene at origin - camera will be at eye level looking into scene
+  // Fixed camera height at 1.7m (170cm)
   
-  // Create cylindrical background
-  var bgGeometry = new THREE.CylinderGeometry(5, 5, 4, 32, 1, true);
+  // Set camera height
+  camera.position.y = 1.7;
+  
+  // Create cylindrical background centered around origin
+  var bgGeometry = new THREE.CylinderGeometry(8, 8, 6, 32, 1, true);
   var bgTexture = textureLoader.load('./assets/img/ciel.png');
   bgTexture.wrapS = THREE.RepeatWrapping;
   bgTexture.repeat.x = 4;
@@ -370,22 +719,22 @@ function setupPuzzleScene() {
     side: THREE.BackSide 
   });
   var background = new THREE.Mesh(bgGeometry, bgMaterial);
-  background.position.set(cameraPos.x, cameraPos.y + groundOffset + 2, cameraPos.z);
+  background.position.set(0, 3, 0); // Center it vertically
   scene.add(background);
   
-  // Create ground
+  // Create ground at Y=0
   var groundGeometry = new THREE.PlaneGeometry(20, 20);
   var groundTexture = textureLoader.load('./assets/img/ground.jpg');
   groundTexture.wrapS = THREE.RepeatWrapping;
   groundTexture.wrapT = THREE.RepeatWrapping;
-  groundTexture.repeat.set(1, 1);
+  groundTexture.repeat.set(4, 4);
   var groundMaterial = new THREE.MeshBasicMaterial({ map: groundTexture });
   var ground = new THREE.Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2;
-  ground.position.set(cameraPos.x, cameraPos.y + groundOffset, cameraPos.z);
+  ground.position.set(0, 0, 0);
   scene.add(ground);
   
-  // Place rocks
+  // Place rocks at ground level (Y=0)
   var rockPositions = [
     { x: 1.5, z: -2.0 },
     { x: -1.8, z: -1.5 },
@@ -402,18 +751,14 @@ function setupPuzzleScene() {
         var rock = gltf.scene.clone();
         var scale = 0.3 + Math.random() * 0.2;
         rock.scale.setScalar(scale);
-        rock.position.set(
-          cameraPos.x + pos.x, 
-          cameraPos.y + groundOffset, 
-          cameraPos.z + pos.z
-        );
+        rock.position.set(pos.x, 0, pos.z);
         rock.rotation.y = Math.random() * Math.PI * 2;
         scene.add(rock);
       });
     })(rockPositions[i]);
   }
   
-  // Place trees
+  // Place trees at ground level (Y=0)
   var treePositions = [
     { x: -2.0, z: -2.5 },
     { x: 2.8, z: -1.2 },
@@ -428,26 +773,22 @@ function setupPuzzleScene() {
         var tree = gltf.scene.clone();
         var scale = 1.5 + Math.random() * 0.6;
         tree.scale.setScalar(scale);
-        tree.position.set(
-          cameraPos.x + pos.x,
-          cameraPos.y + groundOffset,
-          cameraPos.z + pos.z
-        );
+        tree.position.set(pos.x, 0, pos.z);
         tree.rotation.y = Math.random() * Math.PI * 2;
         scene.add(tree);
       });
     })(treePositions[j]);
   }
   
-  // Place key
+  // Place key floating above a rock
   var keyRockPos = { x: 2.2, z: 0.5 };
   gltfLoader.load('./assets/3D/key.glb', function(gltf) {
     keyObject = gltf.scene;
     keyObject.scale.setScalar(0.1);
     keyObject.position.set(
-      cameraPos.x + keyRockPos.x + 0.8, 
-      cameraPos.y + groundOffset + 0.3, 
-      cameraPos.z + keyRockPos.z + 0.6
+      keyRockPos.x + 0.8, 
+      0.5,  // Floating above ground
+      keyRockPos.z + 0.6
     );
     keyObject.traverse(function(child) {
       if (child.isMesh) {
@@ -471,10 +812,10 @@ function setupPuzzleScene() {
     keyObject.add(keySound);
     keyObject.userData.sound = keySound;
     
-    // Floating animation
+    // Floating animation - key stays at fixed height above ground
     function animateKey() {
       if (keyObject && !hasKey) {
-        keyObject.position.y = cameraPos.y + groundOffset + 0.3 + Math.sin(Date.now() * 0.003) * 0.05;
+        keyObject.position.y = 0.5 + Math.sin(Date.now() * 0.003) * 0.05;
         keyObject.rotation.z += 0.01;
       }
       requestAnimationFrame(animateKey);
@@ -486,90 +827,10 @@ function setupPuzzleScene() {
 }
 
 /**
- * Handle AR session end
- */
-function onSessionEnded() {
-  hitTestSource = null;
-  hitTestSourceRequested = false;
-  document.getElementById('instructions').classList.remove('hidden');
-  document.getElementById('exit-ar-btn').classList.add('hidden');
-  updateStatus('AR Session Ended');
-}
-
-/**
  * Exit AR session
  */
 function exitAR() {
-  var session = renderer.xr.getSession();
-  if (session) {
-    session.end();
-    updateStatus('Exiting AR...', 'warning');
-  }
-}
-
-/**
- * Handle tap/select event
- */
-function onSelect(event) {
-  // First, try to collect the key if it exists
-  if (keyObject && !hasKey) {
-    // Check distance to key - if close enough, collect it
-    var keyPosition = new THREE.Vector3();
-    keyObject.getWorldPosition(keyPosition);
-    var distanceToKey = camera.position.distanceTo(keyPosition);
-    
-    // If within 2 meters, collect the key (proximity-based)
-    if (distanceToKey < 2) {
-      collectKey();
-      return;
-    }
-    
-    // Also try raycast with a wider cone (multiple rays)
-    var collected = false;
-    var offsets = [
-      {x: 0, y: 0},      // center
-      {x: 0.1, y: 0},    // right
-      {x: -0.1, y: 0},   // left
-      {x: 0, y: 0.1},    // up
-      {x: 0, y: -0.1},   // down
-      {x: 0.07, y: 0.07},  // diagonals
-      {x: -0.07, y: 0.07},
-      {x: 0.07, y: -0.07},
-      {x: -0.07, y: -0.07}
-    ];
-    
-    for (var i = 0; i < offsets.length; i++) {
-      var tempRaycaster = new THREE.Raycaster();
-      var direction = new THREE.Vector3(offsets[i].x, offsets[i].y, -1);
-      direction.normalize();
-      direction.applyQuaternion(camera.quaternion);
-      tempRaycaster.set(camera.position, direction);
-      
-      var intersects = tempRaycaster.intersectObject(keyObject, true);
-      
-      if (intersects.length > 0 && intersects[0].distance < 5) {
-        collectKey();
-        collected = true;
-        break;
-      }
-    }
-    
-    if (collected) return;
-  }
-  
-  // If not collecting key, check placement mode
-  if (!placementModeEnabled) {
-    return;
-  }
-  
-  if (reticle.visible) {
-    placeObject(reticle.matrix);
-  } else {
-    var matrix = new THREE.Matrix4();
-    matrix.makeTranslation(0, 0, -1.5);
-    matrix.premultiply(camera.matrixWorld);
-    placeObject(matrix);
-  }
+  stopARSession();
 }
 
 /**
@@ -635,31 +896,6 @@ function placeObject(matrix) {
 }
 
 /**
- * XR Frame update loop
- */
-function onXRFrame(time, frame) {
-  var session = frame.session;
-  session.requestAnimationFrame(onXRFrame);
-
-  if (hitTestSource) {
-    var referenceSpace = renderer.xr.getReferenceSpace();
-    var hitTestResults = frame.getHitTestResults(hitTestSource);
-
-    if (hitTestResults.length > 0) {
-      var hit = hitTestResults[0];
-      var pose = hit.getPose(referenceSpace);
-
-      reticle.visible = true;
-      reticle.matrix.fromArray(pose.transform.matrix);
-    } else {
-      reticle.visible = false;
-    }
-  }
-
-  renderer.render(scene, camera);
-}
-
-/**
  * Handle window resize
  */
 function onWindowResize() {
@@ -688,17 +924,46 @@ function updateStatus(message, type) {
  * Handle screen clicks for key collection
  */
 function onScreenClick(event) {
+  // Skip if no key or already collected
   if (!keyObject || hasKey) return;
   
+  // Calculate mouse position
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   
+  // Raycast to detect key click
   raycaster.setFromCamera(mouse, camera);
-  
   var intersects = raycaster.intersectObject(keyObject, true);
   
   if (intersects.length > 0) {
+    debugLog('Key clicked!');
     collectKey();
+  }
+}
+
+/**
+ * Handle touch events for key collection on mobile
+ */
+function onScreenTouch(event) {
+  // Skip if no key or already collected
+  if (!keyObject || hasKey) return;
+  
+  // Get first touch
+  var touch = event.touches[0];
+  if (!touch) return;
+  
+  // Calculate touch position
+  mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+  
+  // Raycast to detect key touch
+  raycaster.setFromCamera(mouse, camera);
+  var intersects = raycaster.intersectObject(keyObject, true);
+  
+  if (intersects.length > 0) {
+    debugLog('Key touched!');
+    collectKey();
+    event.preventDefault(); // Prevent click from firing too
   }
 }
 
