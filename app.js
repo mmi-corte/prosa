@@ -16,7 +16,7 @@ export function clearContainer() {
 window.addEventListener('DOMContentLoaded', () => {
   // 1. Force the current history entry to be "Menu"
   // This ensures that if we go 'back' later, we return here.
-  history.replaceState({ view: 'menu' }, "", "/");
+  // history.replaceState({ view: 'menu' }, "", "/");
 
   //Load main menu by default
   menuView()
