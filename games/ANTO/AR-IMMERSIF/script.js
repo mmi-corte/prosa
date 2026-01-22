@@ -24,8 +24,9 @@ var groundOffset = -1.7;
 // AR mode state
 var isARActive = false;
 var videoElement = null;
-var deviceOrientation = { alpha: 0, beta: 0, gamma: 0 };
+var deviceOrientation = { alpha: null, beta: null, gamma: null };
 var initialOrientation = null;
+var hasOrientationData = false;
 
 // Position tracking (step detection)
 var userPosition = { x: 0, y: 0, z: 0 };
@@ -183,6 +184,9 @@ function startCameraAR() {
   targetPosition = { x: 0, y: 0, z: 0 };
   lastMotionTime = 0;
   initialOrientation = null;
+  hasOrientationData = false;
+  lastQuaternion = null;
+  accelHistory = [];
   
   // Create video element for camera
   videoElement = document.createElement('video');
@@ -220,6 +224,7 @@ function setupDeviceOrientation() {
   // Orientation tracking
   window.addEventListener('deviceorientation', function(event) {
     if (event.alpha !== null) {
+      hasOrientationData = true;
       if (initialOrientation === null) {
         initialOrientation = { alpha: event.alpha, beta: event.beta, gamma: event.gamma };
       }
@@ -322,7 +327,7 @@ function fallbackAnimate() {
   if (!isARActive) return;
   requestAnimationFrame(fallbackAnimate);
   
-  if (deviceOrientation.alpha !== null) {
+  if (hasOrientationData && deviceOrientation.alpha !== null) {
     var alpha = THREE.MathUtils.degToRad(deviceOrientation.alpha);
     var beta = THREE.MathUtils.degToRad(deviceOrientation.beta);
     var gamma = THREE.MathUtils.degToRad(deviceOrientation.gamma);
