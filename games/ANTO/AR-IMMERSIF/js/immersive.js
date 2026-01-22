@@ -157,25 +157,26 @@ function init() {
   window.addEventListener('click', onScreenClick);
   window.addEventListener('touchstart', onScreenTouch);
 
-  debugLog('Init complete!');
-  
-  // Wait for user tap on start screen to begin AR
+  // Hide loading screen
   var loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen) {
+    loadingScreen.style.display = 'none';
+  }
+
+  debugLog('Init complete!');
+  updateStatus('Tap anywhere to start AR');
   
+  // Wait for user tap to start AR (required for iOS permissions)
   function startOnTap(e) {
     e.preventDefault();
-    loadingScreen.removeEventListener('touchstart', startOnTap);
-    loadingScreen.removeEventListener('click', startOnTap);
-    
-    // Hide start screen
-    if (loadingScreen) loadingScreen.style.display = 'none';
-    
-    updateStatus('Démarrage...');
+    document.removeEventListener('touchstart', startOnTap);
+    document.removeEventListener('click', startOnTap);
+    updateStatus('Starting AR...');
     startAR();
   }
   
-  loadingScreen.addEventListener('touchstart', startOnTap, { once: true });
-  loadingScreen.addEventListener('click', startOnTap, { once: true });
+  document.addEventListener('touchstart', startOnTap, { once: true });
+  document.addEventListener('click', startOnTap, { once: true });
 }
 
 /**
@@ -287,7 +288,7 @@ function clearAllObjects() {
     scene.remove(placedObjects[i]);
   }
   placedObjects = [];
-  updateStatus('Tous les objets supprimés', 'success');
+  updateStatus('All objects cleared', 'success');
   setTimeout(function() { updateStatus('Tap to place more objects'); }, 2000);
 }
 
@@ -416,7 +417,7 @@ function startCameraAR() {
     setupPuzzleScene();
     
     // Start fallback render loop
-    updateStatus('Trouvez la clé ! Suivez le son.');
+    updateStatus('Find the key! Listen for the sound.');
     fallbackAnimate();
     
   }).catch(function(err) {
@@ -695,7 +696,7 @@ function stopARSession() {
   clearAllObjects();
   
   debugLog('AR stopped');
-  updateStatus('Session AR terminée');
+  updateStatus('AR session ended');
 }
 
 /**
@@ -822,7 +823,7 @@ function setupPuzzleScene() {
     animateKey();
   });
   
-  updateStatus('Scène chargée ! Trouvez la clé cachée', 'success');
+  updateStatus('Puzzle scene loaded! Find the hidden key', 'success');
 }
 
 /**
@@ -846,24 +847,11 @@ function collectKey() {
   scene.remove(keyObject);
   keyObject = null;
   
-  updateStatus('🔑 Clé récupérée ! Bravo !', 'success');
+  updateStatus('🔑 Key collected! Puzzle solved!', 'success');
   
-  // Trigger next step
-  onKeyCollected();
-}
-
-/**
- * Placeholder - Called after key is collected
- * TODO: Implement next puzzle step or scene transition
- */
-function onKeyCollected() {
-  console.log('Clé récupérée - prochaine étape à implémenter');
-  
-  // Add your logic here:
-  // - Load next scene
-  // - Show dialog
-  // - Trigger animation
-  // - etc.
+  setTimeout(function() {
+    updateStatus('Great job! You found the hidden key!');
+  }, 2000);
 }
 
 /**
@@ -902,7 +890,7 @@ function placeObject(matrix) {
     undefined,
     function(error) {
       console.error('Error loading model:', error);
-      updateStatus('Échec du chargement du modèle', 'error');
+      updateStatus('Failed to load model', 'error');
     }
   );
 }
