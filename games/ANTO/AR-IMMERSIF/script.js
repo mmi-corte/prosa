@@ -24,7 +24,7 @@ var groundOffset = -1.7;
 // AR mode state
 var isARActive = false;
 var videoElement = null;
-var deviceOrientation = { alpha: 0, beta: 0, gamma: 0 };
+var deviceOrientation = { alpha: null, beta: null, gamma: null };
 var initialOrientation = null;
 
 // Position tracking (step detection)
