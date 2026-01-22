@@ -175,7 +175,7 @@ function init() {
     startAR();
   }
   
-  document.addEventListener('touchstart', startOnTap, { once: true });
+  document.addEventListener('touchstart', startOnTap, { once: true, passive: false });
   document.addEventListener('click', startOnTap, { once: true });
 }
 
