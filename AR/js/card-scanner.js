@@ -1,0 +1,807 @@
+/**
+ * Card Scanner - MindAR Character Card Recognition
+ * 
+ * Scans physical character cards and displays AR content.
+ * Loads character configuration from JSON file.
+ */
+
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MindARThree } from 'mindar-image-three';
+
+// ==============================================
+// CONFIGURATION
+// ==============================================
+const CONFIG_PATH = 'data/characters.json';
+
+// ==============================================
+// GLOBAL STATE
+// ==============================================
+let config = null;           // Loaded JSON config
+let characters = [];         // Array of character objects
+let settings = {};           // Global settings from JSON
+
+let mindarThree = null;
+let scene, camera, renderer;
+let gltfLoader;
+let textureLoader;
+
+// Track loaded content per character
+const characterAnchors = {};
+const characterContent = {};
+const activeCharacters = {};
+const playedIntros = {};
+
+// Audio state
+let isMuted = false;
+const activeAudioElements = [];
+
+// Current character for modal
+let currentCharacter = null;
+
+// DOM Elements
+let loadingScreen;
+let loadingText;
+let scanPrompt;
+let statusText;
+
+// ==============================================
+// INITIALIZATION
+// ==============================================
+
+/**
+ * Load character configuration from JSON
+ */
+async function loadConfig() {
+  try {
+    updateStatus('Chargement des données...');
+    const response = await fetch(CONFIG_PATH);
+    if (!response.ok) {
+      throw new Error('Failed to load config: ' + response.status);
+    }
+    config = await response.json();
+    
+    // Extract settings and characters
+    settings = config.settings || {};
+    characters = config.characters || [];
+    
+    console.log('Config loaded:', config.version);
+    console.log('Settings:', settings);
+    console.log('Characters:', characters.length);
+    
+    return true;
+  } catch (error) {
+    console.error('Error loading config:', error);
+    updateStatus('Erreur de chargement');
+    return false;
+  }
+}
+
+/**
+ * Convert JSON character format to internal format
+ */
+function normalizeCharacter(char) {
+  return {
+    id: char.id,
+    name: char.name,
+    description: char.description,
+    themeColor: char.themeColor || settings.defaultThemeColor || '#6366F1',
+    portrait: char.portrait,
+    
+    // Marker config
+    markerFile: char.marker?.file,
+    markerIndex: char.marker?.targetIndex || 0,
+    
+    // Stats
+    stats: char.stats || {},
+    
+    // Assets - convert from JSON format
+    images2D: (char.assets?.['2d'] || []).map(img => ({
+      path: img.path,
+      scale: img.scale || 1,
+      position: img.position || { x: 0, y: 0, z: 0 },
+      rotation: img.rotation || { x: 0, y: 0, z: 0 },
+      opacity: img.opacity !== undefined ? img.opacity : 1
+    })),
+    
+    model3D: char.assets?.['3d']?.[0] ? {
+      path: char.assets['3d'][0].path,
+      scale: char.assets['3d'][0].scale || { x: 0.1, y: 0.1, z: 0.1 },
+      position: char.assets['3d'][0].position || { x: 0, y: 0, z: 0 },
+      rotation: char.assets['3d'][0].rotation || { x: 0, y: 0, z: 0 },
+      animation: char.assets['3d'][0].animation
+    } : null,
+    
+    // Sounds
+    sounds: char.sounds || {}
+  };
+}
+
+/**
+ * Initialize the card scanner
+ */
+async function initCardScanner() {
+  console.log('Initializing Card Scanner...');
+  
+  // Get DOM elements
+  loadingScreen = document.getElementById('loading-screen');
+  loadingText = document.getElementById('loading-text');
+  scanPrompt = document.getElementById('scan-prompt');
+  statusText = document.getElementById('status-text');
+  
+  // Initialize loaders
+  gltfLoader = new GLTFLoader();
+  textureLoader = new THREE.TextureLoader();
+  
+  // Load configuration from JSON
+  const configLoaded = await loadConfig();
+  if (!configLoaded) {
+    return;
+  }
+  
+  // Normalize all characters
+  characters = characters.map(normalizeCharacter);
+  
+  // Start MindAR
+  await startMindAR();
+}
+
+// ==============================================
+// MINDAR SETUP
+// ==============================================
+
+/**
+ * Start MindAR with the marker configuration
+ */
+async function startMindAR() {
+  updateStatus('Chargement AR...');
+  
+  // Determine which marker file to use
+  let markerFile;
+  if (settings.useIndividualMarkers && characters.length > 0 && characters[0].markerFile) {
+    markerFile = characters[0].markerFile;
+    console.log('Using individual marker file:', markerFile);
+  } else {
+    // Fallback to first character's marker or a default
+    markerFile = characters[0]?.markerFile || 'assets/markers/default.mind';
+    console.log('Using marker file:', markerFile);
+  }
+  
+  // Create MindAR instance with quality options
+  mindarThree = new MindARThree({
+    container: document.getElementById('ar-container'),
+    imageTargetSrc: markerFile,
+    maxTrack: settings.maxTrack || 1,
+    uiLoading: 'no',
+    uiScanning: 'no',
+    uiError: 'no',
+    // Quality improvements
+    filterMinCF: 0.0001,
+    filterBeta: 0.001,
+    warmupTolerance: 5,
+    missTolerance: 5
+  });
+  
+  // Set pixel ratio for better rendering
+  mindarThree.renderer.setPixelRatio(window.devicePixelRatio);
+  
+  // Get Three.js components
+  renderer = mindarThree.renderer;
+  scene = mindarThree.scene;
+  camera = mindarThree.camera;
+  
+  // Setup lighting
+  setupLighting();
+  
+  // Setup anchors for each character
+  await setupCharacterAnchors();
+  
+  // Start AR
+  updateStatus('Démarrage caméra...');
+  
+  try {
+    await mindarThree.start();
+    console.log('MindAR started successfully');
+    hideLoading();
+    updateStatus('Scannez une carte personnage');
+    showScanPrompt();
+  } catch (err) {
+    console.error('MindAR start error:', err);
+    updateStatus('Erreur: ' + err.message);
+  }
+}
+
+/**
+ * Setup scene lighting
+ */
+function setupLighting() {
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  scene.add(ambientLight);
+  
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  directionalLight.position.set(0, 1, 1);
+  scene.add(directionalLight);
+}
+
+/**
+ * Create anchors for each character in the config
+ */
+async function setupCharacterAnchors() {
+  if (settings.useIndividualMarkers) {
+    // Find the character whose marker file we loaded
+    const loadedMarkerFile = characters[0].markerFile;
+    const characterToSetup = characters.find(c => c.markerFile === loadedMarkerFile);
+    
+    if (characterToSetup) {
+      updateStatus('Configuration de ' + characterToSetup.name + '...');
+      await setupSingleCharacter(characterToSetup);
+    } else {
+      console.error('No character found for loaded marker file');
+    }
+  } else {
+    // Combined marker file - set up all characters
+    updateStatus('Configuration de ' + characters.length + ' personnage(s)...');
+    
+    for (const character of characters) {
+      await setupSingleCharacter(character);
+    }
+  }
+}
+
+/**
+ * Setup anchor and content for a single character
+ */
+async function setupSingleCharacter(character) {
+  const markerIndex = settings.useIndividualMarkers ? 0 : character.markerIndex;
+  
+  console.log('Setting up character:', character.id, 'at marker index:', markerIndex);
+  
+  // Create anchor for this character's marker
+  const anchor = mindarThree.addAnchor(markerIndex);
+  characterAnchors[character.id] = anchor;
+  
+  // Add content directly to anchor.group
+  const contentGroup = anchor.group;
+  characterContent[character.id] = contentGroup;
+  
+  // Load 3D model if specified
+  if (character.model3D && character.model3D.path) {
+    load3DModel(character, contentGroup);
+  }
+  
+  // Load 2D images if specified
+  if (character.images2D && character.images2D.length > 0) {
+    await load2DImages(character, contentGroup);
+    console.log('✅ All 2D images loaded for', character.id);
+  }
+  
+  // Setup target found/lost events
+  anchor.onTargetFound = () => {
+    onCharacterFound(character);
+  };
+  
+  anchor.onTargetLost = () => {
+    onCharacterLost(character);
+  };
+}
+
+// ==============================================
+// ASSET LOADING
+// ==============================================
+
+/**
+ * Load 3D model for a character
+ */
+function load3DModel(character, contentGroup) {
+  const modelConfig = character.model3D;
+  
+  gltfLoader.load(
+    modelConfig.path,
+    (gltf) => {
+      const model = gltf.scene;
+      
+      // Apply scale
+      if (typeof modelConfig.scale === 'number') {
+        model.scale.setScalar(modelConfig.scale);
+      } else {
+        model.scale.set(
+          modelConfig.scale.x || 0.1,
+          modelConfig.scale.y || 0.1,
+          modelConfig.scale.z || 0.1
+        );
+      }
+      
+      // Apply position
+      if (modelConfig.position) {
+        model.position.set(
+          modelConfig.position.x || 0,
+          modelConfig.position.y || 0,
+          modelConfig.position.z || 0
+        );
+      }
+      
+      // Apply rotation
+      if (modelConfig.rotation) {
+        model.rotation.set(
+          modelConfig.rotation.x || 0,
+          modelConfig.rotation.y || 0,
+          modelConfig.rotation.z || 0
+        );
+      }
+      
+      // Play animations if available
+      if (modelConfig.animation && gltf.animations && gltf.animations.length > 0) {
+        const mixer = new THREE.AnimationMixer(model);
+        const clipName = modelConfig.animation.clipName;
+        let clip = gltf.animations[0];
+        
+        if (clipName) {
+          const namedClip = gltf.animations.find(a => a.name === clipName);
+          if (namedClip) clip = namedClip;
+        }
+        
+        const action = mixer.clipAction(clip);
+        if (modelConfig.animation.loop !== false) {
+          action.setLoop(THREE.LoopRepeat);
+        }
+        action.play();
+        
+        model.userData.mixer = mixer;
+        model.userData.clock = new THREE.Clock();
+      }
+      
+      contentGroup.add(model);
+      console.log('3D model loaded for:', character.id);
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading 3D model for', character.id, ':', error);
+    }
+  );
+}
+
+/**
+ * Load 2D images for a character
+ */
+async function load2DImages(character, contentGroup) {
+  for (const imageConfig of character.images2D) {
+    await loadSingle2DImage(imageConfig, contentGroup, character.id);
+  }
+}
+
+/**
+ * Load a single 2D image
+ */
+async function loadSingle2DImage(imageConfig, contentGroup, characterId) {
+  console.log('Loading 2D image:', imageConfig.path, 'for', characterId);
+  
+  try {
+    const texture = await textureLoader.loadAsync(imageConfig.path);
+    console.log('Texture loaded successfully:', imageConfig.path);
+    
+    // Get aspect ratio from texture
+    const imageWidth = texture.image.width;
+    const imageHeight = texture.image.height;
+    const aspectRatio = imageWidth / imageHeight;
+    
+    console.log('Image dimensions:', imageWidth, 'x', imageHeight, 'aspect:', aspectRatio);
+    
+    // Create plane geometry with correct aspect ratio
+    const baseScale = imageConfig.scale || 1;
+    const globalScale = settings.defaultAssetScale || 1;
+    const scale = baseScale * globalScale;
+    const planeWidth = scale * aspectRatio;
+    const planeHeight = scale;
+    
+    const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      opacity: imageConfig.opacity !== undefined ? imageConfig.opacity : 1,
+      side: THREE.DoubleSide,
+      depthWrite: true
+    });
+    
+    const plane = new THREE.Mesh(geometry, material);
+    
+    // Position the plane - lift it up from marker surface
+    const pos = imageConfig.position || { x: 0, y: 0, z: 0 };
+    const yOffset = (pos.y || 0) + (planeHeight / 2) + 0.01;
+    plane.position.set(pos.x || 0, yOffset, pos.z || 0);
+    
+    // Make perpendicular to marker (stand up from marker surface)
+    plane.rotation.x = Math.PI / 2;
+    
+    // Apply additional rotation if specified
+    if (imageConfig.rotation) {
+      plane.rotation.x += imageConfig.rotation.x || 0;
+      plane.rotation.y += imageConfig.rotation.y || 0;
+      plane.rotation.z += imageConfig.rotation.z || 0;
+    }
+    
+    contentGroup.add(plane);
+    console.log('✅ 2D plane added for:', characterId);
+    
+  } catch (error) {
+    console.error('Error loading 2D image for', characterId, ':', error);
+  }
+}
+
+// ==============================================
+// CHARACTER EVENTS
+// ==============================================
+
+/**
+ * Called when a character card is detected
+ */
+function onCharacterFound(character) {
+  console.log('Character found:', character.name);
+  
+  activeCharacters[character.id] = true;
+  
+  hideScanPrompt();
+  updateStatus('Détecté: ' + character.name);
+  
+  // Store current character for modal
+  currentCharacter = character;
+  
+  // Play intro sound (only first time)
+  if (!playedIntros[character.id]) {
+    playSound(character, 'intro');
+    playedIntros[character.id] = true;
+  }
+  
+  // Start ambient sound
+  playSound(character, 'ambient');
+  
+  // Update debug panel
+  updateDebugPanel();
+}
+
+/**
+ * Called when a character card is lost
+ */
+function onCharacterLost(character) {
+  console.log('Character lost:', character.name);
+  
+  activeCharacters[character.id] = false;
+  
+  // Stop ambient sound
+  stopSound(character, 'ambient');
+  
+  // Check if any characters still active
+  let anyActive = false;
+  for (const id in activeCharacters) {
+    if (activeCharacters[id]) {
+      anyActive = true;
+      break;
+    }
+  }
+  
+  if (!anyActive) {
+    showScanPrompt();
+    currentCharacter = null;
+    updateStatus('Scannez une carte personnage');
+  }
+  
+  updateDebugPanel();
+}
+
+// ==============================================
+// AUDIO
+// ==============================================
+
+/**
+ * Play a sound for a character
+ */
+function playSound(character, soundType) {
+  if (!character.sounds || !character.sounds[soundType]) return;
+  
+  const soundConfig = character.sounds[soundType];
+  const soundId = character.id + '_' + soundType;
+  
+  let audioEl = document.getElementById(soundId);
+  
+  if (!audioEl) {
+    audioEl = document.createElement('audio');
+    audioEl.id = soundId;
+    audioEl.src = soundConfig.path;
+    audioEl.volume = soundConfig.volume || 0.5;
+    audioEl.loop = soundConfig.loop || false;
+    audioEl.muted = isMuted;
+    document.getElementById('audio-container').appendChild(audioEl);
+    
+    activeAudioElements.push(audioEl);
+  }
+  
+  audioEl.muted = isMuted;
+  audioEl.currentTime = 0;
+  audioEl.play().catch((e) => {
+    console.log('Audio play blocked:', e.message);
+  });
+}
+
+/**
+ * Stop a sound for a character
+ */
+function stopSound(character, soundType) {
+  const soundId = character.id + '_' + soundType;
+  const audioEl = document.getElementById(soundId);
+  
+  if (audioEl) {
+    audioEl.pause();
+    audioEl.currentTime = 0;
+  }
+}
+
+/**
+ * Toggle mute state for all audio
+ */
+function toggleMute() {
+  isMuted = !isMuted;
+  
+  activeAudioElements.forEach(audio => {
+    audio.muted = isMuted;
+  });
+  
+  const audioContainer = document.getElementById('audio-container');
+  if (audioContainer) {
+    const audioElements = audioContainer.querySelectorAll('audio');
+    audioElements.forEach(audio => {
+      audio.muted = isMuted;
+    });
+  }
+  
+  const muteBtn = document.getElementById('mute-btn');
+  if (muteBtn) {
+    if (isMuted) {
+      muteBtn.classList.add('muted');
+      muteBtn.innerHTML = '🔇';
+      muteBtn.title = 'Unmute';
+    } else {
+      muteBtn.classList.remove('muted');
+      muteBtn.innerHTML = '🔊';
+      muteBtn.title = 'Mute';
+    }
+  }
+  
+  console.log('Audio muted:', isMuted);
+}
+
+// ==============================================
+// UI FUNCTIONS
+// ==============================================
+
+/**
+ * Open the info modal with expanded character details
+ */
+function openInfoModal() {
+  if (!currentCharacter) {
+    console.log('No character to show in modal');
+    return;
+  }
+  
+  const modal = document.getElementById('info-modal');
+  const modalPortrait = document.getElementById('modal-portrait');
+  const modalName = document.getElementById('modal-character-name');
+  const modalDesc = document.getElementById('modal-description');
+  const modalStats = document.getElementById('modal-stats');
+  
+  if (!modal || !modalName || !modalDesc) {
+    console.log('Modal elements not found');
+    return;
+  }
+  
+  // Set portrait image
+  if (modalPortrait && currentCharacter.portrait) {
+    modalPortrait.style.backgroundImage = 'url(' + currentCharacter.portrait + ')';
+    modalPortrait.style.display = 'block';
+  } else if (modalPortrait) {
+    modalPortrait.style.display = 'none';
+  }
+  
+  // Populate modal content
+  modalName.textContent = currentCharacter.name;
+  modalName.style.color = currentCharacter.themeColor;
+  modalDesc.textContent = currentCharacter.description;
+  
+  // Build expanded stats display
+  if (modalStats && currentCharacter.stats) {
+    let statsHtml = '';
+    for (const stat in currentCharacter.stats) {
+      const value = currentCharacter.stats[stat];
+      statsHtml += '<div class="modal-stat-row">';
+      statsHtml += '<span class="stat-name">' + stat.toUpperCase() + '</span>';
+      statsHtml += '<div class="stat-bar"><div class="stat-fill" style="width: ' + value + '%; background: ' + currentCharacter.themeColor + ';"></div></div>';
+      statsHtml += '<span class="stat-value">' + value + '</span>';
+      statsHtml += '</div>';
+    }
+    modalStats.innerHTML = statsHtml;
+  }
+  
+  // Show modal
+  modal.classList.remove('hidden');
+  modal.style.display = 'flex';
+  
+  console.log('Opened info modal for:', currentCharacter.name);
+}
+
+/**
+ * Close the info modal
+ */
+function closeInfoModal() {
+  const modal = document.getElementById('info-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.style.display = 'none';
+  }
+}
+
+/**
+ * Show scan prompt
+ */
+function showScanPrompt() {
+  if (scanPrompt) {
+    scanPrompt.classList.remove('hidden');
+  }
+}
+
+/**
+ * Hide scan prompt
+ */
+function hideScanPrompt() {
+  if (scanPrompt) {
+    scanPrompt.classList.add('hidden');
+  }
+}
+
+/**
+ * Hide loading screen
+ */
+function hideLoading() {
+  if (loadingScreen) {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }
+}
+
+/**
+ * Update status text
+ */
+function updateStatus(message) {
+  console.log('Status:', message);
+  if (statusText) {
+    statusText.textContent = message;
+  }
+  if (loadingText) {
+    loadingText.textContent = message;
+  }
+}
+
+/**
+ * Update debug panel
+ */
+function updateDebugPanel() {
+  const list = document.getElementById('detected-list');
+  if (!list) return;
+  
+  let html = '';
+  for (const id in activeCharacters) {
+    if (activeCharacters[id]) {
+      const char = characters.find(c => c.id === id);
+      if (char) {
+        html += '<li style="color: ' + char.themeColor + ';">' + char.name + '</li>';
+      }
+    }
+  }
+  
+  list.innerHTML = html || '<li>None</li>';
+}
+
+/**
+ * Toggle debug panel
+ */
+function toggleDebugPanel() {
+  const panel = document.getElementById('debug-panel');
+  if (panel) {
+    panel.classList.toggle('hidden');
+  }
+}
+
+// ==============================================
+// EVENT LISTENERS
+// ==============================================
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'd' || e.key === 'D') {
+    toggleDebugPanel();
+  }
+  if (e.key === 'm' || e.key === 'M') {
+    toggleMute();
+  }
+  if (e.key === 'Escape') {
+    closeInfoModal();
+  }
+});
+
+// UI button event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  // Back button
+  const backBtn = document.getElementById('back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      window.location.href = '../index.html';
+    });
+  }
+  
+  // Mute button
+  const muteBtn = document.getElementById('mute-btn');
+  if (muteBtn) {
+    muteBtn.addEventListener('click', toggleMute);
+  }
+  
+  // Zoom/expand button
+  const zoomBtn = document.getElementById('zoom-btn');
+  if (zoomBtn) {
+    zoomBtn.addEventListener('click', openInfoModal);
+  }
+  
+  // Close modal button
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeInfoModal);
+  }
+  
+  // Close modal when clicking outside content
+  const modal = document.getElementById('info-modal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeInfoModal();
+      }
+    });
+  }
+});
+
+// ==============================================
+// ANIMATION LOOP
+// ==============================================
+
+function animate() {
+  requestAnimationFrame(animate);
+  
+  // Update animation mixers
+  for (const id in characterContent) {
+    const group = characterContent[id];
+    if (group) {
+      group.traverse((child) => {
+        if (child.userData && child.userData.mixer) {
+          const delta = child.userData.clock.getDelta();
+          child.userData.mixer.update(delta);
+        }
+      });
+    }
+  }
+  
+  // Render the scene
+  if (renderer && scene && camera) {
+    renderer.render(scene, camera);
+  }
+}
+
+// Start animation loop
+animate();
+
+// ==============================================
+// START APPLICATION
+// ==============================================
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCardScanner);
+} else {
+  initCardScanner();
+}

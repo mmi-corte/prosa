@@ -2,58 +2,50 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width user-scalable=no minimum-scale=1.0 maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar" content="#F1D482">
-    
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- ios support -->
-    <link rel="apple-touch-icon" href="assets/icons/icon-72x72.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-128x128.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-144x144.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-256x256.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-512x512.png">
-    <link rel="apple-touch-icon" href="assets/icons/icon-1024x1024.png">
-    <meta name="apple-mobile-web-app-status-bar" content="#F1D482">
-    <meta name="theme-color" content="#F1D482">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F1D482" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>PROSA - Réalité Augmentée</title>
 
-    <title>L'île de Prosa</title>
-
-    <!-- <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/style.css"></noscript> -->
-    
-    <!-- Lien vers le font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap"
-        rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    
-    <!-- logo dans l'onglet de nav -->
-    <link rel="icon" type="image/png" href="assets/PLogo.png" loading="lazy" alt="logo">
-
-    <!-- A-Frame Library -->
-    <script src="./libs/aframe.min.js" defer></script>
-    <script src="./libs/aframe-ar.js" defer></script>
-
-    <!-- animation -->
-    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"></script>
-    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script> -->
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./assets/img/icon1.svg" />
+  <link rel="stylesheet" href="./fronts/start_view_1/styles.css" />
 </head>
 
 <body>
-    <div id="container">   
+  <!-- Main Menu Screen -->
+  <header class="header">
+    <div class="logo-small">
+      <!-- Logo PROSA officiel -->
+      <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-img" />
     </div>
-    
-    <!-- Import du script principal (main.js) en tant que module -->
-    <script type="module" src="./main.js"></script>
+    <button class="settings-btn" id="settingButton" aria-label="Réglages">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+      </svg>
+    </button>
+  </header>
 
+  <main class="screen" id="gameContainer">
+
+  </main>
+
+  <script type="module" src="./app.js"></script>
+
+  <!-- <script type="module" src="./fronts/start_view_1/app.js"></script> -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then((reg) => console.log("Service Worker enregistré !", reg))
+          .catch((err) => console.error("Erreur SW :", err));
+      });
+    }
+  </script>
 </body>
+
 </html>

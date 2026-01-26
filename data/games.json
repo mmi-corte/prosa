@@ -1,0 +1,19 @@
+{
+    "1": {
+        "0100": {
+            "1": {
+                "game": "radio",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLoose": "dialog",
+                "nextActionLoose": "2",
+                "nextActionTypeStill": "dialog",
+                "nextActionStill": "2",
+                "nextActionTypeContinue": "dialog",
+                "nextActionContinue": "2"
+            }
+        }
+    },
+    "2": {},
+    "3": {}
+}

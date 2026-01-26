@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "settings": {
+    "useIndividualMarkers": true,
+    "maxTrack": 1,
+    "defaultAssetScale": 2,
+    "defaultThemeColor": "#6366F1"
+  },
+  "characters": [
+    {
+      "id": "strega",
+      "name": "La Strega",
+      "description": "Prodige de l'île de Prosa, a Strega est chargée de maintenir l'infertilité des terres de Corse.",
+      "themeColor": "#10032e",
+      "portrait": "assets/img/characters/strega_portrait.png",
+      
+      "marker": {
+        "file": "assets/markers/strega.mind",
+        "targetIndex": 0
+      },
+      
+      "stats": {
+        "puissance": 85,
+        "défense": 40,
+        "magie": 95,
+        "vitesse": 60
+      },
+      
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/strega_char.png",
+            "scale": 1,
+            "position": { "x": 0, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/strega_bg.png",
+            "scale": 1.5,
+            "position": { "x": 0, "y": 0, "z": -0.1 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/SON1.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "games": {
+    "game1": {
+      "code": "0000",
+      "action": {
+        "type": "redirect",
+        "url": "../../games/game1/game.html"
+      }
+    },
+    "game2": {
+      "code": "1000",
+      "action": {
+        "type": "redirect",
+        "url": "../../games/game2/game.html"
+      }
+    },
+    "game3": {
+      "code": "1234",
+      "action": {
+        "type": "redirect",
+        "url": "../../games/game1/game.html"
+      }
+    }
+  }
+}
