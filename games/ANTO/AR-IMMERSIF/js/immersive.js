@@ -68,13 +68,14 @@ var lastQuaternion = null;
 
 // Step detection parameters
 var stepLength = 0.65; // Average step length in meters
-var stepThreshold = 2; // Acceleration magnitude threshold for step detection (minimum for max sensitivity)
-var stepCooldown = 150; // Minimum ms between steps
+var stepThreshold = 11; // Acceleration magnitude threshold (gravity is ~9.8, so 11 means 1.2+ deviation)
+var stepCooldown = 200; // Minimum ms between steps
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 1; // No averaging, instant response
+var accelHistorySize = 3; // Number of samples to average
 var lastPeak = 0;
 var inStep = false;
+var baselineGravity = 9.8; // Baseline gravity magnitude
 
 // Height tracking for crouching
 var standingHeight = 1.7; // Standing eye height in meters
@@ -554,8 +555,8 @@ function setupDeviceOrientation() {
       // Detected upward acceleration (foot hitting ground)
       inStep = true;
       lastPeak = smoothedMag;
-    } else if (inStep && smoothedMag < lastPeak - 2) {
-      // Detected downward acceleration after peak - step complete!
+    } else if (inStep && smoothedMag < lastPeak - 0.5) {
+      // Detected downward acceleration after peak - step complete! (0.5 dip = more sensitive)
       inStep = false;
       lastStepTime = now;
       isMoving = true;
