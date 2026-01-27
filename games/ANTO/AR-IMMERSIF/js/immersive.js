@@ -67,7 +67,7 @@ var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
 var lastQuaternion = null;
 
 // Step detection parameters
-var stepLength = 0.35; // Larger movement per step
+var stepLength = 1.0; // Larger movement per step
 var stepThreshold = 0.8; // Lower threshold for better detection
 var stepCooldown = 400; // Slightly faster than 2/sec
 var lastStepTime = 0;
