@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AR Immersif - PROSA</title>
 
+  <!-- PROSA Font -->
+  <style>
+    @font-face {
+      font-family: 'Futura';
+      src: url('/fronts/start_view_1/public/fonts/FuturaCondMedium.woff2') format('woff2'),
+           url('/fronts/start_view_1/public/fonts/FuturaCondMedium.woff') format('woff');
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
   <!-- Local Three.js files for WebXR Viewer compatibility -->
   <script src="./js/three.min.js"></script>
   <script src="./js/GLTFLoader.js"></script>
@@ -24,33 +36,92 @@
     #loading-screen {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: #1a1812;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 99999;
-      color: white;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #ece4cb;
+      font-family: 'Futura', 'Segoe UI', sans-serif;
+    }
+    #loading-screen .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 30px;
     }
     #loading-screen .spinner {
       width: 50px; height: 50px;
-      border: 4px solid rgba(255,255,255,0.2);
-      border-top-color: #667eea;
+      border: 3px solid rgba(236, 228, 203, 0.2);
+      border-top-color: #ece4cb;
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    #loading-screen p { margin-top: 20px; font-size: 16px; }
-    #loading-screen #debug-info { font-size: 12px; color: #aaa; margin-top: 10px; max-width: 80%; text-align: center; }
+    #loading-screen p { 
+      margin-top: 24px; 
+      font-size: 18px; 
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    #loading-screen #debug-info { 
+      font-size: 12px; 
+      color: #9a9680; 
+      margin-top: 12px; 
+      max-width: 80%; 
+      text-align: center; 
+    }
   </style>
 </head>
 <body>
   <!-- Loading Screen -->
   <div id="loading-screen">
+    <img src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo">
     <div class="spinner"></div>
-    <p>Loading AR Experience...</p>
-    <div id="debug-info">Initializing...</div>
+    <p>Chargement...</p>
+    <div id="debug-info">Initialisation...</div>
+  </div>
+
+  <!-- Start Screen with Instructions -->
+  <div id="start-screen" class="start-screen" style="display: none;">
+    <div class="start-content">
+      <img src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="start-logo">
+      
+      <h1>Expérience AR</h1>
+      
+      <div class="game-info">
+        <div class="info-section">
+          <h2>🎯 Objectif</h2>
+          <p>Explorez votre environnement en réalité augmentée et trouvez la clé cachée en suivant le son.</p>
+        </div>
+        
+        <div class="info-section">
+          <h2>🎮 Comment jouer</h2>
+          <ul>
+            <li>📱 Bougez votre téléphone pour regarder autour de vous</li>
+            <li>🚶 Marchez pour vous déplacer dans la scène</li>
+            <li>🔊 Écoutez le son spatial pour localiser la clé</li>
+            <li>👆 Touchez la clé quand vous êtes proche pour la récupérer</li>
+          </ul>
+        </div>
+        
+        <div class="info-section tips">
+          <h2>💡 Conseils</h2>
+          <p>Utilisez des écouteurs pour mieux localiser le son. Plus vous êtes proche de la clé, plus le son est fort !</p>
+        </div>
+      </div>
+      
+      <button id="start-btn" class="start-btn">
+        Commencer l'aventure
+      </button>
+      
+      <button id="start-vr-btn" class="start-btn vr-btn" style="display: none;">
+        🥽 Mode VR (Casque)
+      </button>
+      
+      <p class="permission-note">L'accès à la caméra et aux capteurs de mouvement sera demandé.</p>
+      <p id="vr-note" class="permission-note" style="display: none; margin-top: 8px;">Casque VR détecté ! Vous pouvez aussi jouer en réalité virtuelle.</p>
+    </div>
   </div>
 
   <div id="container">
@@ -59,11 +130,8 @@
 
   <!-- Status Bar -->
   <div id="status-bar" class="status-bar" style="pointer-events: none;">
-    <span id="status-text">Initializing...</span>
+    <span id="status-text">Initialisation...</span>
   </div>
-
-  <!-- Exit AR Button -->
-  <button id="exit-ar-btn" class="exit-btn hidden" style="pointer-events: auto;">❌ Exit AR</button>
   
   <!-- Subtitle Display -->
   <div id="subtitles" class="subtitles" style="display: none;">

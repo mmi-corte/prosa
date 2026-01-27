@@ -48,6 +48,13 @@ var groundOffset = -1.5;
 var isARActive = false;
 var videoElement = null;
 var deviceOrientation = { alpha: 0, beta: 0, gamma: 0 };
+
+// VR mode state
+var isVRActive = false;
+var isVRSupported = false;
+var vrSession = null;
+var controller1, controller2;
+var controllerGrip1, controllerGrip2;
 var initialOrientation = null;
 
 // Position tracking (step detection)
@@ -78,7 +85,53 @@ var verticalAccelHistory = [];
 var verticalHistorySize = 8;
 var isCrouching = false;
 
+// Audio state
+var audioContextResumed = false;
+var pendingKeySound = null;
+
 debugLog('Script loaded, waiting for DOM...');
+
+/**
+ * Resume AudioContext - must be called from user interaction
+ */
+function resumeAudioContext() {
+  if (audioContextResumed) return;
+  
+  if (camera && camera.userData.audioListener) {
+    var audioContext = camera.userData.audioListener.context;
+    
+    // For iOS, we need to resume and also play a silent buffer
+    if (audioContext.state === 'suspended') {
+      audioContext.resume().then(function() {
+        console.log('AudioContext resumed successfully, state:', audioContext.state);
+        audioContextResumed = true;
+        
+        // Play pending sound if any
+        if (pendingKeySound && !pendingKeySound.isPlaying) {
+          console.log('Playing pending key sound');
+          pendingKeySound.play();
+        }
+      }).catch(function(err) {
+        console.warn('Failed to resume AudioContext:', err);
+      });
+    } else {
+      audioContextResumed = true;
+      console.log('AudioContext already running, state:', audioContext.state);
+    }
+    
+    // iOS workaround: create and play a silent buffer to unlock audio
+    try {
+      var silentBuffer = audioContext.createBuffer(1, 1, 22050);
+      var source = audioContext.createBufferSource();
+      source.buffer = silentBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+      console.log('Silent buffer played to unlock iOS audio');
+    } catch (e) {
+      console.warn('Silent buffer workaround failed:', e);
+    }
+  }
+}
 
 /**
  * Initialize the AR experience
@@ -89,7 +142,7 @@ function init() {
   // Check if THREE is loaded
   if (typeof THREE === 'undefined') {
     debugLog('ERROR: THREE.js not loaded');
-    alert('Error: Three.js library failed to load.');
+    alert('Erreur : La bibliothèque Three.js n\'a pas pu être chargée.');
     return;
   }
   
@@ -98,7 +151,7 @@ function init() {
   // Initialize loaders
   if (typeof THREE.GLTFLoader === 'undefined') {
     debugLog('ERROR: GLTFLoader not loaded');
-    alert('Error: GLTFLoader failed to load.');
+    alert('Erreur : GLTFLoader n\'a pas pu être chargé.');
     return;
   }
   
@@ -157,26 +210,44 @@ function init() {
   window.addEventListener('click', onScreenClick);
   window.addEventListener('touchstart', onScreenTouch);
 
-  // Hide loading screen
+  // Hide loading screen, show start screen
   var loadingScreen = document.getElementById('loading-screen');
   if (loadingScreen) {
     loadingScreen.style.display = 'none';
   }
+  
+  var startScreen = document.getElementById('start-screen');
+  if (startScreen) {
+    startScreen.style.display = 'block';
+  }
 
   debugLog('Init complete!');
-  updateStatus('Tap anywhere to start AR');
+  updateStatus('Prêt à démarrer');
   
-  // Wait for user tap to start AR (required for iOS permissions)
-  function startOnTap(e) {
-    e.preventDefault();
-    document.removeEventListener('touchstart', startOnTap);
-    document.removeEventListener('click', startOnTap);
-    updateStatus('Starting AR...');
-    startAR();
+  // Check for WebXR VR support
+  checkVRSupport();
+  
+  // Wait for start button click (AR mode)
+  var startBtn = document.getElementById('start-btn');
+  if (startBtn) {
+    startBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      startScreen.style.display = 'none';
+      updateStatus('Démarrage...');
+      startAR();
+    });
   }
   
-  document.addEventListener('touchstart', startOnTap, { once: true, passive: false });
-  document.addEventListener('click', startOnTap, { once: true });
+  // Wait for VR button click
+  var startVRBtn = document.getElementById('start-vr-btn');
+  if (startVRBtn) {
+    startVRBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      startScreen.style.display = 'none';
+      updateStatus('Démarrage VR...');
+      startVR();
+    });
+  }
 }
 
 /**
@@ -229,7 +300,7 @@ function setupUI() {
         }
         btn.classList.add('selected');
         selectedModel = btn.getAttribute('data-model');
-        updateStatus('Selected: ' + btn.textContent.trim());
+        updateStatus('Sélectionné : ' + btn.textContent.trim());
       });
     })(assetBtns[i]);
   }
@@ -250,15 +321,6 @@ function setupUI() {
       clearAllObjects();
     });
   }
-
-  // Exit AR button
-  var exitBtn = document.getElementById('exit-ar-btn');
-  if (exitBtn) {
-    exitBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      exitAR();
-    });
-  }
   
   // Placement mode toggle
   var placementCheckbox = document.getElementById('placement-mode');
@@ -266,9 +328,9 @@ function setupUI() {
     placementCheckbox.addEventListener('change', function(e) {
       placementModeEnabled = e.target.checked;
       if (placementModeEnabled) {
-        updateStatus('Placement mode enabled - Tap to place objects');
+        updateStatus('Mode placement activé');
       } else {
-        updateStatus('Placement mode disabled - Click objects to interact');
+        updateStatus('Mode placement désactivé');
       }
     });
   }
@@ -288,8 +350,8 @@ function clearAllObjects() {
     scene.remove(placedObjects[i]);
   }
   placedObjects = [];
-  updateStatus('All objects cleared', 'success');
-  setTimeout(function() { updateStatus('Tap to place more objects'); }, 2000);
+  updateStatus('Tout effacé', 'success');
+  setTimeout(function() { updateStatus('Appuyez pour placer des objets'); }, 2000);
 }
 
 /**
@@ -349,6 +411,10 @@ function startAR() {
   console.log('Starting AR...');
   debugLog('Starting AR...');
   
+  // Resume AudioContext (required for iOS after user interaction)
+  // Must be done synchronously in the click/touch handler
+  resumeAudioContext();
+  
   // Request device orientation permission first (for iOS)
   requestDeviceOrientationPermission().then(function(granted) {
     if (!granted) {
@@ -407,9 +473,6 @@ function startCameraAR() {
     // Setup device orientation
     setupDeviceOrientation();
     
-    // Show exit button
-    document.getElementById('exit-ar-btn').classList.remove('hidden');
-    
     // Make renderer transparent
     renderer.setClearColor(0x000000, 0);
     
@@ -417,13 +480,13 @@ function startCameraAR() {
     setupPuzzleScene();
     
     // Start fallback render loop
-    updateStatus('Find the key! Listen for the sound.');
+    updateStatus('Trouvez la clé ! Écoutez le son.');
     fallbackAnimate();
     
   }).catch(function(err) {
     console.error('Camera access error:', err);
     debugLog('Camera error: ' + err.message);
-    alert('Could not access camera.\nError: ' + err.message);
+    alert('Impossible d\'accéder à la caméra.\nErreur : ' + err.message);
     document.getElementById('instructions').classList.remove('hidden');
     isARActive = false;
   });
@@ -652,8 +715,8 @@ function fallbackAnimate() {
   
   // Debug: show position and height
   var posInfo = 'Pos: ' + userPosition.x.toFixed(2) + ', ' + userPosition.z.toFixed(2) + ' H:' + currentHeight.toFixed(2);
-  if (isMoving) posInfo += ' [WALK]';
-  if (isCrouching) posInfo += ' [CROUCH]';
+  if (isMoving) posInfo += ' [MARCHE]';
+  if (isCrouching) posInfo += ' [ACCROUPI]';
   updateStatus(posInfo);
   
   // Animate the key (bob and rotate)
@@ -688,15 +751,15 @@ function stopARSession() {
   // Reset orientation
   initialOrientation = null;
   
-  // Hide UI
-  document.getElementById('exit-ar-btn').classList.add('hidden');
-  document.getElementById('instructions').classList.remove('hidden');
+  // Show instructions
+  var instructions = document.getElementById('instructions');
+  if (instructions) instructions.classList.remove('hidden');
   
   // Clear placed objects
   clearAllObjects();
   
   debugLog('AR stopped');
-  updateStatus('AR session ended');
+  updateStatus('Session AR terminée');
 }
 
 /**
@@ -802,12 +865,30 @@ function setupPuzzleScene() {
     var audioLoader = new THREE.AudioLoader();
     var keySound = new THREE.PositionalAudio(camera.userData.audioListener);
     audioLoader.load('./assets/sound/SON1.mp3', function(buffer) {
+      console.log('Audio loaded successfully');
       keySound.setBuffer(buffer);
       keySound.setRefDistance(0.5);
       keySound.setRolloffFactor(2);
-      keySound.setVolume(0.05);
+      keySound.setVolume(0.15);
       keySound.setLoop(true);
-      keySound.play();
+      
+      // Store reference for pending play
+      pendingKeySound = keySound;
+      
+      // Try to play - if AudioContext is suspended (iOS), it will be played when resumed
+      var audioContext = camera.userData.audioListener.context;
+      if (audioContext.state === 'running') {
+        keySound.play();
+        console.log('Audio playing:', keySound.isPlaying);
+      } else {
+        console.log('AudioContext not running yet, sound will play when resumed. State:', audioContext.state);
+        // Try to resume again (user may have already tapped)
+        resumeAudioContext();
+      }
+    }, function(progress) {
+      // Progress callback
+    }, function(error) {
+      console.error('Error loading audio:', error);
     });
     keyObject.add(keySound);
     keyObject.userData.sound = keySound;
@@ -823,7 +904,7 @@ function setupPuzzleScene() {
     animateKey();
   });
   
-  updateStatus('Puzzle scene loaded! Find the hidden key', 'success');
+  updateStatus('Scène chargée ! Trouvez la clé cachée', 'success');
 }
 
 /**
@@ -847,10 +928,10 @@ function collectKey() {
   scene.remove(keyObject);
   keyObject = null;
   
-  updateStatus('🔑 Key collected! Puzzle solved!', 'success');
+  updateStatus('🔑 Clé récupérée ! Énigme résolue !', 'success');
   
   setTimeout(function() {
-    updateStatus('Great job! You found the hidden key!');
+    updateStatus('Bravo ! Vous avez trouvé la clé cachée !');
   }, 2000);
 }
 
@@ -884,13 +965,13 @@ function placeObject(matrix) {
       scene.add(model);
       placedObjects.push(model);
       
-      updateStatus('Placed ' + selectedModel.replace('.glb', '') + ' (#' + placedObjects.length + ')', 'success');
-      setTimeout(function() { updateStatus('Tap to place more objects'); }, 2000);
+      updateStatus('Placé : ' + selectedModel.replace('.glb', '') + ' (#' + placedObjects.length + ')', 'success');
+      setTimeout(function() { updateStatus('Appuyez pour placer des objets'); }, 2000);
     },
     undefined,
     function(error) {
       console.error('Error loading model:', error);
-      updateStatus('Failed to load model', 'error');
+      updateStatus('Échec du chargement', 'error');
     }
   );
 }
@@ -1012,6 +1093,219 @@ function setupSubtitleTest() {
       }, 3000);
     }
   });
+}
+
+/**
+ * Check if WebXR VR is supported
+ */
+function checkVRSupport() {
+  if ('xr' in navigator) {
+    navigator.xr.isSessionSupported('immersive-vr').then(function(supported) {
+      isVRSupported = supported;
+      if (supported) {
+        console.log('WebXR VR is supported!');
+        var vrBtn = document.getElementById('start-vr-btn');
+        var vrNote = document.getElementById('vr-note');
+        if (vrBtn) vrBtn.style.display = 'block';
+        if (vrNote) vrNote.style.display = 'block';
+      }
+    }).catch(function(err) {
+      console.log('WebXR VR check failed:', err);
+    });
+  }
+}
+
+/**
+ * Start VR mode
+ */
+function startVR() {
+  if (!isVRSupported) {
+    alert('Le mode VR n\'est pas supporté sur cet appareil.');
+    return;
+  }
+  
+  console.log('Starting VR mode...');
+  debugLog('Starting VR mode...');
+  
+  // Enable XR on renderer
+  renderer.xr.enabled = true;
+  
+  // Request VR session
+  navigator.xr.requestSession('immersive-vr', {
+    optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking']
+  }).then(onVRSessionStarted).catch(function(err) {
+    console.error('Failed to start VR session:', err);
+    alert('Impossible de démarrer la session VR.\nErreur: ' + err.message);
+  });
+}
+
+/**
+ * VR session started
+ */
+function onVRSessionStarted(session) {
+  console.log('VR session started');
+  vrSession = session;
+  isVRActive = true;
+  
+  // Set up session
+  renderer.xr.setSession(session);
+  
+  // Set up controllers
+  setupVRControllers();
+  
+  // Set up VR scene (same puzzle as AR but with different environment)
+  setupVRScene();
+  
+  // Handle session end
+  session.addEventListener('end', onVRSessionEnded);
+  
+  // Start VR render loop
+  renderer.setAnimationLoop(vrAnimate);
+  
+  updateStatus('Mode VR actif - Utilisez les manettes pour interagir');
+}
+
+/**
+ * VR session ended
+ */
+function onVRSessionEnded() {
+  console.log('VR session ended');
+  isVRActive = false;
+  vrSession = null;
+  
+  renderer.xr.setSession(null);
+  renderer.setAnimationLoop(null);
+  
+  // Show start screen again
+  var startScreen = document.getElementById('start-screen');
+  if (startScreen) startScreen.style.display = 'block';
+  
+  updateStatus('Session VR terminée');
+}
+
+/**
+ * Set up VR controllers
+ */
+function setupVRControllers() {
+  // Controller 1
+  controller1 = renderer.xr.getController(0);
+  controller1.addEventListener('selectstart', onVRSelectStart);
+  controller1.addEventListener('selectend', onVRSelectEnd);
+  scene.add(controller1);
+  
+  // Controller 2
+  controller2 = renderer.xr.getController(1);
+  controller2.addEventListener('selectstart', onVRSelectStart);
+  controller2.addEventListener('selectend', onVRSelectEnd);
+  scene.add(controller2);
+  
+  // Controller grips (for visual representation)
+  controllerGrip1 = renderer.xr.getControllerGrip(0);
+  controllerGrip2 = renderer.xr.getControllerGrip(1);
+  
+  // Add simple visual for controllers
+  var controllerGeometry = new THREE.CylinderGeometry(0.02, 0.02, 0.1, 16);
+  var controllerMaterial = new THREE.MeshStandardMaterial({ color: 0xece4cb });
+  
+  var controllerMesh1 = new THREE.Mesh(controllerGeometry, controllerMaterial);
+  controllerMesh1.rotation.x = Math.PI / 2;
+  controllerGrip1.add(controllerMesh1);
+  
+  var controllerMesh2 = new THREE.Mesh(controllerGeometry, controllerMaterial);
+  controllerMesh2.rotation.x = Math.PI / 2;
+  controllerGrip2.add(controllerMesh2);
+  
+  scene.add(controllerGrip1);
+  scene.add(controllerGrip2);
+  
+  // Add ray pointer
+  var rayGeometry = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 0, -3)
+  ]);
+  var rayMaterial = new THREE.LineBasicMaterial({ color: 0x81cbd6 });
+  
+  var ray1 = new THREE.Line(rayGeometry, rayMaterial);
+  controller1.add(ray1);
+  
+  var ray2 = new THREE.Line(rayGeometry, rayMaterial);
+  controller2.add(ray2);
+}
+
+/**
+ * VR select (trigger) pressed
+ */
+function onVRSelectStart(event) {
+  var controller = event.target;
+  
+  // Raycast from controller
+  var tempMatrix = new THREE.Matrix4();
+  tempMatrix.identity().extractRotation(controller.matrixWorld);
+  
+  var vrRaycaster = new THREE.Raycaster();
+  vrRaycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);
+  vrRaycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempMatrix);
+  
+  // Check for key intersection
+  if (keyObject && !hasKey) {
+    var intersects = vrRaycaster.intersectObject(keyObject, true);
+    if (intersects.length > 0) {
+      collectKey();
+    }
+  }
+}
+
+/**
+ * VR select (trigger) released
+ */
+function onVRSelectEnd(event) {
+  // Not used currently
+}
+
+/**
+ * Set up VR scene environment
+ */
+function setupVRScene() {
+  // Clear any AR-specific elements
+  if (videoElement) {
+    videoElement.pause();
+    if (videoElement.parentNode) {
+      videoElement.parentNode.removeChild(videoElement);
+    }
+    videoElement = null;
+  }
+  
+  // Set scene background for VR (dark forest atmosphere)
+  scene.background = new THREE.Color(0x1a1812);
+  
+  // Add fog for atmosphere
+  scene.fog = new THREE.Fog(0x1a1812, 2, 15);
+  
+  // Set up the puzzle scene if not already done
+  if (!puzzleSetup) {
+    setupPuzzleScene();
+  }
+  
+  // Reset camera position
+  camera.position.set(0, 1.6, 0);
+  
+  updateStatus('Trouvez la clé ! Écoutez le son et pointez avec la manette.');
+}
+
+/**
+ * VR animation loop
+ */
+function vrAnimate() {
+  if (!isVRActive) return;
+  
+  // Animate the key (bob and rotate)
+  if (keyObject && !hasKey) {
+    keyObject.rotation.z += 0.01;
+    keyObject.position.y = 0.5 + Math.sin(Date.now() * 0.003) * 0.05;
+  }
+  
+  // Render
+  renderer.render(scene, camera);
 }
 
 // Initialize when DOM is ready
