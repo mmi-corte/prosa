@@ -60,24 +60,24 @@ var initialOrientation = null;
 // Position tracking (step detection)
 var userPosition = { x: 0, y: 0, z: 0 };
 var targetPosition = { x: 0, y: 0, z: 0 }; // Target position for smooth interpolation
-var positionSmoothing = 0.3; // Higher = faster response to movement (0-1)
+var positionSmoothing = 0.1; // Fast but smooth (0-1)
 var lastMotionTime = 0;
 var isMoving = false;
 var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
 var lastQuaternion = null;
 
 // Step detection parameters
-var stepLength = 1.0; // Larger movement per step
-var stepThreshold = 0.8; // Lower threshold for better detection
-var stepCooldown = 400; // Slightly faster than 2/sec
+var stepLength = 0.8; // Smaller steps
+var stepThreshold = 1.0; // Middle ground sensitivity
+var stepCooldown = 350; // Moderate step rate
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 2; // Less smoothing for responsiveness
+var accelHistorySize = 4; // More smoothing
 var lastPeak = 0;
 var inStep = false;
-var baselineGravity = 9.8; // Baseline gravity magnitude
+var isMoving = false;
 var rotationRate = { alpha: 0, beta: 0, gamma: 0 }; // Track rotation speed
-var rotationThreshold = 50; // Higher threshold - only ignore fast spins
+var rotationThreshold = 30; // Block steps during rotation OR tilting
 
 // Height tracking for crouching
 var standingHeight = 1.7; // Standing eye height in meters
@@ -527,37 +527,40 @@ function setupDeviceOrientation() {
     
     if (dt <= 0 || dt > 0.5) return; // Skip invalid time deltas
     
-    // Track rotation rate to filter out turning
+    // Track rotation rate to filter out turning AND tilting
     if (event.rotationRate) {
-      rotationRate.alpha = Math.abs(event.rotationRate.alpha || 0);
-      rotationRate.beta = Math.abs(event.rotationRate.beta || 0);
-      rotationRate.gamma = Math.abs(event.rotationRate.gamma || 0);
+      rotationRate.alpha = Math.abs(event.rotationRate.alpha || 0); // Yaw (turning left/right)
+      rotationRate.beta = Math.abs(event.rotationRate.beta || 0);   // Pitch (looking up/down)
+      rotationRate.gamma = Math.abs(event.rotationRate.gamma || 0); // Roll
     }
     
-    // Check if phone is rotating (turning) - ignore steps during rotation
-    var isRotating = rotationRate.alpha > rotationThreshold || 
-                     rotationRate.beta > rotationThreshold || 
-                     rotationRate.gamma > rotationThreshold;
-    
-    if (isRotating) {
-      // Phone is turning, don't count as step
+    // Check if phone is rotating (turning OR tilting) - ignore steps during rotation
+    var maxRotation = Math.max(rotationRate.alpha, rotationRate.beta, rotationRate.gamma);
+    if (maxRotation > rotationThreshold) {
+      // Phone is moving rotationally, don't count as step
       return;
     }
     
-    // Try to use acceleration without gravity first (more accurate for movement)
-    var accel = event.acceleration || event.accelerationIncludingGravity || { x: 0, y: 0, z: 0 };
-    var hasRawAccel = !!event.acceleration;
+    // Get acceleration - use linear acceleration (without gravity) for better accuracy
+    var accel = event.acceleration || { x: 0, y: 0, z: 0 };
+    var hasLinearAccel = !!event.acceleration && (accel.x !== null);
     
-    // Focus on vertical acceleration (Y axis) which is more indicative of walking
-    var ay = Math.abs(accel.y || 0);
-    
-    // If using accelerationIncludingGravity, subtract gravity from Y
-    if (!hasRawAccel) {
-      ay = Math.abs(ay - baselineGravity);
+    if (!hasLinearAccel) {
+      // Fallback: use accelerationIncludingGravity but subtract gravity
+      accel = event.accelerationIncludingGravity || { x: 0, y: 0, z: 0 };
     }
     
+    // Focus on horizontal acceleration (X and Z in device space)
+    // This ignores vertical bounce which can be caused by tilting
+    var ax = accel.x || 0;
+    var az = accel.z || 0;
+    var horizontalMag = Math.sqrt(ax * ax + az * az);
+    
+    // If using accelerationIncludingGravity, the horizontal component should be small when stationary
+    // Walking creates horizontal oscillation
+    
     // Add to history for smoothing
-    accelHistory.push(ay);
+    accelHistory.push(horizontalMag);
     if (accelHistory.length > accelHistorySize) {
       accelHistory.shift();
     }
@@ -586,11 +589,11 @@ function setupDeviceOrientation() {
       // Fixed step size for consistent movement
       var moveAmount = stepLength;
       
-      // Update target position (camera will smoothly interpolate toward this)
+      // Update target position (camera will smoothly interpolate)
       targetPosition.x += forward.x * moveAmount;
       targetPosition.z += forward.z * moveAmount;
       
-      // Clamp target position to reasonable bounds (10 meter radius)
+      // Clamp position to reasonable bounds (10 meter radius)
       var maxDist = 10;
       var dist = Math.sqrt(targetPosition.x * targetPosition.x + targetPosition.z * targetPosition.z);
       if (dist > maxDist) {
