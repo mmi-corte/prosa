@@ -5,12 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AR Immersif - PROSA</title>
 
-  <!-- PROSA Font -->
+  <!-- Base path detection for GitHub Pages / local compatibility -->
+  <script>
+    // Detect if running on GitHub Pages (e.g., /prosa/) or locally (/)
+    window.BASE_PATH = (function() {
+      var path = window.location.pathname;
+      // Check if we're in a GitHub Pages repo subfolder
+      if (path.startsWith('/prosa/')) {
+        return '/prosa';
+      }
+      return '';
+    })();
+    
+    // Helper function to resolve paths
+    window.resolvePath = function(path) {
+      if (path.startsWith('/')) {
+        return window.BASE_PATH + path;
+      }
+      return path;
+    };
+  </script>
+
+  <!-- PROSA Font - using relative path for compatibility -->
   <style>
     @font-face {
       font-family: 'Futura';
-      src: url('/fronts/start_view_1/public/fonts/FuturaCondMedium.woff2') format('woff2'),
-           url('/fronts/start_view_1/public/fonts/FuturaCondMedium.woff') format('woff');
+      src: url('../../../fronts/start_view_1/public/fonts/FuturaCondMedium.woff2') format('woff2'),
+           url('../../../fronts/start_view_1/public/fonts/FuturaCondMedium.woff') format('woff');
       font-weight: 100;
       font-style: normal;
       font-display: swap;
@@ -74,9 +95,19 @@
   </style>
 </head>
 <body>
+  <!-- Path resolution for images -->
+  <script>
+    // Resolve image paths once DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img[data-src]').forEach(function(img) {
+        img.src = window.resolvePath(img.getAttribute('data-src'));
+      });
+    });
+  </script>
+
   <!-- Loading Screen -->
   <div id="loading-screen">
-    <img src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo">
+    <img data-src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo">
     <div class="spinner"></div>
     <p>Chargement...</p>
     <div id="debug-info">Initialisation...</div>
@@ -85,7 +116,7 @@
   <!-- Start Screen with Instructions -->
   <div id="start-screen" class="start-screen" style="display: none;">
     <div class="start-content">
-      <img src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="start-logo">
+      <img data-src="/fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="start-logo">
       
       <h1>Expérience AR</h1>
       
