@@ -67,17 +67,17 @@ var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
 var lastQuaternion = null;
 
 // Step detection parameters
-var stepLength = 0.15; // Small movement for indoor exploration
-var stepThreshold = 1.5; // Moderate sensitivity
-var stepCooldown = 500; // 2 steps per second max
+var stepLength = 0.35; // Larger movement per step
+var stepThreshold = 0.8; // Lower threshold for better detection
+var stepCooldown = 400; // Slightly faster than 2/sec
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 3; // Some smoothing to reduce jitter
+var accelHistorySize = 2; // Less smoothing for responsiveness
 var lastPeak = 0;
 var inStep = false;
 var baselineGravity = 9.8; // Baseline gravity magnitude
 var rotationRate = { alpha: 0, beta: 0, gamma: 0 }; // Track rotation speed
-var rotationThreshold = 30; // Ignore steps when rotating faster than this (degrees/sec)
+var rotationThreshold = 50; // Higher threshold - only ignore fast spins
 
 // Height tracking for crouching
 var standingHeight = 1.7; // Standing eye height in meters
