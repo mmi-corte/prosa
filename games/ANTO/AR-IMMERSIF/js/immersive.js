@@ -67,12 +67,12 @@ var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
 var lastQuaternion = null;
 
 // Step detection parameters
-var stepLength = 0.65; // Average step length in meters
-var stepThreshold = 11; // Acceleration magnitude threshold (gravity is ~9.8, so 11 means 1.2+ deviation)
-var stepCooldown = 200; // Minimum ms between steps
+var stepLength = 0.5; // Movement per detected motion
+var stepThreshold = 0.8; // Very low threshold - any slight movement triggers
+var stepCooldown = 100; // Fast response - 100ms between movements
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 3; // Number of samples to average
+var accelHistorySize = 2; // Minimal smoothing
 var lastPeak = 0;
 var inStep = false;
 var baselineGravity = 9.8; // Baseline gravity magnitude
@@ -517,7 +517,7 @@ function setupDeviceOrientation() {
   
   // Motion tracking (position/movement)
   window.addEventListener('devicemotion', function(event) {
-    if (!event.accelerationIncludingGravity) return;
+    if (!isARActive) return;
     
     var now = Date.now();
     var dt = lastMotionTime > 0 ? (now - lastMotionTime) / 1000 : 0;
@@ -525,14 +525,20 @@ function setupDeviceOrientation() {
     
     if (dt <= 0 || dt > 0.5) return; // Skip invalid time deltas
     
-    // Get acceleration including gravity (more reliable for step detection)
-    var accel = event.accelerationIncludingGravity || event.acceleration || { x: 0, y: 0, z: 0 };
+    // Try to use acceleration without gravity first (more accurate for movement)
+    var accel = event.acceleration || event.accelerationIncludingGravity || { x: 0, y: 0, z: 0 };
+    var hasRawAccel = !!event.acceleration;
     
     // Calculate acceleration magnitude
     var ax = accel.x || 0;
     var ay = accel.y || 0;
     var az = accel.z || 0;
     var magnitude = Math.sqrt(ax * ax + ay * ay + az * az);
+    
+    // If using accelerationIncludingGravity, subtract baseline gravity
+    if (!hasRawAccel) {
+      magnitude = Math.abs(magnitude - baselineGravity);
+    }
     
     // Add to history for smoothing
     accelHistory.push(magnitude);
@@ -547,17 +553,11 @@ function setupDeviceOrientation() {
     }
     smoothedMag /= accelHistory.length;
     
-    // Step detection: look for peak above threshold followed by dip
-    var now = Date.now();
+    // Continuous movement: any motion above threshold moves the player
     var timeSinceLastStep = now - lastStepTime;
     
-    if (!inStep && smoothedMag > stepThreshold && timeSinceLastStep > stepCooldown) {
-      // Detected upward acceleration (foot hitting ground)
-      inStep = true;
-      lastPeak = smoothedMag;
-    } else if (inStep && smoothedMag < lastPeak - 0.5) {
-      // Detected downward acceleration after peak - step complete! (0.5 dip = more sensitive)
-      inStep = false;
+    if (smoothedMag > stepThreshold && timeSinceLastStep > stepCooldown) {
+      // Movement detected!
       lastStepTime = now;
       isMoving = true;
       
@@ -567,12 +567,16 @@ function setupDeviceOrientation() {
       forward.y = 0; // Keep movement horizontal
       forward.normalize();
       
-      // Update target position (camera will smoothly interpolate toward this)
-      targetPosition.x += forward.x * stepLength;
-      targetPosition.z += forward.z * stepLength;
+      // Scale movement by acceleration intensity (more shake = faster movement)
+      var moveMultiplier = Math.min(smoothedMag / 2, 2); // Cap at 2x
+      var moveAmount = stepLength * moveMultiplier;
       
-      // Clamp target position to reasonable bounds (5 meter radius)
-      var maxDist = 5;
+      // Update target position (camera will smoothly interpolate toward this)
+      targetPosition.x += forward.x * moveAmount;
+      targetPosition.z += forward.z * moveAmount;
+      
+      // Clamp target position to reasonable bounds (10 meter radius)
+      var maxDist = 10;
       var dist = Math.sqrt(targetPosition.x * targetPosition.x + targetPosition.z * targetPosition.z);
       if (dist > maxDist) {
         targetPosition.x *= maxDist / dist;
