@@ -440,6 +440,8 @@ function onCharacterFound(character) {
   activeCharacters[character.id] = true;
   
   hideScanPrompt();
+  hideScanAnimation();
+  showZoomHint();
   updateStatus('Détecté: ' + character.name);
   
   // Store current character for modal
@@ -480,6 +482,8 @@ function onCharacterLost(character) {
   
   if (!anyActive) {
     showScanPrompt();
+    showScanAnimation();
+    hideZoomHint();
     currentCharacter = null;
     updateStatus('Scannez une carte personnage');
   }
@@ -585,16 +589,15 @@ function openInfoModal() {
   const modalPortrait = document.getElementById('modal-portrait');
   const modalName = document.getElementById('modal-character-name');
   const modalDesc = document.getElementById('modal-description');
-  const modalStats = document.getElementById('modal-stats');
   
   if (!modal || !modalName || !modalDesc) {
     console.log('Modal elements not found');
     return;
   }
   
-  // Set portrait image
+  // Set portrait image using src attribute
   if (modalPortrait && currentCharacter.portrait) {
-    modalPortrait.style.backgroundImage = 'url(' + currentCharacter.portrait + ')';
+    modalPortrait.src = currentCharacter.portrait;
     modalPortrait.style.display = 'block';
   } else if (modalPortrait) {
     modalPortrait.style.display = 'none';
@@ -602,22 +605,7 @@ function openInfoModal() {
   
   // Populate modal content
   modalName.textContent = currentCharacter.name;
-  modalName.style.color = currentCharacter.themeColor;
   modalDesc.textContent = currentCharacter.description;
-  
-  // Build expanded stats display
-  if (modalStats && currentCharacter.stats) {
-    let statsHtml = '';
-    for (const stat in currentCharacter.stats) {
-      const value = currentCharacter.stats[stat];
-      statsHtml += '<div class="modal-stat-row">';
-      statsHtml += '<span class="stat-name">' + stat.toUpperCase() + '</span>';
-      statsHtml += '<div class="stat-bar"><div class="stat-fill" style="width: ' + value + '%; background: ' + currentCharacter.themeColor + ';"></div></div>';
-      statsHtml += '<span class="stat-value">' + value + '</span>';
-      statsHtml += '</div>';
-    }
-    modalStats.innerHTML = statsHtml;
-  }
   
   // Show modal
   modal.classList.remove('hidden');
@@ -652,6 +640,46 @@ function showScanPrompt() {
 function hideScanPrompt() {
   if (scanPrompt) {
     scanPrompt.classList.add('hidden');
+  }
+}
+
+/**
+ * Show scan animation
+ */
+function showScanAnimation() {
+  const scanAnimation = document.getElementById('scan-animation');
+  if (scanAnimation) {
+    scanAnimation.classList.remove('hidden');
+  }
+}
+
+/**
+ * Hide scan animation
+ */
+function hideScanAnimation() {
+  const scanAnimation = document.getElementById('scan-animation');
+  if (scanAnimation) {
+    scanAnimation.classList.add('hidden');
+  }
+}
+
+/**
+ * Show zoom hint button
+ */
+function showZoomHint() {
+  const zoomHint = document.getElementById('zoom-hint-container');
+  if (zoomHint) {
+    zoomHint.classList.remove('hidden');
+  }
+}
+
+/**
+ * Hide zoom hint button
+ */
+function hideZoomHint() {
+  const zoomHint = document.getElementById('zoom-hint-container');
+  if (zoomHint) {
+    zoomHint.classList.add('hidden');
   }
 }
 
