@@ -67,12 +67,12 @@ var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
 var lastQuaternion = null;
 
 // Step detection parameters
-var stepLength = 0.5; // Movement per detected motion
-var stepThreshold = 0.8; // Very low threshold - any slight movement triggers
-var stepCooldown = 100; // Fast response - 100ms between movements
+var stepLength = 0.15; // Small movement for indoor exploration
+var stepThreshold = 1.5; // Moderate sensitivity
+var stepCooldown = 80; // Very responsive for slow indoor walking
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 2; // Minimal smoothing
+var accelHistorySize = 3; // Some smoothing to reduce jitter
 var lastPeak = 0;
 var inStep = false;
 var baselineGravity = 9.8; // Baseline gravity magnitude
