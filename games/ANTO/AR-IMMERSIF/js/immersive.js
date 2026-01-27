@@ -69,7 +69,7 @@ var lastQuaternion = null;
 // Step detection parameters
 var stepLength = 0.15; // Small movement for indoor exploration
 var stepThreshold = 1.5; // Moderate sensitivity
-var stepCooldown = 80; // Very responsive for slow indoor walking
+var stepCooldown = 500; // 2 steps per second max
 var lastStepTime = 0;
 var accelHistory = [];
 var accelHistorySize = 3; // Some smoothing to reduce jitter
