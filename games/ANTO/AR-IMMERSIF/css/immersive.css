@@ -182,7 +182,6 @@ body {
   border-radius: 4px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--border);
-  backdrop-filter: blur(8px);
   font-family: 'Futura', 'Segoe UI', sans-serif;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -216,8 +215,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 24, 18, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(26, 24, 18, 0.98);
   padding: 20px;
   border-radius: 12px 12px 0 0;
   border-top: 1px solid var(--border);

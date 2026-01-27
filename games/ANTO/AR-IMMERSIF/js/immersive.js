@@ -184,19 +184,18 @@ function init() {
   camera.userData.audioListener = listener;
 
   debugLog('Creating renderer...');
-  // Create renderer
+  // Create renderer with XR-compatible settings
   renderer = new THREE.WebGLRenderer({
     antialias: true,
-    alpha: true
+    alpha: true,
+    preserveDrawingBuffer: true,
+    powerPreference: 'high-performance'
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.domElement.style.position = 'fixed';
-  renderer.domElement.style.top = '0';
-  renderer.domElement.style.left = '0';
-  renderer.domElement.style.width = '100%';
-  renderer.domElement.style.height = '100%';
-  renderer.domElement.style.zIndex = '1';
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  // Don't set CSS width/height - let the canvas use its native resolution
+  // Setting width:100% / height:100% causes blurriness by CSS-scaling the canvas
   document.getElementById('container').appendChild(renderer.domElement);
 
   debugLog('Setting up lighting...');
@@ -1202,17 +1201,24 @@ function startWebXRAR() {
   // Resume AudioContext
   resumeAudioContext();
   
-  // Enable XR on renderer
+  // Enable XR on renderer BEFORE requesting session (like old version)
   renderer.xr.enabled = true;
   
-  // Request AR session with hit-test for ground detection
+  // Request AR session - simple approach like old version
   navigator.xr.requestSession('immersive-ar', {
-    requiredFeatures: ['local-floor'],
-    optionalFeatures: ['hit-test', 'dom-overlay'],
+    requiredFeatures: [],
+    optionalFeatures: ['hit-test', 'dom-overlay', 'local-floor'],
     domOverlay: { root: document.getElementById('status-bar') }
   }).then(onWebXRARSessionStarted).catch(function(err) {
-    console.error('Failed to start WebXR AR session:', err);
-    alert('Impossible de démarrer la session AR.\nErreur: ' + err.message + '\n\nEssayez le mode Gyroscope.');
+    console.warn('Full AR session failed, trying minimal:', err);
+    // Fallback to minimal session
+    navigator.xr.requestSession('immersive-ar', {
+      requiredFeatures: [],
+      optionalFeatures: ['local-floor']
+    }).then(onWebXRARSessionStarted).catch(function(fallbackErr) {
+      console.error('Failed to start WebXR AR session:', fallbackErr);
+      alert('Impossible de démarrer la session AR.\nErreur: ' + fallbackErr.message + '\n\nEssayez le mode Gyroscope.');
+    });
   });
 }
 
@@ -1224,24 +1230,105 @@ function onWebXRARSessionStarted(session) {
   webXRARSession = session;
   isARActive = true;
   
-  // Set up session
-  renderer.xr.setSession(session);
-  renderer.xr.setReferenceSpaceType('local-floor');
-  
-  // Make renderer transparent for AR passthrough
-  renderer.setClearColor(0x000000, 0);
-  renderer.setClearAlpha(0);
-  
-  // Setup the puzzle scene
-  setupPuzzleScene();
-  
   // Handle session end
   session.addEventListener('end', onWebXRARSessionEnded);
+  session.addEventListener('select', onWebXRARSelect);
   
-  // Start WebXR render loop
-  renderer.setAnimationLoop(webXRARAnimate);
+  // Get native scale factor
+  var nativeScaleFactor = 1.0;
+  try {
+    nativeScaleFactor = XRWebGLLayer.getNativeFramebufferScaleFactor(session);
+    console.log('Native framebuffer scale factor:', nativeScaleFactor);
+  } catch (e) {
+    console.warn('Could not get native scale factor:', e);
+  }
   
-  updateStatus('AR Natif actif - Marchez pour explorer !');
+  // Force higher pixel ratio for WebXR AR (try to counter power-saving throttling)
+  var forcedPixelRatio = Math.max(window.devicePixelRatio, 2) * nativeScaleFactor;
+  renderer.setPixelRatio(forcedPixelRatio);
+  console.log('Forced pixel ratio:', forcedPixelRatio);
+  
+  // Configure Three.js renderer to use native resolution
+  renderer.xr.setFramebufferScaleFactor(nativeScaleFactor);
+  
+  // Set up session with Three.js (it will create XRWebGLLayer internally)
+  renderer.xr.setSession(session).then(function() {
+    console.log('XR session set up complete');
+    
+    // Log the actual framebuffer size
+    var baseLayer = session.renderState.baseLayer;
+    if (baseLayer) {
+      console.log('Framebuffer size:', baseLayer.framebufferWidth, 'x', baseLayer.framebufferHeight);
+    }
+    
+    // Request reference space (like old version)
+    session.requestReferenceSpace('viewer').then(function(referenceSpace) {
+      console.log('Got viewer reference space');
+      
+      // Try hit test (optional)
+      if (session.requestHitTestSource) {
+        session.requestHitTestSource({ space: referenceSpace }).then(function(source) {
+          hitTestSource = source;
+          console.log('Hit test source ready');
+        }).catch(function(err) {
+          console.warn('Hit test not available:', err);
+        });
+      }
+    }).catch(function(err) {
+      console.warn('Reference space error:', err);
+    });
+    
+    // Start the XR render loop
+    session.requestAnimationFrame(onWebXRARFrame);
+    
+    // Setup puzzle scene after delay (like old version)
+    setTimeout(function() {
+      setupPuzzleScene();
+    }, 1000);
+    
+  }).catch(function(err) {
+    console.error('Failed to set XR session:', err);
+  });
+}
+
+/**
+ * Hide all UI elements for immersive AR
+ */
+function hideAllUI() {
+  var elementsToHide = [
+    'status-bar',
+    'asset-menu',
+    'subtitles',
+    'subtitleTestBtn',
+    'exit-ar-btn',
+    'start-screen',
+    'loading-screen',
+    'debug-info'
+  ];
+  
+  for (var i = 0; i < elementsToHide.length; i++) {
+    var el = document.getElementById(elementsToHide[i]);
+    if (el) {
+      el.style.display = 'none';
+    }
+  }
+  
+  // Also hide by class
+  var menus = document.querySelectorAll('.menu, .status-bar');
+  for (var j = 0; j < menus.length; j++) {
+    menus[j].style.display = 'none';
+  }
+}
+
+/**
+ * Show UI elements again
+ */
+function showAllUI() {
+  var statusBar = document.getElementById('status-bar');
+  if (statusBar) statusBar.style.display = '';
+  
+  var startScreen = document.getElementById('start-screen');
+  if (startScreen) startScreen.style.display = 'block';
 }
 
 /**
@@ -1254,6 +1341,9 @@ function onWebXRARSessionEnded() {
   hitTestSource = null;
   hitTestSourceRequested = false;
   
+  // Show UI again
+  showAllUI();
+  
   renderer.xr.setSession(null);
   renderer.setAnimationLoop(null);
   
@@ -1263,36 +1353,28 @@ function onWebXRARSessionEnded() {
 }
 
 /**
- * WebXR AR render loop
+ * WebXR AR render loop - using XR session's requestAnimationFrame
  */
-function webXRARAnimate(time, frame) {
-  if (!isARActive || !webXRARSession) return;
+function onWebXRARFrame(time, frame) {
+  var session = frame.session;
   
-  // Get XR camera pose
-  if (frame) {
+  // Request next frame FIRST
+  session.requestAnimationFrame(onWebXRARFrame);
+  
+  // Handle hit test if available
+  if (hitTestSource) {
     var referenceSpace = renderer.xr.getReferenceSpace();
-    
     if (referenceSpace) {
-      var pose = frame.getViewerPose(referenceSpace);
-      
-      if (pose) {
-        // Get camera position from pose transform
-        var position = pose.transform.position;
-        
-        // Check for key proximity and pickup
-        if (keyObject && !hasKey) {
-          var keyPos = keyObject.position;
-          var distance = Math.sqrt(
-            Math.pow(keyPos.x - position.x, 2) +
-            Math.pow(keyPos.y - position.y, 2) +
-            Math.pow(keyPos.z - position.z, 2)
-          );
-          
-          // Auto-pickup when very close
-          if (distance < 0.5) {
-            pickupKey();
-          }
+      var hitTestResults = frame.getHitTestResults(hitTestSource);
+      if (hitTestResults.length > 0) {
+        var hit = hitTestResults[0];
+        var pose = hit.getPose(referenceSpace);
+        if (pose && reticle) {
+          reticle.visible = true;
+          reticle.matrix.fromArray(pose.transform.matrix);
         }
+      } else if (reticle) {
+        reticle.visible = false;
       }
     }
   }
@@ -1302,8 +1384,24 @@ function webXRARAnimate(time, frame) {
     keyObject.rotation.y += 0.02;
   }
   
-  // Render - WebXR handles the camera automatically
+  // Render inside XR frame callback
   renderer.render(scene, camera);
+}
+
+/**
+ * Handle select event in WebXR AR
+ */
+function onWebXRARSelect(event) {
+  // Check for key collection
+  if (keyObject && !hasKey) {
+    var keyPosition = new THREE.Vector3();
+    keyObject.getWorldPosition(keyPosition);
+    var distanceToKey = camera.position.distanceTo(keyPosition);
+    
+    if (distanceToKey < 2) {
+      pickupKey();
+    }
+  }
 }
 
 /**
