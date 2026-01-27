@@ -76,6 +76,8 @@ var accelHistorySize = 3; // Some smoothing to reduce jitter
 var lastPeak = 0;
 var inStep = false;
 var baselineGravity = 9.8; // Baseline gravity magnitude
+var rotationRate = { alpha: 0, beta: 0, gamma: 0 }; // Track rotation speed
+var rotationThreshold = 30; // Ignore steps when rotating faster than this (degrees/sec)
 
 // Height tracking for crouching
 var standingHeight = 1.7; // Standing eye height in meters
@@ -525,23 +527,37 @@ function setupDeviceOrientation() {
     
     if (dt <= 0 || dt > 0.5) return; // Skip invalid time deltas
     
+    // Track rotation rate to filter out turning
+    if (event.rotationRate) {
+      rotationRate.alpha = Math.abs(event.rotationRate.alpha || 0);
+      rotationRate.beta = Math.abs(event.rotationRate.beta || 0);
+      rotationRate.gamma = Math.abs(event.rotationRate.gamma || 0);
+    }
+    
+    // Check if phone is rotating (turning) - ignore steps during rotation
+    var isRotating = rotationRate.alpha > rotationThreshold || 
+                     rotationRate.beta > rotationThreshold || 
+                     rotationRate.gamma > rotationThreshold;
+    
+    if (isRotating) {
+      // Phone is turning, don't count as step
+      return;
+    }
+    
     // Try to use acceleration without gravity first (more accurate for movement)
     var accel = event.acceleration || event.accelerationIncludingGravity || { x: 0, y: 0, z: 0 };
     var hasRawAccel = !!event.acceleration;
     
-    // Calculate acceleration magnitude
-    var ax = accel.x || 0;
-    var ay = accel.y || 0;
-    var az = accel.z || 0;
-    var magnitude = Math.sqrt(ax * ax + ay * ay + az * az);
+    // Focus on vertical acceleration (Y axis) which is more indicative of walking
+    var ay = Math.abs(accel.y || 0);
     
-    // If using accelerationIncludingGravity, subtract baseline gravity
+    // If using accelerationIncludingGravity, subtract gravity from Y
     if (!hasRawAccel) {
-      magnitude = Math.abs(magnitude - baselineGravity);
+      ay = Math.abs(ay - baselineGravity);
     }
     
     // Add to history for smoothing
-    accelHistory.push(magnitude);
+    accelHistory.push(ay);
     if (accelHistory.length > accelHistorySize) {
       accelHistory.shift();
     }
@@ -567,9 +583,8 @@ function setupDeviceOrientation() {
       forward.y = 0; // Keep movement horizontal
       forward.normalize();
       
-      // Scale movement by acceleration intensity (more shake = faster movement)
-      var moveMultiplier = Math.min(smoothedMag / 2, 2); // Cap at 2x
-      var moveAmount = stepLength * moveMultiplier;
+      // Fixed step size for consistent movement
+      var moveAmount = stepLength;
       
       // Update target position (camera will smoothly interpolate toward this)
       targetPosition.x += forward.x * moveAmount;
