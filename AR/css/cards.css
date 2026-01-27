@@ -60,15 +60,15 @@ body {
   height: 3px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    var(--prosa-accent) 20%, 
-    var(--prosa-text) 50%, 
-    var(--prosa-accent) 80%, 
+    #00ff00 20%, 
+    #00ff88 50%, 
+    #00ff00 80%, 
     transparent 100%
   );
   box-shadow: 
-    0 0 10px var(--prosa-accent),
-    0 0 20px var(--prosa-accent),
-    0 0 40px rgba(201, 184, 150, 0.5);
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 40px rgba(0, 255, 0, 0.5);
   animation: scanMove 2.5s ease-in-out infinite;
 }
 
@@ -430,6 +430,42 @@ body {
 #close-modal-btn:hover {
   background: var(--prosa-primary);
   border-color: var(--prosa-primary);
+}
+
+/* Language Toggle Button */
+.lang-toggle-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--prosa-border);
+  background: var(--prosa-bg-light);
+  color: var(--prosa-text);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+.lang-toggle-btn:hover {
+  background: var(--prosa-primary);
+  border-color: var(--prosa-accent);
+}
+
+.lang-toggle-btn.active {
+  background: var(--prosa-primary);
+  border-color: var(--prosa-accent);
+}
+
+.lang-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .modal-body {

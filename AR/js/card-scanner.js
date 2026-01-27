@@ -39,6 +39,9 @@ const activeAudioElements = [];
 // Current character for modal
 let currentCharacter = null;
 
+// Language state (false = French, true = Corsican)
+let isCorsican = false;
+
 // DOM Elements
 let loadingScreen;
 let loadingText;
@@ -85,6 +88,7 @@ function normalizeCharacter(char) {
     id: char.id,
     name: char.name,
     description: char.description,
+    descriptionCorsican: char.descriptionCorsican || '',
     themeColor: char.themeColor || settings.defaultThemeColor || '#6366F1',
     portrait: char.portrait,
     
@@ -97,6 +101,7 @@ function normalizeCharacter(char) {
     
     // Assets - convert from JSON format
     images2D: (char.assets?.['2d'] || []).map(img => ({
+      id: img.id || null,
       path: img.path,
       scale: img.scale || 1,
       position: img.position || { x: 0, y: 0, z: 0 },
@@ -595,23 +600,80 @@ function openInfoModal() {
     return;
   }
   
+  // Find the character image from 2D assets (the one with id "character" or first image)
+  let portraitPath = null;
+  if (currentCharacter.images2D && currentCharacter.images2D.length > 0) {
+    // Look for the image with id "character" first
+    const charImage = currentCharacter.images2D.find(img => img.id === 'character');
+    if (charImage) {
+      portraitPath = charImage.path;
+    } else {
+      // Fallback to first 2D image
+      portraitPath = currentCharacter.images2D[0].path;
+    }
+  }
+  
   // Set portrait image using src attribute
-  if (modalPortrait && currentCharacter.portrait) {
-    modalPortrait.src = currentCharacter.portrait;
+  if (modalPortrait && portraitPath) {
+    modalPortrait.src = portraitPath;
     modalPortrait.style.display = 'block';
+    console.log('Setting portrait to:', portraitPath);
   } else if (modalPortrait) {
     modalPortrait.style.display = 'none';
   }
   
   // Populate modal content
   modalName.textContent = currentCharacter.name;
-  modalDesc.textContent = currentCharacter.description;
+  updateModalDescription();
+  
+  // Update language toggle button state
+  updateLangToggleButton();
   
   // Show modal
   modal.classList.remove('hidden');
   modal.style.display = 'flex';
   
   console.log('Opened info modal for:', currentCharacter.name);
+}
+
+/**
+ * Update modal description based on current language
+ */
+function updateModalDescription() {
+  const modalDesc = document.getElementById('modal-description');
+  if (!modalDesc || !currentCharacter) return;
+  
+  if (isCorsican && currentCharacter.descriptionCorsican) {
+    modalDesc.textContent = currentCharacter.descriptionCorsican;
+  } else {
+    modalDesc.textContent = currentCharacter.description;
+  }
+}
+
+/**
+ * Update language toggle button appearance
+ */
+function updateLangToggleButton() {
+  const langBtn = document.getElementById('lang-toggle-btn');
+  if (!langBtn) return;
+  
+  if (isCorsican) {
+    langBtn.classList.add('active');
+    langBtn.title = 'Passer en Français';
+  } else {
+    langBtn.classList.remove('active');
+    langBtn.title = 'Passer en Corse';
+  }
+}
+
+/**
+ * Toggle between French and Corsican description
+ */
+function toggleLanguage() {
+  isCorsican = !isCorsican;
+  updateModalDescription();
+  updateLangToggleButton();
+  console.log('Language switched to:', isCorsican ? 'Corsican' : 'French');
 }
 
 /**
@@ -781,6 +843,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('close-modal-btn');
   if (closeModalBtn) {
     closeModalBtn.addEventListener('click', closeInfoModal);
+  }
+  
+  // Language toggle button
+  const langToggleBtn = document.getElementById('lang-toggle-btn');
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener('click', toggleLanguage);
   }
   
   // Close modal when clicking outside content

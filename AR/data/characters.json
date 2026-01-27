@@ -9,10 +9,11 @@
   "characters": [
     {
       "id": "strega",
-      "name": "La Strega",
+      "name": "A Strega",
       "description": "Prodige de l'île de Prosa, a Strega est chargée de maintenir l'infertilité des terres de Corse.",
+      "descriptionCorsican": "Prodigia di l'isula di Prosa, a Strega hè incaricata di mantene a sterilità di e terre di Corsica.",
       "themeColor": "#10032e",
-      "portrait": "assets/img/characters/strega_portrait.png",
+      "portrait": "assets/img/characters/strega_char.png",
       
       "marker": {
         "file": "assets/markers/strega.mind",
