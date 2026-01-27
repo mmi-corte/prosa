@@ -60,7 +60,7 @@ var initialOrientation = null;
 // Position tracking (step detection)
 var userPosition = { x: 0, y: 0, z: 0 };
 var targetPosition = { x: 0, y: 0, z: 0 }; // Target position for smooth interpolation
-var positionSmoothing = 0.08; // Lower = smoother movement (0-1)
+var positionSmoothing = 0.3; // Higher = faster response to movement (0-1)
 var lastMotionTime = 0;
 var isMoving = false;
 var orientationSmoothing = 0.15; // Lower = smoother orientation (0-1)
