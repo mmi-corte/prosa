@@ -68,11 +68,11 @@ var lastQuaternion = null;
 
 // Step detection parameters
 var stepLength = 0.65; // Average step length in meters
-var stepThreshold = 5; // Acceleration magnitude threshold for step detection (lower = more sensitive)
-var stepCooldown = 200; // Minimum ms between steps
+var stepThreshold = 2; // Acceleration magnitude threshold for step detection (minimum for max sensitivity)
+var stepCooldown = 150; // Minimum ms between steps
 var lastStepTime = 0;
 var accelHistory = [];
-var accelHistorySize = 2; // Number of samples to average (fewer = more responsive)
+var accelHistorySize = 1; // No averaging, instant response
 var lastPeak = 0;
 var inStep = false;
 
