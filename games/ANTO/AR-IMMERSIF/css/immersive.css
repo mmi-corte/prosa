@@ -131,6 +131,13 @@ body {
   color: #81cbd6;
 }
 
+.start-btn.ar-native-btn {
+  background: rgba(22, 101, 52, 0.8);
+  border-color: #4ade80;
+  color: #4ade80;
+  font-size: 16px;
+}
+
 .start-btn:active {
   transform: scale(0.97);
   background: var(--primary-dark);

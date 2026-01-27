@@ -57,6 +57,13 @@ var controller1, controller2;
 var controllerGrip1, controllerGrip2;
 var initialOrientation = null;
 
+// WebXR AR mode state (native AR on supported devices)
+var isWebXRARSupported = false;
+var webXRARSession = null;
+var hitTestSource = null;
+var hitTestSourceRequested = false;
+var xrRefSpace = null;
+
 // Position tracking (step detection)
 var userPosition = { x: 0, y: 0, z: 0 };
 var targetPosition = { x: 0, y: 0, z: 0 }; // Target position for smooth interpolation
@@ -227,10 +234,11 @@ function init() {
   debugLog('Init complete!');
   updateStatus('Prêt à démarrer');
   
-  // Check for WebXR VR support
+  // Check for WebXR VR and AR support
   checkVRSupport();
+  checkWebXRARSupport();
   
-  // Wait for start button click (AR mode)
+  // Wait for start button click (Gyro AR mode - fallback)
   var startBtn = document.getElementById('start-btn');
   if (startBtn) {
     startBtn.addEventListener('click', function(e) {
@@ -238,6 +246,17 @@ function init() {
       startScreen.style.display = 'none';
       updateStatus('Démarrage...');
       startAR();
+    });
+  }
+  
+  // Wait for WebXR AR button click (native AR)
+  var startWebXRARBtn = document.getElementById('start-webxr-ar-btn');
+  if (startWebXRARBtn) {
+    startWebXRARBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      startScreen.style.display = 'none';
+      updateStatus('Démarrage AR natif...');
+      startWebXRAR();
     });
   }
   
@@ -1003,6 +1022,9 @@ function placeObject(matrix) {
  * Handle window resize
  */
 function onWindowResize() {
+  // Don't resize while in XR session
+  if (renderer.xr.isPresenting) return;
+  
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -1136,6 +1158,152 @@ function checkVRSupport() {
       console.log('WebXR VR check failed:', err);
     });
   }
+}
+
+/**
+ * Check if WebXR AR is supported (native AR - Android ARCore, etc.)
+ * Note: iOS Safari does NOT support WebXR AR, only XRViewer app does
+ */
+function checkWebXRARSupport() {
+  if ('xr' in navigator) {
+    navigator.xr.isSessionSupported('immersive-ar').then(function(supported) {
+      isWebXRARSupported = supported;
+      if (supported) {
+        console.log('WebXR AR is supported! (Native AR available)');
+        var arBtn = document.getElementById('start-webxr-ar-btn');
+        var arNote = document.getElementById('webxr-ar-note');
+        if (arBtn) arBtn.style.display = 'block';
+        if (arNote) arNote.style.display = 'block';
+        
+        // Update fallback button label
+        var fallbackBtn = document.getElementById('start-btn');
+        if (fallbackBtn) {
+          fallbackBtn.innerHTML = '📱 Mode Gyroscope (Fallback)';
+        }
+      }
+    }).catch(function(err) {
+      console.log('WebXR AR check failed:', err);
+    });
+  }
+}
+
+/**
+ * Start WebXR AR session (native AR with real tracking)
+ */
+function startWebXRAR() {
+  if (!isWebXRARSupported) {
+    alert('Le mode AR natif n\'est pas supporté sur cet appareil.\nUtilisez le mode Gyroscope à la place.');
+    return;
+  }
+  
+  console.log('Starting WebXR AR mode...');
+  debugLog('Starting WebXR AR mode...');
+  
+  // Resume AudioContext
+  resumeAudioContext();
+  
+  // Enable XR on renderer
+  renderer.xr.enabled = true;
+  
+  // Request AR session with hit-test for ground detection
+  navigator.xr.requestSession('immersive-ar', {
+    requiredFeatures: ['local-floor'],
+    optionalFeatures: ['hit-test', 'dom-overlay'],
+    domOverlay: { root: document.getElementById('status-bar') }
+  }).then(onWebXRARSessionStarted).catch(function(err) {
+    console.error('Failed to start WebXR AR session:', err);
+    alert('Impossible de démarrer la session AR.\nErreur: ' + err.message + '\n\nEssayez le mode Gyroscope.');
+  });
+}
+
+/**
+ * WebXR AR session started
+ */
+function onWebXRARSessionStarted(session) {
+  console.log('WebXR AR session started');
+  webXRARSession = session;
+  isARActive = true;
+  
+  // Set up session
+  renderer.xr.setSession(session);
+  renderer.xr.setReferenceSpaceType('local-floor');
+  
+  // Make renderer transparent for AR passthrough
+  renderer.setClearColor(0x000000, 0);
+  renderer.setClearAlpha(0);
+  
+  // Setup the puzzle scene
+  setupPuzzleScene();
+  
+  // Handle session end
+  session.addEventListener('end', onWebXRARSessionEnded);
+  
+  // Start WebXR render loop
+  renderer.setAnimationLoop(webXRARAnimate);
+  
+  updateStatus('AR Natif actif - Marchez pour explorer !');
+}
+
+/**
+ * WebXR AR session ended
+ */
+function onWebXRARSessionEnded() {
+  console.log('WebXR AR session ended');
+  isARActive = false;
+  webXRARSession = null;
+  hitTestSource = null;
+  hitTestSourceRequested = false;
+  
+  renderer.xr.setSession(null);
+  renderer.setAnimationLoop(null);
+  
+  // Show start screen again
+  var startScreen = document.getElementById('start-screen');
+  if (startScreen) startScreen.style.display = 'block';
+}
+
+/**
+ * WebXR AR render loop
+ */
+function webXRARAnimate(time, frame) {
+  if (!isARActive || !webXRARSession) return;
+  
+  // Get XR camera pose
+  if (frame) {
+    var referenceSpace = renderer.xr.getReferenceSpace();
+    
+    if (referenceSpace) {
+      var pose = frame.getViewerPose(referenceSpace);
+      
+      if (pose) {
+        // Get camera position from pose transform
+        var position = pose.transform.position;
+        
+        // Check for key proximity and pickup
+        if (keyObject && !hasKey) {
+          var keyPos = keyObject.position;
+          var distance = Math.sqrt(
+            Math.pow(keyPos.x - position.x, 2) +
+            Math.pow(keyPos.y - position.y, 2) +
+            Math.pow(keyPos.z - position.z, 2)
+          );
+          
+          // Auto-pickup when very close
+          if (distance < 0.5) {
+            pickupKey();
+          }
+        }
+      }
+    }
+  }
+  
+  // Rotate key
+  if (keyObject && !hasKey) {
+    keyObject.rotation.y += 0.02;
+  }
+  
+  // Render - WebXR handles the camera automatically
+  renderer.render(scene, camera);
 }
 
 /**
