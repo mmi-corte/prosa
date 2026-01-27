@@ -655,14 +655,23 @@ function updateModalDescription() {
  */
 function updateLangToggleButton() {
   const langBtn = document.getElementById('lang-toggle-btn');
+  const corsicanFlag = document.getElementById('corsican-flag');
+  const frenchFlag = document.getElementById('french-flag');
+  
   if (!langBtn) return;
   
   if (isCorsican) {
+    // Currently in Corsican mode, show French flag to switch back
     langBtn.classList.add('active');
     langBtn.title = 'Passer en Français';
+    if (corsicanFlag) corsicanFlag.classList.add('hidden');
+    if (frenchFlag) frenchFlag.classList.remove('hidden');
   } else {
+    // Currently in French mode, show Corsican flag to switch
     langBtn.classList.remove('active');
     langBtn.title = 'Passer en Corse';
+    if (corsicanFlag) corsicanFlag.classList.remove('hidden');
+    if (frenchFlag) frenchFlag.classList.add('hidden');
   }
 }
 
