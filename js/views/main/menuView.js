@@ -93,25 +93,25 @@ export function menuView() {
   //QR Scan button
   const qrBtn = document.getElementById("qrBtn")
   qrBtn.addEventListener('click', () => {
-    navigate("qr", qrView)
+    navigate("qr", qrView())
   })
 
   //Characters view button
   const charactersBtn = document.getElementById("charactersBtn")
   charactersBtn.addEventListener('click', () => {
-    navigate("encyclopedie", charactersView)
+    navigate("encyclopedie", charactersView())
   })
 
   //Seasons button
   const seasonsBtn = document.getElementById("seasonsBtn")
   seasonsBtn.addEventListener('click', () => {
-    navigate("saisons", seasonsView)
+    navigate("saisons", seasonsView())
   })
 
   // debug screen button
   const debugBtn = document.getElementById("debugBtn")
   debugBtn.addEventListener('click', () => {
-    navigate("debug", debugView)
+    navigate("debug", debugView())
   })
 }
 
