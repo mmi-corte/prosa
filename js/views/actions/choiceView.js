@@ -1,12 +1,12 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activeStepId, callAction } from "../../gameEventHandler.js";
-import { choicesData } from "../../initGameData.js";
+import { choicesData } from "../../loadData.js";
 import { typeWriteEffect } from "../../typeWriteEffect.js";
 
 export async function choiceView(action) {
     clearContainer()
 
-    const data = choicesData[activeStepId][action]
+    const data = choicesData[action]
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('choiceWrapper')

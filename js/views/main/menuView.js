@@ -1,7 +1,9 @@
 import { clearContainer, gameContainer, navigate } from "../../../app.js"
+import { gameInitialized, initGame } from "../../initGame.js"
 import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
-import { codeView } from "./codeView.js"
+import { initView } from "./initView.js"
+import { playerSelectView } from "./playerSelectView.js"
 import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
 
@@ -13,6 +15,16 @@ export function menuView() {
       <h1 class="menu-title">QUE VOULEZ-VOUS FAIRE ?</h1>
 
         <nav class="menu-buttons">
+
+          <button class="menu-btn" id="startBtn">
+            <span class="btn-title">Commencer la partie</span>
+            <span class="btn-subtitle">L'histoire de Prosa vous attend.</span>
+            <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </button>
+
           <button class="menu-btn" id="codeBtn">
             <span class="btn-title">Découvrir mon énigme :</span>
             <span class="btn-subtitle">saisir un code</span>
@@ -59,10 +71,24 @@ export function menuView() {
   `
 
   // Code Input button
+  const startBtn = document.getElementById("startBtn")
+  if (gameInitialized) {
+    startBtn.remove()
+  } else {
+    startBtn.addEventListener('click', () => {
+      navigate("start-01", initView())
+    })
+  }
+
+  // Code Input button
   const codeBtn = document.getElementById("codeBtn")
-  codeBtn.addEventListener('click', () => {
-    navigate("code", codeView)
-  })
+  if (!gameInitialized) {
+    codeBtn.remove()
+  } else {
+    codeBtn.addEventListener('click', () => {
+      navigate("code", playerSelectView())
+    })
+  }
 
   //QR Scan button
   const qrBtn = document.getElementById("qrBtn")

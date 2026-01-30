@@ -1,5 +1,5 @@
 <p align="center">
-<img src="fronts/start_view_1/public/images/prosa-logo.png" alt="Description de l'image" width="300">
+<img src="assets/logo/prosa-logo.png" alt="Description de l'image" width="300">
 </p>
 
 # Prosa

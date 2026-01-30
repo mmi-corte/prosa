@@ -1,4 +1,5 @@
-import { nextStepVariant, stepsData } from "./initGameData.js";
+import { players } from "./initGame.js";
+import { loadCurrentStepData, stepsData } from "./loadData.js";
 import { choiceView } from "./views/actions/choiceView.js";
 import { dialogView } from "./views/actions/dialogView.js";
 import { endView } from "./views/actions/endView.js";
@@ -6,21 +7,34 @@ import { gameView } from "./views/actions/gameView.js";
 import { riddleView } from "./views/actions/riddleView.js";
 import { menuView } from "./views/main/menuView.js";
 
+export let activePlayer
 export let activeStepId
 export let activeStep
+
+/**
+ * Fonction 
+ * @param  {[number]} playerIndex Joueur actif, issue de l'objet "players"
+ */
+export function setActivePlayer(playerIndex) {
+    activePlayer = players[playerIndex]
+}
 
 /**
  * Fonction début d'étape
  * @param  {[number]} step Numéro d'étape appelé
  */
-export function startStep(step) {
+export async function startStep(step) {
     // step: Input, issu de la case du plateau
-    const searchId = `${step}${nextStepVariant}`
+    const searchId = `${step}${activePlayer.nextStepVariant}`
 
     //Search if the step exist in the database
-    if (searchId in stepsData) {
+    console.log(stepsData)
+    console.log(activePlayer)
+    if (searchId in stepsData[activePlayer.localisation]) {
         activeStepId = step
-        activeStep = stepsData[searchId];
+        activeStep = stepsData[activePlayer.localisation][searchId];
+
+        await loadCurrentStepData()
 
         //Call the action from the selected step
         console.log(`Loading step ${step}`)

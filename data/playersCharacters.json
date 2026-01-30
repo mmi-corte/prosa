@@ -1,0 +1,48 @@
+{
+    "1": [
+        {
+            "id": 1,
+            "name": "Livia",
+            "fullName": "Livia (La Forgeronne)",
+            "description": "Femme dans la vingtaine, ancienne bergère ayant perdu sa famille lors des luttes tribales qui ont opposées le clan de Corti aux différentes factions qui occupaient la ville avant eux. Livia porte le poids du deuil de manière visible : ses mains tremblent légèrement, ses yeux ont une dureté qu'aucun rire ne peut totalement atténuer. Malgré cela, elle a choisi la résilience plutôt que la vengeance. Elle aide les autres sans attendre compensation, mais elle ne risquera pas sa vie pour des principes abstraits.",
+            "image": "livia.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Orsetta",
+            "fullName": "Orsetta (La Navigatrice)",
+            "description": "Femme (16 ans), orpheline qui a grandi en écoutant les histoires de navigation de son grand-père. Elle possède une connaissance innée des courants marins et des étoiles. Elle porte des cicatrices de noyade presque mortelle dans son enfance. Après une expédition de pêche, son équipe a découvert des traces de technologie avancée échouée sur les rives. Fascinée, elle a commencé à collecter des matériaux et différentes technologies pour les étudier. Son travail lui a permis de se construire une radio.",
+            "image": "orsettta.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Bastianu",
+            "fullName": "Bastianu (Le Chasseur)",
+            "description": "Homme d'une trentaine d'années, ancien garde-chasse des forêts corses. Bastianu est obsédé par la préservation de la faune locale. Il n'est ni bon ni mauvais - il est protecteur, mais exclusivement envers son territoire et ses créatures. Il voit les humains comme des intrus potentiels, et toute menace envers la vie sauvage comme une offense personnelle. Son corps porte les cicatrices de chasses dangereuses et de combats pour protéger les animaux contre les braconniers et les factions.",
+            "image": "bastianu.jpg"
+        }
+    ],
+    "2": [
+        {
+            "id": 4,
+            "name": "Marc",
+            "fullName": "Marc (Le Fondateur)",
+            "description": "",
+            "image": "marc.jpeg"
+        },
+        {
+            "id": 5,
+            "name": "Sophie",
+            "fullName": "Sophie (L’Éclaireuse)",
+            "description": "",
+            "image": "sophie.jpeg"
+        },
+        {
+            "id": 6,
+            "name": "Docteur Valérie",
+            "fullName": "Docteur Valérie (La Biologiste)",
+            "description": "",
+            "image": "valerie.jpeg"
+        }
+    ]
+}

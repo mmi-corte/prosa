@@ -1,6 +1,6 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activeStepId, callAction } from "../../gameEventHandler.js";
-import { riddlesData } from "../../initGameData.js";
+import { riddlesData } from "../../loadData.js";
 import { typeWriteEffect } from "../../typeWriteEffect.js";
 
 let data
@@ -12,7 +12,7 @@ let riddles
 
 export async function riddleView(action) {
     clearContainer()
-    data = riddlesData[activeStepId][action]
+    data = riddlesData[action]
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('riddleWrapper')

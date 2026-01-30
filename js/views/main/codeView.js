@@ -1,11 +1,10 @@
 import { clearContainer, gameContainer, vibrate } from "../../../app.js";
-import { startStep } from "../../gameEventHandler.js";
-import { nextStepVariant, stepsData } from "../../initGameData.js";
-import { menuView } from "./menuView.js";
+import { activePlayer, startStep } from "../../gameEventHandler.js";
+import { stepsData } from "../../loadData.js";
+import { playerSelectView } from "./playerSelectView.js";
 
 export function codeView() {
     clearContainer()
-
     gameContainer.innerHTML = `
         <div class="code-header">
         <div class="code-title-section">
@@ -98,10 +97,11 @@ export function codeView() {
 
     function submitCode() {
         if (currentCode.length !== 4) return codeError()
+        if (!activePlayer) return playerSelectView()
 
-        const searchId = `${currentCode}${nextStepVariant}`
+        const searchId = `${currentCode}${activePlayer.nextStepVariant}`
 
-        if (searchId in stepsData) {
+        if (searchId in stepsData[activePlayer.localisation]) {
             console.log("Found step ", currentCode)
             codeSuccess()
         } else {

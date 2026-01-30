@@ -1,6 +1,6 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activeStepId, callAction, startStep } from "../../gameEventHandler.js";
-import { playerLocalisation, stepsData } from "../../initGameData.js";
+import { stepsData } from "../../loadData.js";
 
 export function debugView() {
     clearContainer()

@@ -8,11 +8,11 @@ export function loadingView() {
         <div class="loading-content">
         <div class="logo-container">
             <!-- Logo PROSA officiel -->
-            <img src="fronts/start_view_1/public/images/prosa-logo.png" alt="PROSA" class="logo-main" />
+            <img src="./assets/logo/prosa-logo.png" alt="PROSA" class="logo-main" />
         </div>
         <!-- Serpent spirale comme icône de chargement -->
         <div class="spinner-spiral">
-            <img src="fronts/start_view_1/public/images/chargement.png" alt="Chargement" class="spiral-img" />
+            <img src="f./assets/logo/chargement.png" alt="Chargement" class="spiral-img" />
         </div>
         </div>
         <div class="fun-fact-card">

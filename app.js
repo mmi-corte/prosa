@@ -1,4 +1,4 @@
-import { initGameData } from "./js/initGameData.js"
+import { gameInitialized, initGame } from "./js/initGame.js"
 import { charactersView } from "./js/views/main/charactersView.js"
 import { codeView } from "./js/views/main/codeView.js"
 import { loadingView } from "./js/views/main/loadingView.js"
@@ -13,21 +13,29 @@ export function clearContainer() {
   gameContainer.innerHTML = ''
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  // 1. Force the current history entry to be "Menu"
-  // This ensures that if we go 'back' later, we return here.
-  // history.replaceState({ view: 'menu' }, "", "/");
+window.addEventListener('DOMContentLoaded', async () => {
 
-  //Load main menu by default
+  // Initialize game and wait for it to complete
+  await initGame()
+  if (gameInitialized) {
+    console.log("Previous game found, successfuly initialized save data")
+  } else {
+    console.log("No game initialized.")
+  }
+
+  //Then, load main menu
   menuView()
-  loadingView()
 
-  // ========================================
-  // ============= DATA LOADING =============
-  // ========================================
-  initGameData()
+  // ====================================
+  // ============= HEADER LOGO ==========
+  // ====================================
+  const headerLogo = document.getElementById('header-logo');
+
+  headerLogo.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigate('./', menuView)
+  });
 });
-
 
 
 // ====================================
@@ -69,15 +77,19 @@ export function vibrate(pattern) {
  */
 export function navigate(viewName, viewFunction, updateUrl = true) {
   //Store the state of the page
-  const state = { view: viewName }
-  let url = ""
-  if (updateUrl) {
-    url = viewName
-  } 
-  history.pushState(state, "", url)
+  // const state = { view: viewName }
+  // let url = ""
+  // if (updateUrl) {
+  //   url = viewName
+  // }
+  // try {
+  //   history.pushState(state, "", url)
+  // } catch (e) {
+  //   console.warn('Could not update history:', e);
+  // }
 
   //Call view function
-  viewFunction()
+  viewFunction
 }
 
 const views = {

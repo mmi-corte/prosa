@@ -11,14 +11,12 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
-              "cor": ""
+              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table."
             }
           },
           {
             "text": {
-              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
-              "cor": ""
+              "fr": "\"…si entend… île… Dict… Refuge… Pro…\""
             },
             "pitch": "600"
           }
@@ -36,36 +34,32 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
+              "fr": "\"Si quelqu’un m’entend… Il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
               "cor": ""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-              "cor": ""
+              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"J’ai tenté de résister, mais j’ai échoué…\"",
-              "cor": ""
+              "fr": "\"J’ai tenté de résister, mais j’ai échoué…\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
-              "cor": ""
+              "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "La voix s’interrompt soudainement…",
-              "cor": ""
+              "fr": "La voix s’interrompt soudainement…"
             }
           }
         ],
@@ -89,7 +83,7 @@
           },
           {
             "text": {
-              "fr": "Un doute persiste… Partir pour Prosa, ou continuer à survivre dans un monde injuste ?"
+              "fr": "Un doute persiste… Partir pour Prosa, ou continuer à survivre dans ce monde injuste ?"
             }
           },
           {
@@ -106,13 +100,12 @@
           },
           {
             "text": {
-              "fr": "\"C’est ma radio. J’ai capté un message intrigant, un rebelle me demande de l’aider.\"",
-              "cor": ""
+              "fr": "\"C’est ma radio. J’ai capté un message intrigant, un rebelle me demande de l’aider.\""
             }
           },
           {
             "text": {
-              "fr": "\"En effet, c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.\"",
+              "fr": "\"En effet, c’est préoccupant… Avant de t’aider, je dois savoir si je peux te faire confiance.\"",
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
             "pitch": 650
@@ -131,27 +124,27 @@
         "dialog": [
           {
             "text": {
-              "fr": "Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.",
-              "cor": "U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa."
+              "fr": "\"Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
+              "cor": "\"U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
             "pitch": 650
           },
           {
             "text": {
-              "fr": "Leur règne n’apporte que famine et tristesse. Cela fait longtemps que je rêve qu’il prenne fin…",
-              "cor": "Hè ora chì qualchissia ci mittessi fine."
+              "fr": "\"Leur règne n’apporte que famine et tristesse. Cela fait longtemps que je rêve qu’il prenne fin…\"",
+              "cor": "\"Hè ora chì qualchissia ci mittessi fine.\""
             },
             "pitch": 650
           },
           {
             "text": {
-              "fr": "J’aimerai changer les choses… mais je ne sais pas comment m’y prendre."
+              "fr": "\"J’aimerai changer les choses… mais je ne sais pas comment m’y prendre.\""
             }
           },
           {
             "text": {
-              "fr": "Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.",
-              "cor": "Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu."
+              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
+              "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
             "pitch": 650
           }
@@ -169,8 +162,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "A Fata ne répond pas. Elle détourne son regard, et s’en va lentement…",
-              "cor": ""
+              "fr": "A Fata ne répond pas. Elle détourne son regard, et s’en va lentement…"
             }
           }
         ],
@@ -187,12 +179,12 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous vous éloignez, et vous engagez sur sur la passerelle de bois qui surplombe la rivière."
+              "fr": "Vous vous éloignez, et vous vous engagez sur la passerelle de bois qui surplombe la rivière."
             }
           },
           {
             "text": {
-              "fr": "Quelqu’un vous bouscule, votre gourde tombe sur le sol, renversée."
+              "fr": "Quelqu’un vous bouscule. Votre gourde tombe sur le sol, renversée."
             }
           },
           {
@@ -217,7 +209,7 @@
           {
             "text": {
               "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé. \"",
-              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu. \""
+              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
             "pitch": 500
           },

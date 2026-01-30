@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Futura';
-  src: url('public/fonts/FuturaCondMedium.woff2') format('woff2'),
-    url('public/fonts/FuturaCondMedium.woff') format('woff');
+  src: url('./assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+    url('./assets/fonts/FuturaCondMedium.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -152,6 +152,11 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 100%;
+  overflow: scroll;
 }
 
 .screen.hidden {
@@ -179,6 +184,25 @@ body {
   height: 40px;
   width: auto;
   /* Suppression du filtre invert pour garder le logo noir */
+}
+
+.btn-primary {
+  padding: 16px 24px;
+  width: 100%;
+  border-radius: 12px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+  transition: 0.3s ease;
+  max-width: 600px;
+}
+
+.btn-primary:hover {
+  background: var(--muted);
+  border-color: var(--primary);
 }
 
 .settings-btn {
@@ -583,7 +607,7 @@ body {
 
 .close-detail {
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 20px;
   color: var(--accent-red);
 }
@@ -813,21 +837,253 @@ body {
 }
 
 /* ===================================
-========= Actions Wrapper =========
-=================================== */
+============= Init Screens =============
+====================================== */
+.initWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 15px;
+  font-size: 1.5rem;
+}
+
+.initWrapper .playerNumber {
+  color: var(--background);
+  background-color: var(--foreground);
+  padding: 3px 14px;
+  font-weight: 900;
+  margin-right: 4px;
+}
+
+.initScreen1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  gap: 30px;
+}
+
+.initScreen1 .playerCountContainer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+  font-size: 4rem;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  gap: 3vh;
+  align-self: center;
+  width: 10rem;
+  font-weight: 900;
+}
+
+.initScreen1 .playerCountContainer button {
+  background-color: var(--card);
+  font-weight: 900;
+  padding: 15px;
+  font-size: 3rem;
+  color: white;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  height: 14vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initScreen1 .playerCountContainer button:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+.initScreen2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  justify-content: center;
+  height: 100%;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.initScreen2 .locationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+}
+
+.initScreen2 .locationSection p {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.initScreen2 .characterGrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 8px;
+  height: 100%;
+}
+
+.initScreen2 .characterGrid button {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  font-family: Futura;
+  font-size: 1rem;
+  color: white;
+  padding: 8px;
+  font-weight: 900;
+  background: #000;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 58%);
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 58%);
+  flex: 1;
+  background-position-x: center;
+  flex-basis: 15%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.initScreen2 .characterGrid button.is-taken {
+  filter: grayscale(1);
+  opacity: 0.8;
+  cursor: default;
+}
+
+.initScreen3 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ===============================
+============ Player list =========
+================================== */
+.playerList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.playerList button {
+  flex: 1;
+  background-position-x: left;
+  max-height: 6rem;
+  background-position-y: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 20px;
+  color: var(--foreground);
+  font-family: Futura;
+  border-radius: 15px;
+  border: 2px solid var(--border);
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(22, 20, 20, 0.92) 90%, rgba(22, 22, 22, 0.97) 100%), var(--bg-image);
+}
+
+.playerList button div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.playerList button span {
+  font-size: 1.5rem;
+}
+
+.playerList button p {
+  font-size: 0.8rem;
+}
+
+/* ============================================
+============ Character Select details =========
+=============================================== */
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10dvh 5dvh;
+  gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 1000;
+  transition: .2s ease-in-out;
+  opacity: 0;
+  backdrop-filter: blur(25px);
+  background-color: rgba(116, 100, 83, 0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+.detailContainer img {
+
+  height: calc(50vh - 100px);
+  width: auto;
+  border: 3px solid var(--border);
+}
+
+.detailContainer .characterName {
+
+  margin: 10px 0px;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.detailContainer .characterDescription {
+  overflow-y: scroll;
+  display: flex;
+  /*! justify-content: center; */
+  flex-direction: column;
+  max-width: 600px;
+}
+
+/* ===================================
+============ Actions Wrapper =========
+====================================== */
 #gameContainer {
   position: relative;
 }
 
 .dialogWrapper,
+.playerSelect,
 .endWrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100%;
-  padding: 50px;
+  padding: 24px;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
+  gap: 30px;
+}
+
+.dialogWrapper {
+  justify-content: end;
+}
+
+.playerSelect,
+.endWrapper {
+  justify-content: center;
 }
 
 .dialogWrapper {
@@ -865,7 +1121,8 @@ body {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.endWrapper.show {
+.endWrapper.show,
+.detailContainer.show {
   opacity: 1;
 }
 
