@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "title": "Test",
+    "video": "assets/cinematiques/test.mp4",
+    "image": "assets/cinematiques/test.png",
+    "description": "Cinématique de test",
+    "season": "Test"
+  }
+]
