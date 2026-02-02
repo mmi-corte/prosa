@@ -103,16 +103,15 @@ function showCharacterDetails(regionId, characterId) {
     detailContainer.classList.add('detailContainer')
     gameContainer.appendChild(detailContainer)
 
-    //close button
-    const closeButton = document.createElement('button')
-    closeButton.classList.add('close-btn', 'close-detail')
-    closeButton.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M15 9l-6 6M9 9l6 6" />
+ const backButton = document.createElement('button');
+    backButton.classList.add('back-btn-circle');
+    backButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     `
-    closeButton.addEventListener('click', () => {
+
+    backButton.addEventListener('click', () => {
         detailContainer.classList.remove('show')
         setTimeout(() => closeCharacterDetail(), 300)
     })
@@ -202,7 +201,7 @@ function showCharacterDetails(regionId, characterId) {
         addPlayer(regionId, characterId)
     })
 
-    detailContainer.append(closeButton, characterPicture, characterName, switchRow, characterDescription, submitButton)
+    detailContainer.append(backButton, characterPicture, characterName, switchRow, characterDescription, submitButton)
     setTimeout(() => detailContainer.classList.add("show"), 10)
 }
 
