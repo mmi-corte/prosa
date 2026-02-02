@@ -71,6 +71,20 @@
       height: auto;
       margin-bottom: 30px;
     }
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      line-height: 0;
+    }
+    .logo-o-lottie {
+      position: absolute;
+      top: 50%;
+      left: 48.9%;
+      width: 25.7%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
     #loading-screen .spinner {
       width: 50px; height: 50px;
       border: 3px solid rgba(236, 228, 203, 0.2);
@@ -107,7 +121,10 @@
 
   <!-- Loading Screen -->
   <div id="loading-screen">
-    <img data-src="/assets/logo/prosa-logo.png" alt="PROSA" class="logo">
+    <span class="logo-wrap">
+      <img data-src="/assets/logo/prosa-logo.png" alt="PROSA" class="logo">
+      <span class="logo-o-lottie" data-lottie="/assets/lottie/prosa-o.json" aria-hidden="true"></span>
+    </span>
     <div class="spinner"></div>
     <p>Chargement...</p>
     <div id="debug-info">Initialisation...</div>
@@ -116,7 +133,10 @@
   <!-- Start Screen with Instructions -->
   <div id="start-screen" class="start-screen" style="display: none;">
     <div class="start-content">
-      <img data-src="/assets/logo/prosa-logo.png" alt="PROSA" class="start-logo">
+      <span class="logo-wrap">
+        <img data-src="/assets/logo/prosa-logo.png" alt="PROSA" class="start-logo">
+        <span class="logo-o-lottie" data-lottie="/assets/lottie/prosa-o.json" aria-hidden="true"></span>
+      </span>
       
       <h1>Expérience AR</h1>
       
@@ -174,6 +194,27 @@
     <span id="subtitleText"></span>
   </div>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!window.lottie) return;
+      document.querySelectorAll('.logo-o-lottie').forEach(function(el) {
+        if (el.dataset.lottieInit === 'true') return;
+        var path = el.getAttribute('data-lottie');
+        if (!path) return;
+        var resolved = window.resolvePath(path);
+        window.lottie.loadAnimation({
+          container: el,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: resolved
+        });
+        el.dataset.lottieInit = 'true';
+      });
+    });
+  </script>
+
   <script src="./js/immersive.js"></script>
 </body>
 </html>

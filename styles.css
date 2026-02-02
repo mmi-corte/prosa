@@ -91,6 +91,22 @@ body {
   justify-content: center;
 }
 
+.logo-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.logo-o-lottie {
+  position: absolute;
+  top: 50%;
+  left: 48.9%;
+  width: 25.7%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 /* Agrandissement du logo PROSA sur l'écran de chargement */
 .logo-main {
   width: 280px;

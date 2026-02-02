@@ -15,6 +15,27 @@ export function clearContainer() {
   gameContainer.innerHTML = ''
 }
 
+window.initProsaLogoLottie = function initProsaLogoLottie() {
+  if (!window.lottie) return
+
+  const targets = document.querySelectorAll('.logo-o-lottie')
+  targets.forEach((el) => {
+    if (el.dataset.lottieInit === 'true') return
+    const path = el.getAttribute('data-lottie')
+    if (!path) return
+
+    window.lottie.loadAnimation({
+      container: el,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path
+    })
+
+    el.dataset.lottieInit = 'true'
+  })
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
 
   // Initialize language manager first (async to load translations)
@@ -30,6 +51,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   //Then, load progression screen
   progressionView()
+
+  if (window.initProsaLogoLottie) {
+    window.initProsaLogoLottie()
+  }
 
   // ====================================
   // ============= HEADER LOGO ==========

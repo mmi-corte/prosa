@@ -6,10 +6,13 @@ export function loadingView() {
 
     container.innerHTML = `
         <div class="loading-content">
-        <div class="logo-container">
-            <!-- Logo PROSA officiel -->
-            <img src="./assets/logo/prosa-logo.png" alt="PROSA" class="logo-main" />
-        </div>
+                <div class="logo-container">
+                        <!-- Logo PROSA officiel -->
+                        <span class="logo-wrap">
+                            <img src="./assets/logo/prosa-logo.png" alt="PROSA" class="logo-main" />
+                            <span class="logo-o-lottie" data-lottie="./assets/lottie/prosa-o.json" aria-hidden="true"></span>
+                        </span>
+                </div>
         <!-- Serpent spirale comme icône de chargement -->
         <div class="spinner-spiral">
             <img src="f./assets/logo/chargement.png" alt="Chargement" class="spiral-img" />
@@ -25,6 +28,10 @@ export function loadingView() {
     `
 
     gameContainer.appendChild(container)
+
+    if (window.initProsaLogoLottie) {
+        window.initProsaLogoLottie()
+    }
 
     let funFacts = [
         "En Corse, on dit qu'un serpent à sept têtes gardait une source sacrée et qu'aucun berger n'osait s'en approcher.",
