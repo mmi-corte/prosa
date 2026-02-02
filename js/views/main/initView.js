@@ -1,6 +1,7 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { characterSelectView } from "./initViews/characterSelectView.js";
 import { playerCountView } from "./initViews/playerCountView.js";
+import { difficultyView } from "./initViews/difficultyView.js";
 
 export let wrapper;
 export let initTextContainer;
@@ -22,8 +23,8 @@ export function initView() {
     initContainer.classList.add('initScreen1');
     wrapper.appendChild(initContainer)
 
-    // Load first setting screen
-    playerCountView()
+    // Load difficulty screen first
+    difficultyView()
 }
 
 export function clearInitContainer() {

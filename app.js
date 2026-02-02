@@ -14,6 +14,45 @@ import { debugView } from "./js/views/Temp/debugView.js"
 
 export const gameContainer = document.getElementById('gameContainer')
 
+const difficultyLabels = {
+  30: 'FACILE',
+  20: 'NORMAL',
+  10: 'DIFFICILE'
+}
+
+function initDifficultyIndicator() {
+  let indicator = document.getElementById('difficulty-indicator')
+  if (indicator) return indicator
+
+  indicator = document.createElement('div')
+  indicator.id = 'difficulty-indicator'
+  indicator.className = 'difficulty-battery hidden'
+  indicator.innerHTML = `
+    <div class="battery-body">
+      <div class="battery-fill"></div>
+      <div class="battery-cap"></div>
+    </div>
+    <div class="battery-label">-</div>
+  `
+  document.body.appendChild(indicator)
+  return indicator
+}
+
+window.updateDifficultyIndicator = function updateDifficultyIndicator(difficultyValue) {
+  const indicator = initDifficultyIndicator()
+  if (!difficultyValue) {
+    indicator.classList.add('hidden')
+    return
+  }
+
+  const fill = indicator.querySelector('.battery-fill')
+  const label = indicator.querySelector('.battery-label')
+  const percent = difficultyValue === 30 ? 100 : difficultyValue === 20 ? 66 : 33
+  fill.style.width = `${percent}%`
+  label.textContent = difficultyLabels[difficultyValue] || '-'
+  indicator.classList.remove('hidden')
+}
+
 export function clearContainer() {
   gameContainer.innerHTML = ''
 }
@@ -54,6 +93,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   //Then, load progression screen
   progressionView()
+
+  // Afficher l'indicateur de difficulté si déjà défini
+  const storedDifficultyRaw = localStorage.getItem('gameDifficulty')
+  if (storedDifficultyRaw !== null && window.updateDifficultyIndicator) {
+    const storedDifficulty = parseInt(storedDifficultyRaw, 10)
+    if (!Number.isNaN(storedDifficulty)) {
+      window.updateDifficultyIndicator(storedDifficulty)
+    }
+  }
 
   if (window.initProsaLogoLottie) {
     window.initProsaLogoLottie()
