@@ -76,7 +76,7 @@ export function menuView() {
     startBtn.remove()
   } else {
     startBtn.addEventListener('click', () => {
-      navigate("start-01", initView())
+      navigate("nombre-joueur", initView(), true)
     })
   }
 

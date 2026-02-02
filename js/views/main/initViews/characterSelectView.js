@@ -1,18 +1,27 @@
-import { gameContainer } from "../../../../app.js";
+import { gameContainer, navigate } from "../../../../app.js";
 import { fetchPlayerCharacters } from "../../../loadData.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { playerSubmitView } from "./playerSubmitView.js";
 import { getTranslation, setLanguage } from "../../../langageManager.js";
+import { gameInitialized } from "../../../initGame.js";
+import { menuView } from "../menuView.js";
 
 let charactersData
 let currentPlayerIndex
 let detailContainer
 
-let selectedPlayers = []
+let selectedPlayers
 
 export async function characterSelectView(playerCount) {
-    console.log(playerCount)
+    if (gameInitialized) {
+        navigate('menu', menuView(), true)
+    }
+
+    if (!playerCount) {
+        navigate('nombre-joueur', playerCountView(), true)
+    }
+    selectedPlayers = []
     clearInitContainer()
     initContainer.classList.add('initScreen2');
 
@@ -182,21 +191,21 @@ function showCharacterDetails(regionId, characterId) {
         selectedPlayers[currentPlayerIndex].language = newLang
         setLanguage(newLang)
         updateDescription()
-            updateSubmitLabel()
+        updateSubmitLabel()
     })
 
     switchRow.append(switchWrapper)
 
-        const submitButton = document.createElement('button')
-        submitButton.classList.add("btn-primary")
-        const submitLabel = {
-            fr: "Choisir ce personnage",
-            cor: "Sceglie stu persunagiu"
-        }
-        const updateSubmitLabel = () => {
-            submitButton.innerText = getTranslation(submitLabel)
-        }
-        updateSubmitLabel()
+    const submitButton = document.createElement('button')
+    submitButton.classList.add("btn-primary")
+    const submitLabel = {
+        fr: "Choisir ce personnage",
+        cor: "Sceglie stu persunagiu"
+    }
+    const updateSubmitLabel = () => {
+        submitButton.innerText = getTranslation(submitLabel)
+    }
+    updateSubmitLabel()
 
     submitButton.addEventListener('click', () => {
         addPlayer(regionId, characterId)
@@ -222,7 +231,7 @@ function addPlayer(regionId, characterId) {
     }
 }
 
-function closeCharacterDetail() {
+export function closeCharacterDetail() {
     detailContainer.remove()
 }
 

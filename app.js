@@ -2,6 +2,9 @@ import { gameInitialized, initGame } from "./js/initGame.js"
 import { initLanguageManager } from "./js/langageManager.js"
 import { charactersView } from "./js/views/main/charactersView.js"
 import { codeView } from "./js/views/main/codeView.js"
+import { characterSelectView } from "./js/views/main/initViews/characterSelectView.js"
+import { playerCountView } from "./js/views/main/initViews/playerCountView.js"
+import { playerSubmitView } from "./js/views/main/initViews/playerSubmitView.js"
 import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { qrView } from "./js/views/main/qrView.js"
@@ -99,50 +102,71 @@ export function vibrate(pattern) {
 }
 
 // ====================================
-// ============= POPSTATE =============
+// ============= NAVIGATE =============
 // ====================================
-/**
- * Fonction de gestion de l'historique
- * @param  {[string]} viewName Nom commun de la page appelé
- * @param  {[function]} viewFunction Fonction d'affichage de la page
- * @param  {[boolean]} [updateUrl=true] Choix de l'actualisation d'url ou non
- */
 export function navigate(viewName, viewFunction, updateUrl = true) {
-  //Store the state of the page
-  // const state = { view: viewName }
-  // let url = ""
-  // if (updateUrl) {
-  //   url = viewName
-  // }
-  // try {
-  //   history.pushState(state, "", url)
-  // } catch (e) {
-  //   console.warn('Could not update history:', e);
-  // }
+  // Store the state with the view name
+  const state = { view: viewName }
+  let url = ""
+  if (updateUrl) {
+    url = `#${viewName}`
+  }
 
-  //Call view function
-  viewFunction()
+  try {
+    history.pushState(state, "", url)
+  } catch (e) {
+    console.warn('Could not update history:', e);
+  }
+
+  // Always call the view function when navigating
+  if (typeof viewFunction === 'function') {
+    viewFunction()
+  }
 }
 
-const views = {
-  "progression": progressionView,
-  "menu": menuView,
-  "code": codeView,
-  "qr": qrView,
-  "encyclopedie": charactersView,
-  "saisons": settingView,
-  "debug": debugView,
-  "parametres": settingView
-};
-
+// ====================================
+// ============= POPSTATE =============
+// ====================================
 window.addEventListener('popstate', (event) => {
-  // 1. Get the view name from the state (default to 'menu' if null)
-  const viewName = event.state ? event.state.view : 'menu';
+  const viewName = event.state ? event.state.view : 'menu'
 
-  // 2. Execute the matching function
-  if (views[viewName]) {
-    views[viewName]();
-  } else {
-    menuView(); // Fallback
+  // Call the appropriate view function based on viewName
+  callView(viewName)
+})
+
+// ====================================
+// ============= VIEW ROUTER ==========
+// ====================================
+function callView(viewName) {
+  switch (viewName) {
+    case 'menu':
+      menuView()
+      break
+    case 'nombre-joueur':
+      playerCountView()
+      break
+    case 'choix-personnage':
+      characterSelectView()
+      break
+    case 'code':
+      codeView()
+      break
+    case 'qr':
+      qrView()
+      break
+    case 'encyclopedie':
+      charactersView()
+      break
+    case 'saisons':
+      seasonsView()
+      break
+    case 'debug':
+      debugView()
+      break
+    case 'parametres':
+      settingView()
+      break
+    default:
+      menuView()
   }
-});
+}

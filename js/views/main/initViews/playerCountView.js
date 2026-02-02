@@ -1,9 +1,16 @@
+import { navigate } from "../../../../app.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
+import { gameInitialized } from "../../../initGame.js";
 
 let playerCount
 
 export function playerCountView() {
+
+    if (gameInitialized) {
+        navigate('menu', menuView(), true)
+    }
+
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerText = "Nombre de joueurs";
@@ -48,7 +55,6 @@ export function playerCountView() {
     });
 
     submitButton.addEventListener('click', () => {
-        console.log(playerCount)
-        characterSelectView(playerCount);
+        navigate('choix-personnage', characterSelectView(playerCount), true)
     });
 }
