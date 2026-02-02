@@ -4,8 +4,8 @@
   "description": "Application éducative de réalité augmentée",
   "start_url": "/prosa/index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#F1D482",
+  "background_color": "#1a1812",
+  "theme_color": "#1a1812",
   "icons": [
     {
       "src": "./assets/img/icon1.svg",
