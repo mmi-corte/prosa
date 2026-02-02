@@ -62,5 +62,37 @@
     "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle, il porte un manteau créé à partir de peaux de bêtes. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons, outils de divination spirituelle qu'il utilise pour lire le destin de la vallée dans les craquelures des os. Gardien du musée de Corti qu'il protège comme un sanctuaire, il méprise la tyrannie du clan d'I Muntagnoli.",
     "role": "U Spallistu est l’appellation de certains bergers qui, lorsqu'ils abattent un mouton, peuvent lire l'avenir dans l'omoplate de ce dernier. Loyal / Bon",
     "image": "spallistu.jpg"
+  },
+  {
+    "id": 9,
+    "name": "P1",
+    "region": "PROVENCE",
+    "description": "",
+    "role": "",
+    "image": ""
+  },
+  {
+    "id": 10,
+    "name": "P2",
+    "region": "PROVENCE",
+    "description": "",
+    "role": "",
+    "image": ""
+  },
+    {
+    "id": 11,
+    "name": "P3",
+    "region": "PROVENCE",
+    "description": "",
+    "role": "",
+    "image": ""
+  },
+    {
+    "id": 12,
+    "name": "P4",
+    "region": "PROVENCE",
+    "description": "",
+    "role": "",
+    "image": ""
   }
 ]
