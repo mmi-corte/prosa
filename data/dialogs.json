@@ -36,32 +36,32 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Si quelqu’un m’entend… Il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\"",
+              "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
               "cor": ""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\""
+              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"J’ai tenté de résister, mais j’ai échoué…\""
+              "fr": "\"J'ai tenté de résister, mais j'ai échoué…\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "\"J’ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\""
+              "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\""
             },
             "pitch": "600"
           },
           {
             "text": {
-              "fr": "La voix s’interrompt soudainement…"
+              "fr": "La voix s'interrompt soudainement…"
             }
           }
         ],
@@ -111,8 +111,8 @@
           },
           {
             "text": {
-              "fr": "\"En effet, c’est préoccupant… Avant de t’aider, je dois savoir si je peux te faire confiance.\"",
-              "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
+              "fr": "\"En effet, c'est préoccupant… Avant de t'aider, je dois savoir si je peux te faire confiance.\"",
+              "cor": "\"Hè vera, hè stranu… Nanzu d'aiutatti, devu sapè s'è ti possu fà cunfidenza.\""
             },
             "pitch": 650
           }
@@ -130,26 +130,26 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
+              "fr": "\"Le clan I Muntagnoli qui dirige Corte obéit à l'organisation de Prosa.\"",
               "cor": "\"U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
             "pitch": 650
           },
           {
             "text": {
-              "fr": "\"Leur règne n’apporte que famine et tristesse. Cela fait longtemps que je rêve qu’il prenne fin…\"",
+              "fr": "\"Leur règne n'apporte que famine et tristesse. Cela fait longtemps que je rêve qu'il prenne fin…\"",
               "cor": "\"Hè ora chì qualchissia ci mittessi fine.\""
             },
             "pitch": 650
           },
           {
             "text": {
-              "fr": "\"J’aimerai changer les choses… mais je ne sais pas comment m’y prendre.\""
+              "fr": "\"J'aimerai changer les choses… mais je ne sais pas comment m'y prendre.\""
             }
           },
           {
             "text": {
-              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
+              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t'aidera.\"",
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
             "pitch": 650
@@ -168,7 +168,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "A Fata ne répond pas. Elle détourne son regard, et s’en va lentement…"
+              "fr": "A Fata ne répond pas. Elle détourne son regard, et s'en va lentement…"
             }
           }
         ],
@@ -190,7 +190,7 @@
           },
           {
             "text": {
-              "fr": "Quelqu’un vous bouscule. Votre gourde tombe sur le sol, renversée."
+              "fr": "Quelqu'un vous bouscule. Votre gourde tombe sur le sol, renversée."
             }
           },
           {
@@ -201,37 +201,292 @@
           {
             "text": {
               "fr": "\"Si tu veux survivre, tu ferais mieux de comprendre comment ce monde fonctionne !\"",
-              "cor": "\"S’è tù voli campà, faresti megliu à capì cumu funziona stu mondu !\""
+              "cor": "\"S'è tù voli campà, faresti megliu à capì cumu funziona stu mondu !\""
             },
             "pitch": 500
           },
           {
             "text": {
-              "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
-              "cor": "\"St’acqua ùn appartene più chè à u clan di I Muntagnoli è à quelli chì u dirigenu… \""
+              "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c'est moi qu'ils ont choisi pour gouverner cette île !\"",
+              "cor": "\"St'acqua ùn appartene più chè à u clan di I Muntagnoli è à quelli chì u dirigenu… \""
             },
             "pitch": 500
           },
           {
             "text": {
               "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé. \"",
-              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
+              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum'è U Spallistu, chjosu in u passatu.\""
             },
             "pitch": 500
           },
           {
             "text": {
-              "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle, vous laissant seul."
+              "fr": "Elle s'éloigne, disparaissant de l'autre côté de la passerelle, vous laissant seul."
             }
           },
           {
             "text": {
-              "fr": "Le choc est brutal: Ils sont tous liés. Prosa. Corte. Le clan. Si personne n’agit… rien ne changera."
+              "fr": "Le choc est brutal: Ils sont tous liés. Prosa. Corte. Le clan. Si personne n'agit… rien ne changera."
             }
           },
           {
             "text": {
-              "fr": "Si le clan déteste autant U Spallistu, c’est qu’il peut peut-être aider. Mais où le trouver… dans le passé, dans le passé… AU MUSÉE !"
+              "fr": "Si le clan déteste autant U Spallistu, c'est qu'il peut peut-être aider. Mais où le trouver… dans le passé, dans le passé… AU MUSÉE !"
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "0300": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le musée se dresse encore, malgré les années. Une silhouette vous attend au fond de la salle principale.",
+              "cor": "U museu hè ancu arrittu, malgratu l'anni. Una siluetta v'aspetta in fondu di a sala principale."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous devinez qu'il s'agit de U Spallistu (le devin). Celui-ci vous fixe longuement, comme s'il lisait à travers vous.",
+              "cor": "Induvinate ch'ellu hè U Spallistu. Vi fighjula longu, cum'è s'ellu leghjia à traversu à voi."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je t'attendais.\"",
+              "cor": "\"T'aspettava.\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéit à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
+              "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l'altri morenu.\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "U Spallistu sort une omoplate de mouton polie par le temps et la fait rouler entre ses doigts."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Dis-moi... es-tu prêt à savoir ce qui t'attend ?\"",
+              "cor": "\"Dimmi... Sè prontu à sapè ciò chì t'aspetta ?\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l'Orcu. Mais avant... regarde mieux autour de toi.\"",
+              "cor": "\"A to strada ti purterà versu l'Orcu. Ma prima... guarda megliu intornu à tè.\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"Le vent garde la mémoire des routes oubliées.\"",
+              "cor": "\"U ventu tene a memoria di e strade scurdate.\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0301"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l'Orcu.\"",
+              "cor": "\"A to strada ti purterà versu l'Orcu.\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Lorsque vous ressortez, U Spallistu vous appelle."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"L'Orcu t'attend. Ne le fais pas patienter.\"",
+              "cor": "\"L'Orcu t'aspetta. Ùn lu fà aspettà.\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0400"
+      }
+    },
+    "0301": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous comprenez très vite : cette carte est une clé pour traverser la mer sans encombre."
+            }
+          },
+          {
+            "text": {
+              "fr": "Objet obtenu : La Carte des Vents."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0300"
+      }
+    },
+    "0400": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L'Orcu (le géant) est là. Immobile. Immense. L'Orcu vous jauge sans un mot, puis vous désigne un objet lourd posé au sol."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Tu veux la mer. Moi, je veux les pierres mais pas n'importe lesquelles : des fragments du dolmen du Diavule.\"",
+              "cor": "\"Tù voli u mare. Eiu, vogliu a petra, ma micca n'importa qualessa: un frammentu di a stazzona di u Diavule.\""
+            },
+            "pitch": 200
+          },
+          {
+            "text": {
+              "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération.\"",
+              "cor": "\"Hè una petra antica, trasmessa in a mo famiglia di generazione in generazione.\""
+            },
+            "pitch": 200
+          },
+          {
+            "text": {
+              "fr": "\"On dit qu'elles sont chargées de la mémoire de l'île... et même du secret du Diavule lui-même.\"",
+              "cor": "\"Si dice ch'ella porta in ella a memoria di l'isula... è ancu u sicretu di u Diavule stessu.\""
+            },
+            "pitch": 200
+          },
+          {
+            "text": {
+              "fr": "\"Aujourd'hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
+              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
+            },
+            "pitch": 200
+          },
+          {
+            "text": {
+              "fr": "\"Infiltre le camp I Muntagnoli, affronte A Strega, ramène-moi un fragment et je t'aiderai à traverser.\"",
+              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t'aiuteraghju à varcà.\""
+            },
+            "pitch": 200
+          },
+          {
+            "text": {
+              "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0500"
+      }
+    },
+    "0500": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, mais la vie s'y agite encore."
+            }
+          },
+          {
+            "text": {
+              "fr": "Plusieurs personnages importants y sont présents. Vous comprenez que cet endroit est un carrefour d'informations."
+            }
+          },
+          {
+            "text": {
+              "fr": "Qui souhaitez-vous approcher ?"
             }
           }
         ],

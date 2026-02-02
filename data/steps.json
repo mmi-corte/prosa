@@ -23,6 +23,20 @@
           "nextStep": "0300"
         }
       }
+    },
+    "05000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0600"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "0600"
+        }
+      }
     }
   },
   "2": {},
