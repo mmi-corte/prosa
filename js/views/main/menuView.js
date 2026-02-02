@@ -1,6 +1,6 @@
 import { clearContainer, gameContainer, navigate } from "../../../app.js"
 import { gameInitialized, initGame } from "../../initGame.js"
-import { debugView } from "../Temp/debugView.js"
+//import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
 import { initView } from "./initView.js"
 import { playerSelectView } from "./playerSelectView.js"
@@ -17,7 +17,7 @@ export function menuView() {
 
         <nav class="menu-buttons">
 
-          <button class="menu-btn" id="startBtn">
+          <button class="menu-btn btn-extra" id="startBtn">
             <span class="btn-title">Commencer la partie</span>
             <span class="btn-subtitle">L'histoire de Prosa vous attend.</span>
             <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -26,7 +26,7 @@ export function menuView() {
             </svg>
           </button>
 
-          <button class="menu-btn" id="codeBtn">
+          <button class="menu-btn btn-extra" id="codeBtn">
             <span class="btn-title">Découvrir mon énigme :</span>
             <span class="btn-subtitle">saisir un code</span>
             <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -110,9 +110,9 @@ export function menuView() {
   })
 
   // debug screen button
-  const debugBtn = document.getElementById("debugBtn")
-  debugBtn.addEventListener('click', () => {
-    navigate("debug", debugView())
-  })
+  // const debugBtn = document.getElementById("debugBtn")
+  // debugBtn.addEventListener('click', () => {
+  //   navigate("debug", debugView())
+  // })
 }
 

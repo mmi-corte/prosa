@@ -4,7 +4,6 @@ import { charactersView } from "./js/views/main/charactersView.js"
 import { codeView } from "./js/views/main/codeView.js"
 import { characterSelectView } from "./js/views/main/initViews/characterSelectView.js"
 import { playerCountView } from "./js/views/main/initViews/playerCountView.js"
-import { playerSubmitView } from "./js/views/main/initViews/playerSubmitView.js"
 import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { qrView } from "./js/views/main/qrView.js"
@@ -92,7 +91,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   //Then, load progression screen
-  progressionView()
+  if (gameInitialized) {
+    navigate('resume', progressionView())
+  } else {
+    navigate('menu', menuView())
+  }
 
   // Afficher l'indicateur de difficulté si déjà défini
   const storedDifficultyRaw = localStorage.getItem('gameDifficulty')
@@ -173,48 +176,30 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
 }
 
 // ====================================
+// ============= VIEW ROUTER ==========
+// ====================================
+const viewRoutes = {
+  'menu': menuView,
+  'resume': progressionView,
+  'nombre-joueur': playerCountView,
+  'choix-personnage': characterSelectView,
+  'code': codeView,
+  'qr': qrView,
+  'encyclopedie': charactersView,
+  'encyclopedie-details': charactersView,
+  'debug': debugView,
+  'parametres': settingView,
+}
+
+function callView(viewName) {
+  const viewFunction = viewRoutes[viewName] || menuView
+  viewFunction?.()
+}
+
+// ====================================
 // ============= POPSTATE =============
 // ====================================
 window.addEventListener('popstate', (event) => {
   const viewName = event.state ? event.state.view : 'menu'
-
-  // Call the appropriate view function based on viewName
   callView(viewName)
 })
-
-// ====================================
-// ============= VIEW ROUTER ==========
-// ====================================
-function callView(viewName) {
-  switch (viewName) {
-    case 'menu':
-      menuView()
-      break
-    case 'nombre-joueur':
-      playerCountView()
-      break
-    case 'choix-personnage':
-      characterSelectView()
-      break
-    case 'code':
-      codeView()
-      break
-    case 'qr':
-      qrView()
-      break
-    case 'encyclopedie':
-      charactersView()
-      break
-    case 'saisons':
-      seasonsView()
-      break
-    case 'debug':
-      debugView()
-      break
-    case 'parametres':
-      settingView()
-      break
-    default:
-      menuView()
-  }
-}

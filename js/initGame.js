@@ -24,8 +24,13 @@ export async function initGame() {
 export function savePlayerData(playersSelect) {
     if (playersSelect) {
         localStorage.setItem('playersData', JSON.stringify(playersSelect));
-        initGame()
     } else {
         console.error(`Could not save players: no data was provided (${playersSelect})`)
     }
+}
+
+export function resetGame() {
+    players = null
+    gameInitialized = false
+    localStorage.clear('playersData')
 }

@@ -298,6 +298,14 @@ body {
   transform: translateX(4px);
 }
 
+.menu-btn.btn-extra {
+  background-color: var(--foreground);
+}
+
+.menu-btn.btn-extra .btn-title {
+  color: var(--background);
+}
+
 .menu-btn:hover::before {
   transform: scaleY(1);
 }
@@ -969,7 +977,7 @@ body {
   text-align: center;
 }
 
-.initWrapper > p {
+.initWrapper>p {
   margin: 0;
   font-weight: 600;
 }
@@ -1260,11 +1268,11 @@ body {
   transition: transform 0.2s ease;
 }
 
-.language-switch input:checked + .language-slider {
+.language-switch input:checked+.language-slider {
   background: var(--primary);
 }
 
-.language-switch input:checked + .language-slider::before {
+.language-switch input:checked+.language-slider::before {
   transform: translateX(20px);
 }
 

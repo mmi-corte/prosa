@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, navigate } from "../../../app.js";
 import { menuView } from "./menuView.js";
 
 export function charactersView() {
@@ -99,7 +99,7 @@ function renderCharactersGrid(charactersData) {
            style="background-image:url('./assets/characters/${char.image}')"></div>
       <div class="character-card-name">${char.name}</div>
     `
-        card.addEventListener("click", () => goToCharacterDetail(char))
+        card.addEventListener("click", () => navigate('encyclopedie-details', goToCharacterDetail(char)))
         charactersGrid.appendChild(card)
     })
 }
@@ -153,5 +153,6 @@ function goToCharacterDetail(char) {
     closeButton.addEventListener('click', () => {
         overlay.remove()
         gameContainer.classList.remove('modal-open')
+        window.history.back();
     })
 }
