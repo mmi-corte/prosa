@@ -41,8 +41,8 @@
         "region": "CORSE",
         "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
         "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-        "image": "Fulettu-HQ.png"
-    }
+        "image": "./assets/characters/Fulettu-HQ.png"
+    },
     {
         "id": 1,
         "name": "L'ORCU",
