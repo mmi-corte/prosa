@@ -18,6 +18,73 @@
         "name": "U MAZZERU",
         "region": "CORSE",
         "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-        "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive."
+        "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
+        "image": "Fulettu-HQ.png"
+    },
+    {
+        "id": 1,
+        "name": "L'ORCU",
+        "region": "CORSE",
+        "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
+        "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
+    },
+    {
+        "id": 2,
+        "name": "LA STREGA",
+        "region": "CORSE",
+        "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
+        "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
+    },
+    {
+        "id": 3,
+        "name": "U MAZZERU",
+        "region": "CORSE",
+        "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
+        "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
+        "image": "Fulettu-HQ.png"
+    }
+    {
+        "id": 1,
+        "name": "L'ORCU",
+        "region": "CORSE",
+        "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
+        "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
+    },
+    {
+        "id": 2,
+        "name": "LA STREGA",
+        "region": "CORSE",
+        "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
+        "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
+    },
+    {
+        "id": 3,
+        "name": "U MAZZERU",
+        "region": "CORSE",
+        "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
+        "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
+        "image": "Fulettu-HQ.png"
+    },
+    {
+        "id": 1,
+        "name": "L'ORCU",
+        "region": "CORSE",
+        "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
+        "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
+    },
+    {
+        "id": 2,
+        "name": "LA STREGA",
+        "region": "CORSE",
+        "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
+        "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
+    },
+    {
+        "id": 3,
+        "name": "U MAZZERU",
+        "region": "CORSE",
+        "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
+        "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
+        "image": "Fulettu-HQ.png"
     }
 ]
