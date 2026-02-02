@@ -9,22 +9,22 @@ export function charactersView() {
             <div class="characters-header">
                 <div class="characters-title-section">
                     <h1 class="characters-title">LES PERSONNAGES</h1>
-                    <p class="characters-region">CORSE</p>
+                    <p class="characters-region" id="charactersRegionLabel">CORSE</p>
                 </div>
 
                 <div class="characters-actions">
+                    <label class="language-switch" aria-label="Basculer la région entre Corse et Provence">
+                        <span class="language-label">CORSE</span>
+                        <input type="checkbox" id="regionToggle" />
+                        <span class="language-slider"></span>
+                        <span class="language-label">PROVENCE</span>
+                    </label>
+
                     <button class="close-btn" id="closeScreen" aria-label="Fermer">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M15 9l-6 6M9 9l6 6" />
                         </svg>
-                    </button>
-
-                    <button class="filter-btn" id="filterBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                    filtrer
                     </button>
                 </div>
             </div>
@@ -36,6 +36,24 @@ export function charactersView() {
     `
 
     let charactersData;
+    const regionToggle = document.getElementById('regionToggle')
+    const charactersRegionLabel = document.getElementById('charactersRegionLabel')
+
+    const applyRegionFilter = () => {
+        if (!charactersData) return
+
+        const selectedRegion = regionToggle && regionToggle.checked ? 'PROVENCE' : 'CORSE'
+        if (charactersRegionLabel) {
+            charactersRegionLabel.textContent = selectedRegion
+        }
+
+        const filtered = charactersData.filter(char => {
+            const region = (char.region || '').toString().toUpperCase()
+            return region === selectedRegion
+        })
+
+        renderCharactersGrid(filtered)
+    }
     async function loadCharacters() {
         if (charactersData) {
             return;
@@ -51,13 +69,17 @@ export function charactersView() {
                 console.log("Characters data loaded:", charactersData.length, "characters.");
 
                 // Render grid
-                renderCharactersGrid(charactersData)
+                applyRegionFilter()
             } catch (error) {
                 console.error("Critical: Could not load characters data", error);
             }
         }
     }
     loadCharacters()
+
+    if (regionToggle) {
+        regionToggle.addEventListener('change', applyRegionFilter)
+    }
 
     const closeScreen = document.getElementById('closeScreen')
     closeScreen.addEventListener('click', () => {
