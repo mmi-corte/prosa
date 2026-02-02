@@ -74,7 +74,7 @@ function renderCharactersGrid(charactersData) {
         card.className = "character-card"
         card.innerHTML = `
       <div class="character-card-image"
-           style="background-image:url('${char.image || "assets/characters/default.png"}')"></div>
+           style="background-image:url('./assets/characters/${char.image}')"></div>
       <div class="character-card-name">${char.name}</div>
     `
         card.addEventListener("click", () => goToCharacterDetail(char))
