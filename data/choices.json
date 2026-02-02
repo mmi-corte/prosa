@@ -7,5 +7,42 @@
     "choices": []
   },
   "2": {},
-  "3": {}
+  "3": {},
+  "4": {},
+  "5": {
+    "question": {
+      "fr": "Qui souhaitez-vous approcher ?",
+      "cor": "À quale vulete avvicinà ?"
+    },
+    "choices": [
+      {
+        "text": {
+          "fr": "Approcher A Signadora (la vieille dame attristée)",
+          "cor": "Avvicinà A Signadora (a vechja donna trista)"
+        },
+        "nextStep": "05001"
+      },
+      {
+        "text": {
+          "fr": "S'interposer dans la dispute de l'armurier",
+          "cor": "Interponesi in a disputa di l'armaghjolu"
+        },
+        "nextStep": "05002"
+      },
+      {
+        "text": {
+          "fr": "Confronter le jeune garçon qui vous observe (U Fulettu)",
+          "cor": "Cunfruntà u zitellu chì vi osserva (U Fulettu)"
+        },
+        "nextStep": "05003"
+      },
+      {
+        "text": {
+          "fr": "Continuer vers le belvédère pour une meilleure vue",
+          "cor": "Cuntinuà versu u belvedere per una vista megliu"
+        },
+        "nextStep": "05004"
+      }
+    ]
+  }
 }

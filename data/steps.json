@@ -50,6 +50,16 @@
         }
       }
     },
+    "05000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0500"
+        }
+      }
+    },
     "05001": {
       "actionType": "dialog",
       "action": "1",
@@ -87,6 +97,76 @@
         "1": {
           "type": "win",
           "nextStep": "0900"
+        }
+      }
+    },
+    "06000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1200"
+        }
+      }
+    },
+    "07000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1200"
+        }
+      }
+    },
+    "08000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1300"
+        }
+      }
+    },
+    "09000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1000"
+        }
+      }
+    },
+    "10000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1100"
+        }
+      }
+    },
+    "11000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1200"
+        }
+      }
+    },
+    "12000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1300"
         }
       }
     },
