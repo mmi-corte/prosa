@@ -111,8 +111,8 @@ function goToCharacterDetail(char) {
     const characterDetailName = document.getElementById('characterDetailName')
     const characterDescription = document.getElementById('characterDescription')
 
-    characterDetailImage.src = char.image || "assets/characters/default.png"
-    characterDetailImage.alt = char.name
+    characterDetailImage.src = char.image
+    characterDetailImage.alt = `./assets/characters/${char.name}`
     characterDetailName.textContent = char.name
     characterDescription.innerHTML = `
     <p>${char.description}</p>
