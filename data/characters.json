@@ -1,91 +1,66 @@
 [
   {
     "id": 1,
-    "name": "U Fulettu",
+    "name": "U Fullettu",
     "region": "CORSE",
     "description": "U Fullettu, pourrait être un enfant d’une dizaine d’années. Il porte un bandeau blanc sur le front. Sa caractéristique la plus frappante est son bras gauche manquant, remplacé par une prothèse de fer. Vif comme l'air, malicieux et jouant de mauvais tours, il n'offre sa loyauté qu'à ceux qui peuvent remplir son estomac. Il peut devenir un allié précieux grâce à son agilité et sa discrétion, ou un ennemi redoutable utilisant des pièges pour égarer les voyageurs imprudents.",
-    "role": "Lutin ou esprit domestique, il est considéré comme neutre aimant jouer des tours (parfois méchants, parfois inoffensifs). Il met souvent le bazar dans les affaires des gens.",
-    "image": "Fulettu-HQ.png"
+    "role": "Lutin ou esprit domestique, il est considéré comme neutre aimant jouer des tours (parfois méchants, parfois inoffensifs). Il met souvent le bazar dans les affaires des gens. Chaotique / Bon",
+    "image": "Fullettu.jpg"
   },
   {
     "id": 2,
-    "name": "LA STREGA",
+    "name": "A Squadra d’Arozza",
     "region": "CORSE",
-    "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
-    "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
+    "description": "A Squadra d'Arozza est une unité d'élite, agissant sur Corti, vouée corps et âme à A Strega. Ils portent un masque à gaz et une armure tactique lourde dissimulée sous un long manteau sombre dont la doublure vert acide crée un fort contraste. Ils avancent dans un silence absolu, seulement trahis par leur lourde respiration. Armés de leurs fusils, ils ne prononcent jamais un mot, communiquant uniquement par sifflements avant de frapper avec une violence inéluctable et brutale. Pour ceux qui croisent leur route, ils ne sont plus des soldats, mais le présage brutal d'un destin contre lequel on ne peut plus lutter.",
+    "role": "Groupe d'esprits. Représentation de la mort, ils font passer les vivants qu’ils croisent dans le monde des morts. Chaotique / Mauvais",
+    "image": "SquadraDArozza.jpg"
   },
   {
     "id": 3,
+    "name": "A Strega",
+    "region": "CORSE",
+    "description": "D’un âge incertain, A Strega est la cheffe impitoyable du clan de Corti. Elle est chargée par U Strigone de maintenir la ville dans la peur, la misère et la dépendance totale envers l’île de Prosa.  Elle porte un manteau sombre où elle dissimule des poisons terribles, elle dirige la Squadra d’Arozza, une troupe d’élite utilisée pour briser toute tentative de révolte et saboter discrètement toute émancipation de Corti.  On dit que certaines nuits de pleine lune, elle fait enlever en secret des enfants desquels elle prélève le sang et les fait expédier sur Prosa, où ils sont préparés pour intégrer la Squadra d’Arozza. La prononciation de son nom suffit à terroriser la population de Corti. Sa base d’opération depuis laquelle elle dirige le clan se trouve sur la route du cimetière de Corti.",
+    "role": "Figure de sorcière ou jeteuse de sorts, elle a un rôle souvent mauvais, agissant par malveillance ou pour exercer une influence. Elle est l’inverse direct de a Fata, étant symbole d’infertilité. Chaotique / Mauvais",
+    "image": "AStrega.jpg"
+  },
+  {
+    "id": 4,
+    "name": "U Magu",
+    "region": "CORSE",
+    "description": "U Magu est un érudit de Prosa chargé des moulins à vent de l’île et de tout ce qui touche à la médecine, mêlant savoir technique, botanique et expérimentation sur les corps.  De taille moyenne, voûté par les années passées dans le vent et la poussière, il a le visage creusé, une barbe grisonnante mal entretenue et des yeux clairs constamment plissés, comme habitués à scruter aussi bien les montagnes que les fièvres des malades.  Sa silhouette est enveloppée dans un long manteau cachant un costume sobre. Une grande sacoche dont les poches débordent de fioles, de bandages et de sachets d’herbes séchées, pend à son épaule, donnant l’impression qu’il transporte en permanence un petit laboratoire ambulant. ",
+    "role": "On le voit souvent seul dans les montagnes, près des moulins, en train de récolter des herbes rares qu’il est le seul à savoir utiliser.  Il soigne ceux qui lui sont utiles, teste des traitements dangereux sur les autres et ajuste l’énergie des moulins pour maintenir l’avantage énergétique de Prosa. Neutre / Mauvais",
+    "image": "UMagu.jpg"
+  },
+  {
+    "id": 5,
+    "name": "A Signadora",
+    "region": "CORSE",
+    "description": "A Signadora est une femme de 60 ans, dont le visage marqué par le soleil et les rides profondes disparaît souvent sous un voile noir usé par la poussière. Vêtue d’un châle beige recouvrant des habits sombres, elle fréquente souvent la vieille fontaine de Corti pour soigner les malades et les blessés qui viennent la quérir. Ses mains tremblantes et noueuses sont pourtant d'une précision chirurgicale et à sa ceinture pend une fiole d'huile d'olive, ressource devenue rarissime, qu'elle utilise avec une assiette en céramique blanche et une bougie pour diagnostiquer le mal. Elle a rejoint les rebelles de la ville, non par ambition politique, mais par solidarité car elle est déterminée à récupérer des médicaments important que le clan de Corti I Muntagnoli (Les Montagnards) privatise.",
+    "role": "Guérisseuse utilisant des prières et des herbes, son rôle est toujours considéré comme bon, car elle apporte soin et soulagement aux maladies et blessures. Loyal / Bon",
+    "image": "Signadora.jpg"
+  },
+  {
+    "id": 6,
     "name": "U MAZZERU",
     "region": "CORSE",
-    "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-    "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-    "image": "Fulettu-HQ.png"
+    "description": "Âgé de 45 ans, cet ancien dignitaire du gouvernement de l’île de Prosa, nommé U Sarpu à Sette Capi est devenu une figure tragique, incarnant le personnage mythique corse du Mazzeru au cœur d’un monde post-apocalyptique. Autrefois chargé de la gestion des habitants au sein de Prosa, il a été profondément choqué par la brutalité du régime, ce qui l'a poussé à mener une rébellion qui s'est malheureusement soldée par un échec sanglant. Désormais emprisonné et aveugle, il a développé une perception proche de la Seconda Vista, un don de clairvoyance souvent subi comme une malédiction. Elle lui permet de voir en rêve éveillé le désastre futur qui menace les peuples de Prosa, Corti et Toulon s'il n'agit pas. Vêtu d’une lourde cape assemblée de débris militaires évoquant le pilone des anciens bergers Corse. Il se sert d’une lourde barre de fer dont la tête semble noueuse et torsadée en guise de canne nommé sa Mazza. Bien que enchaîné, il reste le chef spirituel de la résistance, utilisant ses anciennes relations pour diffuser des messages radio clandestins et guider les joueurs pour orchestrer la chute du gouvernement U Sarpu à Sette Capi.",
+    "role": "Celui ou celle qui annonce la mort en rêve, son rôle est neutre, car il ne fait que prédire sans provoquer le destin. Loyal / Bon",
+    "image": "Mazzeru.jpg"
   },
   {
-    "id": 1,
-    "name": "L'ORCU",
+    "id": 7,
+    "name": "U Strigone",
     "region": "CORSE",
-    "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
-    "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
+    "description": "Âgé de 40 ans, U Strigone est un calculateur à l'élégance froide qui dirige les forces militaires de Prosa depuis le sommet de sa tour de verre. C’est le U Sarpu à Sette Capi. Vêtu d'un long manteau noir, il cultive une silhouette sombre rappelant celle d'un corbeau observant le champ de bataille. Loin d'être un guerrier barbare, il orchestre la mort à distance via ses soldats disséminés aux 4 coins de Corti, Toulon et Prosa. Ses directives froides et arbitraires s’abattent comme l'Ochju (le mauvais œil) sur ses ennemis. Du fait de sa position il est le supérieur hiérarchique de A Strega à Corti qui lui permet de maintenir ainsi son emprise sur la ville.",
+    "role": "C'est le chef des Streghe (Sorcières) qui est traditionnellement perçu comme mauvais en raison de ses pratiques occultes. Chaotique / Mauvais",
+    "image": "UStrigone.jpg"
   },
   {
-    "id": 2,
-    "name": "LA STREGA",
+    "id": 8,
+    "name": "U Spallistu",
     "region": "CORSE",
-    "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
-    "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
-  },
-  {
-    "id": 3,
-    "name": "U MAZZERU",
-    "region": "CORSE",
-    "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-    "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-    "image": "Fulettu-HQ.png"
-  },
-  {
-    "id": 1,
-    "name": "L'ORCU",
-    "region": "CORSE",
-    "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
-    "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
-  },
-  {
-    "id": 2,
-    "name": "LA STREGA",
-    "region": "CORSE",
-    "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
-    "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
-  },
-  {
-    "id": 3,
-    "name": "U MAZZERU",
-    "region": "CORSE",
-    "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-    "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-    "image": "Fulettu-HQ.png"
-  },
-  {
-    "id": 1,
-    "name": "L'ORCU",
-    "region": "CORSE",
-    "description": "Son rôle est de faire passer les gens souhaitant se rendre à Prosa en bateau depuis Corti.",
-    "role": "Rôle Mythe/ Alignement jeu : Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionnellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu."
-  },
-  {
-    "id": 2,
-    "name": "LA STREGA",
-    "region": "CORSE",
-    "description": "Gardienne des secrets anciens et maîtresse des potions mystiques.",
-    "role": "Rôle Mythe/ Alignement jeu : Sorcière ancestrale, elle guide les âmes perdues et protège les traditions."
-  },
-  {
-    "id": 3,
-    "name": "U MAZZERU",
-    "region": "CORSE",
-    "description": "Le chasseur de rêves qui prédit l'avenir dans ses visions nocturnes.",
-    "role": "Rôle Mythe/ Alignement jeu : Être entre deux mondes, il voit la mort avant qu'elle n'arrive.",
-    "image": "Fulettu-HQ.png"
+    "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle, il porte un manteau créé à partir de peaux de bêtes. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons, outils de divination spirituelle qu'il utilise pour lire le destin de la vallée dans les craquelures des os. Gardien du musée de Corti qu'il protège comme un sanctuaire, il méprise la tyrannie du clan d'I Muntagnoli.",
+    "role": "U Spallistu est l’appellation de certains bergers qui, lorsqu'ils abattent un mouton, peuvent lire l'avenir dans l'omoplate de ce dernier. Loyal / Bon",
+    "image": "spallistu.jpg"
   }
 ]
