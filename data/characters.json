@@ -65,19 +65,19 @@
   },
   {
     "id": 9,
-    "name": "P1",
+    "name": "Lou Garagaï",
     "region": "PROVENCE",
-    "description": "",
-    "role": "",
-    "image": ""
+    "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
+    "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n’hésite pas à trahir ou abandonner ceux qu’il accompagne pour survivre. Mauvais",
+    "image": "LouGaragai.jpg"
   },
   {
     "id": 10,
-    "name": "P2",
+    "name": "Le Drac",
     "region": "PROVENCE",
-    "description": "",
-    "role": "",
-    "image": ""
+    "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et  dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
+    "role": "Artisan et réparateur itinérant, le Drac rétablit un semblant d’ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu’il croise, même si son aide se monnaie cher. Gentil",
+    "image": "drac.jpg"
   },
     {
     "id": 11,
