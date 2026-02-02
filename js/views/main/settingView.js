@@ -27,12 +27,6 @@ export function settingView() {
         </div>
       </div>
 
-      <div class="setting-item">
-        <label class="setting-label">Vibration</label>
-        <button class="toggle-switch active" id="vibrationToggle">
-          <span class="toggle-knob"></span>
-        </button>
-      </div>
 
       <div class="setting-item">
         <label class="setting-label">Caméra</label>
@@ -47,13 +41,11 @@ export function settingView() {
 
     const musicSlider = document.getElementById('musicSlider')
     const sfxSlider = document.getElementById('sfxSlider')
-    const vibrationToggle = document.getElementById('vibrationToggle')
     const cameraToggle = document.getElementById('cameraToggle')
 
     // Set initial values from settings
     musicSlider.value = settings.music || 70;
     sfxSlider.value = settings.sfx || 80;
-    vibrationToggle.classList.toggle('active', settings.vibration);
     cameraToggle.classList.toggle('active', settings.camera);
 
     //Musique
@@ -64,8 +56,6 @@ export function settingView() {
     sfxSlider.addEventListener('input', (e) => {
         settings.sfx = parseInt(e.target.value);
     });
-    //Vibration
-    vibrationToggle.addEventListener("click", () => toggleSetting(vibrationToggle, "vibration"))
     //Camera
     cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
 
@@ -85,7 +75,6 @@ export function settingView() {
     function saveSettings() {
         localStorage.setItem('settingMusic', settings.music);
         localStorage.setItem('settingSfx', settings.sfx);
-        localStorage.setItem('settingVibration', settings.vibration);
         localStorage.setItem('settingCamera', settings.camera);
     }
 }

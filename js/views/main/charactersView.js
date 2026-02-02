@@ -105,10 +105,13 @@ function renderCharactersGrid(charactersData) {
 }
 
 function goToCharacterDetail(char) {
-    const container = document.createElement('div')
-    container.classList.add('modal-overlay', 'character-detail-content')
+    const overlay = document.createElement('div')
+    overlay.classList.add('modal-overlay')
 
-    container.innerHTML = `
+    const modal = document.createElement('div')
+    modal.classList.add('character-detail-content')
+
+    modal.innerHTML = `
             <button class="close-btn close-detail" id="closeModal" aria-label="Fermer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
@@ -127,11 +130,13 @@ function goToCharacterDetail(char) {
         </div>
     `
 
-    gameContainer.appendChild(container)
+    overlay.appendChild(modal)
+    gameContainer.appendChild(overlay)
+    gameContainer.classList.add('modal-open')
 
-    const characterDetailImage = document.getElementById('characterDetailImage')
-    const characterDetailName = document.getElementById('characterDetailName')
-    const characterDescription = document.getElementById('characterDescription')
+    const characterDetailImage = modal.querySelector('#characterDetailImage')
+    const characterDetailName = modal.querySelector('#characterDetailName')
+    const characterDescription = modal.querySelector('#characterDescription')
 
     characterDetailImage.src = `./assets/characters/${char.image}`
     characterDetailImage.alt = `Illustration ${char.name}`
@@ -141,8 +146,9 @@ function goToCharacterDetail(char) {
     <span class="role">${char.role}</span>
     `
 
-    const closeModal = document.getElementById('closeModal')
+    const closeModal = modal.querySelector('#closeModal')
     closeModal.addEventListener('click', () => {
-        container.remove()
+        overlay.remove()
+        gameContainer.classList.remove('modal-open')
     })
 }
