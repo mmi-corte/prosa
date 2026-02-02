@@ -112,13 +112,6 @@ function goToCharacterDetail(char) {
     modal.classList.add('character-detail-content')
 
     modal.innerHTML = `
-            <button class="close-btn close-detail" id="closeModal" aria-label="Fermer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M15 9l-6 6M9 9l6 6" />
-                </svg>
-            </button>
-
             <div class="character-card-large" id="characterCardLarge">
                 <div class="character-image-frame">
                     <img src="" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
@@ -130,6 +123,17 @@ function goToCharacterDetail(char) {
         </div>
     `
 
+    const closeButton = document.createElement('button')
+    closeButton.classList.add('close-btn', 'character-detail-close')
+    closeButton.setAttribute('aria-label', 'Fermer')
+    closeButton.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M15 9l-6 6M9 9l6 6" />
+        </svg>
+    `
+
+    overlay.appendChild(closeButton)
     overlay.appendChild(modal)
     gameContainer.appendChild(overlay)
     gameContainer.classList.add('modal-open')
@@ -146,8 +150,7 @@ function goToCharacterDetail(char) {
     <span class="role">${char.role}</span>
     `
 
-    const closeModal = modal.querySelector('#closeModal')
-    closeModal.addEventListener('click', () => {
+    closeButton.addEventListener('click', () => {
         overlay.remove()
         gameContainer.classList.remove('modal-open')
     })

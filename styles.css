@@ -623,11 +623,12 @@ body {
   overflow: hidden;
 }
 
-.close-detail {
-  position: absolute;
-  top: 10px;
+.character-detail-close {
+  position: fixed;
+  top: 20px;
   right: 20px;
   color: var(--accent-red);
+  z-index: 600;
 }
 
 .character-card-large {
