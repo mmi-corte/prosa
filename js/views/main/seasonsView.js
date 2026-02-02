@@ -62,9 +62,14 @@ function renderCinematicsGrid(cinematicsData) {
         const card = document.createElement("div")
         card.className = "character-card"
         card.innerHTML = `
-      <div class="character-card-image"
-           style="background-image:url('${cinematic.image || "assets/cinematiques/default.png"}')"></div>
-      <div class="character-card-name">${cinematic.title}</div>
+            <div class="character-card-image" style="background-image: url('${cinematic.image || "assets/cinematiques/default.png"}');">
+                <div class="play-overlay">
+                    <svg viewBox="0 0 24 24" fill="white" width="40" height="40">
+                        <polygon points="5 3 19 12 5 21" />
+                    </svg>
+                </div>
+            </div>
+            <div class="character-card-name">${cinematic.title}</div>
     `
         card.addEventListener("click", () => goToCinematicDetail(cinematic))
         cinematicsGrid.appendChild(card)
@@ -73,67 +78,46 @@ function renderCinematicsGrid(cinematicsData) {
 
 function goToCinematicDetail(cinematic) {
     const container = document.createElement('div')
-    container.classList.add('modal-overlay', 'character-detail-content')
+    container.classList.add('modal-overlay')
 
     container.innerHTML = `
-            <button class="close-btn close-detail" id="closeModal" aria-label="Fermer">
+        <div class="modal-content cinematic-modal">
+            <button class="close-btn" id="closeModal" aria-label="Fermer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M15 9l-6 6M9 9l6 6" />
                 </svg>
             </button>
 
-            <div class="character-card-large" id="cinematicCardLarge">
-                <div class="character-image-frame" id="cinematicImageFrame" style="cursor: pointer; position: relative;">
-                    <img src="${cinematic.image || "assets/cinematiques/default.png"}" alt="${cinematic.title}" id="cinematicDetailImage" class="character-detail-img">
-                    <div id="playButton" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background-color: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;">
-                        <svg viewBox="0 0 24 24" fill="white" width="30" height="30">
-                            <polygon points="5 3 19 12 5 21" />
-                        </svg>
-                    </div>
-                </div>
-                <h2 class="character-name" id="cinematicDetailTitle"></h2>
+            <div class="cinematic-player" id="cinematicPlayer">
+                <video 
+                    id="cinematicVideo"
+                    src="${cinematic.video || ""}"
+                    controls 
+                    autoplay 
+                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </video>
             </div>
 
-        <div class="character-description" id="cinematicDescription">
+            <div class="cinematic-info">
+                <h2 class="cinematic-title">${cinematic.title}</h2>
+                <p class="cinematic-season">${cinematic.season || "Saison inconnue"}</p>
+                <p class="cinematic-description">${cinematic.description || ""}</p>
+            </div>
         </div>
     `
 
     gameContainer.appendChild(container)
 
-    const cinematicDetailImage = document.getElementById('cinematicDetailImage')
-    const cinematicDetailTitle = document.getElementById('cinematicDetailTitle')
-    const cinematicDescription = document.getElementById('cinematicDescription')
-    const cinematicImageFrame = document.getElementById('cinematicImageFrame')
-    const playButton = document.getElementById('playButton')
-
-    cinematicDetailImage.src = cinematic.image || "assets/cinematiques/default.png"
-    cinematicDetailImage.alt = cinematic.title
-    cinematicDetailTitle.textContent = cinematic.title
-    cinematicDescription.innerHTML = `
-    <p>${cinematic.description}</p>
-    <span class="role">${cinematic.season || "Saison inconnue"}</span>
-    `
-
-    // Play video on click
-    function playVideo() {
-        const video = document.createElement('video')
-        video.src = cinematic.video
-        video.controls = true
-        video.autoplay = true
-        video.style.width = '100%'
-        video.style.height = '100%'
-        video.style.objectFit = 'cover'
-        
-        cinematicImageFrame.innerHTML = ''
-        cinematicImageFrame.appendChild(video)
-    }
-
-    cinematicImageFrame.addEventListener('click', playVideo)
-    playButton.addEventListener('click', playVideo)
-
     const closeModal = document.getElementById('closeModal')
     closeModal.addEventListener('click', () => {
         container.remove()
+    })
+
+    // Close modal when clicking outside
+    container.addEventListener('click', (e) => {
+        if (e.target === container) {
+            container.remove()
+        }
     })
 }

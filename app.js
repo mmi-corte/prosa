@@ -60,9 +60,11 @@ settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.c
 
 //Setup the button
 const settingButton = document.getElementById('settingButton')
-settingButton.addEventListener('click', () => {
-  navigate("parametres", settingView, false)
-})
+if (settingButton) {
+  settingButton.addEventListener('click', () => {
+    settingView()
+  })
+}
 
 // ===================================
 // ============= HAPTICS =============
@@ -94,7 +96,7 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
   // }
 
   //Call view function
-  viewFunction
+  viewFunction()
 }
 
 const views = {
