@@ -11,12 +11,6 @@ export function codeView() {
             <h1 class="code-title">SAISISSEZ LE CODE</h1>
             <p class="code-subtitle">pour découvrir l'énigme.</p>
         </div>
-            <button class="close-btn" id="closeScreen" aria-label="Fermer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M15 9l-6 6M9 9l6 6" />
-                </svg>
-            </button>
         </div>
 
         <div class="code-display" id="codeDisplay">
@@ -63,10 +57,18 @@ export function codeView() {
     keyDelete.addEventListener("click", deleteDigit)
     keyValidate.addEventListener("click", submitCode)
 
-    const closeScreen = document.getElementById('closeScreen')
-    closeScreen.addEventListener('click', () => {
-        window.history.back();
+    // Bouton retour
+    const backButton = document.createElement('button')
+    backButton.classList.add('back-btn-circle')
+    backButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    `
+    backButton.addEventListener('click', () => {
+        window.history.back()
     })
+    gameContainer.appendChild(backButton)
 
     let currentCode = []
 

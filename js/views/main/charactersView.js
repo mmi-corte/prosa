@@ -20,12 +20,6 @@ export function charactersView() {
                         <span class="language-label">PROVENCE</span>
                     </label>
 
-                    <button class="close-btn" id="closeScreen" aria-label="Fermer">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M15 9l-6 6M9 9l6 6" />
-                        </svg>
-                    </button>
                 </div>
             </div>
 
@@ -81,10 +75,18 @@ export function charactersView() {
         regionToggle.addEventListener('change', applyRegionFilter)
     }
 
-    const closeScreen = document.getElementById('closeScreen')
-    closeScreen.addEventListener('click', () => {
-        window.history.back();
+    // Bouton retour
+    const backButton = document.createElement('button')
+    backButton.classList.add('back-btn-circle')
+    backButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    `
+    backButton.addEventListener('click', () => {
+        window.history.back()
     })
+    gameContainer.appendChild(backButton)
 }
 
 function renderCharactersGrid(charactersData) {
@@ -124,12 +126,11 @@ function goToCharacterDetail(char) {
     `
 
     const closeButton = document.createElement('button')
-    closeButton.classList.add('close-btn', 'character-detail-close')
+    closeButton.classList.add('back-btn-circle')
     closeButton.setAttribute('aria-label', 'Fermer')
     closeButton.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M15 9l-6 6M9 9l6 6" />
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     `
 

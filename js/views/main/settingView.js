@@ -6,12 +6,6 @@ export function settingView() {
 
     container.innerHTML = `
     <div class="settings-panel">
-      <button class="close-modal-btn" id="closeModal" aria-label="Fermer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M15 9l-6 6M9 9l6 6" />
-        </svg>
-      </button>
 
       <div class="setting-item">
         <label class="setting-label">Musique</label>
@@ -65,12 +59,19 @@ export function settingView() {
         vibrate(30)
     }
 
-    const closeModal = document.getElementById('closeModal')
-    closeModal.addEventListener('click', () => {
+    // Bouton retour
+    const backButton = document.createElement('button')
+    backButton.classList.add('back-btn-circle')
+    backButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    `
+    backButton.addEventListener('click', () => {
         saveSettings()
-        window.history.back();
         container.remove()
     })
+    container.appendChild(backButton)
 
     function saveSettings() {
         localStorage.setItem('settingMusic', settings.music);
