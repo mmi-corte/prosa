@@ -96,7 +96,7 @@ function goToCharacterDetail(char) {
 
             <div class="character-card-large" id="characterCardLarge">
                 <div class="character-image-frame">
-                    <img src="assets/characters/default.png" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
+                    <img src="" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
                 </div>
                 <h2 class="character-name" id="characterDetailName"></h2>
             </div>
@@ -111,7 +111,7 @@ function goToCharacterDetail(char) {
     const characterDetailName = document.getElementById('characterDetailName')
     const characterDescription = document.getElementById('characterDescription')
 
-    characterDetailImage.src = char.image
+    characterDetailImage.src = `./assets/characters/${char.name}`
     characterDetailImage.alt = `./assets/characters/${char.name}`
     characterDetailName.textContent = char.name
     characterDescription.innerHTML = `
