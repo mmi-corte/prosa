@@ -14,9 +14,9 @@ import { debugView } from "./js/views/Temp/debugView.js"
 export const gameContainer = document.getElementById('gameContainer')
 
 const difficultyLabels = {
-  30: 'FACILE',
-  20: 'NORMAL',
-  10: 'DIFFICILE'
+  30: 'F',
+  20: 'M',
+  10: 'D'
 }
 
 function initDifficultyIndicator() {
@@ -30,8 +30,8 @@ function initDifficultyIndicator() {
     <div class="battery-body">
       <div class="battery-fill"></div>
       <div class="battery-cap"></div>
+      <div class="battery-label">-</div>
     </div>
-    <div class="battery-label">-</div>
   `
   document.body.appendChild(indicator)
   return indicator
@@ -49,6 +49,12 @@ window.updateDifficultyIndicator = function updateDifficultyIndicator(difficulty
   const percent = difficultyValue === 30 ? 100 : difficultyValue === 20 ? 66 : 33
   fill.style.width = `${percent}%`
   label.textContent = difficultyLabels[difficultyValue] || '-'
+  indicator.dataset.difficulty = String(difficultyValue)
+
+  const hasInfo = !!document.querySelector('.info-btn')
+  const hasBack = !!document.querySelector('.back-btn-circle')
+  const rightOffset = hasInfo && !hasBack ? 74 : 128
+  indicator.style.right = `${rightOffset}px`
   indicator.classList.remove('hidden')
 }
 

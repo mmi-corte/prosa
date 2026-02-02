@@ -1670,12 +1670,13 @@ body {
 
 .difficulty-battery {
   position: fixed;
-  top: 15px;
-  right: 140px;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 44px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
   z-index: 10;
   color: var(--foreground);
 }
@@ -1716,10 +1717,20 @@ body {
 }
 
 .battery-label {
-  font-size: 0.7rem;
-  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 800;
   letter-spacing: 0.06em;
-  color: var(--muted-foreground);
+  color: var(--background);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.difficulty-battery[data-difficulty="10"] .battery-label {
+  color: var(--foreground);
 }
 
 .back-btn-circle:hover {

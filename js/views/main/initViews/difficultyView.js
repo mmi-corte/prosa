@@ -9,7 +9,7 @@ export function difficultyView() {
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerHTML = `
-        <span style="font-size: 2rem; font-weight: 900;">DIFFICULTÉ DU JEU</span><br>
+        <span style="font-size: 2rem; font-weight: 900;">NOMBRE D’ERREURS MAXIMAL</span><br>
         <span style="font-size: 1.2rem; font-weight: 400; color: var(--muted-foreground);">Choisissez votre jauge</span>
     `;
 
