@@ -17,8 +17,114 @@
         "1": {
           "type": "win",
           "nextStep": "0300"
+        }
+      }
+    },
+    "03000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0400"
+        }
+      }
+    },
+    "03001": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0300"
+        }
+      }
+    },
+    "04000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0500"
+        }
+      }
+    },
+    "05001": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0600"
+        }
+      }
+    },
+    "05002": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0700"
+        }
+      }
+    },
+    "05003": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0800"
+        }
+      }
+    },
+    "05004": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0900"
+        }
+      }
+    },
+    "13000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "1400"
+        }
+      }
+    },
+    "14000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "PROSA_01001"
         },
         "2": {
+          "type": "win",
+          "nextStep": "PROSA_01002"
+        },
+        "3": {
+          "type": "lose",
+          "nextStep": "PROSA_01003"
+        }
+      }
+    }
+  },
+  "2": {
+    "02000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
           "type": "win",
           "nextStep": "0300"
         }
@@ -39,6 +145,26 @@
       }
     }
   },
-  "2": {},
-  "3": {}
+  "3": {
+    "05000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "0600"
+        }
+      }
+    },
+    "10000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "FINAL"
+        }
+      }
+    }
+  }
 }
