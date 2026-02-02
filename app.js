@@ -1,4 +1,5 @@
 import { gameInitialized, initGame } from "./js/initGame.js"
+import { initLanguageManager } from "./js/langageManager.js"
 import { charactersView } from "./js/views/main/charactersView.js"
 import { codeView } from "./js/views/main/codeView.js"
 import { loadingView } from "./js/views/main/loadingView.js"
@@ -14,6 +15,9 @@ export function clearContainer() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+
+  // Initialize language manager first (async to load translations)
+  await initLanguageManager()
 
   // Initialize game and wait for it to complete
   await initGame()

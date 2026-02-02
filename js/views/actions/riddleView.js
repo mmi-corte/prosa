@@ -2,6 +2,7 @@ import { clearContainer, gameContainer } from "../../../app.js";
 import { activeStepId, callAction } from "../../gameEventHandler.js";
 import { riddlesData } from "../../loadData.js";
 import { typeWriteEffect } from "../../typeWriteEffect.js";
+import { getTranslation } from "../../langageManager.js";
 
 let data
 let currentRiddleIndex
@@ -47,12 +48,12 @@ async function updateRiddle() {
         choiceContainer.innerHTML = ""
 
         //Type write question
-        await typeWriteEffect(questionContainer, riddles[currentRiddleIndex].question)
+        await typeWriteEffect(questionContainer, getTranslation(riddles[currentRiddleIndex].question))
 
         //Show availables answers
         riddles[currentRiddleIndex].choices.forEach(riddle => {
             const button = document.createElement('button')
-            button.innerHTML = riddle.text
+            button.innerHTML = getTranslation(riddle.text)
             choiceContainer.appendChild(button)
 
             button.addEventListener('click', () => {

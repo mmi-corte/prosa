@@ -5,40 +5,67 @@
                 "random": true,
                 "text": [
                     {
-                        "question": "TODO Énigme Fata 1",
+                        "question": {
+                            "fr": "TODO Énigme Fata 1",
+                            "cor": "TODO Casula Fata 1"
+                        },
                         "choices": [
                             {
-                                "text": "Réponse neutre",
+                                "text": {
+                                    "fr": "Réponse neutre",
+                                    "cor": "Risposta neutra"
+                                },
                                 "score": 0
                             },
                             {
-                                "text": "Réponse neutre",
+                                "text": {
+                                    "fr": "Réponse neutre",
+                                    "cor": "Risposta neutra"
+                                },
                                 "score": 0
                             }
                         ]
                     },
                     {
-                        "question": "TODO Énigme Fata 2",
+                        "question": {
+                            "fr": "TODO Énigme Fata 2",
+                            "cor": "TODO Casula Fata 2"
+                        },
                         "choices": [
                             {
-                                "text": "Bonne réponse",
+                                "text": {
+                                    "fr": "Bonne réponse",
+                                    "cor": "Bona risposta"
+                                },
                                 "score": 1
                             },
                             {
-                                "text": "Mauvaise réponse",
+                                "text": {
+                                    "fr": "Mauvaise réponse",
+                                    "cor": "Mala risposta"
+                                },
                                 "score": -1
                             }
                         ]
                     },
                     {
-                        "question": "TODO Énigme Fata 3",
+                        "question": {
+                            "fr": "TODO Énigme Fata 3",
+                            "cor": "TODO Casula Fata 3"
+                        },
                         "choices": [
                             {
-                                "text": "Réponse neutre",
+                                "text": {
+                                    "fr": "Réponse neutre",
+                                    "cor": "Risposta neutra"
+                                },
                                 "score": 0
                             },
                             {
-                                "text": "Réponse neutre",
+                                "text": {
+                                    "fr": "Réponse neutre",
+                                    "cor": "Risposta neutra"
+                                },
                                 "score": 0
                             }
                         ]

@@ -6,6 +6,7 @@ import { endView } from "./views/actions/endView.js";
 import { gameView } from "./views/actions/gameView.js";
 import { riddleView } from "./views/actions/riddleView.js";
 import { menuView } from "./views/main/menuView.js";
+import { setLanguage } from "./langageManager.js";
 
 export let activePlayer
 export let activeStepId
@@ -17,6 +18,11 @@ export let activeStep
  */
 export function setActivePlayer(playerIndex) {
     activePlayer = players[playerIndex]
+    if (activePlayer && activePlayer.language) {
+        setLanguage(activePlayer.language)
+    } else {
+        setLanguage('fr')
+    }
 }
 
 /**

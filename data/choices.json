@@ -1,5 +1,10 @@
 {
     "1": {
+        "question": {
+            "fr": "Question de choix 1",
+            "cor": "Quistioni di scelta 1"
+        },
+        "choices": []
     },
     "2": {},
     "3": {}

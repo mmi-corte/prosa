@@ -6,7 +6,7 @@ let playerCount
 export function playerCountView() {
     clearInitContainer();
     initContainer.classList.add('initScreen1');
-    initTextContainer.innerText = "Veuillez entrer le nombre de joueurs";
+    initTextContainer.innerText = "Nombre de joueurs";
 
     playerCount = 2;
 
@@ -24,7 +24,7 @@ export function playerCountView() {
     const playerCountInput = document.createElement('span');
     playerCountInput.innerHTML = playerCount;
 
-    playerCountContainer.append(plusButton, playerCountInput, minusButton);
+    playerCountContainer.append(minusButton, playerCountInput, plusButton);
 
     // --- Submit Button ---
     const submitButton = document.createElement('button');

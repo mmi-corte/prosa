@@ -3,6 +3,7 @@ import { fetchPlayerCharacters } from "../../../loadData.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { playerSubmitView } from "./playerSubmitView.js";
+import { getTranslation, setLanguage } from "../../../langageManager.js";
 
 let charactersData
 let currentPlayerIndex
@@ -29,7 +30,8 @@ export async function characterSelectView(playerCount) {
                 selectedPlayers[i] = {
                     character: 0,
                     localisation: 0,
-                    nextStepVariant: 0
+                    nextStepVariant: 0,
+                    language: 'fr'
                 };
             }
             console.log(`${playerCount} players initialized.`);
@@ -127,18 +129,80 @@ function showCharacterDetails(regionId, characterId) {
     //Character name and description
     const characterDescription = document.createElement('p')
     characterDescription.classList.add('characterDescription')
-    characterDescription.innerText = charactersData[regionId][characterId].description
+    const descriptionSource = charactersData[regionId][characterId].description
+    const updateDescription = () => {
+        characterDescription.innerText = getTranslation(descriptionSource)
+    }
+    updateDescription()
 
-    //submit Button
-    const submitButton = document.createElement('button')
-    submitButton.classList.add("btn-primary")
-    submitButton.innerText = "Choisir ce personnage"
+    // Language switch (per player)
+    const switchRow = document.createElement('div')
+    switchRow.classList.add('character-language-row')
+
+    const switchWrapper = document.createElement('label')
+    switchWrapper.classList.add('language-switch')
+
+    const frLabel = document.createElement('span')
+    frLabel.classList.add('language-label')
+    const frFlag = document.createElement('img')
+    frFlag.src = './assets/drapeau/france.png'
+    frFlag.alt = 'Drapeau France'
+    frFlag.style.width = '1.5em'
+    frFlag.style.height = '1.5em'
+    frFlag.style.objectFit = 'contain'
+    frLabel.appendChild(frFlag)
+
+    const languageSwitch = document.createElement('input')
+    languageSwitch.type = 'checkbox'
+    languageSwitch.setAttribute('aria-label', 'Basculer la langue entre FR et Corse')
+
+    const slider = document.createElement('span')
+    slider.classList.add('language-slider')
+
+    const corLabel = document.createElement('span')
+    corLabel.classList.add('language-label')
+    const corFlag = document.createElement('img')
+    corFlag.src = './assets/drapeau/bandera.png'
+    corFlag.alt = 'Drapeau Corse'
+    corFlag.style.width = '1.5em'
+    corFlag.style.height = '1.5em'
+    corFlag.style.objectFit = 'contain'
+    corLabel.appendChild(corFlag)
+
+    switchWrapper.append(frLabel, languageSwitch, slider, corLabel)
+
+    // Initialize switch from current player's language
+    const currentLang = selectedPlayers[currentPlayerIndex]?.language || 'fr'
+    languageSwitch.checked = currentLang === 'cor'
+    setLanguage(currentLang)
+    updateDescription()
+
+    languageSwitch.addEventListener('change', () => {
+        const newLang = languageSwitch.checked ? 'cor' : 'fr'
+        selectedPlayers[currentPlayerIndex].language = newLang
+        setLanguage(newLang)
+        updateDescription()
+            updateSubmitLabel()
+    })
+
+    switchRow.append(switchWrapper)
+
+        const submitButton = document.createElement('button')
+        submitButton.classList.add("btn-primary")
+        const submitLabel = {
+            fr: "Choisir ce personnage",
+            cor: "Sceglie stu persunagiu"
+        }
+        const updateSubmitLabel = () => {
+            submitButton.innerText = getTranslation(submitLabel)
+        }
+        updateSubmitLabel()
 
     submitButton.addEventListener('click', () => {
         addPlayer(regionId, characterId)
     })
 
-    detailContainer.append(closeButton, characterPicture, characterName, characterDescription, submitButton)
+    detailContainer.append(closeButton, characterPicture, characterName, switchRow, characterDescription, submitButton)
     setTimeout(() => detailContainer.classList.add("show"), 10)
 }
 

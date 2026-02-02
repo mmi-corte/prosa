@@ -843,9 +843,17 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  gap: 15px;
-  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 80px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.initWrapper > p {
+  margin: 0;
+  font-weight: 600;
 }
 
 .initWrapper .playerNumber {
@@ -860,40 +868,45 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  gap: 100px;
 }
 
 .initScreen1 .playerCountContainer {
   display: flex;
-  flex-direction: column;
-  border-radius: 26px;
+  flex-direction: row;
+  border-radius: 40px;
   overflow: hidden;
-  font-size: 4rem;
+  font-size: 8rem;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--border);
-  gap: 3vh;
+  border: 3px solid var(--border);
+  gap: 0;
   align-self: center;
-  width: 10rem;
+  width: auto;
   font-weight: 900;
 }
 
 .initScreen1 .playerCountContainer button {
   background-color: var(--card);
   font-weight: 900;
-  padding: 15px;
-  font-size: 3rem;
+  padding: 35px;
+  font-size: 6rem;
   color: white;
   border: none;
-  width: 100%;
+  width: 11rem;
   cursor: pointer;
-  height: 14vh;
+  height: 11rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.initScreen1 .playerCountContainer span {
+  padding: 0 4rem;
+  min-width: 8rem;
+  text-align: center;
 }
 
 .initScreen1 .playerCountContainer button:hover {
@@ -1032,7 +1045,8 @@ body {
   backdrop-filter: blur(25px);
   background-color: rgba(116, 100, 83, 0.7);
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .detailContainer img {
@@ -1050,11 +1064,88 @@ body {
 }
 
 .detailContainer .characterDescription {
-  overflow-y: scroll;
+  display: block;
+  max-width: 700px;
+  text-align: center;
+  line-height: 1.5;
+  padding: 10px 20px;
+}
+
+/* Character name row with language switch */
+.character-name-row {
   display: flex;
-  /*! justify-content: center; */
-  flex-direction: column;
-  max-width: 600px;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.character-language-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -6px;
+  margin-bottom: 6px;
+}
+
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.language-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.language-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  display: flex;
+  align-items: center;
+}
+
+.language-label img {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.language-slider {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  background: var(--muted);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.language-slider::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  background: var(--foreground);
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.language-switch input:checked + .language-slider {
+  background: var(--primary);
+}
+
+.language-switch input:checked + .language-slider::before {
+  transform: translateX(20px);
 }
 
 /* ===================================
@@ -1144,4 +1235,120 @@ body {
 
 #debugBtn {
   z-index: 2000;
+}
+
+/* Language Selection View */
+.language-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.language-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 40px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  transform: translateY(-4px);
+}
+
+.language-btn:active {
+  transform: translateY(-2px);
+}
+
+.language-btn svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--accent-green);
+}
+
+.language-btn.french-btn {
+  border-color: #002395;
+}
+
+.language-btn.corsican-btn {
+  border-color: #c63032;
+}
+
+.initScreen1-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Language Selection in Character Modal */
+.language-selection-container {
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 15px 0;
+}
+
+.language-title {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin-bottom: 15px;
+}
+
+.language-buttons-wrapper {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.language-choice-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 25px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.language-choice-btn span:first-child {
+  font-size: 2rem;
+}
+
+.language-choice-btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.language-choice-btn.active {
+  background: var(--primary);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px rgba(129, 203, 214, 0.3);
+}
+
+.language-choice-btn:active {
+  transform: translateY(0);
 }

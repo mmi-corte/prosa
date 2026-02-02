@@ -2,6 +2,7 @@ import { clearContainer, gameContainer } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { dialogsData } from "../../loadData.js";
+import { getTranslation } from "../../langageManager.js";
 
 let textBox
 let data
@@ -30,7 +31,7 @@ export function dialogView(action) {
 
     //Add click event logic for next dialog
     textBox.addEventListener('click', () => {
-        const activeText = data.dialog[currentDialogIndex].text.fr;
+        const activeText = getTranslation(data.dialog[currentDialogIndex].text);
 
         if (isTyping) { //If typerite effect is still active...
             skipTypeWrite()
@@ -47,7 +48,7 @@ export function dialogView(action) {
 }
 
 function updateDialog() {
-    const activeText = data.dialog[currentDialogIndex].text.fr;
+    const activeText = getTranslation(data.dialog[currentDialogIndex].text);
     currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
     typeWriteEffect(textBox, activeText, currentPitch);
 }

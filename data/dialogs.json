@@ -11,12 +11,14 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table."
+              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
+              "cor": "In un rifugiu di furtuna, una vecchia radio è posta nantu à una tavula."
             }
           },
           {
             "text": {
-              "fr": "\"…si entend… île… Dict… Refuge… Pro…\""
+              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
+              "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
             "pitch": "600"
           }
@@ -78,17 +80,20 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous vous agenouillez et remplissez votre gourde. Le bruit du courant couvre vos pensées, mais le message radio tourne encore dans votre tête"
+              "fr": "Vous vous agenouillez et remplissez votre gourde. Le bruit du courant couvre vos pensées, mais le message radio tourne encore dans votre tête",
+              "cor": "Vi inginochjè è riempite a vostra zucca. U rumore di l'acqua copre i vostri pinseri, mà u missaghju di a radio gira sempre in a vostra testa"
             }
           },
           {
             "text": {
-              "fr": "Un doute persiste… Partir pour Prosa, ou continuer à survivre dans ce monde injuste ?"
+              "fr": "Un doute persiste… Partir pour Prosa, ou continuer à survivre dans ce monde injuste ?",
+              "cor": "Un dubitu persiste… Partì per Prosa, o cuntinuà à campare in stu mondu inghjustu ?"
             }
           },
           {
             "text": {
-              "fr": "Un bruit vient interrompre votre réfléxion…"
+              "fr": "Un bruit vient interrompre votre réfléxion…",
+              "cor": "Un rumore vene à interrompere a vostra riflessione…"
             }
           },
           {
@@ -100,7 +105,8 @@
           },
           {
             "text": {
-              "fr": "\"C’est ma radio. J’ai capté un message intrigant, un rebelle me demande de l’aider.\""
+              "fr": "\"C'est ma radio. J'ai capté un message intrigant, un rebelle me demande de l'aider.\"",
+              "cor": "\"Hè a mo radio. Aghju ricevutu un missaghju intrigante, un ribelle mi dumanda d'aiutàlu.\""
             }
           },
           {
