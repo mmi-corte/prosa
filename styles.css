@@ -1352,3 +1352,60 @@ body {
 .language-choice-btn:active {
   transform: translateY(0);
 }
+
+/* ========== SPLASH VIEW ========== */
+.splashWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.splash-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.splash-btn {
+  padding: 20px 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.splash-btn-primary {
+  background-color: var(--primary);
+  color: var(--foreground);
+  border: 2px solid var(--primary);
+}
+
+.splash-btn-primary:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.splash-btn-secondary {
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 2px solid var(--primary);
+}
+
+.splash-btn-secondary:hover {
+  background-color: var(--muted);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.splash-btn:active {
+  transform: translateY(0);
+}

@@ -6,6 +6,7 @@ import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { qrView } from "./js/views/main/qrView.js"
 import { settingView } from "./js/views/main/settingView.js"
+import { progressionView } from "./js/views/main/progressionView.js"
 import { debugView } from "./js/views/Temp/debugView.js"
 
 export const gameContainer = document.getElementById('gameContainer')
@@ -27,8 +28,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log("No game initialized.")
   }
 
-  //Then, load main menu
-  menuView()
+  //Then, load progression screen
+  progressionView()
 
   // ====================================
   // ============= HEADER LOGO ==========
@@ -97,6 +98,7 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
 }
 
 const views = {
+  "progression": progressionView,
   "menu": menuView,
   "code": codeView,
   "qr": qrView,
