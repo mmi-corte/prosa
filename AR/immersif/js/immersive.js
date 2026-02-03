@@ -838,11 +838,11 @@ function fallbackAnimate() {
   camera.position.y = currentHeight;
   camera.position.z = userPosition.z;
   
-  // Debug: show position and height
-  var posInfo = 'Pos: ' + userPosition.x.toFixed(2) + ', ' + userPosition.z.toFixed(2) + ' H:' + currentHeight.toFixed(2);
-  if (isMoving) posInfo += ' [MARCHE]';
-  if (isCrouching) posInfo += ' [ACCROUPI]';
-  updateStatus(posInfo);
+  // Debug info disabled for production
+  // var posInfo = 'Pos: ' + userPosition.x.toFixed(2) + ', ' + userPosition.z.toFixed(2) + ' H:' + currentHeight.toFixed(2);
+  // if (isMoving) posInfo += ' [MARCHE]';
+  // if (isCrouching) posInfo += ' [ACCROUPI]';
+  // updateStatus(posInfo);
   
   // Check proximity to character for subtitle trigger
   checkCharacterProximity();
