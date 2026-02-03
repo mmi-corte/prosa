@@ -2,7 +2,7 @@
     "1": {
         "01": {
             "1": {
-                "game": "radio_frequence",
+                "game": "radio_frequencee",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLoose": "end",

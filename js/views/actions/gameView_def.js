@@ -20,12 +20,7 @@ export function gameView(action) {
 
     // Load the game's HTML content
     fetch(`./games/${data.game}/index.html`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: Cannot load minigame at ./games/${data.game}/index.html`);
-            }
-            return response.text();
-        })
+        .then(response => response.text())
         .then(html => {
             // Parse HTML to extract body content
             const parser = new DOMParser();
@@ -102,37 +97,7 @@ export function gameView(action) {
         })
         .catch(error => {
             console.error('Error loading minigame:', error);
-            
-            // Debug UI for missing minigame
-            const debugDiv = document.createElement('div');
-            
-            const gameName = data.game ? data.game : 'UNKNOWN';
-            debugDiv.innerHTML = `
-                <h2>DEBUG: MINIGAME LOAD ERROR</h2>
-                <p>Minigame: ${gameName}</p>
-                <p>Path: ./games/${gameName}/index.html</p>
-                <p>Error: ${error.message}</p>
-            `;
-            
-            const buttonContainer = document.createElement('div');
-            
-            const winBtn = document.createElement('button');
-            winBtn.textContent = 'WIN';
-            winBtn.onclick = () => {
-                callAction(data.nextActionTypeWin, data.nextActionWin);
-            };
-            
-            const loseBtn = document.createElement('button');
-            loseBtn.textContent = 'LOSE';
-            loseBtn.onclick = () => {
-                callAction(data.nextActionTypeLoose, data.nextActionLoose);
-            };
-            
-            buttonContainer.appendChild(winBtn);
-            buttonContainer.appendChild(loseBtn);
-            debugDiv.appendChild(buttonContainer);
-            
-            gameContainer.appendChild(debugDiv);
+            callAction(data.nextActionTypeWin, data.nextActionWin);
         });
 }
 
