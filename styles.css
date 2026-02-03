@@ -1468,6 +1468,70 @@ body {
   border: 1px solid var(--border);
 }
 
+.actionWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 24px;
+  justify-content: center;
+}
+
+.actionQuestion {
+  padding: 24px;
+  width: 100%;
+  font-size: 1.3rem;
+  min-height: 8rem;
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.actionChoices {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .actionChoices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.actionChoiceButton {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  min-height: 56px;
+}
+
+.actionChoiceButton:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.actionChoiceButton:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.actionChoiceButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 /* EndWrapper */
 .endWrapper {
   position: absolute;

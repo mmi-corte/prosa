@@ -15,7 +15,7 @@ export async function riddleView(action) {
     data = riddlesData[action]
 
     const wrapper = document.createElement('div');
-    wrapper.classList.add('riddleWrapper')
+    wrapper.classList.add('riddleWrapper', 'actionWrapper')
     gameContainer.appendChild(wrapper)
 
     //Reset score
@@ -23,10 +23,12 @@ export async function riddleView(action) {
 
     //Prepare Question container
     questionContainer = document.createElement('p')
+    questionContainer.classList.add('actionQuestion')
     wrapper.appendChild(questionContainer)
 
     //Prepare choices container
     choiceContainer = document.createElement('div')
+    choiceContainer.classList.add('actionChoices')
     wrapper.appendChild(choiceContainer)
 
     // Select one random riddle from available riddles
@@ -43,6 +45,7 @@ async function displayRiddle() {
     //Show available answers
     selectedRiddle.choices.forEach(choice => {
         const button = document.createElement('button')
+        button.classList.add('actionChoiceButton')
         button.innerHTML = getTranslation(choice.text)
         choiceContainer.appendChild(button)
 
