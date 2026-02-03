@@ -162,12 +162,12 @@ body {
 /* Subtitles - Interactive box for character dialog */
 .subtitles {
   position: fixed;
-  bottom: 100px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100000;
-  max-width: 90%;
-  width: 90%;
+  max-width: 85%;
+  width: auto;
   text-align: center;
   pointer-events: auto !important;
   cursor: pointer;
@@ -186,12 +186,12 @@ body {
   display: block;
   background: linear-gradient(135deg, rgba(26, 24, 18, 0.95), rgba(40, 35, 28, 0.95));
   color: var(--foreground);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.7;
-  padding: 20px 24px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  line-height: 1.5;
+  padding: 14px 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--border);
   font-family: 'Futura', 'Segoe UI', sans-serif;
   letter-spacing: 0.02em;
@@ -200,8 +200,8 @@ body {
 
 .subtitles span small {
   display: block;
-  margin-top: 12px;
-  font-size: 12px;
+  margin-top: 8px;
+  font-size: 11px;
   color: #b8b0a0;
   text-transform: uppercase;
   letter-spacing: 0.1em;
