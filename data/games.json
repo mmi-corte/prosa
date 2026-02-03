@@ -1,19 +1,25 @@
 {
     "1": {
-        "0100": {
+        "01": {
             "1": {
-                "game": "radio",
+                "game": "radio_frequence",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
-                "nextActionTypeLoose": "dialog",
-                "nextActionLoose": "2",
-                "nextActionTypeStill": "dialog",
-                "nextActionStill": "2",
-                "nextActionTypeContinue": "dialog",
-                "nextActionContinue": "2"
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
             }
         }
     },
-    "2": {},
+    "2": {
+        "01": {
+            "1": {
+                "game": "radio_frequence",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        }
+    },
     "3": {}
 }

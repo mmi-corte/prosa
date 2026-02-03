@@ -1,10 +1,10 @@
-* {
+.minigame-wrapper * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+.minigame-wrapper {
     background: #000000;
     font-family: 'Courier New', monospace;
     color: #00ff00;
@@ -18,7 +18,7 @@ body {
 }
 
 /* Effet Scanlines CRT */
-body::before {
+.minigame-wrapper::before {
     content: "";
     position: fixed;
     top: 0;
@@ -37,7 +37,7 @@ body::before {
 }
 
 /* Effet Glow Global */
-body::after {
+.minigame-wrapper::after {
     content: "";
     position: fixed;
     top: 0;
@@ -49,7 +49,7 @@ body::after {
     z-index: 1;
 }
 
-.container {
+.minigame-wrapper .container {
     width: 100%;
     max-width: 1200px;
     position: relative;
@@ -57,7 +57,7 @@ body::after {
 }
 
 /* Terminal Header */
-.terminal-header {
+.minigame-wrapper .terminal-header {
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 4px;
@@ -74,7 +74,7 @@ body::after {
     50% { opacity: 0.95; }
 }
 
-.blink {
+.minigame-wrapper .blink {
     animation: blink 1s infinite;
 }
 
@@ -83,7 +83,7 @@ body::after {
     51%, 100% { opacity: 0; }
 }
 
-.game-section {
+.minigame-wrapper .game-section {
     display: flex;
     gap: 30px;
     margin-bottom: 30px;
@@ -92,7 +92,7 @@ body::after {
 }
 
 /* Control Panel */
-.control-panel {
+.minigame-wrapper .control-panel {
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #00ff00;
     padding: 25px;
@@ -101,7 +101,7 @@ body::after {
                 inset 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
-.panel-title {
+.minigame-wrapper .panel-title {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 25px;
@@ -109,7 +109,7 @@ body::after {
     text-shadow: 0 0 10px #00ff00;
 }
 
-.stat {
+.minigame-wrapper .stat {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
@@ -119,12 +119,12 @@ body::after {
     font-size: 1.1rem;
 }
 
-.label {
+.minigame-wrapper .label {
     color: #00ff00;
     text-shadow: 0 0 5px #00ff00;
 }
 
-.value {
+.minigame-wrapper .value {
     color: #00ff00;
     font-size: 1.5rem;
     text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
@@ -132,7 +132,7 @@ body::after {
 }
 
 /* Wave Container */
-.wave-container {
+.minigame-wrapper .wave-container {
     position: relative;
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #00ff00;
@@ -143,7 +143,7 @@ body::after {
     min-width: 300px;
 }
 
-.wave-label {
+.minigame-wrapper .wave-label {
     text-align: center;
     margin-bottom: 15px;
     font-size: 0.9rem;
@@ -151,7 +151,7 @@ body::after {
     text-shadow: 0 0 10px #00ff00;
 }
 
-#waveCanvas {
+.minigame-wrapper #waveCanvas {
     display: block;
     width: 100%;
     background: #000000;
@@ -161,7 +161,7 @@ body::after {
 }
 
 /* Radio Dial Container */
-.radio-dial-container {
+.minigame-wrapper .radio-dial-container {
     margin-top: 20px;
     padding: 20px;
     background: rgba(0, 255, 0, 0.05);
@@ -171,12 +171,12 @@ body::after {
     flex-wrap: wrap;
 }
 
-.dial-section {
+.minigame-wrapper .dial-section {
     flex: 1;
     min-width: 250px;
 }
 
-.dial-title {
+.minigame-wrapper .dial-title {
     text-align: center;
     font-size: 0.85rem;
     margin-bottom: 10px;
@@ -185,7 +185,7 @@ body::after {
     color: #00ff00;
 }
 
-.radio-dial {
+.minigame-wrapper .radio-dial {
     position: relative;
     height: 80px;
     background: #000000;
@@ -195,7 +195,7 @@ body::after {
     box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
 }
 
-.dial-ticks {
+.minigame-wrapper .dial-ticks {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -205,7 +205,7 @@ body::after {
     padding: 0 10px;
 }
 
-.tick {
+.minigame-wrapper .tick {
     width: 2px;
     height: 30px;
     background: #00ff00;
@@ -213,13 +213,13 @@ body::after {
     opacity: 0.5;
 }
 
-.tick.major {
+.minigame-wrapper .tick.major {
     height: 50px;
     opacity: 1;
     width: 3px;
 }
 
-.dial-center-zone {
+.minigame-wrapper .dial-center-zone {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -231,7 +231,7 @@ body::after {
     opacity: 0.3;
 }
 
-.needle {
+.minigame-wrapper .needle {
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -243,7 +243,7 @@ body::after {
     z-index: 10;
 }
 
-.needle::before {
+.minigame-wrapper .needle::before {
     content: '';
     position: absolute;
     top: 0;
@@ -257,18 +257,18 @@ body::after {
     filter: drop-shadow(0 0 8px #ff0000);
 }
 
-.amplitude-needle {
+.minigame-wrapper .amplitude-needle {
     background: linear-gradient(to top, #ffff00, #ffff99);
     box-shadow: 0 0 15px #ffff00, 0 0 30px #ffff00;
 }
 
-.amplitude-needle::before {
+.minigame-wrapper .amplitude-needle::before {
     border-top-color: #ffff00;
     filter: drop-shadow(0 0 8px #ffff00);
 }
 
 /* Tuning Slider */
-input[type="range"] {
+.minigame-wrapper input[type="range"] {
     width: 100%;
     height: 8px;
     -webkit-appearance: none;
@@ -279,7 +279,7 @@ input[type="range"] {
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
-input[type="range"]::-webkit-slider-thumb {
+.minigame-wrapper input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
@@ -290,7 +290,7 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
 }
 
-input[type="range"]::-moz-range-thumb {
+.minigame-wrapper input[type="range"]::-moz-range-thumb {
     width: 25px;
     height: 25px;
     background: #00ff00;
@@ -301,7 +301,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* Terminal Button */
-.terminal-button {
+.minigame-wrapper .terminal-button {
     width: 100%;
     margin-top: 20px;
     padding: 15px;
@@ -317,20 +317,20 @@ input[type="range"]::-moz-range-thumb {
     letter-spacing: 2px;
 }
 
-.terminal-button:hover:not(:disabled) {
+.minigame-wrapper .terminal-button:hover:not(:disabled) {
     background: rgba(0, 255, 0, 0.1);
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.8),
                 inset 0 0 10px rgba(0, 255, 0, 0.2);
     text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
 }
 
-.terminal-button:disabled {
+.minigame-wrapper .terminal-button:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
 /* Status Display */
-.status-display {
+.minigame-wrapper .status-display {
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #00ff00;
     padding: 20px;
@@ -338,7 +338,7 @@ input[type="range"]::-moz-range-thumb {
                 inset 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
-.status-header {
+.minigame-wrapper .status-header {
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 15px;
@@ -346,7 +346,7 @@ input[type="range"]::-moz-range-thumb {
     letter-spacing: 3px;
 }
 
-.status-content {
+.minigame-wrapper .status-content {
     color: #00ff00;
     font-size: 1rem;
     padding: 15px;
@@ -357,18 +357,18 @@ input[type="range"]::-moz-range-thumb {
     text-align: center;
 }
 
-.status-content.synced {
+.minigame-wrapper .status-content.synced {
     color: #00ffff;
     text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
     animation: pulse 1s infinite;
 }
 
-.status-content.failed {
+.minigame-wrapper .status-content.failed {
     color: #ff0000;
     text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
 }
 
-.status-content.partial {
+.minigame-wrapper .status-content.partial {
     color: #ffff00;
     text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00;
 }
@@ -378,14 +378,14 @@ input[type="range"]::-moz-range-thumb {
     50% { opacity: 0.6; }
 }
 
-.prompt {
+.minigame-wrapper .prompt {
     color: #00ff00;
     font-weight: bold;
     text-shadow: 0 0 10px #00ff00;
 }
 
 /* Modal Styling */
-.modal {
+.minigame-wrapper .modal {
     display: flex;
     position: fixed;
     z-index: 10000;
@@ -404,7 +404,7 @@ input[type="range"]::-moz-range-thumb {
     to { opacity: 1; }
 }
 
-.modal-content {
+.minigame-wrapper .modal-content {
     background: #000000;
     border: 3px solid #00ff00;
     padding: 40px;
@@ -421,7 +421,7 @@ input[type="range"]::-moz-range-thumb {
     100% { transform: scale(1) skew(0deg); opacity: 1; }
 }
 
-.modal-header {
+.minigame-wrapper .modal-header {
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 30px;
@@ -432,7 +432,7 @@ input[type="range"]::-moz-range-thumb {
     text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
 }
 
-.glitch {
+.minigame-wrapper .glitch {
     animation: glitch 2s infinite;
 }
 
@@ -443,27 +443,27 @@ input[type="range"]::-moz-range-thumb {
     96% { transform: translate(-2px, -2px); }
 }
 
-.modal-body {
+.minigame-wrapper .modal-body {
     color: #00ff00;
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 30px;
 }
 
-.terminal-line {
+.minigame-wrapper .terminal-line {
     color: #00ff00;
     font-style: italic;
     opacity: 0.7;
     text-shadow: 0 0 5px #00ff00;
 }
 
-.rule-item {
+.minigame-wrapper .rule-item {
     margin: 10px 0;
     padding-left: 20px;
     text-shadow: 0 0 5px #00ff00;
 }
 
-.key {
+.minigame-wrapper .key {
     display: inline-block;
     padding: 2px 8px;
     border: 1px solid #00ff00;
@@ -473,13 +473,13 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* Radio Modal Styling */
-.radio-modal {
+.minigame-wrapper .radio-modal {
     max-width: 900px;
     background: #000000;
     border: 3px solid #00ff00;
 }
 
-.radio-header {
+.minigame-wrapper .radio-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -488,7 +488,7 @@ input[type="range"]::-moz-range-thumb {
     background: rgba(0, 255, 0, 0.05);
 }
 
-.radio-icon {
+.minigame-wrapper .radio-icon {
     font-size: 2rem;
     filter: grayscale(1) brightness(2);
     animation: radioPulse 2s infinite;
@@ -499,25 +499,25 @@ input[type="range"]::-moz-range-thumb {
     50% { opacity: 0.7; transform: scale(1.1); }
 }
 
-.frequency-display {
+.minigame-wrapper .frequency-display {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.freq-label {
+.minigame-wrapper .freq-label {
     font-size: 0.8rem;
     opacity: 0.7;
     letter-spacing: 2px;
 }
 
-.freq-value {
+.minigame-wrapper .freq-value {
     font-size: 1.5rem;
     text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
     letter-spacing: 3px;
 }
 
-.radio-static {
+.minigame-wrapper .radio-static {
     text-align: center;
     padding: 15px;
     font-size: 0.9rem;
@@ -532,7 +532,7 @@ input[type="range"]::-moz-range-thumb {
     50% { opacity: 0.3; }
 }
 
-.radio-message {
+.minigame-wrapper .radio-message {
     padding: 30px;
     height: 350px;
     overflow-y: auto;
@@ -546,60 +546,60 @@ input[type="range"]::-moz-range-thumb {
     font-family: 'Courier New', monospace;
 }
 
-.radio-message p {
+.minigame-wrapper .radio-message p {
     margin-bottom: 15px;
 }
 
-.radio-message .emphasis {
+.minigame-wrapper .radio-message .emphasis {
     color: #ff0000;
     text-shadow: 0 0 10px #ff0000;
     font-weight: bold;
 }
 
-.radio-message .location {
+.minigame-wrapper .radio-message .location {
     color: #00ffff;
     text-shadow: 0 0 10px #00ffff;
 }
 
-.radio-controls {
+.minigame-wrapper .radio-controls {
     display: flex;
     gap: 15px;
     justify-content: center;
     padding: 20px;
 }
 
-.small-btn {
+.minigame-wrapper .small-btn {
     width: auto;
     padding: 10px 30px;
     margin: 0;
     font-size: 0.9rem;
 }
 
-.typing-cursor::after {
+.minigame-wrapper .typing-cursor::after {
     content: '█';
     animation: blink 1s infinite;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .game-section {
+    .minigame-wrapper .game-section {
         flex-direction: column;
         align-items: center;
     }
     
-    .radio-dial-container {
+    .minigame-wrapper .radio-dial-container {
         flex-direction: column;
     }
     
-    .modal-content {
+    .minigame-wrapper .modal-content {
         padding: 20px;
     }
     
-    .modal-header {
+    .minigame-wrapper .modal-header {
         font-size: 1.2rem;
     }
     
-    .modal-body {
+    .minigame-wrapper .modal-body {
         font-size: 0.95rem;
     }
 }

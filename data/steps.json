@@ -6,7 +6,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "020"
+          "nextStep": "2"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "1"
         }
       }
     },

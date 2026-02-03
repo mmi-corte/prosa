@@ -7,27 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Modal Message Radio -->
-    <div id="radioModal" class="modal" style="display:none;">
-        <div class="modal-content radio-modal">
-            <div class="radio-header">
-                <span class="radio-icon">📻</span>
-                <div class="frequency-display">
-                    <span class="freq-label">FRÉQUENCE:</span>
-                    <span class="freq-value blink">107.9 MHz</span>
-                </div>
-            </div>
-            <div class="radio-static">
-                [GRÉSILLEMENT... INTERFÉRENCE... SIGNAL CAPTÉ]
-            </div>
-            <div id="radioMessage" class="radio-message"></div>
-            <div class="radio-controls">
-                <button id="skipRadio" class="terminal-button small-btn">&gt; PASSER</button>
-                <button id="continueFromRadio" class="terminal-button" style="display:none;">&gt; CONTINUER</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal des Règles -->
     <div id="rulesModal" class="modal" style="display:flex;">
         <div class="modal-content">
@@ -54,7 +33,7 @@
     </div>
 
     <!-- Game Container -->
-    <div class="container" style="display:none;" id="gameContainer">
+    <div class="container" style="display:none;" id="minigameContainer">
         <div class="terminal-header">
             <span class="glitch">SYSTEM ACCESS: RADIO FREQUENCE 107.9 MHz</span>
         </div>
@@ -128,7 +107,7 @@
                             <div class="dial-center-zone"></div>
                             <div class="needle amplitude-needle" id="needleAmplitude"></div>
                         </div>
-                        <input type="range" id="tuningSliderAmplitude" min="20" max="100" value="60" step="1">
+                        <input type="range" id="tuningSliderAmplitude" min="10" max="100" value="60" step="1">
                     </div>
                 </div>
             </div>
