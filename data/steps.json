@@ -108,17 +108,17 @@
         }
       }
     },
-    "080": {
+    "670": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "14"
         },
         "2": {
           "type": "lose",
-          "nextStep": "06"
+          "nextStep": "05"
         }
       }
     },

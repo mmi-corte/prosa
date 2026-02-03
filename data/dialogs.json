@@ -716,7 +716,7 @@
         "nextAction": "1"
       }
     },
-    "08": {
+    "67": {
       "1": {
         "default": {
           "backgroundUrl": "",
@@ -727,13 +727,96 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule. Puis en une seconde, il s'élance à toute vitesse vers le maquis.",
-              "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede. Poi in un secondu, si lancia à tutta velocità versu u macchja."
+              "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
+              "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
+            }
+          },
+          {
+            "text": {
+              "fr": "Soudain, en une seconde, il s'élance à toute vitesse vers le maquis.",
+              "cor": "Poi in un secondu, si lancia à tutta velocità versu u macchja."
             }
           }
         ],
         "nextActionType": "game",
         "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Laissez-moi ! Laissez-moi !\"",
+              "cor": "\"Linteti mi ! Linteti mi !\"",
+              "pitch": 700
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
+              "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\"",
+              "pitch": 700
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
+              "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\"",
+              "pitch": 700
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais pour parvenir jusqu’à elle, vous avez besoin de récupérer l’un des fragments du dolmen de l’Orcu."
+            }
+          },
+          {
+            "text": {
+              "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
+              "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\"",
+              "pitch": 700
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous retournez à la fontaine, déçu d’avoir perdu votre temps."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
       }
     },
     "09": {
