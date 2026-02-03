@@ -1,200 +1,200 @@
 {
   "1": {
-    "01000": {
+    "010": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "02000"
+          "nextStep": "020"
         }
       }
     },
-    "02000": {
+    "020": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "03000"
+          "nextStep": "030"
         },
         "2": {
           "type": "lose",
-          "nextStep": "02000"
+          "nextStep": "020"
         }
       }
     },
-    "03000": {
+    "030": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "04000"
+          "nextStep": "050"
         },
         "2": {
           "type": "win",
-          "nextStep": "03010"
+          "nextStep": "040"
         }
       }
     },
-    "03010": {
+    "040": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "04000"
+          "nextStep": "050"
         }
       }
     },
-    "04000": {
+    "050": {
       "actionType": "choice",
       "action": "2",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "05000"
+          "nextStep": "060"
         }
       }
     },
-    "05000": {
+    "060": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "choice",
-          "nextStep": "06000"
+          "nextStep": "070"
         },
         "2": {
           "type": "choice",
-          "nextStep": "07000"
+          "nextStep": "080"
         },
         "3": {
           "type": "choice",
-          "nextStep": "08000"
+          "nextStep": "090"
         },
         "4": {
           "type": "choice",
-          "nextStep": "09000"
+          "nextStep": "100"
         }
       }
     },
-    "06000": {
+    "070": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "10000"
+          "nextStep": "110"
         }
       }
     },
-    "07000": {
+    "080": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "10000"
+          "nextStep": "110"
         }
       }
     },
-    "08000": {
+    "090": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "10000"
+          "nextStep": "110"
         },
         "2": {
           "type": "lose",
-          "nextStep": "05000"
+          "nextStep": "060"
         }
       }
     },
-    "09000": {
+    "100": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "choice",
-          "nextStep": "11000"
+          "nextStep": "120"
         },
         "2": {
           "type": "choice",
-          "nextStep": "10000"
+          "nextStep": "110"
         },
         "3": {
           "type": "choice",
-          "nextStep": "05000"
+          "nextStep": "060"
         }
       }
     },
-    "10000": {
+    "110": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11000"
+          "nextStep": "120"
         },
         "2": {
           "type": "lose",
-          "nextStep": "11000"
+          "nextStep": "120"
         }
       }
     },
-    "11000": {
+    "120": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12000"
+          "nextStep": "130"
         }
       }
     },
-    "12000": {
+    "130": {
       "actionType": "choice",
       "action": "4",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "13000"
+          "nextStep": "150"
         },
         "2": {
           "type": "win",
-          "nextStep": "12010"
+          "nextStep": "140"
         },
         "3": {
           "type": "win",
-          "nextStep": "13000"
+          "nextStep": "150"
         }
       }
     },
-    "12010": {
+    "140": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "13000"
+          "nextStep": "150"
         }
       }
     },
-    "13000": {
+    "150": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "14000"
+          "nextStep": "160"
         }
       }
     },
-    "14000": {
+    "160": {
       "actionType": "choice",
       "action": "5",
       "end": {

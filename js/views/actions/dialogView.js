@@ -13,7 +13,7 @@ let currentPitch = 400;
 export function dialogView(action) {
     clearContainer();
 
-    data = dialogsData[action];
+    data = dialogsData[action] || dialogsData;
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('dialogWrapper');
