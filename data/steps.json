@@ -149,8 +149,8 @@
           "nextStep": "13"
         },
         "2": {
-          "type": "still",
-          "nextStep": "10"
+          "type": "win",
+          "nextStep": "11"
         }
       }
     },

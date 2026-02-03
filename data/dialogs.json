@@ -19,9 +19,6 @@
             "text": {
               "fr": "La voix se perd dans un flot de grésillement."
             }
-          },
-          {
-            "pitch": "600"
           }
         ],
         "nextActionType": "game",
