@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, vibrate } from "../../../app.js";
+import { clearContainer, gameContainer, extraHeaderContainer, vibrate } from "../../../app.js";
 import { activePlayer, startStep } from "../../gameEventHandler.js";
 import { stepsData } from "../../loadData.js";
 import { playerSelectView } from "./playerSelectView.js";
@@ -55,18 +55,20 @@ export function codeView() {
     keyDelete.addEventListener("click", deleteDigit)
     keyValidate.addEventListener("click", submitCode)
 
-    // Bouton retour
-    const backButton = document.createElement('button')
-    backButton.classList.add('back-btn-circle')
-    backButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `
-    backButton.addEventListener('click', () => {
-        window.history.back()
-    })
-    gameContainer.appendChild(backButton)
+    // Bouton retour (header)
+    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button')
+        backButton.classList.add('back-btn-circle')
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `
+        backButton.addEventListener('click', () => {
+            window.history.back()
+        })
+        extraHeaderContainer.appendChild(backButton)
+    }
 
     let currentCode = ""
 

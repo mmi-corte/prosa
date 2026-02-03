@@ -1,7 +1,7 @@
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
-import { navigate } from "../../../../app.js";
+import { navigate, extraHeaderContainer } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
 import { resetDifficultyIndicator } from "../../components/difficultyIndicator.js";
 
@@ -25,12 +25,6 @@ export function difficultyView() {
     // Container pour les jauges
     const difficultyContainer = document.createElement('div');
     difficultyContainer.classList.add('difficulty-container');
-
-    // Info button en haut à droite
-    const infoButton = document.createElement('button');
-    infoButton.classList.add('info-btn');
-    infoButton.innerHTML = '?';
-    infoButton.setAttribute('aria-label', 'Informations sur la difficulté');
 
     // Créer les 3 jauges
     const difficulties = [
@@ -74,20 +68,22 @@ export function difficultyView() {
         difficultyContainer.appendChild(gaugeWrapper);
     });
 
-    initContainer.appendChild(infoButton);
     initContainer.appendChild(difficultyContainer);
 
-    // Bouton retour en haut à droite
-    const backButton = document.createElement('button');
-    backButton.classList.add('back-btn-circle');
-    backButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `;
-    backButton.addEventListener('click', () => {
-        navigate('menu', menuView())
-    });
+    // Bouton retour (header)
+    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button');
+        backButton.classList.add('back-btn-circle');
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `;
+        backButton.addEventListener('click', () => {
+            navigate('menu', menuView())
+        });
+        extraHeaderContainer.appendChild(backButton);
+    }
 
     // Bouton submit caché au départ
     const submitButton = document.createElement('button');
@@ -100,20 +96,7 @@ export function difficultyView() {
         }
     });
 
-    initContainer.appendChild(backButton);
     initContainer.appendChild(submitButton);
-
-    // Pré-remplir si déjà choisi
-    // const storedDifficultyRaw = localStorage.getItem('gameDifficulty');
-    // if (storedDifficultyRaw !== null) {
-    //     const storedDifficulty = parseInt(storedDifficultyRaw, 10);
-    //     if (!Number.isNaN(storedDifficulty)) {
-    //         selectedDifficulty = storedDifficulty;
-    //         if (window.updateDifficultyIndicator) {
-    //             window.updateDifficultyIndicator(selectedDifficulty);
-    //         }
-    //     }
-    // }
 
     // Afficher automatiquement la modal au premier chargement
     setTimeout(() => {

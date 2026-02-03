@@ -103,14 +103,14 @@ function showCharacterDetails(regionId, characterId) {
     detailContainer.classList.add('detailContainer')
     gameContainer.appendChild(detailContainer)
 
- const backButton = document.createElement('button');
+    // Bouton retour modal
+    const backButton = document.createElement('button');
     backButton.classList.add('back-btn-circle');
     backButton.innerHTML = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     `
-
     backButton.addEventListener('click', () => {
         detailContainer.classList.remove('show')
         setTimeout(() => closeCharacterDetail(), 300)

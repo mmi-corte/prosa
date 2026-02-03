@@ -42,18 +42,20 @@ export function seasonsView() {
     }
     loadCinematics()
 
-    // Bouton retour
-    const backButton = document.createElement('button')
-    backButton.classList.add('back-btn-circle')
-    backButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `
-    backButton.addEventListener('click', () => {
-        menuView()
-    })
-    gameContainer.appendChild(backButton)
+    // Bouton retour (header)
+    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button')
+        backButton.classList.add('back-btn-circle')
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `
+        backButton.addEventListener('click', () => {
+            menuView()
+        })
+        extraHeaderContainer.appendChild(backButton)
+    }
 }
 
 function renderCinematicsGrid(cinematicsData) {
@@ -105,7 +107,7 @@ function goToCinematicDetail(cinematic) {
 
     gameContainer.appendChild(container)
 
-    // Bouton retour
+    // Bouton retour modal
     const closeButton = document.createElement('button')
     closeButton.classList.add('back-btn-circle')
     closeButton.innerHTML = `
@@ -117,11 +119,6 @@ function goToCinematicDetail(cinematic) {
         container.remove()
     })
     container.appendChild(closeButton)
-
-    const closeModal = document.getElementById('closeModal')
-    closeModal.addEventListener('click', () => {
-        container.remove()
-    })
 
     // Close modal when clicking outside
     container.addEventListener('click', (e) => {

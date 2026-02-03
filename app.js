@@ -65,6 +65,9 @@ export const extraHeaderContainer = document.getElementById('extraHeaderContaine
 
 export function clearContainer() {
   gameContainer.innerHTML = ''
+  if (extraHeaderContainer) {
+    extraHeaderContainer.innerHTML = ''
+  }
 }
 
 window.initProsaLogoLottie = function initProsaLogoLottie() {

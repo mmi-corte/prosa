@@ -172,7 +172,8 @@ body {
   margin: 0 auto;
   width: 100%;
   max-height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .screen.hidden {
@@ -183,12 +184,24 @@ body {
   padding: 40px 24px 40px;
 }
 
+@media (max-width: 480px) {
+  .menuWrapper {
+    padding: 20px 16px;
+  }
+}
+
 /* ========== HEADER ========== */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 12px 16px;
+  }
 }
 
 .logo-small {
@@ -200,6 +213,12 @@ body {
   height: 40px;
   width: auto;
   /* Suppression du filtre invert pour garder le logo noir */
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    height: 32px;
+  }
 }
 
 .btn-primary {
@@ -228,26 +247,39 @@ body {
   gap: 10px;
 }
 
+.extra-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .settings-btn {
   width: 44px;
   height: 44px;
-  background: transparent;
-  border: none;
+  border-radius: 50%;
+  background: rgba(26, 24, 18, 0.8);
+  border: 1.5px solid var(--border);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--foreground);
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
 .settings-btn:hover {
-  opacity: 0.7;
+  border-color: var(--dust);
+  background: var(--card);
+}
+
+.settings-btn:active {
+  transform: scale(0.95);
 }
 
 .settings-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 /* ========== MENU SCREEN - AMELIORE ========== */
@@ -265,6 +297,13 @@ body {
   margin-bottom: 40px;
   letter-spacing: 0.05em;
   color: var(--foreground);
+}
+
+@media (max-width: 480px) {
+  .menu-title {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
 }
 
 /* Boutons du menu améliorés avec effet hover */
@@ -285,6 +324,12 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .menu-btn {
+    padding: 18px;
+  }
 }
 
 .menu-btn::before {
@@ -366,6 +411,13 @@ body {
   align-items: flex-start;
   margin-bottom: 40px;
   padding: 20px 40px;
+}
+
+@media (max-width: 480px) {
+  .code-header {
+    padding: 16px 20px;
+    margin-bottom: 30px;
+  }
 }
 
 .code-title-section {
@@ -463,6 +515,14 @@ body {
   padding-bottom: 40px;
 }
 
+@media (max-width: 480px) {
+  .keypad {
+    gap: 12px;
+    max-width: 280px;
+    padding-bottom: 30px;
+  }
+}
+
 .key {
   width: 80px;
   height: 80px;
@@ -478,6 +538,14 @@ body {
   justify-content: center;
   transition: all 0.15s ease;
   justify-self: center;
+}
+
+@media (max-width: 480px) {
+  .key {
+    width: 70px;
+    height: 70px;
+    font-size: 1.6rem;
+  }
 }
 
 .key:hover {
@@ -755,6 +823,14 @@ body {
   position: relative;
 }
 
+@media (max-width: 480px) {
+  .modal-content {
+    border-radius: 16px;
+    padding: 16px;
+    max-height: 85vh;
+  }
+}
+
 .cinematic-modal {
   display: flex;
   flex-direction: column;
@@ -973,15 +1049,16 @@ body {
 ============= Init Screens =============
 ====================================== */
 .initWrapper {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 40px;
-  gap: 80px;
+  padding: 20px;
+  gap: 40px;
   font-size: 2rem;
   text-align: center;
+  overflow-y: auto;
 }
 
 .initWrapper>p {
@@ -1001,11 +1078,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  gap: 50px;
+  max-width: 600px;
+  gap: 30px;
   position: relative;
-  padding-bottom: 120px;
+  padding: 0;
+  flex: 1;
 }
 
 .initScreen1 .playerCountContainer {
@@ -1047,6 +1126,33 @@ body {
 .initScreen1 .playerCountContainer button:hover {
   background: var(--muted);
   border-color: var(--primary);
+}
+
+@media (max-width: 480px) {
+  .initScreen1 {
+    gap: 20px;
+    padding: 0 25px;
+  }
+
+  .initScreen1 .playerCountContainer {
+    font-size: 3rem;
+    border-radius: 20px;
+    border-width: 2px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .initScreen1 .playerCountContainer button {
+    padding: 12px;
+    font-size: 2.2rem;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .initScreen1 .playerCountContainer span {
+    padding: 0 1.2rem;
+    min-width: 3.5rem;
+  }
 }
 
 .initScreen2 {
@@ -1182,6 +1288,13 @@ body {
   align-items: center;
   justify-content: flex-start;
   overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .detailContainer {
+    padding: 5dvh 3dvh;
+    gap: 16px;
+  }
 }
 
 .detailContainer img {
@@ -1550,12 +1663,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
-  height: 420px;
-  max-width: 550px;
-  padding: 0 20px;
-  margin-bottom: 20px;
+  height: 350px;
+  max-width: 500px;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .difficulty-container {
+    height: 300px;
+    gap: 10px;
+  }
 }
 
 .difficulty-gauge-wrapper {
@@ -1563,25 +1684,40 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  gap: 20px;
+  gap: 15px;
   flex: 1;
-  max-width: 140px;
+  max-width: 150px;
   height: 100%;
+}
+
+@media (max-width: 480px) {
+  .difficulty-gauge-wrapper {
+    gap: 10px;
+    max-width: 100px;
+  }
 }
 
 .difficulty-gauge {
   width: 100%;
-  min-height: 150px;
+  min-height: 120px;
   background: var(--muted);
   border-radius: 999px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 3px solid transparent;
   position: relative;
+}
+
+@media (max-width: 480px) {
+  .difficulty-gauge {
+    min-height: 100px;
+    padding-bottom: 15px;
+    border: 2px solid transparent;
+  }
 }
 
 .difficulty-gauge:hover {
@@ -1602,6 +1738,12 @@ body {
   color: var(--foreground);
 }
 
+@media (max-width: 480px) {
+  .gauge-value {
+    font-size: 2.5rem;
+  }
+}
+
 .gauge-label {
   font-size: 1rem;
   font-weight: 700;
@@ -1609,7 +1751,13 @@ body {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .gauge-label {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
 }
 
 .info-btn {
@@ -1670,6 +1818,23 @@ body {
 
 .back-btn-circle:active {
   transform: scale(0.95);
+}
+
+/* Back button positioning in modals */
+.modal-overlay > .back-btn-circle,
+.detailContainer > .back-btn-circle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 600;
+}
+
+@media (max-width: 480px) {
+  .modal-overlay > .back-btn-circle,
+  .detailContainer > .back-btn-circle {
+    top: 15px;
+    left: 15px;
+  }
 }
 
 .difficulty-battery {
@@ -1737,12 +1902,6 @@ body {
   color: var(--foreground);
 }
 
-.back-btn-circle:hover {
-  background: var(--muted);
-  border-color: var(--primary);
-  transform: translateX(-5px);
-}
-
 .difficulty-info-modal {
   max-width: 500px;
   padding: 40px 30px;
@@ -1773,13 +1932,18 @@ body {
 }
 
 .difficulty-continue-btn {
-  position: fixed;
-  bottom: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 60px);
+  width: 100%;
   max-width: 500px;
-  padding: 18px;
-  font-size: 1.2rem;
-  z-index: 10;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .difficulty-continue-btn {
+    font-size: 1rem;
+    padding: 14px 20px;
+  }
 }
