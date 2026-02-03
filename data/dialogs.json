@@ -112,14 +112,13 @@
           },
           {
             "text": {
-              "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris.",
-              "cor": "Cunniscite a riputazione di A Fata è sapete chì pudete fidassi. Li dite ciò chì u missaghju di a radio vi hà amparatu."
+              "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
             }
           },
           {
             "text": {
-              "fr": "En effet c'est préoccupant… Avant de t'aider je dois savoir si je peux te faire confiance.",
-              "cor": "\"Hè vera, hè stranu… Nanzu d'aiutatti, devu sapè s'è ti possu fà cunfidenza.\""
+              "fr": "En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.",
+              "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
             "pitch": 650
           }
