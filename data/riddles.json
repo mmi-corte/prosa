@@ -15,14 +15,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           },
@@ -59,14 +59,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           }
@@ -92,14 +92,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           },
@@ -136,14 +136,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           }

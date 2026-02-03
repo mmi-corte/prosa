@@ -21,7 +21,7 @@
         "1": {
           "type": "win",
           "nextStep": "03"
-        } 
+        }
       }
     },
     "030": {
@@ -30,9 +30,15 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "05"
-        },
-        "2": {
+          "nextStep": "04"
+        }
+      }
+    },
+    "880": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
           "type": "win",
           "nextStep": "04"
         }
@@ -45,6 +51,10 @@
         "1": {
           "type": "win",
           "nextStep": "05"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "04"
         }
       }
     },
@@ -53,19 +63,19 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "01"
+          "type": "continue",
+          "nextStep": "06"
         },
         "2": {
-          "type": "win",
+          "type": "continue",
           "nextStep": "07"
         },
         "3": {
-          "type": "win",
+          "type": "continue",
           "nextStep": "08"
         },
         "4": {
-          "type": "win",
+          "type": "continue",
           "nextStep": "09"
         }
       }
@@ -76,19 +86,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "07"
+          "nextStep": "12"
         },
         "2": {
-          "type": "win",
-          "nextStep": "08"
-        },
-        "3": {
-          "type": "win",
-          "nextStep": "09"
-        },
-        "4": {
-          "type": "win",
-          "nextStep": "10"
+          "type": "still",
+          "nextStep": "06"
         }
       }
     },
@@ -98,17 +100,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
-        }
-      }
-    },
-    "080": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "11"
+          "nextStep": "12"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "07"
         }
       }
     },

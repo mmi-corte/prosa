@@ -1,66 +1,35 @@
 {
   "1": {
     "05": {
-      "2": {
+      "1": {
         "question": {
-          "fr": "Que faites-vous ?",
-          "cor": "Chì fate ?"
+          "fr": "Qui souhaitez-vous approcher ?"
         },
         "choices": [
           {
             "text": {
-              "fr": "Tenter de négocier",
-              "cor": "Pruvà à niguzià"
+              "fr": "Une vieille dame, portant des habits simples et paraissant attristée."
             },
             "nextActionType": "end",
             "nextAction": "1"
           },
           {
             "text": {
-              "fr": "Se battre",
-              "cor": "Cumbatte"
-            },
-            "nextActionType": "end",
-            "nextAction": "1"
-          }
-        ]
-      }
-    },
-    "06": {
-      "5": {
-        "question": {
-          "fr": "Qui souhaitez-vous approcher ?",
-          "cor": "À quale vulete avvicinà ?"
-        },
-        "choices": [
-          {
-            "text": {
-              "fr": "Approcher A Signadora (la vieille dame attristée)",
-              "cor": "Avvicinà A Signadora (a vechja donna trista)"
-            },
-            "nextActionType": "end",
-            "nextAction": "1"
-          },
-          {
-            "text": {
-              "fr": "S'interposer dans la dispute de l'armurier",
-              "cor": "Interponesi in a disputa di l'armaghjolu"
+              "fr": "Un homme à la stature athlétique et armé qui se dispute avec des soldats du clan."
             },
             "nextActionType": "end",
             "nextAction": "2"
           },
           {
             "text": {
-              "fr": "Confronter le jeune garçon qui vous observe (U Fulettu)",
-              "cor": "Cunfruntà u zitellu chì vi osserva (U Fulettu)"
+              "fr": "Un jeune garçon frêle, dissimulé dans la foule qui vous observe avec insistance ."
             },
             "nextActionType": "end",
             "nextAction": "3"
           },
           {
             "text": {
-              "fr": "Continuer vers le belvédère pour une meilleure vue",
-              "cor": "Cuntinuà versu u belvedere per una vista megliu"
+              "fr": "Continuez votre chemin vers le belvédère pour une meilleure vue"
             },
             "nextActionType": "end",
             "nextAction": "4"
@@ -68,28 +37,25 @@
         ]
       }
     },
-    "08": {
-      "2": {
+    "07": {
+      "1": {
         "question": {
-          "fr": "Que faites-vous ?",
-          "cor": "Chì fate ?"
+          "fr": "Que voulez-vous faire ?"
         },
         "choices": [
           {
             "text": {
-              "fr": "Tenter de négocier",
-              "cor": "Pruvà à niguzià"
+              "fr": "Tenter de négocier"
             },
-            "nextActionType": "end",
-            "nextAction": "1"
+            "nextActionType": "dialog",
+            "nextAction": "2"
           },
           {
             "text": {
-              "fr": "Se battre",
-              "cor": "Cumbatte"
+              "fr": "Se battre"
             },
-            "nextActionType": "end",
-            "nextAction": "1"
+            "nextActionType": "dialog",
+            "nextAction": "3"
           }
         ]
       }

@@ -11,11 +11,6 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table."
-            }
-          },
-          {
-            "text": {
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             }
@@ -24,7 +19,7 @@
             "text": {
               "fr": "La voix se perd dans un flot de grésillement."
             }
-          },  
+          },
           {
             "pitch": "600"
           }
@@ -89,8 +84,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête.",
-              "cor": "Vi inginochjè è riempite a vostra zucca d'acqua. U rumore di u fiumu copre i vostri pinseri… mà u missaghju di a radio gira sempre in a vostra testa."
+              "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête."
             }
           },
           {
@@ -105,7 +99,7 @@
           },
           {
             "text": {
-              "fr": "\"Ho… ta gourde déborde. Je sens ton esprit ailleurs.\"",
+              "fr": "\"Oh… ta gourde déborde. Je sens ton esprit ailleurs.\"",
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
             "pitch": 650
@@ -253,29 +247,28 @@
         "dialog": [
           {
             "text": {
-              "fr": "Le musée se dresse encore, malgré les années. Une silhouette vous attend.",
-              "cor": "U museu si tene sempre, malgradu l'anni. Una siluetta vi aspetta."
+              "fr": "Une silhouette vous attend au fond de la salle principale."
             }
           },
           {
             "text": {
-              "fr": "Vous devinez qu'il s'agit de U Spallistu (le devin).",
-              "cor": "Induvinate chì si tratta di U Spallistu."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"T'aspettava.\" (Je t'attendais.)",
+              "fr": "\"T'aspettava.\"",
               "cor": "\"T'aspettava.\""
             },
-            "pitch": 400
+            "pitch": 500
           },
           {
             "text": {
-              "fr": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa.\" (Corte obéit à I Muntagnoli. I Muntagnoli obéit à Prosa.)",
-              "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa.\""
+              "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
             },
-            "pitch": 400
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
+              "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
+            },
+            "pitch": 500
           },
           {
             "text": {
@@ -285,13 +278,116 @@
           },
           {
             "text": {
-              "fr": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\" (Dis-moi... es-tu prêt à savoir ce qui t'attend ?)",
+              "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
-            "pitch": 400
+            "pitch": 500
           }
         ],
         "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
+              "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
+            },
+            "pitch": 500
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l’Orcu…\"",
+              "cor": "\"A to strada ti purterà versu l’Orcu…\""
+            },
+            "pitch": 500
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "88": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Objet obtenu : « La Carte des Vents » (jeton unique). Vous récupérez un jeton doré."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
+              "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà.",
+              "pitch": 500
+            }
+          }
+        ],
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },
@@ -306,31 +402,57 @@
         "dialog": [
           {
             "text": {
-              "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée.",
-              "cor": "Un meccanisimu cede. A parete scivula pianu pianu, rivelendu una stanza ammucciata."
+              "fr": "L'Orcu est là. Immobile. Immense. Il vous jauge sans un mot, puis désigne un objet lourd posé au sol."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
+              "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\"",
+              "pitch": 400
             }
           },
           {
             "text": {
-              "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants.",
-              "cor": "À u centru, una carta antica, pergamena fragile, marcata di linee rosse. I venti. I currenti."
+              "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
+              "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\"",
+              "pitch": 400
             }
           },
           {
             "text": {
-              "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre.",
-              "cor": "Capite : sta carta hè una chjave per francà u mare senza prublemi."
+              "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
+              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\"",
+              "pitch": 400
             }
           },
           {
             "text": {
-              "fr": "📜 Objet obtenu : La Carte des Vents.",
-              "cor": "📜 Oggettu ottinutu : A Carta di i Venti."
+              "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
+              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\"",
+              "pitch": 400
+            }
+          },
+          {
+            "text": {
+              "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
             }
           }
         ],
         "nextActionType": "end",
-        "nextAction": "0300"
+        "nextAction": "1"
       }
     },
     "05": {
@@ -344,18 +466,16 @@
         "dialog": [
           {
             "text": {
-              "fr": "L'Orcu (le géant) est là. Immobile. Immense.",
-              "cor": "L'Orcu (u gigantu) hè quì. Immobile. Imensu."
+              "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec."
             }
           },
           {
             "text": {
-              "fr": "L'Orcu vous jauge sans un mot, puis désigne un objet lourd posé au sol.",
-              "cor": "L'Orcu vi valuta senza una parolla, poi indica un oggettu pisante postu in terra."
+              "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents."
             }
           }
         ],
-        "nextActionType": "game",
+        "nextActionType": "choice",
         "nextAction": "1"
       }
     },
@@ -370,31 +490,99 @@
         "dialog": [
           {
             "text": {
-              "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec.",
-              "cor": "A vechja funtana di petra si trova in u centru di a piazza. L'acqua ùn corre più da tantu tempu, lascendu i bacini secchi."
+              "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
             }
           },
           {
             "text": {
-              "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents.",
-              "cor": "Eppuru, a vita s'agita sempre quì. Parechji persunaggi impurtanti sò presenti."
+              "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
+              "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan."
             }
           },
           {
             "text": {
-              "fr": "Vous comprenez que cet endroit est un carrefour d'informations.",
-              "cor": "Capite chì stu locu hè un crucivia d'infurmazione."
+              "fr": "\"Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments.\"",
+              "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns.\"",
+              "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.\"",
+              "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
+            },
+            "pitch": 500
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La chapelle se dresse à l’écart du village. Ses murs fissurés portent encore les cicatrices de l’effondrement du monde."
             }
           },
           {
             "text": {
-              "fr": "Qui souhaitez-vous approcher ?",
-              "cor": "À quale vulete avvicinà ?"
+              "fr": "Autrefois lieu de recueillement, elle est devenue un avant-poste du clan. Des caisses de vivres, des armes et des réserves médicales y sont entassées."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une veilleuse brûle sous le porche de pierre où deux gardes jouent aux cartes."
             }
           }
         ],
-        "nextActionType": "choice",
-        "nextAction": "5"
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "À l’intérieur, l’air est lourd. Des cierges éteints jonchent le sol."
+            }
+          },
+          {
+            "text": {
+              "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous récupérez les médicaments et ressortez rapidement."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
       }
     },
     "07": {
@@ -408,37 +596,42 @@
         "dialog": [
           {
             "text": {
-              "fr": "A Signadora (la guérisseuse) semble soulagée de voir le joueur. A ses côtés, un jeune homme d'une vingtaine d'années est allongé, souffrant.",
-              "cor": "A Signadora (a guaritrice) pari sollevata di vede u ghjucatore. Accant'à ella, un ghjuvanottu d'una vintina d'anni hè stendutu, sufferente."
+              "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
             }
           },
           {
             "text": {
-              "fr": "On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé, que veux-tu ?",
-              "cor": "Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu chì voli ?"
+              "fr": "\"Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !\"",
+              "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
+            },
+            "pitch": 350
+          },
+          {
+            "text": {
+              "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
+              "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
             "pitch": 600
           },
           {
             "text": {
-              "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan.",
-              "cor": "Li spiegate discretamente chì circate infurmazione nantu à u clan."
-            }
+              "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
+              "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
+            },
+            "pitch": 650
           },
           {
             "text": {
-              "fr": "Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments. Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns. Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.",
-              "cor": "Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine. Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi. Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi."
+              "fr": "\"Jamais ! C'est mon héritage !\"",
+              "cor": "\"Mai ! Hè a mo lascita !\""
             },
-            "pitch": 600
+            "pitch": 350
           }
         ],
-        "nextActionType": "game",
+        "nextActionType": "choice",
         "nextAction": "1"
-      }
-    },
-    "08": {
-      "1": {
+      },
+      "2": {
         "default": {
           "backgroundUrl": "",
           "foregroundUrl": "",
@@ -448,41 +641,79 @@
         "dialog": [
           {
             "text": {
-              "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable.",
-              "cor": "Un omu di statura atletica, cupertu di polvara è armatu d'un vechju fucile, si tene davanti à dui suldati di u clan. A tensione hè palpabile."
+              "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
             }
           },
           {
             "text": {
-              "fr": "Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !",
-              "cor": "Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !"
-            },
-            "pitch": 350
-          },
-          {
-            "text": {
-              "fr": "Ce qui est à toi ? Je crois que tu n'as pas bien compris avec qui tu parles.",
-              "cor": "Ciò chè hè toiu ? Credu ch'ùn ai micca capitu bè cun qual' parli."
-            },
-            "pitch": 300
-          },
-          {
-            "text": {
-              "fr": "Donne-moi ton fusil et peut-être en sortiras-tu vivant.",
-              "cor": "Dà mi u to fucile è forse ne sorterai vivu."
-            },
-            "pitch": 300
-          },
-          {
-            "text": {
-              "fr": "Jamais ! C'est mon héritage !",
-              "cor": "Mai ! Hè a mo lascita !"
-            },
-            "pitch": 350
+              "fr": "Vous perdez un jeton avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
+            }
           }
         ],
-        "nextActionType": "choice",
-        "nextAction": "2"
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
+              "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\"",
+              "pitch": 350
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
+              "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\"",
+              "pitch": 350
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
+              "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\"",
+              "pitch": 350
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
       }
     },
     "09": {

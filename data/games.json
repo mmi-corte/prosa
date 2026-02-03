@@ -9,22 +9,31 @@
                 "nextActionLoose": "2"
             }
         },
-        "05": {
+        "04": {
             "1": {
                 "game": "orcu_force",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
                 "nextActionTypeLoose": "end",
-                "nextActionLoose": "1"
+                "nextActionLoose": "2"
+            }
+        },
+        "06": {
+            "1": {
+                "game": "chapelle_infiltration",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "3",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
             }
         },
         "07": {
             "1": {
-                "game": "chapelle_infiltration",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
+                "game": "chapelle_recup_arme",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "5",
                 "nextActionTypeLoose": "end",
-                "nextActionLoose": "1"
+                "nextActionLoose": "2"
             }
         },
         "09": {

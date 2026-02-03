@@ -15,13 +15,13 @@ export async function choiceView(action) {
 
     const questionContainer = document.createElement('p')
     gameContainer.appendChild(questionContainer)
-    await typeWriteEffect(questionContainer, getTranslation(data.question))
+    await typeWriteEffect(questionContainer, getTranslation(data.question.fr))
 
     const choiceContainer = document.createElement('div')
 
     data.choices.forEach(element => {
         const button = document.createElement('button')
-        button.innerHTML = getTranslation(element.text)
+        button.innerHTML = getTranslation(element.text.fr)
         choiceContainer.appendChild(button)
 
         button.addEventListener('click', () => {
