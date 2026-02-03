@@ -1,14 +1,57 @@
 {
-  "1": {
+  "1": {},
+  "2": {
     "question": {
-      "fr": "Question de choix 1",
-      "cor": "Quistioni di scelta 1"
+      "fr": "Que faites-vous ?",
+      "cor": "Chì fate ?"
     },
-    "choices": []
+    "choices": [
+      {
+        "text": {
+          "fr": "Tenter de négocier",
+          "cor": "Pruvà à niguzià"
+        },
+        "nextStep": "0700"
+      },
+      {
+        "text": {
+          "fr": "Se battre",
+          "cor": "Cumbatte"
+        },
+        "nextStep": "0700"
+      }
+    ]
   },
-  "2": {},
   "3": {},
-  "4": {},
+  "4": {
+    "question": {
+      "fr": "Où souhaitez-vous aller ?",
+      "cor": "Induve vulete andà ?"
+    },
+    "choices": [
+      {
+        "text": {
+          "fr": "A Piazza à u Duca",
+          "cor": "A Piazza à u Duca"
+        },
+        "nextStep": "1100"
+      },
+      {
+        "text": {
+          "fr": "Le FRAC",
+          "cor": "U FRAC"
+        },
+        "nextStep": "1000"
+      },
+      {
+        "text": {
+          "fr": "Retourner à la fontaine",
+          "cor": "Vultà à a funtana"
+        },
+        "nextStep": "0500"
+      }
+    ]
+  },
   "5": {
     "question": {
       "fr": "Qui souhaitez-vous approcher ?",
@@ -20,28 +63,28 @@
           "fr": "Approcher A Signadora (la vieille dame attristée)",
           "cor": "Avvicinà A Signadora (a vechja donna trista)"
         },
-        "nextStep": "05001"
+        "nextStep": "0600"
       },
       {
         "text": {
           "fr": "S'interposer dans la dispute de l'armurier",
           "cor": "Interponesi in a disputa di l'armaghjolu"
         },
-        "nextStep": "05002"
+        "nextStep": "0700"
       },
       {
         "text": {
           "fr": "Confronter le jeune garçon qui vous observe (U Fulettu)",
           "cor": "Cunfruntà u zitellu chì vi osserva (U Fulettu)"
         },
-        "nextStep": "05003"
+        "nextStep": "0800"
       },
       {
         "text": {
           "fr": "Continuer vers le belvédère pour une meilleure vue",
           "cor": "Cuntinuà versu u belvedere per una vista megliu"
         },
-        "nextStep": "05004"
+        "nextStep": "0900"
       }
     ]
   }

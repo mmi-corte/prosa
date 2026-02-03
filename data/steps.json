@@ -6,7 +6,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0200"
+          "nextStep": "02000"
         }
       }
     },
@@ -16,7 +16,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0300"
+          "nextStep": "03000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "02000"
         }
       }
     },
@@ -26,27 +30,31 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0400"
+          "nextStep": "04000"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "03010"
         }
       }
     },
-    "03001": {
+    "03010": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0300"
+          "nextStep": "04000"
         }
       }
     },
     "04000": {
-      "actionType": "dialog",
-      "action": "1",
+      "actionType": "choice",
+      "action": "2",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0500"
+          "nextStep": "05000"
         }
       }
     },
@@ -55,48 +63,20 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "0500"
-        }
-      }
-    },
-    "05001": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "0600"
-        }
-      }
-    },
-    "05002": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "0700"
-        }
-      }
-    },
-    "05003": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "0800"
-        }
-      }
-    },
-    "05004": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "0900"
+          "type": "choice",
+          "nextStep": "06000"
+        },
+        "2": {
+          "type": "choice",
+          "nextStep": "07000"
+        },
+        "3": {
+          "type": "choice",
+          "nextStep": "08000"
+        },
+        "4": {
+          "type": "choice",
+          "nextStep": "09000"
         }
       }
     },
@@ -106,7 +86,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1200"
+          "nextStep": "10000"
         }
       }
     },
@@ -116,7 +96,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1200"
+          "nextStep": "10000"
         }
       }
     },
@@ -126,7 +106,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1300"
+          "nextStep": "10000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "05000"
         }
       }
     },
@@ -135,8 +119,16 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "1000"
+          "type": "choice",
+          "nextStep": "11000"
+        },
+        "2": {
+          "type": "choice",
+          "nextStep": "10000"
+        },
+        "3": {
+          "type": "choice",
+          "nextStep": "05000"
         }
       }
     },
@@ -146,7 +138,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1100"
+          "nextStep": "11000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "11000"
         }
       }
     },
@@ -156,17 +152,35 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1200"
+          "nextStep": "12000"
         }
       }
     },
     "12000": {
+      "actionType": "choice",
+      "action": "4",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "13000"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "12010"
+        },
+        "3": {
+          "type": "win",
+          "nextStep": "13000"
+        }
+      }
+    },
+    "12010": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1300"
+          "nextStep": "13000"
         }
       }
     },
@@ -176,13 +190,13 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "1400"
+          "nextStep": "14000"
         }
       }
     },
     "14000": {
-      "actionType": "dialog",
-      "action": "1",
+      "actionType": "choice",
+      "action": "5",
       "end": {
         "1": {
           "type": "win",
@@ -200,39 +214,135 @@
     }
   },
   "2": {
+    "01000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "02000"
+        }
+      }
+    },
     "02000": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "0300"
+          "type": "choice",
+          "nextStep": "CHOICE"
         }
       }
     },
-    "05000": {
+    "03000": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0600"
+          "nextStep": "04010"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "04020"
+        }
+      }
+    },
+    "03010": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "04020"
         },
         "2": {
           "type": "win",
-          "nextStep": "0600"
+          "nextStep": "05020"
         }
       }
-    }
-  },
-  "3": {
-    "05000": {
+    },
+    "04010": {
       "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "0600"
+          "nextStep": "05010"
+        }
+      }
+    },
+    "04020": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "05020"
+        }
+      }
+    },
+    "05010": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "choice",
+          "nextStep": "CHOICE"
+        }
+      }
+    },
+    "05020": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "07000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "07000"
+        }
+      }
+    },
+    "06000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "07000"
+        }
+      }
+    },
+    "07000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "08000"
+        }
+      }
+    },
+    "08000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09000"
+        }
+      }
+    },
+    "09000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "choice",
+          "nextStep": "CHOICE"
         }
       }
     },
@@ -242,7 +352,189 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "FINAL"
+          "nextStep": "11000"
+        }
+      }
+    },
+    "11000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "13000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "12010"
+        },
+        "3": {
+          "type": "win",
+          "nextStep": "12020"
+        }
+      }
+    },
+    "12010": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "13000"
+        }
+      }
+    },
+    "12020": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "lose",
+          "nextStep": "PROSA_PRISON"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "PROSA_SOLDIER"
+        }
+      }
+    },
+    "13000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "PROSA_REBEL"
+        }
+      }
+    }
+  },
+  "3": {
+    "01000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "02000"
+        }
+      }
+    },
+    "02000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "03000"
+        }
+      }
+    },
+    "03000": {
+      "actionType": "game",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "04000"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "PROSA_PRISON"
+        }
+      }
+    },
+    "04000": {
+      "actionType": "game",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "05000"
+        }
+      }
+    },
+    "05000": {
+      "actionType": "choice",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "06000"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "06010"
+        }
+      }
+    },
+    "06000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "07000"
+        }
+      }
+    },
+    "06010": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "lose",
+          "nextStep": "PROSA_PRISON"
+        }
+      }
+    },
+    "07000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "08000"
+        }
+      }
+    },
+    "08000": {
+      "actionType": "choice",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09000"
+        }
+      }
+    },
+    "09000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "10000"
+        }
+      }
+    },
+    "10000": {
+      "actionType": "game",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "11000"
+        }
+      }
+    },
+    "11000": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "PROSA_REBEL"
         }
       }
     }
