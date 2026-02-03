@@ -11,15 +11,21 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
-              "cor": "In un rifugiu di furtuna, una vecchia radio è posta nantu à una tavula."
+              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table."
             }
           },
           {
             "text": {
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
-            },
+            }
+          },
+          {
+            "text": {
+              "fr": "La voix se perd dans un flot de grésillement."
+            }
+          },  
+          {
             "pitch": "600"
           }
         ],
@@ -64,8 +70,7 @@
           },
           {
             "text": {
-              "fr": "La voix s'interrompt soudainement…",
-              "cor": "A voce s'interrompe subitu…"
+              "fr": "La voix s'interrompt soudainement…"
             }
           }
         ],
@@ -90,14 +95,12 @@
           },
           {
             "text": {
-              "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?",
-              "cor": "Un dubitu persiste. Partì per Prosa o cuntinuà à campà in stu mondu inghjustu ?"
+              "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
             }
           },
           {
             "text": {
-              "fr": "Un bruit vous interpelle. Vous levez la tête et apercevez A Fata di u Fiume",
-              "cor": "Un rumore vi chjama. Alzate a testa è vede A Fata di u Fiume."
+              "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
             }
           },
           {
