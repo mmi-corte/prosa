@@ -108,7 +108,7 @@
         }
       }
     },
-    "090": {
+    "080": {
       "actionType": "dialog",
       "action": "1",
       "end": {
@@ -122,7 +122,7 @@
         }
       }
     },
-    "100": {
+    "090": {
       "actionType": "dialog",
       "action": "1",
       "end": {
@@ -140,7 +140,7 @@
         }
       }
     },
-    "110000": {
+    "100": {
       "actionType": "dialog",
       "action": "1",
       "end": {
