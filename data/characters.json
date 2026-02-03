@@ -5,7 +5,7 @@
     "region": "CORSE",
     "description": "U Fullettu, pourrait être un enfant d’une dizaine d’années. Il porte un bandeau blanc sur le front. Sa caractéristique la plus frappante est son bras gauche manquant, remplacé par une prothèse de fer. Vif comme l'air, malicieux et jouant de mauvais tours, il n'offre sa loyauté qu'à ceux qui peuvent remplir son estomac. Il peut devenir un allié précieux grâce à son agilité et sa discrétion, ou un ennemi redoutable utilisant des pièges pour égarer les voyageurs imprudents.",
     "role": "Lutin ou esprit domestique, il est considéré comme neutre aimant jouer des tours (parfois méchants, parfois inoffensifs). Il met souvent le bazar dans les affaires des gens. Chaotique / Bon",
-    "image": "Fullettu.jpg"
+    "image": "Fulettu.mp4"
   },
   {
     "id": 2,
@@ -73,6 +73,14 @@
   },
   {
     "id": 10,
+    "name": "A Fata",
+    "region": "CORSE",
+    "description": "A Fata est la jeune gardienne bienveillante du barrage hydraulique de Corti qu’elle maintient en état avec des pièces recyclées. Elle travaille pour le clan par obligation car elle est consciente que ce faible courant consiste en l'un éléments vitaux les plus importants de la vallée. Vêtue de tissus clairs et simples, elle aide spontanément toute personne en détresse, sans distinction d’appartenance.​Il est cependant strictement déconseillé de regarder derrière son épaule, car bien que cette partie soit à peu près couverte, on peut y apercevoir des traces de coups qu'elle a dû subir durant ces nombreux désaccords avec A Strega. Celui qui enfreint ce tabou rompt le pacte de confiance. A Fata coupe tout lien avec cette personne, en plus de lui interdire tout accès à la rivière.",
+    "role": "Fée de l’eau, elle est neutre, offrant parfois de l’aide en échange de la non révélation d’un secret qu’elle garde (tabou). C’est une Déesse de la Fertilité. Loyal / Bon",
+    "image": "Fata.jpg"
+  },
+  {
+    "id": 11,
     "name": "Lou Garagaï",
     "region": "PROVENCE",
     "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
@@ -80,7 +88,7 @@
     "image": "LouGaragai.jpg"
   },
   {
-    "id": 11,
+    "id": 12,
     "name": "Le Drac",
     "region": "PROVENCE",
     "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et  dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
@@ -88,7 +96,7 @@
     "image": "drac.jpg"
   },
     {
-    "id": 12,
+    "id": 13,
     "name": "P3",
     "region": "PROVENCE",
     "description": "",
@@ -96,7 +104,7 @@
     "image": ""
   },
     {
-    "id": 13,
+    "id": 14,
     "name": "P4",
     "region": "PROVENCE",
     "description": "",
