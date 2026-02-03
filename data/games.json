@@ -8,6 +8,51 @@
                 "nextActionTypeLoose": "end",
                 "nextActionLoose": "2"
             }
+        },
+        "05": {
+            "1": {
+                "game": "orcu_force",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "1"
+            }
+        },
+        "07": {
+            "1": {
+                "game": "chapelle_infiltration",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "1"
+            }
+        },
+        "09": {
+            "1": {
+                "game": "fulettu_chase",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        },
+        "11": {
+            "1": {
+                "game": "frac_escape",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        },
+        "15": {
+            "1": {
+                "game": "strega_combat",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
         }
     },
     "2": {
@@ -18,6 +63,60 @@
                 "nextActionWin": "2",
                 "nextActionTypeLoose": "end",
                 "nextActionLoose": "2"
+            }
+        },
+        "03": {
+            "1": {
+                "game": "tarasca_defense",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        },
+        "04": {
+            "1": {
+                "game": "toulon_game_04",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        },
+        "10": {
+            "1": {
+                "game": "opera_sequence",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "1"
+            }
+        },
+        "14": {
+            "1": {
+                "game": "mairie_duel",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            }
+        },
+        "15": {
+            "1": {
+                "game": "iut_mmi_escape",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "1"
+            }
+        },
+        "17": {
+            "1": {
+                "game": "port_infiltration",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "1"
             }
         }
     },
