@@ -13,12 +13,14 @@
             "text": {
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "La voix se perd dans un flot de grésillement."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -37,33 +39,34 @@
               "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
               "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
             },
-            "pitch": "600"
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
               "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
             },
-            "pitch": "600"
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
               "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
             },
-            "pitch": "600"
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
               "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
             },
-            "pitch": "600"
+            "pitch": 400
           },
           {
             "text": {
               "fr": "La voix s'interrompt soudainement…"
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -82,17 +85,20 @@
           {
             "text": {
               "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
@@ -104,7 +110,8 @@
           {
             "text": {
               "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
@@ -129,24 +136,28 @@
             "text": {
               "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
               "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
-            }
+            },
+            "pitch": 650
           },
           {
             "text": {
               "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
               "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
-            }
+            },
+            "pitch": 650
           },
           {
             "text": {
               "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
-            }
+            },
+            "pitch": 650
           }
         ],
         "nextActionType": "end",
@@ -163,7 +174,8 @@
           {
             "text": {
               "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -180,53 +192,59 @@
           {
             "text": {
               "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
-              "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\"",
-              "pitch": 600
-            }
+              "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
+            },
+            "pitch": 600
           },
           {
             "text": {
               "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
-              "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\"",
-              "pitch": 600
-            }
+              "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
+            },
+            "pitch": 600
           },
           {
             "text": {
               "fr": "Vous faites un pas en arrière effrayé."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
-              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\"",
-              "pitch": 600
-            }
+              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
+            },
+            "pitch": 600
           },
           {
             "text": {
               "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Ils sont tous liés. Prosa… Corte… et le clan. Si personne n’agit… rien ne changera."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Si le clan déteste autant U Spallistu c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé…. AU MUSÉE !"
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -245,40 +263,42 @@
           {
             "text": {
               "fr": "Une silhouette vous attend au fond de la salle principale."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"T'aspettava.\"",
               "cor": "\"T'aspettava.\""
             },
-            "pitch": 500
+            "pitch": 300
           },
           {
             "text": {
               "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
             },
-            "pitch": 500
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
               "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
             },
-            "pitch": 500
+            "pitch": 300
           },
           {
             "text": {
               "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts.",
               "cor": "U Spallistu esce una omoplate di muntone è a faci rotulà trà e so dita."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
-            "pitch": 500
+            "pitch": 300
           }
         ],
         "nextActionType": "riddle",
@@ -297,7 +317,7 @@
               "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
               "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
             },
-            "pitch": 500
+            "pitch": 300
           }
         ],
         "nextActionType": "end",
@@ -316,7 +336,7 @@
               "fr": "\"Ton chemin te mènera à l’Orcu…\"",
               "cor": "\"A to strada ti purterà versu l’Orcu…\""
             },
-            "pitch": 500
+            "pitch": 300
           }
         ],
         "nextActionType": "end",
@@ -335,17 +355,20 @@
           {
             "text": {
               "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -362,7 +385,8 @@
           {
             "text": {
               "fr": "Objet obtenu : « La Carte des Vents » (jeton unique). Vous récupérez un jeton doré."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -381,7 +405,7 @@
               "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
               "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà."
             },
-            "pitch": 500
+            "pitch": 300
           }
         ],
         "nextActionType": "end",
@@ -400,7 +424,8 @@
           {
             "text": {
               "fr": "L'Orcu est là. Immobile. Immense. Il vous jauge sans un mot, puis désigne un objet lourd posé au sol."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -417,35 +442,36 @@
           {
             "text": {
               "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
-              "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\"",
-              "pitch": 400
-            }
+              "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
+            },
+            "pitch": 350
           },
           {
             "text": {
               "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
-              "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\"",
-              "pitch": 400
-            }
+              "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
+            },
+            "pitch": 350
           },
           {
             "text": {
               "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
-              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\"",
-              "pitch": 400
-            }
+              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
+            },
+            "pitch": 350
           },
           {
             "text": {
               "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
-              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\"",
-              "pitch": 400
-            }
+              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
+            },
+            "pitch": 350
           },
           {
             "text": {
               "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -464,12 +490,14 @@
           {
             "text": {
               "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "choice",
@@ -488,7 +516,8 @@
           {
             "text": {
               "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
@@ -500,7 +529,8 @@
           {
             "text": {
               "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
@@ -538,17 +568,20 @@
           {
             "text": {
               "fr": "La chapelle se dresse à l’écart du village. Ses murs fissurés portent encore les cicatrices de l’effondrement du monde."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Autrefois lieu de recueillement, elle est devenue un avant-poste du clan. Des caisses de vivres, des armes et des réserves médicales y sont entassées."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Une veilleuse brûle sous le porche de pierre où deux gardes jouent aux cartes."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -565,17 +598,20 @@
           {
             "text": {
               "fr": "À l’intérieur, l’air est lourd. Des cierges éteints jonchent le sol."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Vous récupérez les médicaments et ressortez rapidement."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -594,7 +630,8 @@
           {
             "text": {
               "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
@@ -608,14 +645,14 @@
               "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
               "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
-            "pitch": 600
+            "pitch": 550
           },
           {
             "text": {
               "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
               "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
             },
-            "pitch": 650
+            "pitch": 600
           },
           {
             "text": {
@@ -639,12 +676,14 @@
           {
             "text": {
               "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Vous perdez un jeton avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -661,7 +700,8 @@
           {
             "text": {
               "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -678,16 +718,16 @@
           {
             "text": {
               "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
-              "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\"",
-              "pitch": 350
-            }
+              "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
+            },
+            "pitch": 350
           },
           {
             "text": {
               "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
-              "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\"",
-              "pitch": 350
-            }
+              "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
+            },
+            "pitch": 350
           }
         ],
         "nextActionType": "game",
@@ -704,9 +744,9 @@
           {
             "text": {
               "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
-              "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\"",
-              "pitch": 350
-            }
+              "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
+            },
+            "pitch": 350
           }
         ],
         "nextActionType": "end",
@@ -726,13 +766,15 @@
             "text": {
               "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
               "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Soudain, en une seconde, il s'élance à toute vitesse vers le maquis.",
               "cor": "Poi in un secondu, si lancia à tutta velocità versu u macchja."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -749,50 +791,54 @@
           {
             "text": {
               "fr": "\"Laissez-moi ! Laissez-moi !\"",
-              "cor": "\"Linteti mi ! Linteti mi !\"",
-              "pitch": 700
-            }
+              "cor": "\"Linteti mi ! Linteti mi !\""
+            },
+            "pitch": 700
           },
           {
             "text": {
               "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
-              "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\"",
-              "pitch": 700
-            }
+              "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
+            },
+            "pitch": 700
           },
           {
             "text": {
               "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
-              "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\"",
-              "pitch": 700
-            }
+              "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
+            },
+            "pitch": 700
           },
           {
             "text": {
               "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Mais pour parvenir jusqu’à elle, vous avez besoin de récupérer l’un des fragments du dolmen de l’Orcu."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
-              "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\"",
-              "pitch": 700
-            }
+              "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
+            },
+            "pitch": 700
           }
         ],
         "nextActionType": "end",
@@ -809,7 +855,8 @@
           {
             "text": {
               "fr": "Vous retournez à la fontaine, déçu d’avoir perdu votre temps."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -828,12 +875,14 @@
           {
             "text": {
               "fr": "Afin de continuer vos recherches, vous décidez de monter en haut du belvédère pour bénéficier d'une meilleure vue d'ensemble."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Après une marche épuisante, vous observez l'ensemble de la ville de Corte… Vous remarquez finalement deux endroits marquants et plusieurs choix s'offrent à vous."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "choice",
@@ -853,19 +902,22 @@
             "text": {
               "fr": "Vous rentrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
               "cor": "Entrate in u Frac, l'internu di u bastimentu hè silenziu, abbandunatu dapoi tantu tempu, e so sale d'esposizione trasformate in corridori scuri induve risonanu passi imaginarii."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "À peine avez-vous franchi l'entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d'enfant déformé par un large sourire.",
               "cor": "Appena avete francatu l'entrata chì a porta sbatte daretu à voi. Un visu fragile appare brevemente, u so visu di zitellu deformatu da un largu surrisu."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.",
               "cor": "Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -883,12 +935,14 @@
             "text": {
               "fr": "Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.",
               "cor": "Scoprite un passaghju scunnisciutu daretu à una tenda tesa. Una botola grossolana sbocca in un corridore scuru, scavatu da i travagliadori per circulà senza attirà l'attenzione di i guardi."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -905,12 +959,14 @@
           {
             "text": {
               "fr": "Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré. "
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Votre seul chemin encore viable est A Piazza à u Duca."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -929,18 +985,21 @@
           {
             "text": {
               "fr": "Le bruit régulier du métal, des pas et des souffles fatigués rythme l'endroit. Au-dessus des travailleurs, trois gardes de A Squadra d'Arozza (Les revenants) surveillent la scène, immobiles, l'arme en évidence, prêts à intervenir au moindre faux pas."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Vous vous approchez du premier travailleur que vous croisez espérant récupérer des informations."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Ici on travaille… ou on regarde ailleurs. Y'en a qui baissent la tête pour survivre. D'autres qui serrent les dents… en attendant que ça casse. Fais attention à qui tu parles.",
               "cor": "Quì si travaglia… o si guarda in altrò. Ci n'hè chì abbassanu a testa per campà. Altri chì serranu i denti… aspittendu chì si rompa. Fà attenzione à quale parli."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "choice",
@@ -957,17 +1016,20 @@
           {
             "text": {
               "fr": "Vous parler au premier travailleur, celui-ci creuse un troue avec une pelle."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Ici… on ne parle pas. Hé ! Il pose des questions."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "La dénonciation tombe comme un couperet. Vous vous retrouvez face au clan, exposé, forcé d’affronter la garde. L’épreuve est brutale, sans soutien, chaque mouvement comptant double pour espérer vous en sortir."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -984,17 +1046,20 @@
           {
             "text": {
               "fr": "Vous parlez au deuxième travailleur qui utilise un marteau pour clouer une planche."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrais avec toi."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "La dénonciation tombe comme un couperet. Vous vous retrouvez face au clan, exposé, forcé d’affronter la garde. L’épreuve est brutale, sans soutien, chaque mouvement comptant double pour espérer vous en sortir."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -1011,7 +1076,8 @@
           {
             "text": {
               "fr": "Une fois les gardes neutralisés, les travailleurs se dispersent dans un souffle de soulagement. Le travailleur équipé d’un marteau vous entraîne jusqu’au camp des travailleurs de la statue de Pascal Paoli."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -1030,12 +1096,14 @@
           {
             "text": {
               "fr": "L’armurier dépose les sacs d’armes et de munitions récupérées. Les rebelles s’organisent immédiatement, triant, répartissant, vérifiant les stocks. Chaque action est rapide, précise."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant. Prouve ta valeur si tu veux combattre avec nous demain."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "riddle",
@@ -1052,7 +1120,8 @@
           {
             "text": {
               "fr": "Vous gagnez le respect des habitants du camp et leur confiance. Vous êtes désormais accepté et prêt à vous préparer avec eux pour le départ : le lendemain, vous affronterez A Strega sur la route du cimetière."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -1069,7 +1138,8 @@
           {
             "text": {
               "fr": "Après avoir remis les médicaments à la vieille guérisseuse qui vous attend devant la chapelle, vous sentez un souffle de soulagement et de gratitude. La soigneuse vous invite à la suivre. Elle connaît un chemin discret à travers le maquis, loin des patrouilles du clan, un passage sûr pour rejoindre des rebelles."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "riddle",
@@ -1088,13 +1158,15 @@
           {
             "text": {
               "fr": "Le travailleur marteau raconte au camp l’altercation."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.",
               "cor": "U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "riddle",
@@ -1113,14 +1185,15 @@
           {
             "text": {
               "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de A Squadra d’Arrozza, vous devez faire face à A Strega."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
               "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
-            "pitch": "350"
+            "pitch": 600
           }
         ],
         "nextActionType": "game",
@@ -1139,17 +1212,19 @@
               "fr": "\"Je sais ce que tu veux… Quand U Sarpu saura que j'ai perdu, il mettra la Corse à feu et à sang… Je n'avais pas le choix… Protège notre île !\"",
               "cor": "\"Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !\""
             },
-            "pitch": "350"
+            "pitch": 600
           },
           {
             "text": {
               "fr": "A Strega expire une dernière fois et le silence tombe sur le camp."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Vous récupérez la pierre de l'Orcu et continuez votre quête vers Prosa."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -1166,7 +1241,8 @@
           {
             "text": {
               "fr": "Votre quête se transforme en infiltration. Vous devez parvenir jusqu’à la demeure d’A Strega pour lui voler un fragment de la pierre de l’Orcu."
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "game",
@@ -1183,7 +1259,8 @@
           {
             "text": {
               "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoir volé A Strega et continuez votre quête vers Prosa. "
-            }
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "end",
@@ -1204,691 +1281,738 @@
               "fr": "Tu as tenu parole.",
               "cor": "Hai tenutu a to parolla."
             },
-            "pitch": 200
+            "pitch": 350
           },
           {
             "text": {
               "fr": "Après avoir remis la pierre à l'Orcu, vous et le colosse quittez la plage à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Un silence étrange s'installe. Vous regardez la mer et le ciel, sentez le sel sur votre peau, écoutez le clapotis des eaux. Pour un instant, la traversée devient un moment de calme et de contemplation."
-            }
+            },
+            "pitch": 400
           },
           {
             "text": {
               "fr": "Puis, au loin, des voiles apparaissent. Une patrouille de Prosa est prête à vous intercepter. Au moment où la patrouille approche le plus, l'Orcu vous demande de l'aide."
-            }
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      }
+    }
+  },
+  "2": {
+    "01": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
+              "cor": "In un rifugiu di furtuna, una vecchia radio è posta nantu à una tavula."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
+              "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
+              "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
+              "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
+              "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
+              "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "La voix s'interrompt soudainement…",
+              "cor": "A voce s'interrompe subitu…"
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "02": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous êtes assis sur les rails rouillés. Les quais sont déserts, envahis par la nature. Au fond, un groupe de civils avance lentement, encadré par des silhouettes armées.",
+              "cor": "Site assittatu nantu à i binari arrugginiti. E banchine sò deserte, invase da a natura. In fondu, un gruppu di civili avanza pianu pianu, incurniciatu da siluette armate."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "L'un d'eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n'est libre et l'île, réelle ou non vous apparaît soudain comme une évidence.",
+              "cor": "Unu d'elli inciampa è hè brutalmente rializatu, custrettu à cuntinuà. Quì, nimu hè liberu è l'isula, vera o micca vi appare subitu cum'è una evidenza."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "À l'entrée du tunnel, deux personnes semblent fatiguées, assises près d'un feu de fortune : Gyptis et Protis. Vous vous approchez pour leur parler.",
+              "cor": "À l'entrata di u tunnel, duie persone parenu stanchi, assittati vicinu à un focu di furtuna : Gyptis è Protis. Vi avvicinate per parlà li."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous décidez de leur raconter le message radio et votre intention de trouver l'île.",
+              "cor": "Decidite di cuntà li u missaghju di a radio è a vostra intenzione di truvà l'isula."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.",
+              "cor": "Pensi daveru d'andà à u portu ? Ùn ti ne rendi micca contu di u periculu chì rapprisenta."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Gyptis a raison, Toulon est sous le contrôle de la FLRP, La Fédération Li Rais de Prouvènço. Lou Drapé, un des chefs, fait partie du U Sarpu a Sette Capi qui dirige Prosa. Le port est constamment surveillé, tu risques ta vie.",
+              "cor": "Gyptis hà ragione, Tolone hè sottu u cuntrollu di a FLRP, A Federazione Li Rais de Prouvènço. Lou Drapé, unu di i capi, face parte di U Sarpu a Sette Capi chì dirige Prosa. U portu hè custantemente surveglatu, risichi a to vita."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Tu sembles toujours déterminé malgré nos avertissements. L'Opéra peut t'aider. Des gens importants y passent encore. Ce lieu sera un point clé sur ton chemin vers le port.",
+              "cor": "Pari sempre determinatu malgradu i nostri avvisi. L'Opera pò aiutà ti. A ghjente impurtante ci passa sempre. Stu locu serà un puntu chjave nantu à u to caminu versu u portu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Sylvain a essayé de résister. Ils l'ont envoyé sur Prosa. Comme les autres.",
+              "cor": "Sylvain hà pruvatu à resistà. L'anu mandatu nantu à Prosa. Cum'è l'altri."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Tu as le choix entre deux routes : longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.",
+              "cor": "Ai a scelta trà duie strade : seguità u tunnel per sbuccà versu u cimiteru… o passà per e ruelles per ghjunghje à u giardinu Alexandre 1er."
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "choice",
         "nextAction": "1"
       }
     },
-    "2": {
-      "01": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
-                "cor": "In un rifugiu di furtuna, una vecchia radio è posta nantu à una tavula."
-              }
-            },
-            {
-              "text": {
-                "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
-                "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
-              },
-              "pitch": 600
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
+    "03": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
         },
-        "2": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre, une jeune femme est agenouillée devant une sépulture. Lorsque vous vous approchez, elle se redresse brusquement et braque une arbalète.",
+              "cor": "Sortite da u tunnel è ghjunghje à u vechju cimiteru. À u centru, una ghjovana hè inginochjata davanti à una sepultura. Quandu vi avvicinate, si rialza bruscamente è punta una balestra."
+            },
+            "pitch": 400
           },
-          "dialog": [
-            {
-              "text": {
-                "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
-                "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
-              },
-              "pitch": "600"
+          {
+            "text": {
+              "fr": "Pas un pas de plus. Que fais-tu ici ?",
+              "cor": "Micca un passu di più. Chì faci quì ?"
             },
-            {
-              "text": {
-                "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-                "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
-              },
-              "pitch": "600"
-            },
-            {
-              "text": {
-                "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
-                "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
-              },
-              "pitch": "600"
-            },
-            {
-              "text": {
-                "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
-                "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
-              },
-              "pitch": "600"
-            },
-            {
-              "text": {
-                "fr": "La voix s'interrompt soudainement…",
-                "cor": "A voce s'interrompe subitu…"
-              }
-            }
-          ],
-          "nextActionType": "end",
-          "nextAction": "1"
-        }
-      },
-      "02": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
+            "pitch": 400
           },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous êtes assis sur les rails rouillés. Les quais sont déserts, envahis par la nature. Au fond, un groupe de civils avance lentement, encadré par des silhouettes armées.",
-                "cor": "Site assittatu nantu à i binari arrugginiti. E banchine sò deserte, invase da a natura. In fondu, un gruppu di civili avanza pianu pianu, incurniciatu da siluette armate."
-              }
+          {
+            "text": {
+              "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme.",
+              "cor": "Affirmate chì ùn fate chè attraversà u cimiteru per ghjunghje à u portu. Vi osserva, esita, poi abbassa a so arma."
             },
-            {
-              "text": {
-                "fr": "L'un d'eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n'est libre et l'île, réelle ou non vous apparaît soudain comme une évidence.",
-                "cor": "Unu d'elli inciampa è hè brutalmente rializatu, custrettu à cuntinuà. Quì, nimu hè liberu è l'isula, vera o micca vi appare subitu cum'è una evidenza."
-              }
-            },
-            {
-              "text": {
-                "fr": "À l'entrée du tunnel, deux personnes semblent fatiguées, assises près d'un feu de fortune : Gyptis et Protis. Vous vous approchez pour leur parler.",
-                "cor": "À l'entrata di u tunnel, duie persone parenu stanchi, assittati vicinu à un focu di furtuna : Gyptis è Protis. Vi avvicinate per parlà li."
-              }
-            },
-            {
-              "text": {
-                "fr": "Vous décidez de leur raconter le message radio et votre intention de trouver l'île.",
-                "cor": "Decidite di cuntà li u missaghju di a radio è a vostra intenzione di truvà l'isula."
-              }
-            },
-            {
-              "text": {
-                "fr": "Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.",
-                "cor": "Pensi daveru d'andà à u portu ? Ùn ti ne rendi micca contu di u periculu chì rapprisenta."
-              },
-              "pitch": 450
-            },
-            {
-              "text": {
-                "fr": "Gyptis a raison, Toulon est sous le contrôle de la FLRP, La Fédération Li Rais de Prouvènço. Lou Drapé, un des chefs, fait partie du U Sarpu a Sette Capi qui dirige Prosa. Le port est constamment surveillé, tu risques ta vie.",
-                "cor": "Gyptis hà ragione, Tolone hè sottu u cuntrollu di a FLRP, A Federazione Li Rais de Prouvènço. Lou Drapé, unu di i capi, face parte di U Sarpu a Sette Capi chì dirige Prosa. U portu hè custantemente surveglatu, risichi a to vita."
-              },
-              "pitch": 400
-            },
-            {
-              "text": {
-                "fr": "Tu sembles toujours déterminé malgré nos avertissements. L'Opéra peut t'aider. Des gens importants y passent encore. Ce lieu sera un point clé sur ton chemin vers le port.",
-                "cor": "Pari sempre determinatu malgradu i nostri avvisi. L'Opera pò aiutà ti. A ghjente impurtante ci passa sempre. Stu locu serà un puntu chjave nantu à u to caminu versu u portu."
-              },
-              "pitch": 450
-            },
-            {
-              "text": {
-                "fr": "Sylvain a essayé de résister. Ils l'ont envoyé sur Prosa. Comme les autres.",
-                "cor": "Sylvain hà pruvatu à resistà. L'anu mandatu nantu à Prosa. Cum'è l'altri."
-              },
-              "pitch": 400
-            },
-            {
-              "text": {
-                "fr": "Tu as le choix entre deux routes : longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.",
-                "cor": "Ai a scelta trà duie strade : seguità u tunnel per sbuccà versu u cimiteru… o passà per e ruelles per ghjunghje à u giardinu Alexandre 1er."
-              },
-              "pitch": 450
-            }
-          ],
-          "nextActionType": "choice",
-          "nextAction": "1"
-        }
-      },
-      "03": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
+            "pitch": 400
           },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre, une jeune femme est agenouillée devant une sépulture. Lorsque vous vous approchez, elle se redresse brusquement et braque une arbalète.",
-                "cor": "Sortite da u tunnel è ghjunghje à u vechju cimiteru. À u centru, una ghjovana hè inginochjata davanti à una sepultura. Quandu vi avvicinate, si rialza bruscamente è punta una balestra."
-              }
+          {
+            "text": {
+              "fr": "Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux. Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.",
+              "cor": "Poca ghjente dice a verità quì. Stu locu nasconde qualcosa di assai periculosu. Un'arma di distruzzione massiva chì puderia purtà à u caosu s'ella casca in e mani di Lou Drapé."
             },
-            {
-              "text": {
-                "fr": "Pas un pas de plus. Que fais-tu ici ?",
-                "cor": "Micca un passu di più. Chì faci quì ?"
-              },
-              "pitch": 500
-            },
-            {
-              "text": {
-                "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme.",
-                "cor": "Affirmate chì ùn fate chè attraversà u cimiteru per ghjunghje à u portu. Vi osserva, esita, poi abbassa a so arma."
-              }
-            },
-            {
-              "text": {
-                "fr": "Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux. Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.",
-                "cor": "Poca ghjente dice a verità quì. Stu locu nasconde qualcosa di assai periculosu. Un'arma di distruzzione massiva chì puderia purtà à u caosu s'ella casca in e mani di Lou Drapé."
-              },
-              "pitch": 500
-            },
-            {
-              "text": {
-                "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l'ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer.",
-                "cor": "Vi conduce à u fondu di u cimiteru. Una massa metallica gigantesca riposa in l'ombra : a Tarasca, un camiò blindatu cù i fari sempre accesi chì parenu osservà vi."
-              }
-            },
-            {
-              "text": {
-                "fr": "Ils sont morts à cause d'elle. J'accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t'accompagnerai plus loin.",
-                "cor": "Sò morti per via di ella. Accettu a to pruposta… mà serà periculosu. S'ellu mai ne sortemu vittoriosi, t'accumpagneraghju più luntanu."
-              },
-              "pitch": 500
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
-      },
-      "04": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
+            "pitch": 400
           },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Dans une ruelle étroite, une silhouette noire surgit. L'animal est trop grand pour être un simple chat. Immobile, il semble vous observer.",
-                "cor": "In una ruelle stretta, una siluetta nera surge. L'animale hè troppu grande per esse un simplice ghjattu. Immobile, pare osservà vi."
-              }
+          {
+            "text": {
+              "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l'ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer.",
+              "cor": "Vi conduce à u fondu di u cimiteru. Una massa metallica gigantesca riposa in l'ombra : a Tarasca, un camiò blindatu cù i fari sempre accesi chì parenu osservà vi."
             },
-            {
-              "text": {
-                "fr": "Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage. Après quelques secondes, le félin s'enfuit soudainement.",
-                "cor": "Pensate di ricunnosce un Matagot, una criatura di e leggende pruvenzale, assuciata à u malu presagiu. Dopu qualchi secondu, u felinu fughje subitu."
-              }
-            },
-            {
-              "text": {
-                "fr": "En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. Les allées encombrées forment un véritable labyrinthe et le Matagot s'enfuit à travers une ouverture trop étroite pour le suivre.",
-                "cor": "Seguendulu entrate in u Giardinu Alexandre 1er. L'allei ingombrate formanu un veru labirintu è u Matagot fughje attraversu un'apertura troppu stretta per seguità lu."
-              }
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
-      },
-      "05": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
+            "pitch": 400
           },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Approche, enfant… on ne marche pas avec une blessure pareille, laisse-moi t'aider.",
-                "cor": "Avvicinati, figliolu… ùn si marchja micca cù una ferita cusì, lascia mi aiutà ti."
-              },
-              "pitch": 550
+          {
+            "text": {
+              "fr": "Ils sont morts à cause d'elle. J'accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t'accompagnerai plus loin.",
+              "cor": "Sò morti per via di ella. Accettu a to pruposta… mà serà periculosu. S'ellu mai ne sortemu vittoriosi, t'accumpagneraghju più luntanu."
             },
-            {
-              "text": {
-                "fr": "La guérisseuse vous aide et vous héberge un moment. Peu à peu, vos forces reviennent. Le temps passe lentement, rythmé par les gestes précis de Fada Lavandula.",
-                "cor": "A guaritrice vi aiuta è vi ospita un mumentu. Pocu à pocu, e vostre forze tornanu. U tempu passa pianu pianu, ritmatu da i gesti precisi di Fada Lavandula."
-              }
-            },
-            {
-              "text": {
-                "fr": "Lorsque vous vous sentez d'aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec.",
-                "cor": "Quandu vi sentite prontu à ripartisce, guidatu da e so indicazione, lasciate finalmente u rifugiu. U vostru corpu hè ristabilitu, mà u vostru spiritu hè turbatu da u vostru fiascu."
-              }
-            }
-          ],
-          "nextActionType": "end",
-          "nextAction": "0501"
-        }
-      },
-      "06": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "En vous éloignant des passages encombrés du jardin, vous découvrez un chemin plus discret. Celui-ci débouche sur une petite clairière étonnamment dégagée.",
-                "cor": "Alluntanendu vi da i passaghji ingombrati di u giardinu, scoprite un caminu più discretu. Questu sbocca nantu à una piccula radura stupendamente sgumbrata."
-              }
-            },
-            {
-              "text": {
-                "fr": "Au centre repose un objet singulier : un roseau, droit et intact, dont l'extrémité est taillée en forme de clef. Sa présence semble volontaire, comme déposée là pour être trouvée.",
-                "cor": "À u centru riposa un oggettu singulare : un cannucciu, drittu è intactu, di cui l'estremità hè tagliata in forma di chjave. A so prisenza pare vuluntaria, cum'è diposta quì per esse truvata."
-              }
-            },
-            {
-              "text": {
-                "fr": "📜 Objet obtenu : Le Roseau.",
-                "cor": "📜 Oggettu ottinutu : U Cannucciu."
-              }
-            }
-          ],
-          "nextActionType": "end",
-          "nextAction": "0502"
-        }
-      },
-      "07": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous observez des wagons qui circulent sans jamais s'arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, vous devez sauter dans un wagon en marche.",
-                "cor": "Osservate vagoni chì circulanu senza mai firmà si, guidati da siluette enigmatiche, i Railadors. Per cuntinuà versu u portu senza esse spiatu, duvete saltà in un vagone in marcia."
-              }
-            },
-            {
-              "text": {
-                "fr": "À peine descendu, une scène capte votre attention : trois membres de la FLRP encerclent deux frères aux vêtements usés.",
-                "cor": "Appena falatu, una scena attira a vostra attenzione : trè membri di a FLRP circondanu dui fratelli cù vistimenti usati."
-              }
-            },
-            {
-              "text": {
-                "fr": "Vous devez décider comment intervenir.",
-                "cor": "Duvete decide cumu intervenì."
-              }
-            }
-          ],
-          "nextActionType": "choice",
-          "nextAction": "2"
-        }
-      },
-      "08": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Derrière un amas de gravats, vous débouchez sur la décharge de Toulon. L'odeur de ferraille rouillée et de déchets en décomposition est suffocante.",
-                "cor": "Daretu à un ammassatu di macerie, sbuccate nantu à a scarica di Tolone. L'odore di ferraglia arrugginita è di scumere in decumposizione hè suffucante."
-              }
-            },
-            {
-              "text": {
-                "fr": "Au milieu de ce chaos, un homme fouille méthodiquement les déchets, allongé près d'un vieux matelas usé.",
-                "cor": "À mezu à stu caosu, un omu cerca metodicalmente e scumere, allungatu vicinu à un vechju materassu usutu."
-              }
-            },
-            {
-              "text": {
-                "fr": "Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j'ai déniché : un masque à gaz permettant de filtrer les radiations. Je te propose un jeu. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !",
-                "cor": "Tristu, cum'è locu, ùn trovi micca ? Face un mumentu chì cercu sti scumere… è guarda ciò chì aghju scovatu : una maschera à gas chì permette di filtrà e radiazione. Ti prupongu un ghjocu. Rispondi à u mo enigma è a maschera hè a to. Ti sbagli… è riparti senza nunda !"
-              },
-              "pitch": 420
-            }
-          ],
-          "nextActionType": "riddle",
-          "nextAction": "1"
-        }
-      },
-      "09": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Alors que la tension est à son comble entre les soldats et les deux frères, une présence s'impose soudain. Une femme avance d'un pas assuré le long de l'allée déserte.",
-                "cor": "Mentre chì a tensione hè à u culmu trà i suldati è i dui fratelli, una presenza s'impone subitu. Una donna avanza d'un passu assicuratu longu l'allee deserta."
-              }
-            },
-            {
-              "text": {
-                "fr": "Vêtue de cuir et de fourrure, un fusil fermement serré contre elle, elle force naturellement les passants à s'écarter. C'est la Cabro d'Or, une figure majeure de l'organisation Prosa.",
-                "cor": "Vestita di core è di pelliccia, un fucile fermamente strettu contr'à ella, forza naturalmente i passanti à si scostà. Hè a Cabro d'Or, una figura maiò di l'urganizazione Prosa."
-              }
-            },
-            {
-              "text": {
-                "fr": "Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.",
-                "cor": "Avete superatu i limiti. Sparite è turnerete cù ciò chì serve per riparà ciò chì avete distruttu."
-              },
-              "pitch": 380
-            },
-            {
-              "text": {
-                "fr": "Humiliés, les soldats obéissent sans discuter et quittent les lieux. La Cabro d'Or se tourne alors vers vous.",
-                "cor": "Umiliati, i suldati obbediscenu senza discutà è lascenu u locu. A Cabro d'Or si volta tandu versu voi."
-              }
-            },
-            {
-              "text": {
-                "fr": "Peu auraient pris ce risque. Garde l'œil ouvert. Je devine aisément tes intentions jeune homme.",
-                "cor": "Pochi avianu presu stu risicu. Tene l'ochju apertu. Induvinu facilmente e to intenzione ghjovane omu."
-              },
-              "pitch": 380
-            },
-            {
-              "text": {
-                "fr": "Sans un mot de plus, elle s'éloigne. Les frères vous remercient et vous indiquent la direction de l'Opéra de Toulon.",
-                "cor": "Senza una parolla di più, s'alluntana. I fratelli vi ringrazianu è vi indicanu a direzzione di l'Opera di Tolone."
-              }
-            }
-          ],
-          "nextActionType": "end",
-          "nextAction": "0700"
-        }
-      },
-      "10": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "L'Opéra se dresse devant vous comme un monument culturel imposant, ravagé par le temps. La lourde porte s'ouvre dans un grincement sourd.",
-                "cor": "L'Opera si drizza davanti à voi cum'è un munumentu culturale impunente, devastatu da u tempu. A porta pisante s'apre in un scricchiolatamentu sordu."
-              }
-            },
-            {
-              "text": {
-                "fr": "À l'intérieur, vous progressez prudemment de pièce en pièce. Des abris de fortune abandonnés jonchent les couloirs, témoins d'un passé où des habitants ont tenté d'y survivre.",
-                "cor": "À l'internu, prugressate prudentemente da stanza à stanza. Rifugi di furtuna abbandunati sò sparsi in i corridori, testimoni d'un passatu induve abitanti anu pruvatu à campà quì."
-              }
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
-      },
-      "11": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Un bruit de pas précipité attire votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine. Il se présente comme Sébastien.",
-                "cor": "Un rumore di passi precipitati attira a vostra attenzione quandu scendete a porta. Un omu surge da una stanza vicina. Si presenta cum'è Sébastien."
-              }
-            },
-            {
-              "text": {
-                "fr": "Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés. Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange.",
-                "cor": "I so capelli sò in battaglia, i so gesti sò rapidi è disordinati. Pare parlà solu, cummentendu à volte e so propie azione cù un surrisu stranu."
-              }
-            },
-            {
-              "text": {
-                "fr": "Je suis Sébastien. Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui... mais tu portes la même flamme. Réponds-moi : es-tu vraiment prêt ?",
-                "cor": "Sò Sébastien. St'ochji… Sta determinazione... Gyptis avia u listessu sguardu. Ùn si micca ellu... mà porti a listessa fiamma. Rispondimi : si daveru prontu ?"
-              },
-              "pitch": 470
-            }
-          ],
-          "nextActionType": "riddle",
-          "nextAction": "1"
-        }
-      },
-      "12": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, un homme est agenouillé en prière. Il s'agit du Père Lucien, très célèbre pour sa gentillesse à Toulon.",
-                "cor": "Entrate à l'internu di a cattidrale, à u centru, un omu hè inginochjatu in preghiera. Si tratta di u Babbu Lucien, assai famosu per a so gentilezza à Tolone."
-              }
-            },
-            {
-              "text": {
-                "fr": "Respectueux, vous attendez la fin de sa prière. Puis l'homme se redresse.",
-                "cor": "Rispettuosu, aspettate a fine di a so preghiera. Poi l'omu si rialza."
-              }
-            },
-            {
-              "text": {
-                "fr": "Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?",
-                "cor": "Bonghjornu, figliolu meiu. Sò u Babbu Lucien. Pochi osanu francà ste porte oramai. Chì possu fà per tè ?"
-              },
-              "pitch": 380
-            },
-            {
-              "text": {
-                "fr": "Vous lui expliquez la raison de votre venue.",
-                "cor": "Li spiegate a ragione di a vostra venuta."
-              }
-            },
-            {
-              "text": {
-                "fr": "Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrai par radio cette nuit. Sois attentif en chemin, il paraît qu'il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer.",
-                "cor": "Duverai andà à a meria. Quallà, Darius puderà aiutà ti à ghjunghje à Prosa. U preveniaraghju per radio sta notte. Sii attentu in caminu, pare chì esiste un dipositu secretu in u cantu. Mà sopratuttu duverai stà quì per riposà ti."
-              },
-              "pitch": 380
-            }
-          ],
-          "nextActionType": "choice",
-          "nextAction": "3"
-        }
-      },
-      "13": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Avant de suivre le Père Lucien vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements.",
-                "cor": "Prima di seguità u Babbu Lucien nutate u passaghju secretu. À l'internu, scoprite un dipositu pienu di materiale è di diversi equipamenti."
-              }
-            },
-            {
-              "text": {
-                "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la FLRP à votre taille.",
-                "cor": "Dopu una cerca rapida, circendu tuttu l'oggettu chì pò esse utile à voi, scoprite finalmente un uniformu di a FLRP à a vostra taglia."
-              }
-            },
-            {
-              "text": {
-                "fr": "📜 Objet obtenu : Uniforme FLRP.",
-                "cor": "📜 Oggettu ottinutu : Uniformu FLRP."
-              }
-            }
-          ],
-          "nextActionType": "end",
-          "nextAction": "1100"
-        }
-      },
-      "14": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie. Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde.",
-                "cor": "Dopu un longu viaghju, ghjunghje à un carrughju induve finalmente vedete a meria. U bastimentu hè pesantemente surveglatu : parechji membri di l'urganizazione montanu a guardia."
-              }
-            },
-            {
-              "text": {
-                "fr": "Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif.",
-                "cor": "U locu s'assumiglia più à una fortezza ch'è à un bastimentu amministrativu."
-              }
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
-      },
-      "15": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Paniqué par votre échec vous traversez les rues de Toulon, évitant patrouilles et obstacles. Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir.",
-                "cor": "Paniticatu da u vostru fiascu attraversate e strade di Tolone, evitendu pattuglie è ostaculi. Vi firmate rapidamente à l'IUT MMI, un anticu locu di sapè."
-              }
-            },
-            {
-              "text": {
-                "fr": "Vous l'utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route. Mais soudain le sol tremble et vous sentez que le bâtiment n'est pas stable.",
-                "cor": "L'utilizate cum'è un puntu di riferimentu è di rifugiu timpurariu prima di ripiglià a vostra strada. Mà subitu u pianu trema è sentite chì u bastimentu ùn hè micca stabile."
-              }
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
-      },
-      "16": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main. Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée.",
-                "cor": "Indussate a cumminazione di membru di l'urganizazione è tenete u badge fermamente in manu. Grazie à stu equipamentu, attraversate senza difficultà e guardie poste à l'entrata."
-              }
-            },
-            {
-              "text": {
-                "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas.",
-                "cor": "Mà una volta à l'internu di u bastimentu, a situazione si cumplica. Un ufficiale di rangu superiore, più sfiduciatu, si ferma netta videndu vi : ùn vi ricunnosce micca."
-              }
-            },
-            {
-              "text": {
-                "fr": "Toi. Je ne t'ai jamais vu. Viens par ici !",
-                "cor": "Tù. Ùn t'aghju mai vistu. Veni quà !"
-              },
-              "pitch": 350
-            }
-          ],
-          "nextActionType": "riddle",
-          "nextAction": "1"
-        }
-      },
-      "17": {
-        "1": {
-          "default": {
-            "backgroundUrl": "",
-            "foregroundUrl": "",
-            "sound": "",
-            "music": ""
-          },
-          "dialog": [
-            {
-              "text": {
-                "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance.",
-                "cor": "Vi avvicinate à u portu. Una tensione silenziosa s'installa. U locu, unicu passaghju versu l'esternu di a cità, hè custantemente piazzatu sottu alta surviglianza."
-              }
-            },
-            {
-              "text": {
-                "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect.",
-                "cor": "E banchine sò quadrettate da pattuglie facendu ronde meccaniche o scrutendu attentamente u minimu movimentu sospettu."
-              }
-            }
-          ],
-          "nextActionType": "game",
-          "nextAction": "1"
-        }
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
       }
     },
-    "3": {}
-  }
+    "04": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Dans une ruelle étroite, une silhouette noire surgit. L'animal est trop grand pour être un simple chat. Immobile, il semble vous observer.",
+              "cor": "In una ruelle stretta, una siluetta nera surge. L'animale hè troppu grande per esse un simplice ghjattu. Immobile, pare osservà vi."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage. Après quelques secondes, le félin s'enfuit soudainement.",
+              "cor": "Pensate di ricunnosce un Matagot, una criatura di e leggende pruvenzale, assuciata à u malu presagiu. Dopu qualchi secondu, u felinu fughje subitu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. Les allées encombrées forment un véritable labyrinthe et le Matagot s'enfuit à travers une ouverture trop étroite pour le suivre.",
+              "cor": "Seguendulu entrate in u Giardinu Alexandre 1er. L'allei ingombrate formanu un veru labirintu è u Matagot fughje attraversu un'apertura troppu stretta per seguità lu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "05": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Approche, enfant… on ne marche pas avec une blessure pareille, laisse-moi t'aider.",
+              "cor": "Avvicinati, figliolu… ùn si marchja micca cù una ferita cusì, lascia mi aiutà ti."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "La guérisseuse vous aide et vous héberge un moment. Peu à peu, vos forces reviennent. Le temps passe lentement, rythmé par les gestes précis de Fada Lavandula.",
+              "cor": "A guaritrice vi aiuta è vi ospita un mumentu. Pocu à pocu, e vostre forze tornanu. U tempu passa pianu pianu, ritmatu da i gesti precisi di Fada Lavandula."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Lorsque vous vous sentez d'aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec.",
+              "cor": "Quandu vi sentite prontu à ripartisce, guidatu da e so indicazione, lasciate finalmente u rifugiu. U vostru corpu hè ristabilitu, mà u vostru spiritu hè turbatu da u vostru fiascu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0501"
+      }
+    },
+    "06": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "En vous éloignant des passages encombrés du jardin, vous découvrez un chemin plus discret. Celui-ci débouche sur une petite clairière étonnamment dégagée.",
+              "cor": "Alluntanendu vi da i passaghji ingombrati di u giardinu, scoprite un caminu più discretu. Questu sbocca nantu à una piccula radura stupendamente sgumbrata."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Au centre repose un objet singulier : un roseau, droit et intact, dont l'extrémité est taillée en forme de clef. Sa présence semble volontaire, comme déposée là pour être trouvée.",
+              "cor": "À u centru riposa un oggettu singulare : un cannucciu, drittu è intactu, di cui l'estremità hè tagliata in forma di chjave. A so prisenza pare vuluntaria, cum'è diposta quì per esse truvata."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "📜 Objet obtenu : Le Roseau.",
+              "cor": "📜 Oggettu ottinutu : U Cannucciu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0502"
+      }
+    },
+    "07": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous observez des wagons qui circulent sans jamais s'arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, vous devez sauter dans un wagon en marche.",
+              "cor": "Osservate vagoni chì circulanu senza mai firmà si, guidati da siluette enigmatiche, i Railadors. Per cuntinuà versu u portu senza esse spiatu, duvete saltà in un vagone in marcia."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "À peine descendu, une scène capte votre attention : trois membres de la FLRP encerclent deux frères aux vêtements usés.",
+              "cor": "Appena falatu, una scena attira a vostra attenzione : trè membri di a FLRP circondanu dui fratelli cù vistimenti usati."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous devez décider comment intervenir.",
+              "cor": "Duvete decide cumu intervenì."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "2"
+      }
+    },
+    "08": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Derrière un amas de gravats, vous débouchez sur la décharge de Toulon. L'odeur de ferraille rouillée et de déchets en décomposition est suffocante.",
+              "cor": "Daretu à un ammassatu di macerie, sbuccate nantu à a scarica di Tolone. L'odore di ferraglia arrugginita è di scumere in decumposizione hè suffucante."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Au milieu de ce chaos, un homme fouille méthodiquement les déchets, allongé près d'un vieux matelas usé.",
+              "cor": "À mezu à stu caosu, un omu cerca metodicalmente e scumere, allungatu vicinu à un vechju materassu usutu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j'ai déniché : un masque à gaz permettant de filtrer les radiations. Je te propose un jeu. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !",
+              "cor": "Tristu, cum'è locu, ùn trovi micca ? Face un mumentu chì cercu sti scumere… è guarda ciò chì aghju scovatu : una maschera à gas chì permette di filtrà e radiazione. Ti prupongu un ghjocu. Rispondi à u mo enigma è a maschera hè a to. Ti sbagli… è riparti senza nunda !"
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      }
+    },
+    "09": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Alors que la tension est à son comble entre les soldats et les deux frères, une présence s'impose soudain. Une femme avance d'un pas assuré le long de l'allée déserte.",
+              "cor": "Mentre chì a tensione hè à u culmu trà i suldati è i dui fratelli, una presenza s'impone subitu. Una donna avanza d'un passu assicuratu longu l'allee deserta."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vêtue de cuir et de fourrure, un fusil fermement serré contre elle, elle force naturellement les passants à s'écarter. C'est la Cabro d'Or, une figure majeure de l'organisation Prosa.",
+              "cor": "Vestita di core è di pelliccia, un fucile fermamente strettu contr'à ella, forza naturalmente i passanti à si scostà. Hè a Cabro d'Or, una figura maiò di l'urganizazione Prosa."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.",
+              "cor": "Avete superatu i limiti. Sparite è turnerete cù ciò chì serve per riparà ciò chì avete distruttu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Humiliés, les soldats obéissent sans discuter et quittent les lieux. La Cabro d'Or se tourne alors vers vous.",
+              "cor": "Umiliati, i suldati obbediscenu senza discutà è lascenu u locu. A Cabro d'Or si volta tandu versu voi."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Peu auraient pris ce risque. Garde l'œil ouvert. Je devine aisément tes intentions jeune homme.",
+              "cor": "Pochi avianu presu stu risicu. Tene l'ochju apertu. Induvinu facilmente e to intenzione ghjovane omu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Sans un mot de plus, elle s'éloigne. Les frères vous remercient et vous indiquent la direction de l'Opéra de Toulon.",
+              "cor": "Senza una parolla di più, s'alluntana. I fratelli vi ringrazianu è vi indicanu a direzzione di l'Opera di Tolone."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "0700"
+      }
+    },
+    "10": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L'Opéra se dresse devant vous comme un monument culturel imposant, ravagé par le temps. La lourde porte s'ouvre dans un grincement sourd.",
+              "cor": "L'Opera si drizza davanti à voi cum'è un munumentu culturale impunente, devastatu da u tempu. A porta pisante s'apre in un scricchiolatamentu sordu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "À l'intérieur, vous progressez prudemment de pièce en pièce. Des abris de fortune abandonnés jonchent les couloirs, témoins d'un passé où des habitants ont tenté d'y survivre.",
+              "cor": "À l'internu, prugressate prudentemente da stanza à stanza. Rifugi di furtuna abbandunati sò sparsi in i corridori, testimoni d'un passatu induve abitanti anu pruvatu à campà quì."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "11": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un bruit de pas précipité attire votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine. Il se présente comme Sébastien.",
+              "cor": "Un rumore di passi precipitati attira a vostra attenzione quandu scendete a porta. Un omu surge da una stanza vicina. Si presenta cum'è Sébastien."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés. Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange.",
+              "cor": "I so capelli sò in battaglia, i so gesti sò rapidi è disordinati. Pare parlà solu, cummentendu à volte e so propie azione cù un surrisu stranu."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Je suis Sébastien. Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui... mais tu portes la même flamme. Réponds-moi : es-tu vraiment prêt ?",
+              "cor": "Sò Sébastien. St'ochji… Sta determinazione... Gyptis avia u listessu sguardu. Ùn si micca ellu... mà porti a listessa fiamma. Rispondimi : si daveru prontu ?"
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      }
+    },
+    "12": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, un homme est agenouillé en prière. Il s'agit du Père Lucien, très célèbre pour sa gentillesse à Toulon.",
+              "cor": "Entrate à l'internu di a cattidrale, à u centru, un omu hè inginochjatu in preghiera. Si tratta di u Babbu Lucien, assai famosu per a so gentilezza à Tolone."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Respectueux, vous attendez la fin de sa prière. Puis l'homme se redresse.",
+              "cor": "Rispettuosu, aspettate a fine di a so preghiera. Poi l'omu si rialza."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?",
+              "cor": "Bonghjornu, figliolu meiu. Sò u Babbu Lucien. Pochi osanu francà ste porte oramai. Chì possu fà per tè ?"
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous lui expliquez la raison de votre venue.",
+              "cor": "Li spiegate a ragione di a vostra venuta."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrai par radio cette nuit. Sois attentif en chemin, il paraît qu'il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer.",
+              "cor": "Duverai andà à a meria. Quallà, Darius puderà aiutà ti à ghjunghje à Prosa. U preveniaraghju per radio sta notte. Sii attentu in caminu, pare chì esiste un dipositu secretu in u cantu. Mà sopratuttu duverai stà quì per riposà ti."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "3"
+      }
+    },
+    "13": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Avant de suivre le Père Lucien vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements.",
+              "cor": "Prima di seguità u Babbu Lucien nutate u passaghju secretu. À l'internu, scoprite un dipositu pienu di materiale è di diversi equipamenti."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la FLRP à votre taille.",
+              "cor": "Dopu una cerca rapida, circendu tuttu l'oggettu chì pò esse utile à voi, scoprite finalmente un uniformu di a FLRP à a vostra taglia."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "📜 Objet obtenu : Uniforme FLRP.",
+              "cor": "📜 Oggettu ottinutu : Uniformu FLRP."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1100"
+      }
+    },
+    "14": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie. Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde.",
+              "cor": "Dopu un longu viaghju, ghjunghje à un carrughju induve finalmente vedete a meria. U bastimentu hè pesantemente surveglatu : parechji membri di l'urganizazione montanu a guardia."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif.",
+              "cor": "U locu s'assumiglia più à una fortezza ch'è à un bastimentu amministrativu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "15": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Paniqué par votre échec vous traversez les rues de Toulon, évitant patrouilles et obstacles. Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir.",
+              "cor": "Paniticatu da u vostru fiascu attraversate e strade di Tolone, evitendu pattuglie è ostaculi. Vi firmate rapidamente à l'IUT MMI, un anticu locu di sapè."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous l'utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route. Mais soudain le sol tremble et vous sentez que le bâtiment n'est pas stable.",
+              "cor": "L'utilizate cum'è un puntu di riferimentu è di rifugiu timpurariu prima di ripiglià a vostra strada. Mà subitu u pianu trema è sentite chì u bastimentu ùn hè micca stabile."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "16": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main. Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée.",
+              "cor": "Indussate a cumminazione di membru di l'urganizazione è tenete u badge fermamente in manu. Grazie à stu equipamentu, attraversate senza difficultà e guardie poste à l'entrata."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas.",
+              "cor": "Mà una volta à l'internu di u bastimentu, a situazione si cumplica. Un ufficiale di rangu superiore, più sfiduciatu, si ferma netta videndu vi : ùn vi ricunnosce micca."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Toi. Je ne t'ai jamais vu. Viens par ici !",
+              "cor": "Tù. Ùn t'aghju mai vistu. Veni quà !"
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      }
+    },
+    "17": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance.",
+              "cor": "Vi avvicinate à u portu. Una tensione silenziosa s'installa. U locu, unicu passaghju versu l'esternu di a cità, hè custantemente piazzatu sottu alta surviglianza."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect.",
+              "cor": "E banchine sò quadrettate da pattuglie facendu ronde meccaniche o scrutendu attentamente u minimu movimentu sospettu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    }
+  },
+  "3": {}
 }
