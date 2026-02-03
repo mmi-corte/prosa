@@ -163,7 +163,7 @@
           "nextStep": "12"
         },
         "2": {
-          "type": "loose",
+          "type": "lose",
           "nextStep": "11"
         }
       }
@@ -177,7 +177,7 @@
           "nextStep": "13"
         },
         "2": {
-          "type": "loose",
+          "type": "lose",
           "nextStep": "12"
         }
       }
@@ -191,7 +191,7 @@
           "nextStep": "13"
         },
         "2": {
-          "type": "loose",
+          "type": "lose",
           "nextStep": "12"
         }
       }
@@ -205,7 +205,7 @@
           "nextStep": "14"
         },
         "2": {
-          "type": "loose",
+          "type": "lose",
           "nextStep": "13"
         }
       }

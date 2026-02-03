@@ -58,7 +58,7 @@ function handleAnswer(answerScore) {
     
     // Continue to next action depending on the total score
     if (score < 0) {
-        callAction(data.nextActionTypeLoose, data.nextActionLoose)
+        callAction(data.nextActionTypeLose, data.nextActionLose)
     } else {
         callAction(data.nextActionTypeWin, data.nextActionWin)
     }

@@ -43,7 +43,7 @@ export function endView(action) {
             break;
 
         //Reculez à la case X
-        case "loose":
+        case "lose":
             textIndication.innerText = "Reculez à la case"
             textNextStep.innerText = nextStep
             break;

@@ -5,8 +5,8 @@
                 "game": "radio_frequence",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "04": {
@@ -14,8 +14,8 @@
                 "game": "orcu_force",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "06": {
@@ -23,8 +23,8 @@
                 "game": "chapelle_infiltration",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "3",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "07": {
@@ -32,8 +32,8 @@
                 "game": "chapelle_recup_arme",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "5",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "09": {
@@ -41,8 +41,8 @@
                 "game": "fulettu_chase",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "11": {
@@ -50,8 +50,8 @@
                 "game": "fight_soldiers",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "14": {
@@ -59,15 +59,15 @@
                 "game": "strega_combat",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             },
             "2":{
                 "game": "strega_infiltration",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         }
     },
@@ -77,8 +77,8 @@
                 "game": "radio_frequence",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "03": {
@@ -86,8 +86,8 @@
                 "game": "tarasca_defense",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "04": {
@@ -95,8 +95,8 @@
                 "game": "toulon_game_04",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "10": {
@@ -104,8 +104,8 @@
                 "game": "opera_sequence",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "1"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "1"
             }
         },
         "14": {
@@ -113,8 +113,8 @@
                 "game": "mairie_duel",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "2"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "15": {
@@ -122,8 +122,8 @@
                 "game": "iut_mmi_escape",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "1"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "1"
             }
         },
         "17": {
@@ -131,8 +131,8 @@
                 "game": "port_infiltration",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
-                "nextActionTypeLoose": "end",
-                "nextActionLoose": "1"
+                "nextActionTypeLose": "end",
+                "nextActionLose": "1"
             }
         }
     },

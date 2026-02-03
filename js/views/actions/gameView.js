@@ -125,7 +125,7 @@ export function gameView(action) {
             const loseBtn = document.createElement('button');
             loseBtn.textContent = 'LOSE';
             loseBtn.onclick = () => {
-                callAction(data.nextActionTypeLoose, data.nextActionLoose);
+                callAction(data.nextActionTypeLose, data.nextActionLose);
             };
             
             buttonContainer.appendChild(winBtn);
@@ -151,9 +151,9 @@ function setupGameCompletion() {
                 console.log('Calling win action');
                 callAction(data.nextActionTypeWin, data.nextActionWin);
             } else {
-                console.log('Calling loose action');
-                console.log(data.nextActionLoose, data.nextActionTypeLoose)
-                callAction(data.nextActionTypeLoose, data.nextActionLoose);
+                console.log('Calling lose action');
+                console.log(data.nextActionLose, data.nextActionTypeLose)
+                callAction(data.nextActionTypeLose, data.nextActionLose);
             }
             
             window.removeEventListener('minigame-complete', handleGameComplete);
