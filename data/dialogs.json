@@ -96,13 +96,13 @@
           },
           {
             "text": {
-              "fr": "Un bruit vous interpelle. Vous levez la tête et apercevez A Fata di u Fiume (La fée de la rivière).",
+              "fr": "Un bruit vous interpelle. Vous levez la tête et apercevez A Fata di u Fiume",
               "cor": "Un rumore vi chjama. Alzate a testa è vede A Fata di u Fiume."
             }
           },
           {
             "text": {
-              "fr": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\" (Ho… ta gourde déborde. Je sens ton esprit ailleurs.)",
+              "fr": "\"Ho… ta gourde déborde. Je sens ton esprit ailleurs.\"",
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
             "pitch": 650
@@ -115,13 +115,128 @@
           },
           {
             "text": {
-              "fr": "\"Hè vera, hè stranu… Nanzu d'aiutatti, devu sapè s'è ti possu fà cunfidenza.\" (En effet c'est préoccupant… Avant de t'aider je dois savoir si je peux te faire confiance.)",
+              "fr": "En effet c'est préoccupant… Avant de t'aider je dois savoir si je peux te faire confiance.",
               "cor": "\"Hè vera, hè stranu… Nanzu d'aiutatti, devu sapè s'è ti possu fà cunfidenza.\""
             },
             "pitch": 650
           }
         ],
         "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
+              "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
+              "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
+              "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
+            }
+          },
+          {
+            "text": {
+              "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
+              "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\"",
+              "pitch": 600
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
+              "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\"",
+              "pitch": 600
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous faites un pas en arrière effrayé."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
+              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\"",
+              "pitch": 600
+            }
+          },
+          {
+            "text": {
+              "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Ils sont tous liés. Prosa… Corte… et le clan. Si personne n’agit… rien ne changera."
+            }
+          },
+          {
+            "text": {
+              "fr": "Si le clan déteste autant U Spallistu c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé…. AU MUSÉE !"
+            }
+          }
+        ],
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },
