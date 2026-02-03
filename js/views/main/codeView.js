@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, extraHeaderContainer, vibrate } from "../../../app.js";
+import { clearContainer, gameContainer, headerLeft, vibrate } from "../../../app.js";
 import { activePlayer, startStep } from "../../gameEventHandler.js";
 import { stepsData } from "../../loadData.js";
 import { playerSelectView } from "./playerSelectView.js";
@@ -56,7 +56,7 @@ export function codeView() {
     keyValidate.addEventListener("click", submitCode)
 
     // Bouton retour (header)
-    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button')
         backButton.classList.add('back-btn-circle')
         backButton.innerHTML = `
@@ -67,7 +67,7 @@ export function codeView() {
         backButton.addEventListener('click', () => {
             window.history.back()
         })
-        extraHeaderContainer.appendChild(backButton)
+        headerLeft.appendChild(backButton)
     }
 
     let currentCode = ""

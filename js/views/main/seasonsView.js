@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js"
+import { clearContainer, gameContainer, headerLeft } from "../../../app.js"
 import { menuView } from "./menuView.js"
 
 export function seasonsView() {
@@ -43,7 +43,7 @@ export function seasonsView() {
     loadCinematics()
 
     // Bouton retour (header)
-    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button')
         backButton.classList.add('back-btn-circle')
         backButton.innerHTML = `
@@ -52,9 +52,9 @@ export function seasonsView() {
             </svg>
         `
         backButton.addEventListener('click', () => {
-            menuView()
+            window.history.back()
         })
-        extraHeaderContainer.appendChild(backButton)
+        headerLeft.appendChild(backButton)
     }
 }
 

@@ -17,7 +17,11 @@
 <body>
   <!-- Main Menu Screen -->
   <header class="header">
-    <a href="/" class="logo-small" id="header-logo">
+    <div class="header-left" id="headerLeft">
+      <!-- Back button will be placed here dynamically -->
+    </div>
+
+    <a href="/" class="logo-small logo-center" id="header-logo">
       <!-- Logo PROSA officiel -->
       <span class="logo-wrap">
         <img src="./assets/logo/prosa-logo.png" alt="PROSA" class="logo-img" />
@@ -25,11 +29,7 @@
       </span>
     </a>
 
-    <div class="header-container">
-      <div class="extra-container" id="extraHeaderContainer">
-
-      </div>
-
+    <div class="header-right">
       <div class="battery-body hidden" id="difficultyIndicator">
         <div class="battery-cap"></div>
         <div class="battery-label" id="difficultyLabel">-</div>

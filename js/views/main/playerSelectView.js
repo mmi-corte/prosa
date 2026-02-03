@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, extraHeaderContainer, navigate } from "../../../app.js"
+import { clearContainer, gameContainer, headerLeft, navigate } from "../../../app.js"
 import { setActivePlayer } from "../../gameEventHandler.js"
 import { players } from "../../initGame.js"
 import { renderPlayerList } from "../components/renderPlayerList.js"
@@ -21,7 +21,7 @@ export function playerSelectView() {
     })
     
     // Bouton retour (header)
-    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button')
         backButton.classList.add('back-btn-circle')
         backButton.innerHTML = `
@@ -30,8 +30,8 @@ export function playerSelectView() {
             </svg>
         `
         backButton.addEventListener('click', () => {
-            menuView()
+            navigate('menu', menuView(), true)
         })
-        extraHeaderContainer.appendChild(backButton)
+        headerLeft.appendChild(backButton)
     }
 }

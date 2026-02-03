@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, extraHeaderContainer, navigate } from "../../../app.js";
+import { clearContainer, gameContainer, headerLeft, navigate } from "../../../app.js";
 import { menuView } from "./menuView.js";
 
 export function charactersView() {
@@ -76,7 +76,7 @@ export function charactersView() {
     }
 
     // Bouton retour (header)
-    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button')
         backButton.classList.add('back-btn-circle')
         backButton.innerHTML = `
@@ -87,7 +87,7 @@ export function charactersView() {
         backButton.addEventListener('click', () => {
             window.history.back()
         })
-        extraHeaderContainer.appendChild(backButton)
+        headerLeft.appendChild(backButton)
     }
 }
 
@@ -98,11 +98,31 @@ function renderCharactersGrid(charactersData) {
     charactersData.forEach(char => {
         const card = document.createElement("div")
         card.className = "character-card"
-        card.innerHTML = `
-      <div class="character-card-image"
-           style="background-image:url('./assets/characters/${char.image}')"></div>
-      <div class="character-card-name">${char.name}</div>
-    `
+
+        const mediaWrapper = document.createElement('div')
+        mediaWrapper.className = "character-card-image"
+
+        const mediaPath = char.image || char.media || ''
+        const isVideo = /\.(mp4|webm|ogg)$/i.test(mediaPath)
+
+        if (isVideo) {
+            const video = document.createElement('video')
+            video.src = `./assets/characters/${mediaPath}`
+            video.muted = true
+            video.loop = true
+            video.playsInline = true
+            video.autoplay = true
+            video.setAttribute('aria-label', char.name)
+            mediaWrapper.appendChild(video)
+        } else {
+            mediaWrapper.style.backgroundImage = `url('./assets/characters/${mediaPath}')`
+        }
+
+        const nameEl = document.createElement('div')
+        nameEl.className = "character-card-name"
+        nameEl.textContent = char.name
+
+        card.append(mediaWrapper, nameEl)
         card.addEventListener("click", () => navigate('encyclopedie-details', goToCharacterDetail(char)))
         charactersGrid.appendChild(card)
     })
@@ -145,8 +165,23 @@ function goToCharacterDetail(char) {
     const characterDetailName = modal.querySelector('#characterDetailName')
     const characterDescription = modal.querySelector('#characterDescription')
 
-    characterDetailImage.src = `./assets/characters/${char.image}`
-    characterDetailImage.alt = `Illustration ${char.name}`
+    const detailMediaPath = char.image || char.media || ''
+    const isDetailVideo = /\.(mp4|webm|ogg)$/i.test(detailMediaPath)
+
+    if (isDetailVideo) {
+        const video = document.createElement('video')
+        video.src = `./assets/characters/${detailMediaPath}`
+        video.muted = true
+        video.loop = true
+        video.controls = true
+        video.autoplay = true
+        video.playsInline = true
+        video.setAttribute('aria-label', char.name)
+        characterDetailImage.replaceWith(video)
+    } else {
+        characterDetailImage.src = `./assets/characters/${detailMediaPath}`
+        characterDetailImage.alt = `Illustration ${char.name}`
+    }
     characterDetailName.textContent = char.name
     characterDescription.innerHTML = `
     <p>${char.description}</p>

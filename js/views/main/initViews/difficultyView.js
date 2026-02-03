@@ -1,7 +1,7 @@
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
-import { navigate, extraHeaderContainer } from "../../../../app.js";
+import { navigate, headerLeft } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
 import { resetDifficultyIndicator } from "../../components/difficultyIndicator.js";
 
@@ -71,7 +71,7 @@ export function difficultyView() {
     initContainer.appendChild(difficultyContainer);
 
     // Bouton retour (header)
-    if (extraHeaderContainer && !extraHeaderContainer.querySelector('.back-btn-circle')) {
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button');
         backButton.classList.add('back-btn-circle');
         backButton.innerHTML = `
@@ -80,9 +80,9 @@ export function difficultyView() {
             </svg>
         `;
         backButton.addEventListener('click', () => {
-            navigate('menu', menuView())
+            navigate('menu', menuView(), true);
         });
-        extraHeaderContainer.appendChild(backButton);
+        headerLeft.appendChild(backButton);
     }
 
     // Bouton submit caché au départ

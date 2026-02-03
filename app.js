@@ -16,7 +16,7 @@ import { initDifficultyIndicator } from "./js/views/components/difficultyIndicat
 export const gameContainer = document.getElementById('gameContainer')
 export const difficultyIndicator = document.getElementById('difficultyIndicator')
 export const difficultyLabel = document.getElementById('difficultyLabel')
-export const extraHeaderContainer = document.getElementById('extraHeaderContainer')
+export const headerLeft = document.getElementById('headerLeft')
 
 // const difficultyLabels = {
 //   30: 'F',
@@ -65,8 +65,8 @@ export const extraHeaderContainer = document.getElementById('extraHeaderContaine
 
 export function clearContainer() {
   gameContainer.innerHTML = ''
-  if (extraHeaderContainer) {
-    extraHeaderContainer.innerHTML = ''
+  if (headerLeft) {
+    headerLeft.innerHTML = ''
   }
 }
 
