@@ -781,10 +781,22 @@
             "fr": "Vous observez des wagons qui circulent sans jamais s'arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, vous devez sauter dans un wagon en marche.",
             "cor": "Osservate vagoni chì circulanu senza mai firmà si, guidati da siluette enigmatiche, i Railadors. Per cuntinuà versu u portu senza esse spiatu, duvete saltà in un vagone in marcia."
           }
+        },
+        {
+          "text": {
+            "fr": "À peine descendu, une scène capte votre attention : trois membres de la FLRP encerclent deux frères aux vêtements usés.",
+            "cor": "Appena falatu, una scena attira a vostra attenzione : trè membri di a FLRP circondanu dui fratelli cù vistimenti usati."
+          }
+        },
+        {
+          "text": {
+            "fr": "Vous devez décider comment intervenir.",
+            "cor": "Duvete decide cumu intervenì."
+          }
         }
       ],
-      "nextActionType": "game",
-      "nextAction": "1"
+      "nextActionType": "choice",
+      "nextAction": "2"
     },
     "08": {
       "default": {

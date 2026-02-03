@@ -63,19 +63,19 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "070"
         },
         "2": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "080"
         },
         "3": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "090"
         },
         "4": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "100"
         }
       }
@@ -119,15 +119,15 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "120"
         },
         "2": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "110"
         },
         "3": {
-          "type": "choice",
+          "type": "win",
           "nextStep": "060"
         }
       }
@@ -229,8 +229,12 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "choice",
-          "nextStep": "CHOICE"
+          "type": "win",
+          "nextStep": "030"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "040"
         }
       }
     },
@@ -287,8 +291,12 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "choice",
-          "nextStep": "CHOICE"
+          "type": "win",
+          "nextStep": "090"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "100"
         }
       }
     },
@@ -341,8 +349,12 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "choice",
-          "nextStep": "CHOICE"
+          "type": "win",
+          "nextStep": "130"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "140"
         }
       }
     },

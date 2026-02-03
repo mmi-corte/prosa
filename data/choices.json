@@ -1,91 +1,307 @@
 {
-  "1": {},
+  "1": {
+    "05": {
+      "2": {
+        "question": {
+          "fr": "Que faites-vous ?",
+          "cor": "Chì fate ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Tenter de négocier",
+              "cor": "Pruvà à niguzià"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Se battre",
+              "cor": "Cumbatte"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          }
+        ]
+      }
+    },
+    "06": {
+      "5": {
+        "question": {
+          "fr": "Qui souhaitez-vous approcher ?",
+          "cor": "À quale vulete avvicinà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Approcher A Signadora (la vieille dame attristée)",
+              "cor": "Avvicinà A Signadora (a vechja donna trista)"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "S'interposer dans la dispute de l'armurier",
+              "cor": "Interponesi in a disputa di l'armaghjolu"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Confronter le jeune garçon qui vous observe (U Fulettu)",
+              "cor": "Cunfruntà u zitellu chì vi osserva (U Fulettu)"
+            },
+            "nextActionType": "end",
+            "nextAction": "3"
+          },
+          {
+            "text": {
+              "fr": "Continuer vers le belvédère pour une meilleure vue",
+              "cor": "Cuntinuà versu u belvedere per una vista megliu"
+            },
+            "nextActionType": "end",
+            "nextAction": "4"
+          }
+        ]
+      }
+    },
+    "08": {
+      "2": {
+        "question": {
+          "fr": "Que faites-vous ?",
+          "cor": "Chì fate ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Tenter de négocier",
+              "cor": "Pruvà à niguzià"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Se battre",
+              "cor": "Cumbatte"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          }
+        ]
+      }
+    },
+    "10": {
+      "4": {
+        "question": {
+          "fr": "Où souhaitez-vous aller ?",
+          "cor": "Induve vulete andà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "A Piazza à u Duca",
+              "cor": "A Piazza à u Duca"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Le FRAC",
+              "cor": "U FRAC"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Retourner à la fontaine",
+              "cor": "Vultà à a funtana"
+            },
+            "nextActionType": "end",
+            "nextAction": "3"
+          }
+        ]
+      }
+    },
+    "12": {
+      "6": {
+        "question": {
+          "fr": "Qui souhaitez-vous approcher ?",
+          "cor": "À quale vulete avvicinà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Parler au travailleur avec la pelle",
+              "cor": "Parlà à u travagliadore cù a pala"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Parler au travailleur avec le marteau",
+              "cor": "Parlà à u travagliadore cù u martellu"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          }
+        ]
+      }
+    },
+    "13": {
+      "4": {
+        "question": {
+          "fr": "Où souhaitez-vous aller ?",
+          "cor": "Induve vulete andà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "A Piazza à u Duca",
+              "cor": "A Piazza à u Duca"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Le FRAC",
+              "cor": "U FRAC"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Retourner à la fontaine",
+              "cor": "Vultà à a funtana"
+            },
+            "nextActionType": "end",
+            "nextAction": "3"
+          }
+        ]
+      }
+    },
+    "16": {
+      "5": {
+        "question": {
+          "fr": "Que souhaitez-vous faire ?",
+          "cor": "Chì vulete fà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Utiliser la carte des vents afin d'échapper à la patrouille",
+              "cor": "Aduprà a carta di i venti per scappà à a pattuglia"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Réussir l'épreuve et parvenir à échapper à la patrouille",
+              "cor": "Riuscì à a prova è scappà à a pattuglia"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Échouer l'épreuve et tomber à l'eau",
+              "cor": "Fiascà à a prova è cascà in acqua"
+            },
+            "nextActionType": "end",
+            "nextAction": "3"
+          }
+        ]
+      }
+    }
+  },
   "2": {
-    "question": {
-      "fr": "Que faites-vous ?",
-      "cor": "Chì fate ?"
-    },
-    "choices": [
-      {
-        "text": {
-          "fr": "Tenter de négocier",
-          "cor": "Pruvà à niguzià"
+    "02": {
+      "1": {
+        "question": {
+          "fr": "Quelle route choisissez-vous ?",
+          "cor": "Quale strada sceglite ?"
         },
-        "nextStep": "0700"
-      },
-      {
-        "text": {
-          "fr": "Se battre",
-          "cor": "Cumbatte"
-        },
-        "nextStep": "0700"
+        "choices": [
+          {
+            "text": {
+              "fr": "Passer par le tunnel (cimetière)",
+              "cor": "Passà per u tunnel (cimiteru)"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Passer par les ruelles (jardin Alexandre Ier)",
+              "cor": "Passà per e ruelle (giardinu Alexandre 1er)"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          }
+        ]
       }
-    ]
+    },
+    "07": {
+      "2": {
+        "question": {
+          "fr": "Que faites-vous ?",
+          "cor": "Chì fate ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Prendre la défense des deux frères",
+              "cor": "Difende i dui fratelli"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Tenter de calmer la situation et éviter l'affrontement",
+              "cor": "Pruvà à calmà a situazione è evitari u cumbattu"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          }
+        ]
+      }
+    },
+    "12": {
+      "3": {
+        "question": {
+          "fr": "Que décidez-vous faire ?",
+          "cor": "Chì decidite di fà ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Trouver l'indice et ouvrir le passage",
+              "cor": "Truvà l'indiziu è apre u passaghju"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Continuer sans chercher l'indice",
+              "cor": "Cuntinuà senza circà l'indiziu"
+            },
+            "nextActionType": "end",
+            "nextAction": "2"
+          }
+        ]
+      }
+    }
   },
-  "3": {},
-  "4": {
-    "question": {
-      "fr": "Où souhaitez-vous aller ?",
-      "cor": "Induve vulete andà ?"
-    },
-    "choices": [
-      {
-        "text": {
-          "fr": "A Piazza à u Duca",
-          "cor": "A Piazza à u Duca"
-        },
-        "nextStep": "1100"
-      },
-      {
-        "text": {
-          "fr": "Le FRAC",
-          "cor": "U FRAC"
-        },
-        "nextStep": "1000"
-      },
-      {
-        "text": {
-          "fr": "Retourner à la fontaine",
-          "cor": "Vultà à a funtana"
-        },
-        "nextStep": "0500"
-      }
-    ]
-  },
-  "5": {
-    "question": {
-      "fr": "Qui souhaitez-vous approcher ?",
-      "cor": "À quale vulete avvicinà ?"
-    },
-    "choices": [
-      {
-        "text": {
-          "fr": "Approcher A Signadora (la vieille dame attristée)",
-          "cor": "Avvicinà A Signadora (a vechja donna trista)"
-        },
-        "nextStep": "0600"
-      },
-      {
-        "text": {
-          "fr": "S'interposer dans la dispute de l'armurier",
-          "cor": "Interponesi in a disputa di l'armaghjolu"
-        },
-        "nextStep": "0700"
-      },
-      {
-        "text": {
-          "fr": "Confronter le jeune garçon qui vous observe (U Fulettu)",
-          "cor": "Cunfruntà u zitellu chì vi osserva (U Fulettu)"
-        },
-        "nextStep": "0800"
-      },
-      {
-        "text": {
-          "fr": "Continuer vers le belvédère pour une meilleure vue",
-          "cor": "Cuntinuà versu u belvedere per una vista megliu"
-        },
-        "nextStep": "0900"
-      }
-    ]
-  }
+  "3": {}
 }
