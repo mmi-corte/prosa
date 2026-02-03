@@ -13,7 +13,7 @@
     "region": "CORSE",
     "description": "A Squadra d'Arozza est une unité d'élite, agissant sur Corti, vouée corps et âme à A Strega. Ils portent un masque à gaz et une armure tactique lourde dissimulée sous un long manteau sombre dont la doublure vert acide crée un fort contraste. Ils avancent dans un silence absolu, seulement trahis par leur lourde respiration. Armés de leurs fusils, ils ne prononcent jamais un mot, communiquant uniquement par sifflements avant de frapper avec une violence inéluctable et brutale. Pour ceux qui croisent leur route, ils ne sont plus des soldats, mais le présage brutal d'un destin contre lequel on ne peut plus lutter.",
     "role": "Groupe d'esprits. Représentation de la mort, ils font passer les vivants qu’ils croisent dans le monde des morts. Chaotique / Mauvais",
-    "image": "SquadradArozza.jpg"
+    "image": "SquadradArozza.mp4"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "region": "CORSE",
     "description": "D’un âge incertain, A Strega est la cheffe impitoyable du clan de Corti. Elle est chargée par U Strigone de maintenir la ville dans la peur, la misère et la dépendance totale envers l’île de Prosa.  Elle porte un manteau sombre où elle dissimule des poisons terribles, elle dirige la Squadra d’Arozza, une troupe d’élite utilisée pour briser toute tentative de révolte et saboter discrètement toute émancipation de Corti.  On dit que certaines nuits de pleine lune, elle fait enlever en secret des enfants desquels elle prélève le sang et les fait expédier sur Prosa, où ils sont préparés pour intégrer la Squadra d’Arozza. La prononciation de son nom suffit à terroriser la population de Corti. Sa base d’opération depuis laquelle elle dirige le clan se trouve sur la route du cimetière de Corti.",
     "role": "Figure de sorcière ou jeteuse de sorts, elle a un rôle souvent mauvais, agissant par malveillance ou pour exercer une influence. Elle est l’inverse direct de a Fata, étant symbole d’infertilité. Chaotique / Mauvais",
-    "image": "AStrega.jpg"
+    "image": "AStrega.mp4"
   },
   {
     "id": 4,
