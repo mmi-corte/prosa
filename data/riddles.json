@@ -6,21 +6,21 @@
         "text": [
           {
             "question": {
-              "fr": "TODO Énigme Fata 1",
-              "cor": "TODO Casula Fata 1"
+              "fr": "TODO Question Énigme A Fata 1 - Test de confiance",
+              "cor": "TODO Dumanda Casula A Fata 1 - Prova di cunfidenza"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "Réponse neutre",
-                  "cor": "Risposta neutra"
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
                 },
                 "score": 0
               },
               {
                 "text": {
-                  "fr": "Réponse neutre",
-                  "cor": "Risposta neutra"
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
                 },
                 "score": 0
               }
@@ -28,21 +28,21 @@
           },
           {
             "question": {
-              "fr": "TODO Énigme Fata 2",
-              "cor": "TODO Casula Fata 2"
+              "fr": "TODO Question Énigme A Fata 2 - Test de confiance",
+              "cor": "TODO Dumanda Casula A Fata 2 - Prova di cunfidenza"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "Bonne réponse",
-                  "cor": "Bona risposta"
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "Mauvaise réponse",
-                  "cor": "Mala risposta"
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
                 },
                 "score": -1
               }
@@ -50,21 +50,483 @@
           },
           {
             "question": {
-              "fr": "TODO Énigme Fata 3",
-              "cor": "TODO Casula Fata 3"
+              "fr": "TODO Question Énigme A Fata 3 - Test de confiance",
+              "cor": "TODO Dumanda Casula A Fata 3 - Prova di cunfidenza"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "Réponse neutre",
-                  "cor": "Risposta neutra"
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
                 },
                 "score": 0
               },
               {
                 "text": {
-                  "fr": "Réponse neutre",
-                  "cor": "Risposta neutra"
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "03": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme U Spallistu 1 - Lecture omoplate",
+              "cor": "TODO Dumanda Casula U Spallistu 1 - Lettura omoplate"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme U Spallistu 2 - Lecture omoplate",
+              "cor": "TODO Dumanda Casula U Spallistu 2 - Lettura omoplate"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme U Spallistu 3 - Lecture omoplate",
+              "cor": "TODO Dumanda Casula U Spallistu 3 - Lettura omoplate"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "08": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme Masque à Gaz 1 - Fouilleur de déchets",
+              "cor": "TODO Dumanda Casula Maschera à Gas 1 - Cercadore di scumere"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Masque à Gaz 2 - Fouilleur de déchets",
+              "cor": "TODO Dumanda Casula Maschera à Gas 2 - Cercadore di scumere"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Masque à Gaz 3 - Fouilleur de déchets",
+              "cor": "TODO Dumanda Casula Maschera à Gas 3 - Cercadore di scumere"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "12": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme Sébastien 1 - Test de détermination",
+              "cor": "TODO Dumanda Casula Sébastien 1 - Prova di determinazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Sébastien 2 - Test de détermination",
+              "cor": "TODO Dumanda Casula Sébastien 2 - Prova di determinazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Sébastien 3 - Test de détermination",
+              "cor": "TODO Dumanda Casula Sébastien 3 - Prova di determinazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "13": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme Route du Cimetière 1 - Test de valeur",
+              "cor": "TODO Dumanda Casula Strada di u Cimiteru 1 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Route du Cimetière 2 - Test de valeur",
+              "cor": "TODO Dumanda Casula Strada di u Cimiteru 2 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Route du Cimetière 3 - Test de valeur",
+              "cor": "TODO Dumanda Casula Strada di u Cimiteru 3 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "14": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme Camp Travailleurs 1 - Test de valeur",
+              "cor": "TODO Dumanda Casula Campu Travagliadori 1 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Camp Travailleurs 2 - Test de valeur",
+              "cor": "TODO Dumanda Casula Campu Travagliadori 2 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Camp Travailleurs 3 - Test de valeur",
+              "cor": "TODO Dumanda Casula Campu Travagliadori 3 - Prova di valenza"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLoose": "dialog",
+        "nextActionLoose": "3"
+      }
+    },
+    "16": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "TODO Question Énigme Garde 1 - Confrontation",
+              "cor": "TODO Dumanda Casula Guardia 1 - Cunfruntazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": 0
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Garde 2 - Confrontation",
+              "cor": "TODO Dumanda Casula Guardia 2 - Cunfruntazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "TODO Question Énigme Garde 3 - Confrontation",
+              "cor": "TODO Dumanda Casula Guardia 3 - Cunfruntazione"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "TODO Réponse A",
+                  "cor": "TODO Risposta A"
+                },
+                "score": 0
+              },
+              {
+                "text": {
+                  "fr": "TODO Réponse B",
+                  "cor": "TODO Risposta B"
                 },
                 "score": 0
               }
