@@ -45,7 +45,7 @@
                 "nextActionLose": "3"
             }
         },
-        "10": {
+        "09": {
             "1": {
                 "game": "escape_frac",
                 "nextActionTypeWin": "dialog",
@@ -54,7 +54,7 @@
                 "nextActionLose": "3"
             }
         },
-        "11": {
+        "10": {
             "1": {
                 "game": "fight_soldiers",
                 "nextActionTypeWin": "dialog",
@@ -63,7 +63,7 @@
                 "nextActionLose": "2"
             }
         },
-        "14": {
+        "13": {
             "1": {
                 "game": "strega_combat",
                 "nextActionTypeWin": "dialog",

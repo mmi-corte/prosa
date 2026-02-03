@@ -60,7 +60,7 @@
         ]
       }
     },
-    "09": {
+    "08": {
       "1": {
         "question": {
           "fr": "Que voulez-vous faire ?"
@@ -90,7 +90,7 @@
         ]
       }
     },
-    "10": {
+    "09": {
       "4": {
         "question": {
           "fr": "Où souhaitez-vous aller ?",
@@ -124,7 +124,7 @@
         ]
       }
     },
-    "11": {
+    "10": {
       "1": {
         "question": {
           "fr": "Qui souhaitez-vous approcher ?",
@@ -150,7 +150,7 @@
         ]
       }
     },
-    "15": {
+    "14": {
       "1": {
         "question": {
           "fr": "Que souhaitez-vous faire ?"

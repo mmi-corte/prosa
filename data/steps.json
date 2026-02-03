@@ -76,7 +76,7 @@
         },
         "4": {
           "type": "continue",
-          "nextStep": "09"
+          "nextStep": "08"
         }
       }
     },
@@ -86,7 +86,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12"
+          "nextStep": "11"
         },
         "2": {
           "type": "still",
@@ -100,7 +100,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12"
+          "nextStep": "11"
         },
         "2": {
           "type": "still",
@@ -114,9 +114,27 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "14"
+          "nextStep": "13"
         },
         "2": {
+          "type": "lose",
+          "nextStep": "05"
+        }
+      }
+    },
+    "080": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "10"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "09"
+        },
+        "3": {
           "type": "lose",
           "nextStep": "05"
         }
@@ -128,15 +146,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "12"
         },
         "2": {
           "type": "win",
           "nextStep": "10"
-        },
-        "3": {
-          "type": "lose",
-          "nextStep": "05"
         }
       }
     },
@@ -146,10 +160,10 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "13"
+          "nextStep": "11"
         },
         "2": {
-          "type": "win",
+          "type": "lose",
           "nextStep": "11"
         }
       }
@@ -164,27 +178,27 @@
         },
         "2": {
           "type": "lose",
+          "nextStep": "11"
+        }
+      }
+    },
+    "111": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
+          "type": "win",
           "nextStep": "12"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "11"
         }
       }
     },
     "120": {
       "actionType": "dialog",
       "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "13"
-        },
-        "2": {
-          "type": "lose",
-          "nextStep": "12"
-        }
-      }
-    },
-    "121": {
-      "actionType": "dialog",
-      "action": "3",
       "end": {
         "1": {
           "type": "win",
@@ -210,35 +224,21 @@
         }
       }
     },
-    "140": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "15"
-        },
-        "2": {
-          "type": "lose",
-          "nextStep": "14"
-        }
-      }
-    },
-    "141": {
+    "131": {
       "actionType": "dialog",
       "action": "3",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "15"
+          "nextStep": "14"
         },
         "2": {
           "type": "lose",
-          "nextStep": "14"
+          "nextStep": "13"
         }
       }
     },
-    "150": {
+    "140": {
       "actionType": "choice",
       "action": "1",
       "end": {
