@@ -49,12 +49,24 @@
       }
     },
     "050": {
-      "actionType": "choice",
-      "action": "2",
+      "actionType": "dialog",
+      "action": "1",
       "end": {
         "1": {
           "type": "win",
           "nextStep": "060"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "070"
+        },
+        "3": {
+          "type": "win",
+          "nextStep": "080"
+        },
+        "4": {
+          "type": "win",
+          "nextStep": "090"
         }
       }
     },
@@ -153,22 +165,18 @@
         "1": {
           "type": "win",
           "nextStep": "130"
-        }
-      }
-    },
-    "130": {
-      "actionType": "choice",
-      "action": "4",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "150"
         },
         "2": {
           "type": "win",
           "nextStep": "140"
-        },
-        "3": {
+        }
+      }
+    },
+    "130": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
           "type": "win",
           "nextStep": "150"
         }
@@ -191,6 +199,10 @@
         "1": {
           "type": "win",
           "nextStep": "160"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "150"
         }
       }
     },

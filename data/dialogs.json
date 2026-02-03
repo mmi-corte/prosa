@@ -497,6 +497,78 @@
         "dialog": [
           {
             "text": {
+              "fr": "Le camp des rebelles est caché dans l'ancienne mairie de Corte à l'écart de la ville. Des tentes de fortune se pressent autour d'un feu central.",
+              "cor": "U campu di i ribelli hè ammucciatu in l'antica meria di Corti, fora di a cità. Tende di furtuna si stringenu intornu à un focu cintrali."
+            }
+          },
+          {
+            "text": {
+              "fr": "L'air est empli de fumée, de poussière et de voix basses qui murmurent des ordres et des stratégies.",
+              "cor": "L'aria hè piena di fumu, di polvara è di voci basse chì susurranu ordini è strategie."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous comprenez que ce camp n'est pas seulement un refuge : c'est une préparation pour l'affrontement à venir.",
+              "cor": "Capite chì stu campu ùn hè micca solu un rifugiu : hè una preparazione per u cunfrontu à vene."
+            }
+          },
+          {
+            "text": {
+              "fr": "La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant. Prouve ta valeur si tu veux combattre avec nous demain.",
+              "cor": "A strada di u cimiteru ùn s'apre micca à l'incunnuti. Preparemu st'attaccu da parechji ghjorni oramai. Prova a to valenza s'è ti voli cumbatte cù noi dumane."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      }
+    },
+    "14": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le joueur arrive enfin au camp des travailleurs, un refuge aménagé à côté de la statue de Pascal Paoli. Des tentes et des abris rudimentaires sont disposés autour de petits feux, où certains s'assoient simplement pour se reposer ou soigner des blessures.",
+              "cor": "U ghjucatore ghjunghje finalmente à u campu di i travagliadori, un rifugiu stallitu accant'à a statua di Pasquale Paoli."
+            }
+          },
+          {
+            "text": {
+              "fr": "L'atmosphère est calme mais tendue : chacun sait que le clan les surveille.",
+              "cor": "L'atmosfera hè calma mà tesa : ognunu sa chì u clan li survighjia."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.",
+              "cor": "U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      }
+    },
+    "15": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
               "fr": "La route du cimetière s'ouvre sur un petit plateau où le camp du clan est installé. Des tentes robustes, des cabanes en bois et des palissades dissimulent les gardes et les ressources du clan.",
               "cor": "A strada di u cimiteru s'apre nantu à un picculu pianu induve u campu di u clan hè installatu."
             }
@@ -553,78 +625,6 @@
           }
         ],
         "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "14": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Le joueur arrive enfin au camp des travailleurs, un refuge aménagé à côté de la statue de Pascal Paoli. Des tentes et des abris rudimentaires sont disposés autour de petits feux, où certains s'assoient simplement pour se reposer ou soigner des blessures.",
-              "cor": "U ghjucatore ghjunghje finalmente à u campu di i travagliadori, un rifugiu stallitu accant'à a statua di Pasquale Paoli."
-            }
-          },
-          {
-            "text": {
-              "fr": "L'atmosphère est calme mais tendue : chacun sait que le clan les surveille.",
-              "cor": "L'atmosfera hè calma mà tesa : ognunu sa chì u clan li survighjia."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.",
-              "cor": "U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà."
-            },
-            "pitch": 400
-          }
-        ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      }
-    },
-    "15": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "La route du cimetière s'ouvre sur un petit plateau où le camp du clan est installé. Des tentes robustes, des cabanes en bois et des palissades dissimulent les gardes et les ressources du clan.",
-              "cor": "A strada di u cimiteru s'apre nantu à un picculu pianu induve u campu di u clan hè installatu."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le vent transporte les odeurs de feu de bois, de métal et de poussière, et l'atmosphère est saturée de tension. Au centre, A Strega se tient, calme et menaçante, prête à défendre sa position de chef de Corte.",
-              "cor": "U ventu trasporta l'odori di focu di legnu, di metallu è di polvara, è l'atmosfera hè saturata di tensione."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous êtes prêt. Pendant que vos alliés s'occupent de A Squadra d'Arrozza vous devez faire face à A Strega.",
-              "cor": "Site prontu. Mentre chì i vostri alleati si occupanu di A Squadra d'Arrozza duvete affruntà A Strega."
-            }
-          },
-          {
-            "text": {
-              "fr": "Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit mais ton chemin s'arrête ici.",
-              "cor": "Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu mà u to caminu si ferma quì."
-            },
-            "pitch": 350
-          }
-        ],
-        "nextActionType": "game",
         "nextAction": "1"
       }
     },

@@ -149,41 +149,7 @@
               "cor": "Parlà à u travagliadore cù u martellu"
             },
             "nextActionType": "end",
-            "nextAction": "1"
-          }
-        ]
-      }
-    },
-    "13": {
-      "4": {
-        "question": {
-          "fr": "Où souhaitez-vous aller ?",
-          "cor": "Induve vulete andà ?"
-        },
-        "choices": [
-          {
-            "text": {
-              "fr": "A Piazza à u Duca",
-              "cor": "A Piazza à u Duca"
-            },
-            "nextActionType": "end",
-            "nextAction": "1"
-          },
-          {
-            "text": {
-              "fr": "Le FRAC",
-              "cor": "U FRAC"
-            },
-            "nextActionType": "end",
             "nextAction": "2"
-          },
-          {
-            "text": {
-              "fr": "Retourner à la fontaine",
-              "cor": "Vultà à a funtana"
-            },
-            "nextActionType": "end",
-            "nextAction": "3"
           }
         ]
       }
