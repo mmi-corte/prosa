@@ -6,11 +6,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "2"
+          "nextStep": "02"
         },
         "2": {
           "type": "still",
-          "nextStep": "1"
+          "nextStep": "01"
         }
       }
     },
@@ -20,11 +20,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "030"
+          "nextStep": "03"
         },
         "2": {
           "type": "lose",
-          "nextStep": "020"
+          "nextStep": "02"
         }
       }
     },
@@ -34,11 +34,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "050"
+          "nextStep": "05"
         },
         "2": {
           "type": "win",
-          "nextStep": "040"
+          "nextStep": "04"
         }
       }
     },
@@ -48,7 +48,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "050"
+          "nextStep": "05"
         }
       }
     },
@@ -58,19 +58,19 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "060"
+          "nextStep": "01"
         },
         "2": {
           "type": "win",
-          "nextStep": "070"
+          "nextStep": "07"
         },
         "3": {
           "type": "win",
-          "nextStep": "080"
+          "nextStep": "08"
         },
         "4": {
           "type": "win",
-          "nextStep": "090"
+          "nextStep": "09"
         }
       }
     },
@@ -80,19 +80,19 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "070"
+          "nextStep": "07"
         },
         "2": {
           "type": "win",
-          "nextStep": "080"
+          "nextStep": "08"
         },
         "3": {
           "type": "win",
-          "nextStep": "090"
+          "nextStep": "09"
         },
         "4": {
           "type": "win",
-          "nextStep": "100"
+          "nextStep": "10"
         }
       }
     },
@@ -102,7 +102,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "110"
+          "nextStep": "11"
         }
       }
     },
@@ -112,7 +112,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "110"
+          "nextStep": "11"
         }
       }
     },
@@ -122,11 +122,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "110"
+          "nextStep": "11"
         },
         "2": {
           "type": "lose",
-          "nextStep": "060"
+          "nextStep": "06"
         }
       }
     },
@@ -136,15 +136,15 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "120"
+          "nextStep": "10"
         },
         "2": {
           "type": "win",
-          "nextStep": "110"
+          "nextStep": "11"
         },
         "3": {
           "type": "win",
-          "nextStep": "060"
+          "nextStep": "06"
         }
       }
     },
@@ -154,11 +154,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "120"
+          "nextStep": "12"
         },
         "2": {
           "type": "lose",
-          "nextStep": "120"
+          "nextStep": "12"
         }
       }
     },
@@ -168,11 +168,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "130"
+          "nextStep": "13"
         },
         "2": {
           "type": "win",
-          "nextStep": "140"
+          "nextStep": "14"
         }
       }
     },
@@ -182,7 +182,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "150"
+          "nextStep": "15"
         }
       }
     },
@@ -192,7 +192,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "150"
+          "nextStep": "15"
         }
       }
     },
@@ -202,11 +202,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "160"
+          "nextStep": "16"
         },
         "2": {
           "type": "lose",
-          "nextStep": "150"
+          "nextStep": "15"
         }
       }
     },
@@ -236,7 +236,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "020"
+          "nextStep": "02"
         }
       }
     },
@@ -246,11 +246,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "030"
+          "nextStep": "03"
         },
         "2": {
           "type": "win",
-          "nextStep": "040"
+          "nextStep": "04"
         }
       }
     },
@@ -260,11 +260,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "050"
+          "nextStep": "05"
         },
         "2": {
           "type": "lose",
-          "nextStep": "060"
+          "nextStep": "06"
         }
       }
     },
@@ -274,11 +274,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "060"
+          "nextStep": "06"
         },
         "2": {
           "type": "win",
-          "nextStep": "080"
+          "nextStep": "08"
         }
       }
     },
@@ -288,7 +288,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "070"
+          "nextStep": "07"
         }
       }
     },
@@ -298,7 +298,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "080"
+          "nextStep": "08"
         }
       }
     },
@@ -308,11 +308,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "090"
+          "nextStep": "09"
         },
         "2": {
           "type": "win",
-          "nextStep": "100"
+          "nextStep": "10"
         }
       }
     },
@@ -322,11 +322,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "100"
+          "nextStep": "10"
         },
         "2": {
           "type": "lose",
-          "nextStep": "100"
+          "nextStep": "10"
         }
       }
     },
@@ -336,7 +336,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "100"
+          "nextStep": "10"
         }
       }
     },
@@ -346,7 +346,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "110"
+          "nextStep": "11"
         }
       }
     },
@@ -356,7 +356,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "120"
+          "nextStep": "12"
         }
       }
     },
@@ -366,11 +366,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "130"
+          "nextStep": "13"
         },
         "2": {
           "type": "win",
-          "nextStep": "140"
+          "nextStep": "14"
         }
       }
     },
@@ -380,7 +380,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "140"
+          "nextStep": "14"
         }
       }
     },
@@ -390,15 +390,15 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "170"
+          "nextStep": "17"
         },
         "2": {
           "type": "lose",
-          "nextStep": "150"
+          "nextStep": "15"
         },
         "3": {
           "type": "win",
-          "nextStep": "160"
+          "nextStep": "16"
         }
       }
     },
@@ -408,7 +408,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "170"
+          "nextStep": "17"
         }
       }
     },
