@@ -141,6 +141,31 @@ body {
   pointer-events: auto;
 }
 
+/* Demo Link (top left) */
+.demo-link {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--prosa-border);
+  background: rgba(26, 24, 18, 0.9);
+  color: var(--prosa-text);
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  z-index: 110;
+  white-space: nowrap;
+}
+
+.demo-link:hover {
+  background: rgba(98, 98, 71, 0.9);
+  border-color: var(--prosa-accent);
+  transform: scale(1.02);
+}
+
 /* Control Buttons */
 #control-buttons {
   position: absolute;

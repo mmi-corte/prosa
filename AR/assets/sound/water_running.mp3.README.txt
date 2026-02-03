@@ -1,0 +1,12 @@
+PLACEHOLDER: water_running.mp3
+
+This file should be replaced with an actual running water sound effect.
+
+Requirements:
+- Format: MP3
+- Duration: Loop-friendly (seamless loop recommended)
+- Content: Sound of running water, stream, or fountain
+- Recommended length: 10-30 seconds (will loop)
+
+The sound will play spatially in 3D when the user approaches A Fata character.
+Volume and distance falloff are configured in AR/data/characters.json.

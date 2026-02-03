@@ -8,6 +8,81 @@
   },
   "characters": [
     {
+      "id": "fata",
+      "name": "A Fata",
+      "description": "Gardienne des eaux sacrées de Corse, A Fata veille sur les sources et les rivières de l'île.",
+      "descriptionCorsican": "Guardiana di l'acque sacre di Corsica, A Fata vighjula nantu à e surgente è i fiumi di l'isula.",
+      "themeColor": "#1e88e5",
+      
+      "layers": {
+        "background": {
+          "path": "assets/img/characters/backgroundfata.png",
+          "scale": 24.0,
+          "position": { "x": 0, "y": 0, "z": -8 },
+          "order": 0
+        },
+        "waterfall": {
+          "type": "video",
+          "path": "assets/video/waterfall_greenscreen.mp4",
+          "chromaKey": "#00FF00",
+          "tolerance": 0.4,
+          "smoothness": 0.08,
+          "spill": 0.5,
+          "scale": 9.0,
+          "position": { "x": -1.5, "y": 3.2, "z": -7.5 },
+          "loop": true,
+          "muted": true,
+          "order": 1.5
+        },
+        "middleground": {
+          "path": "assets/img/characters/middlegroundfata.png",
+          "scale": 8.0,
+          "position": { "x": 0, "y": 0, "z": -5 },
+          "order": 1
+        },
+        "character": {
+          "path": "assets/img/characters/fata_char.png",
+          "scale": 2.5,
+          "position": { "x": -1.5, "y": 0, "z": -4 },
+          "order": 2
+        },
+        "foreground": {
+          "path": "assets/img/characters/foregroundfata.png",
+          "scale": 6.0,
+          "scaleX": 1.5,
+          "position": { "x": 0, "y": 1.0, "z": -3.8 },
+          "order": 3
+        }
+      },
+      
+      "sounds": {
+        "ambient": {
+          "path": "assets/sound/water_running.mp3",
+          "volume": 0.8,
+          "loop": true,
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 15
+        }
+      },
+      
+      "interaction": {
+        "proximityDistance": 3,
+        "subtitleTriggerDistance": 2.5
+      },
+      
+      "subtitles": {
+        "greeting": {
+          "fr": "Bienvenue, voyageur. Je suis A Fata, gardienne des eaux sacrées de cette île. Écoute le murmure de la source... Elle raconte les secrets anciens de notre terre.",
+          "co": "Benvenutu, viaghjatore. Sò A Fata, guardiana di l'acque sacre di st'isula. Ascolta u murmuriu di a surgente... Conta l'antichi sicreti di a nostra terra."
+        },
+        "lore": {
+          "fr": "Les eaux que je protège coulent depuis l'aube des temps. Elles ont vu naître et mourir des empires, ont abreuvé des générations de Corses.",
+          "co": "L'acque chì pruteghju scorenu dapoi l'alba di i tempi. Anu vistu nasce è more imperi, anu abbeveratu generazioni di Corsi."
+        }
+      }
+    },
+    {
       "id": "strega",
       "name": "A Strega",
       "description": "Prodige de l'île de Prosa, a Strega est chargée de maintenir l'infertilité des terres de Corse.",

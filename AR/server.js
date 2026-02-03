@@ -7,6 +7,23 @@ const { exec } = require('child_process');
 // Generate self-signed certificate
 const forge = require('node-forge');
 const pki = forge.pki;
+const os = require('os');
+
+// Function to get local IP address
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+}
+
+const localIP = getLocalIP();
+console.log('Local IP detected:', localIP);
 
 // Create a new keypair
 const keys = pki.rsa.generateKeyPair(2048);
@@ -21,26 +38,40 @@ cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 1);
 
 const attrs = [{
   name: 'commonName',
-  value: 'localhost'
+  value: localIP
 }, {
   name: 'countryName',
-  value: 'US'
+  value: 'FR'
 }, {
   shortName: 'ST',
-  value: 'Virginia'
+  value: 'Corsica'
 }, {
   name: 'localityName',
-  value: 'Blacksburg'
+  value: 'Ajaccio'
 }, {
   name: 'organizationName',
-  value: 'Test'
+  value: 'PROSA'
 }, {
   shortName: 'OU',
-  value: 'Test'
+  value: 'AR'
 }];
 
 cert.setSubject(attrs);
 cert.setIssuer(attrs);
+
+// Add Subject Alternative Names (SAN) for localhost and local IP
+cert.setExtensions([{
+  name: 'subjectAltName',
+  altNames: [
+    { type: 2, value: 'localhost' },
+    { type: 7, ip: '127.0.0.1' },
+    { type: 7, ip: localIP }
+  ]
+}, {
+  name: 'basicConstraints',
+  cA: true
+}]);
+
 cert.sign(keys.privateKey);
 
 // Convert to PEM format
@@ -115,20 +146,6 @@ const server = https.createServer(options, (req, res) => {
 
 const PORT = 8443;
 const HOST = '0.0.0.0';
-
-// Function to get local IP address
-function getLocalIP() {
-  const os = require('os');
-  const interfaces = os.networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
-      }
-    }
-  }
-  return '172.20.3.86'; // Fallback to hardcoded IP
-}
 
 // Function to launch URL via ADB
 function launchADB(url) {
