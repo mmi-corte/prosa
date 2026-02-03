@@ -38,18 +38,25 @@
         },
         "11": {
             "1": {
-                "game": "frac_escape",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
+                "game": "fight_soldiers",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "4",
                 "nextActionTypeLoose": "end",
                 "nextActionLoose": "2"
             }
         },
-        "15": {
+        "14": {
             "1": {
                 "game": "strega_combat",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
+                "nextActionTypeLoose": "end",
+                "nextActionLoose": "2"
+            },
+            "2":{
+                "game": "strega_infiltration",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "4",
                 "nextActionTypeLoose": "end",
                 "nextActionLoose": "2"
             }

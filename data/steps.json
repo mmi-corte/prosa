@@ -144,7 +144,7 @@
         }
       }
     },
-    "110": {
+    "110000": {
       "actionType": "dialog",
       "action": "1",
       "end": {
@@ -155,6 +155,20 @@
         "2": {
           "type": "lose",
           "nextStep": "12"
+        }
+      }
+    },
+    "110": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "12"
+        },
+        "2": {
+          "type": "loose",
+          "nextStep": "11"
         }
       }
     },
@@ -167,8 +181,22 @@
           "nextStep": "13"
         },
         "2": {
+          "type": "loose",
+          "nextStep": "12"
+        }
+      }
+    },
+    "121": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
           "type": "win",
-          "nextStep": "14"
+          "nextStep": "13"
+        },
+        "2": {
+          "type": "loose",
+          "nextStep": "12"
         }
       }
     },
@@ -178,7 +206,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "15"
+          "nextStep": "14"
+        },
+        "2": {
+          "type": "loose",
+          "nextStep": "13"
         }
       }
     },
@@ -189,38 +221,42 @@
         "1": {
           "type": "win",
           "nextStep": "15"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "14"
+        }
+      }
+    },
+    "141": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "15"
+        },
+        "2": {
+          "type": "lose",
+          "nextStep": "14"
         }
       }
     },
     "150": {
-      "actionType": "dialog",
+      "actionType": "choice",
       "action": "1",
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "16"
-        },
-        "2": {
-          "type": "lose",
-          "nextStep": "15"
-        }
-      }
-    },
-    "160": {
-      "actionType": "choice",
-      "action": "5",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "PROSA_01001"
+          "nextStep": "Allez à Prosa par la plage cachée."
         },
         "2": {
           "type": "win",
-          "nextStep": "PROSA_01002"
+          "nextStep": "Arriver à Prosa avec l'Orcu."
         },
         "3": {
           "type": "lose",
-          "nextStep": "PROSA_01003"
+          "nextStep": "Vous avez été capturé par la patrouille de Prosa, allez à la prison."
         }
       }
     }

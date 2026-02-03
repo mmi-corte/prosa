@@ -246,14 +246,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           },
@@ -290,22 +290,22 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           }
         ],
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
-        "nextActionTypeLoose": "dialog",
-        "nextActionLoose": "3"
+        "nextActionTypeLoose": "end",
+        "nextActionLoose": "2"
       }
     },
     "13": {
@@ -323,14 +323,14 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           },
@@ -367,22 +367,22 @@
                   "fr": "TODO Réponse A",
                   "cor": "TODO Risposta A"
                 },
-                "score": 0
+                "score": 1
               },
               {
                 "text": {
                   "fr": "TODO Réponse B",
                   "cor": "TODO Risposta B"
                 },
-                "score": 0
+                "score": -1
               }
             ]
           }
         ],
-        "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
-        "nextActionTypeLoose": "dialog",
-        "nextActionLoose": "3"
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLoose": "end",
+        "nextActionLoose": "2"
       }
     },
     "14": {

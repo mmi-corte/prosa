@@ -128,8 +128,8 @@
         ]
       }
     },
-    "12": {
-      "6": {
+    "11": {
+      "1": {
         "question": {
           "fr": "Qui souhaitez-vous approcher ?",
           "cor": "À quale vulete avvicinà ?"
@@ -140,47 +140,43 @@
               "fr": "Parler au travailleur avec la pelle",
               "cor": "Parlà à u travagliadore cù a pala"
             },
-            "nextActionType": "end",
-            "nextAction": "1"
+            "nextActionType": "dialog",
+            "nextAction": "2"
           },
           {
             "text": {
               "fr": "Parler au travailleur avec le marteau",
               "cor": "Parlà à u travagliadore cù u martellu"
             },
-            "nextActionType": "end",
-            "nextAction": "2"
+            "nextActionType": "dialog",
+            "nextAction": "3"
           }
         ]
       }
     },
-    "16": {
-      "5": {
+    "15": {
+      "1": {
         "question": {
-          "fr": "Que souhaitez-vous faire ?",
-          "cor": "Chì vulete fà ?"
+          "fr": "Que souhaitez-vous faire ?"
         },
         "choices": [
           {
             "text": {
-              "fr": "Utiliser la carte des vents afin d'échapper à la patrouille",
-              "cor": "Aduprà a carta di i venti per scappà à a pattuglia"
+              "fr": "Utiliser la carte des vents afin d'échapper à la patrouille"
             },
             "nextActionType": "end",
             "nextAction": "1"
           },
           {
             "text": {
-              "fr": "Réussir l'épreuve et parvenir à échapper à la patrouille",
-              "cor": "Riuscì à a prova è scappà à a pattuglia"
+              "fr": "Réussir l'épreuve et parvenir à échapper à la patrouille"
             },
             "nextActionType": "end",
             "nextAction": "2"
           },
           {
             "text": {
-              "fr": "Échouer l'épreuve et tomber à l'eau",
-              "cor": "Fiascà à a prova è cascà in acqua"
+              "fr": "Échouer l'épreuve et tomber à l'eau"
             },
             "nextActionType": "end",
             "nextAction": "3"
