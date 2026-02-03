@@ -14,6 +14,12 @@ export function initDifficultyIndicator() {
 }
 
 export function updateDifficultyIndicator() {
+
+    if (!difficultyStateDisplay) {
+        initDifficultyIndicator()
+    }
+
+
     if (difficultyState && globalDifficulty) {
 
         //Set the battery display level

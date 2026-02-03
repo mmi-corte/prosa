@@ -12,7 +12,7 @@ export async function initGame() {
     const storedDifficulty = localStorage.getItem('globalDifficulty')
     const storedDifficultyState = localStorage.getItem('difficultyState')
 
-    if (storedPlayers && storedDifficulty && storedCurrentDifficulty) {
+    if (storedPlayers && storedDifficulty && storedDifficultyState) {
         //Store the global players data
         players = JSON.parse(storedPlayers);
 

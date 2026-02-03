@@ -6,7 +6,6 @@ import { initView } from "./initView.js"
 import { playerSelectView } from "./playerSelectView.js"
 import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
-import { difficultyView } from "./initViews/difficultyView.js"
 
 export function menuView() {
   clearContainer()
@@ -87,7 +86,7 @@ export function menuView() {
     codeBtn.remove()
   } else {
     codeBtn.addEventListener('click', () => {
-      navigate("code", () => codeView())
+      navigate("code", () => playerSelectView())
     })
   }
 
