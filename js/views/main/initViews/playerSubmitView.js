@@ -19,7 +19,9 @@ export async function playerSubmitView(selectedPlayers) {
     submitButton.innerText = 'Valider'
     initContainer.appendChild(submitButton)
 
-    submitButton.addEventListener('click', submit(selectedPlayers))
+    submitButton.addEventListener('click', () => {
+        submit(selectedPlayers)
+    })
 }
 
 async function submit(selectedPlayers) {
