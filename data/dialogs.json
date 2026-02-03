@@ -787,12 +787,56 @@
             "text": {
               "fr": "Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.",
               "cor": "Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu."
-            },
-            "pitch": 500
+            }
           }
         ],
         "nextActionType": "game",
         "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.",
+              "cor": "Scoprite un passaghju scunnisciutu daretu à una tenda tesa. Una botola grossolana sbocca in un corridore scuru, scavatu da i travagliadori per circulà senza attirà l'attenzione di i guardi."
+            }
+          },
+          {
+            "text": {
+              "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré. "
+            }
+          },
+          {
+            "text": {
+              "fr": "Votre seul chemin encore viable est A Piazza à u Duca."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
       }
     },
     "11": {
@@ -1103,8 +1147,7 @@
         "nextActionType": "choice",
         "nextAction": "1"
       }
-    }
-  },
+    },
   "2": {
     "01": {
       "1": {
@@ -1769,4 +1812,5 @@
     }
   },
   "3": {}
+  } 
 }

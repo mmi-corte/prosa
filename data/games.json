@@ -36,13 +36,13 @@
                 "nextActionLose": "2"
             }
         },
-        "09": {
+        "10": {
             "1": {
                 "game": "fulettu_chase",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLose": "dialog",
+                "nextActionLose": "3"
             }
         },
         "11": {

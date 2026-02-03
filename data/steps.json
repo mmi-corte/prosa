@@ -146,11 +146,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12"
+          "nextStep": "11"
         },
         "2": {
-          "type": "lose",
-          "nextStep": "12"
+          "type": "still",
+          "nextStep": "10"
         }
       }
     },
@@ -164,7 +164,7 @@
         },
         "2": {
           "type": "lose",
-          "nextStep": "11"
+          "nextStep": "12"
         }
       }
     },
