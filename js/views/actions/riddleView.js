@@ -5,11 +5,10 @@ import { typeWriteEffect } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
 
 let data
-let currentRiddleIndex
 let questionContainer
 let choiceContainer
+let selectedRiddle
 let score
-let riddles
 
 export async function riddleView(action) {
     clearContainer()
@@ -19,9 +18,8 @@ export async function riddleView(action) {
     wrapper.classList.add('riddleWrapper')
     gameContainer.appendChild(wrapper)
 
-    //Reset var for riddle and index
+    //Reset score
     score = 0
-    currentRiddleIndex = 0
 
     //Prepare Question container
     questionContainer = document.createElement('p')
@@ -31,46 +29,37 @@ export async function riddleView(action) {
     choiceContainer = document.createElement('div')
     wrapper.appendChild(choiceContainer)
 
-    // Prepare riddles ans shuffle them if "random" is true
-    riddles = [...data.text]
-    if (data.random) {
-        riddles = riddles.sort(() => Math.random() - 0.5);
-    }
+    // Select one random riddle from available riddles
+    const randomIndex = Math.floor(Math.random() * data.text.length)
+    selectedRiddle = data.text[randomIndex]
 
-    updateRiddle()
+    displayRiddle()
 }
 
-async function updateRiddle() {
-    if (riddles.length > currentRiddleIndex) { //If there's still riddle left...
+async function displayRiddle() {
+    //Type write question
+    await typeWriteEffect(questionContainer, getTranslation(selectedRiddle.question))
 
-        //Empty container
-        questionContainer.innerHTML = ""
-        choiceContainer.innerHTML = ""
+    //Show available answers
+    selectedRiddle.choices.forEach(choice => {
+        const button = document.createElement('button')
+        button.innerHTML = getTranslation(choice.text)
+        choiceContainer.appendChild(button)
 
-        //Type write question
-        await typeWriteEffect(questionContainer, getTranslation(riddles[currentRiddleIndex].question))
+        button.addEventListener('click', () => {
+            handleAnswer(choice.score)
+        })
+    })
+}
 
-        //Show availables answers
-        riddles[currentRiddleIndex].choices.forEach(riddle => {
-            const button = document.createElement('button')
-            button.innerHTML = getTranslation(riddle.text)
-            choiceContainer.appendChild(button)
-
-            button.addEventListener('click', () => {
-                score += riddle.score
-                updateRiddle()
-            })
-
-            choiceContainer.appendChild(button)
-        });
-        //Update riddle index for next question
-        currentRiddleIndex += 1;
-
-    } else { //If no riddle left, continue no next action, depending on the score fo the player
-        if (score < 0) {
-            callAction(data.nextActionTypeLoose, data.nextActionLoose)
-        } else {
-            callAction(data.nextActionTypeWin, data.nextActionWin)
-        }
+function handleAnswer(answerScore) {
+    // Add answer score to total score
+    score += answerScore
+    
+    // Continue to next action depending on the total score
+    if (score < 0) {
+        callAction(data.nextActionTypeLoose, data.nextActionLoose)
+    } else {
+        callAction(data.nextActionTypeWin, data.nextActionWin)
     }
 }
