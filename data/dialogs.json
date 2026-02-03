@@ -990,13 +990,13 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de ASquadra d’Arrozza vous devez faire face à A Strega."
+              "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de A Squadra d’Arrozza, vous devez faire face à A Strega."
             }
           },
           {
             "text": {
-              "fr": "Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit mais ton chemin s'arrête ici.",
-              "cor": "Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu mà u to caminu si ferma quì."
+              "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
+              "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
             "pitch": "350"
           }
@@ -1014,8 +1014,8 @@
         "dialog": [
           {
             "text": {
-              "fr": "Je sais ce que tu veux… Quand U Sarpu saura que j'ai perdu, il mettra la Corse à feu et à sang… Je n'avais pas le choix… Protège notre île !",
-              "cor": "Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !"
+              "fr": "\"Je sais ce que tu veux… Quand U Sarpu saura que j'ai perdu, il mettra la Corse à feu et à sang… Je n'avais pas le choix… Protège notre île !\"",
+              "cor": "\"Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !\""
             },
             "pitch": "350"
           },
@@ -1043,7 +1043,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Aucun combat n’est possible et votre quête se transforme en infiltration. Vous devez parvenir jusqu’à la demeure d’A Strega pour lui voler un fragment de la pierre de l’Orcu."
+              "fr": "Votre quête se transforme en infiltration. Vous devez parvenir jusqu’à la demeure d’A Strega pour lui voler un fragment de la pierre de l’Orcu."
             }
           }
         ],
@@ -1060,7 +1060,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoirvolé A Strega et continue votre quête vers Prosa. "
+              "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoir volé A Strega et continuez votre quête vers Prosa. "
             }
           }
         ],
