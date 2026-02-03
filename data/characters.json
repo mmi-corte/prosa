@@ -89,26 +89,74 @@
   },
   {
     "id": 12,
-    "name": "Le Drac",
+    "name": "Lou Drac",
     "region": "PROVENCE",
-    "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et  dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
-    "role": "Artisan et réparateur itinérant, le Drac rétablit un semblant d’ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu’il croise, même si son aide se monnaie cher. Gentil",
+    "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
+    "role": "Artisan et réparateur itinérant, lou Drac rétablit un semblant d’ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu’il croise, même si son aide se monnaie cher. Gentil",
     "image": "drac.jpg"
   },
     {
     "id": 13,
-    "name": "P3",
+    "name": "La Cabro d’Or",
     "region": "PROVENCE",
-    "description": "",
-    "role": "",
+    "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Ses bottes et gants en cuir épais lui permettent une adhérence maximale. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
+    "role": "Sentinelle solitaire, la Cabro d’Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
     "image": ""
   },
     {
     "id": 14,
-    "name": "P4",
+    "name": "Le Matagot",
     "region": "PROVENCE",
-    "description": "",
-    "role": "",
+    "description": "Petit chat noir et maigre, aux yeux d’un blanc perçant. Sa démarche fluide et silencieuse. Il se glisse entre les ruines, observant et parfois volant de la nourriture.",
+    "role": "Considéré comme un présage, le Matagot suit souvent les groupes de pillards ou les lieux de mort. Son alignement est mauvais, car sa présence annonce toujours un malheur, même s’il n’en est pas la cause directe. Mauvais",
+    "image": "Matagot.png"
+  },
+    {
+    "id": 15,
+    "name": "Fada Lavandula",
+    "region": "PROVENCE",
+    "description": "Vieille femme au dos voûté, mains tachées de sève et d’huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
+    "role": "Guérisseuse recluse et herboriste, elle détient le savoir qui maintient la vie dans les zones hostiles. Son alignement est bon, car elle soigne sans distinction et transmet son savoir avec rigueur et patience. gentil",
     "image": ""
+  },
+    {
+    "id": 16,
+    "name": "Li Lavandiero de Niue",
+    "region": "PROVENCE",
+    "description": "Toujours vêtues de blanc, elles portent des colliers ou des bracelets faits de pierres et de coquillages liés aux rituels anciens des eaux et des sources.",
+    "role": "Femmes solidaires et protectrices, elles ont recréé un rituel ancien de “purification” pour redonner sens et dignité aux survivants. Elles lavent le linge des morts et soignent les vivants avec la même attention. Leur alignement est bon, car elles préservent la mémoire et la paix au milieu du chaos. Gentil",
+    "image": ""
+  },
+    {
+    "id": 17,
+    "name": "Gyptis e Protis",
+    "region": "PROVENCE",
+    "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d’ancrage. Leur allure contraste avec la misère ambiante, et ils inspirent confiance aux survivants.",
+    "role": "Dirigeants d’une communauté reconstruite, Gyptis et Protis incarnent la stabilité et la renaissance. Leur alignement est bon, car ils restaurent l’ordre et la solidarité dans un monde dévasté. Gentil",
+    "image": "GyptisProtis.png"
+  },
+    {
+    "id": 18,
+    "name": "La Tarasca",
+    "region": "PROVENCE",
+    "description": "Camion de guerre improvisé, la Tarasca avance comme une bête mécanique. Là où elle passe, il ne reste que le silence et la cendre.",
+    "role": "Symbole de destruction et de pouvoir, la Tarasca sert d’arme de domination pour une faction violente qui règne par la terreur. Son alignement est mauvais, incarnant la brutalité humaine et la soif de contrôle dans un monde sans lois. Mauvais",
+    "image": "Tarraske.png"
+  },
+    {
+    "id": 19,
+    "name": "La Coulobre",
+    "region": "PROVENCE",
+    "description": "Un brouillard dense et jaunâtre chargé d’odeurs de métal et de pourriture. Son odeur attire de nombreux serpents. Elle ne fait pas de bruit, mais marque ceux qui la traversent : toux, brûlures, peau craquelée.",
+    "role": "Zone empoisonnée par des substances chimiques, la Coulobre représente la conséquence directe de la négligence humaine. Elle est mauvaise, car elle tue sans distinction et rend les lieux inhabitables. Mauvais",
+    "image": "Coulobre.png"
+  },
+    {
+    "id": 20,
+    "name": "Lou Drapé",
+    "region": "PROVENCE",
+    "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
+    "role": "Chef de bande violent et stratège, Lou Drapé sème la peur sur les routes et impose sa loi par le sang. Son alignement est mauvais, car il ne vit que du pillage et du désespoir des autres. Mauvais",
+    "image": "LouDrape.png"
   }
 ]
