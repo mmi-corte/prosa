@@ -74,7 +74,7 @@
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "dialog",
-        "nextActionlose": "3"
+        "nextActionLose": "3"
       }
     },
     "03": {

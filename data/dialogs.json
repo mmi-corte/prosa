@@ -366,7 +366,7 @@
           }
         ],
         "nextActionType": "dialog",
-        "nextAction": "2"
+        "nextAction": "3"
       },
       "3": {
         "default": {
@@ -379,9 +379,9 @@
           {
             "text": {
               "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
-              "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà.",
-              "pitch": 500
-            }
+              "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà."
+            },
+            "pitch": 500
           }
         ],
         "nextActionType": "end",
@@ -838,57 +838,6 @@
         ],
         "nextActionType": "choice",
         "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Au loin, A Piazza à U Duca regorge de vie. Ce serait un bon endroit pour vous informer sur le clan."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Plus proche, une petite silhouette vous observe depuis la fenêtre d’un bâtiment sombre et abandonné. Elle vous fait signe de la rejoindre"
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "2"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous décidez de retourner à la fontaine."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "3"
       }
     },
     "10": {

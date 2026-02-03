@@ -68,24 +68,24 @@
         "choices": [
           {
             "text": {
-              "fr": "Direction Piazza à u Duca"
+              "fr": "Au loin, A Piazza à u Duca regorge de vie. Ce serait un bon endroit pour vous informer sur le clan."
             },
-            "nextActionType": "dialog",
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Plus proche, une petite silhouette vous observe depuis la fenêtre d’un bâtiment sombre et abandonné. Elle vous fait signe de la rejoindre."
+            },
+            "nextActionType": "end",
             "nextAction": "2"
           },
           {
             "text": {
-              "fr": "Direction le FRAC"
+              "fr": "Vous décidez de retourner à la fontaine."
             },
-            "nextActionType": "dialog",
+            "nextActionType": "end",
             "nextAction": "3"
-          },
-          {
-            "text": {
-              "fr": "Direction le FRAC"
-            },
-            "nextActionType": "dialog",
-            "nextAction": "4"
           }
         ]
       }
