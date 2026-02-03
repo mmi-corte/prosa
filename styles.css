@@ -221,6 +221,13 @@ body {
   border-color: var(--primary);
 }
 
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 .settings-btn {
   width: 44px;
   height: 44px;
@@ -1636,9 +1643,6 @@ body {
 }
 
 .back-btn-circle {
-  position: fixed;
-  top: 20px;
-  right: 74px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1681,7 +1685,7 @@ body {
   color: var(--foreground);
 }
 
-.difficulty-battery.hidden {
+.battery-body.hidden {
   display: none;
 }
 

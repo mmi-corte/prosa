@@ -71,13 +71,13 @@ export function menuView() {
     </div>
   `
 
-  // Code Input button
+  // Stat button
   const startBtn = document.getElementById("startBtn")
   if (gameInitialized) {
     startBtn.remove()
   } else {
     startBtn.addEventListener('click', () => {
-      navigate("nombre-joueur", initView(), true)
+      initView()
     })
   }
 
@@ -87,26 +87,26 @@ export function menuView() {
     codeBtn.remove()
   } else {
     codeBtn.addEventListener('click', () => {
-      navigate("code", playerSelectView())
+      navigate("code", () => codeView())
     })
   }
 
   //QR Scan button
   const qrBtn = document.getElementById("qrBtn")
   qrBtn.addEventListener('click', () => {
-    navigate("qr", qrView())
+    navigate("qr", () => qrView())
   })
 
   //Characters view button
   const charactersBtn = document.getElementById("charactersBtn")
   charactersBtn.addEventListener('click', () => {
-    navigate("encyclopedie", charactersView())
+    navigate("encyclopedie", () => charactersView())
   })
 
   //Seasons button
   const seasonsBtn = document.getElementById("seasonsBtn")
   seasonsBtn.addEventListener('click', () => {
-    navigate("saisons", seasonsView())
+    navigate("saisons", () => seasonsView())
   })
 
   // debug screen button

@@ -1,11 +1,20 @@
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
+import { navigate } from "../../../../app.js";
+import { gameInitialized, setDifficulty } from "../../../initGame.js";
+import { resetDifficultyIndicator } from "../../components/difficultyIndicator.js";
 
 let selectedDifficulty = null;
 
-
 export function difficultyView() {
+    resetDifficultyIndicator()
+    
+    if (gameInitialized) {
+        navigate('menu', menuView())
+        return
+    }
+
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerHTML = `
@@ -22,7 +31,7 @@ export function difficultyView() {
     infoButton.classList.add('info-btn');
     infoButton.innerHTML = '?';
     infoButton.setAttribute('aria-label', 'Informations sur la difficulté');
-    
+
     // Créer les 3 jauges
     const difficulties = [
         { value: 30, label: 'FACILE', height: '85%' },
@@ -53,11 +62,10 @@ export function difficultyView() {
             document.querySelectorAll('.difficulty-gauge').forEach(g => g.classList.remove('selected'));
             // Ajouter la classe selected à la jauge cliquée
             gauge.classList.add('selected');
+            //Update la difficulté du jeu
+            setDifficulty(selectedDifficulty)
             // Afficher le bouton Continuer
             submitButton.style.display = 'block';
-            if (window.updateDifficultyIndicator) {
-                window.updateDifficultyIndicator(selectedDifficulty);
-            }
         });
 
         gauge.appendChild(valueLabel);
@@ -70,7 +78,6 @@ export function difficultyView() {
     initContainer.appendChild(difficultyContainer);
 
     // Bouton retour en haut à droite
-     
     const backButton = document.createElement('button');
     backButton.classList.add('back-btn-circle');
     backButton.innerHTML = `
@@ -79,7 +86,7 @@ export function difficultyView() {
         </svg>
     `;
     backButton.addEventListener('click', () => {
-        menuView();
+        navigate('menu', menuView())
     });
 
     // Bouton submit caché au départ
@@ -89,8 +96,7 @@ export function difficultyView() {
     submitButton.style.display = 'none';
     submitButton.addEventListener('click', () => {
         if (selectedDifficulty) {
-            localStorage.setItem('gameDifficulty', selectedDifficulty);
-            playerCountView();
+            navigate('nombre-joueur', playerCountView())
         }
     });
 
@@ -98,23 +104,16 @@ export function difficultyView() {
     initContainer.appendChild(submitButton);
 
     // Pré-remplir si déjà choisi
-    const storedDifficultyRaw = localStorage.getItem('gameDifficulty');
-    if (storedDifficultyRaw !== null) {
-        const storedDifficulty = parseInt(storedDifficultyRaw, 10);
-        if (!Number.isNaN(storedDifficulty)) {
-            selectedDifficulty = storedDifficulty;
-            if (window.updateDifficultyIndicator) {
-                window.updateDifficultyIndicator(selectedDifficulty);
-            }
-        }
-    }
-
-    // Modal d'infos
-    infoButton.addEventListener('click', () => {
-        showInfoModal();
-    });
-
-    
+    // const storedDifficultyRaw = localStorage.getItem('gameDifficulty');
+    // if (storedDifficultyRaw !== null) {
+    //     const storedDifficulty = parseInt(storedDifficultyRaw, 10);
+    //     if (!Number.isNaN(storedDifficulty)) {
+    //         selectedDifficulty = storedDifficulty;
+    //         if (window.updateDifficultyIndicator) {
+    //             window.updateDifficultyIndicator(selectedDifficulty);
+    //         }
+    //     }
+    // }
 
     // Afficher automatiquement la modal au premier chargement
     setTimeout(() => {
@@ -165,6 +164,6 @@ function showInfoModal() {
     });
 }
 
-export function getDifficulty() {
-    return parseInt(localStorage.getItem('gameDifficulty')) || 20;
-}
+// export function getDifficulty() {
+//     return parseInt(localStorage.getItem('gameDifficulty')) || 20;
+// }

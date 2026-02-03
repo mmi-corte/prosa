@@ -10,53 +10,58 @@ import { qrView } from "./js/views/main/qrView.js"
 import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
 import { debugView } from "./js/views/Temp/debugView.js"
+import { difficultyView } from "./js/views/main/initViews/difficultyView.js"
+import { initDifficultyIndicator } from "./js/views/components/difficultyIndicator.js"
 
 export const gameContainer = document.getElementById('gameContainer')
+export const difficultyIndicator = document.getElementById('difficultyIndicator')
+export const difficultyLabel = document.getElementById('difficultyLabel')
+export const extraHeaderContainer = document.getElementById('extraHeaderContainer')
 
-const difficultyLabels = {
-  30: 'F',
-  20: 'M',
-  10: 'D'
-}
+// const difficultyLabels = {
+//   30: 'F',
+//   20: 'M',
+//   10: 'D'
+// }
 
-function initDifficultyIndicator() {
-  let indicator = document.getElementById('difficulty-indicator')
-  if (indicator) return indicator
+// function initDifficultyIndicator() {
+//   let indicator = document.getElementById('difficulty-indicator')
+//   if (indicator) return indicator
 
-  indicator = document.createElement('div')
-  indicator.id = 'difficulty-indicator'
-  indicator.className = 'difficulty-battery hidden'
-  indicator.innerHTML = `
-    <div class="battery-body">
-      <div class="battery-fill"></div>
-      <div class="battery-cap"></div>
-      <div class="battery-label">-</div>
-    </div>
-  `
-  document.body.appendChild(indicator)
-  return indicator
-}
+//   indicator = document.createElement('div')
+//   indicator.id = 'difficulty-indicator'
+//   indicator.className = 'difficulty-battery hidden'
+//   indicator.innerHTML = `
+//     <div class="battery-body">
+//       <div class="battery-fill"></div>
+//       <div class="battery-cap"></div>
+//       <div class="battery-label">-</div>
+//     </div>
+//   `
+//   document.body.appendChild(indicator)
+//   return indicator
+// }
 
-window.updateDifficultyIndicator = function updateDifficultyIndicator(difficultyValue) {
-  const indicator = initDifficultyIndicator()
-  if (!difficultyValue) {
-    indicator.classList.add('hidden')
-    return
-  }
+// window.updateDifficultyIndicator = function updateDifficultyIndicator(difficultyValue) {
+//   const indicator = initDifficultyIndicator()
+//   if (!difficultyValue) {
+//     indicator.classList.add('hidden')
+//     return
+//   }
 
-  const fill = indicator.querySelector('.battery-fill')
-  const label = indicator.querySelector('.battery-label')
-  const percent = difficultyValue === 30 ? 100 : difficultyValue === 20 ? 66 : 33
-  fill.style.width = `${percent}%`
-  label.textContent = difficultyLabels[difficultyValue] || '-'
-  indicator.dataset.difficulty = String(difficultyValue)
+//   const fill = indicator.querySelector('.battery-fill')
+//   const label = indicator.querySelector('.battery-label')
+//   const percent = difficultyValue === 30 ? 100 : difficultyValue === 20 ? 66 : 33
+//   fill.style.width = `${percent}%`
+//   label.textContent = difficultyLabels[difficultyValue] || '-'
+//   indicator.dataset.difficulty = String(difficultyValue)
 
-  const hasInfo = !!document.querySelector('.info-btn')
-  const hasBack = !!document.querySelector('.back-btn-circle')
-  const rightOffset = hasInfo && !hasBack ? 74 : 128
-  indicator.style.right = `${rightOffset}px`
-  indicator.classList.remove('hidden')
-}
+//   const hasInfo = !!document.querySelector('.info-btn')
+//   const hasBack = !!document.querySelector('.back-btn-circle')
+//   const rightOffset = hasInfo && !hasBack ? 74 : 128
+//   indicator.style.right = `${rightOffset}px`
+//   indicator.classList.remove('hidden')
+// }
 
 export function clearContainer() {
   gameContainer.innerHTML = ''
@@ -104,13 +109,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Afficher l'indicateur de difficulté si déjà défini
-  const storedDifficultyRaw = localStorage.getItem('gameDifficulty')
-  if (storedDifficultyRaw !== null && window.updateDifficultyIndicator) {
-    const storedDifficulty = parseInt(storedDifficultyRaw, 10)
-    if (!Number.isNaN(storedDifficulty)) {
-      window.updateDifficultyIndicator(storedDifficulty)
-    }
-  }
+  // const storedDifficultyRaw = localStorage.getItem('gameDifficulty')
+  // if (storedDifficultyRaw !== null && window.updateDifficultyIndicator) {
+  //   const storedDifficulty = parseInt(storedDifficultyRaw, 10)
+  //   if (!Number.isNaN(storedDifficulty)) {
+  //     window.updateDifficultyIndicator(storedDifficulty)
+  //   }
+  // }
+
+  initDifficultyIndicator()
 
   if (window.initProsaLogoLottie) {
     window.initProsaLogoLottie()
@@ -187,6 +194,7 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
 const viewRoutes = {
   'menu': menuView,
   'resume': progressionView,
+  'choix-difficulte': difficultyView,
   'nombre-joueur': playerCountView,
   'choix-personnage': characterSelectView,
   'code': codeView,

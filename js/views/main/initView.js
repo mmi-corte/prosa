@@ -1,6 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
-import { characterSelectView } from "./initViews/characterSelectView.js";
-import { playerCountView } from "./initViews/playerCountView.js";
+import { clearContainer, gameContainer, navigate } from "../../../app.js";
 import { difficultyView } from "./initViews/difficultyView.js";
 
 export let wrapper;
@@ -24,7 +22,7 @@ export function initView() {
     wrapper.appendChild(initContainer)
 
     // Load difficulty screen first
-    difficultyView()
+    navigate('choix-difficulte', difficultyView())
 }
 
 export function clearInitContainer() {
