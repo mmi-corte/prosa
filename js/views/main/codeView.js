@@ -16,8 +16,6 @@ export function codeView() {
         <div class="code-display" id="codeDisplay">
             <span class="code-digit" data-index="0"></span>
             <span class="code-digit" data-index="1"></span>
-            <span class="code-digit" data-index="2"></span>
-            <span class="code-digit" data-index="3"></span>
         </div>
 
         <div class="keypad">
@@ -70,10 +68,10 @@ export function codeView() {
     })
     gameContainer.appendChild(backButton)
 
-    let currentCode = []
+    let currentCode = ""
 
     function addDigit(value) {
-        if (currentCode.length < 4) {
+        if (currentCode.length < 2) {
             currentCode += value
             updateCode()
             vibrate(10)
@@ -87,21 +85,27 @@ export function codeView() {
     }
 
     function updateCode() {
+        const paddedCode = currentCode.padStart(2, "0")
         codeDisplay.forEach((digit, index) => {
-            digit.textContent = currentCode[index] || ""
-            digit.classList.toggle("filled", !!currentCode[index])
+            if (!currentCode.length) {
+                digit.textContent = ""
+            } else {
+                digit.textContent = paddedCode[index] || ""
+            }
             digit.classList.remove("error")
         })
-        if (currentCode.length == 4) {
-            submitCode()
-        }
     }
 
     function submitCode() {
-        if (currentCode.length !== 4) return codeError()
+        if (currentCode.length === 0) return codeError()
+
+        const normalizedCode = currentCode.padStart(2, "0")
+        currentCode = normalizedCode
+        updateCode()
+
         if (!activePlayer) return playerSelectView()
 
-        const searchId = `${currentCode}${activePlayer.nextStepVariant}`
+        const searchId = `${normalizedCode}${activePlayer.nextStepVariant}`
 
         if (searchId in stepsData[activePlayer.localisation]) {
             console.log("Found step ", currentCode)
