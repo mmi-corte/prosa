@@ -128,15 +128,15 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "10"
+          "nextStep": "11"
         },
         "2": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "10"
         },
         "3": {
-          "type": "win",
-          "nextStep": "06"
+          "type": "lose",
+          "nextStep": "05"
         }
       }
     },
@@ -146,7 +146,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "13"
         },
         "2": {
           "type": "still",

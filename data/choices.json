@@ -60,6 +60,36 @@
         ]
       }
     },
+    "09": {
+      "1": {
+        "question": {
+          "fr": "Que voulez-vous faire ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Direction Piazza à u Duca"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Direction le FRAC"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "3"
+          },
+          {
+            "text": {
+              "fr": "Direction le FRAC"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "4"
+          }
+        ]
+      }
+    },
     "10": {
       "4": {
         "question": {

@@ -45,6 +45,15 @@
                 "nextActionLose": "3"
             }
         },
+        "10": {
+            "1": {
+                "game": "escape_frac",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLose": "dialog",
+                "nextActionLose": "3"
+            }
+        },
         "11": {
             "1": {
                 "game": "fight_soldiers",
@@ -62,7 +71,7 @@
                 "nextActionTypeLose": "end",
                 "nextActionLose": "2"
             },
-            "2":{
+            "2": {
                 "game": "strega_infiltration",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
