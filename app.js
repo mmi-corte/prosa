@@ -101,7 +101,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log("No game initialized.")
   }
 
-  loadingView()
+  //loadingView()
 
   //Then, load progression screen
   if (gameInitialized) {
