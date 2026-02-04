@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-prosa-game-v1';
+const CACHE_NAME = 'cache-prosa-game-v2';
 
 const ASSETS_TO_CACHE = [
   // Root files
@@ -11,6 +11,7 @@ const ASSETS_TO_CACHE = [
   // Core JS files
   './js/gameEventHandler.js',
   './js/initGame.js',
+  './js/initGameData.js',
   './js/langageManager.js',
   './js/loadData.js',
   './js/typeWriteEffect.js',
@@ -58,6 +59,12 @@ const ASSETS_TO_CACHE = [
   './data/riddles.json',
   './data/steps.json',
   
+  // Front assets
+  './fronts/start_view_1/styles.css',
+  './fronts/start_view_1/public/images/prosa-logo.png',
+  './fronts/start_view_1/public/images/chargement.png',
+  './fronts/start_view_1/step.js',
+  
   // Logo & branding
   './assets/logo/prosa-logo.png',
   './assets/logo/logo_prosa.svg',
@@ -68,6 +75,7 @@ const ASSETS_TO_CACHE = [
   './assets/img/icon1.svg',
   './assets/drapeau/bandera.png',
   './assets/drapeau/france.png',
+  './assets/favicon/prosa-favicon.svg',
   
   // Lottie animation
   './assets/lottie/prosa-o.json',
@@ -104,47 +112,99 @@ const ASSETS_TO_CACHE = [
   
   // Libraries
   './assets/libs/lottie.min.js',
+  
+  // CSS files referenced in HTML
+  './assets/styles.css',
+  
+  // Tailwind CDN fallback (pour les mini-jeux)
+  './games/src/tailwind.js',
+  
+  // Server files (si utilisés côté client)
+  './server.js',
 ];
 
 self.addEventListener('install', (event) => {
+  console.log('[Service Worker] Installation...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Mise en cache des fichiers du jeu.');
-      return cache.addAll(ASSETS_TO_CACHE);
+      console.log('[Service Worker] Mise en cache des fichiers du jeu...');
+      return cache.addAll(ASSETS_TO_CACHE).catch((error) => {
+        console.error('[Service Worker] Erreur lors de la mise en cache:', error);
+      });
     })
   );
+  self.skipWaiting();
 });
 
 self.addEventListener('fetch', (event) => {
-  // Network first for JS modules (permet les mises à jour)
-  if (event.request.url.includes('.js') || event.request.url.includes('cdnjs')) {
+  // Ignore les requêtes non-GET
+  if (event.request.method !== 'GET') return;
+  
+  // Ignore les requêtes chrome-extension et autres protocoles
+  if (!event.request.url.startsWith('http')) return;
+
+  // Network first pour les modules JS (permet les mises à jour)
+  if (event.request.url.includes('.js') && !event.request.url.includes('cdn')) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          const cache = caches.open(CACHE_NAME);
-          cache.then((c) => c.put(event.request, response.clone()));
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => {
+          return caches.match(event.request);
+        })
     );
-  } else {
-    // Cache first for assets, data, CSS
+  } 
+  // Cache first pour les assets, data, CSS, images
+  else {
     event.respondWith(
       caches.match(event.request).then((response) => {
-        return response || fetch(event.request);
+        if (response) {
+          return response;
+        }
+        
+        return fetch(event.request).then((response) => {
+          // Ne mettre en cache que les réponses valides
+          if (!response || response.status !== 200 || response.type === 'error') {
+            return response;
+          }
+          
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+          
+          return response;
+        }).catch(() => {
+          // Fallback pour les images manquantes
+          if (event.request.destination === 'image') {
+            return caches.match('./assets/img/icon1.svg');
+          }
+        });
       })
     );
   }
 });
 
 self.addEventListener('activate', (event) => {
+  console.log('[Service Worker] Activation...');
   event.waitUntil(
     caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
-          return caches.delete(key);
-        }
-      }));
+      return Promise.all(
+        keyList.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('[Service Worker] Suppression ancien cache:', key);
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
+  self.clients.claim();
 });
