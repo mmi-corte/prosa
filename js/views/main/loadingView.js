@@ -1,7 +1,6 @@
 import { gameContainer } from "../../../app.js"
 
 export function loadingView() {
-    console.log('Loading view initialized')
     const container = document.createElement('div')
     container.classList.add('loading-screen')
 
