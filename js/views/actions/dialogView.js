@@ -60,12 +60,12 @@ function updateDialog() {
     currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
     
     if (voiceFile) {
-        // Play voice audio and display text immediately (no typewriter)
-        textBox.innerHTML = activeText;
+        // Play voice audio with typewriter effect (sound muted)
         currentAudio = new Audio(`./assets/steps/${activePlayer.localisation}/${activeStepId}/${voiceFile}`);
         currentAudio.play().catch(err => console.warn('Audio playback failed:', err));
+        typeWriteEffect(textBox, activeText, currentPitch, true);
     } else {
-        // No voice, use typewriter effect
+        // No voice, use typewriter effect with sound
         typeWriteEffect(textBox, activeText, currentPitch);
     }
 }

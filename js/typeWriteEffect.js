@@ -7,9 +7,10 @@ const defaultDelay = 30
  * Fonction d'affichage texte
  * @param  {[object]} container Conteneur où le texte sera affiché.
  * @param  {[string]} text Texte à afficher
- * @param  {[number]} action Tonalité du texte
+ * @param  {[number]} pitch Tonalité du texte
+ * @param  {[boolean]} muted Désactive le son du typewriter
  */
-export function typeWriteEffect(container, text, pitch = 400) {
+export function typeWriteEffect(container, text, pitch = 400, muted = false) {
     return new Promise((resolve) => {
         container.innerHTML = "";
         isTyping = true;
@@ -24,7 +25,7 @@ export function typeWriteEffect(container, text, pitch = 400) {
 
                 let currentDelay = defaultDelay;
 
-                if (char !== " ") {
+                if (char !== " " && !muted) {
                     playLetterSound(pitch);
                 }
 
