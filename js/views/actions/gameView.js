@@ -1,7 +1,8 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, navigate } from "../../../app.js";
 import { callAction } from "../../gameEventHandler.js";
-import { decrementDifficultyState } from "../../initGame.js";
+import { decrementDifficultyState, isGameOver } from "../../initGame.js";
 import { gamesData } from "../../loadData.js";
+import { gameOverView } from "../main/gameOverView.js";
 
 let data = "";
 let activeCleanup = null;
@@ -127,8 +128,12 @@ export function gameView(action) {
             loseBtn.textContent = 'LOSE';
             loseBtn.onclick = () => {
                 console.log('Calling lose action');
-                decrementDifficultyState();
-                callAction(data.nextActionTypeLose, data.nextActionLose);
+                const hasLost = decrementDifficultyState();
+                if (hasLost) {
+                    navigate('gameover', gameOverView, true);
+                } else {
+                    callAction(data.nextActionTypeLose, data.nextActionLose);
+                }
             };
             
             buttonContainer.appendChild(winBtn);
@@ -155,9 +160,13 @@ function setupGameCompletion() {
                 callAction(data.nextActionTypeWin, data.nextActionWin);
             } else {
                 console.log('Calling lose action');
-                decrementDifficultyState();
+                const hasLost = decrementDifficultyState();
                 console.log(data.nextActionLose, data.nextActionTypeLose)
-                callAction(data.nextActionTypeLose, data.nextActionLose);
+                if (hasLost) {
+                    navigate('gameover', gameOverView, true);
+                } else {
+                    callAction(data.nextActionTypeLose, data.nextActionLose);
+                }
             }
             
             window.removeEventListener('minigame-complete', handleGameComplete);

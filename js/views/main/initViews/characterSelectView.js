@@ -218,12 +218,77 @@ function addPlayer(regionId, characterId) {
         closeCharacterDetail()
         renderCharacterGrid()
     } else {
-        closeCharacterDetail()
-        playerSubmitView(selectedPlayers)
+        // Vérifier l'équilibre entre les régions avant de continuer
+        if (checkRegionBalance()) {
+            closeCharacterDetail()
+            playerSubmitView(selectedPlayers)
+        } else {
+            // Fermer d'abord la page de détails, puis afficher le popup d'erreur
+            closeCharacterDetail()
+            showBalanceErrorPopup()
+        }
     }
 }
 
+// Vérifier l'équilibre entre Corte (1) et Toulon (2)
+function checkRegionBalance() {
+    const corteCount = selectedPlayers.filter(p => p.localisation === 1).length
+    const toulonCount = selectedPlayers.filter(p => p.localisation === 2).length
+    const totalPlayers = selectedPlayers.length
+    
+    // Pour un nombre pair : moitié chaque
+    // Pour un nombre impair : maximum 1 de différence
+    const maxDifference = totalPlayers % 2 === 0 ? 0 : 1
+    const difference = Math.abs(corteCount - toulonCount)
+    
+    console.log(`Corte: ${corteCount}, Toulon: ${toulonCount}, Diff: ${difference}, Max allowed: ${maxDifference}`)
+    
+    return difference <= maxDifference
+}
+
+// Afficher le popup d'erreur d'équilibre
+function showBalanceErrorPopup() {
+    const totalPlayers = selectedPlayers.length
+    const corteCount = selectedPlayers.filter(p => p.localisation === 1).length
+    const toulonCount = selectedPlayers.filter(p => p.localisation === 2).length
+    
+    const requiredPerRegion = Math.floor(totalPlayers / 2)
+    const isOdd = totalPlayers % 2 !== 0
+    
+    let message = ''
+    if (isOdd) {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir ${requiredPerRegion} ou ${requiredPerRegion + 1} personnages de chaque région.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    } else {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir exactement ${requiredPerRegion} personnages de Corte et ${requiredPerRegion} de Toulon.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    }
+    
+    const modalOverlay = document.createElement('div')
+    modalOverlay.classList.add('modal-overlay')
+    modalOverlay.innerHTML = `
+        <div class="modal-content balance-error-modal">
+            <h2>ÉQUILIBRE REQUIS</h2>
+            <p>${message}</p>
+            <button class="btn-primary" id="resetSelectionBtn">Recommencer la sélection</button>
+        </div>
+    `
+    
+    document.body.appendChild(modalOverlay)
+    
+    document.getElementById('resetSelectionBtn').addEventListener('click', () => {
+        modalOverlay.remove()
+        // Réinitialiser toutes les sélections
+        currentPlayerIndex = 0
+        for (let i = 0; i < selectedPlayers.length; i++) {
+            selectedPlayers[i].character = 0
+            selectedPlayers[i].localisation = 0
+        }
+        renderCharacterGrid()
+    })
+}
+
 function closeCharacterDetail() {
-    detailContainer.remove()
+    if (detailContainer && detailContainer.parentNode) {
+        detailContainer.remove()
+    }
 }
 

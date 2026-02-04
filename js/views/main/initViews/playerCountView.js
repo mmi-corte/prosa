@@ -2,14 +2,20 @@ import { navigate } from "../../../../app.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { gameInitialized } from "../../../initGame.js";
+import { menuView } from "../menuView.js";
 
 let playerCount
 
 export function playerCountView() {
+    console.log('playerCountView called, gameInitialized:', gameInitialized)
 
     if (gameInitialized) {
-        navigate('menu', menuView(), true)
+        console.log('Game already initialized, redirecting to menu')
+        navigate('menu', menuView, true)
+        return
     }
+    
+    console.log('Starting player count view')
 
     clearInitContainer();
     initContainer.classList.add('initScreen1');
@@ -55,6 +61,6 @@ export function playerCountView() {
     });
 
     submitButton.addEventListener('click', () => {
-        navigate('choix-personnage', characterSelectView(playerCount), true)
+        navigate('choix-personnage', () => characterSelectView(playerCount), true)
     });
 }

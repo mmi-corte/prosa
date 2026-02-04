@@ -61,6 +61,14 @@ export function decrementDifficultyState() {
     console.log("Decreasing difficulty state")
     difficultyState += -1
     localStorage.setItem('difficultyState', JSON.stringify(difficultyState));
+    
+    // Retourner true si le joueur a perdu (batterie à 0)
+    return difficultyState <= 0;
+}
+
+// Vérifier si la partie est perdue
+export function isGameOver() {
+    return difficultyState !== null && difficultyState <= 0;
 }
 
 /**

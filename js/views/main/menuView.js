@@ -1,5 +1,6 @@
 import { clearContainer, gameContainer, navigate } from "../../../app.js"
-import { gameInitialized, initGame, difficultyState, globalDifficulty, decrementDifficultyState } from "../../initGame.js"
+import { gameInitialized, initGame, difficultyState, globalDifficulty, decrementDifficultyState, isGameOver } from "../../initGame.js"
+import { gameOverView } from "./gameOverView.js"
 //import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
 import { initView } from "./initView.js"
@@ -8,6 +9,11 @@ import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
 
 export function menuView() {
+  // Vérifier immédiatement si le joueur a perdu (batterie à 0)
+  if (gameInitialized && difficultyState !== null && difficultyState !== undefined && difficultyState <= 0) {
+    navigate('gameover', gameOverView, true)
+    return
+  }
   clearContainer()
 
   gameContainer.innerHTML = `
@@ -27,7 +33,7 @@ export function menuView() {
   const menuContainer = document.getElementById('menuContentIngame')
 
   //Show the difficulty bar if initialized
-  if (gameInitialized && difficultyState) {
+  if (gameInitialized && difficultyState !== null && difficultyState !== undefined) {
     const difficultyContainer = document.createElement('div')
     difficultyContainer.classList.add('menu-difficulty-bar')
     menuContainer.appendChild(difficultyContainer)
@@ -87,8 +93,12 @@ export function menuView() {
   debugButton.innerText = 'DEBUG - Diminuer difficulté'
   debugButton.style.color = 'white'
   debugButton.addEventListener('click', () => {
-    decrementDifficultyState()
-    menuView()
+    const hasLost = decrementDifficultyState()
+    if (hasLost) {
+      navigate('gameover', gameOverView, true)
+    } else {
+      menuView()
+    }
   })
   navContainer.appendChild(debugButton)
 }

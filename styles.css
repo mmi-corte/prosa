@@ -2791,3 +2791,267 @@ body.light-mode .logo-main {
     margin: 16px;
   }
 }
+
+/* ========================================
+============ GAME OVER PAGE ===============
+=========================================== */
+.game-over-wrapper {
+  justify-content: space-around;
+  align-items: center;
+  padding: 80px 30px;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.game-over-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Titre principal */
+.game-over-title {
+  font-family: 'Futura', sans-serif;
+  font-size: 6.5rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  line-height: 0.95;
+  word-spacing: 100vw;
+}
+
+/* Question */
+.game-over-question {
+  font-family: 'Futura', sans-serif;
+  font-size: 1.4rem;
+  color: var(--muted-foreground);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+/* Conteneur des boutons */
+.game-over-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 30px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Boutons Oui/Non */
+.game-over-choice {
+  font-family: 'Futura', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 50px;
+  border: 2px solid var(--foreground);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-over-choice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--foreground);
+  z-index: -1;
+  transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.game-over-choice:hover {
+  color: var(--background);
+}
+
+.game-over-choice:hover::before {
+  left: 0;
+}
+
+.game-over-choice:active {
+  transform: scale(0.95);
+}
+
+/* Bouton NON plus discret */
+.game-over-no {
+  opacity: 0.6;
+  border-color: var(--muted-foreground);
+  color: var(--muted-foreground);
+}
+
+.game-over-no::before {
+  background: var(--muted-foreground);
+}
+
+.game-over-no:hover {
+  opacity: 1;
+  color: var(--background);
+}
+
+/* Mode clair */
+body.light-mode .game-over-title {
+  color: var(--foreground);
+}
+
+body.light-mode .game-over-question {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .game-over-choice {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
+body.light-mode .game-over-choice::before {
+  background: var(--foreground);
+}
+
+body.light-mode .game-over-choice:hover {
+  color: var(--background);
+}
+
+body.light-mode .game-over-no {
+  border-color: var(--muted-foreground);
+  color: var(--muted-foreground);
+}
+
+body.light-mode .game-over-no::before {
+  background: var(--muted-foreground);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-over-wrapper {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
+  .game-over-title {
+    font-size: 3.5rem;
+    letter-spacing: 4px;
+  }
+
+  .game-over-question {
+    font-size: 1.1rem;
+  }
+
+  .game-over-buttons {
+    gap: 16px;
+  }
+
+  .game-over-choice {
+    padding: 12px 40px;
+    min-width: 120px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-over-wrapper {
+    padding: 50px 15px;
+  }
+
+  .game-over-content {
+    gap: 50px;
+  }
+
+  .game-over-title {
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+  }
+
+  .game-over-question {
+    font-size: 1rem;
+  }
+
+  .game-over-buttons {
+    gap: 12px;
+    width: 100%;
+  }
+
+  .game-over-choice {
+    flex: 1;
+    min-width: 100px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+}
+
+/* ========================================
+======== BALANCE ERROR MODAL ==============
+=========================================== */
+.balance-error-modal {
+  text-align: center;
+  padding: 40px 30px !important;
+  max-width: 420px !important;
+}
+
+.balance-error-modal h2 {
+  font-family: 'Futura', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin: 0 0 25px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.balance-error-modal p {
+  font-size: 1.05rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  margin: 0 0 35px;
+}
+
+.balance-error-modal p strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.balance-error-modal .btn-primary {
+  margin-top: 10px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.balance-error-modal .close-btn {
+  color: #c94a4a;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.balance-error-modal .close-btn:hover {
+  color: #ff6b6b;
+  transform: scale(1.1);
+}
+
+body.light-mode .balance-error-modal h2 {
+  color: var(--foreground);
+}
+
+body.light-mode .balance-error-modal p {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .balance-error-modal p strong {
+  color: var(--foreground);
+}

@@ -11,6 +11,7 @@ import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
 import { debugView } from "./js/views/Temp/debugView.js"
 import { difficultyView } from "./js/views/main/initViews/difficultyView.js"
+import { gameOverView } from "./js/views/main/gameOverView.js"
 
 export const gameContainer = document.getElementById('gameContainer')
 export const headerLeft = document.getElementById('headerLeft')
@@ -231,6 +232,7 @@ const viewRoutes = {
   'encyclopedie-details': charactersView,
   'debug': debugView,
   'parametres': settingView,
+  'gameover': gameOverView,
 }
 
 function callView(viewName) {

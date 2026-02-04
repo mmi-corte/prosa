@@ -7,10 +7,12 @@ import { gameInitialized, setDifficulty } from "../../../initGame.js";
 let selectedDifficulty = null;
 
 export function difficultyView() {    
-    if (gameInitialized) {
-        navigate('menu', menuView())
-        return
-    }
+    console.log('difficultyView called, gameInitialized:', gameInitialized)
+    
+    // Note: On enlève la vérification gameInitialized ici car elle crée des problèmes
+    // lors du retour depuis gameOver. La page devrait toujours afficher le choix de difficulté.
+    
+    console.log('Starting difficulty view')
 
     clearInitContainer();
     initContainer.classList.add('initScreen1');
