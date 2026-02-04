@@ -27,16 +27,23 @@ export function menuView() {
   const menuContainer = document.getElementById('menuContentIngame')
 
   //Show the difficulty bar if initialized
-  const difficultyContainer = document.createElement('div')
-  difficultyContainer.classList.add('menu-difficulty-bar')
-  menuContainer.appendChild(difficultyContainer)
+  if (gameInitialized && difficultyState) {
+    const difficultyContainer = document.createElement('div')
+    difficultyContainer.classList.add('menu-difficulty-bar')
+    menuContainer.appendChild(difficultyContainer)
 
-  const difficultyNumber = document.createElement('span')
-  difficultyContainer.appendChild(difficultyNumber)
+    const difficultyNumber = document.createElement('span')
+    difficultyNumber.innerText = globalDifficulty
+    difficultyContainer.appendChild(difficultyNumber)
 
-  const difficultyIndicator = document.createElement('div')
-  difficultyIndicator.classList.add('difficulty-indicator')
-  difficultyContainer.appendChild(difficultyIndicator)
+    const difficultyIndicator = document.createElement('div')
+    difficultyIndicator.classList.add('difficulty-indicator')
+
+    const height = (difficultyState / globalDifficulty) * 100
+    difficultyIndicator.style.height = height + "%"
+
+    difficultyContainer.appendChild(difficultyIndicator)
+  }
 
   //Show the nav buttons
   const navContainer = document.createElement('nav')

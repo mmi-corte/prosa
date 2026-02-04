@@ -3,13 +3,10 @@ import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
 import { navigate, headerLeft } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
-import { resetDifficultyIndicator } from "../../components/difficultyIndicator.js";
 
 let selectedDifficulty = null;
 
-export function difficultyView() {
-    resetDifficultyIndicator()
-    
+export function difficultyView() {    
     if (gameInitialized) {
         navigate('menu', menuView())
         return

@@ -1,5 +1,4 @@
 import { fetchSteps } from "./loadData.js";
-import { resetDifficultyIndicator, updateDifficultyIndicator } from "./views/components/difficultyIndicator.js";
 
 export let playerCharactersData
 export let players = {}
@@ -19,7 +18,6 @@ export async function initGame() {
         //Store the global difficulty and the difficulty state
         globalDifficulty = parseInt(storedDifficulty, 10)
         difficultyState = parseInt(storedDifficultyState, 10)
-        updateDifficultyIndicator()
 
         //Set the global initialized state to true
         gameInitialized = true
@@ -54,7 +52,6 @@ export function setDifficulty(difficultySelect) {
         difficultyState = difficultySelect
         localStorage.setItem('globalDifficulty', JSON.stringify(difficultySelect));
         localStorage.setItem('difficultyState', JSON.stringify(difficultySelect));
-        updateDifficultyIndicator()
     } else {
         console.error(`Could not save difficulty: no data was provided (${difficultySelect})`)
     }
@@ -70,7 +67,6 @@ export function resetGame() {
     localStorage.clear('difficultyState')
     globalDifficulty = null
     difficultyState = null
-    resetDifficultyIndicator()
 
     //Reset global game state
     gameInitialized = false
