@@ -192,8 +192,8 @@
         ],
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
-        "nextActionTypeLose": "dialog",
-        "nextActionLose": "3"
+        "nextActionTypeLose": "end",
+        "nextActionlose": "2"
       }
     },
     "12": {
