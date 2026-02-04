@@ -1,11 +1,13 @@
 {
   "name": "PROSA - Réalité Augmentée",
   "short_name": "PROSA",
-  "description": "Application éducative de réalité augmentée",
-  "start_url": "/prosa/index.html",
+  "description": "Application éducative de réalité augmentée basée sur la culture corse",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#1a1812",
-  "theme_color": "#1a1812",
+  "theme_color": "#F1D482",
   "icons": [
     {
       "src": "./assets/favicon/favicon.svg",
@@ -24,6 +26,28 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./assets/logo/prosa-logo.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "games"],
+  "shortcuts": [
+    {
+      "name": "Menu Principal",
+      "short_name": "Menu",
+      "description": "Accéder au menu principal",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "./assets/favicon/favicon.svg",
+          "sizes": "any"
+        }
+      ]
     }
   ]
 }

@@ -14,6 +14,19 @@
   <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
   <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png" />
   <link rel="stylesheet" href="./styles.css" />
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" as="style" href="./styles.css" />
+  <link rel="preload" as="font" href="./assets/fonts/FuturaCondMedium.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="script" href="./assets/libs/lottie.min.js" />
+  <link rel="preload" as="script" href="./app.js" />
+  
+  <!-- Preload essential images -->
+  <link rel="preload" as="image" href="./assets/logo/prosa-logo.png" />
+  <link rel="preload" as="image" href="./assets/lottie/prosa-o.json" />
+  <link rel="preload" as="image" href="./assets/playersCharacters/bastianu.jpg" />
+  <link rel="preload" as="image" href="./assets/playersCharacters/livia.jpg" />
+  <link rel="preload" as="image" href="./assets/characters/AStrega.jpg" />
 </head>
 
 <body>
@@ -46,6 +59,7 @@
   </main>
 
   <script src="./assets/libs/lottie.min.js"></script>
+  <script src="./js/preloadAssets.js"></script>
   <script type="module" src="./app.js"></script>
 
   <!-- <script type="module" src="./fronts/start_view_1/app.js"></script> -->

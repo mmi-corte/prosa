@@ -1,4 +1,5 @@
-const CACHE_NAME = 'cache-prosa-game-v2';
+const CACHE_NAME = 'cache-prosa-game-v3';
+const GAMES_CACHE = 'cache-prosa-games-v1';
 
 const ASSETS_TO_CACHE = [
   // Root files
@@ -7,11 +8,12 @@ const ASSETS_TO_CACHE = [
   './app.js',
   './styles.css',
   './manifest.json',
+  './AR/index.html',
+  './games/index.html',
   
   // Core JS files
   './js/gameEventHandler.js',
   './js/initGame.js',
-  './js/initGameData.js',
   './js/langageManager.js',
   './js/loadData.js',
   './js/typeWriteEffect.js',
@@ -53,17 +55,10 @@ const ASSETS_TO_CACHE = [
   './data/choices.json',
   './data/cinematiques.json',
   './data/dialogs.json',
-  './data/funfacts.json',
   './data/games.json',
   './data/playersCharacters.json',
   './data/riddles.json',
   './data/steps.json',
-  
-  // Front assets
-  './fronts/start_view_1/styles.css',
-  './fronts/start_view_1/public/images/prosa-logo.png',
-  './fronts/start_view_1/public/images/chargement.png',
-  './fronts/start_view_1/step.js',
   
   // Logo & branding
   './assets/logo/prosa-logo.png',
@@ -72,10 +67,9 @@ const ASSETS_TO_CACHE = [
   './assets/logo/chargement.png',
   
   // Icons & UI
-  './assets/img/icon1.svg',
+  './assets/favicon/favicon.svg',
   './assets/drapeau/bandera.png',
   './assets/drapeau/france.png',
-  './assets/favicon/prosa-favicon.svg',
   
   // Lottie animation
   './assets/lottie/prosa-o.json',
@@ -86,7 +80,7 @@ const ASSETS_TO_CACHE = [
   
   // Characters (story characters)
   './assets/characters/AStrega.jpg',
-  './assets/characters/Fullettu.jpg',
+  './assets/characters/Fulettu.jpg',
   './assets/characters/Mazzeru.jpg',
   './assets/characters/Orcu.jpg',
   './assets/characters/Signadora.jpg',
@@ -96,19 +90,24 @@ const ASSETS_TO_CACHE = [
   './assets/characters/spallistu.jpg',
   
   // Player characters
-  './assets/playersCharacters/bastianu.jpg',
-  './assets/playersCharacters/livia.jpg',
-  './assets/playersCharacters/marc.jpeg',
-  './assets/playersCharacters/sophie.jpeg',
-  './assets/playersCharacters/valerie.jpeg',
-  './assets/playersCharacters/wide_bastianu.jpg',
-  './assets/playersCharacters/wide_livia.jpg',
+  './assets/playersCharacters/bastianu.webp',
+  './assets/playersCharacters/leo.webp',
+  './assets/playersCharacters/livia.webp',
+  './assets/playersCharacters/marc.webp',
+  './assets/playersCharacters/orsetta.webp',
+  './assets/playersCharacters/valerie.webp',
+  './assets/playersCharacters/wide_bastianu.webp',
+  './assets/playersCharacters/wide_leo.webp',
+  './assets/playersCharacters/wide_livia.webp',
+  './assets/playersCharacters/wide_marc.webp',
+  './assets/playersCharacters/wide_orsetta.webp',
+  './assets/playersCharacters/wide_valerie.webp',
   
   // Cinematiques
   './assets/cinematiques/test.png',
   
   // Steps assets
-  './assets/steps/1/0100/radio.webp',
+  './assets/steps/1/01/radio.webp',
   
   // Libraries
   './assets/libs/lottie.min.js',
@@ -143,8 +142,152 @@ self.addEventListener('fetch', (event) => {
   // Ignore les requêtes chrome-extension et autres protocoles
   if (!event.request.url.startsWith('http')) return;
 
-  // Network first pour les modules JS (permet les mises à jour)
-  if (event.request.url.includes('.js') && !event.request.url.includes('cdn')) {
+  const url = new URL(event.request.url);
+
+  // **Google Fonts - stale-while-revalidate**
+  if (url.origin === 'https://fonts.googleapis.com' || url.origin === 'https://fonts.gstatic.com') {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return networkResponse;
+        }).catch(() => response);
+
+        return response || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // **Font Awesome / CDNs - stale-while-revalidate**
+  if (url.origin === 'https://cdnjs.cloudflare.com') {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return networkResponse;
+        }).catch(() => response);
+
+        return response || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // **Tailwind CDN - cache first avec fallback réseau**
+  if (url.origin === 'https://cdn.tailwindcss.com') {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        if (response) return response;
+
+        return fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return networkResponse;
+        }).catch(() => new Response('', { status: 503 }));
+      })
+    );
+    return;
+  }
+
+  // **Gestion des images avec lazy cache**
+  if (event.request.destination === 'image') {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        // Si en cache, retourner immédiatement
+        if (response) {
+          return response;
+        }
+        
+        // Sinon, chercher en réseau et mettre en cache
+        return fetch(event.request).then((response) => {
+          // Vérifier que c'est une réponse valide
+          if (!response || response.status !== 200 || response.type === 'error') {
+            return response;
+          }
+          
+          // Mettre en cache la réponse
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+            console.log(`[Service Worker] Image mise en cache: ${event.request.url}`);
+          });
+          
+          return response;
+        }).catch(() => {
+          // Fallback si l'image ne peut pas être chargée
+          console.warn(`[Service Worker] Impossible de charger l'image: ${event.request.url}`);
+          return caches.match('./assets/favicon/favicon.svg');
+        });
+      })
+    );
+    return;
+  }
+
+  // **Jeux - cache lazy (on demand)**
+  if (event.request.url.includes('/games/')) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(GAMES_CACHE).then((cache) => {
+              cache.put(event.request, responseClone);
+              console.log(`[Service Worker] Jeu mis en cache: ${event.request.url}`);
+            });
+          }
+          return networkResponse;
+        }).catch(() => {
+          console.warn(`[Service Worker] Jeu hors ligne non disponible: ${event.request.url}`);
+          return undefined;
+        });
+      })
+    );
+    return;
+  }
+  
+  // **Gestion des données JSON avec stale-while-revalidate**
+  else if (event.request.url.includes('.json') && event.request.url.includes('/data/')) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        // Retourner du cache immédiatement
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            // Mettre à jour le cache en arrière-plan
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+              console.log(`[Service Worker] Données mises à jour: ${event.request.url}`);
+            });
+          }
+          return networkResponse;
+        }).catch(() => response); // Si erreur réseau, utiliser cache
+        
+        return response || fetchPromise;
+      })
+    );
+  }
+  
+  // **Network first pour les modules JS (permet les mises à jour)**
+  else if (event.request.url.includes('.js') && !event.request.url.includes('cdn')) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
@@ -152,16 +295,19 @@ self.addEventListener('fetch', (event) => {
             const responseClone = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseClone);
+              console.log(`[Service Worker] JS mis à jour: ${event.request.url}`);
             });
           }
           return response;
         })
         .catch(() => {
+          console.warn(`[Service Worker] Utilisation du cache pour: ${event.request.url}`);
           return caches.match(event.request);
         })
     );
-  } 
-  // Cache first pour les assets, data, CSS, images
+  }
+  
+  // **Cache first pour les assets statiques, CSS, etc.**
   else {
     event.respondWith(
       caches.match(event.request).then((response) => {
@@ -178,14 +324,13 @@ self.addEventListener('fetch', (event) => {
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
+            console.log(`[Service Worker] Asset mis en cache: ${event.request.url}`);
           });
           
           return response;
         }).catch(() => {
-          // Fallback pour les images manquantes
-          if (event.request.destination === 'image') {
-            return caches.match('./assets/img/icon1.svg');
-          }
+          console.warn(`[Service Worker] Offline - pas de cache pour: ${event.request.url}`);
+          return undefined;
         });
       })
     );
@@ -198,7 +343,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keyList) => {
       return Promise.all(
         keyList.map((key) => {
-          if (key !== CACHE_NAME) {
+          if (key !== CACHE_NAME && key !== GAMES_CACHE) {
             console.log('[Service Worker] Suppression ancien cache:', key);
             return caches.delete(key);
           }
