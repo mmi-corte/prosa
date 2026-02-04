@@ -2,23 +2,15 @@ const CACHE_NAME = 'cache-prosa-game-v3';
 const GAMES_CACHE = 'cache-prosa-games-v1';
 
 const ASSETS_TO_CACHE = [
-  // Root files
+  // BOOTSTRAP MINIMUM - Fichiers critiques pour démarrer l'app
   './',
   './index.html',
   './app.js',
-  './styles.css',
-  './manifest.json',
-  './AR/index.html',
-  './games/index.html',
   
-  // Core JS files
-  './js/gameEventHandler.js',
-  './js/initGame.js',
-  './js/langageManager.js',
-  './js/loadData.js',
-  './js/typeWriteEffect.js',
+  // Preloader pour gérer le reste
+  './js/preloadAssets.js',
   
-  // Main views
+  // Views JS - indispensables pour l'interface
   './js/views/main/charactersView.js',
   './js/views/main/codeView.js',
   './js/views/main/initView.js',
@@ -31,106 +23,34 @@ const ASSETS_TO_CACHE = [
   './js/views/main/settingView.js',
   './js/views/main/seasonsView.js',
   
-  // Init views
   './js/views/main/initViews/characterSelectView.js',
   './js/views/main/initViews/langueCorseView.js',
   './js/views/main/initViews/playerCountView.js',
   './js/views/main/initViews/playerSubmitView.js',
   
-  // Action views
   './js/views/actions/choiceView.js',
   './js/views/actions/dialogView.js',
   './js/views/actions/endView.js',
   './js/views/actions/gameView.js',
   './js/views/actions/riddleView.js',
   
-  // Components
   './js/views/components/renderPlayerList.js',
-  
-  // Debug view
   './js/views/Temp/debugView.js',
   
-  // All data files
-  './data/characters.json',
-  './data/choices.json',
-  './data/cinematiques.json',
-  './data/dialogs.json',
-  './data/games.json',
-  './data/playersCharacters.json',
-  './data/riddles.json',
-  './data/steps.json',
+  // Core JS
+  './js/gameEventHandler.js',
+  './js/initGame.js',
+  './js/langageManager.js',
+  './js/loadData.js',
+  './js/typeWriteEffect.js',
   
-  // Logo & branding
-  './assets/logo/prosa-logo.png',
-  './assets/logo/logo_prosa.svg',
-  './assets/logo/prosa-o.svg',
-  './assets/logo/chargement.png',
-  
-  // Icons & UI
-  './assets/favicon/favicon.svg',
-  './assets/drapeau/bandera.png',
-  './assets/drapeau/france.png',
-  
-  // Lottie animation
-  './assets/lottie/prosa-o.json',
-  
-  // Fonts
-  './assets/fonts/FuturaCondMedium.woff2',
-  './assets/fonts/FuturaCondMedium.woff',
-  
-  // Characters (story characters)
-  './assets/characters/AStrega.webp',
-  './assets/characters/Fulettu.webp',
-  './assets/characters/Mazzeru.webp',
-  './assets/characters/Orcu.webp',
-  './assets/characters/Signadora.webp',
-  './assets/characters/SquadradArozza.webp',
-  './assets/characters/UMagu.webp',
-  './assets/characters/UStrigone.webp',
-  './assets/characters/spallistu.webp',
-  './assets/characters/Fata.webp',
-  './assets/characters/lougaragai.webp',
-  './assets/characters/drac.webp',
-  './assets/characters/cabrodor.webp',
-  './assets/characters/Matagot.webp',
-  './assets/characters/feelavandula.webp',
-  './assets/characters/GyptisProtis.webp',
-  './assets/characters/Tarraske.webp',
-  './assets/characters/Coulobre.webp',
-  './assets/characters/LouDrape.webp',
-  
-  // Player characters
-  './assets/playersCharacters/bastianu.webp',
-  './assets/playersCharacters/leo.webp',
-  './assets/playersCharacters/livia.webp',
-  './assets/playersCharacters/marc.webp',
-  './assets/playersCharacters/orsetta.webp',
-  './assets/playersCharacters/valerie.webp',
-  './assets/playersCharacters/wide_bastianu.webp',
-  './assets/playersCharacters/wide_leo.webp',
-  './assets/playersCharacters/wide_livia.webp',
-  './assets/playersCharacters/wide_marc.webp',
-  './assets/playersCharacters/wide_orsetta.webp',
-  './assets/playersCharacters/wide_valerie.webp',
-  
-  // Cinematiques
-  './assets/cinematiques/test.png',
-  
-  // Steps assets
-  './assets/steps/1/01/radio.webp',
-  
-  // Libraries
-  './assets/libs/lottie.min.js',
-  
-  // CSS files referenced in HTML
-  './assets/styles.css',
-  
-  // Tailwind CDN fallback (pour les mini-jeux)
-  './games/src/tailwind.js',
-  
-  // Server files (si utilisés côté client)
-  './server.js',
+  // Asset manifest - CRITIQUE pour le système de préchargement
+  './assets-manifest.json',
 ];
+
+// NOTE: Tous les autres assets (images, styles, données JSON, fonts, etc.)
+// sont définis dans assets-manifest.json et gérés par le système de préchargement
+// + les stratégies de cache du fetch event (Cache First, Network First, etc.)
 
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installation...');

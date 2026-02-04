@@ -1,103 +1,46 @@
 /**
  * Préchargement des assets critiques pour la PWA
- * Lancé dès le démarrage pour remplir le cache du navigateur
+ * Système à 4 niveaux de priorité : critical, high, normal, lazy
+ * Charge dynamiquement depuis assets-manifest.json
  */
 
 class AssetPreloader {
   constructor() {
-    this.preloadedCount = 0;
-    this.failedCount = 0;
+    this.stats = {
+      critical: { loaded: 0, failed: 0 },
+      high: { loaded: 0, failed: 0 },
+      normal: { loaded: 0, failed: 0 },
+      lazy: { loaded: 0, failed: 0 }
+    };
     this.startTime = Date.now();
+    this.manifest = null;
   }
 
   /**
-   * Liste des assets critiques à précharger
+   * Charge le manifest des assets
    */
-  getCriticalAssets() {
-    return {
-      // Logos et branding
-      logos: [
-        './assets/logo/prosa-logo.png',
-        './assets/logo/logo_prosa.svg',
-        './assets/logo/prosa-o.svg',
-        './assets/logo/chargement.png',
-      ],
-      
-      // Images des joueurs
-      playerCharacters: [
-        './assets/playersCharacters/bastianu.webp',
-        './assets/playersCharacters/leo.webp',
-        './assets/playersCharacters/livia.webp',
-        './assets/playersCharacters/marc.webp',
-        './assets/playersCharacters/orsetta.webp',
-        './assets/playersCharacters/valerie.webp',
-        './assets/playersCharacters/wide_bastianu.webp',
-        './assets/playersCharacters/wide_leo.webp',
-        './assets/playersCharacters/wide_livia.webp',
-        './assets/playersCharacters/wide_marc.webp',
-        './assets/playersCharacters/wide_orsetta.webp',
-        './assets/playersCharacters/wide_valerie.webp',
-      ],
-      
-      // Personnages du jeu
-      storyCharacters: [
-        './assets/characters/AStrega.webp',
-        './assets/characters/Fulettu.webp',
-        './assets/characters/Mazzeru.webp',
-        './assets/characters/Orcu.webp',
-        './assets/characters/Signadora.webp',
-        './assets/characters/SquadradArozza.webp',
-        './assets/characters/UMagu.webp',
-        './assets/characters/UStrigone.webp',
-        './assets/characters/spallistu.webp',
-        './assets/characters/Fata.webp',
-        './assets/characters/lougaragai.webp',
-        './assets/characters/drac.webp',
-        './assets/characters/cabrodor.webp',
-        './assets/characters/Matagot.webp',
-        './assets/characters/feelavandula.webp',
-        './assets/characters/GyptisProtis.webp',
-        './assets/characters/Tarraske.webp',
-        './assets/characters/Coulobre.webp',
-        './assets/characters/LouDrape.webp',
-      ],
-      
-      // UI et icônes
-      ui: [
-        './assets/favicon/favicon.svg',
-        './assets/drapeau/bandera.png',
-        './assets/drapeau/france.png',
-      ],
-      
-      // Animations Lottie
-      animations: [
-        './assets/lottie/prosa-o.json',
-      ],
-      
-      // Données JSON
-      data: [
-        './data/characters.json',
-        './data/choices.json',
-        './data/cinematiques.json',
-        './data/dialogs.json',
-        './data/games.json',
-        './data/playersCharacters.json',
-        './data/riddles.json',
-        './data/steps.json',
-      ],
-      
-      // Styles
-      styles: [
-        './styles.css',
-        './assets/styles.css',
-      ],
-    };
+  async loadManifest() {
+    try {
+      const response = await fetch('./assets-manifest.json', { cache: 'force-cache' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      this.manifest = await response.json();
+      console.log('📋 Manifest chargé:', {
+        critical: this.manifest.critical.length,
+        high: this.manifest.high.length,
+        normal: this.manifest.normal.length,
+        lazy: this.manifest.lazy.length
+      });
+      return true;
+    } catch (error) {
+      console.error('❌ Erreur chargement manifest:', error);
+      return false;
+    }
   }
 
   /**
    * Précharge un asset unique
    */
-  async preloadAsset(url) {
+  async preloadAsset(url, priority) {
     try {
       const response = await fetch(url, { 
         method: 'GET',
@@ -108,65 +51,123 @@ class AssetPreloader {
         throw new Error(`HTTP ${response.status}`);
       }
       
-      // Consommer la réponse pour s'assurer qu'elle est complètement chargée
+      // Consommer la réponse pour s'assurer qu'elle est mise en cache
       await response.blob();
       
-      this.preloadedCount++;
-      console.log(`✅ Préchargé: ${url}`);
+      this.stats[priority].loaded++;
+      console.log(`✅ [${priority.toUpperCase()}] ${url}`);
       return true;
     } catch (error) {
-      this.failedCount++;
-      console.warn(`⚠️ Erreur préchargement ${url}:`, error.message);
+      this.stats[priority].failed++;
+      console.warn(`⚠️ [${priority.toUpperCase()}] Erreur ${url}:`, error.message);
       return false;
     }
   }
 
   /**
-   * Précharge tous les assets par catégorie
+   * Précharge un groupe d'assets par paquets
    */
-  async preloadAll() {
-    console.log('🚀 Démarrage du préchargement des assets...');
-    
-    const allAssets = this.getCriticalAssets();
-    const flattenedAssets = Object.values(allAssets).flat();
-    
-    // Précharger par groupes (évite de surcharger le réseau)
-    const batchSize = 5;
-    
-    for (let i = 0; i < flattenedAssets.length; i += batchSize) {
-      const batch = flattenedAssets.slice(i, i + batchSize);
-      await Promise.all(batch.map(asset => this.preloadAsset(asset)));
+  async preloadBatch(assets, priority, batchSize = 5, delayBetweenBatches = 50) {
+    if (!assets || assets.length === 0) {
+      console.log(`⏭️ Aucun asset à charger pour la priorité ${priority}`);
+      return;
+    }
+
+    console.log(`🚀 Chargement ${priority}: ${assets.length} assets (par ${batchSize})`);
+    const startTime = Date.now();
+
+    for (let i = 0; i < assets.length; i += batchSize) {
+      const batch = assets.slice(i, i + batchSize);
+      await Promise.all(batch.map(asset => this.preloadAsset(asset, priority)));
       
-      // Petit délai entre les groupes
-      if (i + batchSize < flattenedAssets.length) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+      // Petit délai entre les paquets pour ne pas saturer le réseau
+      if (i + batchSize < assets.length) {
+        await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
       }
     }
+
+    const duration = Date.now() - startTime;
+    console.log(`✓ ${priority} terminé en ${duration}ms (${this.stats[priority].loaded}/${assets.length})`);
+  }
+
+  /**
+   * Précharge tous les assets selon leur priorité
+   */
+  async preloadAll() {
+    console.log('🎯 Démarrage du système de préchargement avec priorités...\n');
     
+    // Charger le manifest
+    const manifestLoaded = await this.loadManifest();
+    if (!manifestLoaded) {
+      console.error('❌ Impossible de charger le manifest, abandon du préchargement');
+      return;
+    }
+
+    // CRITICAL: Chargé immédiatement (T=0s)
+    console.log('\n🔥 Phase CRITICAL (T+0s)');
+    await this.preloadBatch(this.manifest.critical, 'critical', 5, 0);
+
+    // HIGH: Après 500ms
+    await new Promise(resolve => setTimeout(resolve, 500));
+    console.log('\n⚡ Phase HIGH (T+500ms)');
+    await this.preloadBatch(this.manifest.high, 'high', 5, 50);
+
+    // NORMAL: Après 2 secondes supplémentaires
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log('\n📦 Phase NORMAL (T+2.5s)');
+    await this.preloadBatch(this.manifest.normal, 'normal', 3, 100);
+
+    // LAZY: Jamais chargé automatiquement (uniquement à la demande)
+    if (this.manifest.lazy.length > 0) {
+      console.log(`\n💤 ${this.manifest.lazy.length} assets en mode LAZY (chargés à la demande)`);
+    }
+
     this.logSummary();
   }
 
   /**
-   * Affiche un résumé du préchargement
+   * Charge les assets lazy à la demande
+   */
+  async preloadLazy(specificAssets = null) {
+    const assetsToLoad = specificAssets || this.manifest.lazy;
+    console.log(`\n🎯 Chargement LAZY à la demande: ${assetsToLoad.length} assets`);
+    await this.preloadBatch(assetsToLoad, 'lazy', 5, 50);
+  }
+
+  /**
+   * Affiche un résumé complet du préchargement
    */
   logSummary() {
     const duration = Date.now() - this.startTime;
-    const total = this.preloadedCount + this.failedCount;
-    const successRate = ((this.preloadedCount / total) * 100).toFixed(1);
+    const totalLoaded = Object.values(this.stats).reduce((sum, s) => sum + s.loaded, 0);
+    const totalFailed = Object.values(this.stats).reduce((sum, s) => sum + s.failed, 0);
+    const total = totalLoaded + totalFailed;
+    const successRate = total > 0 ? ((totalLoaded / total) * 100).toFixed(1) : 0;
     
-    console.log(`\n📊 Résumé du préchargement:`);
-    console.log(`   ✅ Réussis: ${this.preloadedCount}/${total}`);
-    console.log(`   ❌ Échoués: ${this.failedCount}/${total}`);
-    console.log(`   ⏱️ Durée: ${duration}ms`);
-    console.log(`   📈 Taux de réussite: ${successRate}%\n`);
+    console.log(`\n${'='.repeat(60)}`);
+    console.log(`📊 RÉSUMÉ DU PRÉCHARGEMENT`);
+    console.log(`${'='.repeat(60)}`);
+    console.log(`🔥 CRITICAL: ${this.stats.critical.loaded} chargés, ${this.stats.critical.failed} échoués`);
+    console.log(`⚡ HIGH:     ${this.stats.high.loaded} chargés, ${this.stats.high.failed} échoués`);
+    console.log(`📦 NORMAL:   ${this.stats.normal.loaded} chargés, ${this.stats.normal.failed} échoués`);
+    console.log(`💤 LAZY:     ${this.stats.lazy.loaded} chargés, ${this.stats.lazy.failed} échoués`);
+    console.log(`${'—'.repeat(60)}`);
+    console.log(`✅ Total réussis: ${totalLoaded}/${total}`);
+    console.log(`❌ Total échoués: ${totalFailed}/${total}`);
+    console.log(`⏱️ Durée totale: ${(duration / 1000).toFixed(2)}s`);
+    console.log(`📈 Taux de réussite: ${successRate}%`);
+    console.log(`${'='.repeat(60)}\n`);
     
     // Marquer le préchargement comme terminé
     window.assetPreloadComplete = true;
+    window.assetPreloader = this; // Rendre le preloader accessible globalement
     window.dispatchEvent(new CustomEvent('assetPreloadComplete', { 
       detail: { 
-        preloadedCount: this.preloadedCount,
-        failedCount: this.failedCount,
-        duration 
+        stats: this.stats,
+        totalLoaded,
+        totalFailed,
+        duration,
+        successRate: parseFloat(successRate)
       } 
     }));
   }
