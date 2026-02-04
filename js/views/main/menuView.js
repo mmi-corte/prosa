@@ -126,7 +126,7 @@ function showDiscoverPage() {
       </svg>
     `
     backButton.addEventListener('click', () => {
-      history.back()
+      menuView()
     })
     headerLeft.appendChild(backButton)
   }
