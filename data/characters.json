@@ -29,7 +29,7 @@
     "region": "CORSE",
     "description": "U Magu est un érudit de Prosa chargé des moulins à vent de l’île et de tout ce qui touche à la médecine, mêlant savoir technique, botanique et expérimentation sur les corps.  De taille moyenne, voûté par les années passées dans le vent et la poussière, il a le visage creusé, une barbe grisonnante mal entretenue et des yeux clairs constamment plissés, comme habitués à scruter aussi bien les montagnes que les fièvres des malades.  Sa silhouette est enveloppée dans un long manteau cachant un costume sobre. Une grande sacoche dont les poches débordent de fioles, de bandages et de sachets d’herbes séchées, pend à son épaule, donnant l’impression qu’il transporte en permanence un petit laboratoire ambulant. ",
     "role": "On le voit souvent seul dans les montagnes, près des moulins, en train de récolter des herbes rares qu’il est le seul à savoir utiliser.  Il soigne ceux qui lui sont utiles, teste des traitements dangereux sur les autres et ajuste l’énergie des moulins pour maintenir l’avantage énergétique de Prosa. Neutre / Mauvais",
-    "image": "UMagu.jpg"
+    "image": "UMagu.webp"
   },
   {
     "id": 5,
@@ -45,7 +45,7 @@
     "region": "CORSE",
     "description": "Âgé de 45 ans, cet ancien dignitaire du gouvernement de l’île de Prosa, nommé U Sarpu à Sette Capi est devenu une figure tragique, incarnant le personnage mythique corse du Mazzeru au cœur d’un monde post-apocalyptique. Autrefois chargé de la gestion des habitants au sein de Prosa, il a été profondément choqué par la brutalité du régime, ce qui l'a poussé à mener une rébellion qui s'est malheureusement soldée par un échec sanglant. Désormais emprisonné et aveugle, il a développé une perception proche de la Seconda Vista, un don de clairvoyance souvent subi comme une malédiction. Elle lui permet de voir en rêve éveillé le désastre futur qui menace les peuples de Prosa, Corti et Toulon s'il n'agit pas. Vêtu d’une lourde cape assemblée de débris militaires évoquant le pilone des anciens bergers Corse. Il se sert d’une lourde barre de fer dont la tête semble noueuse et torsadée en guise de canne nommé sa Mazza. Bien que enchaîné, il reste le chef spirituel de la résistance, utilisant ses anciennes relations pour diffuser des messages radio clandestins et guider les joueurs pour orchestrer la chute du gouvernement U Sarpu à Sette Capi.",
     "role": "Celui ou celle qui annonce la mort en rêve, son rôle est neutre, car il ne fait que prédire sans provoquer le destin. Loyal / Bon",
-    "image": "Mazzeru.jpg"
+    "image": "Mazzeru.webp"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "region": "CORSE",
     "description": "Âgé de 40 ans, U Strigone est un calculateur à l'élégance froide qui dirige les forces militaires de Prosa depuis le sommet de sa tour de verre. C’est le U Sarpu à Sette Capi. Vêtu d'un long manteau noir, il cultive une silhouette sombre rappelant celle d'un corbeau observant le champ de bataille. Loin d'être un guerrier barbare, il orchestre la mort à distance via ses soldats disséminés aux 4 coins de Corti, Toulon et Prosa. Ses directives froides et arbitraires s’abattent comme l'Ochju (le mauvais œil) sur ses ennemis. Du fait de sa position il est le supérieur hiérarchique de A Strega à Corti qui lui permet de maintenir ainsi son emprise sur la ville.",
     "role": "C'est le chef des Streghe (Sorcières) qui est traditionnellement perçu comme mauvais en raison de ses pratiques occultes. Chaotique / Mauvais",
-    "image": "UStrigone.jpg"
+    "image": "UStrigone.webp"
   },
   {
     "id": 8,
@@ -61,9 +61,9 @@
     "region": "CORSE",
     "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle, il porte un manteau créé à partir de peaux de bêtes. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons, outils de divination spirituelle qu'il utilise pour lire le destin de la vallée dans les craquelures des os. Gardien du musée de Corti qu'il protège comme un sanctuaire, il méprise la tyrannie du clan d'I Muntagnoli.",
     "role": "U Spallistu est l’appellation de certains bergers qui, lorsqu'ils abattent un mouton, peuvent lire l'avenir dans l'omoplate de ce dernier. Loyal / Bon",
-    "image": "spallistu.jpg"
+    "image": "spallistu.webp"
   },
-   {
+  {
     "id": 9,
     "name": "L'Orcu",
     "region": "CORSE",
@@ -77,7 +77,7 @@
     "region": "CORSE",
     "description": "A Fata est la jeune gardienne bienveillante du barrage hydraulique de Corti qu’elle maintient en état avec des pièces recyclées. Elle travaille pour le clan par obligation car elle est consciente que ce faible courant consiste en l'un éléments vitaux les plus importants de la vallée. Vêtue de tissus clairs et simples, elle aide spontanément toute personne en détresse, sans distinction d’appartenance.​Il est cependant strictement déconseillé de regarder derrière son épaule, car bien que cette partie soit à peu près couverte, on peut y apercevoir des traces de coups qu'elle a dû subir durant ces nombreux désaccords avec A Strega. Celui qui enfreint ce tabou rompt le pacte de confiance. A Fata coupe tout lien avec cette personne, en plus de lui interdire tout accès à la rivière.",
     "role": "Fée de l’eau, elle est neutre, offrant parfois de l’aide en échange de la non révélation d’un secret qu’elle garde (tabou). C’est une Déesse de la Fertilité. Loyal / Bon",
-    "image": "Fata.jpg"
+    "image": "Fata.webp"
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@
     "region": "PROVENCE",
     "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
     "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n’hésite pas à trahir ou abandonner ceux qu’il accompagne pour survivre. Mauvais",
-    "image": "lougaragai.png"
+    "image": "lougaragai.webp"
   },
   {
     "id": 12,
@@ -93,33 +93,33 @@
     "region": "PROVENCE",
     "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
     "role": "Artisan et réparateur itinérant, lou Drac rétablit un semblant d’ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu’il croise, même si son aide se monnaie cher. Gentil",
-    "image": "drac.jpg"
+    "image": "drac.webp"
   },
-    {
+  {
     "id": 13,
     "name": "La Cabro d’Or",
     "region": "PROVENCE",
     "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Ses bottes et gants en cuir épais lui permettent une adhérence maximale. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
     "role": "Sentinelle solitaire, la Cabro d’Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
-    "image": "cabrodor.jpg"
+    "image": "cabrodor.webp"
   },
-    {
+  {
     "id": 14,
     "name": "Le Matagot",
     "region": "PROVENCE",
     "description": "Petit chat noir et maigre, aux yeux d’un blanc perçant. Sa démarche fluide et silencieuse. Il se glisse entre les ruines, observant et parfois volant de la nourriture.",
     "role": "Considéré comme un présage, le Matagot suit souvent les groupes de pillards ou les lieux de mort. Son alignement est mauvais, car sa présence annonce toujours un malheur, même s’il n’en est pas la cause directe. Mauvais",
-    "image": "Matagot.png"
+    "image": "Matagot.webp"
   },
-    {
+  {
     "id": 15,
     "name": "Fada Lavandula",
     "region": "PROVENCE",
     "description": "Vieille femme au dos voûté, mains tachées de sève et d’huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
     "role": "Guérisseuse recluse et herboriste, elle détient le savoir qui maintient la vie dans les zones hostiles. Son alignement est bon, car elle soigne sans distinction et transmet son savoir avec rigueur et patience. gentil",
-    "image": "feelavandula.jpg"
+    "image": "feelavandula.webp"
   },
-    {
+  {
     "id": 16,
     "name": "Li Lavandiero de Niue",
     "region": "PROVENCE",
@@ -127,36 +127,36 @@
     "role": "Femmes solidaires et protectrices, elles ont recréé un rituel ancien de “purification” pour redonner sens et dignité aux survivants. Elles lavent le linge des morts et soignent les vivants avec la même attention. Leur alignement est bon, car elles préservent la mémoire et la paix au milieu du chaos. Gentil",
     "image": ""
   },
-    {
+  {
     "id": 17,
     "name": "Gyptis e Protis",
     "region": "PROVENCE",
     "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d’ancrage. Leur allure contraste avec la misère ambiante, et ils inspirent confiance aux survivants.",
     "role": "Dirigeants d’une communauté reconstruite, Gyptis et Protis incarnent la stabilité et la renaissance. Leur alignement est bon, car ils restaurent l’ordre et la solidarité dans un monde dévasté. Gentil",
-    "image": "GyptisProtis.png"
+    "image": "GyptisProtis.webp"
   },
-    {
+  {
     "id": 18,
     "name": "La Tarasca",
     "region": "PROVENCE",
     "description": "Camion de guerre improvisé, la Tarasca avance comme une bête mécanique. Là où elle passe, il ne reste que le silence et la cendre.",
     "role": "Symbole de destruction et de pouvoir, la Tarasca sert d’arme de domination pour une faction violente qui règne par la terreur. Son alignement est mauvais, incarnant la brutalité humaine et la soif de contrôle dans un monde sans lois. Mauvais",
-    "image": "Tarraske.png"
+    "image": "Tarraske.webp"
   },
-    {
+  {
     "id": 19,
     "name": "La Coulobre",
     "region": "PROVENCE",
     "description": "Un brouillard dense et jaunâtre chargé d’odeurs de métal et de pourriture. Son odeur attire de nombreux serpents. Elle ne fait pas de bruit, mais marque ceux qui la traversent : toux, brûlures, peau craquelée.",
     "role": "Zone empoisonnée par des substances chimiques, la Coulobre représente la conséquence directe de la négligence humaine. Elle est mauvaise, car elle tue sans distinction et rend les lieux inhabitables. Mauvais",
-    "image": "Coulobre.png"
+    "image": "Coulobre.webp"
   },
-    {
+  {
     "id": 20,
     "name": "Lou Drapé",
     "region": "PROVENCE",
     "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
     "role": "Chef de bande violent et stratège, Lou Drapé sème la peur sur les routes et impose sa loi par le sang. Son alignement est mauvais, car il ne vit que du pillage et du désespoir des autres. Mauvais",
-    "image": "LouDrape.png"
+    "image": "LouDrape.webp"
   }
 ]
