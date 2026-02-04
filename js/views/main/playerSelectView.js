@@ -13,13 +13,14 @@ export function playerSelectView() {
 
     const title = document.createElement('p')
     title.innerText = "Qui joue ?"
+    title.classList.add('player-select-title');
     wrapper.appendChild(title)
 
     renderPlayerList(wrapper, players, true, (playerIndex) => {
         setActivePlayer(playerIndex)
         navigate('code', codeView())
     })
-    
+
     // Bouton retour (header)
     if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
         const backButton = document.createElement('button')
