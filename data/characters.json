@@ -85,7 +85,7 @@
     "region": "PROVENCE",
     "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
     "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n’hésite pas à trahir ou abandonner ceux qu’il accompagne pour survivre. Mauvais",
-    "image": "LouGaragai.jpg"
+    "image": "lougaragai.png"
   },
   {
     "id": 12,
@@ -101,7 +101,7 @@
     "region": "PROVENCE",
     "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Ses bottes et gants en cuir épais lui permettent une adhérence maximale. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
     "role": "Sentinelle solitaire, la Cabro d’Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
-    "image": ""
+    "image": "cabrodor.jpg"
   },
     {
     "id": 14,
@@ -117,7 +117,7 @@
     "region": "PROVENCE",
     "description": "Vieille femme au dos voûté, mains tachées de sève et d’huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
     "role": "Guérisseuse recluse et herboriste, elle détient le savoir qui maintient la vie dans les zones hostiles. Son alignement est bon, car elle soigne sans distinction et transmet son savoir avec rigueur et patience. gentil",
-    "image": ""
+    "image": "feelavandula.jpg"
   },
     {
     "id": 16,
