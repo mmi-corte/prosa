@@ -112,7 +112,7 @@
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
             "pitch": 650,
-            "voice": ""
+            "voice": "Case_2_Fata_1.mp3"
           },
           {
             "text": {
@@ -126,7 +126,7 @@
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
             "pitch": 650,
-            "voice": ""
+            "voice": "Case_2_Fata_2.mp3"
           }
         ],
         "nextActionType": "riddle",
@@ -146,7 +146,7 @@
               "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
             "pitch": 650,
-            "voice": ""
+            "voice": "Case_2_Fata_3.mp3"
           },
           {
             "text": {
@@ -168,7 +168,7 @@
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
             "pitch": 650,
-            "voice": ""
+            "voice": "Case_2_Fata_4.mp3"
           }
         ],
         "nextActionType": "end",
@@ -218,7 +218,7 @@
               "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "Case_2_Strega_1.mp3"
           },
           {
             "text": {
@@ -240,7 +240,7 @@
               "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "Case_2_Strega_2.mp3"
           },
           {
             "text": {
