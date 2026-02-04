@@ -562,7 +562,7 @@
               "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
             },
             "pitch": 500,
-            "voice": ""
+            "voice": "Case_2_Signadora_2.mp3"
           },
           {
             "text": {
@@ -955,7 +955,8 @@
               "fr": "Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.",
               "cor": "Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu."
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": "Case_10_Fulettu_malicieux_1_2.mp3"
           }
         ],
         "nextActionType": "game",
