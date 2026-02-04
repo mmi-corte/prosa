@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+button {
+  touch-action: manipulation;
+}
+
 /* Nouvelle palette de couleurs kaki sombre */
 :root {
   --background: #1a1812;
@@ -539,7 +543,7 @@ body.light-mode .initWrapper {
   background: var(--background);
 }
 
-body.light-mode .initWrapper > p {
+body.light-mode .initWrapper>p {
   color: var(--muted-foreground);
 }
 
@@ -1058,6 +1062,7 @@ body.light-mode .logo-main {
   margin: 0 auto;
   padding-bottom: 40px;
   margin-bottom: auto;
+  touch-action: manipulation;
 }
 
 @media (max-width: 480px) {
@@ -2008,6 +2013,9 @@ body.light-mode .logo-main {
   background: var(--card);
   border-radius: 16px;
   border: 1px solid var(--border);
+  /* Avoid text select */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .actionWrapper {
