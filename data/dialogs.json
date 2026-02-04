@@ -76,7 +76,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "plan-riviere.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -126,7 +126,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "plan-fata.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -165,7 +165,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "plan-passerelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -183,7 +183,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "Strega-passerelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -254,7 +254,7 @@
     "03": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "plan-musee.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -268,7 +268,7 @@
           },
           {
             "text": {
-              "fr": "\"T'aspettava.\"",
+              "fr": "\"Je t'attendais.\"",
               "cor": "\"T'aspettava.\""
             },
             "pitch": 300
@@ -306,7 +306,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "plan-spallistu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -376,7 +376,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "sallecarte.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -415,7 +415,7 @@
     "04": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -481,7 +481,7 @@
     "05": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "fontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -507,7 +507,7 @@
     "06": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "GP-signadora.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -559,7 +559,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "chapelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
