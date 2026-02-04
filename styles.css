@@ -34,6 +34,56 @@
   --cyan: #81cbd6;
 }
 
+/* Mode clair - couleurs inversées */
+body.light-mode {
+  --background: #f5f3ee;
+  --foreground: #1a1812;
+  --card: #ffffff;
+  --card-foreground: #1a1812;
+  --primary: #626247;
+  --primary-dark: #7a7a5a;
+  --primary-light: #4a4a35;
+  --muted: #e8e6e0;
+  --muted-foreground: #6a6860;
+  --dust: #1a1812;
+  --border: #d0cec8;
+}
+
+body.light-mode .header {
+  background: var(--background);
+}
+
+body.light-mode .settings-btn {
+  color: var(--foreground);
+}
+
+body.light-mode .back-btn-circle {
+  background: rgba(245, 243, 238, 0.9);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .menu-btn.btn-extra {
+  background-color: var(--foreground);
+}
+
+body.light-mode .menu-btn.btn-extra .btn-title {
+  color: var(--background);
+}
+
+body.light-mode .menu-btn.btn-extra .btn-subtitle {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .menu-btn-big.btn-primary-big {
+  background: var(--foreground);
+  border-color: var(--foreground);
+}
+
+body.light-mode .menu-btn-big.btn-primary-big .btn-title-big {
+  color: var(--background);
+}
+
 /* Format mobile avec container centré */
 html,
 body {
@@ -2061,5 +2111,199 @@ body {
   .difficulty-continue-btn {
     font-size: 1rem;
     padding: 14px 20px;
+  }
+}
+
+/* ========== IN-GAME MENU (Figma Design) ========== */
+.menuWrapper-ingame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 24px;
+}
+
+.menu-title-left {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.menu-content-ingame {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  flex: 1;
+}
+
+.menu-difficulty-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  min-width: 50px;
+  flex-shrink: 0;
+  background: var(--primary);
+  border-radius: 999px;
+  color: var(--foreground);
+}
+
+.difficulty-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.menu-buttons-ingame {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.menu-btn-big {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 24px 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-btn-big:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+.menu-btn-big.btn-primary-big {
+  background: var(--foreground);
+  border-color: var(--foreground);
+}
+
+.menu-btn-big.btn-primary-big .btn-title-big {
+  color: var(--background);
+}
+
+.menu-btn-big.btn-primary-big:hover {
+  background: var(--dust);
+  border-color: var(--dust);
+}
+
+.btn-title-big {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.menu-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 30px;
+  margin-top: auto;
+}
+
+.discover-btn {
+  flex: 1;
+  padding: 14px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.discover-btn:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+@media (max-width: 480px) {
+  .menuWrapper-ingame {
+    padding: 16px;
+  }
+
+  .menu-content-ingame {
+    gap: 12px;
+  }
+
+  .menu-difficulty-bar {
+    width: 45px;
+    min-width: 45px;
+  }
+
+  .difficulty-number {
+    font-size: 1.5rem;
+  }
+
+  .menu-btn-big {
+    padding: 20px 24px;
+    border-radius: 20px;
+  }
+
+  .btn-title-big {
+    font-size: 1.2rem;
+  }
+
+  .menu-footer {
+    padding-top: 20px;
+    gap: 12px;
+  }
+
+  .discover-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== DISCOVER UNIVERSE MODAL ========== */
+#discoverModal {
+  position: relative;
+}
+
+#discoverModal > .back-btn-circle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 600;
+}
+
+.discover-modal-content {
+  background: transparent;
+  padding: 40px 24px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.discover-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  #discoverModal > .back-btn-circle {
+    top: 15px;
+    left: 15px;
+  }
+
+  .discover-modal-content {
+    padding: 30px 20px;
+    margin: 16px;
   }
 }

@@ -28,6 +28,13 @@ export function settingView() {
           <span class="toggle-knob"></span>
         </button>
       </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Mode clair</label>
+        <button class="toggle-switch" id="lightModeToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
     </div>
     `
 
@@ -36,11 +43,13 @@ export function settingView() {
     const musicSlider = document.getElementById('musicSlider')
     const sfxSlider = document.getElementById('sfxSlider')
     const cameraToggle = document.getElementById('cameraToggle')
+    const lightModeToggle = document.getElementById('lightModeToggle')
 
     // Set initial values from settings
     musicSlider.value = settings.music || 70;
     sfxSlider.value = settings.sfx || 80;
     cameraToggle.classList.toggle('active', settings.camera);
+    lightModeToggle.classList.toggle('active', settings.lightMode);
 
     //Musique
     musicSlider.addEventListener('input', (e) => {
@@ -52,6 +61,12 @@ export function settingView() {
     });
     //Camera
     cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
+
+    //Light Mode
+    lightModeToggle.addEventListener("click", () => {
+        toggleSetting(lightModeToggle, "lightMode")
+        document.body.classList.toggle('light-mode', settings.lightMode)
+    })
 
     function toggleSetting(toggle, key) {
         toggle.classList.toggle("active")
@@ -77,5 +92,6 @@ export function settingView() {
         localStorage.setItem('settingMusic', settings.music);
         localStorage.setItem('settingSfx', settings.sfx);
         localStorage.setItem('settingCamera', settings.camera);
+        localStorage.setItem('settingLightMode', settings.lightMode);
     }
 }

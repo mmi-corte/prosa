@@ -11,11 +11,8 @@ import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
 import { debugView } from "./js/views/Temp/debugView.js"
 import { difficultyView } from "./js/views/main/initViews/difficultyView.js"
-import { initDifficultyIndicator } from "./js/views/components/difficultyIndicator.js"
 
 export const gameContainer = document.getElementById('gameContainer')
-export const difficultyIndicator = document.getElementById('difficultyIndicator')
-export const difficultyLabel = document.getElementById('difficultyLabel')
 export const headerLeft = document.getElementById('headerLeft')
 
 // const difficultyLabels = {
@@ -122,8 +119,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   //   }
   // }
 
-  initDifficultyIndicator()
-
   if (window.initProsaLogoLottie) {
     window.initProsaLogoLottie()
   }
@@ -148,12 +143,19 @@ export const settings = {
   sfx: 80,
   vibration: true,
   camera: false,
+  lightMode: false,
 }
 // Load settings from localStorage if they exists
 settings.music = parseInt(localStorage.getItem('settingMusic')) || settings.music;
 settings.sfx = parseInt(localStorage.getItem('settingSfx')) || settings.sfx;
 settings.vibration = localStorage.getItem('settingVibration') === 'true' || settings.vibration;
 settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.camera;
+settings.lightMode = localStorage.getItem('settingLightMode') === 'true';
+
+// Apply light mode if saved
+if (settings.lightMode) {
+  document.body.classList.add('light-mode');
+}
 
 //Setup the button
 const settingButton = document.getElementById('settingButton')
