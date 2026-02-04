@@ -6,21 +6,57 @@
         "text": [
           {
             "question": {
-              "fr": "TODO Question Énigme A Fata 1 - Test de confiance",
-              "cor": "TODO Dumanda Casula A Fata 1 - Prova di cunfidenza"
+              "fr": "Où t’arrêterais-tu pour observer sans être vu ?",
+              "cor": "Induve ti firmassi per osservà senza esse vistu ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "Sous les arbustes denses du maquis",
+                  "cor": "Sottu l'arbusti densi di u maquis"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Contre un rocher clair au bord de l’eau",
+                  "cor": "Contra un petra chjara à u latu di l'acqua"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Dans l’ombre portée des roseaux",
+                  "cor": "In l'umbra purtata di i canne"
+                },
+                "score": 1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Qu’est-ce qui trahit un passage ancien ?",
+              "cor": "Chì cosa tradisce un passaghju anticu ?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Les pierres polies",
+                  "cor": "E petre pulite"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Les plantes couchées",
+                  "cor": "E piante stese"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Les branches cassées",
+                  "cor": "E branche rumpite"
                 },
                 "score": -1
               }
@@ -28,45 +64,30 @@
           },
           {
             "question": {
-              "fr": "TODO Question Énigme A Fata 2 - Test de confiance",
-              "cor": "TODO Dumanda Casula A Fata 2 - Prova di cunfidenza"
+              "fr": "Si quelqu’un te surveillait, qu’entendrais-tu en premier ?",
+              "cor": "Chì cosa sentirebbe prima se qualcunu ti stesse guardando ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "Le craquement des branches",
+                  "cor": "U scrusciu di i rami"
                 },
-                "score": 1
+                "score": -1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Le bruit de sa respiration",
+                  "cor": "U rumore di a so respirazione"
                 },
                 "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme A Fata 3 - Test de confiance",
-              "cor": "TODO Dumanda Casula A Fata 3 - Prova di cunfidenza"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Le frottement de ses vêtements",
+                  "cor": "U frusciu di i so vistimenti"
                 },
-                "score": -1
+                "score": 1
               }
             ]
           }
@@ -83,21 +104,28 @@
         "text": [
           {
             "question": {
-              "fr": "TODO Question Énigme U Spallistu 1 - Lecture omoplate",
-              "cor": "TODO Dumanda Casula U Spallistu 1 - Lettura omoplate"
+              "fr": "Je suis née avant les routes, je change selon les villages mais je reste l’âme du même peuple. Si je cesse… une partie de l’île meurt. Qui suis-je ?",
+              "cor": "Sò nata prima di e strade, cambiu secondu i paesi ma restu l'anima di u listessu populu. Se mi fermu... una parte di l'isula more. Chì sò ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "La langue corse",
+                  "cor": "A lingua corsa"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Les sentiers de transhumance",
+                  "cor": "I sentieri di transumanza"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Le troque entre les villages",
+                  "cor": "U scambiu trà i paesi"
                 },
                 "score": -1
               }
@@ -105,21 +133,28 @@
           },
           {
             "question": {
-              "fr": "TODO Question Énigme U Spallistu 2 - Lecture omoplate",
-              "cor": "TODO Dumanda Casula U Spallistu 2 - Lettura omoplate"
+              "fr": "Je reste à mon poste depuis des centaines d’années. Je regarde la mer et la montagne, témoin des hommes qui passent et disparaissent. Ni roi, ni soldat… mais gardien quand même. Qui suis-je ?",
+              "cor": "Sò nata prima di e strade, cambiu secondu i paesi ma restu l'anima di u listessu populu. Se mi fermu... una parte di l'isula more. Chì sò ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "Une tour de défense Corse",
+                  "cor": "Una torre di difesa corsa"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Une statue de Pascal Paoli",
+                  "cor": "Una statua di Pasquale Paoli"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Un village en montagne",
+                  "cor": "Un paese in muntagna"
                 },
                 "score": -1
               }
@@ -127,21 +162,28 @@
           },
           {
             "question": {
-              "fr": "TODO Question Énigme U Spallistu 3 - Lecture omoplate",
-              "cor": "TODO Dumanda Casula U Spallistu 3 - Lettura omoplate"
+              "fr": "Je ne suis ni champ ni berger, pourtant j’ai sauvé des villages Corse de la faim. Mon armure repousse les bêtes et mon corps devient pain dans les mains des pauvres. Qui suis-je ?",
+              "cor": "Ùn sò nè campu nè pastore, èppuru aghju salvatu i paesi corsi da a fami. A mo armatura respinge e bestie è u mo corpu diventa pane in e mani di i povari. Chì sò ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "La châtaigne",
+                  "cor": "A castagna"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "L’olive",
+                  "cor": "L'oliva"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Le maquis",
+                  "cor": "U maquis"
                 },
                 "score": -1
               }
@@ -151,161 +193,7 @@
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "dialog",
-        "nextActionlose": "3"
-      }
-    },
-    "08": {
-      "1": {
-        "random": true,
-        "text": [
-          {
-            "question": {
-              "fr": "TODO Question Énigme Masque à Gaz 1 - Fouilleur de déchets",
-              "cor": "TODO Dumanda Casula Maschera à Gas 1 - Cercadore di scumere"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Masque à Gaz 2 - Fouilleur de déchets",
-              "cor": "TODO Dumanda Casula Maschera à Gas 2 - Cercadore di scumere"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Masque à Gaz 3 - Fouilleur de déchets",
-              "cor": "TODO Dumanda Casula Maschera à Gas 3 - Cercadore di scumere"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          }
-        ],
-        "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
-        "nextActionTypeLose": "dialog",
-        "nextActionlose": "3"
-      }
-    },
-    "11": {
-      "1": {
-        "random": true,
-        "text": [
-          {
-            "question": {
-              "fr": "TODO Question Énigme Sébastien 1 - Test de détermination",
-              "cor": "TODO Dumanda Casula Sébastien 1 - Prova di determinazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Sébastien 2 - Test de détermination",
-              "cor": "TODO Dumanda Casula Sébastien 2 - Prova di determinazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Sébastien 3 - Test de détermination",
-              "cor": "TODO Dumanda Casula Sébastien 3 - Prova di determinazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          }
-        ],
-        "nextActionTypeWin": "dialog",
-        "nextActionWin": "4",
-        "nextActionTypeLose": "end",
-        "nextActionlose": "2"
+        "nextActionLose": "3"
       }
     },
     "12": {
@@ -314,21 +202,57 @@
         "text": [
           {
             "question": {
-              "fr": "TODO Question Énigme Route du Cimetière 1 - Test de valeur",
-              "cor": "TODO Dumanda Casula Strada di u Cimiteru 1 - Prova di valenza"
+              "fr": "Tu te tiens devant celui qui a donné une âme à notre peuple. Sur son socle, dans le vieux monde, étaient gravés les mots de notre dignité. Si tu es des nôtres, termine cette phrase : Les hommes sont nés... ?",
+              "cor": "Ti trovi davanti à colui chì hà datu un'anima à u nostru populu. Sottu à u so basamentu, in u vechju mondu, eranu incisi i paroli di a nostra dignità. Se sì di i nostri, finisci sta frasa: L'omi sò nati... ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "...libres et égaux devant la loi.",
+                  "cor": "...liberi è uguali davanti à a lege."
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "...pour servir la terre de leurs ancêtres.",
+                  "cor": "...per serve a terra di i so antenati."
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "...libres et maîtres de leur destin.",
+                  "cor": "...liberi è maestri di u so distinu."
+                },
+                "score": 1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Tu te tiens devant l'homme qui a défié les rois. Pour les savants de l'ancien monde, il était le général Paoli. Mais pour nous, ses enfants du maquis et de la Ruina, il porte un nom plus simple, un nom qui dit qu'il est la racine de chaque Corse. Comment l'appelons-nous dans le secret de nos foyers ?",
+              "cor": "Ti trovi davanti à l'omu chì hà sfidatu i rè. Per i savanti di u vechju mondu, era u generale Paoli. Ma per noi, i so figlioli di u maquis è di a Ruina, porta un nome più simplice, un nome chì dice ch'ellu hè a radica di ogni Corsu. Cumu u chjamemu in u secretu di i nostri fochi?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "U Capu (Le Chef).",
+                  "cor": "U Capu."
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "U Babbu (Le Père).",
+                  "cor": "U Babbu."
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "U Maestru (Le Maître).",
+                  "cor": "U Maestru."
                 },
                 "score": -1
               }
@@ -336,43 +260,28 @@
           },
           {
             "question": {
-              "fr": "TODO Question Énigme Route du Cimetière 2 - Test de valeur",
-              "cor": "TODO Dumanda Casula Strada di u Cimiteru 2 - Prova di valenza"
+              "fr": "Regarde le drapeau qui flotte parfois dans nos rêves de liberté. La tête de maure y est dessinée. Dans les temps anciens, le bandeau cachait ses yeux. Dis-moi, pourquoi le bandeau est-il désormais relevé sur son front ?",
+              "cor": "Guarda à u bandiera chì volteghja à volte in i nostri sogni di libertà. A testa di moru hè disegnata quì. In tempi antichi, a benda copria i so ochji. Dì mi, perchè a benda hè avà alzata nantu à a so fronte?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Pour montrer qu'il n'est plus prisonnier.",
+                  "cor": "Per mustrà ch'ellu ùn hè più prigiunieru."
                 },
                 "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Route du Cimetière 3 - Test de valeur",
-              "cor": "TODO Dumanda Casula Strada di u Cimiteru 3 - Prova di valenza"
-            },
-            "choices": [
+              },
               {
                 "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
+                  "fr": "Pour prouver que le peuple a ouvert les yeux.",
+                  "cor": "Per mustrà ch'ellu populu hà apertu l'ochji."
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
+                  "fr": "Pour essuyer la sueur de son combat.",
+                  "cor": "Per asciugà u sudore di a so lotta."
                 },
                 "score": -1
               }
@@ -382,161 +291,7 @@
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
-        "nextActionlose": "2"
-      }
-    },
-    "13": {
-      "1": {
-        "random": true,
-        "text": [
-          {
-            "question": {
-              "fr": "TODO Question Énigme Camp Travailleurs 1 - Test de valeur",
-              "cor": "TODO Dumanda Casula Campu Travagliadori 1 - Prova di valenza"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Camp Travailleurs 2 - Test de valeur",
-              "cor": "TODO Dumanda Casula Campu Travagliadori 2 - Prova di valenza"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Camp Travailleurs 3 - Test de valeur",
-              "cor": "TODO Dumanda Casula Campu Travagliadori 3 - Prova di valenza"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          }
-        ],
-        "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
-        "nextActionTypeLose": "dialog",
-        "nextActionlose": "3"
-      }
-    },
-    "16": {
-      "1": {
-        "random": true,
-        "text": [
-          {
-            "question": {
-              "fr": "TODO Question Énigme Garde 1 - Confrontation",
-              "cor": "TODO Dumanda Casula Guardia 1 - Cunfruntazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Garde 2 - Confrontation",
-              "cor": "TODO Dumanda Casula Guardia 2 - Cunfruntazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 1
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": -1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "TODO Question Énigme Garde 3 - Confrontation",
-              "cor": "TODO Dumanda Casula Guardia 3 - Cunfruntazione"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "TODO Réponse A",
-                  "cor": "TODO Risposta A"
-                },
-                "score": 0
-              },
-              {
-                "text": {
-                  "fr": "TODO Réponse B",
-                  "cor": "TODO Risposta B"
-                },
-                "score": 0
-              }
-            ]
-          }
-        ],
-        "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
-        "nextActionTypeLose": "dialog",
-        "nextActionlose": "3"
+        "nextActionLose": "2"
       }
     }
   },
