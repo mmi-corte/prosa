@@ -104,6 +104,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.log("No game initialized.")
   }
 
+  loadingView()
+
   //Then, load progression screen
   if (gameInitialized) {
     navigate('resume', progressionView())

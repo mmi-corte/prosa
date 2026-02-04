@@ -1,6 +1,7 @@
 import { gameContainer } from "../../../app.js"
 
 export function loadingView() {
+    console.log('Loading view initialized')
     const container = document.createElement('div')
     container.classList.add('loading-screen')
 
@@ -15,7 +16,7 @@ export function loadingView() {
                 </div>
         <!-- Serpent spirale comme icône de chargement -->
         <div class="spinner-spiral">
-            <img src="f./assets/logo/chargement.png" alt="Chargement" class="spiral-img" />
+            <img src="./assets/logo/chargement.png" alt="Chargement" class="spiral-img" />
         </div>
         </div>
         <div class="fun-fact-card">
@@ -27,7 +28,7 @@ export function loadingView() {
         </div>
     `
 
-    gameContainer.appendChild(container)
+    document.body.appendChild(container)
 
     if (window.initProsaLogoLottie) {
         window.initProsaLogoLottie()
