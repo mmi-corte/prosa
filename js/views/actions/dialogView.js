@@ -9,6 +9,7 @@ let data
 let currentDialogIndex = 0;
 let currentBackground
 let currentPitch = 400;
+let currentAudio = null;
 
 export function dialogView(action) {
     clearContainer();
@@ -37,6 +38,12 @@ export function dialogView(action) {
             skipTypeWrite()
             textBox.innerHTML = activeText;
         } else { //Go to next dialog if the text is fully displayed
+            // Stop any playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            
             currentDialogIndex += 1;
             if (data.dialog.length > currentDialogIndex) {
                 updateDialog();
@@ -49,7 +56,17 @@ export function dialogView(action) {
 
 function updateDialog() {
     const activeText = getTranslation(data.dialog[currentDialogIndex].text);
+    const voiceFile = data.dialog[currentDialogIndex].voice;
     currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
-    typeWriteEffect(textBox, activeText, currentPitch);
+    
+    if (voiceFile) {
+        // Play voice audio and display text immediately (no typewriter)
+        textBox.innerHTML = activeText;
+        currentAudio = new Audio(`./assets/steps/${activePlayer.localisation}/${activeStepId}/${voiceFile}`);
+        currentAudio.play().catch(err => console.warn('Audio playback failed:', err));
+    } else {
+        // No voice, use typewriter effect
+        typeWriteEffect(textBox, activeText, currentPitch);
+    }
 }
 
