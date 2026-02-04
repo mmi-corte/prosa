@@ -59,7 +59,7 @@ export function difficultyView() {
             //Update la difficulté du jeu
             setDifficulty(selectedDifficulty)
             // Afficher le bouton Continuer
-            submitButton.style.display = 'block';
+            submitButton.style.opacity = '1';
         });
 
         gauge.appendChild(valueLabel);
@@ -89,7 +89,7 @@ export function difficultyView() {
     const submitButton = document.createElement('button');
     submitButton.classList.add('btn-primary', 'difficulty-continue-btn');
     submitButton.innerText = 'Continuer';
-    submitButton.style.display = 'none';
+    submitButton.style.opacity = '0';
     submitButton.addEventListener('click', () => {
         if (selectedDifficulty) {
             navigate('nombre-joueur', playerCountView())
