@@ -303,7 +303,7 @@
           }
         ],
         "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
+        "nextActionWin": "4",
         "nextActionTypeLose": "end",
         "nextActionlose": "2"
       }

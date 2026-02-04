@@ -30,7 +30,7 @@ export async function characterSelectView(playerCount) {
                 selectedPlayers[i] = {
                     character: 0,
                     localisation: 0,
-                    nextStepVariant: 0,
+                    unlockedSteps: {},
                     language: 'fr'
                 };
             }
@@ -183,21 +183,21 @@ function showCharacterDetails(regionId, characterId) {
         selectedPlayers[currentPlayerIndex].language = newLang
         setLanguage(newLang)
         updateDescription()
-            updateSubmitLabel()
+        updateSubmitLabel()
     })
 
     switchRow.append(switchWrapper)
 
-        const submitButton = document.createElement('button')
-        submitButton.classList.add("btn-primary")
-        const submitLabel = {
-            fr: "Choisir ce personnage",
-            cor: "Sceglie stu persunagiu"
-        }
-        const updateSubmitLabel = () => {
-            submitButton.innerText = getTranslation(submitLabel)
-        }
-        updateSubmitLabel()
+    const submitButton = document.createElement('button')
+    submitButton.classList.add("btn-primary")
+    const submitLabel = {
+        fr: "Choisir ce personnage",
+        cor: "Sceglie stu persunagiu"
+    }
+    const updateSubmitLabel = () => {
+        submitButton.innerText = getTranslation(submitLabel)
+    }
+    updateSubmitLabel()
 
     submitButton.addEventListener('click', () => {
         addPlayer(regionId, characterId)

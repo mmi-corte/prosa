@@ -1,5 +1,5 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activeStep } from "../../gameEventHandler.js";
+import { activeStep, addUnlockedStep } from "../../gameEventHandler.js";
 import { menuView } from "../main/menuView.js";
 
 export function endView(action) {
@@ -20,6 +20,11 @@ export function endView(action) {
     //Store the type of ending and the next step number
     const endType = activeStep.end[action].type
     const nextStep = activeStep.end[action].nextStep
+
+    //Check if there is a step to unlock
+    if (activeStep.end[action].unlockedStepId && activeStep.end[action].unlockStep) {
+        addUnlockedStep(activeStep.end[action].unlockedStepId, activeStep.end[action].unlockStep)
+    }
 
     //Prepare another div if there is text after the step div
     const extraIndication = document.createElement('div')

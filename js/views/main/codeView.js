@@ -1,5 +1,5 @@
 import { clearContainer, gameContainer, headerLeft, vibrate } from "../../../app.js";
-import { activePlayer, startStep } from "../../gameEventHandler.js";
+import { activePlayer, checkStepExist, startStep } from "../../gameEventHandler.js";
 import { stepsData } from "../../loadData.js";
 import { playerSelectView } from "./playerSelectView.js";
 
@@ -98,26 +98,24 @@ export function codeView() {
         })
     }
 
-    function submitCode() {
+    async function submitCode() {
         if (currentCode.length === 0) return codeError()
-
+        console.log("Submitting code: ", currentCode)
+        //Add leading zero
         const normalizedCode = currentCode.padStart(2, "0")
-        currentCode = normalizedCode
-        updateCode()
+        console.log("Submitted code: ", normalizedCode)
 
-        if (!activePlayer) return playerSelectView()
-
-        const searchId = `${normalizedCode}${activePlayer.nextStepVariant}`
-
-        if (searchId in stepsData[activePlayer.localisation]) {
-            console.log("Found step ", currentCode)
-            codeSuccess()
+        //Check if the step exist, then start if exist
+        const stepId = await checkStepExist(normalizedCode)
+        console.log("Step ID returned: ", stepId)
+        if (stepId) {
+            codeSuccess(stepId)
         } else {
             codeError()
         }
     }
 
-    function codeSuccess() {
+    function codeSuccess(stepId) {
         // Create success overlay
         const overlay = document.createElement("div")
         overlay.className = "success-overlay"
@@ -137,7 +135,8 @@ export function codeView() {
         setTimeout(() => {
             overlay.classList.remove('show')
             overlay.remove()
-            startStep(currentCode)
+            //Start the step
+            startStep(stepId)
         }, 1500)
     }
 

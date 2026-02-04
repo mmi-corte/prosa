@@ -86,7 +86,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "11",
+          "unlockStep": "111",
+          "unlockedStepId": "11"
         },
         "2": {
           "type": "still",
@@ -100,7 +102,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "11",
+          "unlockStep": "110",
+          "unlockedStepId": "11"
         },
         "2": {
           "type": "still",
@@ -114,7 +118,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "13"
+          "nextStep": "13",
+          "unlockStep": "131",
+          "unlockedStepId": "13"
         },
         "2": {
           "type": "lose",
@@ -184,7 +190,7 @@
     },
     "111": {
       "actionType": "dialog",
-      "action": "3",
+      "action": "2",
       "end": {
         "1": {
           "type": "win",
@@ -233,7 +239,7 @@
           "nextStep": "14"
         },
         "2": {
-          "type": "lose",
+          "type": "still",
           "nextStep": "13"
         }
       }

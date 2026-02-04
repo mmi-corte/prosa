@@ -1101,13 +1101,13 @@
           },
           {
             "text": {
-              "fr": "La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant. Prouve ta valeur si tu veux combattre avec nous demain."
+              "fr": "Chaque action est rapide, précise. Vous comprenez que ce camp n’est pas seulement un refuge : c’est une préparation pour l’affrontement à venir."
             },
             "pitch": 400
           }
         ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
+        "nextActionType": "dialog",
+        "nextAction": "3"
       },
       "2": {
         "default": {
@@ -1119,13 +1119,19 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous gagnez le respect des habitants du camp et leur confiance. Vous êtes désormais accepté et prêt à vous préparer avec eux pour le départ : le lendemain, vous affronterez A Strega sur la route du cimetière."
+              "fr": "Après avoir remis les médicaments à la vieille guérisseuse qui vous attend devant la chapelle, vous sentez un souffle de soulagement et de gratitude."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "La soigneuse vous invite à la suivre. Elle connaît un chemin discret à travers le maquis, loin des patrouilles du clan, un passage sûr pour rejoindre des rebelles."
             },
             "pitch": 400
           }
         ],
-        "nextActionType": "end",
-        "nextAction": "1"
+        "nextActionType": "dialog",
+        "nextAction": "3"
       },
       "3": {
         "default": {
@@ -1137,12 +1143,44 @@
         "dialog": [
           {
             "text": {
-              "fr": "Après avoir remis les médicaments à la vieille guérisseuse qui vous attend devant la chapelle, vous sentez un souffle de soulagement et de gratitude. La soigneuse vous invite à la suivre. Elle connaît un chemin discret à travers le maquis, loin des patrouilles du clan, un passage sûr pour rejoindre des rebelles."
+              "fr": "\"La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant.\"",
+              "cor": "\"A strada di u campu santu ùn s’apre micca à i scunnisciuti. Preparemu st’attaccu dapoi parechji ghjorni avà.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "\"Prouve ta valeur si tu veux combattre avec nous demain.\"",
+              "cor": "\"Prova u to valore s’è tù voli cumbatte cun noi dumane.\""
+            },
+            "pitch": 300
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous gagnez le respect des habitants du camp et leur confiance. Vous êtes désormais accepté et prêt à vous préparer avec eux pour le départ."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Le lendemain, vous affronterez A Strega sur la route du cimetière."
             },
             "pitch": 400
           }
         ],
-        "nextActionType": "riddle",
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },

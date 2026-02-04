@@ -26,27 +26,44 @@ export function setActivePlayer(playerIndex) {
 }
 
 /**
- * Fonction début d'étape
- * @param  {[number]} step Numéro d'étape appelé
+ * Fonction recherche d'étape. Retourne l'ID de l'étape complete a appeler avec variante si elle existe.
+ * @param  {[number]} stepId Numéro d'étape entré au clavier (00)
  */
-export async function startStep(step) {
-    // step: Input, issu de la case du plateau
-    const searchId = `${step}${activePlayer.nextStepVariant}`
+export async function checkStepExist(stepId) {
+    //Check if there is an unlocked step for the current player
+    const unlockedStepId = activePlayer.unlockedSteps?.[parseInt(stepId)]
 
-    //Search if the step exist in the database
-    console.log(stepsData)
-    console.log(activePlayer)
+    //Search for the full step ID with unlocked step, or default to base step with variant 0
+    const searchId = unlockedStepId || `${stepId}0`
     if (searchId in stepsData[activePlayer.localisation]) {
-        activeStepId = step
-        activeStep = stepsData[activePlayer.localisation][searchId];
+        console.log("Found step ", searchId)
+        //Return the ID that will be called
+        return searchId
+    } else {
+        console.log("Step ID returned: ", false)
+        return false
+    }
+}
+
+/**
+ * Fonction début d'étape
+ * @param  {[number]} stepId Numéro d'étape appelé  
+ */
+export async function startStep(fullStepId) {
+    //Re-Check if the step exist in the database
+    if (fullStepId in stepsData[activePlayer.localisation]) {
+        //Truncate the full step ID to get the base step ID (without variant) for data reference
+        activeStepId = fullStepId.substring(0, 2)
+        //Set the active step data
+        activeStep = stepsData[activePlayer.localisation][fullStepId];
 
         await loadCurrentStepData()
 
         //Call the action from the selected step
-        console.log(`Loading step ${step}`)
+        console.log(`Loading step ${fullStepId}`)
         callAction(activeStep.actionType, activeStep.action)
     } else {
-        console.error(`Step not found: ${step}`);
+        console.error(`Step not found: ${fullStepId}`);
         return;
     }
 }
@@ -82,4 +99,20 @@ export function callAction(actionType, action) {
             menuView()
             break;
     }
+}
+
+export function addUnlockedStep(stepId, unlockedStepId) {
+    console.log(unlockedStepId, stepId)
+    console.log(activePlayer.unlockedSteps[stepId])
+
+    if (activePlayer.unlockedSteps[stepId] !== unlockedStepId) {
+        activePlayer.unlockedSteps[stepId] = unlockedStepId
+        console.log(`Unlocked step ${unlockedStepId} for step ${stepId}`)
+    }
+    updatePlayerLocalStorage()
+}
+
+function updatePlayerLocalStorage() {
+    localStorage.setItem('playersData', JSON.stringify(players));
+    console.log("Player data saved")
 }
