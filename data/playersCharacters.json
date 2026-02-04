@@ -8,7 +8,7 @@
                 "fr": "Femme dans la vingtaine, ancienne bergère ayant perdu sa famille lors des luttes tribales qui ont opposées le clan de Corti aux différentes factions qui occupaient la ville avant eux. Livia porte le poids du deuil de manière visible : ses mains tremblent légèrement, ses yeux ont une dureté qu'aucun rire ne peut totalement atténuer. Malgré cela, elle a choisi la résilience plutôt que la vengeance. Elle aide les autres sans attendre compensation, mais elle ne risquera pas sa vie pour des principes abstraits.",
                 "cor": "Donna d'una vintina d'anni, antica pastora chì hà persu a so famiglia durante e lotte tribali chì anu oppostu u clan di Corti à e diverse fazzioni chì occupavanu a cità nanzu à elli. Livia porta u pesu di u dulore di manera visibile: e so mani tremanu appena, i so ochji anu una durezza chì nisunu risu pò smurzà cumpletamente. Malgradu què, hà sceltu a resilienza piuttostu chè a vindetta. Aiuta l'altri senza aspettà ricumpensa, ma ùn risicherà micca a so vita per principii astratti."
             },
-            "image": "livia.jpg"
+            "image": "livia.webp"
         },
         {
             "id": 2,
@@ -18,7 +18,7 @@
                 "fr": "Femme (16 ans), orpheline qui a grandi en écoutant les histoires de navigation de son grand-père. Elle possède une connaissance innée des courants marins et des étoiles. Elle porte des cicatrices de noyade presque mortelle dans son enfance. Après une expédition de pêche, son équipe a découvert des traces de technologie avancée échouée sur les rives. Fascinée, elle a commencé à collecter des matériaux et différentes technologies pour les étudier. Son travail lui a permis de se construire une radio.",
                 "cor": "Zitella di 16 anni, urfanella chì hè cresciuta ascultendu e storie di navigazione di u so babbucciu. Hà una cunniscenza innata di i currenti marini è di e stiddi. Porta e cicatrice d'un affucamentu guasgi mortale in a so zitellina. Dopu una spidizione di pesca, a so squadra hà scupertu tracce di tecnulugia avanzata spiaghjata à e ribe. Affascinata, hà cuminciatu à cullighjà materiali è tecnulugie sfarente per studialle. U so travagliu li hà permessu di custruì si una radio."
             },
-            "image": "orsetta.jpg"
+            "image": "orsetta.webp"
         },
         {
             "id": 3,
@@ -28,7 +28,7 @@
                 "fr": "Homme d'une trentaine d'années, ancien garde-chasse des forêts corses. Bastianu est obsédé par la préservation de la faune locale. Il n'est ni bon ni mauvais - il est protecteur, mais exclusivement envers son territoire et ses créatures. Il voit les humains comme des intrus potentiels, et toute menace envers la vie sauvage comme une offense personnelle. Son corps porte les cicatrices de chasses dangereuses et de combats pour protéger les animaux contre les braconniers et les factions.",
                 "cor": "Omu d'una trentina d'anni, anzianu guardacaccia di e fureste corse. Bastianu hè ossessionatu da a priservazione di a fauna lucale. Ùn hè nè bonu nè cattivu: hè prutettore, ma solu versu u so territoriu è e so creature. Vede l'umani cum'è intrusi putenziali, è ogni minaccia contru a vita salvatica cum'è un'offesa persunale. U so corpu porta e cicatrice di cacce periculose è di cumbatti per prutege l'animali contru i bracconieri è e fazzioni."
             },
-            "image": "bastianu.jpg"
+            "image": "bastianu.webp"
         }
     ],
     "2": [
@@ -40,17 +40,17 @@
                 "fr": "",
                 "cor": ""
             },
-            "image": "marc.jpeg"
+            "image": "marc.webp"
         },
         {
             "id": 5,
-            "name": "Sophie",
-            "fullName": "Sophie (L’Éclaireuse)",
+            "name": "Leo",
+            "fullName": "Leo (L’Éclaireur)",
             "description": {
                 "fr": "",
                 "cor": ""
             },
-            "image": "sophie.jpeg"
+            "image": "leo.webp"
         },
         {
             "id": 6,
@@ -60,7 +60,7 @@
                 "fr": "",
                 "cor": ""
             },
-            "image": "valerie.jpeg"
+            "image": "valerie.webp"
         }
     ]
 }

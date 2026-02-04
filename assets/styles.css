@@ -194,15 +194,14 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
   padding: 16px 20px;
   position: relative;
-  column-gap: 10px;
 }
 
 @media (max-width: 480px) {
   .header {
-    padding: 15px 16px;
+    padding: 12px 16px;
   }
 }
 
@@ -211,7 +210,6 @@ body {
   align-items: center;
   gap: 10px;
   flex: 0 0 auto;
-  flex: 2;
 }
 
 .logo-small {
@@ -220,8 +218,9 @@ body {
 }
 
 .logo-center {
-  flex: 1;
-  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo-img {
@@ -232,7 +231,7 @@ body {
 
 @media (max-width: 480px) {
   .logo-img {
-    height: 26px;
+    height: 32px;
   }
 }
 
@@ -259,10 +258,8 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex: 2;
-  column-gap: 20px;
-  row-gap: 10px;
-  flex-wrap: wrap-reverse;
+  gap: 10px;
+  flex: 0 0 auto;
 }
 
 .settings-btn {
@@ -423,7 +420,6 @@ body {
   align-items: flex-start;
   margin-bottom: 40px;
   padding: 20px 40px;
-  column-gap: 10px;
 }
 
 @media (max-width: 480px) {
@@ -1250,10 +1246,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  max-width: 600px;
 }
 
 /* ===============================
@@ -1766,7 +1758,7 @@ body {
   height: 350px;
   max-width: 500px;
   padding: 0;
-  margin: auto 0;
+  margin: 0;
   flex-shrink: 0;
 }
 
@@ -1919,8 +1911,8 @@ body {
 }
 
 /* Back button positioning in modals */
-.modal-overlay>.back-btn-circle,
-.detailContainer>.back-btn-circle {
+.modal-overlay > .back-btn-circle,
+.detailContainer > .back-btn-circle {
   position: fixed;
   top: 20px;
   left: 20px;
@@ -1928,9 +1920,8 @@ body {
 }
 
 @media (max-width: 480px) {
-
-  .modal-overlay>.back-btn-circle,
-  .detailContainer>.back-btn-circle {
+  .modal-overlay > .back-btn-circle,
+  .detailContainer > .back-btn-circle {
     top: 15px;
     left: 15px;
   }
@@ -1955,7 +1946,7 @@ body {
 
 .battery-body {
   position: relative;
-  width: 42px;
+  width: 48px;
   height: 22px;
   border: 1.5px solid var(--border);
   border-radius: 6px;
@@ -2035,6 +2026,7 @@ body {
   max-width: 500px;
   padding: 16px 24px;
   font-size: 1.1rem;
+  /*! margin-top: auto; */
   margin-bottom: 0;
   flex-shrink: 0;
 }
