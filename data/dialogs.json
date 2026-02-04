@@ -14,7 +14,8 @@
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
@@ -39,28 +40,32 @@
               "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
               "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
               "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
               "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
               "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
@@ -92,7 +97,8 @@
             "text": {
               "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
@@ -105,7 +111,8 @@
               "fr": "\"Oh… ta gourde déborde. Je sens ton esprit ailleurs.\"",
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
-            "pitch": 650
+            "pitch": 650,
+            "voice": ""
           },
           {
             "text": {
@@ -118,7 +125,8 @@
               "fr": "En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.",
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
-            "pitch": 650
+            "pitch": 650,
+            "voice": ""
           }
         ],
         "nextActionType": "riddle",
@@ -137,14 +145,16 @@
               "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
               "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
-            "pitch": 650
+            "pitch": 650,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
               "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
             },
-            "pitch": 650
+            "pitch": 650,
+            "voice": ""
           },
           {
             "text": {
@@ -157,7 +167,8 @@
               "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
-            "pitch": 650
+            "pitch": 650,
+            "voice": ""
           }
         ],
         "nextActionType": "end",
@@ -206,14 +217,16 @@
               "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
               "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
               "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           },
           {
             "text": {
@@ -226,7 +239,8 @@
               "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
               "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           },
           {
             "text": {
@@ -271,7 +285,8 @@
               "fr": "\"Je t'attendais.\"",
               "cor": "\"T'aspettava.\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           },
           {
             "text": {
@@ -284,7 +299,8 @@
               "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
               "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           },
           {
             "text": {
@@ -298,7 +314,8 @@
               "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           }
         ],
         "nextActionType": "riddle",
@@ -317,7 +334,8 @@
               "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
               "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           }
         ],
         "nextActionType": "end",
@@ -336,7 +354,8 @@
               "fr": "\"Ton chemin te mènera à l’Orcu…\"",
               "cor": "\"A to strada ti purterà versu l’Orcu…\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           }
         ],
         "nextActionType": "end",
@@ -444,28 +463,32 @@
               "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
               "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
               "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
               "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
               "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
@@ -524,7 +547,8 @@
               "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
               "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
             },
-            "pitch": 500
+            "pitch": 500,
+            "voice": ""
           },
           {
             "text": {
@@ -537,21 +561,24 @@
               "fr": "\"Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments.\"",
               "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
             },
-            "pitch": 500
+            "pitch": 500,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns.\"",
               "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
             },
-            "pitch": 500
+            "pitch": 500,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.\"",
               "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
             },
-            "pitch": 500
+            "pitch": 500,
+            "voice": ""
           }
         ],
         "nextActionType": "dialog",
@@ -638,28 +665,32 @@
               "fr": "\"Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !\"",
               "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
               "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
-            "pitch": 550
+            "pitch": 550,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
               "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Jamais ! C'est mon héritage !\"",
               "cor": "\"Mai ! Hè a mo lascita !\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           }
         ],
         "nextActionType": "choice",
@@ -720,14 +751,16 @@
               "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
               "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
               "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           }
         ],
         "nextActionType": "game",
@@ -746,7 +779,8 @@
               "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
               "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
             },
-            "pitch": 350
+            "pitch": 350,
+            "voice": ""
           }
         ],
         "nextActionType": "end",
@@ -793,7 +827,8 @@
               "fr": "\"Laissez-moi ! Laissez-moi !\"",
               "cor": "\"Linteti mi ! Linteti mi !\""
             },
-            "pitch": 700
+            "pitch": 700,
+            "voice": ""
           },
           {
             "text": {
@@ -806,14 +841,16 @@
               "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
               "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
             },
-            "pitch": 700
+            "pitch": 700,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
               "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
             },
-            "pitch": 700
+            "pitch": 700,
+            "voice": ""
           },
           {
             "text": {
@@ -838,7 +875,8 @@
               "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
               "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
             },
-            "pitch": 700
+            "pitch": 700,
+            "voice": ""
           }
         ],
         "nextActionType": "end",
@@ -1146,14 +1184,16 @@
               "fr": "\"La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant.\"",
               "cor": "\"A strada di u campu santu ùn s’apre micca à i scunnisciuti. Preparemu st’attaccu dapoi parechji ghjorni avà.\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Prouve ta valeur si tu veux combattre avec nous demain.\"",
               "cor": "\"Prova u to valore s’è tù voli cumbatte cun noi dumane.\""
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": ""
           }
         ],
         "nextActionType": "riddle",
@@ -1231,7 +1271,8 @@
               "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
               "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           }
         ],
         "nextActionType": "game",
@@ -1250,7 +1291,8 @@
               "fr": "\"Je sais ce que tu veux… Quand U Sarpu saura que j'ai perdu, il mettra la Corse à feu et à sang… Je n'avais pas le choix… Protège notre île !\"",
               "cor": "\"Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !\""
             },
-            "pitch": 600
+            "pitch": 600,
+            "voice": ""
           },
           {
             "text": {
@@ -1367,7 +1409,8 @@
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           }
         ],
         "nextActionType": "game",
@@ -1386,28 +1429,32 @@
               "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
               "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
               "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
               "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
               "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
               "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
@@ -1519,7 +1566,8 @@
               "fr": "Pas un pas de plus. Que fais-tu ici ?",
               "cor": "Micca un passu di più. Chì faci quì ?"
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
@@ -1722,7 +1770,8 @@
               "fr": "Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j'ai déniché : un masque à gaz permettant de filtrer les radiations. Je te propose un jeu. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !",
               "cor": "Tristu, cum'è locu, ùn trovi micca ? Face un mumentu chì cercu sti scumere… è guarda ciò chì aghju scovatu : una maschera à gas chì permette di filtrà e radiazione. Ti prupongu un ghjocu. Rispondi à u mo enigma è a maschera hè a to. Ti sbagli… è riparti senza nunda !"
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           }
         ],
         "nextActionType": "riddle",
@@ -1841,7 +1890,8 @@
               "fr": "Je suis Sébastien. Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui... mais tu portes la même flamme. Réponds-moi : es-tu vraiment prêt ?",
               "cor": "Sò Sébastien. St'ochji… Sta determinazione... Gyptis avia u listessu sguardu. Ùn si micca ellu... mà porti a listessa fiamma. Rispondimi : si daveru prontu ?"
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           }
         ],
         "nextActionType": "riddle",
@@ -1876,7 +1926,8 @@
               "fr": "Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?",
               "cor": "Bonghjornu, figliolu meiu. Sò u Babbu Lucien. Pochi osanu francà ste porte oramai. Chì possu fà per tè ?"
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": ""
           },
           {
             "text": {
