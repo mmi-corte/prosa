@@ -84,7 +84,9 @@ function renderCharacterGrid() {
             }
 
             if (character.image) {
-                btn.style.backgroundImage = `url(./assets/playersCharacters/${character.image})`
+                btn.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 58%), url(./assets/playersCharacters/${character.image})`
+                btn.style.backgroundPosition = 'center, top center'
+                btn.style.backgroundSize = 'cover, cover'
             }
             btn.innerHTML = character.name
 

@@ -1,19 +1,26 @@
+import { gameContainer, settings } from "../../../app.js"
+
 export function loadingView() {
     const container = document.createElement('div')
     container.classList.add('loading-screen')
+
+    // Choisir le logo en fonction du mode
+    const logoSrc = settings.lightMode ? './assets/logo/logo-clair.png' : './assets/logo/prosa-logo.png'
+    const chargementSrc = settings.lightMode ? './assets/logo/chargement-clair.png' : './assets/logo/chargement.png'
+    const lottieSrc = settings.lightMode ? './assets/lottie/prosa-o-clair.json' : './assets/lottie/prosa-o.json'
 
     container.innerHTML = `
         <div class="loading-content">
                 <div class="logo-container">
                         <!-- Logo PROSA officiel -->
                         <span class="logo-wrap">
-                            <img src="./assets/logo/prosa-logo.png" alt="PROSA" class="logo-main" />
-                            <span class="logo-o-lottie" data-lottie="./assets/lottie/prosa-o.json" aria-hidden="true"></span>
+                            <img src="${logoSrc}" alt="PROSA" class="logo-main" />
+                            <span class="logo-o-lottie" data-lottie="${lottieSrc}" aria-hidden="true"></span>
                         </span>
                 </div>
         <!-- Serpent spirale comme icône de chargement -->
         <div class="spinner-spiral">
-            <img src="./assets/logo/chargement.png" alt="Chargement" class="spiral-img" />
+            <img src="${chargementSrc}" alt="Chargement" class="spiral-img" />
         </div>
         </div>
         <div class="fun-fact-card">

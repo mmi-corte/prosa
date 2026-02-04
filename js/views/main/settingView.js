@@ -1,4 +1,4 @@
-import { gameContainer, settings, vibrate } from "../../../app.js";
+import { gameContainer, settings, vibrate, applyLightMode } from "../../../app.js";
 
 export function settingView() {
     const container = document.createElement('div')
@@ -65,7 +65,9 @@ export function settingView() {
     //Light Mode
     lightModeToggle.addEventListener("click", () => {
         toggleSetting(lightModeToggle, "lightMode")
-        document.body.classList.toggle('light-mode', settings.lightMode)
+        applyLightMode()
+        // Sauvegarder immédiatement pour que le mode persiste
+        localStorage.setItem('settingLightMode', settings.lightMode);
     })
 
     function toggleSetting(toggle, key) {

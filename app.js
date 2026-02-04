@@ -70,10 +70,13 @@ export function clearContainer() {
 window.initProsaLogoLottie = function initProsaLogoLottie() {
   if (!window.lottie) return
 
+  // Ne pas charger Lottie en mode clair
+  if (settings.lightMode) return
+
   const targets = document.querySelectorAll('.logo-o-lottie')
   targets.forEach((el) => {
     if (el.dataset.lottieInit === 'true') return
-    const path = el.getAttribute('data-lottie')
+    let path = el.getAttribute('data-lottie')
     if (!path) return
 
     window.lottie.loadAnimation({
@@ -152,9 +155,27 @@ settings.vibration = localStorage.getItem('settingVibration') === 'true' || sett
 settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.camera;
 settings.lightMode = localStorage.getItem('settingLightMode') === 'true';
 
-// Apply light mode if saved
-if (settings.lightMode) {
-  document.body.classList.add('light-mode');
+// Apply light mode if saved - do it immediately
+if (document.body) {
+  applyLightMode();
+} else {
+  document.addEventListener('DOMContentLoaded', applyLightMode);
+}
+
+export function applyLightMode() {
+  const isLightMode = settings.lightMode;
+  
+  // Appliquer sur html
+  if (document.documentElement) {
+    document.documentElement.classList.toggle('light-mode', isLightMode);
+  }
+  
+  // Appliquer sur body
+  if (document.body) {
+    document.body.classList.toggle('light-mode', isLightMode);
+  }
+  
+  console.log('Light mode applied:', isLightMode);
 }
 
 //Setup the button

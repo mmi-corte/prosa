@@ -34,58 +34,529 @@
   --cyan: #81cbd6;
 }
 
-/* Mode clair - couleurs inversées */
+/* Mode clair - beige en fond, kaki en écriture */
 body.light-mode {
-  --background: #f5f3ee;
-  --foreground: #1a1812;
-  --card: #ffffff;
-  --card-foreground: #1a1812;
+  --background: #ece4cb;
+  --foreground: #2a2820;
+  --card: #f8f5ed;
+  --card-foreground: #2a2820;
   --primary: #626247;
-  --primary-dark: #7a7a5a;
-  --primary-light: #4a4a35;
-  --muted: #e8e6e0;
-  --muted-foreground: #6a6860;
-  --dust: #1a1812;
-  --border: #d0cec8;
+  --primary-dark: #4a4a35;
+  --primary-light: #7a7a5a;
+  --muted: #e0d9c5;
+  --muted-foreground: #6a6555;
+  --dust: #2a2820;
+  --border: #d0c9b5;
+  --accent-red: #c63032;
+  --accent-green: #2a8a95;
+}
+
+body.light-mode {
+  background: var(--background) !important;
 }
 
 body.light-mode .header {
   background: var(--background);
 }
 
+body.light-mode .screen {
+  background: var(--background);
+}
+
 body.light-mode .settings-btn {
   color: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
 body.light-mode .back-btn-circle {
-  background: rgba(245, 243, 238, 0.9);
+  background: var(--card);
   border-color: var(--border);
   color: var(--foreground);
 }
 
-body.light-mode .menu-btn.btn-extra {
-  background-color: var(--foreground);
+/* Logo en mode clair - utiliser une teinte sombre */
+body.light-mode .logo-img {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(8%) saturate(1000%) hue-rotate(20deg) brightness(95%) contrast(90%);
 }
 
-body.light-mode .menu-btn.btn-extra .btn-title {
-  color: var(--background);
+/* Tous les logos du dossier assets/logo en mode clair - noir (sauf logo-main qui a sa propre image) */
+body.light-mode .logo,
+body.light-mode .start-logo,
+body.light-mode img[src*="assets/logo"]:not(.logo-main),
+body.light-mode img[data-src*="assets/logo"] {
+  filter: brightness(0);
 }
 
-body.light-mode .menu-btn.btn-extra .btn-subtitle {
+body.light-mode .logo-o-lottie svg path {
+  fill: #2a2820 !important;
+  stroke: #2a2820 !important;
+}
+
+/* Cacher complètement le Lottie en mode clair */
+body.light-mode .logo-o-lottie {
+  display: none !important;
+}
+
+body.light-mode .menu-title {
+  color: var(--foreground);
+}
+
+body.light-mode .menu-btn {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .menu-btn .btn-title {
+  color: var(--foreground);
+}
+
+body.light-mode .menu-btn .btn-subtitle {
   color: var(--muted-foreground);
 }
 
-body.light-mode .menu-btn-big.btn-primary-big {
-  background: var(--foreground);
-  border-color: var(--foreground);
+body.light-mode .menu-btn:hover {
+  background: var(--muted);
+  border-color: var(--primary);
 }
 
+body.light-mode .menu-btn.btn-extra {
+  background-color: #2a2820;
+  border-color: #2a2820;
+  box-shadow: 0 4px 12px rgba(42, 40, 32, 0.2);
+}
+
+body.light-mode .menu-btn.btn-extra .btn-title {
+  color: #ece4cb;
+}
+
+body.light-mode .menu-btn.btn-extra .btn-subtitle {
+  color: #b5ad98;
+}
+
+body.light-mode .menu-btn-big {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .menu-btn-big .btn-title-big {
+  color: var(--foreground);
+}
+
+body.light-mode .menu-btn-big.btn-primary-big {
+  background: #2a2820;
+  border-color: #2a2820;
+  box-shadow: 0 4px 12px rgba(42, 40, 32, 0.2);
+}
+
+body.light-mode .menu-btn-big.btn-primary-big .btn-title-big {
+  color: #ece4cb;
+}
+
+body.light-mode .menu-difficulty-bar {
+  background: linear-gradient(180deg, #7a7a5a 0%, #626247 100%);
+  border-color: #8a8a6a;
+  color: #ece4cb;
+}
+
+body.light-mode .difficulty-number {
+  color: #ece4cb;
+}
+
+body.light-mode .discover-btn {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .discover-btn:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+body.light-mode .settings-panel {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .modal-overlay {
+  background: rgba(236, 228, 203, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+body.light-mode .modal-content {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .setting-label {
+  color: var(--foreground);
+}
+
+body.light-mode .slider {
+  background: var(--muted);
+}
+
+body.light-mode .slider::-webkit-slider-thumb {
+  background: var(--primary);
+}
+
+body.light-mode .toggle-switch {
+  background: var(--muted);
+}
+
+body.light-mode .toggle-switch.active {
+  background: var(--primary);
+}
+
+body.light-mode .toggle-knob {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
 
 /* Format mobile avec container centré */
 html,
 body {
   height: 100%;
   background: #0a0908;
+}
+
+html.light-mode,
+html.light-mode body {
+  background: #ece4cb !important;
+}
+
+/* Autres éléments en mode clair */
+body.light-mode #gameContainer {
+  background: var(--background);
+}
+
+body.light-mode .loading-screen {
+  background: var(--background);
+}
+
+body.light-mode p,
+body.light-mode span,
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode label {
+  color: var(--foreground);
+}
+
+body.light-mode .btn,
+body.light-mode button:not(.toggle-switch):not(.menu-btn):not(.menu-btn-big):not(.discover-btn):not(.back-btn-circle):not(.settings-btn) {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+body.light-mode .btn-primary {
+  background: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+body.light-mode .btn-primary:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+/* ========== IMAGES EN MODE CLAIR ========== */
+/* Ne PAS filtrer les images de contenu, seulement le logo */
+body.light-mode img:not(.logo-img):not(.character-detail-img):not(.language-label img) {
+  filter: none !important;
+}
+
+/* Character cards en mode clair */
+body.light-mode .character-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+body.light-mode .character-card-name {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+body.light-mode .character-card:hover {
+  border-color: var(--primary);
+}
+
+body.light-mode .character-card.empty {
+  opacity: 0.5;
+}
+
+/* Characters screen */
+body.light-mode .characters-content {
+  background: var(--background);
+}
+
+body.light-mode .characters-title {
+  color: var(--foreground);
+}
+
+body.light-mode .characters-region {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .characters-actions .close-btn {
+  color: var(--foreground);
+}
+
+/* Character detail */
+body.light-mode .character-detail-content {
+  background: var(--background);
+}
+
+body.light-mode .character-name {
+  color: var(--foreground);
+}
+
+body.light-mode .character-description {
+  color: var(--foreground);
+}
+
+body.light-mode .character-description::before {
+  background: linear-gradient(90deg, transparent, rgba(42, 40, 32, 0.35), transparent);
+}
+
+body.light-mode .character-description .role {
+  color: var(--primary);
+}
+
+body.light-mode .character-image-frame {
+  border-color: rgba(42, 40, 32, 0.15);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* Init screens */
+body.light-mode .initScreen,
+body.light-mode .initScreen2 {
+  background: var(--background);
+}
+
+body.light-mode .initScreen h2,
+body.light-mode .initScreen2 h2 {
+  color: var(--foreground);
+}
+
+body.light-mode .initScreen p,
+body.light-mode .initScreen2 p {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .characterGrid button {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .characterGrid button:hover {
+  border-color: var(--primary);
+}
+
+/* Player list en mode clair */
+body.light-mode .playerList button {
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(236, 228, 203, 0.92) 90%, rgba(236, 228, 203, 0.97) 100%), var(--bg-image);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .characterGrid button.is-taken {
+  opacity: 0.4;
+}
+
+body.light-mode .characterGrid button.selected {
+  border-color: var(--primary);
+  background: var(--muted);
+}
+
+/* Detail container */
+body.light-mode .detailContainer {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+body.light-mode .detailContainer .characterName {
+  color: var(--foreground);
+}
+
+body.light-mode .detailContainer .characterDescription {
+  color: var(--muted-foreground);
+}
+
+/* Dialogs et actions */
+body.light-mode .dialogWrapper {
+  background-color: rgba(236, 228, 203, 0.9);
+}
+
+body.light-mode .dialogWrapper p {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .dialog-box {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .dialog-character-name {
+  color: var(--primary);
+}
+
+/* Action wrapper */
+body.light-mode .actionWrapper {
+  background: var(--background);
+}
+
+body.light-mode .actionQuestion {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .actionChoice {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .actionChoice:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+}
+
+/* End wrapper */
+body.light-mode .endWrapper {
+  background: var(--background);
+}
+
+body.light-mode .endWrapper .text_indication {
+  color: var(--foreground);
+}
+
+body.light-mode .endWrapper .next_step {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+/* Player select */
+body.light-mode .playerSelect {
+  background: var(--background);
+}
+
+/* Code view */
+body.light-mode .codeView {
+  background: var(--background);
+}
+
+body.light-mode .codeInput {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode .codeInput::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* QR View */
+body.light-mode .qrView {
+  background: var(--background);
+}
+
+/* Progression view */
+body.light-mode .progressionView {
+  background: var(--background);
+}
+
+body.light-mode .progression-title {
+  color: var(--foreground);
+}
+
+body.light-mode .progression-step {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+body.light-mode .progression-step-title {
+  color: var(--foreground);
+}
+
+body.light-mode .progression-step-desc {
+  color: var(--muted-foreground);
+}
+
+/* Inputs généraux */
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* SVG icons */
+body.light-mode svg {
+  color: inherit;
+}
+
+body.light-mode .close-btn svg,
+body.light-mode .back-btn-circle svg {
+  stroke: var(--foreground);
+}
+
+/* Discover modal en mode clair */
+body.light-mode #discoverModal {
+  background: var(--background);
+}
+
+body.light-mode .discover-modal-content {
+  color: var(--foreground);
+}
+
+/* Menu wrapper */
+body.light-mode .menuWrapper {
+  background: var(--background);
+}
+
+/* Init wrapper */
+body.light-mode .initWrapper {
+  background: var(--background);
+}
+
+body.light-mode .initWrapper > p {
+  color: var(--muted-foreground);
+}
+
+body.light-mode .initWrapper .playerNumber {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+/* Spiral img (loading) */
+body.light-mode .spiral-img {
+  filter: invert(10%) sepia(10%) saturate(500%) hue-rotate(20deg);
+}
+
+/* Video elements - ne pas filtrer */
+body.light-mode video {
+  filter: none !important;
 }
 
 body {
@@ -130,12 +601,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 }
 
 .logo-container {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .logo-wrap {
@@ -158,6 +630,10 @@ body {
 .logo-main {
   width: 280px;
   height: auto;
+}
+
+body.light-mode .logo-main {
+  width: 320px;
 }
 
 .spinner-spiral {
@@ -272,6 +748,9 @@ body {
 .logo-center {
   flex: 1;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-img {
@@ -1080,7 +1559,7 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--foreground);
+  background: #ffffff;
   transition: transform 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -1287,7 +1766,7 @@ body {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 58%);
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 58%);
   flex: 1;
-  background-position-x: center;
+  background-position: top center;
   flex-basis: 15%;
   background-repeat: no-repeat;
   background-size: cover;
