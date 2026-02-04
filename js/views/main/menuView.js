@@ -10,107 +10,12 @@ import { seasonsView } from "./seasonsView.js"
 export function menuView() {
   clearContainer()
 
-  // If game is initialized, show the in-game menu (Figma design)
-  if (gameInitialized) {
-    renderInGameMenu()
-  } else {
-    renderPreGameMenu()
-  }
-}
-
-// Menu before starting a game
-function renderPreGameMenu() {
-  gameContainer.innerHTML = `
-    <div class="menuWrapper">
-      <h1 class="menu-title">QUE VOULEZ-VOUS FAIRE ?</h1>
-
-      <nav class="menu-buttons">
-        <button class="menu-btn btn-extra" id="startBtn">
-          <span class="btn-title">Commencer la partie</span>
-          <span class="btn-subtitle">L'histoire de Prosa vous attend.</span>
-          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-        </button>
-
-        <button class="menu-btn" id="qrBtn">
-          <span class="btn-title">Découvrir la réalité augmentée</span>
-          <span class="btn-subtitle">scanner un QR code</span>
-          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-          </svg>
-        </button>
-
-        <button class="menu-btn" id="charactersBtn">
-          <span class="btn-title">Découvrir les personnages</span>
-          <span class="btn-subtitle">pouvoirs, histoire</span>
-          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
-        </button>
-
-        <button class="menu-btn" id="seasonsBtn">
-          <span class="btn-title">Découvrir les saisons</span>
-          <span class="btn-subtitle">épisodes, aventures</span>
-          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-        </button>
-      </nav>
-    </div>
-  `
-
-  // Start button
-  document.getElementById("startBtn").addEventListener('click', () => {
-    initView()
-  })
-
-  // QR Scan button
-  document.getElementById("qrBtn").addEventListener('click', () => {
-    navigate("qr", () => qrView())
-  })
-
-  // Characters view button
-  document.getElementById("charactersBtn").addEventListener('click', () => {
-    navigate("encyclopedie", () => charactersView())
-  })
-
-  // Seasons button
-  document.getElementById("seasonsBtn").addEventListener('click', () => {
-    navigate("saisons", () => seasonsView())
-  })
-}
-
-// Menu when game is in progress (matches Figma)
-function renderInGameMenu() {
-  const difficultyValue = difficultyState || '-'
-
   gameContainer.innerHTML = `
     <div class="menuWrapper menuWrapper-ingame">
       <h1 class="menu-title menu-title-left">AU COURS DU JEU</h1>
 
-      <div class="menu-content-ingame">
-        <div class="menu-difficulty-bar">
-          <div class="difficulty-number">${difficultyValue}</div>
-        </div>
-
-        <nav class="menu-buttons-ingame">
-          <button class="menu-btn-big btn-primary-big" id="codeBtn">
-            <span class="btn-title-big">DÉCOUVRIR</span>
-            <span class="btn-title-big">MON ÉNIGME</span>
-          </button>
-
-          <button class="menu-btn-big" id="qrBtn">
-            <span class="btn-title-big">RÉALITÉ</span>
-            <span class="btn-title-big">AUGMENTÉE</span>
-          </button>
-        </nav>
+      <div class="menu-content-ingame" id="menuContentIngame">
+        
       </div>
 
       <footer class="menu-footer">
@@ -119,21 +24,59 @@ function renderInGameMenu() {
     </div>
   `
 
-  // Code Input button
-  document.getElementById("codeBtn").addEventListener('click', () => {
-    navigate("code", () => playerSelectView())
-  })
+  const menuContainer = document.getElementById('menuContentIngame')
 
-  // QR/AR button
-  document.getElementById("qrBtn").addEventListener('click', () => {
+  //Show the difficulty bar if initialized
+  const difficultyContainer = document.createElement('div')
+  difficultyContainer.classList.add('menu-difficulty-bar')
+  menuContainer.appendChild(difficultyContainer)
+
+  const difficultyNumber = document.createElement('span')
+  difficultyContainer.appendChild(difficultyNumber)
+
+  const difficultyIndicator = document.createElement('div')
+  difficultyIndicator.classList.add('difficulty-indicator')
+  difficultyContainer.appendChild(difficultyIndicator)
+
+  //Show the nav buttons
+  const navContainer = document.createElement('nav')
+  navContainer.classList.add('menu-buttons-ingame')
+  menuContainer.appendChild(navContainer)
+
+  //Start button
+  const startButton = document.createElement('button')
+  startButton.classList.add('menu-btn-big', 'btn-primary-big')
+  if (gameInitialized) {
+    startButton.innerHTML = `RETOUR AU<br>JEU`
+    startButton.addEventListener('click', () => {
+      navigate("code", () => playerSelectView())
+    })
+  } else {
+    startButton.innerHTML = `COMMENCER LA<br>PARTIE`
+    startButton.addEventListener('click', () => {
+      navigate("init", () => initView())
+    })
+  }
+
+  navContainer.appendChild(startButton)
+
+  //AR Button
+  const arButton = document.createElement('button')
+  arButton.classList.add('menu-btn-big')
+  arButton.innerHTML = `RÉALITÉ<br>AUGMENTÉE`
+
+  arButton.addEventListener('click', () => {
     navigate("qr", () => qrView())
   })
+  navContainer.appendChild(arButton)
 
-  // Discover universe button - navigate to discover page
-  document.getElementById("discoverBtn").addEventListener('click', () => {
-    navigate("decouvrir", () => showDiscoverPage())
+  //Discover button
+  document.getElementById('discoverBtn').addEventListener('click', () => {
+    showDiscoverPage()
   })
 }
+
+
 
 // Page "Découvrir l'univers de Prosa" (full page)
 function showDiscoverPage() {
