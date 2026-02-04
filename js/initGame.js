@@ -57,6 +57,15 @@ export function setDifficulty(difficultySelect) {
     }
 }
 
+export function decrementDifficultyState() {
+    console.log("Decreasing difficulty state")
+    difficultyState += -1
+    localStorage.setItem('difficultyState', JSON.stringify(difficultyState));
+}
+
+/**
+ * Réinitialise l'état du jeu.
+ */
 export function resetGame() {
     //Reset players data
     players = null

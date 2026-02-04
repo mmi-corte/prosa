@@ -1,5 +1,5 @@
 import { clearContainer, gameContainer, navigate } from "../../../app.js"
-import { gameInitialized, initGame, difficultyState, globalDifficulty } from "../../initGame.js"
+import { gameInitialized, initGame, difficultyState, globalDifficulty, decrementDifficultyState } from "../../initGame.js"
 //import { debugView } from "../Temp/debugView.js"
 import { charactersView } from "./charactersView.js"
 import { initView } from "./initView.js"
@@ -33,7 +33,7 @@ export function menuView() {
     menuContainer.appendChild(difficultyContainer)
 
     const difficultyNumber = document.createElement('span')
-    difficultyNumber.innerText = globalDifficulty
+    difficultyNumber.innerText = difficultyState
     difficultyContainer.appendChild(difficultyNumber)
 
     const difficultyIndicator = document.createElement('div')
@@ -81,6 +81,16 @@ export function menuView() {
   document.getElementById('discoverBtn').addEventListener('click', () => {
     showDiscoverPage()
   })
+
+  const debugButton = document.createElement('button')
+  debugButton.classList.add('menu-btn')
+  debugButton.innerText = 'DEBUG - Diminuer difficulté'
+  debugButton.style.color = 'white'
+  debugButton.addEventListener('click', () => {
+    decrementDifficultyState()
+    menuView()
+  })
+  navContainer.appendChild(debugButton)
 }
 
 

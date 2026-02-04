@@ -1,5 +1,6 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { callAction } from "../../gameEventHandler.js";
+import { decrementDifficultyState } from "../../initGame.js";
 import { gamesData } from "../../loadData.js";
 
 let data = "";
@@ -125,6 +126,8 @@ export function gameView(action) {
             const loseBtn = document.createElement('button');
             loseBtn.textContent = 'LOSE';
             loseBtn.onclick = () => {
+                console.log('Calling lose action');
+                decrementDifficultyState();
                 callAction(data.nextActionTypeLose, data.nextActionLose);
             };
             
@@ -152,6 +155,7 @@ function setupGameCompletion() {
                 callAction(data.nextActionTypeWin, data.nextActionWin);
             } else {
                 console.log('Calling lose action');
+                decrementDifficultyState();
                 console.log(data.nextActionLose, data.nextActionTypeLose)
                 callAction(data.nextActionTypeLose, data.nextActionLose);
             }
