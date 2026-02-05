@@ -106,9 +106,6 @@ export function callAction(actionType, action = null) {
 }
 
 export function addUnlockedStep(stepId, unlockedStepId) {
-    console.log(unlockedStepId, stepId)
-    console.log(activePlayer.unlockedSteps[stepId])
-
     if (activePlayer.unlockedSteps[stepId] !== unlockedStepId) {
         activePlayer.unlockedSteps[stepId] = unlockedStepId
         console.log(`Unlocked step ${unlockedStepId} for step ${stepId}`)
