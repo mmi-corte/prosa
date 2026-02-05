@@ -2039,20 +2039,57 @@
         "dialog": [
           {
             "text": {
-              "fr": "L'Opéra se dresse devant vous comme un monument culturel imposant, ravagé par le temps. La lourde porte s'ouvre dans un grincement sourd.",
-              "cor": "L'Opera si drizza davanti à voi cum'è un munumentu culturale impunente, devastatu da u tempu. A porta pisante s'apre in un scricchiolatamentu sordu."
-            },
-            "pitch": 400
+              "fr": "Un bruit de pas précipité attire alors votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine."
+            }
           },
           {
             "text": {
-              "fr": "À l'intérieur, vous progressez prudemment de pièce en pièce. Des abris de fortune abandonnés jonchent les couloirs, témoins d'un passé où des habitants ont tenté d'y survivre.",
-              "cor": "À l'internu, prugressate prudentemente da stanza à stanza. Rifugi di furtuna abbandunati sò sparsi in i corridori, testimoni d'un passatu induve abitanti anu pruvatu à campà quì."
+              "fr": "Il se présente comme Sébastien, et dès le premier instant, son comportement vous intrigue. Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
             },
-            "pitch": 400
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
+            },
+            "pitch": 500
           }
         ],
-        "nextActionType": "game",
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Le Père Lucien connaît les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est lui.\""
+            },
+            "pitch": 500
+          }
+        ],
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },
