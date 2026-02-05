@@ -3,30 +3,30 @@
         {
             "id": 1,
             "name": "Livia",
-            "fullName": "Livia (La Forgeronne)",
+            "fullName": "Livia Albertini",
             "description": {
-                "fr": "Femme dans la vingtaine, ancienne bergère ayant perdu sa famille lors des luttes tribales qui ont opposées le clan de Corti aux différentes factions qui occupaient la ville avant eux. Livia porte le poids du deuil de manière visible : ses mains tremblent légèrement, ses yeux ont une dureté qu'aucun rire ne peut totalement atténuer. Malgré cela, elle a choisi la résilience plutôt que la vengeance. Elle aide les autres sans attendre compensation, mais elle ne risquera pas sa vie pour des principes abstraits.",
-                "cor": "Donna d'una vintina d'anni, antica pastora chì hà persu a so famiglia durante e lotte tribali chì anu oppostu u clan di Corti à e diverse fazzioni chì occupavanu a cità nanzu à elli. Livia porta u pesu di u dulore di manera visibile: e so mani tremanu appena, i so ochji anu una durezza chì nisunu risu pò smurzà cumpletamente. Malgradu què, hà sceltu a resilienza piuttostu chè a vindetta. Aiuta l'altri senza aspettà ricumpensa, ma ùn risicherà micca a so vita per principii astratti."
+                "fr": "Forgeronne depuis l’enfance, Livia fut chassée lorsque le clan de Corti réquisitionna les forges. Cachée au cœur de la cité, elle laissa d’abord la colère la guider avant de mettre son savoir en secret au service des réfugiés, forgeant pour eux une chance de survie.",
+                "cor": "Fabbra di a zitellina, Livia hè stata cacciata quandu u clan di Corti hà requisitu e fabbriche. Nascosta in u core di a cità, hà lasciatu prima a rabbia guidalla prima di mette u so sapè in secretu à u serviziu di i rifugiati, forgiendu per elli una chance di sopravvivenza."
             },
             "image": "livia.webp"
         },
         {
             "id": 2,
             "name": "Orsetta",
-            "fullName": "Orsetta (La Navigatrice)",
+            "fullName": "Orsetta Scampini",
             "description": {
-                "fr": "Femme (16 ans), orpheline qui a grandi en écoutant les histoires de navigation de son grand-père. Elle possède une connaissance innée des courants marins et des étoiles. Elle porte des cicatrices de noyade presque mortelle dans son enfance. Après une expédition de pêche, son équipe a découvert des traces de technologie avancée échouée sur les rives. Fascinée, elle a commencé à collecter des matériaux et différentes technologies pour les étudier. Son travail lui a permis de se construire une radio.",
-                "cor": "Zitella di 16 anni, urfanella chì hè cresciuta ascultendu e storie di navigazione di u so babbucciu. Hà una cunniscenza innata di i currenti marini è di e stiddi. Porta e cicatrice d'un affucamentu guasgi mortale in a so zitellina. Dopu una spidizione di pesca, a so squadra hà scupertu tracce di tecnulugia avanzata spiaghjata à e ribe. Affascinata, hà cuminciatu à cullighjà materiali è tecnulugie sfarente per studialle. U so travagliu li hà permessu di custruì si una radio."
+                "fr": "Nourrie des récits marins de son grand-père, Orsetta comprit très tôt la mer. Après la destruction du navire familial par une faction inconnue, elle survécut seule sur Corti, où des vestiges technologiques échoués lui permirent de créer une radio qui scella son destin.",
+                "cor": "Nutruta di i racconti marini di u so nonnu, Orsetta hà capitu assai prestu a mare. Dopu a distruzzione di u navilu familiali da una fazione sconosciuta, hà sopravvissutu sola nantu à Corti, induve i resti tecnologichi spiaggiati li permetteranu di creà una radio chì sigillò u so destinu."
             },
             "image": "orsetta.webp"
         },
         {
             "id": 3,
             "name": "Bastianu",
-            "fullName": "Bastianu (Le Chasseur)",
+            "fullName": "Bastianu Paoli",
             "description": {
-                "fr": "Homme d'une trentaine d'années, ancien garde-chasse des forêts corses. Bastianu est obsédé par la préservation de la faune locale. Il n'est ni bon ni mauvais - il est protecteur, mais exclusivement envers son territoire et ses créatures. Il voit les humains comme des intrus potentiels, et toute menace envers la vie sauvage comme une offense personnelle. Son corps porte les cicatrices de chasses dangereuses et de combats pour protéger les animaux contre les braconniers et les factions.",
-                "cor": "Omu d'una trentina d'anni, anzianu guardacaccia di e fureste corse. Bastianu hè ossessionatu da a priservazione di a fauna lucale. Ùn hè nè bonu nè cattivu: hè prutettore, ma solu versu u so territoriu è e so creature. Vede l'umani cum'è intrusi putenziali, è ogni minaccia contru a vita salvatica cum'è un'offesa persunale. U so corpu porta e cicatrice di cacce periculose è di cumbatti per prutege l'animali contru i bracconieri è e fazzioni."
+                "fr": "Garde-chasse de Corti, Bastianu rompit avec le clan après avoir saboté ses opérations et sauvé des rebelles. Réfugié dans le maquis avec une radio volée, il devint une légende, l’Ombre du maquis, veillant sur la nature comme sur un territoire sacré.",
+                "cor": "Guardia di Corti, Bastianu hà rottu cù u clan dopu avè sabotatu e so operazioni è salvatu i ribelli. Rifugiatu in u maquis cù una radio rubata, hè diventatu una legenda, l’Ombra di u maquis, vigilendu nantu à a natura cum'è nantu à un territoriu sacru."
             },
             "image": "bastianu.webp"
         }
@@ -35,9 +35,9 @@
         {
             "id": 4,
             "name": "Marc",
-            "fullName": "Marc (Le Fondateur)",
+            "fullName": "Marc Gallafrio",
             "description": {
-                "fr": "",
+                "fr": "Ancien responsable de la sécurité civile, Marc a consacré sa vie à la gestion de crises où la moindre hésitation pouvait être fatale. Il sait reconnaître l’instant précis où ordonner l’arrêt total pour laisser passer le danger. Aujourd’hui encore, son sang-froid et sa rigueur permettent de sauver des groupes entiers de catastrophes imminentes.",
                 "cor": "",
                 "prov": ""
             },
@@ -46,9 +46,9 @@
         {
             "id": 5,
             "name": "Leo",
-            "fullName": "Leo (L’Éclaireur)",
+            "fullName": "Leo Panisson",
             "description": {
-                "fr": "",
+                "fr": "Expert en mécanique, Léo a passé sa vie à démonter et réparer des machines. Il y a dix ans, lors d’une attaque de la Tarasca, il a perdu plusieurs proches ; depuis, il s’est installé près de l’ancienne université de Toulon, où il épluche données et schémas afin d’anticiper le chaos semé par la machine.",
                 "cor": "",
                 "prov": ""
             },
@@ -57,9 +57,9 @@
         {
             "id": 6,
             "name": "Docteur Valérie",
-            "fullName": "Docteur Valérie (La Biologiste)",
+            "fullName": "Dr. Valérie Brauquier",
             "description": {
-                "fr": "",
+                "fr": "Ancienne chercheuse en microbiologie, Valérie a passé des années isolée, obsédée par la découverte de nouveaux médicaments naturels. Pragmatique et méthodique, elle prépare ses expériences et collecte ses ressources avec soin.",
                 "cor": "",
                 "prov": ""
             },
