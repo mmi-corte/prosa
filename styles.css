@@ -1,10 +1,25 @@
 @font-face {
   font-family: 'Futura';
-  src: url('./assets/fonts/FuturaCondMedium.woff2') format('woff2'),
-    url('./assets/fonts/FuturaCondMedium.woff') format('woff');
-  font-weight: 100;
+  src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+    url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+    url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+  font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: fallback;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+    url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+    url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -836,6 +851,7 @@ body.light-mode .logo-main {
 
 /* Titre du menu amélioré */
 .menu-title {
+  font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
   font-size: 1.4rem;
   font-weight: 400;
   text-align: center;
@@ -923,6 +939,7 @@ body.light-mode .logo-main {
 
 .btn-title {
   display: block;
+  font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--foreground);
@@ -981,6 +998,7 @@ body.light-mode .logo-main {
 }
 
 .code-title {
+  font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 4px;
@@ -1160,6 +1178,7 @@ body.light-mode .logo-main {
 }
 
 .characters-title {
+  font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 2px;
@@ -1756,6 +1775,7 @@ body.light-mode .logo-main {
 .initScreen2 .locationSection p {
   font-size: 1.5rem;
   font-weight: 900;
+  text-align: left;
 }
 
 .initScreen2 .characterGrid {

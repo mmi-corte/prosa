@@ -1,8 +1,10 @@
-import { navigate } from "../../../../app.js";
+import { navigate, headerLeft } from "../../../../app.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { gameInitialized } from "../../../initGame.js";
 import { menuView } from "../menuView.js";
+import { difficultyView } from "./difficultyView.js";
+import { showConfirmationModal } from "../../components/confirmationModal.js";
 
 let playerCount
 
@@ -63,4 +65,19 @@ export function playerCountView() {
     submitButton.addEventListener('click', () => {
         navigate('choix-personnage', () => characterSelectView(playerCount), true)
     });
+
+    // Bouton retour (header)
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button');
+        backButton.classList.add('back-btn-circle');
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `;
+        backButton.addEventListener('click', () => {
+            showConfirmationModal('choix-difficulte', () => difficultyView());
+        });
+        headerLeft.appendChild(backButton);
+    }
 }

@@ -3,6 +3,7 @@ import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
 import { navigate, headerLeft } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
+import { showConfirmationModal } from "../../components/confirmationModal.js";
 
 let selectedDifficulty = null;
 
@@ -79,7 +80,7 @@ export function difficultyView() {
             </svg>
         `;
         backButton.addEventListener('click', () => {
-            navigate('menu', menuView(), true);
+            showConfirmationModal('menu', () => menuView());
         });
         headerLeft.appendChild(backButton);
     }

@@ -38,7 +38,8 @@
             "fullName": "Marc (Le Fondateur)",
             "description": {
                 "fr": "",
-                "cor": ""
+                "cor": "",
+                "prov": ""
             },
             "image": "marc.webp"
         },
@@ -48,7 +49,8 @@
             "fullName": "Leo (L’Éclaireur)",
             "description": {
                 "fr": "",
-                "cor": ""
+                "cor": "",
+                "prov": ""
             },
             "image": "leo.webp"
         },
@@ -58,7 +60,8 @@
             "fullName": "Docteur Valérie (La Biologiste)",
             "description": {
                 "fr": "",
-                "cor": ""
+                "cor": "",
+                "prov": ""
             },
             "image": "valerie.webp"
         }

@@ -4,6 +4,8 @@ import { clearInitContainer, initContainer, initTextContainer } from "../initVie
 import { playerCountView } from "./playerCountView.js";
 import { playerSubmitView } from "./playerSubmitView.js";
 import { getTranslation, setLanguage } from "../../../langageManager.js";
+import { headerLeft, navigate } from "../../../../app.js";
+import { showConfirmationModal } from "../../components/confirmationModal.js";
 
 let charactersData
 let currentPlayerIndex
@@ -19,33 +21,42 @@ export async function characterSelectView(playerCount) {
     currentPlayerIndex = 0
     charactersData = await fetchPlayerCharacters()
 
+    // Toujours réinitialiser selectedPlayers quand on entre dans cette vue
+    selectedPlayers = [];
+
     //Create a temporary player array base on the player count input
     if (playerCount >= 2 && playerCount <= 6) {
-
-        // Only reset if the count is different to avoid wiping data
-        if (selectedPlayers.length !== playerCount) {
-            selectedPlayers = []; // Reset array
-
-            for (let i = 0; i < playerCount; i++) {
-                selectedPlayers[i] = {
-                    character: 0,
-                    localisation: 0,
-                    unlockedSteps: {},
-                    language: 'fr'
-                };
-            }
-            console.log(`${playerCount} players initialized.`);
-            renderCharacterGrid()
-        } else {
-            renderCharacterGrid()
+        for (let i = 0; i < playerCount; i++) {
+            selectedPlayers[i] = {
+                character: 0,
+                localisation: 0,
+                unlockedSteps: {},
+                language: 'fr'
+            };
         }
-
+        console.log(`${playerCount} players initialized.`);
+        renderCharacterGrid()
     } else {
         console.error("Critical: Invalid player count");
         playerCountView() //Reset the player count screen
     }
 
     renderCharacterGrid()
+
+    // Bouton retour (header)
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button');
+        backButton.classList.add('back-btn-circle');
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `;
+        backButton.addEventListener('click', () => {
+            showConfirmationModal('choix-joueurs', () => playerCountView());
+        });
+        headerLeft.appendChild(backButton);
+    }
 }
 
 function renderCharacterGrid() {
@@ -155,42 +166,45 @@ function showCharacterDetails(regionId, characterId) {
 
     const languageSwitch = document.createElement('input')
     languageSwitch.type = 'checkbox'
-    languageSwitch.setAttribute('aria-label', 'Basculer la langue entre FR et Corse')
+    languageSwitch.setAttribute('aria-label', `Basculer la langue entre FR et ${regionId === '2' ? 'Provençal' : 'Corse'}`)
 
     const slider = document.createElement('span')
     slider.classList.add('toggle-slider')
 
-    const corFlag = document.createElement('img')
-    corFlag.src = './assets/drapeau/bandera.png'
-    corFlag.alt = 'Corsu'
-    corFlag.style.width = '32px'
-    corFlag.style.height = '32px'
-    corFlag.style.objectFit = 'contain'
-    corFlag.style.cursor = 'pointer'
-    corFlag.style.transition = 'opacity 0.3s ease, filter 0.3s ease, transform 0.2s ease'
-    corFlag.style.borderRadius = '4px'
+    const secondFlag = document.createElement('img')
+    // Utiliser drapeau provence pour Toulon, corse pour Corte
+    const isProvence = regionId === '2'
+    secondFlag.src = isProvence ? './assets/drapeau/provence.svg' : './assets/drapeau/bandera.png'
+    secondFlag.alt = isProvence ? 'Provençal' : 'Corsu'
+    secondFlag.style.width = '32px'
+    secondFlag.style.height = '32px'
+    secondFlag.style.objectFit = 'contain'
+    secondFlag.style.cursor = 'pointer'
+    secondFlag.style.transition = 'opacity 0.3s ease, filter 0.3s ease, transform 0.2s ease'
+    secondFlag.style.borderRadius = '4px'
 
     switchWrapper.append(languageSwitch, slider)
 
     // Initialize switch from current player's language
     const currentLang = selectedPlayers[currentPlayerIndex]?.language || 'fr'
-    languageSwitch.checked = currentLang === 'cor'
+    const secondLanguage = isProvence ? 'prov' : 'cor'
+    languageSwitch.checked = currentLang === secondLanguage
     setLanguage(currentLang)
     updateDescription()
 
     // Fonction pour mettre à jour les styles des drapeaux
     const updateFlagsStyle = () => {
-        const isCorseLanguage = languageSwitch.checked
-        if (isCorseLanguage) {
+        const isSecondLanguage = languageSwitch.checked
+        if (isSecondLanguage) {
             frFlag.style.opacity = '0.3'
             frFlag.style.filter = 'grayscale(100%)'
-            corFlag.style.opacity = '1'
-            corFlag.style.filter = 'grayscale(0%)'
+            secondFlag.style.opacity = '1'
+            secondFlag.style.filter = 'grayscale(0%)'
         } else {
             frFlag.style.opacity = '1'
             frFlag.style.filter = 'grayscale(0%)'
-            corFlag.style.opacity = '0.3'
-            corFlag.style.filter = 'grayscale(100%)'
+            secondFlag.style.opacity = '0.3'
+            secondFlag.style.filter = 'grayscale(100%)'
         }
     }
 
@@ -205,11 +219,11 @@ function showCharacterDetails(regionId, characterId) {
         frFlag.style.transform = 'scale(1)'
     })
 
-    corFlag.addEventListener('mouseenter', () => {
-        if (languageSwitch.checked) corFlag.style.transform = 'scale(1.1)'
+    secondFlag.addEventListener('mouseenter', () => {
+        if (languageSwitch.checked) secondFlag.style.transform = 'scale(1.1)'
     })
-    corFlag.addEventListener('mouseleave', () => {
-        corFlag.style.transform = 'scale(1)'
+    secondFlag.addEventListener('mouseleave', () => {
+        secondFlag.style.transform = 'scale(1)'
     })
 
     // Clic sur les drapeaux pour changer la langue
@@ -225,10 +239,10 @@ function showCharacterDetails(regionId, characterId) {
         }
     })
 
-    corFlag.addEventListener('click', () => {
+    secondFlag.addEventListener('click', () => {
         if (!languageSwitch.checked) {
             languageSwitch.checked = true
-            const newLang = 'cor'
+            const newLang = isProvence ? 'prov' : 'cor'
             selectedPlayers[currentPlayerIndex].language = newLang
             setLanguage(newLang)
             updateDescription()
@@ -238,14 +252,15 @@ function showCharacterDetails(regionId, characterId) {
     })
 
     languageSwitch.addEventListener('change', () => {
-        const newLang = languageSwitch.checked ? 'cor' : 'fr'
+        const newLang = languageSwitch.checked ? (isProvence ? 'prov' : 'cor') : 'fr'
         selectedPlayers[currentPlayerIndex].language = newLang
         setLanguage(newLang)
         updateDescription()
         updateSubmitLabel()
+        updateFlagsStyle()
     })
 
-    switchRow.append(frFlag, switchWrapper, corFlag)
+    switchRow.append(frFlag, switchWrapper, secondFlag)
 
     const submitButton = document.createElement('button')
     submitButton.classList.add("btn-primary")

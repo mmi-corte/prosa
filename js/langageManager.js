@@ -1,6 +1,6 @@
 /**
  * Language Manager for handling language selection and content translation
- * Supports French (fr) and Corsican (cor)
+ * Supports French (fr), Corsican (cor), and Provençal (prov)
  */
 
 export let currentLanguage = 'fr'; // Default to French
@@ -17,10 +17,10 @@ export async function initLanguageManager() {
 
 /**
  * Set the current language
- * @param {string} language - 'fr' or 'cor'
+ * @param {string} language - 'fr', 'cor', or 'prov'
  */
 export function setLanguage(language) {
-  if (language === 'fr' || language === 'cor') {
+  if (language === 'fr' || language === 'cor' || language === 'prov') {
     currentLanguage = language;
     localStorage.setItem('selectedLanguage', language);
     console.log('Language changed to:', language);

@@ -1,8 +1,10 @@
-import { navigate, gameContainer } from "../../../../app.js";
+import { navigate, gameContainer, headerLeft } from "../../../../app.js";
 import { gameInitialized, initGame, savePlayerData, globalDifficulty, setDifficulty } from "../../../initGame.js";
 import { fetchPlayerCharacters } from "../../../loadData.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { menuView } from "../menuView.js";
+import { characterSelectView } from "./characterSelectView.js";
+import { showConfirmationModal } from "../../components/confirmationModal.js";
 
 let charactersData
 
@@ -87,9 +89,13 @@ export async function playerSubmitView(selectedPlayers) {
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
         </svg>
     `
-    changeDifficultyBtn.addEventListener('click', () => {
+    
+    const handleDifficultyChange = () => {
         showDifficultyModal(selectedPlayers, difficultyValue)
-    })
+    }
+    
+    changeDifficultyBtn.addEventListener('click', handleDifficultyChange)
+    difficultySection.addEventListener('click', handleDifficultyChange)
     
     difficultySection.append(difficultyLabel, difficultyValue, changeDifficultyBtn)
     initContainer.appendChild(difficultySection)
@@ -121,6 +127,21 @@ export async function playerSubmitView(selectedPlayers) {
         }
         submit(selectedPlayers)
     })
+
+    // Bouton retour (header)
+    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
+        const backButton = document.createElement('button');
+        backButton.classList.add('back-btn-circle');
+        backButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `;
+        backButton.addEventListener('click', () => {
+            showConfirmationModal('choix-personnage', () => characterSelectView(selectedPlayers.length));
+        });
+        headerLeft.appendChild(backButton);
+    }
 }
 
 function renderEditablePlayerList(container, players) {
