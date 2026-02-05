@@ -451,7 +451,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "pierredelorcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -463,7 +463,7 @@
               "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_4_Orcu_1.mp3"
           },
           {
             "text": {
@@ -471,7 +471,7 @@
               "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_4_Orcu_2.mp3"
           },
           {
             "text": {
@@ -479,7 +479,7 @@
               "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_4_Orcu_3.mp3"
           },
           {
             "text": {
@@ -487,7 +487,7 @@
               "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_4_Orcu_4.mp3"
           },
           {
             "text": {
@@ -615,7 +615,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "interieur_chapelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -827,7 +827,7 @@
               "cor": "\"Linteti mi ! Linteti mi !\""
             },
             "pitch": 700,
-            "voice": ""
+            "voice": "Case_67_Fulettu_1.mp3"
           },
           {
             "text": {
@@ -841,7 +841,7 @@
               "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
             },
             "pitch": 700,
-            "voice": ""
+            "voice": "Case_67_Fulettu_2.mp3"
           },
           {
             "text": {
@@ -849,7 +849,7 @@
               "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
             },
             "pitch": 700,
-            "voice": ""
+            "voice": "Case_67_Fulettu_2-5.mp3"
           },
           {
             "text": {
@@ -875,7 +875,7 @@
               "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
             },
             "pitch": 700,
-            "voice": ""
+            "voice": "Case_67_Fulettu_3.mp3"
           }
         ],
         "nextActionType": "end",
@@ -955,7 +955,7 @@
               "cor": "Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu."
             },
             "pitch": 400,
-            "voice": "Case_10_Fulettu_malicieux_1_2.mp3"
+            "voice": "Case_9_Fulettu_malicieux.mp3"
           }
         ],
         "nextActionType": "game",
