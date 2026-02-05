@@ -296,6 +296,42 @@
     }
   },
   "2": {
+    "07": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "question"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "bonne réponse"
+                },
+                "score": 1
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "dialog",
+        "nextActionLose": "3"
+      }
+    },
     "14": {
       "1": {
         "random": true,

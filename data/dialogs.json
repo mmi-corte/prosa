@@ -1877,27 +1877,62 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous observez des wagons qui circulent sans jamais s'arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, vous devez sauter dans un wagon en marche.",
-              "cor": "Osservate vagoni chì circulanu senza mai firmà si, guidati da siluette enigmatiche, i Railadors. Per cuntinuà versu u portu senza esse spiatu, duvete saltà in un vagone in marcia."
+              "fr": "\"Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j’ai déniché : un masque à gaz permettant de filtrer les radiations.\""
             },
-            "pitch": 400
+            "pitch": 200
           },
           {
             "text": {
-              "fr": "À peine descendu, une scène capte votre attention : trois membres de la FLRP encerclent deux frères aux vêtements usés.",
-              "cor": "Appena falatu, una scena attira a vostra attenzione : trè membri di a FLRP circondanu dui fratelli cù vistimenti usati."
+              "fr": "\"Je te propose un jeu, afin de pimenter un peu la journée. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !\""
             },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Vous devez décider comment intervenir.",
-              "cor": "Duvete decide cumu intervenì."
-            },
-            "pitch": 400
+            "pitch": 200
           }
         ],
-        "nextActionType": "choice",
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous poursuivez votre chemin. Plus loin, une grille dissimulée sous les gravats laisse s’échapper un brouillard jaunâtre et toxique : La Coulobre."
+            }
+          },
+          {
+            "text": {
+              "fr": "Ce nuage empoisonné, qui attire serpents et maladies, bloque le passage. Pourtant, c’est la seule route sûre vers l’Opéra."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous poursuivez votre chemin. Plus loin, une grille dissimulée sous les gravats laisse s’échapper un brouillard jaunâtre et toxique : La Coulobre."
+            }
+          },
+          {
+            "text": {
+              "fr": "Ce nuage empoisonné, qui attire serpents et maladies, bloque le passage. Pourtant, c’est la seule route sûre vers l’Opéra."
+            }
+          }
+        ],
+        "nextActionType": "end",
         "nextAction": "2"
       }
     },
