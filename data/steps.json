@@ -445,30 +445,6 @@
           "nextStep": "17"
         }
       }
-    },
-    "160": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "lose",
-          "nextStep": "PROSA_PRISON"
-        },
-        "2": {
-          "type": "win",
-          "nextStep": "PROSA_SOLDIER"
-        }
-      }
-    },
-    "170": {
-      "actionType": "dialog",
-      "action": "1",
-      "end": {
-        "1": {
-          "type": "win",
-          "nextStep": "PROSA_REBEL"
-        }
-      }
     }
   },
   "3": {}
