@@ -859,6 +859,15 @@ body.light-mode .logo-main {
   margin: auto 0;
 }
 
+/* Page découvrir avec titre rapproché des boutons */
+.discover-wrapper {
+  justify-content: flex-start;
+}
+
+.discover-buttons {
+  margin: 8px 0 auto 0;
+}
+
 .menu-btn {
   width: 100%;
   background: var(--card);
@@ -1989,16 +1998,17 @@ body.light-mode .logo-main {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  gap: 30px;
 }
 
 .dialogWrapper {
   justify-content: end;
+  gap: 30px;
 }
 
 .playerSelect,
 .endWrapper {
   justify-content: center;
+  gap: 4px;
 }
 
 .dialogWrapper {
@@ -2594,8 +2604,9 @@ body.light-mode .logo-main {
 .player-select-title {
   font-size: 1.4rem;
   font-weight: 400;
-  text-align: center;
-  margin-top: 40px;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 12px;
   letter-spacing: 0.05em;
   color: var(--foreground);
 }

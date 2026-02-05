@@ -1,8 +1,114 @@
 // ===== WAVE SYNCHRONIZATION GAME =====
 
-// Canvas Setup
+// Detect light mode from parent application
+function initializeLightMode() {
+    const gameBody = document.getElementById('gameBody');
+    if (!gameBody) return;
+    
+    const settingLightMode = localStorage.getItem('settingLightMode');
+    if (settingLightMode === 'true') {
+        gameBody.classList.add('light-mode');
+    }
+    
+    // Watch for changes to light mode setting
+    const observer = new MutationObserver(() => {
+        const isLightMode = localStorage.getItem('settingLightMode') === 'true';
+        if (isLightMode) {
+            gameBody.classList.add('light-mode');
+        } else {
+            gameBody.classList.remove('light-mode');
+        }
+    });
+    
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+        subtree: true
+    });
+}
+
+// Initialize light mode on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeLightMode);
+} else {
+    initializeLightMode();
+}
+
+// Check for mode changes periodically
+setInterval(() => {
+    const gameBody = document.getElementById('gameBody');
+    if (!gameBody) return;
+    
+    const settingLightMode = localStorage.getItem('settingLightMode') === 'true';
+    const hasLightClass = gameBody.classList.contains('light-mode');
+    
+    if (settingLightMode && !hasLightClass) {
+        gameBody.classList.add('light-mode');
+    } else if (!settingLightMode && hasLightClass) {
+        gameBody.classList.remove('light-mode');
+    }
+}, 1000);
+
+// Canvas Setup - Global variables
 const canvas = document.getElementById('waveCanvas');
 const ctx = canvas.getContext('2d');
+let canvasWidth = 600;
+let canvasHeight = 120;
+let dpr = window.devicePixelRatio || 1;
+
+// Responsive canvas sizing
+function resizeCanvas() {
+    if (!canvas || !canvas.parentElement) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const computedStyle = window.getComputedStyle(canvas);
+    
+    // Get actual visible dimensions
+    canvasWidth = Math.max(rect.width || 300, 100);
+    canvasHeight = Math.max(rect.height || 120, 60);
+    dpr = window.devicePixelRatio || 1;
+    
+    // Set canvas resolution
+    canvas.width = canvasWidth * dpr;
+    canvas.height = canvasHeight * dpr;
+    
+    // Reset canvas transform
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+// Debounced resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+        drawWaves();
+    }, 100);
+});
+
+// Ensure canvas is properly initialized when DOM is ready
+function initializeCanvas() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Give browser time to apply CSS
+            requestAnimationFrame(() => {
+                resizeCanvas();
+                drawWaves();
+            });
+        });
+    } else {
+        // DOM already loaded
+        requestAnimationFrame(() => {
+            resizeCanvas();
+            drawWaves();
+        });
+    }
+}
+
+// Start canvas initialization immediately
+initializeCanvas();
 
 // Game State
 let timeLeft = 50;
@@ -141,16 +247,29 @@ function generateRandomTarget() {
 
 // ===== WAVE DRAWING FUNCTIONS =====
 
+function getColors() {
+    const isLightMode = document.getElementById('gameBody')?.classList.contains('light-mode');
+    return {
+        primary: isLightMode ? '#646454' : '#00ff00',
+        accent: isLightMode ? '#4a7c59' : '#00ffff',
+        warning: isLightMode ? '#8b8b00' : '#ffff00',
+        danger: isLightMode ? '#c94a4a' : '#ff0000',
+        bg: isLightMode ? '#f5f5f0' : '#000000',
+        grid: isLightMode ? 'rgba(100, 100, 100, 0.1)' : 'rgba(0, 255, 0, 0.1)',
+        gridCenter: isLightMode ? 'rgba(100, 100, 100, 0.2)' : 'rgba(0, 255, 0, 0.2)'
+    };
+}
+
 function drawWave(phase, amplitude, color, lineWidth, label) {
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 8;
     ctx.shadowColor = color;
     
     ctx.beginPath();
-    for (let x = 0; x < canvas.width; x++) {
-        const t = (x / canvas.width) * Math.PI * 4;
-        const y = canvas.height / 2 + Math.sin(FREQUENCY * t + phase) * amplitude;
+    for (let x = 0; x < canvasWidth; x++) {
+        const t = (x / canvasWidth) * Math.PI * 4;
+        const y = canvasHeight / 2 + Math.sin(FREQUENCY * t + phase) * (amplitude * canvasHeight / 200);
         
         if (x === 0) {
             ctx.moveTo(x, y);
@@ -163,46 +282,50 @@ function drawWave(phase, amplitude, color, lineWidth, label) {
     // Label
     ctx.shadowBlur = 0;
     ctx.fillStyle = color;
-    ctx.font = '12px "Courier New"';
-    ctx.fillText(label, 10, label === 'CIBLE' ? 20 : 40);
+    ctx.font = 'bold 11px "Courier New"';
+    ctx.fillText(label, 8, label === 'CIBLE' ? 16 : 30);
 }
 
 function drawWaves() {
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const colors = getColors();
+    
+    ctx.fillStyle = colors.bg;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     
     // Draw grid
-    ctx.strokeStyle = 'rgba(0, 255, 0, 0.1)';
+    ctx.strokeStyle = colors.grid;
     ctx.lineWidth = 1;
     ctx.shadowBlur = 0;
     
     // Horizontal lines
-    for (let y = 0; y < canvas.height; y += 40) {
+    const hSpacing = canvasHeight / 5;
+    for (let y = hSpacing; y < canvasHeight; y += hSpacing) {
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+        ctx.lineTo(canvasWidth, y);
         ctx.stroke();
     }
     
     // Vertical lines
-    for (let x = 0; x < canvas.width; x += 60) {
+    const vSpacing = canvasWidth / 10;
+    for (let x = vSpacing; x < canvasWidth; x += vSpacing) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+        ctx.lineTo(x, canvasHeight);
         ctx.stroke();
     }
     
     // Center line
-    ctx.strokeStyle = 'rgba(0, 255, 0, 0.2)';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = colors.gridCenter;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height / 2);
-    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.moveTo(0, canvasHeight / 2);
+    ctx.lineTo(canvasWidth, canvasHeight / 2);
     ctx.stroke();
     
-    // Draw waves avec dérive de la cible
-    drawWave(targetPhase + targetDrift, targetAmplitude, '#00ff00', 3, 'CIBLE');
-    drawWave(playerPhase, playerAmplitude, '#00ffff', 2, 'JOUEUR');
+    // Draw waves
+    drawWave(targetPhase + targetDrift, targetAmplitude, colors.primary, 2.5, 'CIBLE');
+    drawWave(playerPhase, playerAmplitude, colors.accent, 2, 'JOUEUR');
 }
 
 // ===== NEEDLE POSITION =====
@@ -251,6 +374,7 @@ tuningSliderAmplitude.addEventListener('input', function() {
 // ===== SYNCHRONIZATION CHECK =====
 
 function checkSynchronization() {
+    const colors = getColors();
     const phaseDiff = Math.abs(playerPhase - (targetPhase + targetDrift));
     const normalizedPhaseDiff = Math.min(phaseDiff, Math.PI * 2 - phaseDiff);
     const ampDiff = Math.abs(playerAmplitude - targetAmplitude);
@@ -261,24 +385,24 @@ function checkSynchronization() {
     // Update status displays
     if (phaseSynced) {
         phaseStatus.textContent = 'SYNC OK';
-        phaseStatus.style.color = '#00ffff';
+        phaseStatus.style.color = colors.accent;
     } else if (normalizedPhaseDiff < PHASE_TOLERANCE * 2) {
         phaseStatus.textContent = 'PROCHE';
-        phaseStatus.style.color = '#ffff00';
+        phaseStatus.style.color = colors.warning;
     } else {
         phaseStatus.textContent = 'DÉSYNC';
-        phaseStatus.style.color = '#00ff00';
+        phaseStatus.style.color = colors.primary;
     }
     
     if (ampSynced) {
         amplitudeStatus.textContent = 'SYNC OK';
-        amplitudeStatus.style.color = '#00ffff';
+        amplitudeStatus.style.color = colors.accent;
     } else if (ampDiff < AMPLITUDE_TOLERANCE * 2) {
         amplitudeStatus.textContent = 'PROCHE';
-        amplitudeStatus.style.color = '#ffff00';
+        amplitudeStatus.style.color = colors.warning;
     } else {
         amplitudeStatus.textContent = 'DÉSYNC';
-        amplitudeStatus.style.color = '#00ff00';
+        amplitudeStatus.style.color = colors.primary;
     }
     
     return phaseSynced && ampSynced;
@@ -389,6 +513,7 @@ function startGame() {
 }
 
 function endGame(victory) {
+    const colors = getColors();
     gameIsRunning = false;
     clearInterval(timerInterval);
     if (animationFrame) {
@@ -400,9 +525,9 @@ function endGame(victory) {
         messageText.className = 'status-content synced';
         messageText.innerHTML = '<span class="prompt">&gt;</span> SIGNAL ACQUIS. TRANSMISSION ÉTABLIE.<br><br>Tous les signaux ont été synchronisés. Réception du message entrant...';
         phaseStatus.textContent = 'VERROUILLÉ';
-        phaseStatus.style.color = '#00ffff';
+        phaseStatus.style.color = colors.accent;
         amplitudeStatus.textContent = 'VERROUILLÉ';
-        amplitudeStatus.style.color = '#00ffff';
+        amplitudeStatus.style.color = colors.accent;
         
         setTimeout(function() {
             showRadioModal();
@@ -411,9 +536,9 @@ function endGame(victory) {
         messageText.className = 'status-content failed';
         messageText.innerHTML = `<span class="prompt">&gt;</span> PERTE DE SIGNAL. TROP LENT.<br><br>Signaux synchronisés: ${successCount}/3. Le signal s'est dissipé avant synchronisation complète.`;
         phaseStatus.textContent = 'ÉCHEC';
-        phaseStatus.style.color = '#ff0000';
+        phaseStatus.style.color = colors.danger;
         amplitudeStatus.textContent = 'ÉCHEC';
-        amplitudeStatus.style.color = '#ff0000';
+        amplitudeStatus.style.color = colors.danger;
         
         startBtn.disabled = false;
         startBtn.textContent = '> RÉESSAYER';

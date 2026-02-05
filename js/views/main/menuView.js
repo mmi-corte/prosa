@@ -19,7 +19,7 @@ export function menuView() {
 
   gameContainer.innerHTML = `
     <div class="menuWrapper menuWrapper-ingame">
-      <h1 class="menu-title menu-title-left">AU COURS DU JEU</h1>
+      ${gameInitialized ? '<h1 class="menu-title menu-title-left">AU COURS DU JEU</h1>' : ''}
 
       <div class="menu-content-ingame" id="menuContentIngame">
         
@@ -110,10 +110,10 @@ function showDiscoverPage() {
   clearContainer()
 
   gameContainer.innerHTML = `
-    <div class="menuWrapper">
+    <div class="menuWrapper discover-wrapper">
       <h1 class="menu-title menu-title-left">DÉCOUVRIR L'UNIVERS</h1>
 
-      <nav class="menu-buttons">
+      <nav class="menu-buttons discover-buttons">
         <button class="menu-btn btn-extra" id="discoverCharactersBtn">
           <span class="btn-title">Découvrir les personnages</span>
           <span class="btn-subtitle">pouvoirs, histoire</span>

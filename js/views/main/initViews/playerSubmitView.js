@@ -6,6 +6,55 @@ import { menuView } from "../menuView.js";
 
 let charactersData
 
+// Vérifier l'équilibre entre Corte (1) et Toulon (2)
+function checkRegionBalance(players) {
+    const corteCount = players.filter(p => p.localisation === 1).length
+    const toulonCount = players.filter(p => p.localisation === 2).length
+    const totalPlayers = players.length
+    
+    // Pour un nombre pair : moitié chaque
+    // Pour un nombre impair : maximum 1 de différence
+    const maxDifference = totalPlayers % 2 === 0 ? 0 : 1
+    const difference = Math.abs(corteCount - toulonCount)
+    
+    console.log(`Corte: ${corteCount}, Toulon: ${toulonCount}, Diff: ${difference}, Max allowed: ${maxDifference}`)
+    
+    return difference <= maxDifference
+}
+
+// Afficher le popup d'erreur d'équilibre
+function showBalanceErrorPopup(players, onReset) {
+    const totalPlayers = players.length
+    const corteCount = players.filter(p => p.localisation === 1).length
+    const toulonCount = players.filter(p => p.localisation === 2).length
+    
+    const requiredPerRegion = Math.floor(totalPlayers / 2)
+    const isOdd = totalPlayers % 2 !== 0
+    
+    let message = ''
+    if (isOdd) {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir ${requiredPerRegion} ou ${requiredPerRegion + 1} personnages de chaque région.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    } else {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir exactement ${requiredPerRegion} personnages de Corte et ${requiredPerRegion} de Toulon.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    }
+    
+    const modalOverlay = document.createElement('div')
+    modalOverlay.classList.add('modal-overlay')
+    modalOverlay.innerHTML = `
+        <div class="modal-content balance-error-modal">
+            <h2>ÉQUILIBRE REQUIS</h2>
+            <p>${message}</p>
+            <button class="btn-primary" id="continueEditBtn">Continuer la modification</button>
+        </div>
+    `
+    
+    document.body.appendChild(modalOverlay)
+    
+    document.getElementById('continueEditBtn').addEventListener('click', () => {
+        modalOverlay.remove()
+    })
+}
+
 export async function playerSubmitView(selectedPlayers) {
     if (gameInitialized) {
         navigate('menu', menuView(), true)
@@ -65,6 +114,11 @@ export async function playerSubmitView(selectedPlayers) {
     initContainer.appendChild(submitButton)
 
     submitButton.addEventListener('click', () => {
+        // Vérifier l'équilibre avant la validation finale
+        if (!checkRegionBalance(selectedPlayers)) {
+            showBalanceErrorPopup(selectedPlayers)
+            return
+        }
         submit(selectedPlayers)
     })
 }
@@ -161,6 +215,11 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
                     // Mettre à jour le joueur
                     selectedPlayers[playerIndex].character = charIndex
                     selectedPlayers[playerIndex].localisation = parseInt(regionId)
+                    
+                    // Vérifier l'équilibre après la modification
+                    if (!checkRegionBalance(selectedPlayers)) {
+                        showBalanceErrorPopup(selectedPlayers)
+                    }
                     
                     // Rafraîchir la liste
                     playerListEl.innerHTML = ''
