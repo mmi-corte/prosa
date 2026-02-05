@@ -32,7 +32,8 @@ export function setActivePlayer(playerIndex) {
  */
 export async function checkStepExist(stepId) {
     //Check if there is an unlocked step for the current player
-    const unlockedStepId = activePlayer.unlockedSteps?.[parseInt(stepId)]
+    console.log(activePlayer)
+    const unlockedStepId = activePlayer.unlockedSteps?.[stepId]
 
     //Search for the full step ID with unlocked step, or default to base step with variant 0
     const searchId = unlockedStepId || `${stepId}0`
