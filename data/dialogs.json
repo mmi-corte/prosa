@@ -1983,49 +1983,68 @@
         "dialog": [
           {
             "text": {
-              "fr": "Alors que la tension est à son comble entre les soldats et les deux frères, une présence s'impose soudain. Une femme avance d'un pas assuré le long de l'allée déserte.",
-              "cor": "Mentre chì a tensione hè à u culmu trà i suldati è i dui fratelli, una presenza s'impone subitu. Una donna avanza d'un passu assicuratu longu l'allee deserta."
-            },
-            "pitch": 400
+              "fr": "L’Opéra se dresse devant vous comme un monument culturel imposant, ravagé par le temps. La lourde porte s’ouvre dans un grincement sourd."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "À l’intérieur, vous progressez prudemment de pièce en pièce. Des abris de fortune abandonnés jonchent les couloirs, témoins d’un passé où des habitants ont tenté d’y survivre."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L’Opéra se dresse devant vous comme un monument culturel imposant, ravagé par le temps. La lourde porte s’ouvre dans un grincement sourd."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "À l’intérieur, vous progressez prudemment de pièce en pièce. Des abris de fortune abandonnés jonchent les couloirs, témoins d’un passé où des habitants ont tenté d’y survivre."
+            }
           },
           {
             "text": {
-              "fr": "Vêtue de cuir et de fourrure, un fusil fermement serré contre elle, elle force naturellement les passants à s'écarter. C'est la Cabro d'Or, une figure majeure de l'organisation Prosa.",
-              "cor": "Vestita di core è di pelliccia, un fucile fermamente strettu contr'à ella, forza naturalmente i passanti à si scostà. Hè a Cabro d'Or, una figura maiò di l'urganizazione Prosa."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.",
-              "cor": "Avete superatu i limiti. Sparite è turnerete cù ciò chì serve per riparà ciò chì avete distruttu."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Humiliés, les soldats obéissent sans discuter et quittent les lieux. La Cabro d'Or se tourne alors vers vous.",
-              "cor": "Umiliati, i suldati obbediscenu senza discutà è lascenu u locu. A Cabro d'Or si volta tandu versu voi."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Peu auraient pris ce risque. Garde l'œil ouvert. Je devine aisément tes intentions jeune homme.",
-              "cor": "Pochi avianu presu stu risicu. Tene l'ochju apertu. Induvinu facilmente e to intenzione ghjovane omu."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Sans un mot de plus, elle s'éloigne. Les frères vous remercient et vous indiquent la direction de l'Opéra de Toulon.",
-              "cor": "Senza una parolla di più, s'alluntana. I fratelli vi ringrazianu è vi indicanu a direzzione di l'Opera di Tolone."
-            },
-            "pitch": 400
+              "fr": "À l'aide du roseau trouvé dans le jardin, vous parvenez à progresser dans l'Opéra sans encombre."
+            }
           }
         ],
         "nextActionType": "end",
-        "nextAction": "0700"
+        "nextAction": "1"
       }
     },
     "10": {

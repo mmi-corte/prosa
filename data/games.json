@@ -117,6 +117,15 @@
                 "nextActionLose": "2"
             }
         },
+        "09": {
+            "1": {
+                "game": "son_opera",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
+            }
+        },
         "12": {
             "1": {
                 "game": "loudrape_epreuve",
