@@ -7,6 +7,7 @@ import { gameView } from "./views/actions/gameView.js";
 import { riddleView } from "./views/actions/riddleView.js";
 import { menuView } from "./views/main/menuView.js";
 import { setLanguage } from "./langageManager.js";
+import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
 
 export let activePlayer
 export let activeStepId
@@ -70,10 +71,10 @@ export async function startStep(fullStepId) {
 
 /**
  * Fonction d'appel d'action
- * @param  {'dialog'|'choice'|'riddle'|'game'|'ar'|'end'} actionType Type d'action appelé.
+ * @param  {'dialog'|'choice'|'riddle'|'game'|'ar'|'end'|'aleasRiddle'} actionType Type d'action appelé.
  * @param  {[number]} action Numéro d'action appelé pour l'étape active
  */
-export function callAction(actionType, action) {
+export function callAction(actionType, action = null) {
     console.log("Calling action", actionType, action)
 
     switch (actionType) {
@@ -93,6 +94,9 @@ export function callAction(actionType, action) {
             break;
         case "end":
             endView(action)
+            break;
+        case "aleasRiddle":
+            aleasRiddleView();
             break;
         default:
             console.error(`Incorrect data: action type ${actionType} doesn't exist for action ${activeStepId}`)

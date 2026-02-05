@@ -5,6 +5,7 @@ export let dialogsData = [];
 export let choicesData = [];
 export let riddlesData = [];
 export let gamesData = [];
+export let aleasRiddlesData = [];
 
 /**
  * Fonction de chargement des données pour l'étape en cours
@@ -64,6 +65,20 @@ export async function fetchSteps() {
     }
 }
 
+export async function fetchAleasRiddles() {
+    try {
+        const response = await fetch('./data/aleasRiddles.json');
+        if (!response.ok) throw new Error('Failed to load aleas riddles data');
+
+        const dataFetch = await response.json();
+        console.log(`Aleas Riddles data successfully loaded`);
+        aleasRiddlesData = dataFetch;
+    } catch (error) {
+        console.error("Critical: Could not load aleas riddles data", error);
+        return {};
+    }
+}
+
 export async function fetchPlayerCharacters() {
     try {
         const response = await fetch('./data/playersCharacters.json');
@@ -77,3 +92,4 @@ export async function fetchPlayerCharacters() {
         return null;
     }
 }
+

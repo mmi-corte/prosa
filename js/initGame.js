@@ -1,4 +1,4 @@
-import { fetchSteps } from "./loadData.js";
+import { fetchAleasRiddles, fetchSteps } from "./loadData.js";
 
 export let playerCharactersData
 export let players = {}
@@ -22,8 +22,9 @@ export async function initGame() {
         //Set the global initialized state to true
         gameInitialized = true
 
-        //If the game is loaded, fetch the steps JSON
+        //If the game is loaded, fetch the steps JSON and aleas riddles
         await fetchSteps()
+        await fetchAleasRiddles()
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {

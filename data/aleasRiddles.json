@@ -1,0 +1,60 @@
+  {
+    "01": {
+      "question": {
+        "fr": "Question 1",
+        "cor": "Question 1"
+      },
+      "choices": [
+        {
+          "text": {
+            "fr": "mauvaise reponse",
+            "cor": "mauvaise reponse"
+          },
+          "score": -1
+        },
+        {
+          "text": {
+            "fr": "mauvaise reponse",
+            "cor": "mauvaise reponse"
+          },
+          "score": -1
+        },
+        {
+          "text": {
+            "fr": "bonne reponse",
+            "cor": "bonne reponse"
+          },
+          "score": 1
+        }
+      ]
+    },
+    "02": {
+      "question": {
+        "fr": "Question 2",
+        "cor": "Question 2"
+      },
+      "choices": [
+        {
+          "text": {
+            "fr": "mauvaise reponse",
+            "cor": "mauvaise reponse"
+          },
+          "score": -1
+        },
+        {
+          "text": {
+            "fr": "mauvaise reponse",
+            "cor": "mauvaise reponse"
+          },
+          "score": -1
+        },
+        {
+          "text": {
+            "fr": "bonne reponse",
+            "cor": "bonne reponse"
+          },
+          "score": 1
+        }
+      ]
+    }
+  }

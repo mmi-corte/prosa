@@ -7,6 +7,7 @@ import { initView } from "./initView.js"
 import { playerSelectView } from "./playerSelectView.js"
 import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
+import { aleasView } from "./aleasView.js"
 
 export function menuView() {
   // Vérifier immédiatement si le joueur a perdu (batterie à 0)
@@ -73,6 +74,19 @@ export function menuView() {
 
   navContainer.appendChild(startButton)
 
+  //Aleas Button
+  if (gameInitialized) {
+    const aleasButton = document.createElement('button')
+    aleasButton.classList.add('menu-btn-big')
+    aleasButton.innerHTML = `ALÉAS`
+
+    aleasButton.addEventListener('click', () => {
+      navigate("aleas", () => aleasView())
+    })
+
+    navContainer.appendChild(aleasButton)
+  }
+
   //AR Button
   const arButton = document.createElement('button')
   arButton.classList.add('menu-btn-big')
@@ -87,20 +101,6 @@ export function menuView() {
   document.getElementById('discoverBtn').addEventListener('click', () => {
     showDiscoverPage()
   })
-
-  const debugButton = document.createElement('button')
-  debugButton.classList.add('menu-btn')
-  debugButton.innerText = 'DEBUG - Diminuer difficulté'
-  debugButton.style.color = 'white'
-  debugButton.addEventListener('click', () => {
-    const hasLost = decrementDifficultyState()
-    if (hasLost) {
-      navigate('gameover', gameOverView, true)
-    } else {
-      menuView()
-    }
-  })
-  navContainer.appendChild(debugButton)
 }
 
 
