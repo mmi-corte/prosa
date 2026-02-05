@@ -1400,13 +1400,6 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans un abri de fortune, un poste radio ancien et cabossé est disposé sur une table.",
-              "cor": "In un rifugiu di furtuna, una vecchia radio è posta nantu à una tavula."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
@@ -1427,40 +1420,19 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
-              "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
+              "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\""
             },
-            "pitch": 400,
-            "voice": ""
+            "pitch": 400
           },
           {
             "text": {
-              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-              "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
+              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meure. J’ai tenté de résister mais j’ai échoué… \""
             },
-            "pitch": 400,
-            "voice": ""
+            "pitch": 400
           },
           {
             "text": {
-              "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
-              "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
-            },
-            "pitch": 400,
-            "voice": ""
-          },
-          {
-            "text": {
-              "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
-              "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
-            },
-            "pitch": 400,
-            "voice": ""
-          },
-          {
-            "text": {
-              "fr": "La voix s'interrompt soudainement…",
-              "cor": "A voce s'interrompe subitu…"
+              "fr": "\"J’ai besoin de vous. Rejoignez Prosa et continuer ma révolution !\""
             },
             "pitch": 400
           }
@@ -1480,70 +1452,157 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous êtes assis sur les rails rouillés. Les quais sont déserts, envahis par la nature. Au fond, un groupe de civils avance lentement, encadré par des silhouettes armées.",
-              "cor": "Site assittatu nantu à i binari arrugginiti. E banchine sò deserte, invase da a natura. In fondu, un gruppu di civili avanza pianu pianu, incurniciatu da siluette armate."
+              "fr": "Vous êtes assis sur les rails rouillés. Les quais sont déserts, envahis par la nature. Au fond, un groupe de civils avance lentement, encadré par des silhouettes armées."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "L'un d'eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n'est libre et l'île, réelle ou non vous apparaît soudain comme une évidence.",
-              "cor": "Unu d'elli inciampa è hè brutalmente rializatu, custrettu à cuntinuà. Quì, nimu hè liberu è l'isula, vera o micca vi appare subitu cum'è una evidenza."
+              "fr": "L’un d’eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n’est libre et l’île, réel ou non vous apparait soudain comme une évidence."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "À l'entrée du tunnel, deux personnes semblent fatiguées, assises près d'un feu de fortune : Gyptis et Protis. Vous vous approchez pour leur parler.",
-              "cor": "À l'entrata di u tunnel, duie persone parenu stanchi, assittati vicinu à un focu di furtuna : Gyptis è Protis. Vi avvicinate per parlà li."
+              "fr": "Vous êtes maintenant déterminé à en savoir plus."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semble fiable et bienveillant. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Vous décidez de leur raconter le message radio et votre intention de trouver l'île.",
-              "cor": "Decidite di cuntà li u missaghju di a radio è a vostra intenzione di truvà l'isula."
+              "fr": "\"Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la FLRP, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie du U Sarpu a Sette Capi.\""
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.",
-              "cor": "Pensi daveru d'andà à u portu ? Ùn ti ne rendi micca contu di u periculu chì rapprisenta."
+              "fr": "\"Le port est une zone constamment surveillée, tu risques ta vie.\""
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous les regardez remplit de détermination sans rien dire."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Gyptis a raison, Toulon est sous le contrôle de la FLRP, La Fédération Li Rais de Prouvènço. Lou Drapé, un des chefs, fait partie du U Sarpu a Sette Capi qui dirige Prosa. Le port est constamment surveillé, tu risques ta vie.",
-              "cor": "Gyptis hà ragione, Tolone hè sottu u cuntrollu di a FLRP, A Federazione Li Rais de Prouvènço. Lou Drapé, unu di i capi, face parte di U Sarpu a Sette Capi chì dirige Prosa. U portu hè custantemente surveglatu, risichi a to vita."
+              "fr": "\"Tu sembles toujours déterminé à atteindre le port malgré nos avertissements. L’Opéra peut t’aider. Des gens importants y passent encore.\""
+            },
+            "pitch": 500
+          },
+          {
+            "text": {
+              "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port\""
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Tu sembles toujours déterminé malgré nos avertissements. L'Opéra peut t'aider. Des gens importants y passent encore. Ce lieu sera un point clé sur ton chemin vers le port.",
-              "cor": "Pari sempre determinatu malgradu i nostri avvisi. L'Opera pò aiutà ti. A ghjente impurtante ci passa sempre. Stu locu serà un puntu chjave nantu à u to caminu versu u portu."
+              "fr": "\"Sylvain a essayé de résister. Ils l’ont envoyé sur Prosa. Comme les autres.\""
             },
             "pitch": 400
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Tu as le choix entre deux routes pour avancer. Longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.\""
+            },
+            "pitch": 500
           },
           {
             "text": {
-              "fr": "Sylvain a essayé de résister. Ils l'ont envoyé sur Prosa. Comme les autres.",
-              "cor": "Sylvain hà pruvatu à resistà. L'anu mandatu nantu à Prosa. Cum'è l'altri."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Tu as le choix entre deux routes : longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.",
-              "cor": "Ai a scelta trà duie strade : seguità u tunnel per sbuccà versu u cimiteru… o passà per e ruelles per ghjunghje à u giardinu Alexandre 1er."
+              "fr": "Vous les remercier sincèrement pour leur aide et continuez votre chemin."
             },
             "pitch": 400
           }
         ],
         "nextActionType": "choice",
         "nextAction": "1"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le tunnel semble être calme mais vous entendez un bruitmétallique inquiétant au bout."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "6": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Les ruelles sont un passage tranquille mais qui vous semble dangereux maintenant que vous avez choisi la rébellion."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
       }
     },
     "03": {
@@ -1557,50 +1616,116 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre, une jeune femme est agenouillée devant une sépulture. Lorsque vous vous approchez, elle se redresse brusquement et braque une arbalète.",
-              "cor": "Sortite da u tunnel è ghjunghje à u vechju cimiteru. À u centru, una ghjovana hè inginochjata davanti à una sepultura. Quandu vi avvicinate, si rialza bruscamente è punta una balestra."
+              "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre de celui-ci, une jeune femme est agenouillée devant une sépulture. Lorsqu’il s’approche, elle se redresse brusquement et braque une arbalète."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Pas un pas de plus. Que fais-tu ici ?",
-              "cor": "Micca un passu di più. Chì faci quì ?"
+              "fr": "\"Pas un pas de plus. Que fais-tu ici ?\""
             },
-            "pitch": 400,
+            "pitch": 600,
             "voice": ""
           },
           {
             "text": {
-              "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme.",
-              "cor": "Affirmate chì ùn fate chè attraversà u cimiteru per ghjunghje à u portu. Vi osserva, esita, poi abbassa a so arma."
+              "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux. Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.",
-              "cor": "Poca ghjente dice a verità quì. Stu locu nasconde qualcosa di assai periculosu. Un'arma di distruzzione massiva chì puderia purtà à u caosu s'ella casca in e mani di Lou Drapé."
+              "fr": "\"Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux.\""
+            },
+            "pitch": 600
+          },
+          {
+            "text": {
+              "fr": "Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé."
+            },
+            "pitch": 600
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l’ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer comme deux yeux menaçants."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l'ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer.",
-              "cor": "Vi conduce à u fondu di u cimiteru. Una massa metallica gigantesca riposa in l'ombra : a Tarasca, un camiò blindatu cù i fari sempre accesi chì parenu osservà vi."
+              "fr": "Vous lui faits remarquer qu’elle ne pourra pas la dissimuler éternellement et qu’il vaut mieux s’en débarrasser. Vous lui proposez votre aide en échange de son soutien pour poursuivre votre route vers le port."
             },
-            "pitch": 400
+            "pitch": 600
           },
           {
             "text": {
-              "fr": "Ils sont morts à cause d'elle. J'accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t'accompagnerai plus loin.",
-              "cor": "Sò morti per via di ella. Accettu a to pruposta… mà serà periculosu. S'ellu mai ne sortemu vittoriosi, t'accumpagneraghju più luntanu."
+              "fr": "\"Ils sont morts à cause d’elle. J’accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t’accompagnerai plus loin.\""
             },
-            "pitch": 400
+            "pitch": 600
+          },
+          {
+            "text": {
+              "fr": "Elle vous explique le système d’auto-défense : un détecteur réagit à toute agression, déclenchant un champ thermique brûlant et une décharge électrique mortelle."
+            },
+            "pitch": 600
           }
         ],
         "nextActionType": "game",
         "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La Tarasca s’active. Une décharge vous projette au sol. Sainte-Marthe, en larmes, vous supplie de fuir vers la rue adjacente où vous trouverais un abri."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement"
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La Tarasca est détruite. Devant l’amas de métal fumant, Sainte-Marthe, submergée par l’émotion, vous remercie. Elle avoue être ingénieure en robotique et connaître un endroit tout proche qui pourra vous aider à progresser vers le port."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
       }
     },
     "04": {
@@ -1614,22 +1739,19 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans une ruelle étroite, une silhouette noire surgit. L'animal est trop grand pour être un simple chat. Immobile, il semble vous observer.",
-              "cor": "In una ruelle stretta, una siluetta nera surge. L'animale hè troppu grande per esse un simplice ghjattu. Immobile, pare osservà vi."
+              "fr": "Dans une ruelle étroite, une silhouette noire surgit l’animal est trop grand pour être un simple chat. Immobile, il semble vous observer. Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage. Après quelques secondes, le félin s'enfuit soudainement.",
-              "cor": "Pensate di ricunnosce un Matagot, una criatura di e leggende pruvenzale, assuciata à u malu presagiu. Dopu qualchi secondu, u felinu fughje subitu."
+              "fr": "Après quelques secondes, le félin s’enfuit soudainement. En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. C’est un lieu ravagé par des débris et la végétation."
             },
             "pitch": 400
           },
           {
             "text": {
-              "fr": "En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. Les allées encombrées forment un véritable labyrinthe et le Matagot s'enfuit à travers une ouverture trop étroite pour le suivre.",
-              "cor": "Seguendulu entrate in u Giardinu Alexandre 1er. L'allei ingombrate formanu un veru labirintu è u Matagot fughje attraversu un'apertura troppu stretta per seguità lu."
+              "fr": "Les allées encombrée forment un véritable labyrinthe et le Matagot comme fière de vous avoir amenez au centre de ce labyrinthe s’enfuit à travers une ouverture trop étroite pour le suivre."
             },
             "pitch": 400
           }

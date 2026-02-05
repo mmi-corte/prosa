@@ -93,19 +93,19 @@
         "03": {
             "1": {
                 "game": "tarasca_defense",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "3",
+                "nextActionTypeLose": "dialog",
+                "nextActionLose": "4"
             }
         },
         "04": {
             "1": {
-                "game": "toulon_game_04",
+                "game": "labyrinthe_escape",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
                 "nextActionTypeLose": "end",
-                "nextActionLose": "2"
+                "nextActionLose": "4"
             }
         },
         "10": {

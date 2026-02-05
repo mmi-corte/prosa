@@ -185,25 +185,22 @@
     "02": {
       "1": {
         "question": {
-          "fr": "Quelle route choisissez-vous ?",
-          "cor": "Quale strada sceglite ?"
+          "fr": "Quelle route choisissez-vous ?"
         },
         "choices": [
           {
             "text": {
-              "fr": "Passer par le tunnel (cimetière)",
-              "cor": "Passà per u tunnel (cimiteru)"
+              "fr": "Passer par le tunnel (cimetière)"
             },
-            "nextActionType": "end",
-            "nextAction": "1"
+            "nextActionType": "dialog",
+            "nextAction": "5"
           },
           {
             "text": {
-              "fr": "Passer par les ruelles (jardin Alexandre Ier)",
-              "cor": "Passà per e ruelle (giardinu Alexandre 1er)"
+              "fr": "Passer par les ruelles (jardin Alexandre Ier)"
             },
-            "nextActionType": "end",
-            "nextAction": "2"
+            "nextActionType": "dialog",
+            "nextAction": "6"
           }
         ]
       }

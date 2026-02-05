@@ -297,7 +297,7 @@
           "nextStep": "05"
         },
         "2": {
-          "type": "lose",
+          "type": "win",
           "nextStep": "06"
         }
       }
