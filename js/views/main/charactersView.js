@@ -143,6 +143,15 @@ function goToCharacterDetail(char) {
                 <h2 class="character-name" id="characterDetailName"></h2>
             </div>
 
+        <div class="character-language-switch">
+            <img src="./assets/drapeau/france.png" alt="Français" class="language-flag" id="flagFrench">
+            <label class="switch-toggle">
+                <input type="checkbox" id="characterLanguageSwitch">
+                <span class="toggle-slider"></span>
+            </label>
+            <img src="./assets/drapeau/bandera.png" alt="Corsu" class="language-flag" id="flagCorse">
+        </div>
+
         <div class="character-description" id="characterDescription">
         </div>
     `
@@ -183,10 +192,68 @@ function goToCharacterDetail(char) {
         characterDetailImage.alt = `Illustration ${char.name}`
     }
     characterDetailName.textContent = char.name
-    characterDescription.innerHTML = `
-    <p>${char.description}</p>
-    <span class="role">${char.role}</span>
-    `
+    
+    // État de la langue (false = français, true = corse)
+    let isCorseLanguage = false
+    
+    const updateDescription = () => {
+        const description = isCorseLanguage ? (char.description_co || char.description) : char.description
+        const role = isCorseLanguage ? (char.role_co || char.role) : char.role
+        characterDescription.innerHTML = `
+        <p>${description}</p>
+        <span class="role">${role}</span>
+        `
+    }
+    
+    updateDescription()
+    
+    // Gestion du switch de langue
+    const languageSwitch = modal.querySelector('#characterLanguageSwitch')
+    const flagFrench = modal.querySelector('#flagFrench')
+    const flagCorse = modal.querySelector('#flagCorse')
+    
+    // Fonction pour mettre à jour les styles des drapeaux
+    const updateFlagsStyle = () => {
+        if (isCorseLanguage) {
+            flagFrench.style.opacity = '0.3'
+            flagFrench.style.filter = 'grayscale(100%)'
+            flagCorse.style.opacity = '1'
+            flagCorse.style.filter = 'grayscale(0%)'
+        } else {
+            flagFrench.style.opacity = '1'
+            flagFrench.style.filter = 'grayscale(0%)'
+            flagCorse.style.opacity = '0.3'
+            flagCorse.style.filter = 'grayscale(100%)'
+        }
+    }
+    
+    // Style initial des drapeaux
+    updateFlagsStyle()
+    
+    // Clic sur les drapeaux pour changer la langue
+    flagFrench.addEventListener('click', () => {
+        if (isCorseLanguage) {
+            languageSwitch.checked = false
+            isCorseLanguage = false
+            updateDescription()
+            updateFlagsStyle()
+        }
+    })
+    
+    flagCorse.addEventListener('click', () => {
+        if (!isCorseLanguage) {
+            languageSwitch.checked = true
+            isCorseLanguage = true
+            updateDescription()
+            updateFlagsStyle()
+        }
+    })
+    
+    languageSwitch.addEventListener('change', () => {
+        isCorseLanguage = languageSwitch.checked
+        updateDescription()
+        updateFlagsStyle()
+    })
 
     closeButton.addEventListener('click', () => {
         overlay.remove()

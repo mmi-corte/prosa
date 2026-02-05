@@ -140,43 +140,102 @@ function showCharacterDetails(regionId, characterId) {
     const switchRow = document.createElement('div')
     switchRow.classList.add('character-language-row')
 
-    const switchWrapper = document.createElement('label')
-    switchWrapper.classList.add('language-switch')
-
-    const frLabel = document.createElement('span')
-    frLabel.classList.add('language-label')
     const frFlag = document.createElement('img')
     frFlag.src = './assets/drapeau/france.png'
-    frFlag.alt = 'Drapeau France'
-    frFlag.style.width = '1.5em'
-    frFlag.style.height = '1.5em'
+    frFlag.alt = 'Français'
+    frFlag.style.width = '32px'
+    frFlag.style.height = '32px'
     frFlag.style.objectFit = 'contain'
-    frLabel.appendChild(frFlag)
+    frFlag.style.cursor = 'pointer'
+    frFlag.style.transition = 'opacity 0.3s ease, filter 0.3s ease, transform 0.2s ease'
+    frFlag.style.borderRadius = '4px'
+
+    const switchWrapper = document.createElement('label')
+    switchWrapper.classList.add('switch-toggle')
 
     const languageSwitch = document.createElement('input')
     languageSwitch.type = 'checkbox'
     languageSwitch.setAttribute('aria-label', 'Basculer la langue entre FR et Corse')
 
     const slider = document.createElement('span')
-    slider.classList.add('language-slider')
+    slider.classList.add('toggle-slider')
 
-    const corLabel = document.createElement('span')
-    corLabel.classList.add('language-label')
     const corFlag = document.createElement('img')
     corFlag.src = './assets/drapeau/bandera.png'
-    corFlag.alt = 'Drapeau Corse'
-    corFlag.style.width = '1.5em'
-    corFlag.style.height = '1.5em'
+    corFlag.alt = 'Corsu'
+    corFlag.style.width = '32px'
+    corFlag.style.height = '32px'
     corFlag.style.objectFit = 'contain'
-    corLabel.appendChild(corFlag)
+    corFlag.style.cursor = 'pointer'
+    corFlag.style.transition = 'opacity 0.3s ease, filter 0.3s ease, transform 0.2s ease'
+    corFlag.style.borderRadius = '4px'
 
-    switchWrapper.append(frLabel, languageSwitch, slider, corLabel)
+    switchWrapper.append(languageSwitch, slider)
 
     // Initialize switch from current player's language
     const currentLang = selectedPlayers[currentPlayerIndex]?.language || 'fr'
     languageSwitch.checked = currentLang === 'cor'
     setLanguage(currentLang)
     updateDescription()
+
+    // Fonction pour mettre à jour les styles des drapeaux
+    const updateFlagsStyle = () => {
+        const isCorseLanguage = languageSwitch.checked
+        if (isCorseLanguage) {
+            frFlag.style.opacity = '0.3'
+            frFlag.style.filter = 'grayscale(100%)'
+            corFlag.style.opacity = '1'
+            corFlag.style.filter = 'grayscale(0%)'
+        } else {
+            frFlag.style.opacity = '1'
+            frFlag.style.filter = 'grayscale(0%)'
+            corFlag.style.opacity = '0.3'
+            corFlag.style.filter = 'grayscale(100%)'
+        }
+    }
+
+    // Style initial des drapeaux
+    updateFlagsStyle()
+
+    // Hover effect on flags
+    frFlag.addEventListener('mouseenter', () => {
+        if (!languageSwitch.checked) frFlag.style.transform = 'scale(1.1)'
+    })
+    frFlag.addEventListener('mouseleave', () => {
+        frFlag.style.transform = 'scale(1)'
+    })
+
+    corFlag.addEventListener('mouseenter', () => {
+        if (languageSwitch.checked) corFlag.style.transform = 'scale(1.1)'
+    })
+    corFlag.addEventListener('mouseleave', () => {
+        corFlag.style.transform = 'scale(1)'
+    })
+
+    // Clic sur les drapeaux pour changer la langue
+    frFlag.addEventListener('click', () => {
+        if (languageSwitch.checked) {
+            languageSwitch.checked = false
+            const newLang = 'fr'
+            selectedPlayers[currentPlayerIndex].language = newLang
+            setLanguage(newLang)
+            updateDescription()
+            updateSubmitLabel()
+            updateFlagsStyle()
+        }
+    })
+
+    corFlag.addEventListener('click', () => {
+        if (!languageSwitch.checked) {
+            languageSwitch.checked = true
+            const newLang = 'cor'
+            selectedPlayers[currentPlayerIndex].language = newLang
+            setLanguage(newLang)
+            updateDescription()
+            updateSubmitLabel()
+            updateFlagsStyle()
+        }
+    })
 
     languageSwitch.addEventListener('change', () => {
         const newLang = languageSwitch.checked ? 'cor' : 'fr'
@@ -186,7 +245,7 @@ function showCharacterDetails(regionId, characterId) {
         updateSubmitLabel()
     })
 
-    switchRow.append(switchWrapper)
+    switchRow.append(frFlag, switchWrapper, corFlag)
 
     const submitButton = document.createElement('button')
     submitButton.classList.add("btn-primary")
