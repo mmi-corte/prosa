@@ -360,11 +360,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "10"
-        },
-        "2": {
-          "type": "lose",
-          "nextStep": "10"
+          "nextStep": "09"
         }
       }
     },

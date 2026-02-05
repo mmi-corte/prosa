@@ -1947,28 +1947,48 @@
         "dialog": [
           {
             "text": {
-              "fr": "Derrière un amas de gravats, vous débouchez sur la décharge de Toulon. L'odeur de ferraille rouillée et de déchets en décomposition est suffocante.",
-              "cor": "Daretu à un ammassatu di macerie, sbuccate nantu à a scarica di Tolone. L'odore di ferraglia arrugginita è di scumere in decumposizione hè suffucante."
-            },
-            "pitch": 400
+              "fr": "Alors que la tension est à son comble entre les soldats et les deux frères, une présence s’impose soudainement. Une femme avance d’un pas assuré le long de l’allée déserte."
+            }
           },
           {
             "text": {
-              "fr": "Au milieu de ce chaos, un homme fouille méthodiquement les déchets, allongé près d'un vieux matelas usé.",
-              "cor": "À mezu à stu caosu, un omu cerca metodicalmente e scumere, allungatu vicinu à un vechju materassu usutu."
-            },
-            "pitch": 400
+              "fr": "Vêtue de cuir et de fourrure, un fusil fermement serré contre elle, elle force naturellement les passants à s’écarter."
+            }
           },
           {
             "text": {
-              "fr": "Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j'ai déniché : un masque à gaz permettant de filtrer les radiations. Je te propose un jeu. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !",
-              "cor": "Tristu, cum'è locu, ùn trovi micca ? Face un mumentu chì cercu sti scumere… è guarda ciò chì aghju scovatu : una maschera à gas chì permette di filtrà e radiazione. Ti prupongu un ghjocu. Rispondi à u mo enigma è a maschera hè a to. Ti sbagli… è riparti senza nunda !"
+              "fr": "Elle s’impose immédiatement. Vous entendez les murmures des soldats: c’est la Cabro d’Or, une figure majeure de l’organisation Prosa, venue à Toulon pour des affaires internes."
+            }
+          },
+          {
+            "text": {
+              "fr": "Elle s’arrête, écoute les explications des deux frères sans les interrompre. Puis son regard se pose sur les soldats."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.\""
             },
-            "pitch": 400,
-            "voice": ""
+            "pitch": 550
+          },
+          {
+            "text": {
+              "fr": "Humiliés, les soldats obéissent sans discuter et quittent les lieux. La Cabro d’Or se tourne alors vers vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Peu auraient pris ce risque. Garde l’œil ouvert. Je devine aisément tes intention jeune homme.\""
+            },
+            "pitch": 550
+          },
+          {
+            "text": {
+              "fr": "Sans un mot de plus, elle s’éloigne. Les frères vous remercient et vous indique la direction de l’Opéra de Toulon."
+            }
           }
         ],
-        "nextActionType": "riddle",
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },
