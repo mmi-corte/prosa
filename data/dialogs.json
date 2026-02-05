@@ -154,7 +154,7 @@
               "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
             },
             "pitch": 650,
-            "voice": ""
+            "voice": "Case_2_Fata_4.mp3"
           },
           {
             "text": {
@@ -168,7 +168,7 @@
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
             "pitch": 650,
-            "voice": "Case_2_Fata_4.mp3"
+            "voice": "Case_2_Fata_5.mp3"
           }
         ],
         "nextActionType": "end",
@@ -226,7 +226,7 @@
               "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "Case_2_Strega_2.mp3"
           },
           {
             "text": {
@@ -240,7 +240,7 @@
               "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
             "pitch": 600,
-            "voice": "Case_2_Strega_2.mp3"
+            "voice": "Case_2_Strega_3.mp3"
           },
           {
             "text": {
@@ -286,7 +286,7 @@
               "cor": "\"T'aspettava.\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_3_Spallistu_1.mp3"
           },
           {
             "text": {
@@ -300,14 +300,12 @@
               "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_3_Spallistu_2.mp3"
           },
           {
             "text": {
-              "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts.",
-              "cor": "U Spallistu esce una omoplate di muntone è a faci rotulà trà e so dita."
-            },
-            "pitch": 400
+              "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts."
+            }
           },
           {
             "text": {
@@ -315,7 +313,7 @@
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_3_Spallistu_3.mp3"
           }
         ],
         "nextActionType": "riddle",
@@ -335,7 +333,7 @@
               "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_3_Spallistu_4.mp3"
           }
         ],
         "nextActionType": "end",
@@ -343,7 +341,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "orcu_back.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -355,7 +353,7 @@
               "cor": "\"A to strada ti purterà versu l’Orcu…\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_3_Spallistu_4-perdu.mp3"
           }
         ],
         "nextActionType": "end",
@@ -365,7 +363,7 @@
     "88": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "portemecanique_88.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -424,7 +422,8 @@
               "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
               "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà."
             },
-            "pitch": 300
+            "pitch": 300,
+            "voice": "Case_88_Spallistu_imposant.mp3"
           }
         ],
         "nextActionType": "end",
