@@ -17,9 +17,9 @@ const gameState = {
 };
 
 const FREQUENCY = 8;
-const PHASE_TOLERANCE = 0.05;
-const AMPLITUDE_TOLERANCE = 5;
-const SYNC_HOLD_DURATION = 600;
+const PHASE_TOLERANCE = 0.08;
+const AMPLITUDE_TOLERANCE = 6;
+const SYNC_HOLD_DURATION = 500;
 
 // Canvas and context - will be initialized after DOM load
 let canvas = null;
@@ -294,7 +294,7 @@ function checkSynchronization() {
 function gameLoop() {
     if (!gameState.isRunning) return;
     
-    gameState.targetDrift += 0.002;
+    gameState.targetDrift += 0.0008;  // Réduit la dérive
     
     drawWaves();
     updateNeedles();

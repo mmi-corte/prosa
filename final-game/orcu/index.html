@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Épreuve de Force - L'Orcu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="gameBody">
+    <!-- Modal des Règles -->
+    <div id="rulesModal" class="modal" style="display:flex;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="title-wrapper">
+                    <svg class="sword-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+                        <path d="M13 19l6-6"></path>
+                        <path d="M16 16l4 4"></path>
+                        <path d="M19 21l2-2"></path>
+                    </svg>
+                    <span class="title">ÉPREUVE DE FORCE</span>
+                    <svg class="sword-icon flipped" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+                        <path d="M13 19l6-6"></path>
+                        <path d="M16 16l4 4"></path>
+                        <path d="M19 21l2-2"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="intro-text">L'Orcu vous défie de prouver votre valeur...</p>
+                
+                <div class="rule-item">
+                    <span class="rule-number">1</span>
+                    <p><strong>OBJECTIF:</strong> Appuyez le plus vite possible sur la zone de force pour remplir la jauge avant la fin du temps imparti.</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-number">2</span>
+                    <p><strong>TEMPS:</strong> Vous avez 9 secondes pour prouver votre force.</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-number">3</span>
+                    <p><strong>VICTOIRE:</strong> Remplissez la jauge à 100% pour impressionner l'Orcu.</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-number">4</span>
+                    <p><strong>ÉCHEC:</strong> Si vous échouez, vous perdez 1 tour pour vous reposer avant de réessayer.</p>
+                </div>
+                
+                <p class="ready-text">Prêt à relever le défi ?</p>
+            </div>
+            <button id="startGameBtn" class="btn-primary">COMMENCER L'ÉPREUVE</button>
+        </div>
+    </div>
+
+    <!-- Modal de Victoire -->
+    <div id="victoryModal" class="modal" style="display:none;">
+        <div class="modal-content victory">
+            <div class="result-icon victory-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h2>VICTOIRE</h2>
+            <p>L'Orcu est impressionné par votre force !</p>
+            <p class="score-text">Score: <span id="finalScore">0</span>%</p>
+            <button id="continueBtn" class="btn-primary">CONTINUER</button>
+        </div>
+    </div>
+
+    <!-- Modal d'Échec -->
+    <div id="failModal" class="modal" style="display:none;">
+        <div class="modal-content fail">
+            <div class="result-icon fail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+            </div>
+            <h2>ÉCHEC</h2>
+            <p>Vous n'avez pas réussi à impressionner l'Orcu.</p>
+            <p class="penalty-text">Vous perdez 1 tour pour vous reposer.</p>
+            <button id="retryBtn" class="btn-primary">RÉESSAYER</button>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="container" id="gameContainer" style="display:none;">
+        <div class="game-header">
+            <span class="game-title">ÉPREUVE DE FORCE</span>
+        </div>
+
+        <div class="game-content">
+            <!-- Timer -->
+            <div class="timer-section">
+                <div class="timer-label">TEMPS RESTANT</div>
+                <div class="timer-display" id="timerDisplay">9.0</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-label">FORCE</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-markers">
+                        <span>0%</span>
+                        <span>50%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+                <div class="progress-value" id="progressValue">0%</div>
+            </div>
+
+            <!-- Tap Zone -->
+            <div class="tap-zone-container">
+                <div class="tap-instruction">APPUYEZ RAPIDEMENT</div>
+                <button class="tap-zone" id="tapZone">
+                    <div class="tap-icon"></div>
+                    <div class="tap-text">FORCE</div>
+                    <div class="tap-ripple" id="tapRipple"></div>
+                </button>
+                <div class="tap-counter">Taps: <span id="tapCounter">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
