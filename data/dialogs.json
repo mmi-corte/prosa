@@ -2068,43 +2068,77 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, un homme est agenouillé en prière. Il s'agit du Père Lucien, très célèbre pour sa gentillesse à Toulon.",
-              "cor": "Entrate à l'internu di a cattidrale, à u centru, un omu hè inginochjatu in preghiera. Si tratta di u Babbu Lucien, assai famosu per a so gentilezza à Tolone."
-            },
-            "pitch": 400
+              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
+            }
           },
           {
             "text": {
-              "fr": "Respectueux, vous attendez la fin de sa prière. Puis l'homme se redresse.",
-              "cor": "Rispettuosu, aspettate a fine di a so preghiera. Poi l'omu si rialza."
-            },
-            "pitch": 400
+              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le sol tremble légèrement. Puis un cheval apparaît au bout de l'avenue, avançant lentement, la tête basse."
+            }
           },
           {
             "text": {
-              "fr": "Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?",
-              "cor": "Bonghjornu, figliolu meiu. Sò u Babbu Lucien. Pochi osanu francà ste porte oramai. Chì possu fà per tè ?"
-            },
-            "pitch": 400,
-            "voice": ""
+              "fr": "Sur son dos se tient un homme grand, raide, au visage dissimulé derrière un foulard gris. Ses bras et son manteau sont marqués de brûlures anciennes."
+            }
           },
           {
             "text": {
-              "fr": "Vous lui expliquez la raison de votre venue.",
-              "cor": "Li spiegate a ragione di a vostra venuta."
-            },
-            "pitch": 400
+              "fr": "C'est Lou Drapé, un des trois chefs de l'organisation de Toulon, dont la réputation dépasse toutes les autres. Un tir sec retentit. La balle passe juste devant votre visage."
+            }
           },
           {
             "text": {
-              "fr": "Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrai par radio cette nuit. Sois attentif en chemin, il paraît qu'il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer.",
-              "cor": "Duverai andà à a meria. Quallà, Darius puderà aiutà ti à ghjunghje à Prosa. U preveniaraghju per radio sta notte. Sii attentu in caminu, pare chì esiste un dipositu secretu in u cantu. Mà sopratuttu duverai stà quì per riposà ti."
+              "fr": "\"Ne bouge plus. C'est ton seul avertissement.\""
             },
             "pitch": 400
           }
         ],
-        "nextActionType": "choice",
-        "nextAction": "3"
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
+            }
+          },
+          {
+            "text": {
+              "fr": "Grâce a votre déguisement, vous parvenez à passer les gardes sans éveiller de soupçons."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
       }
     },
     "13": {
@@ -2118,28 +2152,22 @@
         "dialog": [
           {
             "text": {
-              "fr": "Avant de suivre le Père Lucien vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements.",
-              "cor": "Prima di seguità u Babbu Lucien nutate u passaghju secretu. À l'internu, scoprite un dipositu pienu di materiale è di diversi equipamenti."
-            },
-            "pitch": 400
+              "fr": "Paniqué par votre échec, vous traversez les rues de Toulon, évitant patrouilles et obstacles."
+            }
           },
           {
             "text": {
-              "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la FLRP à votre taille.",
-              "cor": "Dopu una cerca rapida, circendu tuttu l'oggettu chì pò esse utile à voi, scoprite finalmente un uniformu di a FLRP à a vostra taglia."
-            },
-            "pitch": 400
+              "fr": "Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir. Vous l’utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route."
+            }
           },
           {
             "text": {
-              "fr": "📜 Objet obtenu : Uniforme FLRP.",
-              "cor": "📜 Oggettu ottinutu : Uniformu FLRP."
-            },
-            "pitch": 400
+              "fr": "Mais soudain le sol tremble et vous sentez que le bâtiment n’est pas stable."
+            }
           }
         ],
-        "nextActionType": "end",
-        "nextAction": "1100"
+        "nextActionType": "game",
+        "nextAction": "1"
       }
     },
     "14": {
@@ -2153,21 +2181,84 @@
         "dialog": [
           {
             "text": {
-              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie. Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde.",
-              "cor": "Dopu un longu viaghju, ghjunghje à un carrughju induve finalmente vedete a meria. U bastimentu hè pesantemente surveglatu : parechji membri di l'urganizazione montanu a guardia."
-            },
-            "pitch": 400
+              "fr": "Vous endossez la combinaison de membre de l'organisation et garde le badge fermement en main."
+            }
           },
           {
             "text": {
-              "fr": "Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif.",
-              "cor": "U locu s'assumiglia più à una fortezza ch'è à un bastimentu amministrativu."
-            },
-            "pitch": 400
+              "fr": "Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée : ceux-ci se contentent d'un simple salut, sans même lever les yeux."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas."
+            }
           }
         ],
-        "nextActionType": "game",
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Toi. Je ne t'ai jamais vu. Viens par ici !\""
+            },
+            "pitch": 300
+          }
+        ],
+        "nextActionType": "riddle",
         "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L’officier se laisse convaincre. Votre badge, Votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnement."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous remarquez une modeste embarcation sur le port et vous décidez de l’emprunter pour atteindre enfin l’île de Prosa"
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L'officier comprend instantanément que quelque chose cloche."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation"
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
       }
     },
     "15": {
@@ -2181,25 +2272,19 @@
         "dialog": [
           {
             "text": {
-              "fr": "Paniqué par votre échec vous traversez les rues de Toulon, évitant patrouilles et obstacles. Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir.",
-              "cor": "Paniticatu da u vostru fiascu attraversate e strade di Tolone, evitendu pattuglie è ostaculi. Vi firmate rapidamente à l'IUT MMI, un anticu locu di sapè."
-            },
-            "pitch": 400
+              "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance."
+            }
           },
           {
             "text": {
-              "fr": "Vous l'utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route. Mais soudain le sol tremble et vous sentez que le bâtiment n'est pas stable.",
-              "cor": "L'utilizate cum'è un puntu di riferimentu è di rifugiu timpurariu prima di ripiglià a vostra strada. Mà subitu u pianu trema è sentite chì u bastimentu ùn hè micca stabile."
-            },
-            "pitch": 400
+              "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect."
+            }
           }
         ],
         "nextActionType": "game",
         "nextAction": "1"
-      }
-    },
-    "16": {
-      "1": {
+      },
+      "2": {
         "default": {
           "backgroundUrl": "",
           "foregroundUrl": "",
@@ -2209,55 +2294,16 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main. Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée.",
-              "cor": "Indussate a cumminazione di membru di l'urganizazione è tenete u badge fermamente in manu. Grazie à stu equipamentu, attraversate senza difficultà e guardie poste à l'entrata."
-            },
-            "pitch": 400
+              "fr": "Lorsque vous parvenez au bout du quai. Darius vous attend, prévenu par radio par le Père Lucien, il a un plan d'évasion prêt."
+            }
           },
           {
             "text": {
-              "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas.",
-              "cor": "Mà una volta à l'internu di u bastimentu, a situazione si cumplica. Un ufficiale di rangu superiore, più sfiduciatu, si ferma netta videndu vi : ùn vi ricunnosce micca."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Toi. Je ne t'ai jamais vu. Viens par ici !",
-              "cor": "Tù. Ùn t'aghju mai vistu. Veni quà !"
-            },
-            "pitch": 400
+              "fr": " Il vous fait embarquez sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
+            }
           }
         ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      }
-    },
-    "17": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance.",
-              "cor": "Vi avvicinate à u portu. Una tensione silenziosa s'installa. U locu, unicu passaghju versu l'esternu di a cità, hè custantemente piazzatu sottu alta surviglianza."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect.",
-              "cor": "E banchine sò quadrettate da pattuglie facendu ronde meccaniche o scrutendu attentamente u minimu movimentu sospettu."
-            },
-            "pitch": 400
-          }
-        ],
-        "nextActionType": "game",
+        "nextActionType": "end",
         "nextAction": "1"
       }
     }

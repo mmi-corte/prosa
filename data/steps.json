@@ -404,9 +404,19 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "13"
+          "nextStep": "15"
         },
         "2": {
+          "type": "win",
+          "nextStep": "13"
+        }
+      }
+    },
+    "121": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
           "type": "win",
           "nextStep": "14"
         }
@@ -418,7 +428,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "14"
+          "nextStep": "15"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "13"
         }
       }
     },
@@ -428,15 +442,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "17"
+          "nextStep": "Arrivé à Prosa en tant que soldat"
         },
         "2": {
-          "type": "lose",
-          "nextStep": "15"
-        },
-        "3": {
           "type": "win",
-          "nextStep": "16"
+          "nextStep": "Arrivé à Prosa en tant que prisonnier"
         }
       }
     },
@@ -446,7 +456,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "17"
+          "nextStep": "Arrivé à Prosa en tant que rebelle"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "15"
         }
       }
     }

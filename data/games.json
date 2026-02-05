@@ -117,13 +117,22 @@
                 "nextActionLose": "2"
             }
         },
-        "10": {
+        "12": {
             "1": {
-                "game": "opera_sequence",
+                "game": "loudrape_epreuve",
                 "nextActionTypeWin": "end",
                 "nextActionWin": "1",
                 "nextActionTypeLose": "end",
-                "nextActionLose": "1"
+                "nextActionLose": "2"
+            }
+        },
+        "13": {
+            "1": {
+                "game": "mmi_epreuve",
+                "nextActionTypeWin": "end",
+                "nextActionWin": "1",
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "14": {
@@ -137,20 +146,11 @@
         },
         "15": {
             "1": {
-                "game": "iut_mmi_escape",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "1"
-            }
-        },
-        "17": {
-            "1": {
                 "game": "port_infiltration",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "1"
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "3",
+                "nextActionTypeLose": "dialog",
+                "nextActionLose": "4"
             }
         }
     },
