@@ -61,7 +61,7 @@ export function menuView() {
   const startButton = document.createElement('button')
   startButton.classList.add('menu-btn-big', 'btn-primary-big')
   if (gameInitialized) {
-    startButton.innerHTML = `RETOUR AU<br>JEU`
+    startButton.innerHTML = `JOUER`
     startButton.addEventListener('click', () => {
       navigate("code", () => playerSelectView())
     })
