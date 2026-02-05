@@ -161,16 +161,22 @@ async function initCardScanner() {
 async function startMindAR() {
   updateStatus('Chargement AR...');
   
-  // Determine which marker file to use
-  let markerFile;
-  if (settings.useIndividualMarkers && characters.length > 0 && characters[0].markerFile) {
-    markerFile = characters[0].markerFile;
-    console.log('Using individual marker file:', markerFile);
-  } else {
-    // Fallback to first character's marker or a default
-    markerFile = characters[0]?.markerFile || 'assets/markers/default.mind';
-    console.log('Using marker file:', markerFile);
+  // Find characters that have markers
+  const charactersWithMarkers = characters.filter(c => c.markerFile);
+  
+  if (charactersWithMarkers.length === 0) {
+    updateStatus('Aucun marqueur disponible', 'error');
+    console.error('No characters with markers found');
+    return;
   }
+  
+  // Store for later reference
+  window.charactersWithMarkers = charactersWithMarkers;
+  
+  // MindAR can only load one .mind file at a time
+  // Use the first available marker file
+  const markerFile = charactersWithMarkers[0].markerFile;
+  console.log('Loading marker file:', markerFile);
   
   // Create MindAR instance with quality options
   mindarThree = new MindARThree({
@@ -232,14 +238,16 @@ function setupLighting() {
  * Create anchors for each character in the config
  */
 async function setupCharacterAnchors() {
+  // Find characters that have markers
+  const charactersWithMarkers = characters.filter(c => c.markerFile);
+  
   if (settings.useIndividualMarkers) {
-    // Find the character whose marker file we loaded
-    const loadedMarkerFile = characters[0].markerFile;
-    const characterToSetup = characters.find(c => c.markerFile === loadedMarkerFile);
+    // Only setup the character whose marker file was loaded (first one)
+    const characterToSetup = charactersWithMarkers[0];
     
     if (characterToSetup) {
       updateStatus('Configuration de ' + characterToSetup.name + '...');
-      await setupSingleCharacter(characterToSetup);
+      await setupSingleCharacter(characterToSetup, 0);
     } else {
       console.error('No character found for loaded marker file');
     }
@@ -248,7 +256,7 @@ async function setupCharacterAnchors() {
     updateStatus('Configuration de ' + characters.length + ' personnage(s)...');
     
     for (const character of characters) {
-      await setupSingleCharacter(character);
+      await setupSingleCharacter(character, 0);
     }
   }
 }
@@ -256,13 +264,14 @@ async function setupCharacterAnchors() {
 /**
  * Setup anchor and content for a single character
  */
-async function setupSingleCharacter(character) {
-  const markerIndex = settings.useIndividualMarkers ? 0 : character.markerIndex;
+async function setupSingleCharacter(character, fileIndex = 0) {
+  const markerIndex = character.markerIndex || 0;
   
-  console.log('Setting up character:', character.id, 'at marker index:', markerIndex);
+  console.log('Setting up character:', character.id, 'at marker index:', markerIndex, 'file index:', fileIndex);
   
   // Create anchor for this character's marker
-  const anchor = mindarThree.addAnchor(markerIndex);
+  // When using multiple marker files, pass both target index and file index
+  const anchor = mindarThree.addAnchor(markerIndex, fileIndex);
   characterAnchors[character.id] = anchor;
   
   // Add content directly to anchor.group

@@ -13,6 +13,45 @@
       "description": "Gardienne des eaux sacrées de Corse, A Fata veille sur les sources et les rivières de l'île.",
       "descriptionCorsican": "Guardiana di l'acque sacre di Corsica, A Fata vighjula nantu à e surgente è i fiumi di l'isula.",
       "themeColor": "#1e88e5",
+      "portrait": "assets/img/characters/fata_char.png",
+      
+      "assets": {
+        "2d": [
+          {
+            "id": "background",
+            "path": "assets/img/characters/backgroundfata.png",
+            "scale": 2.5,
+            "position": { "x": 0, "y": 0, "z": -0.3 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          },
+          {
+            "id": "middleground",
+            "path": "assets/img/characters/middlegroundfata.png",
+            "scale": 1.8,
+            "position": { "x": 0, "y": 0, "z": -0.2 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          },
+          {
+            "id": "character",
+            "path": "assets/img/characters/fata_char.png",
+            "scale": 1,
+            "position": { "x": -0.3, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          },
+          {
+            "id": "foreground",
+            "path": "assets/img/characters/foregroundfata.png",
+            "scale": 1.5,
+            "position": { "x": 0, "y": 0.2, "z": 0.1 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          }
+        ],
+        "3d": []
+      },
       
       "layers": {
         "background": {
@@ -63,7 +102,13 @@
           "refDistance": 2,
           "rolloffFactor": 1.5,
           "maxDistance": 15
+        },
+        "intro": {
+          "path": "assets/sound/water_running.mp3",
+          "volume": 0.7,
+          "loop": true
         }
+
       },
       
       "interaction": {
@@ -89,18 +134,6 @@
       "descriptionCorsican": "Prodigia di l'isula di Prosa, a Strega hè incaricata di mantene a sterilità di e terre di Corsica.",
       "themeColor": "#10032e",
       "portrait": "assets/img/characters/strega_char.png",
-      
-      "marker": {
-        "file": "assets/markers/strega.mind",
-        "targetIndex": 0
-      },
-      
-      "stats": {
-        "puissance": 85,
-        "défense": 40,
-        "magie": 95,
-        "vitesse": 60
-      },
       
       "assets": {
         "2d": [
@@ -129,6 +162,48 @@
           "path": "assets/sound/SON1.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      }
+    },
+    {
+      "id": "signadora",
+      "name": "A Signadora",
+      "description": "A Signadora est une guérisseuse de 60 ans, dont le visage marqué par le soleil disparaît souvent sous un voile noir usé. Vêtue d'un châle beige, elle fréquente la vieille fontaine de Corti pour soigner les malades avec ses prières et ses herbes. À sa ceinture pend une fiole d'huile d'olive rarissime qu'elle utilise pour diagnostiquer le mal.",
+      "descriptionCorsican": "A Signadora hè una guaritrice di 60 anni, chì a so faccia marcata da u sole sparisce spessu sottu à un velu neru usatu. Vestita d'un scialle beige, frequenta a vechja funtana di Corti per curà i malati cù e so preghiere è e so erbe. À a so cintura pende una fiala d'oliu d'aliva rarezza ch'ella adopra per diagnosticà u male.",
+      "themeColor": "#8B7355",
+      "portrait": "assets/img/characters/signadora_char.png",
+      
+      "marker": {
+        "file": "assets/markers/signadora.mind",
+        "targetIndex": 0
+      },
+      
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/signadora_char.png",
+            "scale": 0.6,
+            "position": { "x": -0.4, "y": 0, "z": 0 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/signadora_bg.png",
+            "scale": 1.0,
+            "position": { "x": 0, "y": 0, "z": -0.1 },
+            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "opacity": 1
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+          "intro": {
+          "path": "assets/sound/fountain.mp3",
+          "volume": 0.7,
+          "loop": true
         }
       }
     }
