@@ -107,6 +107,7 @@
               "fr": "Je suis née avant les routes, je change selon les villages mais je reste l’âme du même peuple. Si je cesse… une partie de l’île meurt. Qui suis-je ?",
               "cor": "Sò nata prima di e strade, cambiu secondu i paesi ma restu l'anima di u listessu populu. Se mi fermu... una parte di l'isula more. Chì sò ?"
             },
+            "voice": "riddles/enigme_03_01.mp3",
             "choices": [
               {
                 "text": {
@@ -136,6 +137,7 @@
               "fr": "Je reste à mon poste depuis des centaines d’années. Je regarde la mer et la montagne, témoin des hommes qui passent et disparaissent. Ni roi, ni soldat… mais gardien quand même. Qui suis-je ?",
               "cor": "Sò nata prima di e strade, cambiu secondu i paesi ma restu l'anima di u listessu populu. Se mi fermu... una parte di l'isula more. Chì sò ?"
             },
+            "voice": "riddles/enigme_03_02.mp3",
             "choices": [
               {
                 "text": {
@@ -165,6 +167,7 @@
               "fr": "Je ne suis ni champ ni berger, pourtant j’ai sauvé des villages Corse de la faim. Mon armure repousse les bêtes et mon corps devient pain dans les mains des pauvres. Qui suis-je ?",
               "cor": "Ùn sò nè campu nè pastore, èppuru aghju salvatu i paesi corsi da a fami. A mo armatura respinge e bestie è u mo corpu diventa pane in e mani di i povari. Chì sò ?"
             },
+            "voice": "riddles/enigme_03_03.mp3",
             "choices": [
               {
                 "text": {

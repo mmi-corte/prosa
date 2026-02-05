@@ -1,5 +1,5 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activeStepId, callAction } from "../../gameEventHandler.js";
+import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { riddlesData } from "../../loadData.js";
 import { typeWriteEffect } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
@@ -9,6 +9,7 @@ let questionContainer
 let choiceContainer
 let selectedRiddle
 let score
+let currentAudio = null;
 
 export async function riddleView(action) {
     clearContainer()
@@ -39,8 +40,20 @@ export async function riddleView(action) {
 }
 
 async function displayRiddle() {
+    const voiceFile = selectedRiddle.voice;
+
+    if (voiceFile) {
+        currentAudio = new Audio(`./assets/steps/${activePlayer.localisation}/${activeStepId}/${voiceFile}`);
+        currentAudio.play().catch(err => console.warn('Audio playback failed:', err));
+    }
+
     //Type write question
-    await typeWriteEffect(questionContainer, getTranslation(selectedRiddle.question))
+    await typeWriteEffect(
+        questionContainer,
+        getTranslation(selectedRiddle.question),
+        undefined,
+        Boolean(voiceFile)
+    )
 
     //Show available answers
     selectedRiddle.choices.forEach(choice => {
@@ -56,6 +69,11 @@ async function displayRiddle() {
 }
 
 function handleAnswer(answerScore) {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
+
     // Add answer score to total score
     score += answerScore
     
