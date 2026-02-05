@@ -3,6 +3,7 @@ import { callAction } from "../../gameEventHandler.js";
 import { decrementDifficultyState, isGameOver } from "../../initGame.js";
 import { gamesData } from "../../loadData.js";
 import { gameOverView } from "../main/gameOverView.js";
+import { difficultyIncreaseModal } from "../components/difficultyIncreaseModal.js";
 
 let data = "";
 let activeCleanup = null;
@@ -130,9 +131,13 @@ export function gameView(action) {
                 console.log('Calling lose action');
                 const hasLost = decrementDifficultyState();
                 if (hasLost) {
-                    navigate('gameover', gameOverView, true);
+                    difficultyIncreaseModal(() => {
+                        navigate('gameover', gameOverView, true);
+                    });
                 } else {
-                    callAction(data.nextActionTypeLose, data.nextActionLose);
+                    difficultyIncreaseModal(() => {
+                        callAction(data.nextActionTypeLose, data.nextActionLose);
+                    });
                 }
             };
             
@@ -163,9 +168,13 @@ function setupGameCompletion() {
                 const hasLost = decrementDifficultyState();
                 console.log(data.nextActionLose, data.nextActionTypeLose)
                 if (hasLost) {
-                    navigate('gameover', gameOverView, true);
+                    difficultyIncreaseModal(() => {
+                        navigate('gameover', gameOverView, true);
+                    });
                 } else {
-                    callAction(data.nextActionTypeLose, data.nextActionLose);
+                    difficultyIncreaseModal(() => {
+                        callAction(data.nextActionTypeLose, data.nextActionLose);
+                    });
                 }
             }
             
