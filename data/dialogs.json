@@ -2032,28 +2032,68 @@
         "dialog": [
           {
             "text": {
-              "fr": "Un bruit de pas précipité attire votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine. Il se présente comme Sébastien.",
-              "cor": "Un rumore di passi precipitati attira a vostra attenzione quandu scendete a porta. Un omu surge da una stanza vicina. Si presenta cum'è Sébastien."
-            },
-            "pitch": 400
+              "fr": "Vous pénétrez à l'intérieur de la cathédrale. Au centre, un homme est agenouillé en prière."
+            }
           },
           {
             "text": {
-              "fr": "Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés. Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange.",
-              "cor": "I so capelli sò in battaglia, i so gesti sò rapidi è disordinati. Pare parlà solu, cummentendu à volte e so propie azione cù un surrisu stranu."
-            },
-            "pitch": 400
+              "fr": "Il s'agit du Père Lucien, très célèbre pour sa gentillesse à Toulon. Respectueux, vous attendez la fin de sa prière. Puis l'homme se redresse et se présente."
+            }
           },
           {
             "text": {
-              "fr": "Je suis Sébastien. Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui... mais tu portes la même flamme. Réponds-moi : es-tu vraiment prêt ?",
-              "cor": "Sò Sébastien. St'ochji… Sta determinazione... Gyptis avia u listessu sguardu. Ùn si micca ellu... mà porti a listessa fiamma. Rispondimi : si daveru prontu ?"
+              "fr": "\"Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?\""
             },
-            "pitch": 400,
-            "voice": ""
+            "pitch": 350
+          },
+          {
+            "text": {
+              "fr": "Rempli de confiance, vous lui expliquez la raison de votre venue."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrais par radio cette nuit.\""
+            },
+            "pitch": 350
+          },
+          {
+            "text": {
+              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
+            },
+            "pitch": 350
           }
         ],
-        "nextActionType": "riddle",
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "93": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Avant de suivre le Père Lucien, vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
+            }
+          },
+          {
+            "text": {
+              "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la FLRP à votre taille."
+            }
+          },
+          {
+            "text": {
+              "fr": "Celui-ci vous sera probablement utile pour la suite de votre aventure."
+            }
+          }
+        ],
+        "nextActionType": "end",
         "nextAction": "1"
       }
     },

@@ -398,6 +398,18 @@
         }
       }
     },
+    "930": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "12",
+          "unlockStep": "121",
+          "unlockedStepId": "12"
+        }
+      }
+    },
     "120": {
       "actionType": "dialog",
       "action": "1",
