@@ -102,10 +102,19 @@
         "04": {
             "1": {
                 "game": "labyrinthe_escape",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
                 "nextActionTypeLose": "end",
-                "nextActionLose": "4"
+                "nextActionLose": "1"
+            }
+        },
+        "06": {
+            "1": {
+                "game": "wagon_infiltration",
+                "nextActionTypeWin": "dialog",
+                "nextActionWin": "2",
+                "nextActionTypeLose": "end",
+                "nextActionLose": "2"
             }
         },
         "10": {

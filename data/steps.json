@@ -308,11 +308,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "06"
-        },
-        "2": {
-          "type": "win",
-          "nextStep": "08"
+          "nextStep": "07"
         }
       }
     },
@@ -322,7 +318,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "07"
+          "nextStep": "06"
         }
       }
     },
@@ -333,6 +329,14 @@
         "1": {
           "type": "win",
           "nextStep": "08"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "06"
+        },
+        "3": {
+          "type": "win",
+          "nextStep": "09"
         }
       }
     },

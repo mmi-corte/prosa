@@ -205,6 +205,29 @@
         ]
       }
     },
+    "06": {
+      "1": {
+        "question": {
+          "fr": "Que décidez-vous de faire ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Prendre la défense des deux frères et confronte ouvertement les soldats"
+            },
+            "nextActionType": "end",
+            "nextAction": "1"
+          },
+          {
+            "text": {
+              "fr": "Ignorer l’altercation"
+            },
+            "nextActionType": "end",
+            "nextAction": "3"
+          }
+        ]
+      }
+    },
     "07": {
       "2": {
         "question": {
