@@ -3166,3 +3166,404 @@ body.light-mode .endWrapper.dangerWrapper {
 body.dark-mode .endWrapper.dangerWrapper {
   background: rgba(220, 53, 69, 0.2) !important;
 }
+
+/* ========================================
+======== PAGE VALIDATION JOUEURS ==========
+=========================================== */
+.initScreen3 {
+  gap: 16px !important;
+  padding-top: 20px !important;
+}
+
+.submit-difficulty-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.submit-difficulty-label {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.submit-difficulty-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: 1px;
+}
+
+.submit-change-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-change-btn:hover {
+  background: var(--primary);
+  color: var(--background);
+}
+
+.submit-players-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 0;
+  margin-top: 8px;
+  padding: 0 4px;
+}
+
+.submit-players-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Modal difficulté */
+.difficulty-modal {
+  text-align: center;
+  padding: 30px !important;
+  max-width: 400px !important;
+}
+
+.difficulty-modal h2 {
+  font-family: 'Futura', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin: 0 0 24px;
+  letter-spacing: 2px;
+}
+
+.difficulty-options {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.difficulty-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--background);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.difficulty-option:hover {
+  border-color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+.difficulty-option.selected {
+  border-color: var(--primary);
+  background: rgba(116, 100, 83, 0.1);
+}
+
+.difficulty-option span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: 1px;
+}
+
+.diff-gauge {
+  width: 30px;
+  border-radius: 4px;
+  background: linear-gradient(to top, var(--primary) 0%, var(--dust) 100%);
+}
+
+.diff-gauge.diff-easy {
+  height: 60px;
+}
+
+.diff-gauge.diff-normal {
+  height: 45px;
+}
+
+.diff-gauge.diff-hard {
+  height: 30px;
+}
+
+.btn-secondary {
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
+/* Mode clair */
+body.light-mode .submit-difficulty-section {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .submit-change-btn {
+  color: var(--foreground);
+}
+
+body.light-mode .submit-change-btn:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+body.light-mode .submit-players-label {
+  color: var(--foreground);
+}
+
+body.light-mode .difficulty-option {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .difficulty-option:hover {
+  border-color: var(--foreground);
+}
+
+body.light-mode .difficulty-option.selected {
+  background: rgba(116, 100, 83, 0.2);
+  border-color: var(--primary);
+}
+
+/* Ajustement playerList pour cette page */
+.initScreen3 .playerList {
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* Carte joueur éditable */
+.editable-player-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.editable-player-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.editable-player-card:hover::before {
+  opacity: 1;
+}
+
+/* Overlay semi-transparent au hover */
+.editable-player-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.player-edit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.player-edit-icon svg {
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+.editable-player-card:hover .player-edit-icon {
+  opacity: 1;
+}
+
+/* Modal sélection personnage */
+.character-select-modal {
+  text-align: center;
+  padding: 24px !important;
+  max-width: 500px !important;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.character-select-modal h2 {
+  font-family: 'Futura', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin: 0 0 4px;
+  letter-spacing: 2px;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin: 0 0 20px;
+}
+
+.region-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.region-tab {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.region-tab:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
+.region-tab.active {
+  background: var(--foreground);
+  border-color: var(--foreground);
+  color: var(--background);
+}
+
+.characters-select-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.char-select-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  background: var(--background);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.char-select-btn:hover:not(.taken) {
+  border-color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+.char-select-btn.current {
+  border-color: var(--primary);
+  background: rgba(116, 100, 83, 0.15);
+}
+
+.char-select-btn.taken {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.char-select-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center top;
+}
+
+.char-select-btn span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Mode clair */
+body.light-mode .player-edit-icon {
+  color: var(--foreground);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+body.light-mode .editable-player-card::before {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode .editable-player-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .region-tab {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .region-tab:hover {
+  border-color: var(--foreground);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .region-tab.active {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+body.light-mode .char-select-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .char-select-btn:hover:not(.taken) {
+  border-color: var(--foreground);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .char-select-btn.current {
+  border-color: var(--primary);
+  background: rgba(116, 100, 83, 0.15);
+}

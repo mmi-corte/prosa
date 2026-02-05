@@ -144,12 +144,12 @@ function goToCharacterDetail(char) {
             </div>
 
         <div class="character-language-switch">
-            <img src="./assets/drapeau/france.png" alt="Français" class="language-flag" id="flagFrench">
+            <img src="" alt="" class="language-flag" id="flagFirst">
             <label class="switch-toggle">
                 <input type="checkbox" id="characterLanguageSwitch">
                 <span class="toggle-slider"></span>
             </label>
-            <img src="./assets/drapeau/bandera.png" alt="Corsu" class="language-flag" id="flagCorse">
+            <img src="" alt="" class="language-flag" id="flagSecond">
         </div>
 
         <div class="character-description" id="characterDescription">
@@ -193,37 +193,67 @@ function goToCharacterDetail(char) {
     }
     characterDetailName.textContent = char.name
     
-    // État de la langue (false = français, true = corse)
-    let isCorseLanguage = false
+    // Déterminer la région et les drapeaux correspondants
+    const isProvencal = char.region === 'PROVENCE'
+    const flagFirstEl = modal.querySelector('#flagFirst')
+    const flagSecondEl = modal.querySelector('#flagSecond')
+    
+    if (isProvencal) {
+        // Pour Provençaux: Français + Provençal
+        flagFirstEl.src = './assets/drapeau/france.png'
+        flagFirstEl.alt = 'Français'
+        flagSecondEl.src = './assets/drapeau/provence.svg'
+        flagSecondEl.alt = 'Provençal'
+    } else {
+        // Pour Corses: Français + Corse
+        flagFirstEl.src = './assets/drapeau/france.png'
+        flagFirstEl.alt = 'Français'
+        flagSecondEl.src = './assets/drapeau/bandera.png'
+        flagSecondEl.alt = 'Corsu'
+    }
+    
+    // État de la langue (false = première langue, true = deuxième langue)
+    let isSecondLanguage = false
     
     const updateDescription = () => {
-        const description = isCorseLanguage ? (char.description_co || char.description) : char.description
-        const role = isCorseLanguage ? (char.role_co || char.role) : char.role
-        characterDescription.innerHTML = `
-        <p>${description}</p>
-        <span class="role">${role}</span>
-        `
+        if (isProvencal) {
+            // Personnage provençal: basculer entre corse et provençal
+            const description = isSecondLanguage ? (char.description_prov || char.description) : (char.description_co || char.description)
+            const role = isSecondLanguage ? (char.role_prov || char.role) : (char.role_co || char.role)
+            characterDescription.innerHTML = `
+            <p>${description}</p>
+            <span class="role">${role}</span>
+            `
+        } else {
+            // Personnage corse: basculer entre français et corse
+            const description = isSecondLanguage ? (char.description_co || char.description) : char.description
+            const role = isSecondLanguage ? (char.role_co || char.role) : char.role
+            characterDescription.innerHTML = `
+            <p>${description}</p>
+            <span class="role">${role}</span>
+            `
+        }
     }
     
     updateDescription()
     
     // Gestion du switch de langue
     const languageSwitch = modal.querySelector('#characterLanguageSwitch')
-    const flagFrench = modal.querySelector('#flagFrench')
-    const flagCorse = modal.querySelector('#flagCorse')
+    const flagFirst = modal.querySelector('#flagFirst')
+    const flagSecond = modal.querySelector('#flagSecond')
     
     // Fonction pour mettre à jour les styles des drapeaux
     const updateFlagsStyle = () => {
-        if (isCorseLanguage) {
-            flagFrench.style.opacity = '0.3'
-            flagFrench.style.filter = 'grayscale(100%)'
-            flagCorse.style.opacity = '1'
-            flagCorse.style.filter = 'grayscale(0%)'
+        if (isSecondLanguage) {
+            flagFirst.style.opacity = '0.3'
+            flagFirst.style.filter = 'grayscale(100%)'
+            flagSecond.style.opacity = '1'
+            flagSecond.style.filter = 'grayscale(0%)'
         } else {
-            flagFrench.style.opacity = '1'
-            flagFrench.style.filter = 'grayscale(0%)'
-            flagCorse.style.opacity = '0.3'
-            flagCorse.style.filter = 'grayscale(100%)'
+            flagFirst.style.opacity = '1'
+            flagFirst.style.filter = 'grayscale(0%)'
+            flagSecond.style.opacity = '0.3'
+            flagSecond.style.filter = 'grayscale(100%)'
         }
     }
     
@@ -231,26 +261,26 @@ function goToCharacterDetail(char) {
     updateFlagsStyle()
     
     // Clic sur les drapeaux pour changer la langue
-    flagFrench.addEventListener('click', () => {
-        if (isCorseLanguage) {
+    flagFirst.addEventListener('click', () => {
+        if (isSecondLanguage) {
             languageSwitch.checked = false
-            isCorseLanguage = false
+            isSecondLanguage = false
             updateDescription()
             updateFlagsStyle()
         }
     })
     
-    flagCorse.addEventListener('click', () => {
-        if (!isCorseLanguage) {
+    flagSecond.addEventListener('click', () => {
+        if (!isSecondLanguage) {
             languageSwitch.checked = true
-            isCorseLanguage = true
+            isSecondLanguage = true
             updateDescription()
             updateFlagsStyle()
         }
     })
     
     languageSwitch.addEventListener('change', () => {
-        isCorseLanguage = languageSwitch.checked
+        isSecondLanguage = languageSwitch.checked
         updateDescription()
         updateFlagsStyle()
     })
