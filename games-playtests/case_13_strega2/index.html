@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prosa : Duel QTE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="game-stage">
+    
+    <!-- HUD -->
+    <div class="hud">
+        <div class="bar-container">
+            <div class="bar-label">VOUS</div>
+            <div class="hp-bar hp-player" id="player-hp"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label" style="right:6px; left:auto;">A STREGA</div>
+            <div class="hp-bar hp-boss" id="boss-hp"></div>
+        </div>
+    </div>
+
+    <!-- BOSS SCENE -->
+    <div class="boss-area">
+        <div class="boss-avatar" id="boss-avatar">⚡</div>
+    </div>
+
+    <!-- QTE CONTROLS -->
+    <div class="qte-zone">
+        <div class="instruction-bar">
+            <span id="current-instruction">PRÊT ?</span>
+            <div class="timer-container"><div id="timer-bar"></div></div>
+        </div>
+
+        <!-- MASH MODULE -->
+        <div id="qte-mash" class="qte-module">
+            <div id="mash-progress-bg"><div id="mash-progress"></div></div>
+            <button id="mash-btn" class="qte-btn">TAPOTEZ VITE !</button>
+        </div>
+
+        <!-- SEQUENCE MODULE -->
+        <div id="qte-sequence" class="qte-module">
+            <div id="seq-display"></div>
+            <div class="arrow-pad">
+                <button id="key-up" class="arrow-key">▲</button>
+                <div class="arrow-row">
+                    <button id="key-left" class="arrow-key">◀</button>
+                    <button id="key-down" class="arrow-key">▼</button>
+                    <button id="key-right" class="arrow-key">▶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMING MODULE -->
+        <div id="qte-timing" class="qte-module">
+            <div id="timing-track">
+                <div id="timing-target"></div>
+                <div id="timing-cursor"></div>
+            </div>
+            <button id="timing-btn" class="qte-btn" style="margin-top:25px;">STOP !</button>
+        </div>
+
+        <!-- REFLEX MODULE (CORRIGÉ) -->
+        <div id="qte-reflex" class="qte-module">
+            <div id="reflex-container"></div>
+        </div>
+
+        <!-- HOLD MODULE -->
+        <div id="qte-hold" class="qte-module">
+            <div id="hold-gauge-container">
+                <div id="hold-target-zone"></div>
+                <div id="hold-gauge-fill"></div>
+            </div>
+            <button id="hold-btn" class="qte-btn">MAINTENIR</button>
+        </div>
+    </div>
+
+    <!-- START SCREEN & RULES -->
+    <div id="start-screen" class="overlay">
+        <h1 style="color:var(--red); text-transform:uppercase; margin:0; font-size:2.5rem; text-shadow:0 2px 10px rgba(198, 48, 50, 0.4);">Duel à Corte</h1>
+        <p style="color:#aaa; font-size:1rem; margin-top:5px;">A Strega est puissante. La vitesse est votre seule alliée.</p>
+        
+        <div class="rules-container">
+            <div class="rule-item">
+                <div class="rule-icon">👊</div>
+                <div class="rule-text"><strong>Bourrinage</strong>Tapotez le bouton le plus vite possible.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-icon">🧠</div>
+                <div class="rule-text"><strong>Mémoire</strong>Reproduisez la séquence de flèches.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-icon">🎯</div>
+                <div class="rule-text"><strong>Timing</strong>Appuyez quand le curseur est dans la zone bleue.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-icon">⚡</div>
+                <div class="rule-text"><strong>Réflexe</strong>Touchez les cases rouges dès qu'elles apparaissent.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-icon">⚖️</div>
+                <div class="rule-text"><strong>Pression</strong>Maintenez le bouton pour stabiliser la jauge.</div>
+            </div>
+        </div>
+
+        <button class="qte-btn" onclick="game.start()" style="background:var(--red); border-color:#8a2324; box-shadow:0 4px 15px rgba(198, 48, 50, 0.4);">COMMENCER LE COMBAT</button>
+    </div>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="game-over-screen" class="overlay hidden">
+        <h1 style="color:var(--red); font-size:3.5rem; text-shadow:0 0 20px rgba(198, 48, 50, 0.6);">ÉCHEC</h1>
+        <p id="fail-reason" style="margin-bottom:40px; font-size:1.2rem; color:#ccc;">...</p>
+        <button class="qte-btn" onclick="location.reload()">RÉESSAYER</button>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="win-screen" class="overlay hidden">
+        <div style="font-size:5rem; margin-bottom:15px; filter:drop-shadow(0 0 20px var(--green));">💎</div>
+        <h1 style="color:var(--yellow); font-size:3.5rem; margin:0;">VICTOIRE</h1>
+        <p style="margin-bottom:40px; color:#ccc;">A Strega est vaincue. La Pierre de l'Orcu est vôtre.</p>
+        <button class="qte-btn" onclick="location.reload()" style="background:var(--green); border-color:#5c9199; color:#000; text-shadow:none;">CONTINUER</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
