@@ -47,7 +47,7 @@
         },
         "09": {
             "1": {
-                "game": "escape_frac",
+                "game": "case_9_mercenaire",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "dialog",
@@ -56,7 +56,7 @@
         },
         "10": {
             "1": {
-                "game": "fight_soldiers",
+                "game": "case_10_frac",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
                 "nextActionTypeLose": "end",

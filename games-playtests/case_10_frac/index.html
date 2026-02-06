@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROSA - FRAC RUNNER 3D</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Import Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="vignette"></div>
+    
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+        <div>
+            <div class="score-label">PROXIMITÉ GARDE</div>
+            <div class="danger-meter"><div class="danger-fill" id="danger-bar"></div></div>
+        </div>
+        <div class="score-box">
+            <div class="score-label">DISTANCE RESTANTE</div>
+            <div class="score-val" id="score-display">250m</div>
+            <div class="score-label" style="color:var(--yellow); margin-top:5px;">SOUVENIRS: <span id="coin-display">0</span></div>
+        </div>
+    </div>
+
+    <div id="hint-text" class="hint hidden">GLISSER ou FLÈCHES pour bouger</div>
+
+    <!-- START SCREEN -->
+    <div id="start-screen" class="overlay">
+        <h1>FRAC RUNNER</h1>
+        <div class="subtitle">
+            Vous rentrez dans le Frac, l’intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d’exposition transformées en couloirs sombres où résonnent des pas imaginaires. À peine avez-vous franchi l’entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d’enfant déformé par un large sourire.
+        </div>
+        <div class="dialogue-box">
+            <span class="character-name">U Fulettu</span>
+            <span class="dialogue-text">"Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m’agace. Ça m’intrigue. Voyons ce que tu fais… quand il n’y a plus personne."</span>
+        </div>
+        <button class="btn" onclick="initGame()">S'ÉCHAPPER</button>
+    </div>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="gameover-screen" class="overlay hidden">
+        <h1 style="color: var(--danger)">CAPTULÉ</h1>
+        <div class="subtitle">
+            Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré.
+            <br><br>
+            <em>Votre seul chemin encore viable est A Piazza à u Duca.</em>
+        </div>
+        <button class="btn" onclick="resetGame()">RÉESSAYER</button>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="win-screen" class="overlay hidden">
+        <h1 style="color: var(--accent)">ÉVASION RÉUSSIE</h1>
+        <div class="subtitle">
+            Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.
+            <br><br>
+            En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli.
+        </div>
+        <button class="btn" onclick="nextStep()">VERS LA STATUE</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
