@@ -245,7 +245,7 @@
       }
     },
     "140": {
-      "actionType": "choice",
+      "actionType": "dialog",
       "action": "1",
       "end": {
         "1": {
@@ -253,12 +253,8 @@
           "nextStep": "Allez à Prosa par la plage cachée."
         },
         "2": {
-          "type": "win",
-          "nextStep": "Arriver à Prosa avec l'Orcu."
-        },
-        "3": {
           "type": "lose",
-          "nextStep": "Vous avez été capturé par la patrouille de Prosa, allez à la prison."
+          "nextStep": "Perdu"
         }
       }
     }

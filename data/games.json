@@ -38,7 +38,7 @@
     },
     "67": {
       "1": {
-        "game": "case_8_fulettu",
+        "game": "case_67_fullettu",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "dialog",
@@ -75,6 +75,15 @@
         "game": "case_13_strega_2",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "14": {
+      "1": {
+        "game": "case_14_orcu",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
         "nextActionTypeLose": "end",
         "nextActionLose": "2"
       }

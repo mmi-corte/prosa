@@ -1380,7 +1380,7 @@
             "pitch": 400
           }
         ],
-        "nextActionType": "choice",
+        "nextActionType": "game",
         "nextAction": "1"
       }
     }
