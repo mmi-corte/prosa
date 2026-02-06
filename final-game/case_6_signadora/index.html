@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prosa : Infiltration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+        <div id="timer-display">60</div>
+        <div id="eye" class="status-indicator"></div>
+    </div>
+    
+    <div id="alert-msg">NE BOUGEZ PAS !</div>
+
+    <div id="progress-container" class="hidden">
+        <div id="progress-fill"></div>
+    </div>
+
+    <!-- Écran d'accueil / Instructions -->
+    <div id="start-screen" class="overlay">
+        <h1>Infiltration</h1>
+        
+        <!-- Contexte Narratif -->
+        <div class="story-context">
+            "Un homme se meurt à la fontaine. Les remèdes sont stockés dans la chapelle, mais le clan veille."<br><br>
+            "Faufilez-vous sans bruit. Si vous êtes repéré, tout est perdu."
+        </div>
+
+        <div class="instruction-box">
+            <p style="border-bottom: 1px solid var(--border); padding-bottom:10px; margin-bottom:15px;">CONSIGNES DE MISSION</p>
+            <p><span class="key-instruction">MAINTENIR</span> pour avancer</p>
+            <p><span class="key-instruction">RELÂCHER</span> immédiatement quand le voyant est <span style="color:var(--accent-red); font-weight:bold;">ROUGE</span></p>
+        </div>
+        <button onclick="game.start()">LANCER LA MISSION</button>
+    </div>
+
+    <!-- Écran Echec -->
+    <div id="fail-screen" class="overlay hidden">
+        <h2 id="fail-reason" style="font-size: 30px;">ÉCHEC</h2>
+        <p id="fail-desc" style="font-size: 18px; margin-bottom: 30px;">Vous avez été repéré.</p>
+        <!-- Retour au menu principal -->
+        <button onclick="game.goToMenu()">RETOUR AU DÉBUT</button>
+    </div>
+
+    <!-- Écran Victoire -->
+    <div id="win-screen" class="overlay hidden">
+        <h1 style="color: var(--accent-green); border-color: var(--accent-green);">Succès</h1>
+        <p>Médicaments récupérés.</p>
+        <p>A Signadora pourra soigner le jeune homme.</p>
+        <button onclick="game.goToMenu()">MENU PRINCIPAL</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
