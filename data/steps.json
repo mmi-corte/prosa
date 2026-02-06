@@ -180,7 +180,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12"
+          "nextStep": "13"
         },
         "2": {
           "type": "lose",
@@ -194,7 +194,7 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "12"
+          "nextStep": "13"
         },
         "2": {
           "type": "lose",
