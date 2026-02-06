@@ -1197,7 +1197,7 @@
             "voice": ""
           }
         ],
-        "nextActionType": "riddle",
+        "nextActionType": "game",
         "nextAction": "1"
       },
       "4": {
