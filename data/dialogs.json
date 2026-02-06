@@ -3,7 +3,7 @@
     "01": {
       "1": {
         "default": {
-          "backgroundUrl": "radio.webp",
+          "backgroundUrl": "radio.png",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -29,7 +29,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "radio.webp",
+          "backgroundUrl": "radio.png",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -81,7 +81,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "plan-riviere.webp",
+          "backgroundUrl": "plan-riviere.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -134,7 +134,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "plan-fata.webp",
+          "backgroundUrl": "plan-fata.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -176,7 +176,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "plan-passerelle.webp",
+          "backgroundUrl": "plan-passerelle.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -194,7 +194,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "Strega-passerelle.webp",
+          "backgroundUrl": "Strega-passerelle.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -268,7 +268,7 @@
     "03": {
       "1": {
         "default": {
-          "backgroundUrl": "plan-musee.webp",
+          "backgroundUrl": "plan-musee.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -321,7 +321,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "plan-spallistu.webp",
+          "backgroundUrl": "spallistu_decors.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -341,7 +341,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "orcu_back.webp",
+          "backgroundUrl": "plan-spallistu.png",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -393,7 +393,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "sallecarte.webp",
+          "backgroundUrl": "sallecarte.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -433,7 +433,7 @@
     "04": {
       "1": {
         "default": {
-          "backgroundUrl": "orcu.webp",
+          "backgroundUrl": "orcu.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -529,7 +529,7 @@
     "06": {
       "1": {
         "default": {
-          "backgroundUrl": "GP-signadora.webp",
+          "backgroundUrl": "GP-signadora.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -585,7 +585,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "chapelle.webp",
+          "backgroundUrl": "chapelle.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -615,7 +615,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "interieur_chapelle.webp",
+          "backgroundUrl": "interieur_chapelle.png",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -647,7 +647,7 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "armurier.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -697,7 +697,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "confrontation.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -721,7 +721,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "confrontation.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
