@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+/* RESET & LAYOUT */
+html, body { margin: 0; padding: 0; background-color: #12100c; overflow: hidden; }
+
+.game-container {
+  --bg-color: #12100c;
+  --text-color: #ece4cb;
+  --accent: #c63032;
+  --highlight: #ffdb2c;
+  --ally: #81cbd6;
+  --ui-border: #4a4a35;
+
+  font-family: 'Oswald', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  /* FULLSCREEN MOBILE FIX */
+  position: fixed; inset: 0; width: 100%; height: 100dvh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+
+  user-select: none; -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* TEXTURES */
+.scanlines {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+  background-size: 100% 4px; position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: 0.5;
+}
+.vignette {
+  position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, #000 100%);
+  pointer-events: none; z-index: 6;
+}
+.noise {
+  position: absolute; inset: 0; opacity: 0.05; pointer-events: none; z-index: 4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* UI ELEMENTS */
+.btn-action {
+  background: linear-gradient(180deg, #2a2820 0%, #1a1812 100%);
+  border: 2px solid var(--ui-border);
+  box-shadow: 0 4px 0 #000;
+  transform: translateY(0); transition: 0.1s;
+  color: var(--text-color); text-transform: uppercase; letter-spacing: 0.1em;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-action:active { transform: translateY(4px); box-shadow: none; border-color: #666; }
+
+/* QTE & COMBAT UI */
+.qte-target {
+  position: absolute; width: 64px; height: 64px;
+  border-radius: 50%; background: rgba(0,0,0,0.85); border: 3px solid #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: bold; color: #fff;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  z-index: 50; touch-action: manipulation;
+}
+.qte-target.active { border-color: var(--highlight); color: var(--highlight); transform: scale(1.1); }
+@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.precision-bar-container {
+  background: #000; border: 2px solid #555; position: relative; overflow: hidden; border-radius: 4px;
+  box-shadow: inset 0 0 20px #000;
+}
+.precision-cursor {
+  position: absolute; top: 0; bottom: 0; width: 6px; background: #fff; box-shadow: 0 0 10px #fff; z-index: 10;
+}
+.precision-zone-hit { position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: var(--ally); opacity: 0.2; }
+.precision-zone-crit { position: absolute; top: 0; bottom: 0; left: 45%; width: 10%; background: var(--highlight); opacity: 0.8; }
+
+.typewriter { font-family: 'Special Elite', monospace; line-height: 1.6; }
+
+.shake-screen { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } }
+
+.fade-in { animation: fadeIn 0.8s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

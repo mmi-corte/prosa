@@ -1,0 +1,450 @@
+/* --- POLICES --- */
+@font-face {
+    font-family: 'Futura';
+    src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+        url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+        url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+    font-weight: 400; font-style: normal; font-display: fallback;
+}
+@font-face {
+    font-family: 'Futura';
+    src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+        url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+        url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+    font-weight: 700; font-style: normal; font-display: fallback;
+}
+
+/* --- VARIABLES --- */
+:root {
+    --background: #12110d;
+    --foreground: #ece4cb;
+    --card: #1e1c15;
+    --primary: #626247;
+    --primary-light: #7a7a5a;
+    --primary-dark: #4a4a35;
+    --accent-red: #c63032;
+    --accent-green: #81cbd6;
+    --accent-yellow: #ffdb2c;
+    --accent-purple: #300941;
+    --success: #81cbd6;
+    --danger: #d94244;
+    --border: #3a3830;
+    --font-main: 'Futura', sans-serif;
+    --shadow-elevation: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body.light-mode {
+    --background: #ece4cb;
+    --foreground: #2a2820;
+    --card: #f8f5ed;
+    --card-foreground: #2a2820;
+    --primary: #626247;
+    --primary-dark: #4a4a35;
+    --primary-light: #7a7a5a;
+    --muted: #e0d9c5;
+    --muted-foreground: #6a6555;
+    --dust: #2a2820;
+    --border: #d0c9b5;
+    --accent-red: #c63032;
+    --accent-green: #2a8a95;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; 
+}
+
+body {
+    margin: 0;
+    background-color: var(--background);
+    /* Texture subtile de bruit pour l'ambiance */
+    background-image: radial-gradient(circle at center, #2a2820 0%, #080806 100%);
+    color: var(--foreground);
+    font-family: var(--font-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body.light-mode {
+    background-image: radial-gradient(circle at center, #f3efe3 0%, #e6ddc9 100%);
+}
+
+/* --- LAYOUT --- */
+#game-stage {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+/* --- HUD (Barres de vie) --- */
+.hud {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+
+body.light-mode .hud {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+}
+
+.bar-container {
+    width: 45%;
+    height: 24px;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+body.light-mode .bar-container {
+    background: rgba(0,0,0,0.12);
+}
+
+.hp-bar { 
+    height: 100%; width: 100%; 
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+}
+
+/* Effet de reflet sur les barres */
+.hp-bar::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+}
+
+.hp-boss { background: linear-gradient(90deg, #8a2324, var(--accent-red)); }
+.hp-player { background: linear-gradient(90deg, #5c9199, var(--accent-green)); }
+
+.bar-label {
+    position: absolute; top:0; left: 6px; font-size: 0.75rem; 
+    line-height: 20px; text-shadow: 1px 1px 2px #000; font-weight: 700; letter-spacing: 0.5px;
+    z-index: 2; color: #fff;
+}
+
+body.light-mode .bar-label {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* --- BOSS SCENE --- */
+.boss-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.boss-avatar {
+    width: 35vh;
+    height: 35vh;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--accent-purple), #111);
+    border: 4px solid var(--accent-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    box-shadow: 0 0 40px rgba(198, 48, 50, 0.3);
+    transition: transform 0.1s;
+    position: relative;
+}
+
+body.light-mode .boss-avatar {
+    background: radial-gradient(circle at 30% 30%, var(--accent-purple), #f0e7d5);
+    box-shadow: 0 0 40px rgba(198, 48, 50, 0.2);
+}
+
+/* Aura du boss */
+.boss-avatar::before {
+    content: ''; position: absolute; inset: -10px; border-radius: 50%;
+    border: 1px solid rgba(198, 48, 50, 0.3);
+    animation: pulse-aura 2s infinite;
+}
+
+@keyframes pulse-aura { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.2); opacity: 0; } }
+.boss-avatar.hit { animation: flash 0.2s; }
+
+/* --- QTE ZONE (Panneau de contrôle) --- */
+.qte-zone {
+    height: 55%;
+    min-height: 320px;
+    background: var(--card);
+    border-top: 4px solid var(--primary);
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+    border-radius: 20px 20px 0 0; /* Coins arrondis en haut */
+}
+
+.instruction-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#current-instruction {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-yellow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.timer-container {
+    width: 80%;
+    margin: 0 auto;
+    height: 6px;
+    background: #111;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.light-mode .timer-container {
+    background: #e6ddc9;
+}
+
+#timer-bar {
+    height: 100%;
+    width: 100%;
+    background: var(--success);
+    transform-origin: left;
+    box-shadow: 0 0 10px var(--success);
+}
+
+/* --- MODULES QTE (General) --- */
+.qte-module {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligner vers le haut pour éviter le overlap */
+    width: 100%;
+    position: relative;
+    padding-top: 10px;
+}
+
+.qte-btn {
+    background: linear-gradient(to bottom, var(--primary-light), var(--primary));
+    color: #fff;
+    border: none;
+    border-bottom: 4px solid var(--primary-dark);
+    padding: 20px;
+    font-size: 1.4rem;
+    font-family: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 320px;
+    touch-action: none; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.05s, border-bottom-width 0.05s, background 0.1s;
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.qte-btn:active, .qte-btn.holding { 
+    transform: translateY(4px); 
+    border-bottom-width: 0px;
+    background: var(--primary-dark);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.qte-btn.holding { background: var(--accent-green); color: #000; text-shadow: none; }
+
+/* --- SPECIFIC MODULES --- */
+
+/* 1. MASH */
+#mash-progress-bg {
+    width: 85%; height: 20px; background: #000; border: 1px solid #444;
+    margin-bottom: 25px; border-radius: 10px; overflow: hidden;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.8);
+}
+#mash-progress { 
+    height: 100%; width: 0%; background: var(--accent-red); 
+    transition: width 0.05s; 
+    box-shadow: 0 0 10px var(--accent-red);
+}
+
+/* 2. SEQUENCE */
+#qte-sequence { gap: 10px; }
+#seq-display {
+    font-size: 1.8rem; letter-spacing: 12px; 
+    background: rgba(0,0,0,0.4); padding: 10px 25px; 
+    border-radius: 12px; margin-bottom: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+body.light-mode #seq-display {
+    background: rgba(0,0,0,0.08);
+}
+.arrow-pad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.arrow-row { display: flex; gap: 8px; }
+.arrow-key {
+    width: 60px; height: 60px; 
+    background: #2a2820; border: 1px solid #444;
+    color: #888; font-size: 1.5rem; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    touch-action: none;
+    box-shadow: 0 4px 0 #111;
+}
+body.light-mode .arrow-key {
+    background: #f0e7d5; border-color: #c9c0ac; color: #6a6555; box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+.arrow-key:active, .arrow-key.active { 
+    background: var(--accent-green); color: #000; 
+    transform: translateY(4px); box-shadow: none; border-color: var(--accent-green);
+}
+
+/* 3. TIMING */
+#qte-timing { gap: 20px; justify-content: center; }
+#timing-track {
+    width: 90%; height: 50px; background: #111; border: 2px solid #555;
+    position: relative; border-radius: 25px; overflow: hidden;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+body.light-mode #timing-track {
+    background: #efe7d6; border-color: #c9c0ac;
+}
+#timing-target {
+    position: absolute; top: 0; bottom: 0; 
+    background: rgba(129, 203, 214, 0.2);
+    border-left: 2px solid var(--accent-green); border-right: 2px solid var(--accent-green);
+}
+#timing-cursor {
+    position: absolute; top: 5px; bottom: 5px; width: 6px; 
+    background: #fff; border-radius: 3px;
+    box-shadow: 0 0 15px #fff; left: 0%;
+}
+
+/* 4. REFLEX (GRILLE CORRIGÉE) */
+#reflex-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    /* Responsive Grid : Carré parfait qui s'adapte */
+    width: 85%;
+    max-width: 300px; /* Ne devient pas trop grand */
+    aspect-ratio: 1 / 1; /* Force le ratio carré */
+    margin: 0 auto;
+}
+.reflex-cell {
+    background: #252218; 
+    border: 1px solid #3a3830; 
+    border-radius: 8px;
+    position: relative; 
+    touch-action: none;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    transition: transform 0.1s;
+}
+body.light-mode .reflex-cell {
+    background: #efe7d6; border-color: #c9c0ac;
+}
+.reflex-cell:active { transform: scale(0.95); }
+
+.reflex-target {
+    background: var(--accent-red);
+    box-shadow: 0 0 20px var(--accent-red), inset 0 0 10px rgba(255,255,255,0.3);
+    border: 2px solid #fff;
+    animation: popIn 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn { from { transform: scale(0.5); opacity:0; } to { transform: scale(1); opacity:1; } }
+
+/* 5. HOLD */
+#qte-hold { flex-direction: row; gap: 20px; align-items: center; justify-content: center; }
+#hold-gauge-container {
+    width: 40px; height: 180px; background: #111; border: 2px solid #555;
+    position: relative; border-radius: 20px; overflow: hidden;
+}
+body.light-mode #hold-gauge-container {
+    background: #efe7d6; border-color: #c9c0ac;
+}
+#hold-target-zone {
+    position: absolute; left: 0; right: 0; background: rgba(255, 219, 44, 0.2);
+    border-top: 2px solid var(--accent-yellow); border-bottom: 2px solid var(--accent-yellow);
+    z-index: 1;
+}
+#hold-gauge-fill {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 0%;
+    background: var(--primary); transition: height 0.05s linear, background 0.2s; z-index: 2; opacity: 0.9;
+}
+#hold-btn { 
+    height: 100px; width: 100px; border-radius: 50%; font-size: 1rem; 
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; padding: 0;
+}
+
+/* --- SCREENS --- */
+.overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(18, 17, 13, 0.98); 
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 25px;
+    overflow-y: auto;
+}
+body.light-mode .overlay {
+    background: rgba(236, 228, 203, 0.96);
+}
+.hidden { display: none !important; }
+
+/* RULES STYLE */
+.rules-container {
+    text-align: left;
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin: 20px 0;
+    width: 100%;
+    max-width: 400px;
+}
+body.light-mode .rules-container {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.08);
+}
+.rule-item { margin-bottom: 12px; display: flex; align-items: center; }
+.rule-icon { width: 40px; text-align: center; display: inline-block; margin-right: 15px; font-size: 1.5rem; }
+.rule-text { font-size: 0.9rem; color: #ccc; line-height: 1.3; }
+body.light-mode .rule-text { color: #6a6555; }
+.rule-text strong { color: var(--accent-yellow); display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+
+.shake { animation: shake 0.5s; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); }
+}
+@keyframes flash { 0% { filter: brightness(2); } 100% { filter: brightness(1); } }
+
+/* FLOATER TEXT */
+.floater {
+    position: absolute; font-size: 2.5rem; font-weight: 900; pointer-events: none;
+    animation: floatUp 0.8s forwards; text-shadow: 2px 2px 0 #000; z-index: 50;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; } 
+    20% { transform: translateY(-30px) scale(1.2); opacity: 1; } 
+    100% { transform: translateY(-80px) scale(1); opacity: 0; }
+}
