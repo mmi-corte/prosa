@@ -56,6 +56,8 @@ const game = {
     isRunning: false,
     timerInterval: null,
     animationFrame: null,
+    finishTimeout: null,
+    hasFinished: false,
     hpPlayer: 100,
     hpBoss: 100,
     timeLeft: 0,
@@ -200,6 +202,7 @@ const game = {
             this.isRunning = false;
             document.getElementById('fail-reason').innerText = reason;
             this.ui.screens.gameOver.classList.remove('hidden');
+            this.queueFinish(false);
         } else {
             setTimeout(() => this.nextTurn(), 1200);
         }
@@ -208,6 +211,27 @@ const game = {
     win: function () {
         this.isRunning = false;
         this.ui.screens.win.classList.remove('hidden');
+        this.queueFinish(true);
+    },
+
+    queueFinish: function (win) {
+        if (this.hasFinished) return;
+        this.hasFinished = true;
+        clearTimeout(this.finishTimeout);
+        this.finishTimeout = setTimeout(() => {
+            if (window.finishGame) {
+                window.finishGame(win);
+            }
+        }, 1500);
+    },
+
+    exit: function (win) {
+        clearTimeout(this.finishTimeout);
+        if (this.hasFinished) return;
+        this.hasFinished = true;
+        if (window.finishGame) {
+            window.finishGame(win);
+        }
     },
 
     updateHealthUI: function() {
@@ -408,3 +432,13 @@ const qteHold = {
         else game.animationFrame = requestAnimationFrame(() => this.loop());
     }
 };
+
+const failBtn = document.querySelector('#game-over-screen button');
+if (failBtn) {
+    failBtn.addEventListener('click', () => game.exit(false));
+}
+
+const winBtn = document.querySelector('#win-screen button');
+if (winBtn) {
+    winBtn.addEventListener('click', () => game.exit(true));
+}

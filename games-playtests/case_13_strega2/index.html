@@ -112,7 +112,7 @@
     <div id="game-over-screen" class="overlay hidden">
         <h1 style="color:var(--red); font-size:3.5rem; text-shadow:0 0 20px rgba(198, 48, 50, 0.6);">ÉCHEC</h1>
         <p id="fail-reason" style="margin-bottom:40px; font-size:1.2rem; color:#ccc;">...</p>
-        <button class="qte-btn" onclick="location.reload()">RÉESSAYER</button>
+        <button class="qte-btn" onclick="game.exit(false)">CONTINUER</button>
     </div>
 
     <!-- WIN SCREEN -->
@@ -120,7 +120,7 @@
         <div style="font-size:5rem; margin-bottom:15px; filter:drop-shadow(0 0 20px var(--green));">💎</div>
         <h1 style="color:var(--yellow); font-size:3.5rem; margin:0;">VICTOIRE</h1>
         <p style="margin-bottom:40px; color:#ccc;">A Strega est vaincue. La Pierre de l'Orcu est vôtre.</p>
-        <button class="qte-btn" onclick="location.reload()" style="background:var(--green); border-color:#5c9199; color:#000; text-shadow:none;">CONTINUER</button>
+        <button class="qte-btn" onclick="game.exit(true)" style="background:var(--green); border-color:#5c9199; color:#000; text-shadow:none;">CONTINUER</button>
     </div>
 </div>
 
