@@ -1,69 +1,65 @@
 {
-    "1": [
-        {
-            "id": 1,
-            "name": "Livia",
-            "fullName": "Livia Albertini",
-            "description": {
-                "fr": "Forgeronne depuis l’enfance, Livia fut chassée lorsque le clan de Corti réquisitionna les forges. Cachée au cœur de la cité, elle laissa d’abord la colère la guider avant de mettre son savoir en secret au service des réfugiés, forgeant pour eux une chance de survie.",
-                "cor": "Fabbra di a zitellina, Livia hè stata cacciata quandu u clan di Corti hà requisitu e fabbriche. Nascosta in u core di a cità, hà lasciatu prima a rabbia guidalla prima di mette u so sapè in secretu à u serviziu di i rifugiati, forgiendu per elli una chance di sopravvivenza."
-            },
-            "image": "livia.webp"
+    "1": {
+        "name": "Livia",
+        "fullName": "Livia Albertini",
+        "description": {
+            "fr": "Forgeronne depuis l’enfance, Livia fut chassée lorsque le clan de Corti réquisitionna les forges. Cachée au cœur de la cité, elle laissa d’abord la colère la guider avant de mettre son savoir en secret au service des réfugiés, forgeant pour eux une chance de survie.",
+            "cor": "Fabbra di a zitellina, Livia hè stata cacciata quandu u clan di Corti hà requisitu e fabbriche. Nascosta in u core di a cità, hà lasciatu prima a rabbia guidalla prima di mette u so sapè in secretu à u serviziu di i rifugiati, forgiendu per elli una chance di sopravvivenza."
         },
-        {
-            "id": 2,
-            "name": "Orsetta",
-            "fullName": "Orsetta Scampini",
-            "description": {
-                "fr": "Nourrie des récits marins de son grand-père, Orsetta comprit très tôt la mer. Après la destruction du navire familial par une faction inconnue, elle survécut seule sur Corti, où des vestiges technologiques échoués lui permirent de créer une radio qui scella son destin.",
-                "cor": "Nutruta di i racconti marini di u so nonnu, Orsetta hà capitu assai prestu a mare. Dopu a distruzzione di u navilu familiali da una fazione sconosciuta, hà sopravvissutu sola nantu à Corti, induve i resti tecnologichi spiaggiati li permetteranu di creà una radio chì sigillò u so destinu."
-            },
-            "image": "orsetta.webp"
+        "image": "livia.webp",
+        "localisation": "1"
+    },
+    "2": {
+        "name": "Orsetta",
+        "fullName": "Orsetta Scampini",
+        "description": {
+            "fr": "Nourrie des récits marins de son grand-père, Orsetta comprit très tôt la mer. Après la destruction du navire familial par une faction inconnue, elle survécut seule sur Corti, où des vestiges technologiques échoués lui permirent de créer une radio qui scella son destin.",
+            "cor": "Nutruta di i raconti marini di u so nonnu, Orsetta hà capitu assai prestu a mare. Dopu a distruzzione di u navilu familiali da una fazione sconosciuta, hà sopravvissutu sola nantu à Corti, induve i resti tecnologichi spiaggiati li permetteranu di creà una radio chì sigillò u so destinu."
         },
-        {
-            "id": 3,
-            "name": "Bastianu",
-            "fullName": "Bastianu Paoli",
-            "description": {
-                "fr": "Garde-chasse de Corti, Bastianu rompit avec le clan après avoir saboté ses opérations et sauvé des rebelles. Réfugié dans le maquis avec une radio volée, il devint une légende, l’Ombre du maquis, veillant sur la nature comme sur un territoire sacré.",
-                "cor": "Guardia di Corti, Bastianu hà rottu cù u clan dopu avè sabotatu e so operazioni è salvatu i ribelli. Rifugiatu in u maquis cù una radio rubata, hè diventatu una legenda, l’Ombra di u maquis, vigilendu nantu à a natura cum'è nantu à un territoriu sacru."
-            },
-            "image": "bastianu.webp"
-        }
-    ],
-    "2": [
-        {
-            "id": 4,
-            "name": "Marc",
-            "fullName": "Marc Gallafrio",
-            "description": {
-                "fr": "Ancien responsable de la sécurité civile, Marc a consacré sa vie à la gestion de crises où la moindre hésitation pouvait être fatale. Il sait reconnaître l’instant précis où ordonner l’arrêt total pour laisser passer le danger. Aujourd’hui encore, son sang-froid et sa rigueur permettent de sauver des groupes entiers de catastrophes imminentes.",
-                "cor": "",
-                "prov": ""
-            },
-            "image": "marc.webp"
+        "image": "orsetta.webp",
+        "localisation": "1"
+    },
+    "3": {
+        "name": "Bastianu",
+        "fullName": "Bastianu Paoli",
+        "description": {
+            "fr": "Garde-chasse de Corti, Bastianu rompit avec le clan après avoir saboté ses opérations et sauvé des rebelles. Réfugié dans le maquis avec une radio volée, il devint une légende, l’Ombre du maquis, veillant sur la nature comme sur un territoire sacré.",
+            "cor": "Guardia di Corti, Bastianu hà rottu cù u clan dopu avè sabotatu e so operazioni è salvatu i ribelli. Rifugiatu in u maquis cù una radio rubata, hè diventatu una legenda, l’Ombra di u maquis, vigilendu nantu à a natura cum'è nantu à un territoriu sacru."
         },
-        {
-            "id": 5,
-            "name": "Leo",
-            "fullName": "Leo Panisson",
-            "description": {
-                "fr": "Expert en mécanique, Léo a passé sa vie à démonter et réparer des machines. Il y a dix ans, lors d’une attaque de la Tarasca, il a perdu plusieurs proches ; depuis, il s’est installé près de l’ancienne université de Toulon, où il épluche données et schémas afin d’anticiper le chaos semé par la machine.",
-                "cor": "",
-                "prov": ""
-            },
-            "image": "leo.webp"
+        "image": "bastianu.webp",
+        "localisation": "1"
+    },
+    "4": {
+        "name": "Marc",
+        "fullName": "Marc Gallafrio",
+        "description": {
+            "fr": "Ancien responsable de la sécurité civile, Marc a consacré sa vie à la gestion de crises où la moindre hésitation pouvait être fatale. Il sait reconnaître l’instant précis où ordonner l’arrêt total pour laisser passer le danger. Aujourd’hui encore, son sang-froid et sa rigueur permettent de sauver des groupes entiers de catastrophes imminentes.",
+            "cor": "",
+            "prov": ""
         },
-        {
-            "id": 6,
-            "name": "Docteur Valérie",
-            "fullName": "Dr. Valérie Brauquier",
-            "description": {
-                "fr": "Ancienne chercheuse en microbiologie, Valérie a passé des années isolée, obsédée par la découverte de nouveaux médicaments naturels. Pragmatique et méthodique, elle prépare ses expériences et collecte ses ressources avec soin.",
-                "cor": "",
-                "prov": ""
-            },
-            "image": "valerie.webp"
-        }
-    ]
+        "image": "marc.webp",
+        "localisation": "2"
+    },
+    "5": {
+        "name": "Leo",
+        "fullName": "Leo Panisson",
+        "description": {
+            "fr": "Expert en mécanique, Léo a passé sa vie à démonter et réparer des machines. Il y a dix ans, lors d’une attaque de la Tarasca, il a perdu plusieurs proches ; depuis, il s’est installé près de l’ancienne université de Toulon, où il épluche données et schémas afin d’anticiper le chaos semé par la machine.",
+            "cor": "",
+            "prov": ""
+        },
+        "image": "leo.webp",
+        "localisation": "2"
+    },
+    "6": {
+        "name": "Docteur Valérie",
+        "fullName": "Dr. Valérie Brauquier",
+        "description": {
+            "fr": "Ancienne chercheuse en microbiologie, Valérie a passé des années isolée, obsédée par la découverte de nouveaux médicaments naturels. Pragmatique et méthodique, elle prépare ses expériences et collecte ses ressources avec soin.",
+            "cor": "",
+            "prov": ""
+        },
+        "image": "valerie.webp",
+        "localisation": "2"
+    }
 }

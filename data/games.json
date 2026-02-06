@@ -84,7 +84,7 @@
         "game": "case_14_orcu",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
-        "nextActionTypeLose": "end",
+        "nextActionTypeLose": "dialog",
         "nextActionLose": "2"
       }
     }

@@ -40,7 +40,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "04"
+          "nextStep": "04",
+          "unlockStep": "141",
+          "unlockedStepId": "14"
         }
       }
     },
@@ -249,12 +251,65 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "Allez à Prosa par la plage cachée."
+          "type": "special_end",
+          "nextStep": "prosa_orcu"
         },
         "2": {
-          "type": "lose",
-          "nextStep": "Perdu"
+          "type": "lose_turn",
+          "nextStep": "05",
+          "turnLoosed": "2",
+          "unlockStep": "142",
+          "unlockedStepId": "14"
+        }
+      }
+    },
+    "141": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
+          "type": "special_end",
+          "nextStep": "prosa_beach"
+        }
+      }
+    },
+    "142": {
+      "actionType": "end",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "special_end",
+          "nextStep": "prosa_jail"
+        }
+      }
+    },
+    "prosa_orcu": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "01"
+        }
+      }
+    },
+    "prosa_jail": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "05"
+        }
+      }
+    },
+    "prosa_beach": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "04"
         }
       }
     }

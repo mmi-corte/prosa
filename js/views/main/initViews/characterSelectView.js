@@ -12,6 +12,7 @@ let currentPlayerIndex
 let detailContainer
 
 let selectedPlayers = []
+let charactersByRegion = {}
 
 export async function characterSelectView(playerCount) {
     console.log(playerCount)
@@ -20,6 +21,8 @@ export async function characterSelectView(playerCount) {
 
     currentPlayerIndex = 0
     charactersData = await fetchPlayerCharacters()
+
+    charactersByRegion = buildCharactersByRegion(charactersData)
 
     // Toujours réinitialiser selectedPlayers quand on entre dans cette vue
     selectedPlayers = [];
@@ -84,10 +87,11 @@ function renderCharacterGrid() {
         regionSection.appendChild(charactersGrid);
 
         // Show characters for the current region
-        charactersData[region.id].forEach((character, characterIndex) => {
+        const regionCharacters = charactersByRegion[region.id] || []
+        regionCharacters.forEach((character) => {
 
             const btn = document.createElement('button');
-            const isTaken = Object.values(selectedPlayers).some(p => p.character === characterIndex && p.localisation === parseInt(region.id));
+            const isTaken = Object.values(selectedPlayers).some(p => p.character === character.id && p.localisation === parseInt(region.id));
 
             if (isTaken) {
                 btn.classList.add('is-taken');
@@ -102,7 +106,7 @@ function renderCharacterGrid() {
             btn.innerHTML = character.name
 
             btn.addEventListener('click', () => {
-                showCharacterDetails(region.id, characterIndex)
+                showCharacterDetails(region.id, character.id)
             });
 
             charactersGrid.appendChild(btn);
@@ -112,6 +116,9 @@ function renderCharacterGrid() {
 
 //Display the character details on character click
 function showCharacterDetails(regionId, characterId) {
+    const character = charactersData[characterId]
+    if (!character) return
+
     detailContainer = document.createElement('div')
     detailContainer.classList.add('detailContainer')
     gameContainer.appendChild(detailContainer)
@@ -131,17 +138,17 @@ function showCharacterDetails(regionId, characterId) {
 
     //Character Picture
     const characterPicture = document.createElement('img')
-    characterPicture.src = `./assets/playersCharacters/${charactersData[regionId][characterId].image}`
+    characterPicture.src = `./assets/playersCharacters/${character.image}`
 
     //Character name
     const characterName = document.createElement('p')
     characterName.classList.add('characterName')
-    characterName.innerText = charactersData[regionId][characterId].fullName
+    characterName.innerText = character.fullName
 
     //Character name and description
     const characterDescription = document.createElement('p')
     characterDescription.classList.add('characterDescription')
-    const descriptionSource = charactersData[regionId][characterId].description
+    const descriptionSource = character.description
     const updateDescription = () => {
         characterDescription.innerText = getTranslation(descriptionSource)
     }
@@ -302,6 +309,21 @@ function addPlayer(regionId, characterId) {
             showBalanceErrorPopup()
         }
     }
+}
+
+function buildCharactersByRegion(data) {
+    const regions = { "1": [], "2": [] }
+
+    Object.entries(data)
+        .map(([id, character]) => ({ id: parseInt(id, 10), ...character }))
+        .sort((a, b) => a.id - b.id)
+        .forEach(character => {
+            const regionId = String(character.localisation)
+            if (!regions[regionId]) regions[regionId] = []
+            regions[regionId].push(character)
+        })
+
+    return regions
 }
 
 // Vérifier l'équilibre entre Corte (1) et Toulon (2)

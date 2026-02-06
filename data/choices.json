@@ -172,6 +172,29 @@
           }
         ]
       }
+    },
+    "prosa_jail": {
+      "1": {
+        "question": {
+          "fr": "Qui souhaitez-vous interpeller ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Un garde de l'autre coté des barreaux faisant sa ronde"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Un homme que vous apercevez à travers une ouverture dans le mur"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "3"
+          }
+        ]
+      }
     }
   },
   "2": {

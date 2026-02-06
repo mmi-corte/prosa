@@ -22,7 +22,6 @@ export async function loadCurrentStepData() {
 
     // Destructure the results back into each var
     [dialogsData, choicesData, riddlesData, gamesData, tokensData] = results;
-    console.log(dialogsData)
 }
 
 /**

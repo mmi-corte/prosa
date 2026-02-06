@@ -10,6 +10,7 @@ import { setLanguage } from "./langageManager.js";
 import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
 import { tokenView } from "./views/actions/tokenView.js";
 
+let activePlayerId
 export let activePlayer
 export let activeStepId
 export let activeStep
@@ -19,6 +20,7 @@ export let activeStep
  * @param  {[number]} playerIndex Joueur actif, issue de l'objet "players"
  */
 export function setActivePlayer(playerIndex) {
+    activePlayerId = playerIndex
     activePlayer = players[playerIndex]
     if (activePlayer && activePlayer.language) {
         setLanguage(activePlayer.language)
@@ -38,6 +40,7 @@ export async function checkStepExist(stepId) {
 
     //Search for the full step ID with unlocked step, or default to base step with variant 0
     const searchId = unlockedStepId || `${stepId}0`
+    console.log(searchId, unlockedStepId, activePlayer)
     if (searchId in stepsData[activePlayer.localisation]) {
         console.log("Found step ", searchId)
         //Return the ID that will be called
@@ -50,18 +53,24 @@ export async function checkStepExist(stepId) {
 
 /**
  * Fonction début d'étape
- * @param  {[number]} stepId Numéro d'étape appelé  
+ * @param  {[number]} fullStepId Numéro d'étape appelé  
  */
-export async function startStep(fullStepId) {
+export async function startStep(fullStepId, specialStep = false) {
+    console.log(activePlayer)
+    console.log(players)
+
     //Re-Check if the step exist in the database
     if (fullStepId in stepsData[activePlayer.localisation]) {
-        //Truncate the full step ID to get the base step ID (without variant) for data reference
-        activeStepId = fullStepId.substring(0, 2)
+        if (!specialStep) {
+            //Truncate the full step ID to get the base step ID (without variant) for data reference
+            activeStepId = fullStepId.substring(0, 2)
+        } else {
+            activeStepId = fullStepId
+        }
         //Set the active step data
         activeStep = stepsData[activePlayer.localisation][fullStepId];
 
         await loadCurrentStepData()
-
         //Call the action from the selected step
         console.log(`Loading step ${fullStepId}`)
         callAction(activeStep.actionType, activeStep.action)
@@ -103,6 +112,9 @@ export function callAction(actionType, action = null) {
         case "aleasRiddle":
             aleasRiddleView();
             break;
+        case "special_end":
+            startStep(actionType, action)
+            break;
         default:
             console.error(`Incorrect data: action type ${actionType} doesn't exist for action ${activeStepId}`)
             menuView()
@@ -118,7 +130,15 @@ export function addUnlockedStep(stepId, unlockedStepId) {
     updatePlayerLocalStorage()
 }
 
+export function changePlayerLocalisation(localisation) {
+    players[activePlayerId].localisation = localisation
+    console.log(`Player localisation changed for player ID ${activePlayerId} to localisation ${localisation}`)
+    console.log(players)
+    updatePlayerLocalStorage()
+}
+
 function updatePlayerLocalStorage() {
     localStorage.setItem('playersData', JSON.stringify(players));
     console.log("Player data saved")
 }
+

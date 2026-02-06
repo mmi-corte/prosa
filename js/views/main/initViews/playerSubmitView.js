@@ -7,6 +7,7 @@ import { characterSelectView } from "./characterSelectView.js";
 import { showConfirmationModal } from "../../components/confirmationModal.js";
 
 let charactersData
+let charactersByRegion = {}
 
 // Vérifier l'équilibre entre Corte (1) et Toulon (2)
 function checkRegionBalance(players) {
@@ -67,6 +68,7 @@ export async function playerSubmitView(selectedPlayers) {
     
     // Charger les données des personnages
     charactersData = await fetchPlayerCharacters()
+    charactersByRegion = buildCharactersByRegion(charactersData)
 
     // Section difficulté
     const difficultySection = document.createElement('div')
@@ -150,10 +152,12 @@ function renderEditablePlayerList(container, players) {
     container.appendChild(playerList)
 
     players.forEach((player, playerIndex) => {
+        const character = charactersData[player.character]
+        if (!character) return
         const playerCard = document.createElement('button')
         playerCard.classList.add('editable-player-card')
         playerList.appendChild(playerCard)
-        playerCard.style.setProperty('--bg-image', `url(./assets/playersCharacters/wide_${charactersData[player.localisation][player.character].image})`)
+        playerCard.style.setProperty('--bg-image', `url(./assets/playersCharacters/wide_${character.image})`)
 
         const textContainer = document.createElement('div')
         playerCard.appendChild(textContainer)
@@ -162,7 +166,7 @@ function renderEditablePlayerList(container, players) {
         playerName.innerText = `Joueur ${playerIndex + 1}`
 
         const characterName = document.createElement('p')
-        characterName.innerText = charactersData[player.localisation][player.character].name
+        characterName.innerText = character.name
 
         textContainer.append(playerName, characterName)
         
@@ -211,9 +215,10 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
     const renderRegionCharacters = (regionId) => {
         grid.innerHTML = ''
         
-        charactersData[regionId].forEach((char, charIndex) => {
+        const regionCharacters = charactersByRegion[regionId] || []
+        regionCharacters.forEach((char) => {
             const isTaken = selectedPlayers.some((p, idx) => 
-                idx !== playerIndex && p.character === charIndex && p.localisation === parseInt(regionId)
+                idx !== playerIndex && p.character === char.id && p.localisation === parseInt(regionId)
             )
             
             const charBtn = document.createElement('button')
@@ -221,7 +226,7 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
             if (isTaken) charBtn.classList.add('taken')
             
             // Marquer le personnage actuel
-            if (selectedPlayers[playerIndex].character === charIndex && 
+            if (selectedPlayers[playerIndex].character === char.id && 
                 selectedPlayers[playerIndex].localisation === parseInt(regionId)) {
                 charBtn.classList.add('current')
             }
@@ -234,7 +239,7 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
             if (!isTaken) {
                 charBtn.addEventListener('click', () => {
                     // Mettre à jour le joueur
-                    selectedPlayers[playerIndex].character = charIndex
+                    selectedPlayers[playerIndex].character = char.id
                     selectedPlayers[playerIndex].localisation = parseInt(regionId)
                     
                     // Vérifier l'équilibre après la modification
@@ -245,10 +250,12 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
                     // Rafraîchir la liste
                     playerListEl.innerHTML = ''
                     selectedPlayers.forEach((player, pIdx) => {
+                        const refreshedCharacter = charactersData[player.character]
+                        if (!refreshedCharacter) return
                         const playerCard = document.createElement('button')
                         playerCard.classList.add('editable-player-card')
                         playerListEl.appendChild(playerCard)
-                        playerCard.style.setProperty('--bg-image', `url(./assets/playersCharacters/wide_${charactersData[player.localisation][player.character].image})`)
+                        playerCard.style.setProperty('--bg-image', `url(./assets/playersCharacters/wide_${refreshedCharacter.image})`)
 
                         const textContainer = document.createElement('div')
                         playerCard.appendChild(textContainer)
@@ -257,7 +264,7 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
                         playerName.innerText = `Joueur ${pIdx + 1}`
 
                         const characterName = document.createElement('p')
-                        characterName.innerText = charactersData[player.localisation][player.character].name
+                        characterName.innerText = refreshedCharacter.name
 
                         textContainer.append(playerName, characterName)
                         
@@ -309,6 +316,21 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) modalOverlay.remove()
     })
+}
+
+function buildCharactersByRegion(data) {
+    const regions = { "1": [], "2": [] }
+
+    Object.entries(data)
+        .map(([id, character]) => ({ id: parseInt(id, 10), ...character }))
+        .sort((a, b) => a.id - b.id)
+        .forEach(character => {
+            const regionId = String(character.localisation)
+            if (!regions[regionId]) regions[regionId] = []
+            regions[regionId].push(character)
+        })
+
+    return regions
 }
 
 function getDifficultyLabel(value) {
