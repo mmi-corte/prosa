@@ -503,7 +503,7 @@
     "05": {
       "1": {
         "default": {
-          "backgroundUrl": "fontaine.webp",
+          "backgroundUrl": "TrioFontaine_case5.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -737,7 +737,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "armurier.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -765,7 +765,7 @@
       },
       "5": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "armurier.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
