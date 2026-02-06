@@ -41,7 +41,7 @@ export function gameView(action) {
             return response.text();
         })
         .then(html => {
-            console.log(`✅ Loaded HTML for game: ${data.game}`);
+            console.log(`✅ Loaded HTML for game: ${data.game} (index.html)`);
             
             // Parse to extract resources
             const parser = new DOMParser();

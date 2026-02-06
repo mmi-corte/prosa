@@ -2,7 +2,7 @@
     "1": {
         "01": {
             "1": {
-                "game": "radio",
+                "game": "case_1_radio",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
@@ -11,7 +11,7 @@
         },
         "04": {
             "1": {
-                "game": "orcu",
+                "game": "case_4_orcu",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
@@ -20,7 +20,7 @@
         },
         "06": {
             "1": {
-                "game": "signadora",
+                "game": "case_6_signadora",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "3",
                 "nextActionTypeLose": "end",
@@ -29,7 +29,7 @@
         },
         "07": {
             "1": {
-                "game": "armurier",
+                "game": "case_7_armurier",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "5",
                 "nextActionTypeLose": "end",
@@ -38,7 +38,7 @@
         },
         "67": {
             "1": {
-                "game": "fulettu",
+                "game": "case_8_fulettu",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "dialog",
@@ -65,14 +65,14 @@
         },
         "13": {
             "1": {
-                "game": "strega",
+                "game": "case_13_strega",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
                 "nextActionLose": "2"
             },
             "2": {
-                "game": "signadora",
+                "game": "case_13_strega_2",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
                 "nextActionTypeLose": "end",
@@ -83,7 +83,7 @@
     "2": {
         "01": {
             "1": {
-                "game": "radio",
+                "game": "case_1_radio",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
