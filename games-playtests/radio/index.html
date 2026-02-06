@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM ACCESS: WASTELAND RADAR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="gameBody">
+    <!-- Modal Message Radio -->
+    <div id="radioModal" class="modal" style="display:none;">
+        <div class="modal-content radio-modal">
+            <div class="radio-header">
+                <span class="radio-icon">📻</span>
+                <div class="frequency-display">
+                    <span class="freq-label">FRÉQUENCE:</span>
+                    <span class="freq-value blink">107.9 MHz</span>
+                </div>
+            </div>
+            <div class="radio-static">
+                [GRÉSILLEMENT... INTERFÉRENCE... SIGNAL CAPTÉ]
+            </div>
+            <div id="radioMessage" class="radio-message"></div>
+            <div class="radio-controls">
+                <button id="skipRadio" class="terminal-button small-btn">&gt; PASSER</button>
+                <button id="continueFromRadio" class="terminal-button" style="display:none;">&gt; CONTINUER</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal des Règles -->
+    <div id="rulesModal" class="modal" style="display:flex;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="glitch">&gt;&gt; MISSION: RÉCUPÉRATION SIGNAL RADIO &lt;&lt;</span>
+            </div>
+            <div class="modal-body">
+                <p class="terminal-line">[PROTOCOLE DE MISSION ACTIVÉ...]</p>
+                <br>
+                <p class="rule-item"><span class="prompt">&gt;</span> <strong>OBJECTIF:</strong> Synchronisez 3 signaux successifs pour établir la connexion complète avec l'émetteur rebelle.</p>
+                
+                <p class="rule-item"><span class="prompt">&gt;</span> <strong>CONTRÔLE PHASE:</strong> Ajustez le décalage temporel de votre onde pour qu'elle corresponde au signal cible.</p>
+                
+                <p class="rule-item"><span class="prompt">&gt;</span> <strong>CONTRÔLE AMPLITUDE:</strong> Réglez la puissance de votre signal pour qu'elle corresponde à l'amplitude cible.</p>
+                
+                <p class="rule-item"><span class="prompt">&gt;</span> <strong>DIFFICULTÉ:</strong> Le signal rebelle dérive continuellement. Vous devez maintenir la synchronisation pour valider chaque étape.</p>
+                
+                <p class="rule-item"><span class="prompt">&gt;</span> <strong>TEMPS LIMITE:</strong> Synchronisez les 3 signaux avant la fin du temps imparti (50 secondes).</p>
+                <br>
+                <p class="terminal-line">[SYSTÈME PRÊT - ATTENDANT AUTORISATION...]</p>
+            </div>
+            <button id="closeModal" class="terminal-button">&gt; COMMENCEZ LE SCAN</button>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="container" style="display:none;" id="gameContainer">
+        <div class="terminal-header">
+            <span class="glitch">SYSTEM ACCESS: RADIO FREQUENCE 107.9 MHz</span>
+        </div>
+
+        <div class="game-section">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-title">&gt;&gt; ÉTAT DU SYSTÈME</div>
+                <div class="stat">
+                    <span class="label">TEMPS RESTANT:</span>
+                    <span class="value" id="timer">15</span>
+                </div>
+                <div class="stat">
+                    <span class="label">SIGNAUX SYNC:</span>
+                    <span class="value" id="successCount">0/3</span>
+                </div>
+                <div class="stat">
+                    <span class="label">PHASE:</span>
+                    <span class="value" id="phaseStatus" style="font-size: 1rem;">DÉSYNC</span>
+                </div>
+                <div class="stat">
+                    <span class="label">AMPLITUDE:</span>
+                    <span class="value" id="amplitudeStatus" style="font-size: 1rem;">DÉSYNC</span>
+                </div>
+                <button id="startBtn" class="terminal-button" style="display:none;">&gt; DÉMARRER SCAN</button>
+            </div>
+
+            <!-- Wave Display -->
+            <div class="wave-container">
+                <div class="wave-label">&gt;&gt; OSCILLOSCOPE SIGNAL</div>
+                <canvas id="waveCanvas"></canvas>
+                
+                <!-- Radio Dial Container -->
+                <div class="radio-dial-container">
+                    <!-- Phase Dial -->
+                    <div class="dial-section">
+                        <div class="dial-title">RÉGLAGE DE PHASE</div>
+                        <div class="radio-dial">
+                            <div class="dial-ticks">
+                                <div class="tick major"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick major"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick major"></div>
+                            </div>
+                            <div class="dial-center-zone"></div>
+                            <div class="needle" id="needlePhase"></div>
+                        </div>
+                        <input type="range" id="tuningSliderPhase" min="0" max="628" value="314" step="1">
+                    </div>
+
+                    <!-- Amplitude Dial -->
+                    <div class="dial-section">
+                        <div class="dial-title">RÉGLAGE D'AMPLITUDE</div>
+                        <div class="radio-dial">
+                            <div class="dial-ticks">
+                                <div class="tick major"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick major"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick"></div>
+                                <div class="tick major"></div>
+                            </div>
+                            <div class="dial-center-zone"></div>
+                            <div class="needle amplitude-needle" id="needleAmplitude"></div>
+                        </div>
+                        <input type="range" id="tuningSliderAmplitude" min="20" max="100" value="60" step="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

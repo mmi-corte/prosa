@@ -2,7 +2,7 @@
     "1": {
         "01": {
             "1": {
-                "game": "radio_frequence",
+                "game": "radio",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
@@ -11,7 +11,7 @@
         },
         "04": {
             "1": {
-                "game": "orcu_force",
+                "game": "orcu",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
@@ -20,7 +20,7 @@
         },
         "06": {
             "1": {
-                "game": "chapelle_infiltration",
+                "game": "signadora",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "3",
                 "nextActionTypeLose": "end",
@@ -29,7 +29,7 @@
         },
         "07": {
             "1": {
-                "game": "chapelle_recup_arme",
+                "game": "armurier",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "5",
                 "nextActionTypeLose": "end",
@@ -38,7 +38,7 @@
         },
         "67": {
             "1": {
-                "game": "fulettu_chase",
+                "game": "fulettu",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "dialog",
@@ -65,14 +65,14 @@
         },
         "13": {
             "1": {
-                "game": "strega_combat",
+                "game": "strega",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",
                 "nextActionLose": "2"
             },
             "2": {
-                "game": "strega_infiltration",
+                "game": "signadora",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "4",
                 "nextActionTypeLose": "end",
@@ -83,7 +83,7 @@
     "2": {
         "01": {
             "1": {
-                "game": "radio_frequence",
+                "game": "radio",
                 "nextActionTypeWin": "dialog",
                 "nextActionWin": "2",
                 "nextActionTypeLose": "end",

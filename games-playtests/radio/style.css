@@ -1,0 +1,695 @@
+/* ===== RESET & VARIABLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Nouvelle palette de couleurs kaki sombre */
+:root {
+    --primary: #626247;
+    --primary-dark: #4a4a35;
+    --primary-light: #7a7a5a;
+    --accent: #81cbd6;
+    --warning: #ffdb2c;
+    --danger: #c63032;
+    --bg: #1a1812;
+    --card: #252218;
+    --text: #ece4cb;
+    --muted: #2a2820;
+    --muted-foreground: #9a9680;
+    --border: #3a3830;
+    --shadow: rgba(98, 98, 71, 0.3);
+}
+
+/* Mode clair - beige en fond, kaki en écriture */
+body.light-mode {
+    --primary: #626247;
+    --primary-dark: #4a4a35;
+    --primary-light: #7a7a5a;
+    --accent: #2a8a95;
+    --warning: #c9a800;
+    --danger: #c63032;
+    --bg: #ece4cb;
+    --card: #f8f5ed;
+    --text: #2a2820;
+    --muted: #e0d9c5;
+    --muted-foreground: #6a6555;
+    --border: #d0c9b5;
+    --shadow: rgba(98, 98, 71, 0.2);
+}
+
+/* ===== BASE STYLES ===== */
+body {
+    background: var(--bg);
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 12px;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Scanlines effect */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(128, 128, 128, 0.03) 2px,
+        rgba(128, 128, 128, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.terminal-header {
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 10px 8px;
+    margin-bottom: 12px;
+    border: 2px solid var(--primary);
+    background: var(--card);
+    color: var(--text);
+    word-break: break-word;
+}
+
+.glitch {
+    display: block;
+}
+
+/* ===== GAME SECTION ===== */
+.game-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* ===== CONTROL PANEL ===== */
+.control-panel {
+    background: var(--card);
+    border: 2px solid var(--primary);
+    padding: 12px;
+    order: 2;
+}
+
+.panel-title {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    color: var(--text);
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    background: rgba(128, 128, 128, 0.05);
+    border: 1px solid var(--primary);
+    font-size: 0.75rem;
+    gap: 8px;
+}
+
+.label {
+    color: var(--text);
+    flex-shrink: 0;
+}
+
+.value {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.terminal-button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 8px;
+    background: var(--card);
+    border: 2px solid var(--primary);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+
+.terminal-button:hover:not(:disabled) {
+    background: rgba(128, 128, 128, 0.1);
+    box-shadow: 0 0 15px var(--shadow);
+}
+
+.terminal-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===== WAVE CONTAINER ===== */
+.wave-container {
+    background: var(--card);
+    border: 2px solid var(--primary);
+    padding: 12px;
+    order: 1;
+}
+
+.wave-label {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text);
+}
+
+#waveCanvas {
+    display: block;
+    width: 100%;
+    height: 120px;
+    background: var(--bg);
+    border: 1px solid var(--primary);
+}
+
+/* ===== RADIO DIAL ===== */
+.radio-dial-container {
+    margin-top: 12px;
+    padding: 10px;
+    background: rgba(128, 128, 128, 0.05);
+    border: 1px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dial-section {
+    width: 100%;
+}
+
+.dial-title {
+    text-align: center;
+    font-size: 0.65rem;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    color: var(--text);
+    text-transform: uppercase;
+}
+
+.radio-dial {
+    position: relative;
+    height: 50px;
+    background: var(--bg);
+    border: 1px solid var(--primary);
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.dial-ticks {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.tick {
+    width: 1px;
+    height: 15px;
+    background: var(--primary);
+    opacity: 0.4;
+}
+
+.tick.major {
+    height: 25px;
+    width: 2px;
+    opacity: 0.8;
+}
+
+.dial-center-zone {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.1);
+    border-left: 1px dashed var(--primary);
+    border-right: 1px dashed var(--primary);
+    opacity: 0.4;
+}
+
+.needle {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+    transition: left 0.15s ease-out;
+    z-index: 10;
+}
+
+.needle::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 6px solid var(--danger);
+}
+
+.amplitude-needle {
+    background: var(--warning);
+    box-shadow: 0 0 8px var(--warning);
+}
+
+.amplitude-needle::before {
+    border-bottom-color: var(--warning);
+}
+
+/* Range Input */
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(128, 128, 128, 0.2);
+    border: 1px solid var(--primary);
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--shadow);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===== MODAL ===== */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 10000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+body.light-mode .modal {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background: var(--card);
+    border: 2px solid var(--primary);
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    animation: glitchIn 0.3s ease-out;
+}
+
+.modal-header {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    padding: 12px 8px;
+    border: 1px solid var(--primary);
+    background: rgba(128, 128, 128, 0.05);
+    letter-spacing: 1px;
+    word-break: break-word;
+    color: var(--text);
+}
+
+.modal-body {
+    color: var(--text);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.terminal-line {
+    color: var(--text);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.rule-item {
+    margin: 8px 0;
+    padding-left: 12px;
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ===== RADIO MODAL ===== */
+.radio-modal {
+    max-width: 700px;
+}
+
+.radio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid var(--primary);
+    background: rgba(128, 128, 128, 0.05);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.radio-icon {
+    font-size: 1.5rem;
+}
+
+.frequency-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.freq-label {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.freq-value {
+    font-size: 1rem;
+    color: var(--primary);
+    letter-spacing: 2px;
+}
+
+.radio-static {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.7rem;
+    color: var(--text);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.radio-message {
+    padding: 16px;
+    max-height: 250px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: rgba(128, 128, 128, 0.02);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    margin: 12px;
+}
+
+.radio-message p {
+    margin-bottom: 12px;
+}
+
+.radio-message .emphasis {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.radio-message .location {
+    color: var(--accent);
+}
+
+.radio-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 12px;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.typing-cursor::after {
+    content: '█';
+    animation: blink 1s infinite;
+}
+
+/* Scrollbar */
+.radio-message::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.radio-message::-webkit-scrollbar-track,
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(128, 128, 128, 0.1);
+}
+
+.radio-message::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes glitchIn {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== TABLET (min-width: 600px) ===== */
+@media (min-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    .terminal-header {
+        font-size: 1rem;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+    }
+
+    .game-section {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .control-panel {
+        flex: 0 0 280px;
+        padding: 20px;
+        order: 1;
+    }
+
+    .wave-container {
+        flex: 1;
+        min-width: 300px;
+        padding: 20px;
+        order: 2;
+    }
+
+    .panel-title,
+    .wave-label {
+        font-size: 0.9rem;
+    }
+
+    .stat {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+    }
+
+    .value {
+        font-size: 1.2rem;
+    }
+
+    #waveCanvas {
+        height: 180px;
+    }
+
+    .radio-dial-container {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .dial-section {
+        flex: 1;
+    }
+
+    .radio-dial {
+        height: 70px;
+    }
+
+    .needle {
+        height: 55px;
+    }
+
+    .dial-title {
+        font-size: 0.75rem;
+    }
+
+    .status-content {
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        padding: 24px;
+    }
+
+    .modal-header {
+        font-size: 1.1rem;
+        padding: 16px;
+    }
+
+    .modal-body {
+        font-size: 0.9rem;
+    }
+
+    .radio-message {
+        max-height: 300px;
+        font-size: 0.9rem;
+        padding: 20px;
+    }
+}
+
+/* ===== DESKTOP (min-width: 900px) ===== */
+@media (min-width: 900px) {
+    .terminal-header {
+        font-size: 1.2rem;
+        padding: 16px 20px;
+        letter-spacing: 3px;
+    }
+
+    .game-section {
+        gap: 24px;
+    }
+
+    .control-panel {
+        flex: 0 0 320px;
+        padding: 24px;
+    }
+
+    .wave-container {
+        padding: 24px;
+    }
+
+    .panel-title {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .stat {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+    }
+
+    .value {
+        font-size: 1.4rem;
+    }
+
+    #waveCanvas {
+        height: 200px;
+    }
+
+    .radio-dial {
+        height: 80px;
+    }
+
+    .needle {
+        height: 60px;
+    }
+
+    .tick {
+        height: 20px;
+    }
+
+    .tick.major {
+        height: 35px;
+    }
+
+    .dial-center-zone {
+        width: 50px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+
+    .modal-content {
+        padding: 32px;
+    }
+
+    .modal-header {
+        font-size: 1.3rem;
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .radio-message {
+        max-height: 350px;
+        font-size: 1rem;
+        padding: 24px;
+        margin: 16px;
+    }
+}
+
+/* ===== SAFE AREA (iOS notch) ===== */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+}

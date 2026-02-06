@@ -1,0 +1,47 @@
+/* Mobile-first responsive base for all minigames */
+.minigame-wrapper {
+    font-size: clamp(14px, 4vw, 16px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Touch optimization for mobile */
+.minigame-wrapper * {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 640px) {
+    .minigame-wrapper {
+        font-size: clamp(12px, 3.5vw, 14px);
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .minigame-wrapper {
+        font-size: clamp(14px, 3vw, 15px);
+    }
+}
+
+@media (min-width: 1025px) {
+    .minigame-wrapper {
+        font-size: 16px;
+    }
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+    .minigame-wrapper {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+        padding-top: max(0px, env(safe-area-inset-top));
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
