@@ -122,7 +122,7 @@
           },
           {
             "text": {
-              "fr": "En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.",
+              "fr": "\"En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.\"",
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
             "pitch": 650,
@@ -187,6 +187,18 @@
               "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
             },
             "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
+            },
+            "pitch": 400
           }
         ],
         "nextActionType": "dialog",
@@ -200,18 +212,6 @@
           "music": ""
         },
         "dialog": [
-          {
-            "text": {
-              "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
-            },
-            "pitch": 400
-          },
-          {
-            "text": {
-              "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
-            },
-            "pitch": 400
-          },
           {
             "text": {
               "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
