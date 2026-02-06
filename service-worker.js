@@ -1,51 +1,55 @@
-const CACHE_NAME = 'cache-prosa-game-v3';
-const GAMES_CACHE = 'cache-prosa-games-v1';
+const CACHE_NAME = 'cache-prosa-game-v4';
 
 const ASSETS_TO_CACHE = [
   // BOOTSTRAP MINIMUM - Fichiers critiques pour démarrer l'app
   './',
   './index.html',
   './app.js',
-  
+  './styles.css',
+  './manifest.json',
+  './assets-manifest.json',
+
   // Preloader pour gérer le reste
   './js/preloadAssets.js',
-  
-  // Views JS - indispensables pour l'interface
-  './js/views/main/charactersView.js',
-  './js/views/main/codeView.js',
-  './js/views/main/initView.js',
-  './js/views/main/langueCorseView.js',
-  './js/views/main/loadingView.js',
-  './js/views/main/menuView.js',
-  './js/views/main/playerSelectView.js',
-  './js/views/main/progressionView.js',
-  './js/views/main/qrView.js',
-  './js/views/main/settingView.js',
-  './js/views/main/seasonsView.js',
-  
-  './js/views/main/initViews/characterSelectView.js',
-  './js/views/main/initViews/langueCorseView.js',
-  './js/views/main/initViews/playerCountView.js',
-  './js/views/main/initViews/playerSubmitView.js',
-  
-  './js/views/actions/choiceView.js',
-  './js/views/actions/dialogView.js',
-  './js/views/actions/endView.js',
-  './js/views/actions/gameView.js',
-  './js/views/actions/riddleView.js',
-  
-  './js/views/components/renderPlayerList.js',
-  './js/views/Temp/debugView.js',
-  
+
   // Core JS
   './js/gameEventHandler.js',
   './js/initGame.js',
   './js/langageManager.js',
   './js/loadData.js',
   './js/typeWriteEffect.js',
-  
-  // Asset manifest - CRITIQUE pour le système de préchargement
-  './assets-manifest.json',
+
+  // Views JS
+  './js/views/Temp/debugView.js',
+  './js/views/actions/aleasRiddleView.js',
+  './js/views/actions/choiceView.js',
+  './js/views/actions/dialogView.js',
+  './js/views/actions/endView.js',
+  './js/views/actions/gameView.js',
+  './js/views/actions/riddleView.js',
+  './js/views/actions/tokenView.js',
+  './js/views/components/confirmationModal.js',
+  './js/views/components/correctAnswerModal.js',
+  './js/views/components/difficultyIncreaseModal.js',
+  './js/views/components/renderPlayerList.js',
+  './js/views/main/aleasView.js',
+  './js/views/main/charactersView.js',
+  './js/views/main/codeView.js',
+  './js/views/main/gameOverView.js',
+  './js/views/main/initView.js',
+  './js/views/main/initViews/characterSelectView.js',
+  './js/views/main/initViews/difficultyView.js',
+  './js/views/main/initViews/langueCorseView.js',
+  './js/views/main/initViews/playerCountView.js',
+  './js/views/main/initViews/playerSubmitView.js',
+  './js/views/main/langueCorseView.js',
+  './js/views/main/loadingView.js',
+  './js/views/main/menuView.js',
+  './js/views/main/playerSelectView.js',
+  './js/views/main/progressionView.js',
+  './js/views/main/qrView.js',
+  './js/views/main/seasonsView.js',
+  './js/views/main/settingView.js',
 ];
 
 // NOTE: Tous les autres assets (images, styles, données JSON, fonts, etc.)
@@ -73,6 +77,17 @@ self.addEventListener('fetch', (event) => {
   if (!event.request.url.startsWith('http')) return;
 
   const url = new URL(event.request.url);
+
+  // Exclure AR et mini-jeux (network-only)
+  if (
+    url.pathname.includes('/AR/') ||
+    url.pathname.includes('/games/') ||
+    url.pathname.includes('/final-game/') ||
+    url.pathname.includes('/games-playtests/') ||
+    url.pathname.includes('/games_index_veryOld/')
+  ) {
+    return;
+  }
 
   // **Google Fonts - stale-while-revalidate**
   if (url.origin === 'https://fonts.googleapis.com' || url.origin === 'https://fonts.gstatic.com') {
@@ -134,68 +149,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // **Gestion des images avec lazy cache**
-  if (event.request.destination === 'image') {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        // Si en cache, retourner immédiatement
-        if (response) {
-          return response;
-        }
-        
-        // Sinon, chercher en réseau et mettre en cache
-        return fetch(event.request).then((response) => {
-          // Vérifier que c'est une réponse valide
-          if (!response || response.status !== 200 || response.type === 'error') {
-            return response;
-          }
-          
-          // Mettre en cache la réponse
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-            console.log(`[Service Worker] Image mise en cache: ${event.request.url}`);
-          });
-          
-          return response;
-        }).catch(() => {
-          // Fallback si l'image ne peut pas être chargée
-          console.warn(`[Service Worker] Impossible de charger l'image: ${event.request.url}`);
-          return caches.match('./assets/favicon/favicon.svg');
-        });
-      })
-    );
-    return;
-  }
-
-  // **Jeux - cache lazy (on demand)**
-  if (event.request.url.includes('/games/')) {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          return response;
-        }
-
-        return fetch(event.request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(GAMES_CACHE).then((cache) => {
-              cache.put(event.request, responseClone);
-              console.log(`[Service Worker] Jeu mis en cache: ${event.request.url}`);
-            });
-          }
-          return networkResponse;
-        }).catch(() => {
-          console.warn(`[Service Worker] Jeu hors ligne non disponible: ${event.request.url}`);
-          return undefined;
-        });
-      })
-    );
-    return;
-  }
-  
   // **Gestion des données JSON avec stale-while-revalidate**
-  else if (event.request.url.includes('.json') && event.request.url.includes('/data/')) {
+  if (event.request.url.includes('.json') && event.request.url.includes('/data/')) {
     event.respondWith(
       caches.match(event.request).then((response) => {
         // Retourner du cache immédiatement
@@ -216,6 +171,38 @@ self.addEventListener('fetch', (event) => {
     );
   }
   
+  // **Cache first pour les médias (image, audio, video, fonts, CSS, JSON)**
+  else if (
+    ['image', 'audio', 'video', 'font', 'style'].includes(event.request.destination) ||
+    /\.(?:webp|png|jpg|jpeg|gif|svg|mp3|wav|ogg|webm|woff2?|ttf|otf|css|json)$/i.test(url.pathname)
+  ) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        if (response) return response;
+
+        return fetch(event.request).then((networkResponse) => {
+          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'error') {
+            return networkResponse;
+          }
+
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+            console.log(`[Service Worker] Media mis en cache: ${event.request.url}`);
+          });
+
+          return networkResponse;
+        }).catch(() => {
+          if (event.request.destination === 'image') {
+            console.warn(`[Service Worker] Impossible de charger l'image: ${event.request.url}`);
+            return caches.match('./assets/favicon/favicon.svg');
+          }
+          return caches.match(event.request);
+        });
+      })
+    );
+  }
+
   // **Network first pour les modules JS (permet les mises à jour)**
   else if (event.request.url.includes('.js') && !event.request.url.includes('cdn')) {
     event.respondWith(
@@ -273,7 +260,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keyList) => {
       return Promise.all(
         keyList.map((key) => {
-          if (key !== CACHE_NAME && key !== GAMES_CACHE) {
+          if (key !== CACHE_NAME) {
             console.log('[Service Worker] Suppression ancien cache:', key);
             return caches.delete(key);
           }
