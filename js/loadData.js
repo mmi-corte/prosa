@@ -5,6 +5,7 @@ export let dialogsData = [];
 export let choicesData = [];
 export let riddlesData = [];
 export let gamesData = [];
+export let tokensData = [];
 export let aleasRiddlesData = [];
 
 /**
@@ -15,11 +16,12 @@ export async function loadCurrentStepData() {
         fetchStepsActions('dialogs'),
         fetchStepsActions('choices'),
         fetchStepsActions('riddles'),
-        fetchStepsActions('games')
+        fetchStepsActions('games'),
+        fetchStepsActions('tokens')
     ]);
 
     // Destructure the results back into each var
-    [dialogsData, choicesData, riddlesData, gamesData] = results;
+    [dialogsData, choicesData, riddlesData, gamesData, tokensData] = results;
     console.log(dialogsData)
 }
 

@@ -8,6 +8,7 @@ import { riddleView } from "./views/actions/riddleView.js";
 import { menuView } from "./views/main/menuView.js";
 import { setLanguage } from "./langageManager.js";
 import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
+import { tokenView } from "./views/actions/tokenView.js";
 
 export let activePlayer
 export let activeStepId
@@ -90,6 +91,9 @@ export function callAction(actionType, action = null) {
             break;
         case "game":
             gameView(action);
+            break;
+        case "token":
+            tokenView(action);
             break;
         case "ar":
             break;

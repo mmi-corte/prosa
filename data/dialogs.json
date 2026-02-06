@@ -706,18 +706,16 @@
           {
             "text": {
               "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "Vous perdez un jeton avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
-            },
-            "pitch": 400
+              "fr": "Vous êtes en partie dépouillé avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
+            }
           }
         ],
-        "nextActionType": "dialog",
-        "nextAction": "4"
+        "nextActionType": "token",
+        "nextAction": "1"
       },
       "3": {
         "default": {
