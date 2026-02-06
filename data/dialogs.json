@@ -3,7 +3,7 @@
     "01": {
       "1": {
         "default": {
-          "backgroundUrl": "radio.png",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -29,7 +29,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "radio.png",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -81,7 +81,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "plan-riviere.jpg",
+          "backgroundUrl": "plan-riviere.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -134,7 +134,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "plan-fata.jpg",
+          "backgroundUrl": "plan-fata.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -176,7 +176,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "plan-passerelle.jpg",
+          "backgroundUrl": "plan-passerelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -206,7 +206,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "Strega-passerelle.jpg",
+          "backgroundUrl": "Strega-passerelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -268,7 +268,7 @@
     "03": {
       "1": {
         "default": {
-          "backgroundUrl": "plan-musee.jpg",
+          "backgroundUrl": "plan-musee.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -321,7 +321,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "spallistu_decors.jpg",
+          "backgroundUrl": "spallistu_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -341,7 +341,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "plan-spallistu.png",
+          "backgroundUrl": "plan-spallistu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -393,7 +393,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "sallecarte.jpg",
+          "backgroundUrl": "sallecarte.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -411,7 +411,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "sallecarte.jpg",
+          "backgroundUrl": "sallecarte.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -433,7 +433,7 @@
     "04": {
       "1": {
         "default": {
-          "backgroundUrl": "orcu.jpg",
+          "backgroundUrl": "orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -529,7 +529,7 @@
     "06": {
       "1": {
         "default": {
-          "backgroundUrl": "GP-signadora.jpg",
+          "backgroundUrl": "GP-signadora.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -585,7 +585,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "chapelle.jpg",
+          "backgroundUrl": "chapelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -615,7 +615,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "interieur_chapelle.png",
+          "backgroundUrl": "interieur_chapelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -647,7 +647,7 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "armurier.jpg",
+          "backgroundUrl": "armurier.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -697,7 +697,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "confrontation.jpg",
+          "backgroundUrl": "confrontation.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -719,7 +719,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "confrontation.jpg",
+          "backgroundUrl": "confrontation.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
