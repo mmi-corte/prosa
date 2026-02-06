@@ -22,13 +22,6 @@
           },
           {
             "text": {
-              "fr": "Un jeune garçon frêle, dissimulé dans la foule qui vous observe avec insistance ."
-            },
-            "nextActionType": "end",
-            "nextAction": "3"
-          },
-          {
-            "text": {
               "fr": "Continuez votre chemin vers le belvédère pour une meilleure vue"
             },
             "nextActionType": "end",
