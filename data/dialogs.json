@@ -665,7 +665,7 @@
               "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_7_Armurier_1.mp3"
           },
           {
             "text": {
@@ -673,7 +673,7 @@
               "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
             "pitch": 550,
-            "voice": ""
+            "voice": "Case_7_Soldat_1.mp3"
           },
           {
             "text": {
@@ -681,7 +681,7 @@
               "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "Case_7_Soldat_2.mp3"
           },
           {
             "text": {
@@ -689,7 +689,7 @@
               "cor": "\"Mai ! Hè a mo lascita !\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_7_Armurier_2.mp3"
           }
         ],
         "nextActionType": "choice",
@@ -749,7 +749,7 @@
               "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_7_Armurier_3.mp3"
           },
           {
             "text": {
@@ -757,7 +757,7 @@
               "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_7_Armurier_4.mp3"
           }
         ],
         "nextActionType": "game",
@@ -777,7 +777,7 @@
               "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
             },
             "pitch": 350,
-            "voice": ""
+            "voice": "Case_7_Armurier_5.mp3"
           }
         ],
         "nextActionType": "end",
@@ -1035,7 +1035,8 @@
               "fr": "Ici on travaille… ou on regarde ailleurs. Y'en a qui baissent la tête pour survivre. D'autres qui serrent les dents… en attendant que ça casse. Fais attention à qui tu parles.",
               "cor": "Quì si travaglia… o si guarda in altrò. Ci n'hè chì abbassanu a testa per campà. Altri chì serranu i denti… aspittendu chì si rompa. Fà attenzione à quale parli."
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": "Case_10_travailleur_1.mp3"
           }
         ],
         "nextActionType": "choice",
@@ -1059,7 +1060,8 @@
             "text": {
               "fr": "Ici… on ne parle pas. Hé ! Il pose des questions."
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": "Case_10_travailleur_2.mp3"
           },
           {
             "text": {
@@ -1089,7 +1091,8 @@
             "text": {
               "fr": "J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrais avec toi."
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": "Case_10_travailleur_3.mp3"
           },
           {
             "text": {
@@ -1270,7 +1273,7 @@
               "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "case_13_strega_2.mp3"
           }
         ],
         "nextActionType": "game",
@@ -1290,7 +1293,7 @@
               "cor": "\"Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !\""
             },
             "pitch": 600,
-            "voice": ""
+            "voice": "case_13_strega_1.mp3"
           },
           {
             "text": {
