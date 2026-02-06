@@ -56,7 +56,7 @@
     },
     "10": {
       "1": {
-        "game": "case_10_squadra",
+        "game": "case_11_squadra",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",

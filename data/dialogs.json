@@ -787,7 +787,7 @@
     "67": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "fulettu_fontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -813,7 +813,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mairie_chef_12_1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -881,7 +881,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "fulettu_fontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -901,7 +901,7 @@
     "08": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "belvederecase9.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -927,7 +927,7 @@
     "09": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "frac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -961,7 +961,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "int_frac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -986,7 +986,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "frac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1123,7 +1123,7 @@
     "11": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mairie_12_1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1147,7 +1147,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mairie_chef_12_1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1171,7 +1171,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mairie_12_1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1199,7 +1199,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mairie_chef_12_1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
