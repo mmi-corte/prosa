@@ -19,7 +19,7 @@ export function gameView(action) {
     iframe.style.top = '0';
     iframe.style.left = '0';
     iframe.style.width = '100vw';
-    iframe.style.height = '100vh';
+    iframe.style.height = '100dvh';
     iframe.style.border = 'none';
     iframe.style.zIndex = '9999';
     iframe.allow = 'camera; microphone';
@@ -88,7 +88,21 @@ export function gameView(action) {
                     ${inlineStyles}
                     <style>
                         * { box-sizing: border-box; }
-                        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+                        html, body {
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            height: 100%;
+                            min-height: 100dvh;
+                            overflow: auto;
+                            -webkit-overflow-scrolling: touch;
+                        }
+                        body {
+                            padding-top: env(safe-area-inset-top);
+                            padding-right: env(safe-area-inset-right);
+                            padding-bottom: env(safe-area-inset-bottom);
+                            padding-left: env(safe-area-inset-left);
+                        }
                     </style>
                 </head>
                 <body>
