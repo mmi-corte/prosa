@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@font-face {
+    font-family: 'Futura Condensed';
+    src: url('../../assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+         url('../../assets/fonts/FuturaCondMedium.woff') format('woff'),
+         url('../../assets/fonts/futuramediumcondensedbt.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
     --background: #1a1812;
@@ -15,7 +22,7 @@
     --border: #3a3830;
     --accent-red: #c63032;
     --accent-green: #81cbd6;
-    --font-main: 'Oswald', sans-serif;
+    --font-main: 'Futura Condensed', sans-serif;
 }
 
 body.light-mode {

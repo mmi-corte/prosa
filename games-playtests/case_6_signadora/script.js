@@ -243,13 +243,6 @@ class Game {
     triggerWin() {
         this.state = STATE.WIN;
         document.getElementById('win-screen').classList.remove('hidden');
-        
-        // Finish game with success after a short delay
-        setTimeout(() => {
-            if (window.finishGame) {
-                window.finishGame(true);
-            }
-        }, 2000);
     }
 
     draw() {
@@ -312,3 +305,42 @@ class Game {
 }
 
 const game = new Game();
+
+// Improve start button responsiveness on touchscreens
+const startBtn = document.querySelector('#start-screen button');
+if (startBtn) {
+    const handleStart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        game.start();
+    };
+    startBtn.addEventListener('touchend', handleStart, { passive: false });
+    startBtn.addEventListener('pointerup', handleStart);
+}
+
+// Improve fail and win buttons responsiveness on touchscreens
+const failBtn = document.querySelector('#fail-screen button');
+if (failBtn) {
+    const handleFail = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.finishGame) {
+            window.finishGame(false);
+        }
+    };
+    failBtn.addEventListener('touchend', handleFail, { passive: false });
+    failBtn.addEventListener('pointerup', handleFail);
+}
+
+const winBtn = document.querySelector('#win-screen button');
+if (winBtn) {
+    const handleWin = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.finishGame) {
+            window.finishGame(true);
+        }
+    };
+    winBtn.addEventListener('touchend', handleWin, { passive: false });
+    winBtn.addEventListener('pointerup', handleWin);
+}
