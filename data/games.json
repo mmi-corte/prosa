@@ -65,14 +65,14 @@
     },
     "13": {
       "1": {
-        "game": "case_13_strega",
+        "game": "case_13_strega2",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
         "nextActionLose": "2"
       },
       "2": {
-        "game": "case_13_strega2",
+        "game": "case_13_strega",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
