@@ -127,7 +127,7 @@
     "description_prov": "Description en provençal...",
     "role": "Sentinelle solitaire, la Cabro d'Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
     "role_prov": "Rolu en provençal",
-    "image": "cabrodor.webp"
+    "image": "cabrodor.webm"
   },
   {
     "id": 14,
@@ -157,7 +157,7 @@
     "description_prov": "Description en provençal...",
     "role": "Dirigeants d'une communauté reconstruite, Gyptis et Protis incarnent la stabilité et la renaissance. Leur alignement est bon, car ils restaurent l'ordre et la solidarité dans un monde dévasté. Gentil",
     "role_prov": "Rolu en provençal",
-    "image": "GyptisProtis.webp"
+    "image": "GyptisProtis.webm"
   },
   {
     "id": 17,
@@ -177,7 +177,7 @@
     "description_prov": "Description en provençal...",
     "role": "Zone empoisonnée par des substances chimiques, la Coulobre représente la conséquence directe de la négligence humaine. Elle est mauvaise, car elle tue sans distinction et rend les lieux inhabitables. Mauvais",
     "role_prov": "Rolu en provençal",
-    "image": "Coulobre.webp"
+    "image": "Coulobre.webm"
   },
   {
     "id": 19,
@@ -187,6 +187,6 @@
     "description_prov": "Description en provençal...",
     "role": "Chef de bande violent et stratège, Lou Drapé sème la peur sur les routes et impose sa loi par le sang. Son alignement est mauvais, car il ne vit que du pillage et du désespoir des autres. Mauvais",
     "role_prov": "Rolu en provençal",
-    "image": "LouDrape.webp"
+    "image": "LouDrape.webm"
   }
 ]
