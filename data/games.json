@@ -1,167 +1,167 @@
 {
-    "1": {
-        "01": {
-            "1": {
-                "game": "case_1_radio",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "04": {
-            "1": {
-                "game": "case_4_orcu",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "06": {
-            "1": {
-                "game": "case_6_signadora",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "3",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "07": {
-            "1": {
-                "game": "case_7_armurier",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "5",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "67": {
-            "1": {
-                "game": "case_8_fulettu",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "dialog",
-                "nextActionLose": "3"
-            }
-        },
-        "09": {
-            "1": {
-                "game": "case_9_mercenaire",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "dialog",
-                "nextActionLose": "3"
-            }
-        },
-        "10": {
-            "1": {
-                "game": "case_10_frac",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "4",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "13": {
-            "1": {
-                "game": "case_13_strega",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            },
-            "2": {
-                "game": "case_13_strega_2",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "4",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        }
+  "1": {
+    "01": {
+      "1": {
+        "game": "case_1_radio",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
     },
-    "2": {
-        "01": {
-            "1": {
-                "game": "case_1_radio",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "03": {
-            "1": {
-                "game": "tarasca_defense",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "3",
-                "nextActionTypeLose": "dialog",
-                "nextActionLose": "4"
-            }
-        },
-        "04": {
-            "1": {
-                "game": "labyrinthe_escape",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "06": {
-            "1": {
-                "game": "wagon_infiltration",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "2",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "09": {
-            "1": {
-                "game": "son_opera",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "12": {
-            "1": {
-                "game": "loudrape_epreuve",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "13": {
-            "1": {
-                "game": "mmi_epreuve",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "14": {
-            "1": {
-                "game": "mairie_duel",
-                "nextActionTypeWin": "end",
-                "nextActionWin": "1",
-                "nextActionTypeLose": "end",
-                "nextActionLose": "2"
-            }
-        },
-        "15": {
-            "1": {
-                "game": "port_infiltration",
-                "nextActionTypeWin": "dialog",
-                "nextActionWin": "3",
-                "nextActionTypeLose": "dialog",
-                "nextActionLose": "4"
-            }
-        }
+    "04": {
+      "1": {
+        "game": "case_4_orcu",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
     },
-    "3": {}
+    "06": {
+      "1": {
+        "game": "case_6_signadora",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "3",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "07": {
+      "1": {
+        "game": "case_7_armurier",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "5",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "67": {
+      "1": {
+        "game": "case_8_fulettu",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "dialog",
+        "nextActionLose": "3"
+      }
+    },
+    "09": {
+      "1": {
+        "game": "case_9_mercenaire",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "dialog",
+        "nextActionLose": "3"
+      }
+    },
+    "10": {
+      "1": {
+        "game": "case_10_frac",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "4",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "13": {
+      "1": {
+        "game": "case_13_strega",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      },
+      "2": {
+        "game": "case_13_strega_2",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "4",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    }
+  },
+  "2": {
+    "01": {
+      "1": {
+        "game": "case_1_radio",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "03": {
+      "1": {
+        "game": "tarasca_defense",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "3",
+        "nextActionTypeLose": "dialog",
+        "nextActionLose": "4"
+      }
+    },
+    "04": {
+      "1": {
+        "game": "labyrinthe_escape",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "06": {
+      "1": {
+        "game": "wagon_infiltration",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "09": {
+      "1": {
+        "game": "son_opera",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "12": {
+      "1": {
+        "game": "loudrape_epreuve",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "13": {
+      "1": {
+        "game": "mmi_epreuve",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "14": {
+      "1": {
+        "game": "mairie_duel",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "15": {
+      "1": {
+        "game": "port_infiltration",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "3",
+        "nextActionTypeLose": "dialog",
+        "nextActionLose": "4"
+      }
+    }
+  },
+  "3": {}
 }
