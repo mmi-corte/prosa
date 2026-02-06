@@ -1,7 +1,7 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { riddlesData } from "../../loadData.js";
-import { typeWriteEffect } from "../../typeWriteEffect.js";
+import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
 
 let data
@@ -10,6 +10,7 @@ let choiceContainer
 let selectedRiddle
 let score
 let currentAudio = null;
+let choicesRendered = false
 
 export async function riddleView(action) {
     clearContainer()
@@ -35,8 +36,18 @@ export async function riddleView(action) {
     // Select one random riddle from available riddles
     const randomIndex = Math.floor(Math.random() * data.text.length)
     selectedRiddle = data.text[randomIndex]
+    choicesRendered = false
 
     displayRiddle()
+
+    questionContainer.addEventListener('click', () => {
+        const activeText = getTranslation(selectedRiddle.question)
+        if (isTyping) {
+            skipTypeWrite()
+            questionContainer.innerHTML = activeText
+            renderChoices()
+        }
+    })
 }
 
 async function displayRiddle() {
@@ -54,6 +65,13 @@ async function displayRiddle() {
         undefined,
         Boolean(voiceFile)
     )
+
+    renderChoices()
+}
+
+function renderChoices() {
+    if (choicesRendered) return
+    choicesRendered = true
 
     //Show available answers
     selectedRiddle.choices.forEach(choice => {
@@ -76,7 +94,7 @@ function handleAnswer(answerScore) {
 
     // Add answer score to total score
     score += answerScore
-    
+
     // Continue to next action depending on the total score
     if (score < 0) {
         callAction(data.nextActionTypeLose, data.nextActionLose)
