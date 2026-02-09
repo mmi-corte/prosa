@@ -4,9 +4,9 @@
     "name": "U Fullettu",
     "region": "CORSE",
     "description": "U Fullettu, pourrait être un enfant d’une dizaine d’années. Il porte un bandeau blanc sur le front. Sa caractéristique la plus frappante est son bras gauche manquant, remplacé par une prothèse de fer. Vif comme l'air, malicieux et jouant de mauvais tours, il n'offre sa loyauté qu'à ceux qui peuvent remplir son estomac. Il peut devenir un allié précieux grâce à son agilité et sa discrétion, ou un ennemi redoutable utilisant des pièges pour égarer les voyageurs imprudents.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "U Fullettu puderia esse un zitellu d’una decina d’anni. Porta un fasciu biancu nant’à u fronte. A so particularità a più rimarchevule hè ch’ellu li manca u bracciu manca, rimpiazzatu da una protesi di ferru. Vivu cum’è u ventu, astutu è burlone, li piace à fà scherzi – spessu cattivi. Ùn dà a so lealtà chè à quelli chì sanu rimpie li u stomacu. Pò diventà un alleatu preziosu grazia à a so agilità è à a so discrezione, o un nimicu temibile, capace di tende trappule per svià i viaghjadori imprudenti.",
     "role": "Lutin ou esprit domestique, il est considéré comme neutre aimant jouer des tours (parfois méchants, parfois inoffensifs). Il met souvent le bazar dans les affaires des gens. Chaotique / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "Lutin o spiritu di casa, hè cunsideratu cum’è neutru, cù un piacè particulare à fà dispetti (qualchì volta cattivi, qualchì volta senza malizia). Mette spessu u disordine in l’affari di a ghjente. Caoticu / Bonu",
     "image": "Fulettu.webm"
   },
   {
@@ -14,19 +14,19 @@
     "name": "A Squadra d’Arozza",
     "region": "CORSE",
     "description": "A Squadra d'Arozza est une unité d'élite, agissant sur Corti, vouée corps et âme à A Strega. Ils portent un masque à gaz et une armure tactique lourde dissimulée sous un long manteau sombre dont la doublure vert acide crée un fort contraste. Ils avancent dans un silence absolu, seulement trahis par leur lourde respiration. Armés de leurs fusils, ils ne prononcent jamais un mot, communiquant uniquement par sifflements avant de frapper avec une violence inéluctable et brutale. Pour ceux qui croisent leur route, ils ne sont plus des soldats, mais le présage brutal d'un destin contre lequel on ne peut plus lutter.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "A Squadra d’Arozza hè un’unità d’elite chì agisce in Corti, data anima è corpu à A Strega. Portanu una maschera à gas è un’armatura tattica pisante, piatta sott’à un longu mantellu scuru, chì a so fodera verde acitu face nasce un cuntrastu viulente. Avanzanu in un silenziu tutale, traditi solu da u fiatu pisante di a so respirazione. Armati di i so fucili, ùn parlanu mai : si capiscenu solu cù fischji, nanzu di lampassi nant’à a preda cun una viulenza inevitabile è brutale. Per quelli chì s’incrocianu cù elli, ùn sò più suldati, ma u presagiu crudelu d’un destinu contr’à u quale ùn si pò più luttà. ",
     "role": "Groupe d'esprits. Représentation de la mort, ils font passer les vivants qu’ils croisent dans le monde des morts. Chaotique / Mauvais",
-    "role_co": "Rolu in corsu",
+    "role_co": "Gruppu di spiriti. Rapresentazione di a morte, facenu passà i vivi ch’elli scontranu in u mondu di i morti. Caoticu / Malignu",
     "image": "SquadradArozza.webm"
   },
   {
     "id": 3,
     "name": "A Strega",
     "region": "CORSE",
-    "description": "D’un âge incertain, A Strega est la cheffe impitoyable du clan de Corti. Elle est chargée par U Strigone de maintenir la ville dans la peur, la misère et la dépendance totale envers l’île de Prosa.  Elle porte un manteau sombre où elle dissimule des poisons terribles, elle dirige la Squadra d’Arozza, une troupe d’élite utilisée pour briser toute tentative de révolte et saboter discrètement toute émancipation de Corti.  On dit que certaines nuits de pleine lune, elle fait enlever en secret des enfants desquels elle prélève le sang et les fait expédier sur Prosa, où ils sont préparés pour intégrer la Squadra d’Arozza. La prononciation de son nom suffit à terroriser la population de Corti. Sa base d’opération depuis laquelle elle dirige le clan se trouve sur la route du cimetière de Corti.",
+    "description": "D’un’età incerta, A Strega hè a capimachja spietata di u clan di Corti. Hè incaricata da U Strigone di mantene a cità in a paura, a miseria è una dipendenza sana sana versu l’isula di Prosa. Porta un mantellu scuru induve piatta veleni terribili. Dirige a Squadra d’Arozza, una truppa d’elite aduprata per schjattà ogni prova di rivolta è sabotà in silenziu ogni tentativu d’emancipazione di Corti. Si dice chì certe notti di luna piena, face arrubbà in sicretu zitelli à i quali li piglia u sangue, mandendulu dopu in Prosa, induve sò preparati per entre in a Squadra d’Arozza. Basta à pronunzià u so nome per spannà u terrore trà a ghjente di Corti. A so basa d’operazione, da induve cumanda u clan, si trova nant’à a strada di u campusantu di Corti.",
     "description_co": "Descrizzione in corsu...",
     "role": "Figure de sorcière ou jeteuse de sorts, elle a un rôle souvent mauvais, agissant par malveillance ou pour exercer une influence. Elle est l’inverse direct de a Fata, étant symbole d’infertilité. Chaotique / Mauvais",
-    "role_co": "Rolu in corsu",
+    "role_co": "Figura di strega o ghjettatrice di fatture, hà spessu un rollu malignu, agendu per cattiveria o per stende a so influenza. Hè l’uppostu direttu di a Fata, simbulu d’infertilità. Caoticu / Malignu",
     "image": "AStrega.webm"
   },
   {
@@ -34,9 +34,9 @@
     "name": "U Magu",
     "region": "CORSE",
     "description": "U Magu est un érudit de Prosa chargé des moulins à vent de l’île et de tout ce qui touche à la médecine, mêlant savoir technique, botanique et expérimentation sur les corps.  De taille moyenne, voûté par les années passées dans le vent et la poussière, il a le visage creusé, une barbe grisonnante mal entretenue et des yeux clairs constamment plissés, comme habitués à scruter aussi bien les montagnes que les fièvres des malades.  Sa silhouette est enveloppée dans un long manteau cachant un costume sobre. Une grande sacoche dont les poches débordent de fioles, de bandages et de sachets d’herbes séchées, pend à son épaule, donnant l’impression qu’il transporte en permanence un petit laboratoire ambulant. ",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "U Magu hè un eruditu di Prosa, incaricatu di i mulini à ventu di l’isula è di tuttu ciò chì tocca à a medicina, mischjendu sapè tecnicu, botanica è sperimentazione nant’à i corpi. Di statura media, incurvatu da l’anni passati ind’è u ventu è a polvera, hà u visu scavatu, una barba grisgiulente è male curata, è l’ochji chjari, sempre strinti, cum’è abituati à scrutà tantu e muntagne quant’è e frebbi di i malati. A so siluetta hè avvolta ind’è un longu mantellu chì piattà un vistitu sobri. Una grande sacchetta, cù e tasche chì sbordanu di fiale, fasce è sacchetti d’erbe secche, pende à a so spalla, dendu l’impressione ch’ellu porti sempre cun ellu un picculu laboratoriu ambulante.",
     "role": "On le voit souvent seul dans les montagnes, près des moulins, en train de récolter des herbes rares qu’il est le seul à savoir utiliser.  Il soigne ceux qui lui sont utiles, teste des traitements dangereux sur les autres et ajuste l’énergie des moulins pour maintenir l’avantage énergétique de Prosa. Neutre / Mauvais",
-    "role_co": "Rolu in corsu",
+    "role_co": "Si vede spessu solu in muntagna, vicinu à i mulini, à coglie erbe rare ch’ellu hè u solu à sapè aduprà. Cura quelli chì li sò utili, prova trattamenti periculosi nant’à l’altri, è regula l’energia di i mulini per mantene u vantaghju energeticu di Prosa. Neutru / Gattivu",
     "image": "UMagu.webm"
   },
   {
@@ -44,9 +44,9 @@
     "name": "A Signadora",
     "region": "CORSE",
     "description": "A Signadora est une femme de 60 ans, dont le visage marqué par le soleil et les rides profondes disparaît souvent sous un voile noir usé par la poussière. Vêtue d’un châle beige recouvrant des habits sombres, elle fréquente souvent la vieille fontaine de Corti pour soigner les malades et les blessés qui viennent la quérir. Ses mains tremblantes et noueuses sont pourtant d'une précision chirurgicale et à sa ceinture pend une fiole d'huile d'olive, ressource devenue rarissime, qu'elle utilise avec une assiette en céramique blanche et une bougie pour diagnostiquer le mal. Elle a rejoint les rebelles de la ville, non par ambition politique, mais par solidarité car elle est déterminée à récupérer des médicaments important que le clan de Corti I Muntagnoli (Les Montagnards) privatise.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "A Signadora hè una donna di 60 anni, chì u visu, marcatu da u sole è da e rughe prufonde, sparisce spessu sott’à un velu neru, usuratu da a polvera. Vistuta d’un sciallu beige chì copre vistimenti scuri, frequenta spessu a vechja funtana di Corti per curà i malati è i feriti chì venenu à circalla. E so mani trimulente è nodose sò puru d’una precisione guasi chirurgica, è à a so cintura pende una fiala d’oliu d’aliva, risorsa diventata rarissima, ch’ella adopra cù un piattu di ceramica bianca è una candela per diagnosticà u male. Hà aderitu à i ribelli di a cità, micca per ambizione pulitica, ma per sulidarità, postu ch’ella hè determinata à ricuperà medicamenti impurtanti chì u clan di Corti, I Muntagnoli, privatizeghja.",
     "role": "Guérisseuse utilisant des prières et des herbes, son rôle est toujours considéré comme bon, car elle apporte soin et soulagement aux maladies et blessures. Loyal / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "Guaritrice chì adopra preghere è erbe, u so rolu hè sempre cunsideratu cum’è bonu, postu ch’ella porta cura è sollievu à e malatie è à e ferite. Leale / Bona",
     "image": "signadora.webm"
   },
   {
@@ -54,9 +54,9 @@
     "name": "U Mazzeru",
     "region": "CORSE",
     "description": "Âgé de 45 ans, cet ancien dignitaire du gouvernement de l’île de Prosa, nommé U Sarpu à Sette Capi est devenu une figure tragique, incarnant le personnage mythique corse du Mazzeru au cœur d’un monde post-apocalyptique. Autrefois chargé de la gestion des habitants au sein de Prosa, il a été profondément choqué par la brutalité du régime, ce qui l'a poussé à mener une rébellion qui s'est malheureusement soldée par un échec sanglant. Désormais emprisonné et aveugle, il a développé une perception proche de la Seconda Vista, un don de clairvoyance souvent subi comme une malédiction. Elle lui permet de voir en rêve éveillé le désastre futur qui menace les peuples de Prosa, Corti et Toulon s'il n'agit pas. Vêtu d’une lourde cape assemblée de débris militaires évoquant le pilone des anciens bergers Corse. Il se sert d’une lourde barre de fer dont la tête semble noueuse et torsadée en guise de canne nommé sa Mazza. Bien que enchaîné, il reste le chef spirituel de la résistance, utilisant ses anciennes relations pour diffuser des messages radio clandestins et guider les joueurs pour orchestrer la chute du gouvernement U Sarpu à Sette Capi.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "À l’età di 45 anni, st’anzianu dignitariu di u guvernu di l’isula di Prosa, chjamatu U Sarpu à Sette Capi, hè diventatu una figura tragica, incarnendu u persunagiu miticu corsu di u Mazzeru à u core d’un mondu post-apucalitticu. Un tempu incaricatu di a gestione di l’abitanti di Prosa, hè statu prufundamente scunvultu da a brutalità di u regime, ciò chì l’hà spintu à cunduce una ribellione chì, sfortunatamente, s’hè chjosa cù un fiascu sanguinosu. Oramai imprigiunatu è cecu, hà sviluppatu una percezione vicina à a Seconda Vista, un donu di chiarividenza spessu patitu cum’è una maladizzione. Ella li permette di vede, in sonniu svegliu, u disastru futuru chì minaccia i populi di Prosa, Corti è Tolone, s’ellu ùn agisce micca. Vistutu d’una capa pisante, assemblata cù detriti militari, chì ramenta u pilone di l’antichi pastori corsi, si serve d’una barra di ferru massiccia, cù una testa nodosa è atturciulata, cum’è bastone, chjamata a so Mazza. Bench’è incatinatu, ferma u capu spirituale di a resistenza, aduprendu e so antiche relazioni per sparghje missaghji radio clandestini è guidà i ghjucatori per urganizà a caduta di u guvernu di U Sarpu à Sette Capi.",
     "role": "Celui ou celle qui annonce la mort en rêve, son rôle est neutre, car il ne fait que prédire sans provoquer le destin. Loyal / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "Quellu o quella chì annunzia a morte in sognu, u so rolu hè neutru, postu ch’ellu ùn face chè predì, senza pruvucà u destinu. Leale / Bonu",
     "image": "mazzeru.webm"
   },
   {
@@ -64,9 +64,9 @@
     "name": "U Strigone",
     "region": "CORSE",
     "description": "Âgé de 40 ans, U Strigone est un calculateur à l'élégance froide qui dirige les forces militaires de Prosa depuis le sommet de sa tour de verre. C’est le U Sarpu à Sette Capi. Vêtu d'un long manteau noir, il cultive une silhouette sombre rappelant celle d'un corbeau observant le champ de bataille. Loin d'être un guerrier barbare, il orchestre la mort à distance via ses soldats disséminés aux 4 coins de Corti, Toulon et Prosa. Ses directives froides et arbitraires s’abattent comme l'Ochju (le mauvais œil) sur ses ennemis. Du fait de sa position il est le supérieur hiérarchique de A Strega à Corti qui lui permet de maintenir ainsi son emprise sur la ville.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "À l’età di 40 anni, U Strigone hè un omu calculatore, d’una eleganza fredda, chì dirige e forze militare di Prosa da a cima di a so torre di vetru. Hè u Sarpu à Sette Capi. Vistutu d’un longu mantellu neru, cultiveghja una siluetta scura chì ramenta quella d’un corbu chì osserva u campu di battaglia. Luntanu d’esse un guerrieru barbaru, orchestra a morte à distanza per mezu di i so suldati sparsi à i quattru cantoni di Corti, Tolone è Prosa. E so direttive fredde è arbitrarie s’abàttenu nant’à i so nimichi cum’è l’Ochju (u gattivu ochju). Per via di a so pusizione, hè u superiore ierarchicu di A Strega à Corti, ciò chì li permette di mantene a so presa nant’à a cità.",
     "role": "C'est le chef des Streghe (Sorcières) qui est traditionnellement perçu comme mauvais en raison de ses pratiques occultes. Chaotique / Mauvais",
-    "role_co": "Rolu in corsu",
+    "role_co": "Hè u capu di e Streghe (streghe), tradiziunalmente percepitu cum’è gattivu per via di e so pratiche occulte. Caoticu / Gattivu",
     "image": "U_Strigone.webm"
   },
   {
@@ -74,9 +74,9 @@
     "name": "U Spallistu",
     "region": "CORSE",
     "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle, il porte un manteau créé à partir de peaux de bêtes. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons, outils de divination spirituelle qu'il utilise pour lire le destin de la vallée dans les craquelures des os. Gardien du musée de Corti qu'il protège comme un sanctuaire, il méprise la tyrannie du clan d'I Muntagnoli.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "U Spallistu hè un pastore d’una cinquantina d’anni, cù un sguardu stancu chì pare purtà u pesu d’un seculu. Porta un mantellu fattu di pelli d’animali. Figura sulitaria, ùn si ne separa mai di u so bastone in legnu di castagnu, à u capu di u quale pendenu omoplate di pecure, arnesi di divinazione spirituale ch’ellu adopra per leghje u destinu di a valle ind’è e screpolature di l’ossi. Guardianu di u museu di Corti, ch’ellu prutege cum’è un santuariu, disprezza a tirannia di u clan di I Muntagnoli.",
     "role": "U Spallistu est l’appellation de certains bergers qui, lorsqu'ils abattent un mouton, peuvent lire l'avenir dans l'omoplate de ce dernier. Loyal / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "U Spallistu hè l’appellazione data à certi pastori chì, quandu tombanu una pecura, sanu leghje l’avvene ind’è l’omoplata di quessa. Leale / Bonu",
     "image": "Spallistu.webm"
   },
   {
@@ -84,19 +84,19 @@
     "name": "L'Orcu",
     "region": "CORSE",
     "description": "L'Orcu est une force de la nature massive et imposante, un colosse silencieux et qui observe longuement ses interlocuteurs avant de parler. Il est habillé d'un manteau lourd et usé. C’est un passeur méfiant qui accepte d'aider le joueur à traverser la mer vers l'île de Prosa. Il exige cependant en retour un fragment du Dolmen du Diavule, une pierre sacrée contenant les secrets des anciens bergers qu'il protège depuis des générations. Ce talisman ayant été volé par le clan qui contrôle Corti, le joueur doit vaincre A Strega pour le récupérer et le ramener à l'Orcu, qui attendra dans une ancienne tour de défense Corse, en bord de mer.",
-    "description_co": "Descrizzione in corsu...",
+    "description_co": "L’Orcu hè una forza di a natura, massiccia è imponente, un colossu silenziosu chì osserva longamente i so interlocutori prima di parlà. Hè vistutu d’un mantellu pesante è usuratu. Hè un passatore diffidente chì accetta d’aiutà u ghjucatore à traversà u mare versu l’isula di Prosa. Esige però, in cambiu, un frammentu di u Dolmenu di u Diavule, una petra sacra chì cuntene i sicreti di l’antichi pastori, ch’ellu prutege dapoi generazioni. Stu talismanu, essendu statu arrubbatu da u clan chì cuntrulla Corti, u ghjucatore deve vince A Strega per ricuperallu è rimettelu à l’Orcu, chì aspetterà in una vechja torre di difesa corsa, à u bordu di u mare.",
     "role": "Créature monstrueuse, souvent un géant, il est considéré comme un Dieu des Passages. Il est neutre. Il est traditionellement gardien des secrets des bergers Corse, notamment de la recette du Brocciu. Neutre / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "Criatura munstruosa, spessu un ghjigante, hè cunsideratu cum’è un Diu di i Passaghji. Tradiziunalmente, hè u guardianu di i sicreti di i pastori corsi, in particulare quellu di a ricetta di u Brocciu. Neutru / Bonu",
     "image": "orcu.webm"
   },
   {
     "id": 10,
     "name": "A Fata",
     "region": "CORSE",
-    "description": "A Fata est la jeune gardienne bienveillante du barrage hydraulique de Corti qu’elle maintient en état avec des pièces recyclées. Elle travaille pour le clan par obligation car elle est consciente que ce faible courant consiste en l'un éléments vitaux les plus importants de la vallée. Vêtue de tissus clairs et simples, elle aide spontanément toute personne en détresse, sans distinction d’appartenance.​Il est cependant strictement déconseillé de regarder derrière son épaule, car bien que cette partie soit à peu près couverte, on peut y apercevoir des traces de coups qu'elle a dû subir durant ces nombreux désaccords avec A Strega. Celui qui enfreint ce tabou rompt le pacte de confiance. A Fata coupe tout lien avec cette personne, en plus de lui interdire tout accès à la rivière.",
+    "description": "A Fata hè a ghjovana guardiana benevulente di a diga idraulica di Corti, ch’ella mantene in bonu statu cù pezzi riciclati. Travaglia per u clan per obbligu, postu ch’ella hè cusciente chì stu debule currente hè unu di l’elementi vitali i più impurtanti di a valle. Vistuta di tessuti chjari è simplici, aiuta spontaneamente ogni persona in difficultà, senza distinzione d’appartenenza. Hè però strettamente scunsigliatu di fighjà daretu à a so spalla, perchè, ancu s’è sta parte hè più o menu cuperta, si ponu intravede tracce di colpi ch’ella hà subitu durante i so numerosi disaccordi cù A Strega. Quellu chì infrange stu tabu rompe u pattu di fiducia. A Fata taglia ogni ligame cù sta persona è li pruibisce, in più, ogni accessu à u fiume.",
     "description_co": "Descrizzione in corsu...",
     "role": "Fée de l’eau, elle est neutre, offrant parfois de l’aide en échange de la non révélation d’un secret qu’elle garde (tabou). C’est une Déesse de la Fertilité. Loyal / Bon",
-    "role_co": "Rolu in corsu",
+    "role_co": "Fata di l’acqua, hè neutra : offre qualchì volta u so aiutu in cambiu di a non-rivelazione d’un sicretu ch’ella tene (tabu). Hè una Dea di a Fertilità. Leale / Bona",
     "image": "Fata.webm"
   },
   {
