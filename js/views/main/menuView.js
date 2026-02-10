@@ -94,7 +94,7 @@ export function menuView() {
   arButton.innerHTML = `RÉALITÉ<br>AUGMENTÉE`
 
   arButton.addEventListener('click', () => {
-    navigate("qr", () => qrView())
+    qrView()
   })
   navContainer.appendChild(arButton)
 
