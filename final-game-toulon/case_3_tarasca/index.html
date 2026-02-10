@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Tarasca - Combat Final</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DA & AMBIANCE --- */
+        :root { 
+            --bg-dark: #0f0e0b;
+            --metal-dark: #2a2820;
+            --metal-light: #4a483d;
+            --rust: #626247;
+            --neon-red: #ff2a2a;
+            --neon-cyan: #00f0ff;
+            --neon-yellow: #ffdb2c;
+        } 
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ece4cb;
+            font-family: 'Oswald', sans-serif;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            /* Fond texturé style "tempête de sable" */
+            background-image: radial-gradient(circle at center, #1a1812 0%, #000000 100%);
+        }
+
+        h1, h2, .font-military {
+            font-family: 'Black Ops One', cursive; /* Police style militaire/stencil */
+        }
+
+        /* --- ANIMATIONS --- */
+        /* Tremblement moteur (Idle) */
+        .idle-rumble {
+            animation: rumble 0.2s infinite linear;
+        }
+        @keyframes rumble {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(1px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Tremblement violent (Dégâts/Erreur) */
+        .tarasca-shake {
+            animation: violent-shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes violent-shake {
+            10%, 90% { transform: translate3d(-3px, 0, 0) rotate(-1deg); }
+            20%, 80% { transform: translate3d(5px, 0, 0) rotate(2deg); }
+            30%, 50%, 70% { transform: translate3d(-8px, 0, 0) rotate(-2deg); }
+            40%, 60% { transform: translate3d(8px, 0, 0) rotate(1deg); }
+        }
+
+        /* Fumée */
+        .smoke-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: smoke-rise 2s forwards;
+        }
+        @keyframes smoke-rise {
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 0.4; }
+            100% { opacity: 0; transform: translateY(-100px) scale(2); }
+        }
+
+        /* Feedback Flottant Impact */
+        .feedback-float {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Black Ops One', cursive;
+            font-size: 3rem;
+            white-space: nowrap;
+            animation: impact-zoom 0.5s forwards;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0,0,0,1);
+            z-index: 100;
+        }
+        @keyframes impact-zoom {
+            0% { transform: translateX(-50%) scale(0.5); opacity: 0; }
+            50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(-50px) scale(1); opacity: 0; }
+        }
+
+        /* Transitions */
+        .transition-colors-fast { transition: all 0.1s ease-in-out; }
+        .glow-red { filter: drop-shadow(0 0 15px var(--neon-red)); }
+        .glow-cyan { filter: drop-shadow(0 0 15px var(--neon-cyan)); }
+
+        /* Écrans */
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 10;
+        }
+        .screen.active { display: flex; }
+
+        /* SVG Styles */
+        .armor-plate { fill: #3a3830; stroke: #1a1812; stroke-width: 2; }
+        .armor-highlight { fill: #4a483d; }
+        .rust-spot { fill: #5c4033; opacity: 0.6; }
+        .spike { fill: #2a2820; stroke: #000; stroke-width: 1; }
+        .tire { fill: #151515; stroke: #333; stroke-width: 2; }
+        .rim { fill: #2a2820; }
+    </style>
+</head>
+<body>
+
+    <!-- PARTICLES CONTAINER -->
+    <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- ================= ECRAN START ================= -->
+    <div id="start-screen" class="screen active bg-black/80 backdrop-blur-sm">
+        <div class="max-w-md w-full bg-[#1a1812] p-8 rounded border-2 border-[#626247] shadow-[0_0_50px_rgba(0,0,0,0.8)] text-center relative overflow-hidden">
+            <!-- Décoration "Danger" -->
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-[#ffdb2c] to-transparent opacity-50"></div>
+            
+            <h1 class="text-6xl text-[#ece4cb] mb-2 font-military tracking-tighter uppercase leading-none">Tarasca<br><span class="text-2xl tracking-[0.5em] text-[#626247]">Proto-V1</span></h1>
+            
+            <div class="my-6 space-y-4">
+                <div class="flex items-center justify-between bg-[#0f0e0b] p-4 border-l-4 border-[#00f0ff]">
+                    <div class="text-left">
+                        <span class="block text-[#00f0ff] font-military text-xl">LUMIÈRE BLEUE</span>
+                        <span class="text-xs text-gray-400 uppercase">Systèmes vulnérables</span>
+                    </div>
+                    <span class="text-3xl font-bold text-[#00f0ff]">FRAPPE !</span>
+                </div>
+
+                <div class="flex items-center justify-between bg-[#0f0e0b] p-4 border-l-4 border-[#ff2a2a]">
+                    <div class="text-left">
+                        <span class="block text-[#ff2a2a] font-military text-xl">LUMIÈRE ROUGE</span>
+                        <span class="text-xs text-gray-400 uppercase">Peut surgir à tout moment !</span>
+                    </div>
+                    <span class="text-3xl font-bold text-[#ff2a2a]">STOP !</span>
+                </div>
+
+                <div class="bg-[#2a2820] p-2 text-[#ffdb2c] font-military tracking-widest text-sm border border-[#626247]">
+                    ⚠️ LIMITE DE TEMPS : 30 SECONDES
+                </div>
+            </div>
+
+            <button onclick="startGame()" class="w-full py-4 bg-[#626247] hover:bg-[#7a7a5a] text-white font-military text-2xl tracking-widest clip-path-polygon active:scale-95 transition-transform border border-[#ece4cb]/20">
+                ENGAGER LE COMBAT
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= ECRAN JEU ================= -->
+    <div id="game-screen" class="screen z-20">
+        
+        <!-- HUD HEADER -->
+        <div class="absolute top-0 w-full p-2 md:p-4 flex justify-between items-start z-30 pointer-events-none">
+            <!-- Barre de vie Boss (Gauche) -->
+            <div class="w-1/3">
+                <div class="flex justify-between text-xs text-[#626247] font-bold mb-1 uppercase tracking-widest">
+                    <span>Blindage</span>
+                    <span id="hp-text">100%</span>
+                </div>
+                <div class="h-3 md:h-4 bg-[#0f0e0b] border border-[#2a2820] w-full skew-x-[-20deg]">
+                    <div id="health-fill" class="h-full bg-[#ffdb2c] transition-all duration-100 ease-linear shadow-[0_0_10px_#ffdb2c]" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <!-- CHRONO (Centre) -->
+            <div class="flex flex-col items-center mx-2">
+                 <div id="timer-box" class="px-3 py-1 bg-[#0f0e0b]/80 border border-[#626247] rounded skew-x-[-10deg]">
+                    <span id="timer-display" class="text-3xl md:text-4xl font-military text-[#ece4cb] tracking-wider leading-none">30</span>
+                 </div>
+                 <span class="text-[10px] text-[#626247] font-bold uppercase tracking-widest mt-1">SEC</span>
+            </div>
+
+            <!-- Vies Joueur (Droite) -->
+            <div class="flex gap-1 justify-end w-1/3" id="lives-container"></div>
+        </div>
+
+        <!-- INDICATEUR CENTRAL (LAMPE) -->
+        <div id="status-lamp" class="absolute top-24 left-1/2 -translate-x-1/2 px-6 py-2 rounded bg-black/50 backdrop-blur border border-white/10 font-military text-xl tracking-widest transition-all duration-100 z-30 pointer-events-none text-center min-w-[200px]">
+            PRÊT...
+        </div>
+
+        <!-- ZONE DE JEU (MONSTRE) -->
+        <div id="game-container" class="relative w-full h-full flex items-center justify-center pt-10">
+            
+            <!-- TARASCA SVG (Le Monstre) -->
+            <div id="tarasca-wrapper" class="relative w-[340px] h-[280px] md:w-[500px] md:h-[400px] cursor-pointer transition-transform duration-75 active:scale-95 idle-rumble z-10">
+                
+                <svg id="tarasca-svg" viewBox="0 0 500 400" class="w-full h-full drop-shadow-2xl transition-colors-fast">
+                    <defs>
+                        <linearGradient id="metal-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4a483d;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2a2820;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <g id="exhaust-point" transform="translate(180, 80)"></g>
+
+                    <!-- CHASSIS ARRIÈRE -->
+                    <path class="armor-plate transition-colors-fast" d="M120 150 L450 180 L480 300 L150 300 Z" fill="url(#metal-grad)" />
+                    
+                    <!-- ROUES -->
+                    <circle cx="380" cy="300" r="50" class="tire" />
+                    <circle cx="380" cy="300" r="25" class="rim" />
+                    <path d="M380 300 L380 260 M380 300 L415 285 M380 300 L345 285" stroke="#333" stroke-width="4" />
+                    <circle cx="140" cy="310" r="60" class="tire" />
+                    <circle cx="140" cy="310" r="30" class="rim" />
+                    <path d="M140 310 L140 260 M140 310 L185 290 M140 310 L95 290" stroke="#333" stroke-width="5" />
+
+                    <!-- CABINE / TÊTE -->
+                    <g id="tarasca-head" class="transition-transform duration-200">
+                        <path class="armor-plate transition-colors-fast" d="M50 200 L150 120 L300 130 L300 250 L100 280 Z" fill="url(#metal-grad)" />
+                        <path class="armor-highlight opacity-50" d="M60 210 L140 140 L180 150 L120 240 Z" />
+                        <path class="armor-highlight opacity-30" d="M190 145 L290 140 L290 200 L200 220 Z" />
+                        <!-- BOUCHE -->
+                        <path id="grill" d="M50 230 L80 230 L90 250 L110 230 L130 250 L150 230 L140 280 L60 260 Z" fill="#0f0e0b" stroke="#000" stroke-width="2" />
+                        <!-- PICS -->
+                        <path class="spike" d="M150 120 L140 80 L170 125 Z" />
+                        <path class="spike" d="M200 130 L210 70 L230 132 Z" />
+                        <path class="spike" d="M260 135 L280 90 L290 135 Z" />
+                        <path class="spike" d="M50 200 L20 190 L60 220 Z" />
+                        <!-- POTS -->
+                        <rect x="180" y="80" width="20" height="50" fill="#333" />
+                        <rect x="220" y="90" width="15" height="40" fill="#333" />
+                        <!-- YEUX -->
+                        <path id="eye-bg" d="M100 180 L160 170 L160 195 L110 205 Z" fill="#000" />
+                        <path id="eye-glow" class="transition-all duration-100" d="M110 185 L150 180 L150 190 L115 195 Z" fill="#00f0ff" filter="url(#glow-filter)" />
+                    </g>
+                    
+                    <path id="lightning-bolt" d="M150 100 L200 200 L250 150 L300 300" stroke="none" stroke-width="3" fill="none" class="opacity-0" />
+                </svg>
+
+                <div id="tap-area" class="absolute inset-[-20%] z-50"></div>
+            </div>
+        </div>
+        
+        <p class="absolute bottom-8 w-full text-center text-[#626247] font-military text-sm opacity-70 pointer-events-none">
+            TAP = DÉTRUIRE // ROUGE = MORT
+        </p>
+    </div>
+
+    <!-- ================= ECRANS FIN ================= -->
+    <div id="game-over-screen" class="screen bg-red-900/20 backdrop-blur">
+        <h2 id="end-title" class="text-[#ff2a2a] text-6xl font-military mb-4 glow-red">ÉCHEC</h2>
+        <p id="end-reason" class="text-[#ece4cb] font-military text-xl mb-8 tracking-widest uppercase">SYSTÈMES DÉTRUITS</p>
+        <button onclick="startGame()" class="px-8 py-3 border-2 border-[#ff2a2a] text-[#ff2a2a] font-military text-2xl hover:bg-[#ff2a2a] hover:text-black transition-colors">
+            RELANCER LE SYSTÈME
+        </button>
+    </div>
+
+    <div id="win-screen" class="screen bg-cyan-900/20 backdrop-blur">
+        <h2 class="text-[#00f0ff] text-6xl font-military mb-4 glow-cyan">CIBLE N.S.</h2>
+        <p class="text-[#ece4cb] font-military text-xl mb-8 tracking-widest">TARASCA NEUTRALISÉE</p>
+        <button onclick="location.reload()" class="px-8 py-3 border-2 border-[#00f0ff] text-[#00f0ff] font-military text-2xl hover:bg-[#00f0ff] hover:text-black transition-colors">
+            NOUVELLE MISSION
+        </button>
+    </div>
+
+    <script>
+        // --- CONSTANTES ---
+        const MAX_MISTAKES = 3;
+        const HP_TOTAL = 100;
+        const DAMAGE = 4; // Difficulté augmentée : 25 coups pour gagner
+        const TIME_LIMIT = 30; // 30 secondes
+
+        // --- VARIABLES ---
+        let gameState = 'start';
+        let currentHp = HP_TOTAL;
+        let mistakes = 0;
+        let timeLeft = TIME_LIMIT;
+        let isDanger = false;
+        let loopTimer = null;
+        let countdownTimer = null;
+        let particleInterval = null;
+
+        // --- ELEMENTS ---
+        const ui = {
+            screens: {
+                start: document.getElementById('start-screen'),
+                game: document.getElementById('game-screen'),
+                lost: document.getElementById('game-over-screen'),
+                won: document.getElementById('win-screen')
+            },
+            hpFill: document.getElementById('health-fill'),
+            hpText: document.getElementById('hp-text'),
+            lives: document.getElementById('lives-container'),
+            status: document.getElementById('status-lamp'),
+            tarasca: document.getElementById('tarasca-wrapper'),
+            eye: document.getElementById('eye-glow'),
+            head: document.getElementById('tarasca-head'),
+            tapArea: document.getElementById('tap-area'),
+            bodyPlates: document.querySelectorAll('.armor-plate'),
+            lightning: document.getElementById('lightning-bolt'),
+            timerDisplay: document.getElementById('timer-display'),
+            timerBox: document.getElementById('timer-box'),
+            endTitle: document.getElementById('end-title'),
+            endReason: document.getElementById('end-reason')
+        };
+
+        // --- MOTEUR JEU ---
+
+        function switchScreen(name) {
+            Object.values(ui.screens).forEach(s => s.classList.remove('active'));
+            ui.screens[name].classList.add('active');
+            gameState = name;
+        }
+
+        function startGame() {
+            currentHp = HP_TOTAL;
+            mistakes = 0;
+            timeLeft = TIME_LIMIT;
+            isDanger = false;
+            
+            updateLives();
+            updateHp();
+            updateTimerDisplay();
+            setMode(false);
+            
+            switchScreen('game');
+            gameLoop();
+            startTimer();
+            startSmoke();
+        }
+
+        function startTimer() {
+            clearInterval(countdownTimer);
+            countdownTimer = setInterval(() => {
+                if(gameState !== 'game') return;
+                
+                timeLeft--;
+                updateTimerDisplay();
+
+                if(timeLeft <= 0) {
+                    endGame('lost', 'TEMPS ÉCOULÉ');
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            ui.timerDisplay.innerText = timeLeft;
+            
+            // Alerte Rouge < 10s
+            if(timeLeft <= 10) {
+                ui.timerBox.classList.add('border-[#ff2a2a]', 'bg-red-900/50');
+                ui.timerDisplay.classList.add('text-[#ff2a2a]', 'animate-pulse');
+                ui.timerDisplay.classList.remove('text-[#ece4cb]');
+            } else {
+                ui.timerBox.classList.remove('border-[#ff2a2a]', 'bg-red-900/50');
+                ui.timerBox.classList.add('border-[#626247]');
+                ui.timerDisplay.classList.remove('text-[#ff2a2a]', 'animate-pulse');
+                ui.timerDisplay.classList.add('text-[#ece4cb]');
+            }
+        }
+
+        function gameLoop() {
+            if(gameState !== 'game') return;
+
+            // Temps "Safe" (Bleu) - PLUS COURT POUR LA DIFFICULTÉ
+            // Entre 0.5s et 1.3s
+            const safeTime = Math.random() * 800 + 500;
+            setMode(false);
+
+            loopTimer = setTimeout(() => {
+                if(gameState !== 'game') return;
+
+                // Temps "Danger" (Rouge) - PLUS NERVEUX
+                // Entre 0.4s et 1.6s
+                const dangerTime = Math.random() * 1200 + 400; 
+                setMode(true);
+
+                loopTimer = setTimeout(() => {
+                    gameLoop();
+                }, dangerTime);
+
+            }, safeTime);
+        }
+
+        function setMode(danger) {
+            isDanger = danger;
+            
+            if(danger) {
+                ui.status.innerText = "DANGER !!!";
+                ui.status.style.color = "#ff2a2a";
+                ui.status.style.borderColor = "#ff2a2a";
+                ui.status.style.boxShadow = "0 0 20px #ff2a2a";
+                
+                ui.eye.setAttribute('fill', '#ff2a2a');
+                ui.eye.setAttribute('filter', 'drop-shadow(0 0 5px #ff2a2a)');
+                ui.bodyPlates.forEach(p => p.style.fill = "#3a1a1a");
+                
+                ui.head.style.transform = "translateX(5px) rotate(2deg)";
+                ui.lightning.setAttribute('stroke', '#ff2a2a');
+                ui.lightning.setAttribute('class', 'animate-pulse opacity-100');
+            } else {
+                ui.status.innerText = "TIRER MAINTENANT";
+                ui.status.style.color = "#00f0ff";
+                ui.status.style.borderColor = "#00f0ff";
+                ui.status.style.boxShadow = "0 0 10px #00f0ff";
+                
+                ui.eye.setAttribute('fill', '#00f0ff');
+                ui.bodyPlates.forEach(p => p.style.fill = "#2a2820");
+                
+                ui.head.style.transform = "translateX(0) rotate(0)";
+                ui.lightning.setAttribute('class', 'opacity-0');
+            }
+        }
+
+        // --- INTERACTION ---
+
+        ui.tapArea.addEventListener('touchstart', (e) => {
+            if(e.cancelable) e.preventDefault();
+            handleHit();
+        }, {passive: false});
+
+        ui.tapArea.addEventListener('mousedown', handleHit);
+
+        function handleHit() {
+            if(gameState !== 'game') return;
+
+            if(isDanger) {
+                mistakes++;
+                updateLives();
+                shakeScreen();
+                showFloatText("ERREUR !", "bad");
+                
+                if(navigator.vibrate) navigator.vibrate(400);
+
+                if(mistakes >= MAX_MISTAKES) endGame('lost', 'SYSTÈMES DÉTRUITS');
+            } else {
+                currentHp -= DAMAGE;
+                updateHp();
+                showFloatText("-HIT", "good");
+                createSpark();
+                
+                ui.tarasca.style.transform = "scale(0.95) translateX(-5px)";
+                setTimeout(() => ui.tarasca.style.transform = "scale(1) translateX(0)", 50);
+
+                if(navigator.vibrate) navigator.vibrate(40);
+
+                if(currentHp <= 0) endGame('won');
+            }
+        }
+
+        function endGame(result, reason = '') {
+            clearTimeout(loopTimer);
+            clearInterval(countdownTimer);
+            clearInterval(particleInterval);
+            gameState = result;
+            
+            if(result === 'lost') {
+                ui.endTitle.innerText = "ÉCHEC";
+                ui.endReason.innerText = reason;
+            }
+
+            setTimeout(() => switchScreen(result), 400);
+        }
+
+        // --- UI & FX ---
+
+        function updateHp() {
+            const pct = Math.max(0, currentHp);
+            ui.hpFill.style.width = pct + "%";
+            ui.hpText.innerText = pct + "%";
+            if(pct < 30) ui.hpFill.style.backgroundColor = "#ff2a2a";
+            else ui.hpFill.style.backgroundColor = "#ffdb2c";
+        }
+
+        function updateLives() {
+            ui.lives.innerHTML = "";
+            for(let i=0; i<MAX_MISTAKES; i++) {
+                const alive = i < (MAX_MISTAKES - mistakes);
+                const div = document.createElement('div');
+                div.className = `w-8 h-2 md:w-10 md:h-3 skew-x-[-20deg] border border-[#2a2820] ${alive ? 'bg-[#00f0ff] shadow-[0_0_5px_#00f0ff]' : 'bg-[#1a1812]'}`;
+                ui.lives.appendChild(div);
+            }
+        }
+
+        function showFloatText(txt, type) {
+            const el = document.createElement('div');
+            el.className = 'feedback-float';
+            el.innerText = txt;
+            el.style.color = type === 'good' ? '#ffdb2c' : '#ff2a2a';
+            ui.tarasca.appendChild(el);
+            setTimeout(() => el.remove(), 500);
+        }
+
+        function shakeScreen() {
+            ui.tarasca.classList.remove('idle-rumble');
+            ui.tarasca.classList.add('tarasca-shake');
+            document.body.style.backgroundColor = "#3a0000";
+            setTimeout(() => {
+                ui.tarasca.classList.remove('tarasca-shake');
+                ui.tarasca.classList.add('idle-rumble');
+                document.body.style.backgroundColor = "var(--bg-dark)";
+            }, 400);
+        }
+
+        // --- PARTICULES ---
+
+        function startSmoke() {
+            particleInterval = setInterval(() => {
+                if(gameState !== 'game') return;
+                const smoke = document.createElement('div');
+                smoke.className = 'smoke-particle';
+                const left = 50 + (Math.random() * 10 - 5); 
+                smoke.style.left = left + "%";
+                smoke.style.top = "30%";
+                smoke.style.width = (Math.random() * 20 + 10) + "px";
+                smoke.style.height = smoke.style.width;
+                document.getElementById('particles').appendChild(smoke);
+                setTimeout(() => smoke.remove(), 2000);
+            }, 300);
+        }
+
+        function createSpark() {
+            const spark = document.createElement('div');
+            spark.style.position = 'absolute';
+            spark.style.left = '50%';
+            spark.style.top = '50%';
+            spark.style.width = '100px';
+            spark.style.height = '100px';
+            spark.style.background = 'radial-gradient(circle, #fff 0%, transparent 70%)';
+            spark.style.transform = 'translate(-50%, -50%) scale(0)';
+            spark.style.pointerEvents = 'none';
+            spark.style.transition = 'transform 0.1s ease-out, opacity 0.1s';
+            spark.style.zIndex = '50';
+            ui.tarasca.appendChild(spark);
+            requestAnimationFrame(() => {
+                spark.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                spark.style.opacity = '0';
+            });
+            setTimeout(() => spark.remove(), 100);
+        }
+    </script>
+</body>
+</html>

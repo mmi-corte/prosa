@@ -108,35 +108,68 @@ function initializeDOM() {
 function initializeLightMode() {
     const gameBody = document.getElementById('gameBody');
     if (!gameBody) return;
-    
-    const settingLightMode = localStorage.getItem('settingLightMode');
-    if (settingLightMode === 'true') {
-        gameBody.classList.add('light-mode');
-    }
-    
-    setInterval(() => {
-        const isLightMode = localStorage.getItem('settingLightMode') === 'true';
-        const hasLightClass = gameBody.classList.contains('light-mode');
-        
-        if (isLightMode && !hasLightClass) {
-            gameBody.classList.add('light-mode');
-        } else if (!isLightMode && hasLightClass) {
-            gameBody.classList.remove('light-mode');
+
+    const applyLightModeState = (isLightMode) => {
+        gameBody.classList.toggle('light-mode', isLightMode);
+    };
+
+    const readSetting = () => localStorage.getItem('settingLightMode') === 'true';
+
+    // Initial sync from stored settings
+    applyLightModeState(readSetting());
+
+    // Sync when settings page toggles class on the main document
+    const rootObserver = new MutationObserver(() => {
+        const rootHasLight = document.documentElement.classList.contains('light-mode');
+        applyLightModeState(rootHasLight || readSetting());
+    });
+
+    rootObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+
+    // Sync when settings are saved
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'settingLightMode') {
+            applyLightModeState(event.newValue === 'true');
         }
+    });
+
+    // Fallback polling for same-tab changes
+    setInterval(() => {
+        applyLightModeState(readSetting());
     }, 1000);
 }
 
 // Get color palette based on light mode
 function getColors() {
-    const isLightMode = document.getElementById('gameBody')?.classList.contains('light-mode');
+    const styles = getComputedStyle(document.body);
+    const readVar = (name, fallback) => {
+        const value = styles.getPropertyValue(name).trim();
+        return value || fallback;
+    };
+
+    const hexToRgb = (hex) => {
+        const normalized = hex.replace('#', '');
+        if (normalized.length !== 6) return [98, 98, 71];
+        const r = parseInt(normalized.slice(0, 2), 16);
+        const g = parseInt(normalized.slice(2, 4), 16);
+        const b = parseInt(normalized.slice(4, 6), 16);
+        return [r, g, b];
+    };
+
+    const primary = readVar('--primary', '#626247');
+    const [pr, pg, pb] = hexToRgb(primary);
+
     return {
-        primary: isLightMode ? '#626247' : '#626247',
-        accent: isLightMode ? '#2a8a95' : '#81cbd6',
-        warning: isLightMode ? '#c9a800' : '#ffdb2c',
-        danger: isLightMode ? '#c63032' : '#c63032',
-        bg: isLightMode ? '#ece4cb' : '#1a1812',
-        grid: isLightMode ? 'rgba(98, 98, 71, 0.1)' : 'rgba(98, 98, 71, 0.1)',
-        gridCenter: isLightMode ? 'rgba(98, 98, 71, 0.2)' : 'rgba(98, 98, 71, 0.2)'
+        primary,
+        accent: readVar('--accent', '#81cbd6'),
+        warning: readVar('--warning', '#ffdb2c'),
+        danger: readVar('--danger', '#c63032'),
+        bg: readVar('--bg', '#1a1812'),
+        grid: `rgba(${pr}, ${pg}, ${pb}, 0.1)`,
+        gridCenter: `rgba(${pr}, ${pg}, ${pb}, 0.2)`
     };
 }
 
