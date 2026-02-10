@@ -1012,7 +1012,7 @@
     "10": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "Place_padoue.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1044,7 +1044,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "travailleur_2.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1075,7 +1075,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "travailleur_3.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1106,7 +1106,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "travailleur1.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1134,6 +1134,30 @@
         "dialog": [
           {
             "text": {
+              "fr": "Le camp des rebelles est caché dans l’ancienne mairie de Corte à l’écart de la ville. Des tentes de fortune, assemblées à partir de bâches et de branchages, se pressent autour d’un feu central."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "L’air est empli de fumée, de poussière et de voix basses qui murmurent des ordres, des stratégies ou des prières pour ceux qui ont disparu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "mairie_12_1.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
               "fr": "L’armurier dépose les sacs d’armes et de munitions récupérées. Les rebelles s’organisent immédiatement, triant, répartissant, vérifiant les stocks. Chaque action est rapide, précise."
             },
             "pitch": 400
@@ -1146,9 +1170,33 @@
           }
         ],
         "nextActionType": "dialog",
-        "nextAction": "3"
+        "nextAction": "5"
       },
-      "2": {
+      "3": {
+        "default": {
+          "backgroundUrl": "mairie_12_1.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le camp des rebelles est caché dans l’ancienne mairie de Corte à l’écart de la ville. Des tentes de fortune, assemblées à partir de bâches et de branchages, se pressent autour d’un feu central."
+            },
+            "pitch": 400
+          },
+          {
+            "text": {
+              "fr": "L’air est empli de fumée, de poussière et de voix basses qui murmurent des ordres, des stratégies ou des prières pour ceux qui ont disparu."
+            },
+            "pitch": 400
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
         "default": {
           "backgroundUrl": "mairie_chef_12_1.webp",
           "foregroundUrl": "",
@@ -1170,9 +1218,9 @@
           }
         ],
         "nextActionType": "dialog",
-        "nextAction": "3"
+        "nextAction": "5"
       },
-      "3": {
+      "5": {
         "default": {
           "backgroundUrl": "mairie_12_1.webp",
           "foregroundUrl": "",
@@ -1186,7 +1234,7 @@
               "cor": "\"A strada di u campu santu ùn s’apre micca à i scunnisciuti. Preparemu st’attaccu dapoi parechji ghjorni avà.\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_11_voix_1.mp3"
           },
           {
             "text": {
@@ -1194,13 +1242,13 @@
               "cor": "\"Prova u to valore s’è tù voli cumbatte cun noi dumane.\""
             },
             "pitch": 300,
-            "voice": ""
+            "voice": "Case_11_voix_2.mp3"
           }
         ],
-        "nextActionType": "game",
+        "nextActionType": "riddle",
         "nextAction": "1"
       },
-      "4": {
+      "6": {
         "default": {
           "backgroundUrl": "mairie_chef_12_1.webp",
           "foregroundUrl": "",
@@ -1242,10 +1290,11 @@
           },
           {
             "text": {
-              "fr": "Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.",
-              "cor": "U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà."
+              "fr": "\"Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.\"",
+              "cor": "\"U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà.\""
             },
-            "pitch": 400
+            "pitch": 400,
+            "voice": "Case_12_voix_1.mp3"
           }
         ],
         "nextActionType": "riddle",
@@ -1351,7 +1400,7 @@
     "14": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "orcubateau.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1386,7 +1435,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "Orcu_patrouille.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1408,7 +1457,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "orcubateau.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""

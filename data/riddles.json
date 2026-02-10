@@ -199,6 +199,107 @@
         "nextActionLose": "3"
       }
     },
+    "11": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "Quelle est la bonne réponse ?",
+              "cor": ""
+            },
+            "voice": "",
+            "choices": [
+              {
+                "text": {
+                  "fr": "Bonne réponse",
+                  "cor": ""
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise",
+                  "cor": ""
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise",
+                  "cor": ""
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Quelle est la bonne réponse V2 ?",
+              "cor": ""
+            },
+            "voice": "",
+            "choices": [
+              {
+                "text": {
+                  "fr": "Bonne réponse",
+                  "cor": ""
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise",
+                  "cor": ""
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise",
+                  "cor": ""
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Quelle est la bonne réponse V3 ?",
+              "cor": ""
+            },
+            "voice": "",
+            "choices": [
+              {
+                "text": {
+                  "fr": "Bonne réponse",
+                  "cor": ""
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise réponse",
+                  "cor": ""
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Mauvaise réponse",
+                  "cor": ""
+                },
+                "score": -1
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "6",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
     "12": {
       "1": {
         "random": true,

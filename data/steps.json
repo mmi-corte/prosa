@@ -168,11 +168,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "11"
+          "nextStep": "12"
         },
         "2": {
           "type": "lose",
-          "nextStep": "11"
+          "nextStep": "10"
         }
       }
     },
@@ -185,21 +185,21 @@
           "nextStep": "13"
         },
         "2": {
-          "type": "lose",
+          "type": "still",
           "nextStep": "11"
         }
       }
     },
     "111": {
       "actionType": "dialog",
-      "action": "2",
+      "action": "3",
       "end": {
         "1": {
           "type": "win",
           "nextStep": "13"
         },
         "2": {
-          "type": "lose",
+          "type": "still",
           "nextStep": "11"
         }
       }
