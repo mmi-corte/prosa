@@ -15,6 +15,7 @@ import { progressionView } from "./js/views/main/progressionView.js"
 import { qrView } from "./js/views/main/qrView.js"
 import { seasonsView } from "./js/views/main/seasonsView.js"
 import { settingView } from "./js/views/main/settingView.js"
+import { minigamesView } from "./js/views/main/minigamesView.js"
 
 // ====================================
 const viewRoutes = {
@@ -33,7 +34,8 @@ const viewRoutes = {
     'nouvelle-partie/confirmation': characterSelectView,
     'univers-prosa/encyclopedie': charactersView,
     'univers-prosa/encyclopedie-details': charactersView,
-    'univers-prosa/saisons': seasonsView
+    'univers-prosa/saisons': seasonsView,
+    'univers-prosa/mini-jeux': minigamesView
 }
 
 // ====================================

@@ -8,6 +8,7 @@ import { playerSelectView } from "./playerSelectView.js"
 import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
 import { aleasView } from "./aleasView.js"
+import { minigamesView } from "./minigamesView.js"
 import { navigate } from "../../../router.js"
 import { showBackButton } from "../components/backButton.js"
 
@@ -133,6 +134,17 @@ function showDiscoverPage() {
             <polyline points="12 6 12 12 16 14" />
           </svg>
         </button>
+
+        <button class="menu-btn" id="discoverMinigamesBtn">
+          <span class="btn-title">Découvrir les mini-jeux</span>
+          <span class="btn-subtitle">répertoire complet</span>
+          <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="7" height="7" />
+            <rect x="14" y="4" width="7" height="7" />
+            <rect x="3" y="13" width="7" height="7" />
+            <rect x="14" y="13" width="7" height="7" />
+          </svg>
+        </button>
       </nav>
     </div>
   `
@@ -145,6 +157,11 @@ function showDiscoverPage() {
   // Discover seasons button
   document.getElementById('discoverSeasonsBtn').addEventListener('click', () => {
     navigate("univers-prosa/saisons", () => seasonsView())
+  })
+
+  // Discover mini-games button
+  document.getElementById('discoverMinigamesBtn').addEventListener('click', () => {
+    navigate("univers-prosa/mini-jeux", () => minigamesView())
   })
 }
 

@@ -882,6 +882,77 @@ body.light-mode .logo-main {
   margin: 8px 0 auto 0;
 }
 
+.minigames-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.minigame-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 45%),
+    var(--card);
+  color: var(--foreground);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  min-height: 120px;
+}
+
+.minigame-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(129, 203, 214, 0.18), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.minigame-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-light);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.minigame-card:hover::after {
+  opacity: 1;
+}
+
+.minigame-title {
+  font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+.minigame-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-top: auto;
+}
+
+.minigame-cta::after {
+  content: "→";
+  font-size: 1rem;
+}
+
+@media (max-width: 520px) {
+  .minigames-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .menu-btn {
   width: 100%;
   background: var(--card);

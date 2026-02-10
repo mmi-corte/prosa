@@ -1,0 +1,92 @@
+[
+  {
+    "id": "case_1_radio",
+    "title": "Case 1 - Radio",
+    "path": "./final-game/case_1_radio/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_4_orcu",
+    "title": "Case 4 - Orcu",
+    "path": "./final-game/case_4_orcu/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_6_signadora",
+    "title": "Case 6 - Signadora",
+    "path": "./final-game/case_6_signadora/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_7_armurier",
+    "title": "Case 7 - Armurier",
+    "path": "./final-game/case_7_armurier/game.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_8_fulettu",
+    "title": "Case 8 - Fulettu",
+    "path": "./final-game/case_8_fulettu/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_10_frac",
+    "title": "Case 10 - Frac",
+    "path": "./final-game/case_10_frac/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_11_squadra",
+    "title": "Case 11 - Squadra",
+    "path": "./final-game/case_11_squadra/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_13_strega",
+    "title": "Case 13 - Strega",
+    "path": "./final-game/case_13_strega/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_13_strega_partie_2",
+    "title": "Case 13 - Strega (Partie 2)",
+    "path": "./final-game/case_13_strega_partie_2/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_14_orcu",
+    "title": "Case 14 - Orcu",
+    "path": "./final-game/case_14_orcu/idnex.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_3.1_tarasca",
+    "title": "Case 3.1 - Tarasca",
+    "path": "./final-game-toulon/case_3.1_tarasca/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_3.2_matagot",
+    "title": "Case 3.2 - Matagot",
+    "path": "./final-game-toulon/case_3.2_matagot/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_5.1_wagon",
+    "title": "Case 5.1 - Wagon",
+    "path": "./final-game-toulon/case_5.1_wagon/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_7_mairie",
+    "title": "Case 7 - Mairie",
+    "path": "./final-game-toulon/case_7_mairie/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_7_opera",
+    "title": "Case 7 - Opera",
+    "path": "./final-game-toulon/case_7_opera/index.html",
+    "collection": "final-game-toulon"
+  }
+]
