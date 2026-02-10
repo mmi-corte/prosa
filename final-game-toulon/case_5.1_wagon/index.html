@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champ de Mars - L'Infiltration</title>
+    <style>
+        /* --- POLICES --- */
+        @font-face { 
+            font-family: 'Futura'; 
+            src: local('Futura'), url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'); 
+            font-weight: 400; 
+            font-style: normal; 
+            font-display: fallback;
+        } 
+        @font-face { 
+            font-family: 'Futura'; 
+            src: local('Futura Bold'), url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'); 
+            font-weight: 700; 
+            font-style: normal; 
+            font-display: fallback;
+        }
+
+        /* --- VARIABLES --- */
+        :root { 
+            --background: #1a1812; 
+            --foreground: #ece4cb; 
+            --card: #252218; 
+            --primary: #626247; 
+            --primary-dark: #4a4a35; 
+            --primary-light: #7a7a5a; 
+            --muted: #2a2820; 
+            --muted-foreground: #cfc6b0; /* added: fallback for player arm color */
+            --accent-red: #c63032; 
+            --accent-green: #81cbd6; 
+            --yellow: #ffdb2c; 
+            --border: #3a3830;
+        }
+
+        /* --- BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Futura', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- JEU --- */
+        #game-container {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 600px;
+            position: relative;
+            background: linear-gradient(to bottom, #1a1812 0%, #2a2820 100%);
+            border: 2px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- DÉCOR --- */
+        .skyline {
+            position: absolute;
+            bottom: 200px;
+            left: 0;
+            width: 200%;
+            height: 150px;
+            background: repeating-linear-gradient(90deg, var(--card) 0px, var(--card) 20px, transparent 20px, transparent 40px);
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        .rails {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 10px, var(--muted) 10px, var(--muted) 60px);
+            transform: perspective(500px) rotateX(45deg) scale(1.5);
+            transform-origin: bottom;
+            animation: shakeRails 0.2s infinite;
+        }
+
+        /* --- TRAIN --- */
+        #train-container {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            height: 250px;
+            width: 100%;
+        }
+
+        .wagon {
+            width: 400px;
+            height: 250px;
+            background-color: var(--card);
+            border-right: 5px solid var(--background);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .wagon::before { /* Toit */
+            content: ''; position: absolute; top: -10px; left: 0; width: 100%; height: 10px;
+            background-color: var(--primary-dark); border-radius: 5px 5px 0 0;
+        }
+
+        .wagon::after { /* Roues */
+            content: ''; position: absolute; bottom: -20px; left: 20px; width: 360px; height: 20px;
+            background: repeating-linear-gradient(90deg, #111 0, #111 40px, transparent 40px, transparent 320px);
+        }
+
+        /* Dernier wagon : ajout d'un feu rouge arrière */
+        .last-wagon::after {
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            right: 10px; 
+            width: 20px; 
+            height: 20px; 
+            background: red; 
+            border-radius: 50%; 
+            box-shadow: 0 0 10px red;
+            animation: blink 1s infinite;
+        }
+
+        .door {
+            width: 120px; height: 180px;
+            background-color: var(--primary-dark);
+            border: 2px solid var(--border);
+            position: relative;
+        }
+
+        .door.open {
+            background-color: #000;
+            border: 4px solid var(--accent-green);
+            box-shadow: 0 0 15px var(--accent-green);
+        }
+        
+        .door.open::after {
+            content: 'SAUTE !'; color: var(--accent-green); font-weight: bold;
+            position: absolute; bottom: 5px; width: 100%; text-align: center;
+        }
+
+        .door.closed::after {
+            content: 'X'; color: var(--accent-red); font-size: 40px; opacity: 0.3;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+
+        /* --- JOUEUR --- */
+        #player {
+            position: absolute; bottom: 60px; left: 100px;
+            width: 40px; height: 80px;
+            background-color: var(--foreground);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--yellow);
+            z-index: 10;
+        }
+        #player::after { /* Bras */
+            content: ''; position: absolute; top: 10px; right: -10px; width: 10px; height: 30px;
+            background: var(--muted-foreground); animation: runArms 0.5s infinite alternate;
+        }
+
+        .jump-animation {
+            animation: jumpIn 0.8s forwards cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* --- UI --- */
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 24, 18, 0.95);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 100; text-align: center; padding: 20px;
+        }
+        .hidden { display: none !important; }
+
+        h1 { color: var(--yellow); font-size: 2.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 15px 30px;
+            font-size: 1.2rem; cursor: pointer; margin-top: 20px; font-weight: bold;
+            font-family: 'Futura', sans-serif; text-transform: uppercase;
+        }
+        .btn:hover { background: var(--primary-light); box-shadow: 0 0 15px var(--primary); }
+
+        .dialogue-box {
+            text-align: left; border-left: 4px solid var(--accent-red);
+            padding: 15px; margin: 10px 0; background: rgba(255,255,255,0.05); width: 100%; max-width: 600px;
+        }
+        .character-name { color: var(--yellow); font-weight: bold; display: block; margin-bottom: 5px; }
+
+        #intro-message {
+            position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+            color: var(--accent-red); font-size: 3rem; font-weight: bold; z-index: 90;
+            text-shadow: 0 0 10px black; animation: blink 0.5s infinite;
+        }
+
+        #feedback {
+            position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+            font-size: 3rem; font-weight: bold; z-index: 50; opacity: 0; transition: opacity 0.2s;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes moveBackground { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes shakeRails { 0%, 100% { transform: perspective(500px) rotateX(45deg) scale(1.5) translateY(0); } 50% { transform: perspective(500px) rotateX(45deg) scale(1.5) translateY(1px); } }
+        @keyframes runArms { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
+        @keyframes jumpIn { 50% { bottom: 180px; transform: scale(1.2); } 100% { bottom: 180px; transform: scale(0); opacity: 0; } }
+        @keyframes blink { from { opacity: 1; } to { opacity: 0.2; } }
+        @keyframes rise { 0% { transform: translateY(0); opacity: 0.5; } 100% { transform: translateY(-100px); opacity: 0; } }
+        .steam { position: absolute; background: rgba(255,255,255,0.1); border-radius: 50%; animation: rise 2s infinite; }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <div class="skyline"></div>
+        <div id="train-container"></div>
+        <div class="rails"></div>
+        <div id="player"></div>
+        
+        <div id="intro-message" class="hidden">⚠ LE TRAIN ARRIVE ⚠</div>
+        <div id="feedback"></div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="overlay">
+            <h1>SAUTE DANS LE TRAIN !</h1>
+            <div style="background: var(--card); padding: 30px; border: 2px solid var(--primary);">
+                <p style="color: var(--accent-green); font-size: 1.5rem; font-weight: bold; margin-bottom: 15px;">PORTE BLEU = SAUTE</p>
+                <p style="color: var(--accent-red); font-size: 1.2rem;">PORTE ROUGE = ATTENDS</p>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--muted-foreground);">ESPACE ou TOUCHE L'ÉCRAN pour sauter</p>
+            </div>
+            <button class="btn" onclick="startGame()">JOUER</button>
+        </div>
+
+        <!-- Fail Screen -->
+        <div id="fail-screen" class="overlay hidden">
+            <h1 style="color: var(--accent-red)">RÂTÉ !</h1>
+            <p id="fail-reason">Tu as heurté le wagon.</p>
+            <button class="btn" onclick="resetGame()">RÉESSAYER</button>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="narrative-screen" class="overlay hidden">
+            <h1 style="color: var(--accent-green)">SUCCÈS !</h1>
+            <p>Vous êtes à bord. Le train arrive au Champ de Mars.</p>
+            <div style="margin-top: 30px;">
+                <div class="dialogue-box">
+                    <span class="character-name">Frère aîné</span>
+                    « On voulait juste manger… c’était pour l’anniversaire de notre mère. »
+                </div>
+                <div class="dialogue-box">
+                    <span class="character-name" style="color: var(--accent-red)">Soldat FLRP</span>
+                    « Il ne fallait pas le laisser traîner si c’était si précieux. »
+                </div>
+            </div>
+            <button class="btn">CONTINUER</button>
+        </div>
+    </div>
+
+    <script>
+        // --- LOGIQUE JEU CORRIGÉE ---
+        // Reduced speed so wagons are easier to see and react to.
+        const trainSpeed = 8;
+        const wagonWidth = 400;
+        const totalWagons = 15; // Le train a une fin !
+
+        let gameRunning = false;
+        let wagons = [];
+        let wagonsSpawnedCount = 0;
+        let animationFrameId; 
+        
+        const trainContainer = document.getElementById('train-container');
+        const player = document.getElementById('player');
+        const failReason = document.getElementById('fail-reason');
+        
+        function startGame() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('fail-screen').classList.add('hidden');
+            document.getElementById('intro-message').classList.remove('hidden');
+
+            // Nettoyage complet
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            trainContainer.innerHTML = '';
+            wagons = [];
+            wagonsSpawnedCount = 0;
+
+            // Démarrage différé : Train loin (2500px)
+            let startOffset = 2500;
+
+            // On génère le début du train
+            for(let i=0; i<4; i++) {
+                spawnWagon(startOffset + (i * wagonWidth));
+            }
+
+            // Délai d'intro
+            setTimeout(() => {
+                document.getElementById('intro-message').classList.add('hidden');
+                gameRunning = true; 
+            }, 2000);
+
+            gameLoop();
+        }
+
+        function spawnWagon(positionX) {
+            if (wagonsSpawnedCount >= totalWagons) return; // Limite atteinte
+
+            const el = document.createElement('div');
+            el.classList.add('wagon');
+            el.style.left = positionX + 'px'; 
+            
+            // Si c'est le dernier wagon, on le marque
+            if (wagonsSpawnedCount === totalWagons - 1) {
+                el.classList.add('last-wagon');
+            }
+            
+            // 30% de chance d'ouverture (C'est plus dur, avant c'était 50%)
+            const isOpen = Math.random() > 0.7;
+            
+            const door = document.createElement('div');
+            door.classList.add('door');
+            if(isOpen) door.classList.add('open');
+            else door.classList.add('closed');
+            
+            el.appendChild(door);
+            trainContainer.appendChild(el);
+
+            wagons.push({ element: el, x: positionX, isOpen: isOpen });
+            wagonsSpawnedCount++;
+        }
+
+        function gameLoop() {
+            if(!document.getElementById('narrative-screen').classList.contains('hidden') || 
+               !document.getElementById('fail-screen').classList.contains('hidden')) {
+                return; 
+            }
+
+            // Déplacement
+            wagons.forEach(w => {
+                w.x -= trainSpeed;
+                w.element.style.left = w.x + 'px';
+            });
+
+            // Nettoyage (Si le wagon est sorti à gauche)
+            if(wagons.length > 0 && wagons[0].x < -wagonWidth) {
+                wagons[0].element.remove();
+                wagons.shift();
+            }
+
+            // Ajout nouveaux wagons (si on n'a pas atteint la fin du train)
+            if(wagons.length < 4 && wagonsSpawnedCount < totalWagons) {
+                const lastWagon = wagons[wagons.length - 1];
+                const newX = lastWagon ? lastWagon.x + wagonWidth : 800; 
+                spawnWagon(newX);
+            }
+
+            // CONDITION D'ÉCHEC : TRAIN PASSÉ
+            // Si on a spawn tous les wagons ET qu'il n'en reste plus dans le tableau (tous sortis à gauche)
+            if (wagonsSpawnedCount >= totalWagons && wagons.length === 0) {
+                gameRunning = false;
+                failReason.innerText = "Le train est passé sans toi !";
+                document.getElementById('fail-screen').classList.remove('hidden');
+                return; // Stop loop
+            }
+
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function resetGame() {
+            gameRunning = false;
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            wagons = [];
+            trainContainer.innerHTML = '';
+            player.classList.remove('jump-animation');
+            player.style.opacity = '1';
+            startGame();
+        }
+
+        function jump() {
+            if(!gameRunning) return;
+
+            // compute player center dynamically (in case layout changes)
+            const playerCenter = player.offsetLeft + (player.offsetWidth / 2);
+            let target = null;
+            wagons.forEach(w => {
+                const doorStart = w.x + 140;
+                const doorEnd = w.x + 260;
+                if(playerCenter > doorStart - 30 && playerCenter < doorEnd + 30) {
+                    target = w;
+                }
+            });
+
+            if(target && target.isOpen) {
+                // VICTOIRE
+                gameRunning = false;
+                player.classList.add('jump-animation');
+                showFeedback("SUCCÈS !", "var(--accent-green)");
+                setTimeout(() => document.getElementById('narrative-screen').classList.remove('hidden'), 1000);
+            } else {
+                // DÉFAITE (Choc)
+                gameRunning = false;
+                showFeedback("BAM !", "var(--accent-red)");
+                failReason.innerText = "Tu as heurté la paroi du wagon !";
+                document.getElementById('game-container').style.transform = "translate(-5px, 5px)";
+                setTimeout(() => document.getElementById('game-container').style.transform = "none", 100);
+                setTimeout(() => document.getElementById('fail-screen').classList.remove('hidden'), 600);
+            }
+        }
+
+        function showFeedback(txt, col) {
+            const f = document.getElementById('feedback');
+            f.innerText = txt; f.style.color = col; f.style.opacity = 1;
+            setTimeout(() => f.style.opacity = 0, 800);
+        }
+
+        // Contrôles
+        window.addEventListener('keydown', e => { if(e.code === 'Space') jump(); });
+        
+        const gameContainer = document.getElementById('game-container');
+        gameContainer.addEventListener('mousedown', (e) => { e.preventDefault(); jump(); });
+        gameContainer.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); }, { passive: false });
+
+        // Effets visuels
+        setInterval(() => {
+            if(!gameRunning) return;
+            const steam = document.createElement('div');
+            steam.classList.add('steam');
+            steam.style.left = Math.random() * 800 + 'px';
+            steam.style.bottom = '-20px';
+            steam.style.width = Math.random() * 40 + 20 + 'px';
+            steam.style.height = steam.style.width;
+            document.getElementById('game-container').appendChild(steam);
+            setTimeout(() => steam.remove(), 2000);
+        }, 200);
+
+    </script>
+</body>
+</html>
