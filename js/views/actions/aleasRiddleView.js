@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, navigate } from "../../../app.js";
+import { clearContainer, gameContainer } from "../../../app.js";
 import { aleasRiddlesData } from "../../loadData.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";

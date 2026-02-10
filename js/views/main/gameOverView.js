@@ -1,11 +1,12 @@
-import { gameContainer, navigate, clearContainer } from "../../../app.js";
-import { resetGame, gameInitialized } from "../../initGame.js";
+import { gameContainer, clearContainer } from "../../../app.js";
+import { navigate } from "../../../router.js";
+import { resetGame } from "../../initGame.js";
 import { initView } from "./initView.js";
 
 export function gameOverView() {
     // Vider le conteneur
     clearContainer()
-    
+
     // Créer le wrapper dans le style du menu
     gameContainer.innerHTML = `
         <div class="menuWrapper game-over-wrapper">
@@ -31,7 +32,7 @@ export function gameOverView() {
         // Attendre que resetGame se termine
         setTimeout(() => {
             console.log('Navigating to init view');
-            navigate('init', () => initView(), true);
+            navigate('init', () => initView());
         }, 100);
     });
 

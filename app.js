@@ -1,70 +1,19 @@
 import { gameInitialized, initGame } from "./js/initGame.js"
 import { initLanguageManager } from "./js/langageManager.js"
-import { charactersView } from "./js/views/main/charactersView.js"
-import { codeView } from "./js/views/main/codeView.js"
-import { characterSelectView } from "./js/views/main/initViews/characterSelectView.js"
-import { playerCountView } from "./js/views/main/initViews/playerCountView.js"
 import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
-import { qrView } from "./js/views/main/qrView.js"
 import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
-import { debugView } from "./js/views/Temp/debugView.js"
-import { difficultyView } from "./js/views/main/initViews/difficultyView.js"
-import { gameOverView } from "./js/views/main/gameOverView.js"
+import { navigate } from "./router.js"
+import { removeBackButton } from "./js/views/components/backButton.js"
 
 export const gameContainer = document.getElementById('gameContainer')
 export const headerLeft = document.getElementById('headerLeft')
 
-// const difficultyLabels = {
-//   30: 'F',
-//   20: 'M',
-//   10: 'D'
-// }
-
-// function initDifficultyIndicator() {
-//   let indicator = document.getElementById('difficulty-indicator')
-//   if (indicator) return indicator
-
-//   indicator = document.createElement('div')
-//   indicator.id = 'difficulty-indicator'
-//   indicator.className = 'difficulty-battery hidden'
-//   indicator.innerHTML = `
-//     <div class="battery-body">
-//       <div class="battery-fill"></div>
-//       <div class="battery-cap"></div>
-//       <div class="battery-label">-</div>
-//     </div>
-//   `
-//   document.body.appendChild(indicator)
-//   return indicator
-// }
-
-// window.updateDifficultyIndicator = function updateDifficultyIndicator(difficultyValue) {
-//   const indicator = initDifficultyIndicator()
-//   if (!difficultyValue) {
-//     indicator.classList.add('hidden')
-//     return
-//   }
-
-//   const fill = indicator.querySelector('.battery-fill')
-//   const label = indicator.querySelector('.battery-label')
-//   const percent = difficultyValue === 30 ? 100 : difficultyValue === 20 ? 66 : 33
-//   fill.style.width = `${percent}%`
-//   label.textContent = difficultyLabels[difficultyValue] || '-'
-//   indicator.dataset.difficulty = String(difficultyValue)
-
-//   const hasInfo = !!document.querySelector('.info-btn')
-//   const hasBack = !!document.querySelector('.back-btn-circle')
-//   const rightOffset = hasInfo && !hasBack ? 74 : 128
-//   indicator.style.right = `${rightOffset}px`
-//   indicator.classList.remove('hidden')
-// }
-
 export function clearContainer() {
   gameContainer.innerHTML = ''
   if (headerLeft) {
-    headerLeft.innerHTML = ''
+    removeBackButton()
   }
 }
 
@@ -97,7 +46,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Initialize language manager first (async to load translations)
   await initLanguageManager()
 
-  // Initialize game and wait for it to complete
+  // Initialize game data and wait for it to complete
   await initGame()
   if (gameInitialized) {
     console.log("Previous game found, successfuly initialized save data")
@@ -114,15 +63,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     navigate('menu', menuView())
   }
 
-  // Afficher l'indicateur de difficulté si déjà défini
-  // const storedDifficultyRaw = localStorage.getItem('gameDifficulty')
-  // if (storedDifficultyRaw !== null && window.updateDifficultyIndicator) {
-  //   const storedDifficulty = parseInt(storedDifficultyRaw, 10)
-  //   if (!Number.isNaN(storedDifficulty)) {
-  //     window.updateDifficultyIndicator(storedDifficulty)
-  //   }
-  // }
-
   if (window.initProsaLogoLottie) {
     window.initProsaLogoLottie()
   }
@@ -134,7 +74,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   headerLogo.addEventListener('click', (e) => {
     e.preventDefault();
-    navigate('./', menuView)
+    navigate('menu', menuView)
   });
 });
 
@@ -165,17 +105,17 @@ if (document.body) {
 
 export function applyLightMode() {
   const isLightMode = settings.lightMode;
-  
+
   // Appliquer sur html
   if (document.documentElement) {
     document.documentElement.classList.toggle('light-mode', isLightMode);
   }
-  
+
   // Appliquer sur body
   if (document.body) {
     document.body.classList.toggle('light-mode', isLightMode);
   }
-  
+
   console.log('Light mode applied:', isLightMode);
 }
 
@@ -183,6 +123,7 @@ export function applyLightMode() {
 const settingButton = document.getElementById('settingButton')
 if (settingButton) {
   settingButton.addEventListener('click', () => {
+    navigate('parametres', settingView)
     settingView()
   })
 }
@@ -193,57 +134,3 @@ if (settingButton) {
 export function vibrate(pattern) {
   if (navigator.vibrate && settings.vibration) navigator.vibrate(pattern)
 }
-
-// ====================================
-// ============= NAVIGATE =============
-// ====================================
-export function navigate(viewName, viewFunction, updateUrl = true) {
-  // Store the state with the view name
-  const state = { view: viewName }
-  let url = ""
-  if (updateUrl) {
-    url = `#${viewName}`
-  }
-
-  try {
-    history.pushState(state, "", url)
-  } catch (e) {
-    console.warn('Could not update history:', e);
-  }
-
-  // Always call the view function when navigating
-  if (typeof viewFunction === 'function') {
-    viewFunction()
-  }
-}
-
-// ====================================
-// ============= VIEW ROUTER ==========
-// ====================================
-const viewRoutes = {
-  'menu': menuView,
-  'resume': progressionView,
-  'choix-difficulte': difficultyView,
-  'nombre-joueur': playerCountView,
-  'choix-personnage': characterSelectView,
-  'code': codeView,
-  'qr': qrView,
-  'encyclopedie': charactersView,
-  'encyclopedie-details': charactersView,
-  'debug': debugView,
-  'parametres': settingView,
-  'gameover': gameOverView,
-}
-
-function callView(viewName) {
-  const viewFunction = viewRoutes[viewName] || menuView
-  viewFunction?.()
-}
-
-// ====================================
-// ============= POPSTATE =============
-// ====================================
-window.addEventListener('popstate', (event) => {
-  const viewName = event.state ? event.state.view : 'menu'
-  callView(viewName)
-})

@@ -1,11 +1,14 @@
-import { clearContainer, gameContainer, navigate } from "../../../app.js"
+import { clearContainer, gameContainer } from "../../../app.js"
+import { navigate } from "../../../router.js"
 import { callAction } from "../../gameEventHandler.js"
 import { decrementDifficultyState } from "../../initGame.js"
+import { showBackButton } from "../components/backButton.js"
 import { difficultyIncreaseModal } from "../components/difficultyIncreaseModal.js"
 import { menuView } from "./menuView.js"
 
 export function aleasView() {
   clearContainer()
+  showBackButton()
 
   const wrapper = document.createElement('div')
   wrapper.classList.add('aleasWrapper', 'menu-content-ingame')
@@ -17,7 +20,7 @@ export function aleasView() {
   riddleButton.innerHTML = `ÉNIGME`
 
   riddleButton.addEventListener('click', () => {
-    navigate("enigme", () => callAction("aleasRiddle"))
+    navigate("aleas/enigme", () => callAction("aleasRiddle"))
   })
   wrapper.appendChild(riddleButton)
 
@@ -27,25 +30,9 @@ export function aleasView() {
   loseButton.innerHTML = `AUGMENTATION JAUGE`
 
   loseButton.addEventListener('click', () => {
-    showConfirmModal()
+    navigate("aleas/confirm-augmentation", showConfirmModal)
   })
   wrapper.appendChild(loseButton)
-
-  // Add back button to header
-  const headerLeft = document.getElementById('headerLeft')
-  if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-    const backButton = document.createElement('button')
-    backButton.classList.add('back-btn-circle')
-    backButton.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    `
-    backButton.addEventListener('click', () => {
-      menuView()
-    })
-    headerLeft.appendChild(backButton)
-  }
 }
 
 function showConfirmModal() {
@@ -72,7 +59,8 @@ function showConfirmModal() {
     modal.remove()
     clearContainer()
     difficultyIncreaseModal(() => {
-      menuView()
+      history.replaceState({ view: 'aleas' }, "", "#aleas")
+      navigate('menu', menuView())
     })
   })
   buttonsContainer.appendChild(confirmButton)

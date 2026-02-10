@@ -1,8 +1,10 @@
-import { clearContainer, gameContainer, headerLeft, navigate } from "../../../app.js";
-import { menuView } from "./menuView.js";
+import { clearContainer, gameContainer } from "../../../app.js";
+import { navigate } from "../../../router.js";
+import { showBackButton } from "../components/backButton.js";
 
 export function charactersView() {
     clearContainer()
+    showBackButton()
 
     gameContainer.innerHTML = `
         <div class="menuWrapper">
@@ -45,7 +47,6 @@ export function charactersView() {
             const region = (char.region || '').toString().toUpperCase()
             return region === selectedRegion
         })
-
         renderCharactersGrid(filtered)
     }
     async function loadCharacters() {
@@ -73,21 +74,6 @@ export function charactersView() {
 
     if (regionToggle) {
         regionToggle.addEventListener('change', applyRegionFilter)
-    }
-
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button')
-        backButton.classList.add('back-btn-circle')
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `
-        backButton.addEventListener('click', () => {
-            window.history.back()
-        })
-        headerLeft.appendChild(backButton)
     }
 }
 
@@ -123,7 +109,7 @@ function renderCharactersGrid(charactersData) {
         nameEl.textContent = char.name
 
         card.append(mediaWrapper, nameEl)
-        card.addEventListener("click", () => navigate('encyclopedie-details', goToCharacterDetail(char)))
+        card.addEventListener("click", () => navigate('univers-prosa/encyclopedie-details', () => goToCharacterDetail(char)))
         charactersGrid.appendChild(card)
     })
 }
@@ -156,16 +142,6 @@ function goToCharacterDetail(char) {
         </div>
     `
 
-    const closeButton = document.createElement('button')
-    closeButton.classList.add('back-btn-circle')
-    closeButton.setAttribute('aria-label', 'Fermer')
-    closeButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `
-
-    overlay.appendChild(closeButton)
     overlay.appendChild(modal)
     gameContainer.appendChild(overlay)
     gameContainer.classList.add('modal-open')
@@ -192,12 +168,12 @@ function goToCharacterDetail(char) {
         characterDetailImage.alt = `Illustration ${char.name}`
     }
     characterDetailName.textContent = char.name
-    
+
     // Déterminer la région et les drapeaux correspondants
     const isProvencal = char.region === 'PROVENCE'
     const flagFirstEl = modal.querySelector('#flagFirst')
     const flagSecondEl = modal.querySelector('#flagSecond')
-    
+
     if (isProvencal) {
         // Pour Provençaux: Français + Provençal
         flagFirstEl.src = './assets/drapeau/france.png'
@@ -211,10 +187,10 @@ function goToCharacterDetail(char) {
         flagSecondEl.src = './assets/drapeau/bandera.png'
         flagSecondEl.alt = 'Corsu'
     }
-    
+
     // État de la langue (false = première langue, true = deuxième langue)
     let isSecondLanguage = false
-    
+
     const updateDescription = () => {
         if (isProvencal) {
             // Personnage provençal: basculer entre corse et provençal
@@ -234,14 +210,14 @@ function goToCharacterDetail(char) {
             `
         }
     }
-    
+
     updateDescription()
-    
+
     // Gestion du switch de langue
     const languageSwitch = modal.querySelector('#characterLanguageSwitch')
     const flagFirst = modal.querySelector('#flagFirst')
     const flagSecond = modal.querySelector('#flagSecond')
-    
+
     // Fonction pour mettre à jour les styles des drapeaux
     const updateFlagsStyle = () => {
         if (isSecondLanguage) {
@@ -256,10 +232,10 @@ function goToCharacterDetail(char) {
             flagSecond.style.filter = 'grayscale(100%)'
         }
     }
-    
+
     // Style initial des drapeaux
     updateFlagsStyle()
-    
+
     // Clic sur les drapeaux pour changer la langue
     flagFirst.addEventListener('click', () => {
         if (isSecondLanguage) {
@@ -269,7 +245,7 @@ function goToCharacterDetail(char) {
             updateFlagsStyle()
         }
     })
-    
+
     flagSecond.addEventListener('click', () => {
         if (!isSecondLanguage) {
             languageSwitch.checked = true
@@ -278,16 +254,10 @@ function goToCharacterDetail(char) {
             updateFlagsStyle()
         }
     })
-    
+
     languageSwitch.addEventListener('change', () => {
         isSecondLanguage = languageSwitch.checked
         updateDescription()
         updateFlagsStyle()
-    })
-
-    closeButton.addEventListener('click', () => {
-        overlay.remove()
-        gameContainer.classList.remove('modal-open')
-        window.history.back();
     })
 }

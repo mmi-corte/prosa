@@ -1,5 +1,5 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activeStep, addUnlockedStep, changePlayerLocalisation, startStep } from "../../gameEventHandler.js";
+import { activeStep, addUnlockedStep, changePlayerLocalisation, startStep, unsetActivePlayer } from "../../gameEventHandler.js";
 import { menuView } from "../main/menuView.js";
 
 export function endView(action, special_end = false) {
@@ -81,6 +81,8 @@ function showEndModal(text01, text02, text03 = null) {
     setTimeout(() => wrapper.classList.add("show"), 10)
 
     wrapper.addEventListener('click', () => {
+        unsetActivePlayer()
+        history.replaceState({ view: 'menu' }, "", "#menu")
         menuView()
     })
 }

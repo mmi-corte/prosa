@@ -1,8 +1,11 @@
 import { clearContainer, gameContainer, headerLeft } from "../../../app.js"
+import { navigate } from "../../../router.js";
+import { showBackButton } from "../components/backButton.js";
 import { menuView } from "./menuView.js"
 
 export function seasonsView() {
     clearContainer()
+    showBackButton()
 
     gameContainer.innerHTML = `
         <div class="menuWrapper">
@@ -41,21 +44,6 @@ export function seasonsView() {
         }
     }
     loadCinematics()
-
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button')
-        backButton.classList.add('back-btn-circle')
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `
-        backButton.addEventListener('click', () => {
-            window.history.back()
-        })
-        headerLeft.appendChild(backButton)
-    }
 }
 
 function renderCinematicsGrid(cinematicsData) {
@@ -75,7 +63,7 @@ function renderCinematicsGrid(cinematicsData) {
             </div>
             <div class="character-card-name">${cinematic.title}</div>
     `
-        card.addEventListener("click", () => goToCinematicDetail(cinematic))
+        card.addEventListener("click", () => navigate("univers-prosa/saisons/details", goToCinematicDetail(cinematic)))
         cinematicsGrid.appendChild(card)
     })
 }
@@ -107,23 +95,8 @@ function goToCinematicDetail(cinematic) {
 
     gameContainer.appendChild(container)
 
-    // Bouton retour modal
-    const closeButton = document.createElement('button')
-    closeButton.classList.add('back-btn-circle')
-    closeButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `
-    closeButton.addEventListener('click', () => {
-        container.remove()
-    })
-    container.appendChild(closeButton)
-
     // Close modal when clicking outside
     container.addEventListener('click', (e) => {
-        if (e.target === container) {
-            container.remove()
-        }
+        window.history.back()
     })
 }

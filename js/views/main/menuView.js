@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer, navigate } from "../../../app.js"
+import { clearContainer, gameContainer } from "../../../app.js"
 import { gameInitialized, initGame, difficultyState, globalDifficulty, decrementDifficultyState, isGameOver } from "../../initGame.js"
 import { gameOverView } from "./gameOverView.js"
 //import { debugView } from "../Temp/debugView.js"
@@ -8,11 +8,13 @@ import { playerSelectView } from "./playerSelectView.js"
 import { qrView } from "./qrView.js"
 import { seasonsView } from "./seasonsView.js"
 import { aleasView } from "./aleasView.js"
+import { navigate } from "../../../router.js"
+import { showBackButton } from "../components/backButton.js"
 
 export function menuView() {
   // Vérifier immédiatement si le joueur a perdu (batterie à 0)
   if (gameInitialized && difficultyState !== null && difficultyState !== undefined && difficultyState <= 0) {
-    navigate('gameover', gameOverView, true)
+    navigate('gameover', gameOverView)
     return
   }
   clearContainer()
@@ -52,7 +54,7 @@ export function menuView() {
     difficultyContainer.appendChild(difficultyIndicator)
   }
 
-  //Show the nav buttons
+  //Init the nav buttons container
   const navContainer = document.createElement('nav')
   navContainer.classList.add('menu-buttons-ingame')
   menuContainer.appendChild(navContainer)
@@ -60,21 +62,20 @@ export function menuView() {
   //Start button
   const startButton = document.createElement('button')
   startButton.classList.add('menu-btn-big', 'btn-primary-big')
-  if (gameInitialized) {
+  if (gameInitialized) { //If game already initialized, show code entry button
     startButton.innerHTML = `JOUER`
     startButton.addEventListener('click', () => {
-      navigate("code", () => playerSelectView())
+      navigate("jeu/choix-joueur", () => playerSelectView())
     })
-  } else {
+  } else { //If not initialized, show init game sequence button
     startButton.innerHTML = `COMMENCER LA<br>PARTIE`
     startButton.addEventListener('click', () => {
-      navigate("init", () => initView())
+      initView()
     })
   }
-
   navContainer.appendChild(startButton)
 
-  //Aleas Button
+  //Aleas Button, only shown if game initialized
   if (gameInitialized) {
     const aleasButton = document.createElement('button')
     aleasButton.classList.add('menu-btn-big')
@@ -99,7 +100,7 @@ export function menuView() {
 
   //Discover button
   document.getElementById('discoverBtn').addEventListener('click', () => {
-    showDiscoverPage()
+    navigate("univers-prosa", () => showDiscoverPage())
   })
 }
 
@@ -108,6 +109,7 @@ export function menuView() {
 // Page "Découvrir l'univers de Prosa" (full page)
 function showDiscoverPage() {
   clearContainer()
+  showBackButton()
 
   gameContainer.innerHTML = `
     <div class="menuWrapper discover-wrapper">
@@ -135,30 +137,14 @@ function showDiscoverPage() {
     </div>
   `
 
-  // Add back button to header
-  const headerLeft = document.getElementById('headerLeft')
-  if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-    const backButton = document.createElement('button')
-    backButton.classList.add('back-btn-circle')
-    backButton.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    `
-    backButton.addEventListener('click', () => {
-      menuView()
-    })
-    headerLeft.appendChild(backButton)
-  }
-
   // Discover characters button
   document.getElementById('discoverCharactersBtn').addEventListener('click', () => {
-    navigate("encyclopedie", () => charactersView())
+    navigate("univers-prosa/encyclopedie", () => charactersView())
   })
 
   // Discover seasons button
   document.getElementById('discoverSeasonsBtn').addEventListener('click', () => {
-    navigate("saisons", () => seasonsView())
+    navigate("univers-prosa/saisons", () => seasonsView())
   })
 }
 

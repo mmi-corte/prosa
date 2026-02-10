@@ -36,6 +36,7 @@ button {
 :root {
   --background: #1a1812;
   --foreground: #ece4cb;
+  --foreground-permanent: #ece4cb;
   --card: #252218;
   --card-foreground: #ece4cb;
   --primary: #626247;
@@ -241,7 +242,7 @@ body.light-mode .toggle-knob {
 /* Format mobile avec container centré */
 html,
 body {
-  height: 100%;
+  height: 100dvh;
   background: #0a0908;
 }
 
@@ -270,11 +271,12 @@ body.light-mode label {
 }
 
 body.light-mode .btn,
-body.light-mode button:not(.toggle-switch):not(.menu-btn):not(.menu-btn-big):not(.discover-btn):not(.back-btn-circle):not(.settings-btn) {
+body.light-mode button:not(.toggle-switch):not(.menu-btn):not(.menu-btn-big):not(.discover-btn):not(.back-btn-circle):not(.settings-btn):not(.difficulty-continue-btn):not(.key-validate) {
   background-color: var(--card);
-  color: var(--foreground);
   border-color: var(--border);
 }
+
+
 
 body.light-mode .btn-primary {
   background: var(--card);
@@ -373,7 +375,7 @@ body.light-mode .initScreen2 p {
 
 body.light-mode .characterGrid button {
   border-color: var(--border);
-  color: var(--foreground);
+  color: var(--foreground-permanent);
 }
 
 body.light-mode .characterGrid button:hover {
@@ -1376,12 +1378,6 @@ body.light-mode .logo-main {
   color: var(--dust);
 }
 
-.modal-open .menuWrapper {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 /* ========== SETTINGS MODAL ========== */
 .modal-overlay {
   position: fixed;
@@ -1395,7 +1391,7 @@ body.light-mode .logo-main {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 500;
+  z-index: 400;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   padding: 20px;
 }
@@ -1613,7 +1609,7 @@ body.light-mode .logo-main {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 600;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -1701,7 +1697,7 @@ body.light-mode .logo-main {
 .initScreen1 .playerCountContainer button {
   background-color: var(--card);
   font-weight: 900;
-  color: white;
+  color: var(--foreground);
   border: none;
   cursor: pointer;
   display: flex;
@@ -1882,7 +1878,7 @@ body.light-mode .logo-main {
   left: 0;
   width: 100dvw;
   height: 100dvh;
-  z-index: 1000;
+  z-index: 10;
   transition: .2s ease-in-out;
   opacity: 0;
   backdrop-filter: blur(25px);
@@ -1899,7 +1895,7 @@ body.light-mode .logo-main {
   }
 }
 
-.detailContainer img {
+.detailContainer .characterPicture {
   height: calc(50vh - 100px);
   width: auto;
   border: 3px solid var(--border);
@@ -1920,6 +1916,7 @@ body.light-mode .logo-main {
   line-height: 1.5;
   padding: 10px 20px;
   margin-bottom: auto;
+  font-size: 1rem;
 }
 
 /* Character name row with language switch */
@@ -2415,6 +2412,12 @@ body.light-mode .logo-main {
   font-size: 3.5rem;
   font-weight: 900;
   color: var(--foreground);
+  transition: color 0.3s ease;
+}
+
+.difficulty-gauge:hover .gauge-value,
+.difficulty-gauge.selected .gauge-value {
+  color: var(--foreground-permanent);
 }
 
 @media (max-width: 480px) {
@@ -2481,7 +2484,7 @@ body.light-mode .logo-main {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  z-index: 10;
+  z-index: 500;
   backdrop-filter: blur(10px);
 }
 
@@ -3160,11 +3163,11 @@ body.light-mode .balance-error-modal p strong {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.switch-toggle input:checked + .toggle-slider {
+.switch-toggle input:checked+.toggle-slider {
   background-color: #5a6b4a;
 }
 
-.switch-toggle input:checked + .toggle-slider:before {
+.switch-toggle input:checked+.toggle-slider:before {
   transform: translateX(26px);
 }
 
@@ -3178,7 +3181,7 @@ body.light-mode .toggle-slider:before {
   background-color: #ffffff;
 }
 
-body.light-mode .switch-toggle input:checked + .toggle-slider {
+body.light-mode .switch-toggle input:checked+.toggle-slider {
   background-color: #7a8b6a;
 }
 

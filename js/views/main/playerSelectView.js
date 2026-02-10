@@ -1,12 +1,15 @@
-import { clearContainer, gameContainer, headerLeft, navigate } from "../../../app.js"
+import { clearContainer, gameContainer, headerLeft } from "../../../app.js"
+import { navigate } from "../../../router.js"
 import { setActivePlayer } from "../../gameEventHandler.js"
 import { players } from "../../initGame.js"
+import { showBackButton } from "../components/backButton.js"
 import { renderPlayerList } from "../components/renderPlayerList.js"
 import { codeView } from "./codeView.js"
 import { menuView } from "./menuView.js"
 
 export function playerSelectView() {
     clearContainer()
+    showBackButton()
     const wrapper = document.createElement('div')
     wrapper.classList.add('playerSelect')
     gameContainer.appendChild(wrapper)
@@ -18,21 +21,6 @@ export function playerSelectView() {
 
     renderPlayerList(wrapper, players, true, (playerIndex) => {
         setActivePlayer(playerIndex)
-        navigate('code', codeView())
+        navigate('jeu/code', codeView())
     })
-
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button')
-        backButton.classList.add('back-btn-circle')
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `
-        backButton.addEventListener('click', () => {
-            navigate('menu', menuView(), true)
-        })
-        headerLeft.appendChild(backButton)
-    }
 }

@@ -1,71 +1,29 @@
-import { navigate, gameContainer, headerLeft } from "../../../../app.js";
+import { gameContainer, headerLeft } from "../../../../app.js";
 import { gameInitialized, initGame, savePlayerData, globalDifficulty, setDifficulty } from "../../../initGame.js";
 import { fetchPlayerCharacters } from "../../../loadData.js";
 import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { menuView } from "../menuView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { showConfirmationModal } from "../../components/confirmationModal.js";
+import { navigate } from "../../../../router.js";
 
 let charactersData
 let charactersByRegion = {}
 
-// Vérifier l'équilibre entre Corte (1) et Toulon (2)
-function checkRegionBalance(players) {
-    const corteCount = players.filter(p => p.localisation === 1).length
-    const toulonCount = players.filter(p => p.localisation === 2).length
-    const totalPlayers = players.length
-    
-    // Pour un nombre pair : moitié chaque
-    // Pour un nombre impair : maximum 1 de différence
-    const maxDifference = totalPlayers % 2 === 0 ? 0 : 1
-    const difference = Math.abs(corteCount - toulonCount)
-    
-    console.log(`Corte: ${corteCount}, Toulon: ${toulonCount}, Diff: ${difference}, Max allowed: ${maxDifference}`)
-    
-    return difference <= maxDifference
-}
-
-// Afficher le popup d'erreur d'équilibre
-function showBalanceErrorPopup(players, onReset) {
-    const totalPlayers = players.length
-    const corteCount = players.filter(p => p.localisation === 1).length
-    const toulonCount = players.filter(p => p.localisation === 2).length
-    
-    const requiredPerRegion = Math.floor(totalPlayers / 2)
-    const isOdd = totalPlayers % 2 !== 0
-    
-    let message = ''
-    if (isOdd) {
-        message = `Pour ${totalPlayers} joueurs, vous devez avoir ${requiredPerRegion} ou ${requiredPerRegion + 1} personnages de chaque région.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
-    } else {
-        message = `Pour ${totalPlayers} joueurs, vous devez avoir exactement ${requiredPerRegion} personnages de Corte et ${requiredPerRegion} de Toulon.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
-    }
-    
-    const modalOverlay = document.createElement('div')
-    modalOverlay.classList.add('modal-overlay')
-    modalOverlay.innerHTML = `
-        <div class="modal-content balance-error-modal">
-            <h2>ÉQUILIBRE REQUIS</h2>
-            <p>${message}</p>
-            <button class="btn-primary" id="continueEditBtn">Continuer la modification</button>
-        </div>
-    `
-    
-    document.body.appendChild(modalOverlay)
-    
-    document.getElementById('continueEditBtn').addEventListener('click', () => {
-        modalOverlay.remove()
-    })
-}
-
 export async function playerSubmitView(selectedPlayers) {
     if (gameInitialized) {
         navigate('menu', menuView(), true)
+        return
+    }
+
+    if (!selectedPlayers) {
+        navigate('nouvelle-partie/choix-personnage', characterSelectView(), false)
+        return
     }
 
     clearInitContainer()
     initContainer.classList.add('initScreen3');
-    
+
     // Charger les données des personnages
     charactersData = await fetchPlayerCharacters()
     charactersByRegion = buildCharactersByRegion(charactersData)
@@ -73,16 +31,16 @@ export async function playerSubmitView(selectedPlayers) {
     // Section difficulté
     const difficultySection = document.createElement('div')
     difficultySection.classList.add('submit-difficulty-section')
-    
+
     const difficultyLabel = document.createElement('span')
     difficultyLabel.classList.add('submit-difficulty-label')
     difficultyLabel.textContent = 'Difficulté :'
-    
+
     const difficultyValue = document.createElement('span')
     difficultyValue.classList.add('submit-difficulty-value')
     const currentDifficulty = globalDifficulty || localStorage.getItem('globalDifficulty') || 20
     difficultyValue.textContent = getDifficultyLabel(parseInt(currentDifficulty))
-    
+
     const changeDifficultyBtn = document.createElement('button')
     changeDifficultyBtn.classList.add('submit-change-btn')
     changeDifficultyBtn.innerHTML = `
@@ -91,25 +49,25 @@ export async function playerSubmitView(selectedPlayers) {
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
         </svg>
     `
-    
+
     const handleDifficultyChange = () => {
         showDifficultyModal(selectedPlayers, difficultyValue)
     }
-    
+
     changeDifficultyBtn.addEventListener('click', handleDifficultyChange)
     difficultySection.addEventListener('click', handleDifficultyChange)
-    
+
     difficultySection.append(difficultyLabel, difficultyValue, changeDifficultyBtn)
     initContainer.appendChild(difficultySection)
 
     // Section personnages
     const playersHeader = document.createElement('div')
     playersHeader.classList.add('submit-players-header')
-    
+
     const playersLabel = document.createElement('span')
     playersLabel.classList.add('submit-players-label')
     playersLabel.textContent = 'Cliquez sur un joueur pour le modifier'
-    
+
     playersHeader.append(playersLabel)
     initContainer.appendChild(playersHeader)
 
@@ -129,21 +87,6 @@ export async function playerSubmitView(selectedPlayers) {
         }
         submit(selectedPlayers)
     })
-
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button');
-        backButton.classList.add('back-btn-circle');
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `;
-        backButton.addEventListener('click', () => {
-            showConfirmationModal('choix-personnage', () => characterSelectView(selectedPlayers.length));
-        });
-        headerLeft.appendChild(backButton);
-    }
 }
 
 function renderEditablePlayerList(container, players) {
@@ -169,7 +112,7 @@ function renderEditablePlayerList(container, players) {
         characterName.innerText = character.name
 
         textContainer.append(playerName, characterName)
-        
+
         // Icône de modification
         const editIcon = document.createElement('div')
         editIcon.classList.add('player-edit-icon')
@@ -190,10 +133,10 @@ function renderEditablePlayerList(container, players) {
 function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
     const modalOverlay = document.createElement('div')
     modalOverlay.classList.add('modal-overlay')
-    
+
     const modal = document.createElement('div')
     modal.classList.add('modal-content', 'character-select-modal')
-    
+
     modal.innerHTML = `
         <h2>JOUEUR ${playerIndex + 1}</h2>
         <p class="modal-subtitle">Choisissez un nouveau personnage</p>
@@ -204,49 +147,49 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
         <div class="characters-select-grid" id="charactersSelectGrid"></div>
         <button class="btn-secondary" id="cancelCharacterBtn">Annuler</button>
     `
-    
+
     modalOverlay.appendChild(modal)
-    document.body.appendChild(modalOverlay)
-    
+    initContainer.appendChild(modalOverlay)
+
     const grid = modal.querySelector('#charactersSelectGrid')
     const tabs = modal.querySelectorAll('.region-tab')
-    
+
     // Fonction pour afficher les personnages d'une région
     const renderRegionCharacters = (regionId) => {
         grid.innerHTML = ''
-        
+
         const regionCharacters = charactersByRegion[regionId] || []
         regionCharacters.forEach((char) => {
-            const isTaken = selectedPlayers.some((p, idx) => 
+            const isTaken = selectedPlayers.some((p, idx) =>
                 idx !== playerIndex && p.character === char.id && p.localisation === parseInt(regionId)
             )
-            
+
             const charBtn = document.createElement('button')
             charBtn.classList.add('char-select-btn')
             if (isTaken) charBtn.classList.add('taken')
-            
+
             // Marquer le personnage actuel
-            if (selectedPlayers[playerIndex].character === char.id && 
+            if (selectedPlayers[playerIndex].character === char.id &&
                 selectedPlayers[playerIndex].localisation === parseInt(regionId)) {
                 charBtn.classList.add('current')
             }
-            
+
             charBtn.innerHTML = `
                 <div class="char-select-img" style="background-image: url('./assets/playersCharacters/${char.image}')"></div>
                 <span>${char.name}</span>
             `
-            
+
             if (!isTaken) {
                 charBtn.addEventListener('click', () => {
                     // Mettre à jour le joueur
                     selectedPlayers[playerIndex].character = char.id
                     selectedPlayers[playerIndex].localisation = parseInt(regionId)
-                    
+
                     // Vérifier l'équilibre après la modification
                     if (!checkRegionBalance(selectedPlayers)) {
                         showBalanceErrorPopup(selectedPlayers)
                     }
-                    
+
                     // Rafraîchir la liste
                     playerListEl.innerHTML = ''
                     selectedPlayers.forEach((player, pIdx) => {
@@ -267,7 +210,7 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
                         characterName.innerText = refreshedCharacter.name
 
                         textContainer.append(playerName, characterName)
-                        
+
                         const editIcon = document.createElement('div')
                         editIcon.classList.add('player-edit-icon')
                         editIcon.innerHTML = `
@@ -282,22 +225,22 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
                             showCharacterSelectModal(selectedPlayers, pIdx, playerListEl)
                         })
                     })
-                    
+
                     modalOverlay.remove()
                 })
             }
-            
+
             grid.appendChild(charBtn)
         })
     }
-    
+
     // Afficher la région actuelle du joueur
     const currentRegion = selectedPlayers[playerIndex].localisation.toString()
     tabs.forEach(tab => {
         tab.classList.toggle('active', tab.dataset.region === currentRegion)
     })
     renderRegionCharacters(currentRegion)
-    
+
     // Gestion des onglets
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -306,12 +249,12 @@ function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
             renderRegionCharacters(tab.dataset.region)
         })
     })
-    
+
     // Bouton annuler
     modal.querySelector('#cancelCharacterBtn').addEventListener('click', () => {
         modalOverlay.remove()
     })
-    
+
     // Fermer en cliquant à l'extérieur
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) modalOverlay.remove()
@@ -342,10 +285,10 @@ function getDifficultyLabel(value) {
 function showDifficultyModal(selectedPlayers, difficultyValueEl) {
     const modalOverlay = document.createElement('div')
     modalOverlay.classList.add('modal-overlay')
-    
+
     const modal = document.createElement('div')
     modal.classList.add('modal-content', 'difficulty-modal')
-    
+
     modal.innerHTML = `
         <h2>MODIFIER LA DIFFICULTÉ</h2>
         <div class="difficulty-options">
@@ -364,15 +307,15 @@ function showDifficultyModal(selectedPlayers, difficultyValueEl) {
         </div>
         <button class="btn-secondary" id="cancelDifficultyBtn">Annuler</button>
     `
-    
+
     modalOverlay.appendChild(modal)
-    document.body.appendChild(modalOverlay)
-    
+    initContainer.appendChild(modalOverlay)
+
     // Sélectionner la difficulté actuelle
     const currentDiff = globalDifficulty || localStorage.getItem('globalDifficulty') || 20
     const currentBtn = modal.querySelector(`[data-value="${currentDiff}"]`)
     if (currentBtn) currentBtn.classList.add('selected')
-    
+
     // Gestion des clics sur les options
     modal.querySelectorAll('.difficulty-option').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -382,12 +325,12 @@ function showDifficultyModal(selectedPlayers, difficultyValueEl) {
             modalOverlay.remove()
         })
     })
-    
+
     // Bouton annuler
     modal.querySelector('#cancelDifficultyBtn').addEventListener('click', () => {
         modalOverlay.remove()
     })
-    
+
     // Fermer en cliquant à l'extérieur
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) modalOverlay.remove()
@@ -395,7 +338,57 @@ function showDifficultyModal(selectedPlayers, difficultyValueEl) {
 }
 
 async function submit(selectedPlayers) {
+    console.log(selectedPlayers)
     savePlayerData(selectedPlayers)
     await initGame()
     navigate('menu', menuView(), true)
+}
+
+// Vérifier l'équilibre entre Corte (1) et Toulon (2)
+function checkRegionBalance(players) {
+    const corteCount = players.filter(p => p.localisation === 1).length
+    const toulonCount = players.filter(p => p.localisation === 2).length
+    const totalPlayers = players.length
+
+    // Pour un nombre pair : moitié chaque
+    // Pour un nombre impair : maximum 1 de différence
+    const maxDifference = totalPlayers % 2 === 0 ? 0 : 1
+    const difference = Math.abs(corteCount - toulonCount)
+
+    console.log(`Corte: ${corteCount}, Toulon: ${toulonCount}, Diff: ${difference}, Max allowed: ${maxDifference}`)
+
+    return difference <= maxDifference
+}
+
+// Afficher le popup d'erreur d'équilibre
+function showBalanceErrorPopup(players, onReset) {
+    const totalPlayers = players.length
+    const corteCount = players.filter(p => p.localisation === 1).length
+    const toulonCount = players.filter(p => p.localisation === 2).length
+
+    const requiredPerRegion = Math.floor(totalPlayers / 2)
+    const isOdd = totalPlayers % 2 !== 0
+
+    let message = ''
+    if (isOdd) {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir ${requiredPerRegion} ou ${requiredPerRegion + 1} personnages de chaque région.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    } else {
+        message = `Pour ${totalPlayers} joueurs, vous devez avoir exactement ${requiredPerRegion} personnages de Corte et ${requiredPerRegion} de Toulon.<br><br>Actuellement : <strong>${corteCount} de Corte</strong> et <strong>${toulonCount} de Toulon</strong>.`
+    }
+
+    const modalOverlay = document.createElement('div')
+    modalOverlay.classList.add('modal-overlay')
+    modalOverlay.innerHTML = `
+        <div class="modal-content balance-error-modal">
+            <h2>ÉQUILIBRE REQUIS</h2>
+            <p>${message}</p>
+            <button class="btn-primary" id="continueEditBtn">Continuer la modification</button>
+        </div>
+    `
+
+    initContainer.appendChild(modalOverlay)
+
+    document.getElementById('continueEditBtn').addEventListener('click', () => {
+        modalOverlay.remove()
+    })
 }

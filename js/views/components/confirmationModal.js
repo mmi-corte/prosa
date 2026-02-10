@@ -1,4 +1,4 @@
-import { navigate } from "../../../app.js";
+import { navigate } from "../../../router.js";
 
 /**
  * Affiche un modal de confirmation avant de quitter la progression

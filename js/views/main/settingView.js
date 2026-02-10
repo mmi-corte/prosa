@@ -1,10 +1,19 @@
 import { gameContainer, settings, vibrate, applyLightMode } from "../../../app.js";
+import { showBackButton } from "../components/backButton.js";
 
 export function settingView() {
-    const container = document.createElement('div')
-    container.classList.add('modal-overlay')
+  const existingOverlay = document.getElementById('settingsOverlay')
+  if (existingOverlay) {
+    existingOverlay.remove()
+  }
 
-    container.innerHTML = `
+  showBackButton()
+
+  const container = document.createElement('div')
+  container.classList.add('modal-overlay')
+  container.id = 'settingsOverlay'
+
+  container.innerHTML = `
     <div class="settings-panel">
 
       <div class="setting-item">
@@ -38,62 +47,48 @@ export function settingView() {
     </div>
     `
 
-    gameContainer.appendChild(container)
+  gameContainer.appendChild(container)
 
-    const musicSlider = document.getElementById('musicSlider')
-    const sfxSlider = document.getElementById('sfxSlider')
-    const cameraToggle = document.getElementById('cameraToggle')
-    const lightModeToggle = document.getElementById('lightModeToggle')
+  const musicSlider = document.getElementById('musicSlider')
+  const sfxSlider = document.getElementById('sfxSlider')
+  const cameraToggle = document.getElementById('cameraToggle')
+  const lightModeToggle = document.getElementById('lightModeToggle')
 
-    // Set initial values from settings
-    musicSlider.value = settings.music || 70;
-    sfxSlider.value = settings.sfx || 80;
-    cameraToggle.classList.toggle('active', settings.camera);
-    lightModeToggle.classList.toggle('active', settings.lightMode);
+  // Set initial values from settings
+  musicSlider.value = settings.music || 70;
+  sfxSlider.value = settings.sfx || 80;
+  cameraToggle.classList.toggle('active', settings.camera);
+  lightModeToggle.classList.toggle('active', settings.lightMode);
 
-    //Musique
-    musicSlider.addEventListener('input', (e) => {
-        settings.music = parseInt(e.target.value);
-    });
-    //SFX
-    sfxSlider.addEventListener('input', (e) => {
-        settings.sfx = parseInt(e.target.value);
-    });
-    //Camera
-    cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
+  //Musique
+  musicSlider.addEventListener('input', (e) => {
+    settings.music = parseInt(e.target.value);
+  });
+  //SFX
+  sfxSlider.addEventListener('input', (e) => {
+    settings.sfx = parseInt(e.target.value);
+  });
+  //Camera
+  cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
 
-    //Light Mode
-    lightModeToggle.addEventListener("click", () => {
-        toggleSetting(lightModeToggle, "lightMode")
-        applyLightMode()
-        // Sauvegarder immédiatement pour que le mode persiste
-        localStorage.setItem('settingLightMode', settings.lightMode);
-    })
+  //Light Mode
+  lightModeToggle.addEventListener("click", () => {
+    toggleSetting(lightModeToggle, "lightMode")
+    applyLightMode()
+    // Sauvegarder immédiatement pour que le mode persiste
+    localStorage.setItem('settingLightMode', settings.lightMode);
+  })
 
-    function toggleSetting(toggle, key) {
-        toggle.classList.toggle("active")
-        settings[key] = toggle.classList.contains("active")
-        vibrate(30)
-    }
+  function toggleSetting(toggle, key) {
+    toggle.classList.toggle("active")
+    settings[key] = toggle.classList.contains("active")
+    vibrate(30)
+  }
 
-    // Bouton retour
-    const backButton = document.createElement('button')
-    backButton.classList.add('back-btn-circle')
-    backButton.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-    `
-    backButton.addEventListener('click', () => {
-        saveSettings()
-        container.remove()
-    })
-    container.appendChild(backButton)
-
-    function saveSettings() {
-        localStorage.setItem('settingMusic', settings.music);
-        localStorage.setItem('settingSfx', settings.sfx);
-        localStorage.setItem('settingCamera', settings.camera);
-        localStorage.setItem('settingLightMode', settings.lightMode);
-    }
+  function saveSettings() {
+    localStorage.setItem('settingMusic', settings.music);
+    localStorage.setItem('settingSfx', settings.sfx);
+    localStorage.setItem('settingCamera', settings.camera);
+    localStorage.setItem('settingLightMode', settings.lightMode);
+  }
 }

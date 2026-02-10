@@ -12,6 +12,7 @@ export async function initGame() {
     const storedDifficultyState = localStorage.getItem('difficultyState')
 
     if (storedPlayers && storedDifficulty && storedDifficultyState) {
+        console.log("Found stored game data, initializing game with saved data...")
         //Store the global players data
         players = JSON.parse(storedPlayers);
 
@@ -28,6 +29,7 @@ export async function initGame() {
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {
+        console.log("No stored game data found.")
         return false;
     }
 }

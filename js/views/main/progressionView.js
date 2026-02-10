@@ -1,8 +1,15 @@
-import { clearContainer, gameContainer, navigate } from "../../../app.js"
+import { clearContainer, gameContainer } from "../../../app.js"
+import { navigate } from "../../../router.js"
 import { gameInitialized, resetGame } from "../../initGame.js"
 import { menuView } from "./menuView.js"
 
 export function progressionView() {
+  //If no game initialized, force redirect to menu
+  if (!gameInitialized) {
+    navigate('menu', menuView)
+    return
+  }
+  
   clearContainer()
 
   gameContainer.innerHTML = `

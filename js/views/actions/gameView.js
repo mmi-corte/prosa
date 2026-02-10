@@ -1,9 +1,10 @@
-import { clearContainer, gameContainer, navigate } from "../../../app.js";
+import { clearContainer, gameContainer } from "../../../app.js";
 import { callAction } from "../../gameEventHandler.js";
 import { decrementDifficultyState, isGameOver } from "../../initGame.js";
 import { gamesData } from "../../loadData.js";
 import { gameOverView } from "../main/gameOverView.js";
 import { difficultyIncreaseModal } from "../components/difficultyIncreaseModal.js";
+import { navigate } from "../../../router.js";
 
 let data = "";
 
@@ -23,9 +24,9 @@ export function gameView(action) {
     iframe.style.border = 'none';
     iframe.style.zIndex = '9999';
     iframe.allow = 'camera; microphone';
-    
+
     gameContainer.appendChild(iframe);
-    
+
     // Hide header
     const header = document.querySelector('.header');
     if (header) {
@@ -42,11 +43,11 @@ export function gameView(action) {
         })
         .then(html => {
             console.log(`✅ Loaded HTML for game: ${data.game} (index.html)`);
-            
+
             // Parse to extract resources
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
+
             // Get stylesheets
             const styleLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'))
                 .map(link => {
@@ -57,15 +58,15 @@ export function gameView(action) {
                     return `<link rel="stylesheet" href="${href}">`;
                 })
                 .join('');
-            
+
             // Get inline styles
             const inlineStyles = Array.from(doc.querySelectorAll('style'))
                 .map(style => `<style>${style.textContent}</style>`)
                 .join('');
-            
+
             // Get body content
             const bodyContent = doc.body.innerHTML;
-            
+
             // Get scripts
             const scripts = Array.from(doc.querySelectorAll('script[src]'))
                 .map(script => {
@@ -76,7 +77,7 @@ export function gameView(action) {
                     return `<script src="${src}"><\/script>`;
                 })
                 .join('');
-            
+
             // Build complete HTML
             const completeHTML = `
                 <!DOCTYPE html>
@@ -120,20 +121,20 @@ export function gameView(action) {
                 </body>
                 </html>
             `;
-            
+
             // Write to iframe
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             iframeDoc.open();
             iframeDoc.write(completeHTML);
             iframeDoc.close();
-            
+
             console.log(`✅ Game loaded in iframe`);
         })
         .catch(error => {
             console.error('Error loading minigame:', error);
             const header = document.querySelector('.header');
             if (header) header.style.display = '';
-            
+
             // Debug message
             const debugDiv = document.createElement('div');
             debugDiv.style.cssText = `
@@ -153,19 +154,19 @@ export function gameView(action) {
             debugDiv.innerHTML = `<h2>❌ Erreur chargement: ${data.game}</h2><p>${error.message}</p>`;
             gameContainer.appendChild(debugDiv);
         });
-    
+
     // Listen for messages from iframe
     const handleMessage = (event) => {
         if (event.data && event.data.type === 'minigame-complete') {
             console.log(`🎮 Game finished:`, event.data);
-            
+
             // Cleanup
             iframe.remove();
             const header = document.querySelector('.header');
             if (header) header.style.display = '';
-            
+
             window.removeEventListener('message', handleMessage);
-            
+
             // Handle result
             if (event.data.success) {
                 console.log('✅ Game won - calling win action');
@@ -175,7 +176,7 @@ export function gameView(action) {
                 const hasLost = decrementDifficultyState();
                 if (hasLost) {
                     difficultyIncreaseModal(() => {
-                        navigate('gameover', gameOverView, true);
+                        navigate('gameover', gameOverView);
                     });
                 } else {
                     difficultyIncreaseModal(() => {
@@ -185,6 +186,6 @@ export function gameView(action) {
             }
         }
     };
-    
+
     window.addEventListener('message', handleMessage);
 }

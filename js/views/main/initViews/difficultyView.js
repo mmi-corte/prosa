@@ -1,19 +1,19 @@
-import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
+import { clearInitContainer, initContainer, initDifficulty, initSequence, initTextContainer, setInitDifficulty } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
-import { navigate, headerLeft } from "../../../../app.js";
+import { gameContainer } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
 import { showConfirmationModal } from "../../components/confirmationModal.js";
+import { navigate } from "../../../../router.js";
 
 let selectedDifficulty = null;
 
-export function difficultyView() {    
-    console.log('difficultyView called, gameInitialized:', gameInitialized)
-    
-    // Note: On enlève la vérification gameInitialized ici car elle crée des problèmes
-    // lors du retour depuis gameOver. La page devrait toujours afficher le choix de difficulté.
-    
-    console.log('Starting difficulty view')
+export function difficultyView() {
+    //Si la partie est déjà initialisée ou que la séquence d'init n'est pas active, rediriger vers le menu
+    if (gameInitialized || !initSequence) {
+        navigate("menu", () => menuView())
+        return
+    }
 
     clearInitContainer();
     initContainer.classList.add('initScreen1');
@@ -51,13 +51,11 @@ export function difficultyView() {
         textLabel.textContent = diff.label;
 
         gauge.addEventListener('click', () => {
-            selectedDifficulty = diff.value;
+            setInitDifficulty(diff.value);
             // Enlever la classe selected de toutes les jauges
             document.querySelectorAll('.difficulty-gauge').forEach(g => g.classList.remove('selected'));
             // Ajouter la classe selected à la jauge cliquée
             gauge.classList.add('selected');
-            //Update la difficulté du jeu
-            setDifficulty(selectedDifficulty)
             // Afficher le bouton Continuer
             submitButton.style.opacity = '1';
         });
@@ -70,38 +68,33 @@ export function difficultyView() {
 
     initContainer.appendChild(difficultyContainer);
 
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button');
-        backButton.classList.add('back-btn-circle');
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `;
-        backButton.addEventListener('click', () => {
-            showConfirmationModal('menu', () => menuView());
-        });
-        headerLeft.appendChild(backButton);
-    }
-
     // Bouton submit caché au départ
     const submitButton = document.createElement('button');
     submitButton.classList.add('btn-primary', 'difficulty-continue-btn');
     submitButton.innerText = 'Continuer';
     submitButton.style.opacity = '0';
     submitButton.addEventListener('click', () => {
-        if (selectedDifficulty) {
-            navigate('nombre-joueur', playerCountView())
+        if (initDifficulty) {
+            navigate('nouvelle-partie/nombre-joueur', playerCountView())
         }
     });
 
+    if (initDifficulty) {
+        const selectedGauge = difficultyContainer.querySelector(`.difficulty-gauge[data-value="${initDifficulty}"]`)
+        if (selectedGauge) {
+            selectedGauge.classList.add('selected')
+            submitButton.style.opacity = '1'
+        }
+    }
+
     initContainer.appendChild(submitButton);
 
-    // Afficher automatiquement la modal au premier chargement
-    setTimeout(() => {
-        showInfoModal();
-    }, 300);
+    // Afficher la modal au premier choix de la difficulté
+    if (!initDifficulty) {
+        setTimeout(() => {
+            showInfoModal();
+        }, 300);
+    }
 }
 
 
@@ -133,7 +126,7 @@ function showInfoModal() {
     `;
 
     modalOverlay.appendChild(modalContent);
-    document.body.appendChild(modalOverlay);
+    gameContainer.appendChild(modalOverlay);
 
     const closeBtn = document.getElementById('closeInfoModal');
     closeBtn.addEventListener('click', () => {
@@ -146,7 +139,3 @@ function showInfoModal() {
         }
     });
 }
-
-// export function getDifficulty() {
-//     return parseInt(localStorage.getItem('gameDifficulty')) || 20;
-// }

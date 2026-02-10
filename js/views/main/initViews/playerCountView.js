@@ -1,29 +1,21 @@
-import { navigate, headerLeft } from "../../../../app.js";
-import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
+import { clearInitContainer, initContainer, initPlayerCount, initTextContainer, setInitPlayerCount } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { gameInitialized } from "../../../initGame.js";
 import { menuView } from "../menuView.js";
-import { difficultyView } from "./difficultyView.js";
-import { showConfirmationModal } from "../../components/confirmationModal.js";
-
-let playerCount
+import { navigate } from "../../../../router.js";
+import { showBackButton } from "../../components/backButton.js";
 
 export function playerCountView() {
-    console.log('playerCountView called, gameInitialized:', gameInitialized)
-
+    showBackButton()
     if (gameInitialized) {
         console.log('Game already initialized, redirecting to menu')
         navigate('menu', menuView, true)
         return
     }
-    
-    console.log('Starting player count view')
 
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerText = "Nombre de joueurs";
-
-    playerCount = 2;
 
     const playerCountContainer = document.createElement('div');
     playerCountContainer.classList.add('playerCountContainer');
@@ -37,7 +29,7 @@ export function playerCountView() {
     minusButton.innerHTML = "-";
 
     const playerCountInput = document.createElement('span');
-    playerCountInput.innerHTML = playerCount;
+    playerCountInput.innerHTML = initPlayerCount;
 
     playerCountContainer.append(minusButton, playerCountInput, plusButton);
 
@@ -49,35 +41,20 @@ export function playerCountView() {
 
     // --- Event Listeners ---
     plusButton.addEventListener('click', () => {
-        if (playerCount < 6) {
-            playerCount++;
-            playerCountInput.innerHTML = playerCount;
+        if (initPlayerCount < 6) {
+            setInitPlayerCount(initPlayerCount + 1);
+            playerCountInput.innerHTML = initPlayerCount;
         }
     });
 
     minusButton.addEventListener('click', () => {
-        if (playerCount > 2) {
-            playerCount--;
-            playerCountInput.innerHTML = playerCount;
+        if (initPlayerCount > 2) {
+            setInitPlayerCount(initPlayerCount - 1);
+            playerCountInput.innerHTML = initPlayerCount;
         }
     });
 
     submitButton.addEventListener('click', () => {
-        navigate('choix-personnage', () => characterSelectView(playerCount), true)
+        navigate('nouvelle-partie/choix-personnage', () => characterSelectView(initPlayerCount), true)
     });
-
-    // Bouton retour (header)
-    if (headerLeft && !headerLeft.querySelector('.back-btn-circle')) {
-        const backButton = document.createElement('button');
-        backButton.classList.add('back-btn-circle');
-        backButton.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        `;
-        backButton.addEventListener('click', () => {
-            showConfirmationModal('choix-difficulte', () => difficultyView());
-        });
-        headerLeft.appendChild(backButton);
-    }
 }

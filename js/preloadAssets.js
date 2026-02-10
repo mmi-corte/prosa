@@ -4,6 +4,12 @@
  * Charge dynamiquement depuis assets-manifest.json
  */
 
+// Toggle console.log output for this script
+const SHOW_PRELOAD_LOGS = false; // Set to true or false to enable/disable detailed logs
+const log = (...args) => {
+  if (SHOW_PRELOAD_LOGS) console.log(...args);
+};
+
 class AssetPreloader {
   constructor() {
     this.stats = {
@@ -24,7 +30,7 @@ class AssetPreloader {
       const response = await fetch('./assets-manifest.json', { cache: 'force-cache' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       this.manifest = await response.json();
-      console.log('📋 Manifest chargé:', {
+      log('📋 Manifest chargé:', {
         critical: this.manifest.critical.length,
         high: this.manifest.high.length,
         normal: this.manifest.normal.length,
@@ -55,7 +61,7 @@ class AssetPreloader {
       await response.blob();
       
       this.stats[priority].loaded++;
-      console.log(`✅ [${priority.toUpperCase()}] ${url}`);
+      log(`✅ [${priority.toUpperCase()}] ${url}`);
       return true;
     } catch (error) {
       this.stats[priority].failed++;
@@ -69,11 +75,11 @@ class AssetPreloader {
    */
   async preloadBatch(assets, priority, batchSize = 5, delayBetweenBatches = 50) {
     if (!assets || assets.length === 0) {
-      console.log(`⏭️ Aucun asset à charger pour la priorité ${priority}`);
+      log(`⏭️ Aucun asset à charger pour la priorité ${priority}`);
       return;
     }
 
-    console.log(`🚀 Chargement ${priority}: ${assets.length} assets (par ${batchSize})`);
+    log(`🚀 Chargement ${priority}: ${assets.length} assets (par ${batchSize})`);
     const startTime = Date.now();
 
     for (let i = 0; i < assets.length; i += batchSize) {
@@ -87,14 +93,14 @@ class AssetPreloader {
     }
 
     const duration = Date.now() - startTime;
-    console.log(`✓ ${priority} terminé en ${duration}ms (${this.stats[priority].loaded}/${assets.length})`);
+    log(`✓ ${priority} terminé en ${duration}ms (${this.stats[priority].loaded}/${assets.length})`);
   }
 
   /**
    * Précharge tous les assets selon leur priorité
    */
   async preloadAll() {
-    console.log('🎯 Démarrage du système de préchargement avec priorités...\n');
+    log('🎯 Démarrage du système de préchargement avec priorités...\n');
     
     // Charger le manifest
     const manifestLoaded = await this.loadManifest();
@@ -104,22 +110,22 @@ class AssetPreloader {
     }
 
     // CRITICAL: Chargé immédiatement (T=0s)
-    console.log('\n🔥 Phase CRITICAL (T+0s)');
+    log('\n🔥 Phase CRITICAL (T+0s)');
     await this.preloadBatch(this.manifest.critical, 'critical', 5, 0);
 
     // HIGH: Après 500ms
     await new Promise(resolve => setTimeout(resolve, 500));
-    console.log('\n⚡ Phase HIGH (T+500ms)');
+    log('\n⚡ Phase HIGH (T+500ms)');
     await this.preloadBatch(this.manifest.high, 'high', 5, 50);
 
     // NORMAL: Après 2 secondes supplémentaires
     await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log('\n📦 Phase NORMAL (T+2.5s)');
+    log('\n📦 Phase NORMAL (T+2.5s)');
     await this.preloadBatch(this.manifest.normal, 'normal', 3, 100);
 
     // LAZY: Jamais chargé automatiquement (uniquement à la demande)
     if (this.manifest.lazy.length > 0) {
-      console.log(`\n💤 ${this.manifest.lazy.length} assets en mode LAZY (chargés à la demande)`);
+      log(`\n💤 ${this.manifest.lazy.length} assets en mode LAZY (chargés à la demande)`);
     }
 
     this.logSummary();
@@ -130,7 +136,7 @@ class AssetPreloader {
    */
   async preloadLazy(specificAssets = null) {
     const assetsToLoad = specificAssets || this.manifest.lazy;
-    console.log(`\n🎯 Chargement LAZY à la demande: ${assetsToLoad.length} assets`);
+    log(`\n🎯 Chargement LAZY à la demande: ${assetsToLoad.length} assets`);
     await this.preloadBatch(assetsToLoad, 'lazy', 5, 50);
   }
 
@@ -144,19 +150,19 @@ class AssetPreloader {
     const total = totalLoaded + totalFailed;
     const successRate = total > 0 ? ((totalLoaded / total) * 100).toFixed(1) : 0;
     
-    console.log(`\n${'='.repeat(60)}`);
-    console.log(`📊 RÉSUMÉ DU PRÉCHARGEMENT`);
-    console.log(`${'='.repeat(60)}`);
-    console.log(`🔥 CRITICAL: ${this.stats.critical.loaded} chargés, ${this.stats.critical.failed} échoués`);
-    console.log(`⚡ HIGH:     ${this.stats.high.loaded} chargés, ${this.stats.high.failed} échoués`);
-    console.log(`📦 NORMAL:   ${this.stats.normal.loaded} chargés, ${this.stats.normal.failed} échoués`);
-    console.log(`💤 LAZY:     ${this.stats.lazy.loaded} chargés, ${this.stats.lazy.failed} échoués`);
-    console.log(`${'—'.repeat(60)}`);
-    console.log(`✅ Total réussis: ${totalLoaded}/${total}`);
-    console.log(`❌ Total échoués: ${totalFailed}/${total}`);
-    console.log(`⏱️ Durée totale: ${(duration / 1000).toFixed(2)}s`);
-    console.log(`📈 Taux de réussite: ${successRate}%`);
-    console.log(`${'='.repeat(60)}\n`);
+    log(`\n${'='.repeat(60)}`);
+    log(`📊 RÉSUMÉ DU PRÉCHARGEMENT`);
+    log(`${'='.repeat(60)}`);
+    log(`🔥 CRITICAL: ${this.stats.critical.loaded} chargés, ${this.stats.critical.failed} échoués`);
+    log(`⚡ HIGH:     ${this.stats.high.loaded} chargés, ${this.stats.high.failed} échoués`);
+    log(`📦 NORMAL:   ${this.stats.normal.loaded} chargés, ${this.stats.normal.failed} échoués`);
+    log(`💤 LAZY:     ${this.stats.lazy.loaded} chargés, ${this.stats.lazy.failed} échoués`);
+    log(`${'—'.repeat(60)}`);
+    log(`✅ Total réussis: ${totalLoaded}/${total}`);
+    log(`❌ Total échoués: ${totalFailed}/${total}`);
+    log(`⏱️ Durée totale: ${(duration / 1000).toFixed(2)}s`);
+    log(`📈 Taux de réussite: ${successRate}%`);
+    log(`${'='.repeat(60)}\n`);
     
     // Marquer le préchargement comme terminé
     window.assetPreloadComplete = true;

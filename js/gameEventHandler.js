@@ -9,6 +9,7 @@ import { menuView } from "./views/main/menuView.js";
 import { setLanguage } from "./langageManager.js";
 import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
 import { tokenView } from "./views/actions/tokenView.js";
+import { navigate } from "../router.js";
 
 let activePlayerId
 export let activePlayer
@@ -27,6 +28,12 @@ export function setActivePlayer(playerIndex) {
     } else {
         setLanguage('fr')
     }
+}
+
+export function unsetActivePlayer() {
+    activePlayerId = null
+    activePlayer = null
+    setLanguage('fr')
 }
 
 /**
@@ -73,7 +80,7 @@ export async function startStep(fullStepId, specialStep = false) {
         await loadCurrentStepData()
         //Call the action from the selected step
         console.log(`Loading step ${fullStepId}`)
-        callAction(activeStep.actionType, activeStep.action)
+        navigate('jeu/etape', () => callAction(activeStep.actionType, activeStep.action))
     } else {
         console.error(`Step not found: ${fullStepId}`);
         return;
