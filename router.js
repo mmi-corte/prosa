@@ -32,12 +32,15 @@ const viewRoutes = {
     'nouvelle-partie/choix-personnage': characterSelectView,
     'nouvelle-partie/confirmation': characterSelectView,
     'univers-prosa/encyclopedie': charactersView,
+    'univers-prosa/encyclopedie-details': charactersView,
     'univers-prosa/saisons': seasonsView
 }
 
 // ====================================
 // ============= NAVIGATE =============
 // ====================================
+let lastViewName = null
+
 export function navigate(viewName, viewFunction, updateUrl = true) {
     // Store the state with the view name
     const state = { view: viewName }
@@ -48,6 +51,7 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
 
     try {
         history.pushState(state, "", url)
+        lastViewName = viewName
     } catch (e) {
         console.warn('Could not update history:', e);
     }
@@ -59,6 +63,13 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
 }
 
 function callView(viewName) {
+    //Handle exceprions
+    if (viewName === 'univers-prosa/encyclopedie') {
+        const preventReload = lastViewName === 'univers-prosa/encyclopedie-details'
+        charactersView(preventReload)
+        return
+    }
+
     const viewFunction = viewRoutes[viewName]
     if (!viewFunction) {
         try {
@@ -78,4 +89,5 @@ function callView(viewName) {
 window.addEventListener('popstate', (event) => {
     const viewName = event.state ? event.state.view : 'menu'
     callView(viewName)
+    lastViewName = viewName
 })

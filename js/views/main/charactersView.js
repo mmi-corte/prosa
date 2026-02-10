@@ -2,7 +2,17 @@ import { clearContainer, gameContainer } from "../../../app.js";
 import { navigate } from "../../../router.js";
 import { showBackButton } from "../components/backButton.js";
 
-export function charactersView() {
+let characterDetailOverlay
+let isClosingCharacterDetail = false
+
+export function charactersView(preventReload = false) {
+    if (preventReload) {
+        if (characterDetailOverlay) {
+            characterDetailOverlay.remove()
+            characterDetailOverlay = null
+        }
+        return
+    }
     clearContainer()
     showBackButton()
 
@@ -53,8 +63,6 @@ export function charactersView() {
         if (charactersData) {
             return;
         } else {
-
-
             try {
                 const response = await fetch('./data/characters.json');
                 if (!response.ok) throw new Error('Failed to load characters data');
@@ -115,8 +123,8 @@ function renderCharactersGrid(charactersData) {
 }
 
 function goToCharacterDetail(char) {
-    const overlay = document.createElement('div')
-    overlay.classList.add('modal-overlay')
+    characterDetailOverlay = document.createElement('div')
+    characterDetailOverlay.classList.add('modal-overlay')
 
     const modal = document.createElement('div')
     modal.classList.add('character-detail-content')
@@ -142,9 +150,8 @@ function goToCharacterDetail(char) {
         </div>
     `
 
-    overlay.appendChild(modal)
-    gameContainer.appendChild(overlay)
-    gameContainer.classList.add('modal-open')
+    characterDetailOverlay.appendChild(modal)
+    gameContainer.appendChild(characterDetailOverlay)
 
     const characterDetailImage = modal.querySelector('#characterDetailImage')
     const characterDetailName = modal.querySelector('#characterDetailName')
@@ -260,4 +267,21 @@ function goToCharacterDetail(char) {
         updateDescription()
         updateFlagsStyle()
     })
+}
+
+function closeCharacterDetail(skipNavigate = false) {
+    if (isClosingCharacterDetail) {
+        return
+    }
+    isClosingCharacterDetail = true
+
+    if (characterDetailOverlay) {
+        if (!skipNavigate) {
+            navigate('univers-prosa/encyclopedie', () => charactersView(true))
+        }
+        characterDetailOverlay.remove()
+        characterDetailOverlay = null
+    }
+
+    isClosingCharacterDetail = false
 }

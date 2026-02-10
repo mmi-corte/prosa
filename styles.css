@@ -332,10 +332,6 @@ body.light-mode .characters-actions .close-btn {
 }
 
 /* Character detail */
-body.light-mode .character-detail-content {
-  background: var(--background);
-}
-
 body.light-mode .character-name {
   color: var(--foreground);
 }
