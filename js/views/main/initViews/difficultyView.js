@@ -5,6 +5,7 @@ import { gameContainer } from "../../../../app.js";
 import { gameInitialized, setDifficulty } from "../../../initGame.js";
 import { showConfirmationModal } from "../../components/confirmationModal.js";
 import { navigate } from "../../../../router.js";
+import { removeBackButton, showBackButton } from "../../components/backButton.js";
 
 let selectedDifficulty = null;
 
@@ -14,6 +15,9 @@ export function difficultyView() {
         navigate("menu", () => menuView())
         return
     }
+
+    removeBackButton()
+    showBackButton(() => showConfirmationModal("menu", menuView))
 
     clearInitContainer();
     initContainer.classList.add('initScreen1');

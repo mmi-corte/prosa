@@ -5,7 +5,7 @@ import { navigate } from "../../../router.js";
  * @param {string} targetRoute - La route vers laquelle naviguer si confirmé
  * @param {Function} onConfirm - Callback optionnel avant la navigation
  */
-export function showConfirmationModal(targetRoute, onConfirm = null) {
+export function showConfirmationModal(targetRoute, targetFunction, onConfirm = null) {
     // Créer l'overlay
     const modalOverlay = document.createElement('div');
     modalOverlay.classList.add('modal-overlay');
@@ -64,7 +64,7 @@ export function showConfirmationModal(targetRoute, onConfirm = null) {
     confirmBtn.addEventListener('click', () => {
         if (onConfirm) onConfirm();
         modalOverlay.remove();
-        navigate(targetRoute);
+        navigate(targetRoute, targetFunction);
     });
     
     // Événement d'annulation

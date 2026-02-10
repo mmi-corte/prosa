@@ -3,9 +3,10 @@ import { characterSelectView } from "./characterSelectView.js";
 import { gameInitialized } from "../../../initGame.js";
 import { menuView } from "../menuView.js";
 import { navigate } from "../../../../router.js";
-import { showBackButton } from "../../components/backButton.js";
+import { removeBackButton, showBackButton } from "../../components/backButton.js";
 
 export function playerCountView() {
+    removeBackButton()
     showBackButton()
     if (gameInitialized) {
         console.log('Game already initialized, redirecting to menu')

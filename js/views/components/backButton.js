@@ -14,7 +14,7 @@ export function showBackButton(onClickFunction = null) {
           </svg>
         `
         backButton.addEventListener('click', () => {
-            if (onClickFunction && typeof onClickFunction === 'function') {
+            if (onClickFunction !== null && typeof onClickFunction === 'function') {
                 onClickFunction()
             } else {
                 window.history.back()
