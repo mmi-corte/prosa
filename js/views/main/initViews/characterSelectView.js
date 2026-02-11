@@ -266,7 +266,15 @@ function showCharacterDetails(regionId, characterId) {
         addPlayer(regionId, characterId)
     })
 
-    detailContainer.append(characterPicture, characterName, switchRow, characterDescription, submitButton)
+    const mediaBlock = document.createElement('div')
+    mediaBlock.classList.add('character-media-block')
+    mediaBlock.append(characterPicture, characterName, switchRow)
+
+    const textBlock = document.createElement('div')
+    textBlock.classList.add('character-text-block')
+    textBlock.append(characterDescription, submitButton)
+
+    detailContainer.append(mediaBlock, textBlock)
     setTimeout(() => detailContainer.classList.add("show"), 10)
 }
 

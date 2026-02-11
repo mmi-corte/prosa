@@ -717,13 +717,29 @@ body {
 /* ========== CHARACTER DETAIL SCREEN ========== */
 .character-detail-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-items: start;
+  justify-items: center;
   padding: 18px 20px 24px;
   position: relative;
   max-height: 85vh;
   overflow: hidden;
+}
+
+.character-detail-media-block {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+  justify-items: center;
+}
+
+.character-detail-text-block {
+  display: grid;
+  width: 100%;
+  max-width: 560px;
+  justify-items: center;
 }
 
 .character-detail-close {
@@ -787,6 +803,7 @@ body {
   line-height: 1.6;
   color: var(--foreground);
   max-height: 34vh;
+  min-height: 22vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -1297,8 +1314,8 @@ body {
 ============ Character Select details =========
 =============================================== */
 .detailContainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   padding: 10dvh 5dvh;
   gap: 20px;
   position: fixed;
@@ -1311,8 +1328,9 @@ body {
   opacity: 0;
   backdrop-filter: blur(25px);
   background-color: rgba(116, 100, 83, 0.7);
-  align-items: center;
-  justify-content: flex-start;
+  align-items: start;
+  justify-items: center;
+  align-content: start;
   overflow-y: auto;
 }
 
@@ -1343,6 +1361,31 @@ body {
   text-align: center;
   line-height: 1.5;
   padding: 10px 20px;
+  max-height: 28vh;
+  min-height: 22vh;
+  overflow-y: auto;
+}
+
+.detailContainer .character-media-block {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 700px;
+  justify-items: center;
+}
+
+.detailContainer .character-text-block {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 16px;
+  width: 100%;
+  max-width: 700px;
+  justify-items: center;
+}
+
+.detailContainer .character-text-block .btn-primary {
+  width: 100%;
+  max-width: 420px;
 }
 
 /* Character name row with language switch */

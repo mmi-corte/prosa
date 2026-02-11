@@ -149,6 +149,7 @@ function goToCharacterDetail(char) {
     modal.classList.add('character-detail-content')
 
     modal.innerHTML = `
+        <div class="character-detail-media-block">
             <div class="character-card-large" id="characterCardLarge">
                 <div class="character-image-frame">
                     <img src="" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
@@ -156,16 +157,18 @@ function goToCharacterDetail(char) {
                 <h2 class="character-name" id="characterDetailName"></h2>
             </div>
 
-        <div class="character-language-switch">
-            <img src="" alt="" class="language-flag" id="flagFirst">
-            <label class="switch-toggle">
-                <input type="checkbox" id="characterLanguageSwitch">
-                <span class="toggle-slider"></span>
-            </label>
-            <img src="" alt="" class="language-flag" id="flagSecond">
+            <div class="character-language-switch">
+                <img src="" alt="" class="language-flag" id="flagFirst">
+                <label class="switch-toggle">
+                    <input type="checkbox" id="characterLanguageSwitch">
+                    <span class="toggle-slider"></span>
+                </label>
+                <img src="" alt="" class="language-flag" id="flagSecond">
+            </div>
         </div>
 
-        <div class="character-description" id="characterDescription">
+        <div class="character-detail-text-block">
+            <div class="character-description" id="characterDescription"></div>
         </div>
     `
 
