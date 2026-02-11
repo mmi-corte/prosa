@@ -2998,6 +2998,240 @@
     }
   },
   "3": {
+    "05": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous réveillez dans une obscurité glaciale, le dos collé contre un mur de pierre humide. Vos mains sont liées par des menottes grossières."
+            }
+          },
+          {
+            "text": {
+              "fr": "De l’autre côté du couloir, des pas réguliers résonnent : un garde effectue sa ronde. L’ensemble de la prison est silencieux."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous remarquez une ouverture discrète sur le mur. De l’autre côté, une présence calme répond."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous découvrez un visage marqué par le temps et la souffrance ses yeux sont cachés par un bandeau, signes évidents de la cécité qui le frappe."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
+              "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
+              "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Votre visage trahit votre surprise. Il vous explique qu’il était un ancien membre important du gouvernement de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Décidé autrefois à servir son peuple, il a été témoin d’abus si graves qu’ils l’ont poussé à se rebeller contre son propre camp."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son influence auprès des habitants a donné de la force à son mouvement… mais celui-ci a été écrasé."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
+              "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Il continue par une explication qui vous laisse sans voix. Jamais il n’a capitulé. Grâce à ses réseaux, il a fait parvenir un appel discret mais puissant : un message radio, adressé à quiconque serait capable de porter un changement réel."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
+              "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Lorsque vous lui racontez votre voyage et la raison de votre venue, son visage s’illumine. Il ne vous reste plus qu’à sortir avec lui pour raviver la flamme de la rébellion."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous comprenez rapidement que, si vous voulez quitter cette prison, vous ne pouvez pas simplement attendre une occasion mais la créer."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le garde patrouille à intervalles réguliers. Les murs sont épais, et les verrous électromagnétiques représentent la seule faille exploitable."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une fois le puzzle résolu, un déclic étouffé se fait entendre. Le champ électromagnétique se dissipe, les menottes se relâchent, et la porte coulisse légèrement. Juste assez pour que vous puissiez passer… et rejoindre la cellule voisine."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "5"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "U Mazzeru, bien qu’aveugle, se tient droit, déjà prêt. Ses mains trouvent les parois, évaluent la situation."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il ne s’agit plus seulement de s’échapper : il faut le guider, physiquement, silencieusement, dans les couloirs obscurs."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "06": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "A l’entrée de la grotte personne n’est présent."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous poursuivez votre chemin à l’intérieur de ce tunnel sombre mais une silhouette massive se dresse maintenant devant vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"De quel droit tu te trouves ici ? Cette grotte n’est pas accessible sans mon accord.\""
+            },
+            "character": "lou_garagai"
+          },
+          {
+            "text": {
+              "fr": "\"Viens ici. On va discuter un peu toi et moi…\""
+            },
+            "character": "lou_garagai"
+          },
+          {
+            "text": {
+              "fr": "Vous êtes convaincu que son air menaçant et votre maigre justification ne suffiront pas cette fois-ci. Vous décidez de courir plutôt que de discuter."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu oses fuir ? Mauvaise idée. Je connais chaque pierre de cette grotte.\""
+            },
+            "character": "lou_garagai"
+          },
+          {
+            "text": {
+              "fr": "Il saisit sa pioche et abat de violents coups contre les parois de la grotte. La roche tremble, des blocs de pierre commencent à s’effondrer vers vous."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous sortez de la grotte, essoufflé mais victorieux. Celle-ci s’effondre derrière vous violement."
+            }
+          },
+          {
+            "text": {
+              "fr": "Lorsque vous prenez le temps d’observer autour de vous, vous découvrez une forêt luxuriante. Vous approchez du centre de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "07": {
       "1": {
         "default": {

@@ -173,6 +173,24 @@
     }
   },
   "3": {
+    "05": {
+      "1": {
+        "game": "prison_evasion",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "4",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "06": {
+      "1": {
+        "game": "lou_garagai_grotte",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
     "07": {
       "1": {
         "game": "magu_affrontement",

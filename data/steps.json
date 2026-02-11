@@ -641,7 +641,13 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "09"
+          "nextStep": "09",
+          "unlockStep": "091",
+          "unlockedStepId": "09"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "05"
         }
       }
     },
@@ -651,10 +657,12 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "08"
+          "nextStep": "08",
+          "unlockStep": "090",
+          "unlockedStepId": "09"
         },
         "2": {
-          "type": "win",
+          "type": "lose",
           "nextStep": "05"
         }
       }
@@ -665,7 +673,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "09"
+          "nextStep": "09",
+          "unlockStep": "090",
+          "unlockedStepId": "09"
         },
         "2": {
           "type": "lose",
