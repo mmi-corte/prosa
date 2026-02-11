@@ -2998,6 +2998,62 @@
     }
   },
   "3": {
+    "02": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous diriger vers ce qui semble être un bâtiment de maintenances de câbles. Vous comprenez très vite que Prosa pompe l’énergie de la Provence via des câbles sous-marins."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une fois arrivé à l’intérieur du bâtiment, vous croisez un unique technicien. En lui parlant, vous apprenez que ce dernier ne semble pas mauvais et n’est pas attaché à son gouvernement, il exerce simplement son métier."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous vous présentez presque immédiatement comme rebelle sur l’île et demandez quelques renseignements. Celui-ci hésite à vous faire confiance. "
+            }
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Le technicien vous explique le système d’alimentation de Prosa ainsi que la manière dont il est maintenu, via un drone sous-marin. Il souligne l’importante quantité d’électricité produite sur l’île grâce aux moulins à vent et la façon dont le gouvernement en profite au détriment du monde extérieur."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous profitez alors de l’occasion pour rebondir sur la ville en demandant comment vous pourriez vous y rendre."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le technicien répond qu’il y a, non loin, l’entrée d’une grotte qui peut vous amener derrière la chaîne de montagnes."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "03": {
       "1": {
         "default": {
