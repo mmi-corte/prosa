@@ -53,6 +53,13 @@ export function charactersView(preventReload = false) {
             charactersRegionLabel.textContent = selectedRegion
         }
 
+        // Persist region selection across views
+        try {
+            localStorage.setItem('charactersRegion', selectedRegion)
+        } catch (error) {
+            console.warn('Could not persist characters region:', error)
+        }
+
         const filtered = charactersData.filter(char => {
             const region = (char.region || '').toString().toUpperCase()
             return region === selectedRegion
@@ -81,6 +88,18 @@ export function charactersView(preventReload = false) {
     loadCharacters()
 
     if (regionToggle) {
+        // Restore previously selected region
+        try {
+            const savedRegion = localStorage.getItem('charactersRegion')
+            if (savedRegion === 'PROVENCE') {
+                regionToggle.checked = true
+                if (charactersRegionLabel) {
+                    charactersRegionLabel.textContent = 'PROVENCE'
+                }
+            }
+        } catch (error) {
+            console.warn('Could not restore characters region:', error)
+        }
         regionToggle.addEventListener('change', applyRegionFilter)
     }
 }
@@ -163,7 +182,7 @@ function goToCharacterDetail(char) {
     if (isDetailVideo) {
         const video = document.createElement('video')
         video.src = `./assets/characters/${detailMediaPath}`
-        video.muted = true
+        video.muted = false
         video.loop = true
         video.controls = true
         video.autoplay = true
