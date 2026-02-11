@@ -166,9 +166,9 @@
       "1": {
         "game": "port_infiltration",
         "nextActionTypeWin": "dialog",
-        "nextActionWin": "3",
-        "nextActionTypeLose": "dialog",
-        "nextActionLose": "4"
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
       }
     }
   },

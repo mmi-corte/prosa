@@ -2597,7 +2597,7 @@
           },
           {
             "text": {
-              "fr": "Grâce a votre déguisement, vous parvenez à passer les gardes sans éveiller de soupçons."
+              "fr": "Vous endossez alors le déguisement que vous avez récupéré pour tenter de tromper la vigilance des gardes."
             }
           }
         ],
@@ -2645,7 +2645,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous endossez la combinaison de membre de l'organisation et garde le badge fermement en main."
+              "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main."
             }
           },
           {
@@ -2758,12 +2758,237 @@
         "dialog": [
           {
             "text": {
-              "fr": "Lorsque vous parvenez au bout du quai. Darius vous attend, prévenu par radio par le Père Lucien, il a un plan d'évasion prêt."
+              "fr": "Vous parvenez finalement au bout du quai. Darius vous attend, prévenu par radio par le Père Lucien. Il a un plan d'évasion prêt."
             }
           },
           {
             "text": {
-              "fr": " Il vous fait embarquez sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
+              "fr": "Il vous fait embarquer sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "prosa_rebel": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous accostez enfin sur la plage de Prosa, l’eau turquoise roulant doucement sur le sable clair."
+            }
+          },
+          {
+            "text": {
+              "fr": "Devant vous, une immense chaîne de montagnes s’élève, imposante et infranchissable à première vue, bloquant toute vue sur l’intérieur de l’île et donnant au lieu une impression d’isolement total. Les sommets découpés se détachent sur le ciel, formant une barrière naturelle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Darius apparaît à vos côtés, immobile et silencieux. Il explique qu’il repart à Corte pour garder le passage vers Prosa ouvert."
+            }
+          },
+          {
+            "text": {
+              "fr": "Avant de partir, il vous indique de commencer votre chemin vers le poste de maintenance qui accueille les câbles sous-marins venant de Corte et qui alimentent Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Là-bas, vous pourrez surement y trouver un passage qu’utilise les travailleurs pour traverser la montagne et vous rendre au centre de l’île."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "prosa_jail": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous réveillez dans une obscurité glaciale, le dos collé contre un mur de pierre humide."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vos mains sont liées par des menottes grossières. La cellule est étroite, trop basse,comme si elle avait été taillée pour écraser toute volonté."
+            }
+          },
+          {
+            "text": {
+              "fr": "De l’autre côté du couloir, des pas réguliers résonnent : un garde effectue sa ronde. L’ensemble de la prison est silencieux."
+            }
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "En vous approchant des barreaux, vous tentez d’attirer l’attention du garde qui patrouille lentement dans le couloir."
+            }
+          },
+          {
+            "text": {
+              "fr": "L’homme s’arrête un instant. Il tourne la tête, observe la cellule avec un mélange d’indifférence et de mépris, puis reprend sa marche sans accorder plus d’un regard."
+            }
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous remarquez une ouverture discrète sur le mur. De l’autre côté, une présence calme répond."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous découvrez un visage marqué par le temps et la souffrance. Ses yeux sont cachés par un bandeau, signe évident de la cécité qui le frappe."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
+              "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Vous vous présentez dans l’espoir qu’il en fasse autant."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
+              "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Votre visage trahit votre surprise. Il vous explique qu’il était un ancien membre important du gouvernement de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Décidé autrefois à servir son peuple, il a été témoin d’abus si graves qu’ils l’ont poussé à se rebeller contre son propre camp."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son influence auprès des habitants a donné de la force à son mouvement… mais celui-ci a été écrasé."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
+              "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Il continue par une explication qui vous laisse sans voix. Jamais il n’a capitulé. Grâce à ses réseaux, il a fait parvenir un appel discret mais puissant : un message radio, adressé à quiconque serait capable de porter un changement réel."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
+              "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Lorsque vous lui racontez votre voyage et la raison de votre venue, son visage s’illumine. Il ne vous reste plus qu’à sortir avec lui pour raviver la flamme de la rébellion."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "prosa_soldier": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous accostez enfin sur la plage de Prosa, l’eau turquoise roulant doucement sur le sable clair."
+            }
+          },
+          {
+            "text": {
+              "fr": "Devant vous, une immense chaîne de montagnes s’élève, imposante et infranchissable à première vue, bloquant toute vue sur l’intérieur de l’île et donnant au lieu une impression d’isolement total."
+            }
+          },
+          {
+            "text": {
+              "fr": "Les sommets découpés se détachent sur le ciel, formant une barrière naturelle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous débarquez en vous faisant passer pour un soldat de Toulon. Mais ici, votre couverture est fragile : vous portez le mauvais équipement pour Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un soldat de surveillance vous interpelle presque immédiatement."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Motif. Tu viens d’où ?\""
+            },
+            "pitch": 300
+          },
+          {
+            "text": {
+              "fr": "Vous lui expliquez que Gény Maurel, que vous connaissez comme étant le deuxième chef de l’organisation de Toulon, vous a demandé d’aller lui chercher quelques ressources à la ville de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Comme Gény Maurel jouit d’une bonne réputation pour son sens de la justice, le soldat ne se méfie pas et vous accompagne rencontrer Gaspard, meneur de la patrouille de ce côté de la plage."
             }
           }
         ],

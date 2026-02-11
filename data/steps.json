@@ -524,12 +524,24 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "Arrivé à Prosa en tant que soldat"
+          "type": "special_end",
+          "nextStep": "prosa_soldier"
         },
         "2": {
-          "type": "win",
-          "nextStep": "Arrivé à Prosa en tant que prisonnier"
+          "type": "lose_turn",
+          "turnLoosed": "2",
+          "unlockStep": "141",
+          "unlockedStepId": "14"
+        }
+      }
+    },
+    "141": {
+      "actionType": "end",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "special_end",
+          "nextStep": "prosa_jail"
         }
       }
     },
@@ -538,12 +550,42 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
-          "nextStep": "Arrivé à Prosa en tant que rebelle"
+          "type": "special_end",
+          "nextStep": "prosa_rebel"
         },
         "2": {
           "type": "still",
           "nextStep": "15"
+        }
+      }
+    },
+    "prosa_rebel": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "02"
+        }
+      }
+    },
+    "prosa_jail": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "05"
+        }
+      }
+    },
+    "prosa_soldier": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "prosa_landing",
+          "nextStep": "03"
         }
       }
     }
