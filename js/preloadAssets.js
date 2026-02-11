@@ -5,7 +5,7 @@
  */
 
 // Toggle console.log output for this script
-const SHOW_PRELOAD_LOGS = true; // Set to true or false to enable/disable detailed logs
+const SHOW_PRELOAD_LOGS = false; // Set to true or false to enable/disable detailed logs
 const PRELOAD_LOG_PREFIX = '[PWA preload]';
 const log = (...args) => {
   if (SHOW_PRELOAD_LOGS) console.log(PRELOAD_LOG_PREFIX, ...args);
