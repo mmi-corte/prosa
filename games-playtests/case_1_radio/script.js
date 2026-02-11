@@ -335,7 +335,9 @@ function gameLoop() {
 // Generate new random target
 function generateRandomTarget() {
     gameState.targetPhase = Math.random() * Math.PI * 2;
-    gameState.targetAmplitude = 10 + Math.random() * 50;
+    // Target amplitude must be within slider range (20-100) with tolerance buffer
+    // AMPLITUDE_TOLERANCE is 6, so range is 26 to 94 to ensure player can always sync
+    gameState.targetAmplitude = 26 + Math.random() * 68;
     gameState.targetDrift = 0;
 }
 
