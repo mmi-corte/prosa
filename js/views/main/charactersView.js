@@ -154,16 +154,17 @@ function goToCharacterDetail(char) {
                 <div class="character-image-frame">
                     <img src="" alt="L'ORCU" id="characterDetailImage" class="character-detail-img">
                 </div>
-                <h2 class="character-name" id="characterDetailName"></h2>
-            </div>
-
-            <div class="character-language-switch">
-                <img src="" alt="" class="language-flag" id="flagFirst">
-                <label class="switch-toggle">
-                    <input type="checkbox" id="characterLanguageSwitch">
-                    <span class="toggle-slider"></span>
-                </label>
-                <img src="" alt="" class="language-flag" id="flagSecond">
+                <div class="character-name-row character-name-row--switch">
+                    <h2 class="character-name" id="characterDetailName"></h2>
+                    <div class="character-language-switch character-language-switch--inline">
+                        <img src="" alt="" class="language-flag" id="flagFirst">
+                        <label class="switch-toggle">
+                            <input type="checkbox" id="characterLanguageSwitch">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <img src="" alt="" class="language-flag" id="flagSecond">
+                    </div>
+                </div>
             </div>
         </div>
 

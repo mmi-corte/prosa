@@ -138,7 +138,7 @@ function showCharacterDetails(regionId, characterId) {
 
     // Language switch (per player)
     const switchRow = document.createElement('div')
-    switchRow.classList.add('character-language-row')
+    switchRow.classList.add('character-language-row', 'character-language-row--inline')
 
     const frFlag = document.createElement('img')
     frFlag.src = './assets/drapeau/france.png'
@@ -266,9 +266,13 @@ function showCharacterDetails(regionId, characterId) {
         addPlayer(regionId, characterId)
     })
 
+    const nameSwitchRow = document.createElement('div')
+    nameSwitchRow.classList.add('character-name-row--switch')
+    nameSwitchRow.append(characterName, switchRow)
+
     const mediaBlock = document.createElement('div')
     mediaBlock.classList.add('character-media-block')
-    mediaBlock.append(characterPicture, characterName, switchRow)
+    mediaBlock.append(characterPicture, nameSwitchRow)
 
     const textBlock = document.createElement('div')
     textBlock.classList.add('character-text-block')
