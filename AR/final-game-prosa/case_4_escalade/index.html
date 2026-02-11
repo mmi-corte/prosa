@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Prosa - Case 4 : Le Mur de 100m</title>
+    <style>
+        /* --- FONTS & COLORS --- */
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                 url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                 url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                 url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                 url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --bg: #1a1812;
+            --fg: #ece4cb;
+            --primary: #626247;
+            --accent-red: #c63032;
+            --accent-green: #81cbd6;
+            --yellow: #ffdb2c;
+            --muted: #2a2820;
+            --muted-fg: #9a9680;
+            --font-main: 'Futura', sans-serif;
+        }
+
+        /* --- GLOBAL --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-main);
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- UI LAYERS --- */
+        .ui-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .interactive {
+            pointer-events: auto;
+        }
+
+        /* --- SCREENS --- */
+        .card {
+            background: rgba(26, 24, 18, 0.95);
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+
+        h1 {
+            color: var(--fg);
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin: 0 0 1rem 0;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--muted-fg);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight { color: var(--yellow); font-weight: bold; }
+        .danger { color: var(--accent-red); font-weight: bold; }
+
+        button {
+            background: var(--primary);
+            color: var(--fg);
+            border: 1px solid var(--muted);
+            padding: 1rem 2rem;
+            font-family: var(--font-main);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            width: 100%;
+            touch-action: manipulation;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:active {
+            background: var(--yellow);
+            color: var(--bg);
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- HUD --- */
+        #hud-top {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+        .label {
+            font-size: 0.8rem;
+            color: var(--muted-fg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--fg);
+        }
+        .unit {
+            font-size: 1rem;
+            color: var(--muted-fg);
+        }
+
+        /* Grip Bar Container */
+        #grip-container {
+            width: 150px;
+            height: 12px;
+            background: var(--muted);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            margin-top: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        #grip-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--fg);
+            transform-origin: left;
+            transition: width 0.1s linear, background 0.3s;
+        }
+
+        #feedback-text {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            z-index: 20;
+            white-space: nowrap;
+        }
+
+        /* Objectif Marker */
+        #objective {
+            font-size: 0.8rem;
+            color: var(--yellow);
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HUD -->
+    <div id="hud-top" class="hidden">
+        <div class="stat-box" style="text-align: left;">
+            <div class="label">Altitude</div>
+            <div class="value"><span id="score-el">0</span><span class="unit">m</span></div>
+            <div id="objective">OBJECTIF: 100m</div>
+        </div>
+        <div class="stat-box" style="text-align: right;">
+            <div class="label">Grip</div>
+            <div id="grip-container">
+                <div id="grip-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Text -->
+    <div id="feedback-text"></div>
+
+    <!-- UI Overlay -->
+    <div class="ui-layer">
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="card interactive">
+            <h1>L'Ascension</h1>
+            <p>Objectif : Grimper <strong>100 mètres</strong>.</p>
+            
+            <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="color: var(--fg); margin: 5px 0;">Regarde l'anneau qui rétrécit...</p>
+                <p style="font-size: 1.3rem; margin: 10px 0; line-height: 1.4;">
+                    Quand il devient <span style="color: #81cbd6; font-weight: bold; text-shadow: 0 0 10px rgba(129, 203, 214, 0.5);">BLEU</span>...<br>
+                    <strong>APPUIE VITE !</strong>
+                </p>
+            </div>
+
+            <p class="danger" style="font-size: 0.9rem;">Attention : Si tu rates, tu glisses !</p>
+            <button id="btn-start">C'est parti !</button>
+        </div>
+
+        <!-- Game Over -->
+        <div id="game-over-screen" class="card interactive hidden">
+            <h1 class="danger">Chute !</h1>
+            <p>Tu as manqué de force.</p>
+            <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 100m</p>
+            <button id="btn-retry">Réessayer</button>
+        </div>
+
+        <!-- Victory -->
+        <div id="win-screen" class="card interactive hidden">
+            <h1 style="color: var(--accent-green)">Sommet Atteint !</h1>
+            <p>Bravo ! Tu as vaincu la montagne.</p>
+            <button id="btn-next">Case Suivante</button>
+        </div>
+    </div>
+    
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        /**
+         * 1. CONFIG & GLOBALS
+         */
+        var canvas = document.getElementById('gameCanvas');
+        var ctx = canvas ? canvas.getContext('2d') : null;
+        
+        var C = {
+            bg: '#1a1812',
+            fg: '#ece4cb',
+            primary: '#626247',
+            red: '#c63032',
+            green: '#81cbd6', // C'est le "BLEU" turquoise dont on parle
+            yellow: '#ffdb2c',
+            muted: '#2a2820',
+        };
+
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var screenShake = 0;
+        var bgOffset = 0;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            if(canvas) {
+                canvas.width = width;
+                canvas.height = height;
+            }
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        /**
+         * 2. UTILS
+         */
+        function safeVibrate(pattern) {
+            try { if (navigator.vibrate) navigator.vibrate(pattern); } catch(e) { }
+        }
+
+        function showFeedback(text, color) {
+            var el = document.getElementById('feedback-text');
+            if(!el) return;
+            el.innerText = text;
+            el.style.color = color;
+            el.style.opacity = 1;
+            el.style.transform = 'translate(-50%, -50%) scale(1.3)';
+            
+            setTimeout(function() {
+                if(el) {
+                    el.style.transform = 'translate(-50%, -50%) scale(1)';
+                    el.style.opacity = 0;
+                }
+            }, 600);
+        }
+
+        /**
+         * 3. GAME LOGIC
+         */
+        var game = {
+            state: 'MENU', 
+            altitude: 0,
+            targetAltitude: 100, // OBJECTIF 100M
+            grip: 100,
+            
+            // Configuration de la difficulté
+            gripDecayBase: 0.15, // Perte passive de grip par frame
+            gripReward: 15,      // Gain de grip par succès
+            gripPenalty: 25,     // Perte de grip par échec
+
+            hold: {
+                active: false,
+                x: 0, y: 0,
+                radius: 45,
+                ringRadius: 100,
+                shrinkSpeed: 2,
+                color: C.primary
+            },
+
+            particles: [],
+
+            start: function() {
+                var startScreen = document.getElementById('start-screen');
+                var hud = document.getElementById('hud-top');
+                var gameOver = document.getElementById('game-over-screen');
+                var winScreen = document.getElementById('win-screen');
+                
+                if(startScreen) startScreen.classList.add('hidden');
+                if(gameOver) gameOver.classList.add('hidden');
+                if(winScreen) winScreen.classList.add('hidden');
+                if(hud) hud.classList.remove('hidden');
+                
+                this.altitude = 0;
+                this.grip = 100;
+                this.state = 'PLAYING';
+                this.particles = [];
+                this.updateUI();
+                
+                this.spawnHold();
+            },
+
+            spawnHold: function() {
+                // Spawn dans une zone sûre (pas trop près des bords)
+                var margin = 80;
+                this.hold.x = margin + Math.random() * (width - margin*2);
+                this.hold.y = margin + Math.random() * (height - margin*2);
+                
+                // --- DIFFICULTÉ PROGRESSIVE ---
+                // Ratio de progression (0.0 à 1.0)
+                var progress = this.altitude / this.targetAltitude; 
+                
+                // Plus on monte, plus les prises sont petites
+                this.hold.radius = 45 - (progress * 15); // 45 -> 30
+                
+                // Plus on monte, plus ça va vite
+                this.hold.shrinkSpeed = 1.5 + (progress * 2.0); // 1.5 -> 3.5
+
+                this.hold.ringRadius = this.hold.radius * 3;
+                this.hold.active = true;
+                this.hold.color = C.fg;
+            },
+
+            checkTap: function(x, y) {
+                if (!this.hold.active || this.state !== 'PLAYING') return;
+
+                // 1. A-t-on touché la prise ?
+                var dist = Math.hypot(x - this.hold.x, y - this.hold.y);
+                // Tolérance large pour le toucher
+                if (dist > this.hold.radius * 1.8) return; 
+
+                // 2. Vérification du Timing
+                var diff = Math.abs(this.hold.ringRadius - this.hold.radius);
+                
+                // Seuils de tolérance (pixels)
+                // J'ai légèrement augmenté la zone "Parfaite" pour correspondre au visuel bleu
+                var perfectZone = 25; 
+                var goodZone = 55;
+
+                if (diff < perfectZone) {
+                    this.success("PARFAIT !", 2); // 2 = Excellent
+                } else if (diff < goodZone) {
+                    this.success("BIEN", 1); // 1 = Normal
+                } else {
+                    this.fail("TROP TÔT");
+                }
+            },
+
+            success: function(msg, quality) {
+                this.hold.active = false;
+                
+                // Progression (Mètres gagnés)
+                // Parfait = 8m, Bien = 4m
+                var climb = quality === 2 ? 8 : 4;
+                
+                // Ajout d'un petit bonus aléatoire pour ne pas avoir de chiffres ronds tout le temps
+                climb += Math.floor(Math.random() * 2);
+
+                this.altitude += climb;
+                if (this.altitude > this.targetAltitude) this.altitude = this.targetAltitude;
+                
+                // Récupération de Grip
+                this.grip = Math.min(100, this.grip + (quality * this.gripReward));
+
+                this.createParticles(this.hold.x, this.hold.y, 15, C.green);
+                showFeedback(msg, C.green);
+                safeVibrate(quality === 2 ? 50 : 20);
+
+                if (this.altitude >= this.targetAltitude) {
+                    // Petite pause dramatique avant la victoire
+                    var self = this;
+                    setTimeout(function(){ self.win(); }, 500);
+                } else {
+                    bgOffset += (climb * 5); // Effet visuel de montée
+                    var self = this;
+                    // Délai avant la prochaine prise (plus court si on est haut pour stresser)
+                    var delay = 600 - (this.altitude * 2);
+                    if(delay < 300) delay = 300;
+                    
+                    setTimeout(function(){ self.spawnHold(); }, delay);
+                }
+            },
+
+            fail: function(msg) {
+                this.hold.active = false;
+                
+                // Pénalité
+                this.grip -= this.gripPenalty;
+                screenShake = 20;
+                
+                this.createParticles(this.hold.x, this.hold.y, 20, C.red);
+                showFeedback(msg, C.red);
+                safeVibrate([80, 50, 80]);
+
+                if (this.grip <= 0) {
+                    this.gameOver();
+                } else {
+                    var self = this;
+                    setTimeout(function(){ self.spawnHold(); }, 800);
+                }
+            },
+
+            missTimeout: function() {
+                // Appelé si l'anneau devient plus petit que la prise (trop tard)
+                this.fail("TROP LENT");
+            },
+
+            win: function() {
+                this.state = 'WIN';
+                var winScreen = document.getElementById('win-screen');
+                var hud = document.getElementById('hud-top');
+                if(winScreen) winScreen.classList.remove('hidden');
+                if(hud) hud.classList.add('hidden');
+            },
+
+            gameOver: function() {
+                this.state = 'GAMEOVER';
+                var scoreDisplay = document.getElementById('final-score');
+                var gameOverScreen = document.getElementById('game-over-screen');
+                var hud = document.getElementById('hud-top');
+
+                if(scoreDisplay) scoreDisplay.innerText = Math.floor(this.altitude) + "m";
+                if(gameOverScreen) gameOverScreen.classList.remove('hidden');
+                if(hud) hud.classList.add('hidden');
+            },
+
+            updateUI: function() {
+                var scoreEl = document.getElementById('score-el');
+                var gripFill = document.getElementById('grip-fill');
+                
+                if(scoreEl) scoreEl.innerText = Math.floor(this.altitude);
+                if(gripFill) {
+                    gripFill.style.width = Math.max(0, this.grip) + "%";
+                    
+                    // Couleur dynamique de la barre
+                    if (this.grip < 30) gripFill.style.background = C.red;
+                    else if (this.grip < 60) gripFill.style.background = C.yellow;
+                    else gripFill.style.background = C.fg;
+                }
+            },
+
+            createParticles: function(x, y, count, color) {
+                for(var i=0; i<count; i++) {
+                    this.particles.push({
+                        x: x, y: y,
+                        vx: (Math.random() - 0.5) * 15,
+                        vy: (Math.random() - 0.5) * 15,
+                        life: 1.0,
+                        color: color,
+                        size: Math.random() * 5 + 2
+                    });
+                }
+            }
+        };
+        
+        // Expose game to window for button handlers
+        window.game = game;
+
+        /**
+         * 4. INPUT HANDLING
+         */
+        function handleInput(e) {
+            // Ignore if clicking UI buttons
+            if (e.target.tagName === 'BUTTON') return;
+
+            var x, y;
+            if(e.type === 'touchstart') {
+                // Prevent scrolling
+                e.preventDefault();
+                x = e.touches[0].clientX;
+                y = e.touches[0].clientY;
+            } else if (e.type === 'mousedown') {
+                x = e.clientX;
+                y = e.clientY;
+            }
+
+            if (game.state === 'PLAYING') {
+                game.checkTap(x, y);
+            }
+        }
+
+        // Use passive: false to allow preventDefault()
+        document.body.addEventListener('touchstart', handleInput, {passive: false});
+        document.body.addEventListener('mousedown', handleInput);
+        
+        // Buttons
+        var btnStart = document.getElementById('btn-start');
+        if(btnStart) btnStart.addEventListener('click', function() { game.start(); });
+
+        var btnRetry = document.getElementById('btn-retry');
+        if(btnRetry) btnRetry.addEventListener('click', function() { game.start(); });
+
+        var btnNext = document.getElementById('btn-next');
+        if(btnNext) btnNext.addEventListener('click', function() { 
+            alert("Direction: Case 7 (U Magu)");
+            // window.location.href = "case7.html"; 
+        });
+
+        /**
+         * 5. RENDER LOOP
+         */
+        function loop() {
+            if (!ctx) return;
+
+            // --- UPDATE ---
+            if (game.state === 'PLAYING') {
+                // Perte de grip passive (fatigue)
+                if (game.grip > 0) {
+                    game.grip -= game.gripDecayBase;
+                    if (game.grip <= 0) game.gameOver();
+                }
+                game.updateUI();
+
+                // Hold Logic
+                if (game.hold.active) {
+                    game.hold.ringRadius -= game.hold.shrinkSpeed;
+                    
+                    // Too late check
+                    // Si l'anneau rentre DANS le cercle cible (marge de 10px), c'est raté
+                    if (game.hold.ringRadius < game.hold.radius - 10) {
+                        game.missTimeout();
+                    }
+                }
+            }
+
+            // Screen Shake Decay
+            if (screenShake > 0) screenShake *= 0.9;
+            if (screenShake < 0.5) screenShake = 0;
+
+            // --- DRAW ---
+            
+            // 1. Background
+            ctx.fillStyle = C.bg;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.save();
+            
+            // Apply Shake
+            var shakeX = (Math.random() - 0.5) * screenShake;
+            var shakeY = (Math.random() - 0.5) * screenShake;
+            ctx.translate(shakeX, shakeY);
+
+            // 2. Wall Texture (Scrolling)
+            ctx.strokeStyle = 'rgba(98, 98, 71, 0.15)'; 
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            // Lignes verticales qui défilent
+            for (var i = 0; i < width; i+=80) {
+                var offsetY = (bgOffset * 0.5) % height;
+                ctx.moveTo(i, -height);
+                ctx.lineTo(i, height * 2); // Dessine plus grand pour le scroll
+            }
+            ctx.stroke();
+
+            // 3. The Hold (Target)
+            if (game.hold.active) {
+                var h = game.hold;
+                
+                // Cible (Point plein)
+                ctx.beginPath();
+                ctx.arc(h.x, h.y, h.radius, 0, Math.PI*2);
+                ctx.fillStyle = h.color;
+                ctx.fill();
+                
+                // Indicateur "Sweet Spot" (Cercle fin jaune)
+                ctx.beginPath();
+                ctx.arc(h.x, h.y, h.radius, 0, Math.PI*2);
+                ctx.strokeStyle = C.yellow; 
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Anneau (Timer)
+                if (h.ringRadius > 0) {
+                    ctx.beginPath();
+                    ctx.arc(h.x, h.y, h.ringRadius, 0, Math.PI*2);
+                    
+                    // Couleur de l'anneau : Rouge si loin, Vert si proche
+                    var diff = Math.abs(h.ringRadius - h.radius);
+                    
+                    // J'ai aligné les couleurs avec les zones de réussite
+                    if (diff < 25) { // Correspond à perfectZone
+                        ctx.strokeStyle = C.green; // BLEU/CYAN (PERFECT)
+                        ctx.lineWidth = 6;
+                    } else if (diff < 55) { // Correspond à goodZone
+                        ctx.strokeStyle = C.fg; // BLANC (BIEN)
+                        ctx.lineWidth = 4;
+                    } else {
+                        ctx.strokeStyle = 'rgba(236, 228, 203, 0.4)'; // LOIN
+                        ctx.lineWidth = 2;
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            // 4. Particles
+            if (game.particles.length > 0) {
+                for (var i = game.particles.length - 1; i >= 0; i--) {
+                    var p = game.particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life -= 0.03;
+                    
+                    if(p.life <= 0) {
+                        game.particles.splice(i, 1);
+                        continue;
+                    }
+                    
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                    ctx.fill();
+                }
+            }
+            ctx.globalAlpha = 1.0;
+
+            ctx.restore();
+            requestAnimationFrame(loop);
+        }
+
+        if (canvas) requestAnimationFrame(loop);
+
+    </script>
+</body>
+</html>

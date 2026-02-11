@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Case 13 : Infiltration Elite</title>
+    <style>
+        /* --- FONTS & BASE --- */
+        @font-face {
+            font-family: 'Futura';
+            src: local('Futura'), url('https://fonts.cdnfonts.com/s/13898/Futura.woff') format('woff');
+        }
+
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            touch-action: none; /* Crucial pour le joystick */
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0d0c0a;
+            color: #ece4cb;
+            font-family: 'Futura', sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* --- LAYERS --- */
+        #game-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        #ui-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 10;
+            pointer-events: none; /* Laisse passer le touch vers le jeu quand pas de menu */
+        }
+
+        /* --- JOYSTICK --- */
+        #joystick-zone {
+            position: absolute;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            display: none;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.2s;
+        }
+
+        #joystick-knob {
+            position: absolute;
+            width: 50px; height: 50px;
+            background: rgba(236, 228, 203, 0.8);
+            border-radius: 50%;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(236, 228, 203, 0.5);
+        }
+
+        /* --- HUD (In-Game) --- */
+        .hud-panel {
+            position: absolute;
+            top: 20px; left: 20px;
+            pointer-events: none;
+            border-left: 2px solid #c63032;
+            padding-left: 10px;
+        }
+        .hud-text {
+            font-size: 0.8rem;
+            color: #ece4cb;
+            opacity: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .detection-bar-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 4px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #444;
+            display: none; /* Caché si pas détecté */
+        }
+        .detection-bar {
+            height: 100%;
+            width: 0%;
+            background: #c63032;
+            box-shadow: 0 0 10px #c63032;
+            transition: width 0.1s linear;
+        }
+        .detection-label {
+            position: absolute;
+            top: 8px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.6rem;
+            color: #c63032;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* --- MENUS --- */
+        .menu-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(13, 12, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: auto; /* Active les clics */
+            opacity: 1;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ece4cb;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(236, 228, 203, 0.2);
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 0.9rem;
+            color: #c63032;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            border-bottom: 1px solid #c63032;
+            padding-bottom: 10px;
+        }
+
+        .tuto-card {
+            background: linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border-left: 1px solid #626247;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+            max-width: 85%;
+            text-align: left;
+        }
+
+        .tuto-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #9a9680;
+            letter-spacing: 1px;
+        }
+        
+        .tuto-item:last-child { margin-bottom: 0; }
+
+        .icon-svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 20px;
+            fill: #ece4cb;
+            opacity: 0.8;
+        }
+
+        .btn-start {
+            background: rgba(198, 48, 50, 0.1);
+            color: #ece4cb;
+            font-family: 'Futura', sans-serif;
+            font-size: 1rem;
+            padding: 18px 50px;
+            border: 1px solid #4a4a35;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .btn-start:hover {
+            background: rgba(198, 48, 50, 0.3);
+            border-color: #c63032;
+            box-shadow: 0 0 20px rgba(198, 48, 50, 0.2);
+        }
+        
+        .btn-start:active {
+            transform: scale(0.98);
+        }
+
+        /* --- SCANLINES --- */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px);
+            pointer-events: none; z-index: 20;
+        }
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none; z-index: 21;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JEU -->
+    <canvas id="game-layer"></canvas>
+    
+    <!-- EFFETS -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <!-- UI -->
+    <div id="ui-layer">
+        <!-- HUD -->
+        <div class="hud-panel">
+            <div class="hud-text">SECTEUR 13 // PORT</div>
+        </div>
+
+        <div class="detection-bar-container" id="alert-ui">
+            <div class="detection-bar" id="alert-bar"></div>
+            <div class="detection-label">INTRUSION DÉTECTÉE</div>
+        </div>
+
+        <!-- JOYSTICK VISUEL -->
+        <div id="joystick-zone"><div id="joystick-knob"></div></div>
+
+        <!-- MENU ACCUEIL -->
+        <div id="menu-start" class="menu-overlay">
+            <h1>CASE 13</h1>
+            <h2>Infiltration Nocturne</h2>
+            
+            <div class="tuto-card">
+                <div class="tuto-item">
+                    <!-- Icon Joystick -->
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                    <span>GLISSEZ POUR BOUGER<br><em style="font-size:0.8em; color:#666; text-transform:uppercase;">DOUCEMENT = SILENCE</em></span>
+                </div>
+                <div class="tuto-item">
+                    <!-- Icon Light -->
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L4 22h16L12 2zm0 4l5 14H7l5-14z" fill="currentColor"/></svg>
+                    <span>ÉVITEZ LES ZONES ÉCLAIRÉES</span>
+                </div>
+                <div class="tuto-item">
+                    <!-- Icon Anchor -->
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-3.31 0-6 2.69-6 6v3h2v-3c0-2.21 1.79-4 4-4s4 1.79 4 4v3h2v-3c0-3.31-2.69-6-6-6zm-1 9h2v5h-2z" fill="currentColor"/></svg>
+                    <span>REJOIGNEZ LE POINT D'EXTRACTION</span>
+                </div>
+            </div>
+
+            <button class="btn-start" onclick="Game.start()">INITIALISER MISSION</button>
+        </div>
+
+        <!-- MENU GAME OVER -->
+        <div id="menu-fail" class="menu-overlay hidden">
+            <h1 style="color: #c63032;">ÉCHEC</h1>
+            <h2>Cible Neutralisée</h2>
+            <button class="btn-start" onclick="Game.reset()">RELANCER SIMULATION</button>
+        </div>
+
+        <!-- MENU WIN -->
+        <div id="menu-win" class="menu-overlay hidden">
+            <h1 style="color: #81cbd6;">SUCCÈS</h1>
+            <h2>Extraction Confirmée</h2>
+            <button class="btn-start" onclick="alert('Chargement du Chapitre Suivant...')">CONTINUER</button>
+        </div>
+    </div>
+
+<script>
+/**
+ * MOTEUR DE JEU ELITE
+ */
+const Game = {
+    canvas: document.getElementById('game-layer'),
+    ctx: null,
+    width: 0,
+    height: 0,
+    state: 'MENU', 
+    
+    // Joystick
+    touch: { active: false, id: null, startX: 0, startY: 0, currX: 0, currY: 0, force: 0, angle: 0 },
+    
+    // Gameplay Stats (Normal Mode)
+    player: { x: 0, y: 0, r: 10, speed: 0, maxSpeed: 4, noise: 0, detected: 0 },
+    goal: { x: 0, y: 0, r: 30, pulse: 0 },
+    walls: [],
+    enemies: [],
+    particles: [],
+    ripples: [],
+    
+    init() {
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        
+        // Touch events
+        document.addEventListener('touchstart', e => this.handleStart(e), {passive: false});
+        document.addEventListener('touchmove', e => this.handleMove(e), {passive: false});
+        document.addEventListener('touchend', e => this.handleEnd(e), {passive: false});
+        
+        // Mouse debug
+        document.addEventListener('mousedown', e => this.handleStart(this.mouseToTouch(e)));
+        document.addEventListener('mousemove', e => { if(this.touch.active) this.handleMove(this.mouseToTouch(e)); });
+        document.addEventListener('mouseup', e => this.handleEnd(e));
+
+        // Pluie intense
+        for(let i=0; i<150; i++) {
+            this.particles.push({
+                x: Math.random() * this.width,
+                y: Math.random() * this.height,
+                len: Math.random() * 30 + 10,
+                speed: Math.random() * 8 + 15
+            });
+        }
+
+        this.loop();
+    },
+
+    resize() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        if(this.state === 'MENU') this.generateLevel();
+    },
+
+    start() {
+        this.state = 'PLAY';
+        this.generateLevel();
+        this.updateMenuVisibility();
+    },
+    
+    reset() {
+        this.state = 'PLAY';
+        this.player.detected = 0;
+        this.generateLevel();
+        this.updateMenuVisibility();
+    },
+
+    updateMenuVisibility() {
+        document.getElementById('menu-start').classList.add('hidden');
+        document.getElementById('menu-fail').classList.add('hidden');
+        document.getElementById('menu-win').classList.add('hidden');
+        document.getElementById('alert-ui').style.display = 'none';
+
+        if (this.state === 'MENU') document.getElementById('menu-start').classList.remove('hidden');
+        if (this.state === 'OVER') document.getElementById('menu-fail').classList.remove('hidden');
+        if (this.state === 'WIN') document.getElementById('menu-win').classList.remove('hidden');
+    },
+
+    generateLevel() {
+        const u = Math.min(this.width, this.height) / 15;
+        
+        this.player.x = u * 2;
+        this.player.y = this.height - u * 2;
+        this.player.detected = 0;
+
+        this.goal.x = this.width - u * 2;
+        this.goal.y = u * 2;
+
+        this.walls = [];
+        this.walls.push({x:-10, y:-10, w:this.width+20, h:10});
+        this.walls.push({x:-10, y:this.height, w:this.width+20, h:10});
+        this.walls.push({x:-10, y:0, w:10, h:this.height});
+        this.walls.push({x:this.width, y:0, w:10, h:this.height});
+        
+        const cols = 6; 
+        const rows = 5;
+        const gw = this.width / cols;
+        const gh = this.height / rows;
+        
+        for(let i=0; i<cols; i++) {
+            for(let j=0; j<rows; j++) {
+                const cx = i*gw + gw/2;
+                const cy = j*gh + gh/2;
+                const dp = Math.hypot(cx - this.player.x, cy - this.player.y);
+                const dg = Math.hypot(cx - this.goal.x, cy - this.goal.y);
+                
+                if (dp > u*5 && dg > u*5 && Math.random() > 0.35) {
+                    const w = u * (1.2 + Math.random());
+                    const h = u * (1.2 + Math.random()*1.5);
+                    this.walls.push({x: cx-w/2, y: cy-h/2, w: w, h: h});
+                }
+            }
+        }
+
+        // --- ENNEMIS ELITE (EASIER) ---
+        this.enemies = [];
+        const count = 3 + Math.floor(Math.random() * 2); // Moins d'ennemis (3-4)
+        for(let i=0; i<count; i++) {
+            let ex, ey, valid = false;
+            while(!valid) {
+                ex = Math.random() * this.width;
+                ey = Math.random() * this.height;
+                const d = Math.hypot(ex - this.player.x, ey - this.player.y);
+                if (d > u*10) valid = true; // Spawn plus loin
+            }
+            this.enemies.push({
+                x: ex, y: ey,
+                angle: Math.random() * 6.28,
+                fov: 0.8, // Champ de vision plus étroit (0.8 vs 1.1)
+                range: u * 6, // Voit moins loin (6 vs 7.5)
+                state: 'PATROL', 
+                patrolDir: Math.random() > 0.5 ? 1 : -1,
+                turnSpeed: 0.015, // Tourne moins vite
+                turnTimer: Math.random() * 100
+            });
+        }
+    },
+
+    mouseToTouch(e) {
+        return { changedTouches: [{ identifier: 999, clientX: e.clientX, clientY: e.clientY, target: e.target }] };
+    },
+
+    handleStart(e) {
+        if (this.state !== 'PLAY') return;
+        if (e.target && e.target.tagName === 'BUTTON') return;
+
+        const t = e.changedTouches[0];
+        if(e.cancelable) e.preventDefault();
+
+        this.touch.active = true;
+        this.touch.id = t.identifier;
+        this.touch.startX = t.clientX;
+        this.touch.startY = t.clientY;
+        this.touch.currX = t.clientX;
+        this.touch.currY = t.clientY;
+        this.touch.force = 0;
+
+        const jz = document.getElementById('joystick-zone');
+        jz.style.display = 'block';
+        jz.style.left = t.clientX + 'px';
+        jz.style.top = t.clientY + 'px';
+        jz.style.opacity = 1;
+        document.getElementById('joystick-knob').style.transform = `translate(-50%, -50%)`;
+    },
+
+    handleMove(e) {
+        if (!this.touch.active) return;
+        const t = Array.from(e.changedTouches).find(t => t.identifier === this.touch.id);
+        if (!t) return;
+        if(e.cancelable) e.preventDefault();
+
+        this.touch.currX = t.clientX;
+        this.touch.currY = t.clientY;
+
+        const dx = this.touch.currX - this.touch.startX;
+        const dy = this.touch.currY - this.touch.startY;
+        const dist = Math.hypot(dx, dy);
+        const maxDist = 60;
+
+        this.touch.force = Math.min(dist / maxDist, 1);
+        this.touch.angle = Math.atan2(dy, dx);
+
+        const moveDist = Math.min(dist, maxDist);
+        const kx = Math.cos(this.touch.angle) * moveDist;
+        const ky = Math.sin(this.touch.angle) * moveDist;
+        document.getElementById('joystick-knob').style.transform = `translate(calc(-50% + ${kx}px), calc(-50% + ${ky}px))`;
+    },
+
+    handleEnd(e) {
+        let t = null;
+        if (e.changedTouches) {
+            t = Array.from(e.changedTouches).find(t => t.identifier === this.touch.id);
+        }
+        if (t || e.type === 'mouseup') {
+            this.touch.active = false;
+            this.touch.force = 0;
+            document.getElementById('joystick-zone').style.opacity = 0;
+            setTimeout(() => { 
+                if(!this.touch.active) document.getElementById('joystick-zone').style.display = 'none'; 
+            }, 200);
+        }
+    },
+
+    update() {
+        if (this.state !== 'PLAY') return;
+
+        // 1. Déplacer Joueur
+        if (this.touch.active) {
+            const speed = this.touch.force * this.player.maxSpeed;
+            this.player.speed = speed;
+            this.player.noise = speed * 6; // Beaucoup moins de bruit (6 vs 12)
+
+            const mx = Math.cos(this.touch.angle) * speed;
+            const my = Math.sin(this.touch.angle) * speed;
+
+            let nextX = this.player.x + mx;
+            let nextY = this.player.y + my;
+            let col = false;
+
+            for(let w of this.walls) {
+                if (nextX + this.player.r > w.x && nextX - this.player.r < w.x + w.w &&
+                    nextY + this.player.r > w.y && nextY - this.player.r < w.y + w.h) {
+                    col = true;
+                }
+            }
+
+            if (!col) {
+                this.player.x = nextX;
+                this.player.y = nextY;
+            }
+            
+            if (speed > 2.5 && Math.random() > 0.7) {
+                this.ripples.push({x: this.player.x, y: this.player.y, r: 5, o: 0.5});
+            }
+        } else {
+            this.player.speed = 0;
+            this.player.noise = 0;
+        }
+
+        this.player.x = Math.max(10, Math.min(this.width-10, this.player.x));
+        this.player.y = Math.max(10, Math.min(this.height-10, this.player.y));
+
+        // 2. IA Ennemis
+        let currentlyDetected = false;
+
+        for (let e of this.enemies) {
+            e.turnTimer++;
+            // Mouvement erratique moins fréquent
+            if (e.turnTimer > 150 + Math.random()*150) {
+                e.patrolDir *= -1;
+                e.turnTimer = 0;
+            }
+            e.angle += e.turnSpeed * e.patrolDir;
+
+            const dx = this.player.x - e.x;
+            const dy = this.player.y - e.y;
+            const dist = Math.hypot(dx, dy);
+
+            // Hearing System
+            if (dist < this.player.noise + 40) { // Entend le joueur
+                // Se tourne vers le son
+                const angleToSound = Math.atan2(dy, dx);
+                // Smooth turn
+                e.angle += (angleToSound - e.angle) * 0.1;
+                currentlyDetected = true; // Suspecte quelque chose (barre monte un peu)
+            }
+
+            // Vision System
+            if (dist < e.range) {
+                const angleToPlayer = Math.atan2(dy, dx);
+                let diff = angleToPlayer - e.angle;
+                while (diff > Math.PI) diff -= Math.PI*2;
+                while (diff < -Math.PI) diff += Math.PI*2;
+
+                if (Math.abs(diff) < e.fov / 2) {
+                    let visible = true;
+                    const steps = dist / 15;
+                    const rdx = dx / steps;
+                    const rdy = dy / steps;
+                    for(let k=0; k<steps; k++) {
+                        const rcx = e.x + rdx*k;
+                        const rcy = e.y + rdy*k;
+                        for(let w of this.walls) {
+                            if(rcx > w.x && rcx < w.x+w.w && rcy > w.y && rcy < w.y+w.h) visible = false;
+                        }
+                    }
+
+                    if (visible) {
+                        currentlyDetected = true;
+                        // Regarde fixement le joueur s'il le voit
+                        e.angle = angleToPlayer; 
+                    }
+                }
+            }
+        }
+
+        // Alerte
+        const bar = document.getElementById('alert-bar');
+        const ui = document.getElementById('alert-ui');
+        
+        if (currentlyDetected) {
+            this.player.detected += 0.8; // Monte plus doucement (0.8 vs 2.0)
+            ui.style.display = 'block';
+        } else {
+            this.player.detected = Math.max(0, this.player.detected - 1.0); // Descend plus vite
+            if(this.player.detected <= 0) ui.style.display = 'none';
+        }
+
+        bar.style.width = Math.min(100, this.player.detected) + '%';
+
+        if (this.player.detected >= 100) {
+            this.state = 'OVER';
+            this.updateMenuVisibility();
+        }
+
+        const dg = Math.hypot(this.player.x - this.goal.x, this.player.y - this.goal.y);
+        if (dg < this.goal.r) {
+            this.state = 'WIN';
+            this.updateMenuVisibility();
+        }
+
+        this.particles.forEach(p => {
+            p.y += p.speed;
+            if(p.y > this.height) { p.y = -20; p.x = Math.random() * this.width; }
+        });
+
+        this.ripples.forEach((r, i) => {
+            r.r += 1;
+            r.o -= 0.03;
+            if(r.o <= 0) this.ripples.splice(i, 1);
+        });
+    },
+
+    draw() {
+        const ctx = this.ctx;
+        ctx.clearRect(0,0, this.width, this.height);
+
+        // BG
+        ctx.fillStyle = '#0a0907';
+        ctx.fillRect(0,0, this.width, this.height);
+        
+        ctx.strokeStyle = '#151310';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for(let x=0; x<this.width; x+=60) { ctx.moveTo(x,0); ctx.lineTo(x, this.height); }
+        for(let y=0; y<this.height; y+=60) { ctx.moveTo(0,y); ctx.lineTo(this.width, y); }
+        ctx.stroke();
+
+        // MURS
+        ctx.fillStyle = '#141210';
+        ctx.strokeStyle = '#3a3830';
+        ctx.lineWidth = 2;
+        for(let w of this.walls) {
+            ctx.fillRect(w.x, w.y, w.w, w.h);
+            ctx.strokeRect(w.x, w.y, w.w, w.h);
+            
+            // X pattern
+            ctx.beginPath();
+            ctx.moveTo(w.x, w.y); ctx.lineTo(w.x+w.w, w.y+w.h);
+            ctx.stroke();
+        }
+
+        // GOAL (Dessiné, pas d'emoji)
+        ctx.save();
+        ctx.translate(this.goal.x, this.goal.y);
+        this.goal.pulse += 0.05;
+        // Water
+        ctx.beginPath();
+        ctx.arc(0, 0, this.goal.r + Math.sin(this.goal.pulse)*3, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(129, 203, 214, 0.15)';
+        ctx.fill();
+        ctx.strokeStyle = '#81cbd6';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        // Anchor Icon
+        ctx.strokeStyle = '#81cbd6';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(0, -10); ctx.lineTo(0, 10);
+        ctx.moveTo(-8, 5); ctx.quadraticCurveTo(0, 15, 8, 5);
+        ctx.moveTo(-5, -5); ctx.lineTo(5, -5);
+        ctx.stroke();
+        ctx.restore();
+
+        // ENNEMIS
+        for(let e of this.enemies) {
+            ctx.save();
+            ctx.translate(e.x, e.y);
+            ctx.rotate(e.angle);
+
+            // Flashlight gradient
+            const grad = ctx.createRadialGradient(0,0,0, 0,0,e.range);
+            grad.addColorStop(0, 'rgba(255, 240, 150, 0.7)'); 
+            grad.addColorStop(1, 'rgba(255, 240, 150, 0)');
+            
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.arc(0, 0, e.range, -e.fov/2, e.fov/2);
+            ctx.fill();
+
+            // Garde
+            ctx.fillStyle = '#c63032';
+            ctx.beginPath();
+            ctx.arc(0, 0, 7, 0, Math.PI*2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // JOUEUR
+        if(this.state === 'PLAY') {
+            ctx.strokeStyle = 'rgba(236, 228, 203, 0.4)';
+            ctx.lineWidth = 1;
+            for(let r of this.ripples) {
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, r.r, 0, Math.PI*2);
+                ctx.globalAlpha = r.o;
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+            }
+
+            if(this.player.noise > 0) {
+                ctx.beginPath();
+                ctx.arc(this.player.x, this.player.y, this.player.noise * 2, 0, Math.PI*2);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#ece4cb';
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#ece4cb';
+            ctx.beginPath();
+            ctx.arc(this.player.x, this.player.y, this.player.r, 0, Math.PI*2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        // PLUIE
+        ctx.strokeStyle = 'rgba(129, 203, 214, 0.1)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for(let p of this.particles) {
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x - 2, p.y + p.len);
+        }
+        ctx.stroke();
+    },
+
+    loop() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.loop());
+    }
+};
+
+window.onload = () => Game.init();
+</script>
+</body>
+</html>
