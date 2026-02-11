@@ -679,7 +679,9 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "09"
+          "nextStep": "09",
+          "unlockStep": "121",
+          "unlockedStepId": "12"
         }
       }
     },

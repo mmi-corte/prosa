@@ -2998,6 +2998,102 @@
     }
   },
   "3": {
+    "08": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous pénétrez dans la forêt, à la recherche de l’entrée de la ville."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous croisez sur votre chemin un homme assis sur un tronc d’arbre, mangeant de la viande fraîchement chassée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il vous interpelle, vous demandant pourquoi vous êtes si pressé."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Hm… Ta façon de parler. Tes vêtements. Tu viens de Toulon, n’est-ce pas ?\""
+            },
+            "character": "drac"
+          },
+          {
+            "text": {
+              "fr": "\"Ton comportement te trahit. Ta simple présence ici, rebelle, met en péril l’équilibre de l’île. J’aurais préféré ne jamais avoir à lever la main sur un compatriote.\""
+            },
+            "character": "drac"
+          },
+          {
+            "text": {
+              "fr": "\"Moi, le Drac, et en tant que membre du Serpent à Sept Têtes, mon devoir est de t’arrêter.\""
+            },
+            "character": "drac"
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous expliquez concrètement ce que vous comptez faire et pourquoi cela pourrait changer le quotidien de chaque survivant de Toulon. Vous jouez sur l’empathie."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le Drac décide de vous laisser tenter votre chance et de vous laisser partir, mais il vous dit que, s’il vous croise une nouvelle fois, il sera sans pitié."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous menacez Le Drac, en lui disant que vous ferez tout pour atteindre votre but, même devoir être violent si nécessaire. "
+            }
+          },
+          {
+            "text": {
+              "fr": "Le Drac semble vouloir en découdre avec vous pour tester votre détermination. Mais voyant que vous ne baissez pas les bras, il décide de vous laisser partir."
+            }
+          },
+          {
+            "text": {
+              "fr": "En tant que chasseur, il ne compte pas prendre votre vie maintenant, mais plus tard, en tant que défenseur du Serpent à Sept Têtes."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "09": {
       "1": {
         "default": {

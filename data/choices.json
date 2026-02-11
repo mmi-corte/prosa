@@ -320,5 +320,29 @@
       }
     }
   },
-  "3": {}
+  "3": {
+    "08": {
+      "1": {
+        "question": {
+          "fr": "Que souhiatez vous faire ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Persuader Le Drac"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Intimider Le Drac"
+            },
+            "nextActionType": "dialog",
+            "nextAction": "3"
+          }
+        ]
+      }
+    }
+  }
 }
