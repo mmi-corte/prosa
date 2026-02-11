@@ -2,7 +2,7 @@
 
 // Configuration du jeu
 const CONFIG = {
-    gameDuration: 9000,        // 9 secondes
+    gameDuration: 14000,        // 14 secondes
     targetTaps: 50,            // Nombre de taps pour gagner
     tapDecay: 0.3,             // Pourcentage de décroissance par seconde
     winThreshold: 100          // Pourcentage pour gagner
