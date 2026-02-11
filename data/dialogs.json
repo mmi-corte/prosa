@@ -2998,6 +2998,57 @@
     }
   },
   "3": {
+    "04": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous engagez sur le sentier indiqué par le technicien, un passage étroit qui s’enfonce progressivement dans la roche. Très vite, le chemin disparaît, avalé par la paroi abrupte de la montagne qui domine Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le silence se fait lourd, seulement troublé par le souffle du vent qui glisse entre les pierres."
+            }
+          },
+          {
+            "text": {
+              "fr": "L’ascension commence. La roche est froide, rugueuse, parfois friable."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous sortez de la grotte, essoufflé mais victorieux. Celle-ci s’effondre derrière vous violement."
+            }
+          },
+          {
+            "text": {
+              "fr": "Lorsque vous prenez le temps d’observer autour de vous, vous découvrez une forêt luxuriante. Vous approchez du centre de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "05": {
       "1": {
         "default": {

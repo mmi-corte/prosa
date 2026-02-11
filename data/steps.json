@@ -632,6 +632,10 @@
         "1": {
           "type": "win",
           "nextStep": "07"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "04"
         }
       }
     },
