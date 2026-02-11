@@ -2997,5 +2997,267 @@
       }
     }
   },
-  "3": {}
+  "3": {
+    "12": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
+            },
+            "character": "drac"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
+            },
+            "character": "drac"
+          },
+          {
+            "text": {
+              "fr": "\"Je me doutais que tu finirais par atteindre cette salle, cela ne m’étonne pas de te croiser de nouveau. Mais cette fois, je ne détournerai pas le regard sur ta présence.\""
+            },
+            "character": "drac"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous comprenez que vous n’avez pas le choix : pour accéder à l’ascenseur menant à la salle d'U Strigonne, le chef des armées, vous devez vaincre Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "La survie du monde dépend de cette confrontation. Une épreuve se dresse au cœur de votre face-à-face : un défi imposé par Le Drac lui-même, reflet de son esprit et de sa position au sein de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Encore haletant de votre victoire contre Le Drac, vous montez dans l'ascenseur de verre. Tandis qu'il s'élève, Prosa se déploie sous vos pieds : ses toits battus par les vents, ses patrouilles lointaines et l’océan se brisant contre les falaises."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le poids de l'instant vous oppresse. Dans le reflet de la paroi, vous croisez votre propre regard, marqué par la lutte mais résolu."
+            }
+          },
+          {
+            "text": {
+              "fr": "« C’est à toi de sauver le monde », murmurez-vous pour sceller ce pacte."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un ding cristallin retentit, vibrant dans votre poitrine comme un coup de tonnerre. Les portes coulissent. Le sommet est atteint."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "13": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous franchissez le seuil de la salle, encore porté par l’adrénaline de l’ascension. La pièce s’ouvre devant vous dans une clarté froide, baignée d’une lumière tamisée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au centre, U Strigonne est assis sur un fauteuil en cuir, le dos tourné, un verre à la main."
+            }
+          },
+          {
+            "text": {
+              "fr": "Sa posture est relâchée, presque élégante, comme si rien — ni la révolte, ni les morts, ni votre infiltration — ne pouvait ébranler sa tranquillité."
+            }
+          },
+          {
+            "text": {
+              "fr": "Sans se retourner, U Strigonne lève légèrement son verre."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je t’en prie, prends place juste ici.\"",
+              "cor": "\"Ti pregu, possa ghjustu quì\""
+            }
+          },
+          {
+            "text": {
+              "fr": "Il vous désigne la chaise en face de lui, vous invitant à vous asseoir. Vous refusez sans hésiter. U Strigonne se tourne alors vers vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un sourire étire ses traits — rien de chaleureux, seulement la satisfaction froide de celui qui se croit déjà victorieux."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il renouvelle son invitation d’une voix posée, presque paternaliste, comme s’il s’adressait à un enfant entêté."
+            }
+          },
+          {
+            "text": {
+              "fr": "À ses yeux, la partie est déjà terminée… et vous l’avez perdue."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Allons… installe-toi. Cela ne changera rien à ce qui t’attend. La tour est encerclée, chaque issue est verrouillée. Tu n’as nulle part où fuir.\"",
+              "cor": "\"Andemu… mettiti à pusà. A to sorte sera listessa. A torra hè minacciata è tutte è surtite so cundanate. Ùn ai locu per fughjè.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Mais je dois l’admettre… remonter toute la chaîne de commandement pour parvenir jusqu’ici force presque le respect.\"",
+              "cor": "\"Ma devu ricunnosce un fattu… rifà tuttu u fillu di cumandu per ghjunghje sin’à quì impone guasi u rispettu.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous n’avez plus de patience pour les courtoisies. Vous dites que vous ne regrettez rien, que vous vous êtes battu jusqu’ici pour une raison, et que vous souhaitez terminer tout cela maintenant."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une détonation sèche vous répond. Une balle file à quelques centimètres de votre oreille et vient se ficher dans le mur derrière vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous vous figez. U Strigonne pointe désormais son arme dans votre direction, toujours assis, toujours calme, comme s’il venait simplement d’attirer l’attention d’un convive distrait."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je n’aime pas me répéter.\"",
+              "cor": "\"Ùn mi piace à ripete.\""
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Lorsque vous prenez place, U Strigonne pose le revolver sur la table, le fait tourner lentement du bout des doigts. Un jeu dangereux se dessine dans son sourire."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Pourquoi s’abaisser à une confrontation barbare ?\"",
+              "cor": "\"Perchè sotumetessi à una cunfruntazione barbara ? \""
+            }
+          },
+          {
+            "text": {
+              "fr": "Le chef des armée U Strigonne propose un jeu où l’issue n’en laissera qu’un seul d’entre vous vivant. Une façon « élégante » d’en finir, dit-il, comme si la mort pouvait être un raffinement."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    }
+  }
 }

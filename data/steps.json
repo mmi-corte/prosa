@@ -720,6 +720,24 @@
         "1": {
           "type": "win",
           "nextStep": "13"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "12"
+        }
+      }
+    },
+    "121": {
+      "actionType": "dialog",
+      "action": "2",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "13"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "12"
         }
       }
     },

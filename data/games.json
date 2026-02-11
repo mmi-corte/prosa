@@ -172,5 +172,24 @@
       }
     }
   },
-  "3": {}
+  "3": {
+    "12": {
+      "1": {
+        "game": "drac_affrontement",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "4",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
+    "13": {
+      "1": {
+        "game": "fin_strigonu",
+        "nextActionTypeWin": "end",
+        "nextActionWin": "1",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    }
+  }
 }
