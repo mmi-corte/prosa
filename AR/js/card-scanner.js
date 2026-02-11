@@ -81,6 +81,24 @@ async function loadConfig() {
 }
 
 /**
+ * Check if an asset is visible in a given mode
+ * @param {Object} asset - The asset object with optional visibleIn property
+ * @param {string} mode - The mode to check ('scan' or 'immersive')
+ * @returns {boolean} true if the asset should be visible
+ */
+function isVisibleInMode(asset, mode) {
+  // If no visibleIn specified, use default from settings (or show in all modes)
+  const defaultVisibility = settings.defaultVisibility || ['scan', 'immersive'];
+  const visibility = asset.visibleIn || defaultVisibility;
+  
+  // Handle both array and string formats
+  if (Array.isArray(visibility)) {
+    return visibility.includes(mode);
+  }
+  return visibility === mode;
+}
+
+/**
  * Convert JSON character format to internal format
  */
 function normalizeCharacter(char) {
@@ -99,26 +117,32 @@ function normalizeCharacter(char) {
     // Stats
     stats: char.stats || {},
     
-    // Assets - convert from JSON format
-    images2D: (char.assets?.['2d'] || []).map(img => ({
-      id: img.id || null,
-      path: img.path,
-      scale: img.scale || 1,
-      position: img.position || { x: 0, y: 0, z: 0 },
-      rotation: img.rotation || { x: 0, y: 0, z: 0 },
-      opacity: img.opacity !== undefined ? img.opacity : 1
-    })),
+    // Assets - convert from JSON format, filtering for 'scan' mode
+    images2D: (char.assets?.['2d'] || [])
+      .filter(img => isVisibleInMode(img, 'scan'))
+      .map(img => ({
+        id: img.id || null,
+        path: img.path,
+        scale: img.scale || 1,
+        position: img.position || { x: 0, y: 0, z: 0 },
+        rotation: img.rotation || { x: 0, y: 0, z: 0 },
+        opacity: img.opacity !== undefined ? img.opacity : 1,
+        visibleIn: img.visibleIn || settings.defaultVisibility || ['scan', 'immersive']
+      })),
     
-    model3D: char.assets?.['3d']?.[0] ? {
+    model3D: (char.assets?.['3d']?.[0] && isVisibleInMode(char.assets['3d'][0], 'scan')) ? {
       path: char.assets['3d'][0].path,
       scale: char.assets['3d'][0].scale || { x: 0.1, y: 0.1, z: 0.1 },
       position: char.assets['3d'][0].position || { x: 0, y: 0, z: 0 },
       rotation: char.assets['3d'][0].rotation || { x: 0, y: 0, z: 0 },
-      animation: char.assets['3d'][0].animation
+      animation: char.assets['3d'][0].animation,
+      visibleIn: char.assets['3d'][0].visibleIn || settings.defaultVisibility || ['scan', 'immersive']
     } : null,
     
-    // Sounds
-    sounds: char.sounds || {}
+    // Sounds - filter for 'scan' mode
+    sounds: Object.fromEntries(
+      Object.entries(char.sounds || {}).filter(([key, sound]) => isVisibleInMode(sound, 'scan'))
+    )
   };
 }
 

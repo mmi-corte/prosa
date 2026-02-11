@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>PROSA AR Scene Editor</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <!-- Mobile menu toggle -->
+        <div class="mobile-nav">
+          <button class="mobile-nav-btn" id="sidebar-toggle" aria-label="Menu">☰</button>
+        </div>
+        <h1>🎭 PROSA AR Editor</h1>
+        <span class="version" id="json-version">v1.0</span>
+      </div>
+      <div class="header-right">
+        <span class="save-status" id="save-status"></span>
+        <button class="btn btn-ghost" id="clear-local-btn" title="Clear local edits">
+          <span class="icon">🗑️</span>
+        </button>
+        <button class="btn btn-accent" id="preview-btn" title="Preview Scene">
+          <span class="icon">👁️</span><span class="btn-text"> Preview</span>
+        </button>
+        <button class="btn btn-secondary" id="import-btn">
+          <span class="icon">📁</span><span class="btn-text"> Import</span>
+        </button>
+        <button class="btn btn-primary" id="export-btn">
+          <span class="icon">💾</span><span class="btn-text"> Export</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile overlay for sidebar -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <!-- Main Layout -->
+    <div class="main-container">
+      <!-- Sidebar - Character List -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Characters</h2>
+          <button class="btn btn-small btn-accent" id="add-character-btn">+ Add</button>
+        </div>
+        
+        <div class="filter-bar">
+          <input type="text" id="search-characters" placeholder="Search..." class="search-input">
+          <select id="filter-region" class="filter-select">
+            <option value="">All Regions</option>
+            <option value="CORSE">Corse</option>
+            <option value="PROVENCE">Provence</option>
+          </select>
+        </div>
+        
+        <div class="character-list" id="character-list">
+          <!-- Characters will be populated here -->
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="content">
+        <!-- No Character Selected State -->
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🎬</div>
+          <h2>Select a Character</h2>
+          <p>Choose a character from the sidebar to edit their AR scene configuration</p>
+        </div>
+
+        <!-- Character Editor -->
+        <div class="editor-container" id="editor-container" style="display: none;">
+          <!-- Character Info Section -->
+          <section class="editor-section">
+            <div class="section-header">
+              <h3>📋 Character Info</h3>
+              <button class="btn btn-small btn-danger" id="delete-character-btn">Delete</button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID</label>
+                <input type="text" id="char-id" class="form-input" placeholder="unique_id">
+              </div>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="char-name" class="form-input" placeholder="Character Name">
+              </div>
+              <div class="form-group">
+                <label>Region</label>
+                <select id="char-region" class="form-input">
+                  <option value="CORSE">Corse</option>
+                  <option value="PROVENCE">Provence</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Theme Color</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="char-color" class="color-picker">
+                  <input type="text" id="char-color-text" class="form-input color-text" placeholder="#6366F1">
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label>Description (FR)</label>
+                <textarea id="char-description" class="form-textarea" rows="3" placeholder="French description..."></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label>Description (Corsican/Provençal)</label>
+                <textarea id="char-description-alt" class="form-textarea" rows="3" placeholder="Regional language description..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>Portrait Image</label>
+                <input type="text" id="char-portrait" class="form-input" placeholder="assets/img/characters/...">
+              </div>
+              <div class="form-group">
+                <label>Character Type</label>
+                <select id="char-type" class="form-input">
+                  <option value="">NPC</option>
+                  <option value="player">Player Character</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Tabs for Assets -->
+          <div class="tabs-header">
+            <div class="tabs">
+              <button class="tab active" data-tab="assets-2d">🖼️ 2D Assets</button>
+              <button class="tab" data-tab="assets-3d">📦 3D Models</button>
+              <button class="tab" data-tab="layers">🎭 Immersive Layers</button>
+              <button class="tab" data-tab="sounds">🔊 Sounds</button>
+              <button class="tab" data-tab="immersive">🌍 Immersive World</button>
+              <button class="tab" data-tab="marker">📍 Marker</button>
+            </div>
+            <div class="mode-toggle-inline">
+              <span class="mode-label">View:</span>
+              <button class="mode-btn-inline active" data-mode="scan">📱 Scan</button>
+              <button class="mode-btn-inline" data-mode="immersive">🥽 Immersive</button>
+            </div>
+          </div>
+
+          <!-- 2D Assets Tab -->
+          <section class="tab-content active" id="tab-assets-2d">
+            <div class="section-header">
+              <h3>2D Assets (Scan Mode)</h3>
+              <button class="btn btn-small btn-accent" id="add-2d-asset-btn">+ Add Asset</button>
+            </div>
+            <div class="assets-grid" id="assets-2d-list">
+              <!-- 2D assets will be populated here -->
+            </div>
+          </section>
+
+          <!-- 3D Models Tab -->
+          <section class="tab-content" id="tab-assets-3d">
+            <div class="section-header">
+              <h3>3D Models</h3>
+              <button class="btn btn-small btn-accent" id="add-3d-asset-btn">+ Add Model</button>
+            </div>
+            <div class="assets-grid" id="assets-3d-list">
+              <!-- 3D assets will be populated here -->
+            </div>
+          </section>
+
+          <!-- Immersive Layers Tab -->
+          <section class="tab-content" id="tab-layers">
+            <div class="section-header">
+              <h3>Immersive Scene Layers</h3>
+              <button class="btn btn-small btn-accent" id="add-layer-btn">+ Add Layer</button>
+            </div>
+            <div class="layers-list" id="layers-list">
+              <!-- Layers will be populated here -->
+            </div>
+          </section>
+
+          <!-- Sounds Tab -->
+          <section class="tab-content" id="tab-sounds">
+            <div class="section-header">
+              <h3>Audio Configuration</h3>
+              <button class="btn btn-small btn-accent" id="add-sound-btn">+ Add Sound</button>
+            </div>
+            <div class="sounds-list" id="sounds-list">
+              <!-- Sounds will be populated here -->
+            </div>
+          </section>
+
+          <!-- Marker Tab -->
+          <section class="tab-content" id="tab-marker">
+            <div class="section-header">
+              <h3>AR Marker Configuration</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Marker File (.mind)</label>
+                <input type="text" id="marker-file" class="form-input" placeholder="assets/markers/character.mind">
+              </div>
+              <div class="form-group">
+                <label>Target Index</label>
+                <input type="number" id="marker-index" class="form-input" value="0" min="0">
+              </div>
+            </div>
+          </section>
+
+          <!-- Immersive World Tab -->
+          <section class="tab-content" id="tab-immersive">
+            <div class="section-header">
+              <h3>🎯 Interaction Settings</h3>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Proximity Distance</label>
+                <input type="number" id="interaction-proximity" class="form-input" value="3" min="0" step="0.5">
+                <small class="help-text">Distance at which interactions become available</small>
+              </div>
+              <div class="form-group">
+                <label>Subtitle Trigger Distance</label>
+                <input type="number" id="interaction-subtitle-dist" class="form-input" value="2.5" min="0" step="0.5">
+                <small class="help-text">Distance at which subtitles appear</small>
+              </div>
+            </div>
+
+            <div class="section-header" style="margin-top: var(--spacing-lg);">
+              <h3>💬 Subtitles</h3>
+              <button class="btn btn-small btn-accent" id="add-subtitle-btn">+ Add Subtitle</button>
+            </div>
+            <div class="subtitles-list" id="subtitles-list">
+              <!-- Subtitles will be populated here -->
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Preview Panel -->
+      <aside class="preview-panel">
+        <div class="preview-header">
+          <h3>Preview</h3>
+          <div class="preview-mode-toggle">
+            <button class="mode-btn active" data-mode="scan">📱 Scan</button>
+            <button class="mode-btn" data-mode="immersive">🥽 Immersive</button>
+          </div>
+        </div>
+        <div class="preview-canvas" id="preview-canvas">
+          <div class="preview-placeholder">
+            <span>Select a character to preview</span>
+          </div>
+        </div>
+        <div class="preview-info" id="preview-info">
+          <div class="info-row">
+            <span class="info-label">2D Assets:</span>
+            <span class="info-value" id="info-2d-count">0</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">3D Models:</span>
+            <span class="info-value" id="info-3d-count">0</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Layers:</span>
+            <span class="info-value" id="info-layers-count">0</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Sounds:</span>
+            <span class="info-value" id="info-sounds-count">0</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Subtitles:</span>
+            <span class="info-value" id="info-subtitles-count">0</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Asset Editor Modal -->
+  <div class="modal" id="asset-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Edit Asset</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamic content -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-cancel">Cancel</button>
+        <button class="btn btn-primary" id="modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal" id="import-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Import JSON</h3>
+        <button class="modal-close" id="import-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Paste your characters.json content or select a file:</p>
+        <input type="file" id="import-file" accept=".json" class="file-input">
+        <textarea id="import-textarea" class="form-textarea import-textarea" rows="10" placeholder="Paste JSON here..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="import-cancel">Cancel</button>
+        <button class="btn btn-primary" id="import-confirm">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- 3D Preview Modal -->
+  <div class="preview-modal" id="preview-modal">
+    <div class="preview-header">
+      <h3>🎬 Scene Preview</h3>
+      <div class="preview-controls">
+        <label class="preview-mode-label">
+          <input type="radio" name="preview-mode" value="scan" checked> 📱 Scan Mode
+        </label>
+        <label class="preview-mode-label">
+          <input type="radio" name="preview-mode" value="immersive"> 🥽 Immersive Mode
+        </label>
+        <button class="btn btn-small btn-secondary" id="preview-reset">🔄 Reset View</button>
+      </div>
+      <button class="preview-close" id="preview-close">&times;</button>
+    </div>
+    <div class="preview-main">
+      <div class="preview-canvas-container" id="preview-canvas-container">
+        <div class="preview-loading" id="preview-loading">Loading scene...</div>
+      </div>
+      
+      <!-- Dynamic Controls Panel -->
+      <div class="preview-panel" id="preview-panel">
+        <div class="preview-panel-header">
+          <h4>🎛️ Live Controls</h4>
+          <button class="preview-panel-toggle" id="preview-panel-toggle">◀</button>
+        </div>
+        <div class="preview-panel-content" id="preview-panel-content">
+          <div class="preview-asset-list" id="preview-asset-list">
+            <!-- Assets will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-footer">
+      <span>🖱️ Drag to rotate • Scroll to zoom • Right-drag to pan</span>
+      <label class="preview-autosave">
+        <input type="checkbox" id="preview-autosave" checked> Auto-save changes
+      </label>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="file-input" accept=".json" style="display: none;">
+
+  <!-- Three.js for preview -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

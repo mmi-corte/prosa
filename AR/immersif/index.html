@@ -193,6 +193,83 @@
   <div id="subtitles" class="subtitles" style="display: none;">
     <span id="subtitleText"></span>
   </div>
+
+  <!-- Debug Toggle Button -->
+  <button id="debug-toggle" class="debug-toggle" style="display: none;">
+    🛠️
+  </button>
+
+  <!-- Debug Panel -->
+  <div id="debug-panel" class="debug-panel" style="display: none;">
+    <div class="debug-header">
+      <h3>🔧 Debug Settings</h3>
+      <button id="debug-close" class="debug-close">×</button>
+    </div>
+    <div class="debug-content">
+      <!-- Height -->
+      <div class="debug-slider-group">
+        <label>Standing Height: <span id="val-height">1.7</span>m</label>
+        <input type="range" id="slider-height" min="1.0" max="2.2" step="0.1" value="1.7">
+      </div>
+      
+      <!-- Step Length -->
+      <div class="debug-slider-group">
+        <label>Step Length: <span id="val-stepLength">0.8</span>m</label>
+        <input type="range" id="slider-stepLength" min="0.2" max="2.0" step="0.1" value="0.8">
+      </div>
+      
+      <!-- Step Sensitivity -->
+      <div class="debug-slider-group">
+        <label>Step Sensitivity: <span id="val-stepThreshold">1.0</span></label>
+        <input type="range" id="slider-stepThreshold" min="0.3" max="3.0" step="0.1" value="1.0">
+        <small>Lower = more sensitive</small>
+      </div>
+      
+      <!-- Step Cooldown -->
+      <div class="debug-slider-group">
+        <label>Step Cooldown: <span id="val-stepCooldown">350</span>ms</label>
+        <input type="range" id="slider-stepCooldown" min="100" max="800" step="50" value="350">
+      </div>
+      
+      <!-- Rotation Threshold -->
+      <div class="debug-slider-group">
+        <label>Rotation Threshold: <span id="val-rotationThreshold">30</span>°/s</label>
+        <input type="range" id="slider-rotationThreshold" min="10" max="80" step="5" value="30">
+        <small>Ignores steps when rotating faster</small>
+      </div>
+      
+      <!-- Position Smoothing -->
+      <div class="debug-slider-group">
+        <label>Position Smoothing: <span id="val-positionSmoothing">0.10</span></label>
+        <input type="range" id="slider-positionSmoothing" min="0.01" max="0.5" step="0.01" value="0.1">
+        <small>Higher = faster response</small>
+      </div>
+      
+      <!-- Orientation Smoothing -->
+      <div class="debug-slider-group">
+        <label>Orientation Smoothing: <span id="val-orientationSmoothing">0.15</span></label>
+        <input type="range" id="slider-orientationSmoothing" min="0.05" max="0.5" step="0.01" value="0.15">
+        <small>Higher = faster response</small>
+      </div>
+      
+      <!-- Min Crouch Height -->
+      <div class="debug-slider-group">
+        <label>Min Crouch Height: <span id="val-minCrouchHeight">0.5</span>m</label>
+        <input type="range" id="slider-minCrouchHeight" min="0.2" max="1.2" step="0.1" value="0.5">
+      </div>
+      
+      <!-- Live Info -->
+      <div class="debug-info-panel">
+        <div id="debug-live-pos">Pos: 0, 0</div>
+        <div id="debug-live-height">Height: 1.7m</div>
+        <div id="debug-live-state">State: Idle</div>
+        <div id="debug-live-accel">Accel: 0</div>
+      </div>
+      
+      <!-- Reset Button -->
+      <button id="debug-reset" class="debug-reset-btn">Reset to Defaults</button>
+    </div>
+  </div>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>

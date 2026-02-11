@@ -145,6 +145,45 @@ const server = https.createServer(options, (req, res) => {
 
   // Parse URL (remove query string)
   let urlPath = req.url.split('?')[0];
+
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+    res.end();
+    return;
+  }
+
+  // Handle API: Save characters.json
+  if (req.method === 'POST' && urlPath === '/api/save-characters') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        const filePath = path.join(__dirname, 'AR', 'data', 'characters.json');
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end(JSON.stringify({ success: true }));
+        console.log('✅ characters.json saved');
+      } catch (err) {
+        res.writeHead(500, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end(JSON.stringify({ error: err.message }));
+        console.log('❌ Save failed:', err.message);
+      }
+    });
+    return;
+  }
+
   let filePath = '.' + urlPath;
   
   // Default to index.html for root
@@ -174,16 +213,53 @@ const server = https.createServer(options, (req, res) => {
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
 
-  // Read and serve file
+  // Check if file exists first
+  if (!fs.existsSync(filePath)) {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.end('<h1>404 - File Not Found</h1>', 'utf-8');
+    return;
+  }
+
+  // Handle video files with range request support
+  if (extname === '.mp4' || extname === '.webm' || extname === '.ogg') {
+    const stat = fs.statSync(filePath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+
+    if (range) {
+      // Parse range header
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunkSize = (end - start) + 1;
+
+      const file = fs.createReadStream(filePath, { start, end });
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      file.pipe(res);
+    } else {
+      // No range requested - send full file
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Accept-Ranges': 'bytes',
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+    return;
+  }
+
+  // Read and serve other files normally
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      if (error.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end('<h1>404 - File Not Found</h1>', 'utf-8');
-      } else {
-        res.writeHead(500);
-        res.end(`Server Error: ${error.code}`, 'utf-8');
-      }
+      res.writeHead(500);
+      res.end(`Server Error: ${error.code}`, 'utf-8');
     } else {
       res.writeHead(200, {
         'Content-Type': contentType,

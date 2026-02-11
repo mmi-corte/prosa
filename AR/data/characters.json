@@ -1,10 +1,14 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "settings": {
     "useIndividualMarkers": true,
     "maxTrack": 1,
     "defaultAssetScale": 2,
-    "defaultThemeColor": "#6366F1"
+    "defaultThemeColor": "#6366F1",
+    "defaultVisibility": [
+      "scan",
+      "immersive"
+    ]
   },
   "characters": [
     {
@@ -12,53 +16,103 @@
       "name": "A Fata",
       "description": "Gardienne des eaux sacrées de Corse, A Fata veille sur les sources et les rivières de l'île.",
       "descriptionCorsican": "Guardiana di l'acque sacre di Corsica, A Fata vighjula nantu à e surgente è i fiumi di l'isula.",
+      "region": "CORSE",
       "themeColor": "#1e88e5",
       "portrait": "assets/img/characters/fata_char.png",
-      
       "assets": {
         "2d": [
           {
             "id": "background",
             "path": "assets/img/characters/backgroundfata.png",
             "scale": 2.5,
-            "position": { "x": 0, "y": 0, "z": -0.3 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
-            "opacity": 1
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.3
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1,
+            "visibleIn": [
+              "scan"
+            ]
           },
           {
             "id": "middleground",
             "path": "assets/img/characters/middlegroundfata.png",
             "scale": 1.8,
-            "position": { "x": 0, "y": 0, "z": -0.2 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
-            "opacity": 1
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.2
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1,
+            "visibleIn": [
+              "scan"
+            ]
           },
           {
             "id": "character",
             "path": "assets/img/characters/fata_char.png",
             "scale": 1,
-            "position": { "x": -0.3, "y": 0, "z": 0 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
-            "opacity": 1
+            "position": {
+              "x": -0.3,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1,
+            "visibleIn": [
+              "scan"
+            ]
           },
           {
             "id": "foreground",
             "path": "assets/img/characters/foregroundfata.png",
             "scale": 1.5,
-            "position": { "x": 0, "y": 0.2, "z": 0.1 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
-            "opacity": 1
+            "position": {
+              "x": 0,
+              "y": 0.2,
+              "z": 0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1,
+            "visibleIn": [
+              "scan"
+            ]
           }
         ],
         "3d": []
       },
-      
       "layers": {
         "background": {
           "path": "assets/img/characters/backgroundfata.png",
-          "scale": 24.0,
-          "position": { "x": 0, "y": 0, "z": -8 },
-          "order": 0
+          "scale": 24,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": -8
+          },
+          "order": 0,
+          "visibleIn": [
+            "immersive"
+          ]
         },
         "waterfall": {
           "type": "video",
@@ -67,33 +121,61 @@
           "tolerance": 0.4,
           "smoothness": 0.08,
           "spill": 0.5,
-          "scale": 9.0,
-          "position": { "x": -1.5, "y": 3.2, "z": -7.5 },
+          "scale": 9,
+          "position": {
+            "x": -1.5,
+            "y": 3.2,
+            "z": -7.5
+          },
           "loop": true,
           "muted": true,
-          "order": 1.5
+          "order": 1.5,
+          "visibleIn": [
+            "immersive"
+          ],
+          "scaleX": 1
         },
         "middleground": {
           "path": "assets/img/characters/middlegroundfata.png",
-          "scale": 8.0,
-          "position": { "x": 0, "y": 0, "z": -5 },
-          "order": 1
+          "scale": 8,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": -5
+          },
+          "order": 1,
+          "visibleIn": [
+            "immersive"
+          ]
         },
         "character": {
           "path": "assets/img/characters/fata_char.png",
           "scale": 2.5,
-          "position": { "x": -1.5, "y": 0, "z": -4 },
-          "order": 2
+          "position": {
+            "x": -1.5,
+            "y": 0,
+            "z": -4
+          },
+          "order": 2,
+          "visibleIn": [
+            "immersive"
+          ]
         },
         "foreground": {
           "path": "assets/img/characters/foregroundfata.png",
-          "scale": 6.0,
+          "scale": 6,
           "scaleX": 1.5,
-          "position": { "x": 0, "y": 1.0, "z": -3.8 },
-          "order": 3
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -3.8
+          },
+          "order": 3,
+          "visibleIn": [
+            "immersive"
+          ]
         }
       },
-      
       "sounds": {
         "ambient": {
           "path": "assets/sound/water_running.mp3",
@@ -101,21 +183,25 @@
           "loop": true,
           "refDistance": 2,
           "rolloffFactor": 1.5,
-          "maxDistance": 15
+          "maxDistance": 15,
+          "visibleIn": [
+            "immersive"
+          ]
         },
         "intro": {
           "path": "assets/sound/water_running.mp3",
-          "volume": 0.7,
-          "loop": true
+          "volume": 0,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
-
       },
-      
       "interaction": {
         "proximityDistance": 3,
         "subtitleTriggerDistance": 2.5
       },
-      
       "subtitles": {
         "greeting": {
           "fr": "Bienvenue, voyageur. Je suis A Fata, gardienne des eaux sacrées de cette île. Écoute le murmure de la source... Elle raconte les secrets anciens de notre terre.",
@@ -132,31 +218,50 @@
       "name": "A Strega",
       "description": "Prodige de l'île de Prosa, a Strega est chargée de maintenir l'infertilité des terres de Corse.",
       "descriptionCorsican": "Prodigia di l'isula di Prosa, a Strega hè incaricata di mantene a sterilità di e terre di Corsica.",
+      "region": "CORSE",
       "themeColor": "#10032e",
       "portrait": "assets/img/characters/strega_char.png",
-      
       "assets": {
         "2d": [
           {
             "id": "character",
             "path": "assets/img/characters/strega_char.png",
-            "scale": 1,
-            "position": { "x": 0, "y": 0, "z": 0 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
-            "opacity": 1
+            "scale": 1.02,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1,
+            "visibleIn": [
+              "immersive",
+              "scan"
+            ]
           },
           {
             "id": "background",
             "path": "assets/img/characters/strega_bg.png",
-            "scale": 1.5,
-            "position": { "x": 0, "y": 0, "z": -0.1 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "scale": 1.88,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
             "opacity": 0.8
           }
         ],
         "3d": []
       },
-      
       "sounds": {
         "intro": {
           "path": "assets/sound/SON1.mp3",
@@ -170,40 +275,1230 @@
       "name": "A Signadora",
       "description": "A Signadora est une guérisseuse de 60 ans, dont le visage marqué par le soleil disparaît souvent sous un voile noir usé. Vêtue d'un châle beige, elle fréquente la vieille fontaine de Corti pour soigner les malades avec ses prières et ses herbes. À sa ceinture pend une fiole d'huile d'olive rarissime qu'elle utilise pour diagnostiquer le mal.",
       "descriptionCorsican": "A Signadora hè una guaritrice di 60 anni, chì a so faccia marcata da u sole sparisce spessu sottu à un velu neru usatu. Vestita d'un scialle beige, frequenta a vechja funtana di Corti per curà i malati cù e so preghiere è e so erbe. À a so cintura pende una fiala d'oliu d'aliva rarezza ch'ella adopra per diagnosticà u male.",
+      "region": "CORSE",
       "themeColor": "#8B7355",
       "portrait": "assets/img/characters/signadora_char.png",
-      
       "marker": {
         "file": "assets/markers/signadora.mind",
         "targetIndex": 0
       },
-      
       "assets": {
         "2d": [
           {
             "id": "character",
             "path": "assets/img/characters/signadora_char.png",
             "scale": 0.6,
-            "position": { "x": -0.4, "y": 0, "z": 0 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "position": {
+              "x": -0.4,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
             "opacity": 1
           },
           {
             "id": "background",
             "path": "assets/img/characters/signadora_bg.png",
-            "scale": 1.0,
-            "position": { "x": 0, "y": 0, "z": -0.1 },
-            "rotation": { "x": 0, "y": 0, "z": 0 },
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
             "opacity": 1
           }
         ],
         "3d": []
       },
       "sounds": {
-          "intro": {
+        "intro": {
           "path": "assets/sound/fountain.mp3",
           "volume": 0.7,
           "loop": true
+        }
+      }
+    },
+    {
+      "id": "fullettu",
+      "name": "U Fullettu",
+      "description": "U Fullettu, pourrait être un enfant d'une dizaine d'années. Il porte un bandeau blanc sur le front. Sa caractéristique la plus frappante est son bras gauche manquant, remplacé par une prothèse de fer. Vif comme l'air, malicieux et jouant de mauvais tours, il n'offre sa loyauté qu'à ceux qui peuvent remplir son estomac.",
+      "descriptionCorsican": "U Fulettu puderia esse un zitellu d'una decina d'anni. Porta un fasciu biancu nant'à u fronte. A so particularità a più rimarchevule hè ch'ellu li manca u bracciu mancu, rimpiazzatu da una prutesi di ferru. Vivu cum'è u ventu, astutu è burlone, li piace à fà scherzi – à spessu gattivi.",
+      "region": "CORSE",
+      "themeColor": "#7CB342",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "squadra",
+      "name": "A Squadra d'Arozza",
+      "description": "A Squadra d'Arozza est une unité d'élite, agissant sur Corti, vouée corps et âme à A Strega. Ils portent un masque à gaz et une armure tactique lourde dissimulée sous un long manteau sombre dont la doublure vert acide crée un fort contraste.",
+      "descriptionCorsican": "A Squadra d'Arozza hè un'unità d'elita, chì opera in Corti, cunsacrata corpu è anima à A Strega. Portanu un maschera à gasu è un'armatura tattica greve piatta sottu à un longu mantellu scuru, chì a so fodera di culore verde àcidu crea un cuntrastu forte.",
+      "region": "CORSE",
+      "themeColor": "#2E7D32",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "magu",
+      "name": "U Magu",
+      "description": "U Magu est un érudit de Prosa chargé des moulins à vent de l'île et de tout ce qui touche à la médecine, mêlant savoir technique, botanique et expérimentation sur les corps.",
+      "descriptionCorsican": "U Magu hè un omu sapiente di Prosa, incaricatu di i mulini à ventu è di tuttu ciò chì tocca à a medicina, mischjendu sapè tecnicu è erbe.",
+      "region": "CORSE",
+      "themeColor": "#5D4037",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "mazzeru",
+      "name": "U Mazzeru",
+      "description": "Âgé de 45 ans, cet ancien dignitaire du gouvernement de l'île de Prosa, nommé U Sarpu à Sette Capi est devenu une figure tragique, incarnant le personnage mythique corse du Mazzeru. Désormais emprisonné et aveugle, il a développé une perception proche de la Seconda Vista.",
+      "descriptionCorsican": "À l'età di 45 anni, st'anzianu capu di u guvernu di l'isula di Prosa, chjamatu U Sarpu à Sette Capi, hè diventatu una figura tragica, incarnendu u Mazzeru à u core d'un mondu dopu à l'apocalisse.",
+      "region": "CORSE",
+      "themeColor": "#37474F",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "strigone",
+      "name": "U Strigone",
+      "description": "Âgé de 40 ans, U Strigone est un calculateur à l'élégance froide qui dirige les forces militaires de Prosa depuis le sommet de sa tour de verre. C'est le U Sarpu à Sette Capi.",
+      "descriptionCorsican": "À l'età di 40 anni, U Strigone hè un omu calculatore, d'una eleganza fredda, chì cumanda e forze militare di Prosa da a cima di a so torre di vetru. Hè u Sarpu à Sette Capi.",
+      "region": "CORSE",
+      "themeColor": "#1A237E",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "spallistu",
+      "name": "U Spallistu",
+      "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons.",
+      "descriptionCorsican": "U Spallistu hè un pastore d'una cinquantina d'anni, cù un sguardu stancu chì pare purtà u pesu d'un seculu. Porta un mantellu fattu di pelli d'animali.",
+      "region": "CORSE",
+      "themeColor": "#795548",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "orcu",
+      "name": "L'Orcu",
+      "description": "L'Orcu est une force de la nature massive et imposante, un colosse silencieux et qui observe longuement ses interlocuteurs avant de parler. C'est un passeur méfiant qui accepte d'aider le joueur à traverser la mer vers l'île de Prosa.",
+      "descriptionCorsican": "L'Orcu hè una forza di a natura, massicciu è imponente, un colossu zittu chì feghja longamente à quelli chì li parlanu, prima d'apre a bocca.",
+      "region": "CORSE",
+      "themeColor": "#4E342E",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "garagaï",
+      "name": "Lou Garagaï",
+      "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#6D4C41",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "drac",
+      "name": "Lou Drac",
+      "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#FF5722",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "cabrodor",
+      "name": "La Cabro d'Or",
+      "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#FFD700",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "matagot",
+      "name": "Le Matagot",
+      "description": "Petit chat noir et maigre, aux yeux d'un blanc perçant. Sa démarche fluide et silencieuse. Il se glisse entre les ruines, observant et parfois volant de la nourriture.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#212121",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "lavandula",
+      "name": "Fada Lavandula",
+      "description": "Vieille femme au dos voûté, mains tachées de sève et d'huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#9C27B0",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "gyptisprotis",
+      "name": "Gyptis e Protis",
+      "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d'ancrage.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#0288D1",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "tarasca",
+      "name": "La Tarasca",
+      "description": "Camion de guerre improvisé, la Tarasca avance comme une bête mécanique. Là où elle passe, il ne reste que le silence et la cendre.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#B71C1C",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "coulobre",
+      "name": "La Coulobre",
+      "description": "Un brouillard dense et jaunâtre chargé d'odeurs de métal et de pourriture. Son odeur attire de nombreux serpents. Elle ne fait pas de bruit, mais marque ceux qui la traversent.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#827717",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "drape",
+      "name": "Lou Drapé",
+      "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
+      "descriptionProvencal": "Description en provençal...",
+      "region": "PROVENCE",
+      "themeColor": "#424242",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "livia",
+      "name": "Livia",
+      "fullName": "Livia Albertini",
+      "description": "Forgeronne depuis l'enfance, Livia fut chassée lorsque le clan de Corti réquisitionna les forges. Cachée au cœur de la cité, elle laissa d'abord la colère la guider avant de mettre son savoir en secret au service des réfugiés.",
+      "descriptionCorsican": "Fabbra di a zitellina, Livia hè stata cacciata quandu u clan di Corti hà requisitu e fabbriche. Nascosta in u core di a cità, hà lasciatu prima a rabbia guidalla prima di mette u so sapè in secretu à u serviziu di i rifugiati.",
+      "region": "CORSE",
+      "characterType": "player",
+      "themeColor": "#D84315",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "orsetta",
+      "name": "Orsetta",
+      "fullName": "Orsetta Scampini",
+      "description": "Nourrie des récits marins de son grand-père, Orsetta comprit très tôt la mer. Après la destruction du navire familial par une faction inconnue, elle survécut seule sur Corti, où des vestiges technologiques échoués lui permirent de créer une radio.",
+      "descriptionCorsican": "Nutruta di i raconti marini di u so nonnu, Orsetta hà capitu assai prestu a mare. Dopu a distruzzione di u navilu familiali da una fazione sconosciuta, hà sopravvissutu sola nantu à Corti.",
+      "region": "CORSE",
+      "characterType": "player",
+      "themeColor": "#00ACC1",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "bastianu",
+      "name": "Bastianu",
+      "fullName": "Bastianu Paoli",
+      "description": "Garde-chasse de Corti, Bastianu rompit avec le clan après avoir saboté ses opérations et sauvé des rebelles. Réfugié dans le maquis avec une radio volée, il devint une légende, l'Ombre du maquis.",
+      "descriptionCorsican": "Guardia di Corti, Bastianu hà rottu cù u clan dopu avè sabotatu e so operazioni è salvatu i ribelli. Rifugiatu in u maquis cù una radio rubata, hè diventatu una legenda, l'Ombra di u maquis.",
+      "region": "CORSE",
+      "characterType": "player",
+      "themeColor": "#33691E",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "marc",
+      "name": "Marc",
+      "fullName": "Marc Gallafrio",
+      "description": "Ancien responsable de la sécurité civile, Marc a consacré sa vie à la gestion de crises où la moindre hésitation pouvait être fatale. Il sait reconnaître l'instant précis où ordonner l'arrêt total pour laisser passer le danger.",
+      "region": "PROVENCE",
+      "characterType": "player",
+      "themeColor": "#1565C0",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "fullName": "Leo Panisson",
+      "description": "Expert en mécanique, Léo a passé sa vie à démonter et réparer des machines. Il y a dix ans, lors d'une attaque de la Tarasca, il a perdu plusieurs proches ; depuis, il s'est installé près de l'ancienne université de Toulon.",
+      "region": "PROVENCE",
+      "characterType": "player",
+      "themeColor": "#F57C00",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
+        }
+      }
+    },
+    {
+      "id": "valerie",
+      "name": "Docteur Valérie",
+      "fullName": "Dr. Valérie Brauquier",
+      "description": "Ancienne chercheuse en microbiologie, Valérie a passé des années isolée, obsédée par la découverte de nouveaux médicaments naturels. Pragmatique et méthodique, elle prépare ses expériences et collecte ses ressources avec soin.",
+      "region": "PROVENCE",
+      "characterType": "player",
+      "themeColor": "#00897B",
+      "portrait": "assets/img/characters/placeholder_char.png",
+      "assets": {
+        "2d": [
+          {
+            "id": "character",
+            "path": "assets/img/characters/placeholder_char.png",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 1
+          },
+          {
+            "id": "background",
+            "path": "assets/img/characters/placeholder_bg.png",
+            "scale": 1.5,
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -0.1
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "opacity": 0.8
+          }
+        ],
+        "3d": []
+      },
+      "sounds": {
+        "intro": {
+          "path": "assets/sound/placeholder.mp3",
+          "volume": 0.7,
+          "loop": false
         }
       }
     }

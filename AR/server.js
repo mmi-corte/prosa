@@ -110,6 +110,53 @@ const mimeTypes = {
 const server = https.createServer(options, (req, res) => {
   console.log(`${req.method} ${req.url}`);
 
+  // Handle POST requests for saving JSON
+  if (req.method === 'POST' && req.url === '/api/save-characters') {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      try {
+        // Validate JSON
+        const data = JSON.parse(body);
+        
+        // Save to file
+        const filePath = path.join(__dirname, 'data', 'characters.json');
+        fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8', (err) => {
+          if (err) {
+            console.error('Error saving characters.json:', err);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to save file' }));
+          } else {
+            console.log('✅ characters.json saved successfully');
+            res.writeHead(200, { 
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            });
+            res.end(JSON.stringify({ success: true }));
+          }
+        });
+      } catch (parseError) {
+        console.error('Invalid JSON:', parseError);
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid JSON' }));
+      }
+    });
+    return;
+  }
+  
+  // Handle OPTIONS for CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+    res.end();
+    return;
+  }
+
   // Parse URL
   let filePath = '.' + req.url;
   if (filePath === './') {

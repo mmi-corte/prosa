@@ -34,6 +34,7 @@ var textureLoader;
 
 // Character demo state
 var characterData = null; // Loaded from JSON
+var jsonSettings = null; // Global settings from JSON
 var characterLayers = []; // Array of layer meshes
 var characterGroup = null; // Group containing all layers
 var characterSound = null; // Spatialized audio
@@ -565,6 +566,9 @@ function startCameraAR() {
     updateStatus('Trouvez la clé ! Écoutez le son.');
     fallbackAnimate();
     
+    // Show and initialize debug panel toggle
+    initDebugPanel();
+    
   }).catch(function(err) {
     console.error('Camera access error:', err);
     debugLog('Camera error: ' + err.message);
@@ -901,6 +905,9 @@ function loadCharacterData(callback) {
       if (xhr.status === 200) {
         try {
           var data = JSON.parse(xhr.responseText);
+          // Store global settings
+          jsonSettings = data.settings || {};
+          console.log('Loaded JSON settings:', jsonSettings);
           // Find the character by ID
           var characters = data.characters || [];
           for (var i = 0; i < characters.length; i++) {
@@ -924,6 +931,24 @@ function loadCharacterData(callback) {
     }
   };
   xhr.send();
+}
+
+/**
+ * Check if an asset is visible in a given mode
+ * @param {Object} asset - The asset object with optional visibleIn property
+ * @param {string} mode - The mode to check ('scan' or 'immersive')
+ * @returns {boolean} true if the asset should be visible
+ */
+function isVisibleInMode(asset, mode) {
+  // If no visibleIn specified, use default from settings (or show in all modes)
+  var defaultVisibility = (jsonSettings && jsonSettings.defaultVisibility) || ['scan', 'immersive'];
+  var visibility = asset.visibleIn || defaultVisibility;
+  
+  // Handle both array and string formats
+  if (Array.isArray(visibility)) {
+    return visibility.indexOf(mode) !== -1;
+  }
+  return visibility === mode;
 }
 
 /**
@@ -973,10 +998,17 @@ function setupCharacterScene() {
       return (layers[a].order || 0) - (layers[b].order || 0);
     });
     
-    // Load each layer
+    // Load each layer (filtered by visibility)
     for (var i = 0; i < layerKeys.length; i++) {
       (function(layerKey) {
         var layerConfig = layers[layerKey];
+        
+        // Check if this layer should be visible in immersive mode
+        if (!isVisibleInMode(layerConfig, 'immersive')) {
+          console.log('Skipping layer (not visible in immersive mode):', layerKey);
+          return;
+        }
+        
         var assetPath = CONFIG.assetBasePath + layerConfig.path;
         
         // Check if this is a video layer
@@ -1012,6 +1044,10 @@ function loadImageLayer(layerKey, layerConfig, imagePath) {
     // Apply horizontal stretch if specified
     if (layerConfig.scaleX) {
       width = width * layerConfig.scaleX;
+    }
+    // Apply vertical stretch if specified
+    if (layerConfig.scaleY) {
+      height = height * layerConfig.scaleY;
     }
     
     var geometry = new THREE.PlaneGeometry(width, height);
@@ -1096,7 +1132,8 @@ var ChromaKeyShader = {
  * Load a video layer with chroma key (green screen) support
  */
 function loadVideoLayer(layerKey, layerConfig, videoPath) {
-  console.log('Loading video layer:', layerKey, videoPath);
+  console.log('Loading video layer:', layerKey, 'from:', videoPath);
+  updateStatus('Chargement vidéo: ' + layerKey, 'info');
   
   // Create video element
   var video = document.createElement('video');
@@ -1108,6 +1145,14 @@ function loadVideoLayer(layerKey, layerConfig, videoPath) {
   video.setAttribute('playsinline', '');
   video.setAttribute('webkit-playsinline', '');
   
+  // Debug: log all video events
+  video.addEventListener('loadstart', function() {
+    console.log('Video loadstart:', layerKey);
+  });
+  video.addEventListener('canplay', function() {
+    console.log('Video can play:', layerKey);
+  });
+  
   // Wait for video metadata to load
   video.addEventListener('loadedmetadata', function() {
     console.log('Video metadata loaded:', layerKey, video.videoWidth, 'x', video.videoHeight);
@@ -1116,7 +1161,7 @@ function loadVideoLayer(layerKey, layerConfig, videoPath) {
     var videoTexture = new THREE.VideoTexture(video);
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
-    videoTexture.format = THREE.RGBFormat;
+    // Note: RGBFormat deprecated in Three.js r128+, VideoTexture handles format automatically
     
     // Calculate aspect ratio and size
     var aspectRatio = video.videoWidth / video.videoHeight;
@@ -1186,16 +1231,33 @@ function loadVideoLayer(layerKey, layerConfig, videoPath) {
     // Start playing
     video.play().then(function() {
       console.log('Video playing:', layerKey);
+      updateStatus('Vidéo active', 'success');
     }).catch(function(err) {
-      console.warn('Video autoplay failed:', layerKey, err);
-      // Will need user interaction to play
+      console.warn('Video autoplay failed:', layerKey, err, '- will play on user interaction');
+      updateStatus('Touchez l\'écran pour activer la vidéo', 'warning');
+      // Add one-time click handler to start video
+      var startVideo = function() {
+        video.play().then(function() {
+          console.log('Video started on user interaction:', layerKey);
+          updateStatus('Vidéo activée', 'success');
+        }).catch(function(e) {
+          console.error('Video still failed to play:', layerKey, e);
+          updateStatus('Erreur vidéo', 'error');
+        });
+        document.removeEventListener('click', startVideo);
+        document.removeEventListener('touchstart', startVideo);
+      };
+      document.addEventListener('click', startVideo, { once: true });
+      document.addEventListener('touchstart', startVideo, { once: true });
     });
     
-    console.log('Loaded video layer:', layerKey, 'at z:', layerConfig.position.z);
+    console.log('Loaded video layer:', layerKey, 'at z:', layerConfig.position.z, 'size:', width.toFixed(2), 'x', height.toFixed(2));
   });
   
   video.addEventListener('error', function(e) {
-    console.error('Failed to load video layer:', layerKey, e);
+    console.error('Failed to load video layer:', layerKey, 'path:', videoPath, 'error:', e.target.error);
+    updateStatus('Erreur chargement vidéo: ' + layerKey, 'error');
+    // Don't add a placeholder - it's too intrusive. Just log the error.
   });
   
   // Start loading
@@ -1224,6 +1286,13 @@ function setupCharacterSound() {
   }
   
   var soundConfig = characterData.sounds.ambient;
+  
+  // Check if this sound should be visible in immersive mode
+  if (!isVisibleInMode(soundConfig, 'immersive')) {
+    console.log('Ambient sound not visible in immersive mode, skipping');
+    return;
+  }
+  
   var soundPath = CONFIG.assetBasePath + soundConfig.path;
   
   console.log('Setting up character sound:', soundPath);
@@ -1238,7 +1307,7 @@ function setupCharacterSound() {
     characterSound.setRefDistance(soundConfig.refDistance || 2);
     characterSound.setRolloffFactor(soundConfig.rolloffFactor || 1.5);
     characterSound.setMaxDistance(soundConfig.maxDistance || 15);
-    characterSound.setVolume(soundConfig.volume || 0.8);
+    characterSound.setVolume(soundConfig.volume !== undefined ? soundConfig.volume : 0.8);
     characterSound.setLoop(true); // Always loop ambient sound
     
     console.log('Audio loop enabled:', characterSound.getLoop());
@@ -2053,4 +2122,250 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
   init();
+}
+
+// ========================================
+// Debug Panel for VR Fallback Mode
+// ========================================
+
+// Default values for reset
+var DEBUG_DEFAULTS = {
+  standingHeight: 1.7,
+  stepLength: 0.8,
+  stepThreshold: 1.0,
+  stepCooldown: 350,
+  rotationThreshold: 30,
+  positionSmoothing: 0.1,
+  orientationSmoothing: 0.15,
+  minCrouchHeight: 0.5
+};
+
+var debugPanelVisible = false;
+var debugUpdateInterval = null;
+
+/**
+ * Initialize debug panel UI and controls
+ */
+function initDebugPanel() {
+  var toggleBtn = document.getElementById('debug-toggle');
+  var panel = document.getElementById('debug-panel');
+  var closeBtn = document.getElementById('debug-close');
+  var resetBtn = document.getElementById('debug-reset');
+  
+  if (!toggleBtn || !panel) {
+    console.log('Debug panel elements not found');
+    return;
+  }
+  
+  // Show toggle button
+  toggleBtn.style.display = 'flex';
+  
+  // Toggle panel visibility
+  toggleBtn.addEventListener('click', function() {
+    debugPanelVisible = !debugPanelVisible;
+    panel.style.display = debugPanelVisible ? 'block' : 'none';
+    
+    if (debugPanelVisible) {
+      startDebugUpdates();
+      syncSlidersToCurrentValues();
+    } else {
+      stopDebugUpdates();
+    }
+  });
+  
+  // Close button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      debugPanelVisible = false;
+      panel.style.display = 'none';
+      stopDebugUpdates();
+    });
+  }
+  
+  // Reset button
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetDebugValues);
+  }
+  
+  // Setup slider event listeners
+  setupDebugSliders();
+}
+
+/**
+ * Sync sliders to current variable values
+ */
+function syncSlidersToCurrentValues() {
+  setSliderValue('height', standingHeight);
+  setSliderValue('stepLength', stepLength);
+  setSliderValue('stepThreshold', stepThreshold);
+  setSliderValue('stepCooldown', stepCooldown);
+  setSliderValue('rotationThreshold', rotationThreshold);
+  setSliderValue('positionSmoothing', positionSmoothing);
+  setSliderValue('orientationSmoothing', orientationSmoothing);
+  setSliderValue('minCrouchHeight', minCrouchHeight);
+}
+
+/**
+ * Set a slider's value and update display
+ */
+function setSliderValue(name, value) {
+  var slider = document.getElementById('slider-' + name);
+  var display = document.getElementById('val-' + name);
+  
+  if (slider) {
+    slider.value = value;
+  }
+  if (display) {
+    display.textContent = typeof value === 'number' ? value.toFixed(2) : value;
+  }
+}
+
+/**
+ * Setup event listeners for all debug sliders
+ */
+function setupDebugSliders() {
+  // Height slider
+  bindSlider('height', function(val) {
+    standingHeight = val;
+    // Also update current height if not crouching
+    if (currentHeight > val - 0.3) {
+      currentHeight = val;
+    }
+  });
+  
+  // Step length slider
+  bindSlider('stepLength', function(val) {
+    stepLength = val;
+  });
+  
+  // Step threshold (sensitivity) slider
+  bindSlider('stepThreshold', function(val) {
+    stepThreshold = val;
+  });
+  
+  // Step cooldown slider
+  bindSlider('stepCooldown', function(val) {
+    stepCooldown = val;
+  });
+  
+  // Rotation threshold slider
+  bindSlider('rotationThreshold', function(val) {
+    rotationThreshold = val;
+  });
+  
+  // Position smoothing slider
+  bindSlider('positionSmoothing', function(val) {
+    positionSmoothing = val;
+  });
+  
+  // Orientation smoothing slider
+  bindSlider('orientationSmoothing', function(val) {
+    orientationSmoothing = val;
+  });
+  
+  // Min crouch height slider
+  bindSlider('minCrouchHeight', function(val) {
+    minCrouchHeight = val;
+  });
+}
+
+/**
+ * Bind a slider to update a value and display
+ */
+function bindSlider(name, onchange) {
+  var slider = document.getElementById('slider-' + name);
+  var display = document.getElementById('val-' + name);
+  
+  if (!slider) return;
+  
+  slider.addEventListener('input', function() {
+    var val = parseFloat(slider.value);
+    
+    // Update display
+    if (display) {
+      display.textContent = val.toFixed(2);
+    }
+    
+    // Call update function
+    if (onchange) {
+      onchange(val);
+    }
+  });
+}
+
+/**
+ * Reset all debug values to defaults
+ */
+function resetDebugValues() {
+  standingHeight = DEBUG_DEFAULTS.standingHeight;
+  stepLength = DEBUG_DEFAULTS.stepLength;
+  stepThreshold = DEBUG_DEFAULTS.stepThreshold;
+  stepCooldown = DEBUG_DEFAULTS.stepCooldown;
+  rotationThreshold = DEBUG_DEFAULTS.rotationThreshold;
+  positionSmoothing = DEBUG_DEFAULTS.positionSmoothing;
+  orientationSmoothing = DEBUG_DEFAULTS.orientationSmoothing;
+  minCrouchHeight = DEBUG_DEFAULTS.minCrouchHeight;
+  
+  // Reset current height if not crouching significantly
+  currentHeight = standingHeight;
+  
+  // Sync sliders
+  syncSlidersToCurrentValues();
+  
+  console.log('Debug values reset to defaults');
+}
+
+/**
+ * Start interval to update live debug info
+ */
+function startDebugUpdates() {
+  if (debugUpdateInterval) return;
+  
+  debugUpdateInterval = setInterval(updateDebugInfo, 100);
+}
+
+/**
+ * Stop live debug info updates
+ */
+function stopDebugUpdates() {
+  if (debugUpdateInterval) {
+    clearInterval(debugUpdateInterval);
+    debugUpdateInterval = null;
+  }
+}
+
+/**
+ * Update live debug information display
+ */
+function updateDebugInfo() {
+  var posEl = document.getElementById('debug-live-pos');
+  var heightEl = document.getElementById('debug-live-height');
+  var stateEl = document.getElementById('debug-live-state');
+  var accelEl = document.getElementById('debug-live-accel');
+  
+  if (posEl) {
+    posEl.textContent = 'Pos: ' + userPosition.x.toFixed(2) + ', ' + userPosition.z.toFixed(2);
+  }
+  
+  if (heightEl) {
+    heightEl.textContent = 'Height: ' + currentHeight.toFixed(2) + 'm';
+  }
+  
+  if (stateEl) {
+    var state = 'Idle';
+    if (isMoving) state = 'Walking';
+    if (isCrouching) state += ' (Crouched)';
+    stateEl.textContent = 'State: ' + state;
+  }
+  
+  if (accelEl) {
+    var avgAccel = 0;
+    if (accelHistory.length > 0) {
+      for (var i = 0; i < accelHistory.length; i++) {
+        avgAccel += accelHistory[i];
+      }
+      avgAccel /= accelHistory.length;
+    }
+    accelEl.textContent = 'Accel: ' + avgAccel.toFixed(2) + ' (threshold: ' + stepThreshold.toFixed(1) + ')';
+  }
 }
