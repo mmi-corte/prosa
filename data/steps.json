@@ -590,5 +590,148 @@
       }
     }
   },
-  "3": {}
+  "3": {
+    "010": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "04"
+        }
+      }
+    },
+    "020": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "06"
+        }
+      }
+    },
+    "030": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "06"
+        }
+      }
+    },
+    "040": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "07"
+        }
+      }
+    },
+    "050": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09"
+        }
+      }
+    },
+    "060": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "08"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "05"
+        }
+      }
+    },
+    "070": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "05"
+        }
+      }
+    },
+    "080": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09"
+        }
+      }
+    },
+    "090": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "10"
+        }
+      }
+    },
+    "100": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "11"
+        }
+      }
+    },
+    "110": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "12"
+        }
+      }
+    },
+    "120": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "13"
+        }
+      }
+    },
+    "130": {
+      "actionType": "dialog",
+      "action": "1",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "fin_strigonu"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "fin_mazzeru"
+        }
+      }
+    }
+  }
 }
