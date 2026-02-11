@@ -173,6 +173,15 @@
     }
   },
   "3": {
+    "11": {
+      "1": {
+        "game": "cle_epreuve",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
     "12": {
       "1": {
         "game": "drac_affrontement",

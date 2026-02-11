@@ -2998,6 +2998,62 @@
     }
   },
   "3": {
+    "11": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous atteignez enfin la base de la Tour principale. L’édifice domine le reste de l’île : une haute structure de métal blanc et de verre, battue en permanence par les vents puissants des hauteurs."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous arrivez devant l’entrée principale. La porte d’accès, massive, est verrouillée par un système mécanique renforcé. Un unique garde monte la faction devant elle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais ce n’est pas un simple soldat : tout chez lui trahit l’entraînement et l’endurance de quelqu’un capable de rester immobile pendant des heures. Ses épaules sont larges, son regard acéré."
+            }
+          },
+          {
+            "text": {
+              "fr": "À sa ceinture pend un trousseau de clés. L’une d’elles, plus lourde, plus ancienne que les autres, est celle qui ouvre le passage vers l’intérieur de la Tour."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une fois la clé récupérée, la lourde porte cède dans un grincement profond. Vous pénétrez seul dans l’antre du pouvoir de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Derrière ces murs se cache le maître de la Tour, celui qui dirige l’île, celui qui profite de ses richesses… et celui que vous devez destituer. "
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "12": {
       "1": {
         "default": {
