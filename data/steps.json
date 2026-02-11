@@ -700,6 +700,10 @@
         "1": {
           "type": "win",
           "nextStep": "11"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "10"
         }
       }
     },

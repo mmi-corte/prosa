@@ -2998,6 +2998,45 @@
     }
   },
   "3": {
+    "10": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous arrivez aux portes de la ville, équipé et entouré de vos alliés. L’entrée est verrouillée sous la surveillance de deux gardes lourdement armés, fusils d’assaut modernes en main, armures épaisses couvrant leurs silhouettes rigides."
+            }
+          },
+          {
+            "text": {
+              "fr": "Aux côtés des rebelles, vous choisissez de faire front et de les affronter sans détour."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous forcez l’entrée de la ville. Tandis que vos alliés retiennent les gardes dans un échange brutal, vous vous élancez vers la Tour qui domine le centre urbain."
+            }
+          },
+          {
+            "text": {
+              "fr": "Autour de vous, les habitants s’affolent, les cris se mêlent aux ordres hurlés. L’armée se mobilise, déterminée à vous arrêter."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais vous avancez sans hésiter, animé par une seule certitude : atteindre le cœur de l’organisation Prosa, quoi qu’il en coûte."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
     "11": {
       "1": {
         "default": {
