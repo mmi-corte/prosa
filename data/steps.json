@@ -690,6 +690,20 @@
         "1": {
           "type": "win",
           "nextStep": "10"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "09"
+        }
+      }
+    },
+    "091": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "10"
         }
       }
     },

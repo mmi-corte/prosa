@@ -2998,6 +2998,152 @@
     }
   },
   "3": {
+    "09": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous quittez votre position pour vous enfoncer dans les profondeurs de l'île. La nuit de Prosa se dévoile, entre maquis dense et moulins immobiles sur les crêtes."
+            }
+          },
+          {
+            "text": {
+              "fr": "Guidé par des traces invisibles, vous atteignez une clairière dissimulée où un camp rebelle s’organise avec une rigueur militaire."
+            }
+          },
+          {
+            "text": {
+              "fr": "Votre arrivée fige l'instant : les conversations cessent, les regards se braquent. Seul et sans guide, votre présence suscite une hostilité froide."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous êtes encerclé. Ici, survivre ne suffit pas. Face à ces visages fermés, c’est à vous de briser le silence. Vous devez prouver que votre parcours n'est pas une fuite égoïste."
+            }
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une fois sa fiabilité prouvée, les rebelles l’accueil à bras ouvert. Vous quitterez ce refuge demain pour frapper au cœur de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Demain, votre lutte véritable commence."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "U Mazzeru progresse d'un pas sûr dans les tunnels de maintenance, guidé par une mémoire forgée dans la lutte."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous suivez son rythme régulier jusqu'à déboucher à l’air libre, là où la nuit de Prosa vous enveloppe : un maquis dense aux senteurs sauvages, bercé par le murmure lointain des moulins."
+            }
+          },
+          {
+            "text": {
+              "fr": "Après une marche furtive à travers les ravins, une clairière se dévoile. Des lanternes tamisées éclairent un camp secret, organisé avec une précision chirurgicale."
+            }
+          },
+          {
+            "text": {
+              "fr": "Si l’arrivée de votre guide ravive une braise parmi les combattants, votre présence, elle, suscite la méfiance. Vous n'êtes qu'un étranger sur cette île."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Alors que les murmures hostiles s'élèvent, U Mazzeru se redresse et impose le silence d'un simple geste avant de prendre la parole."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Regardez-le bien. Ce n’est pas le moment du doute, mais la volonté de voir Prosa respirer à nouveau. Il a traversé l’ombre à mes côtés sans faiblir.\"",
+              "cor": "\"Fighjatellu bè. Ùn hè micca l’ora di u dubbitu, ma a vulintà di vede Prosa rinvivisce. Hà francatu l’ombra à fiancu à mè senza trima.\""
+            },
+            "character": "mazzeru"
+          },
+          {
+            "text": {
+              "fr": "\"Si nous restons entre nous, nous ne sommes qu’une poignée de spectateurs de notre propre chute. Pour que l’étincelle devienne un incendie, nous avons besoin de mains neuves et de cœurs qui n’ont pas encore appris à désespérer.\"",
+              "cor": "\"S’è no stemu trà di noi, ùn simu chè una manata di spettatori di a nostra sprofundura. Per fà chì l’incenti diventi un focu maiò, avemu bisognu di mani nove è di cori chì ùn anu ancu amparatu à dispirassi.\""
+            },
+            "character": "mazzeru"
+          },
+          {
+            "text": {
+              "fr": "\"Il est venu pour la cause. Demain, il marchera avec nous.\"",
+              "cor": "\"Hè vinutu per a causa. Dumane, marchjerà cun noi.\""
+            },
+            "character": "mazzeru"
+          },
+          {
+            "text": {
+              "fr": "Le silence qui suit ses paroles est dense, chargé d'une tension qui finit par céder. Peu à peu, les regards se font moins acérés ; les visages se détendent."
+            }
+          },
+          {
+            "text": {
+              "fr": "L'accueil est à l'image du camp : sobre et sans fioritures. Un hochement de tête respectueux, un outil qu'on vous tend, une place qu'on vous cède près des braises."
+            }
+          },
+          {
+            "text": {
+              "fr": "Ici, l’heure n’est pas aux célébrations, mais à la convergence des forces. U Mazzeru se tient à vos côtés, sentinelle infatigable dans la nuit."
+            }
+          },
+          {
+            "text": {
+              "fr": "Demain, vous quitterez ce refuge pour frapper au cœur de Prosa. Demain, votre lutte véritable commence."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "10": {
       "1": {
         "default": {
