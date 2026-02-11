@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Case 6 : La Grotte - Évasion Ultime</title>
+    <style>
+        /* --- POLICES --- */
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                 url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                 url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: fallback;
+        }
+
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                 url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                 url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: fallback;
+        }
+
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --background: #0d0c09; /* Plus sombre pour le contraste */
+            --foreground: #ece4cb;
+            --primary: #626247;
+            --accent-red: #c63032;
+            --accent-green: #81cbd6;
+            --dust: #ece4cb;
+            --border: #3a3830;
+            --yellow: #ffdb2c;
+            --font-main: 'Futura', 'Arial Narrow', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: none; /* Empêche le scroll/zoom natif */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-main);
+        }
+
+        /* --- LAYOUT DU JEU --- */
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- UI OVERLAYS --- */
+        .ui-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 12, 9, 0.95); /* Fond semi-transparent sombre */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive font size */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            animation: pulseTitle 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseTitle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.9; }
+        }
+        
+        h2 {
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            color: var(--dust);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            color: var(--yellow);
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 219, 44, 0.3);
+        }
+
+        /* Bouton Stylisé */
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--foreground);
+            border: 2px solid var(--border);
+            padding: 1rem 3rem;
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- HUD (In-game) --- */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--dust);
+            text-transform: uppercase;
+            text-align: right;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px black;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(42, 40, 32, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), #a1e0e8);
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .lives {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .heart {
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent-red);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Étoile/Cœur stylisé */
+            box-shadow: 0 0 10px var(--accent-red);
+            transition: all 0.3s ease;
+        }
+        
+        .heart.lost {
+            background-color: #333;
+            transform: scale(0.8);
+            opacity: 0.5;
+            box-shadow: none;
+        }
+
+        /* --- ZONES TACTILES (Visual Feedback) --- */
+        .touch-feedback {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        #touch-left { left: 0; background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent); }
+        #touch-right { right: 0; background: linear-gradient(-90deg, rgba(255,255,255,0.05), transparent); }
+        
+        .touch-active { opacity: 1 !important; }
+
+        /* --- TUTO MOBILE --- */
+        .tutorial-hint {
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10%;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: fadeOut 3s forwards 2s; /* Disparaît après 5s */
+        }
+        
+        .hand-icon {
+            font-size: 2rem;
+            color: var(--dust);
+            text-shadow: 0 2px 5px black;
+        }
+
+        @keyframes fadeOut { to { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- Feedback visuel tactile -->
+    <div id="touch-left" class="touch-feedback"></div>
+    <div id="touch-right" class="touch-feedback"></div>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+        <div class="progress-label">Distance Sortie</div>
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div id="livesContainer" class="lives"></div>
+    </div>
+
+    <!-- Indices visuels au début -->
+    <div id="mobile-hint" class="tutorial-hint hidden">
+        <div class="hand-icon">👈 Toucher</div>
+        <div class="hand-icon">Toucher 👉</div>
+    </div>
+
+    <!-- ÉCRAN D'ACCUEIL -->
+    <div id="start-screen" class="ui-screen">
+        <h1>L'EFFONDREMENT</h1>
+        <p>Lou Garagai détruit la grotte.<br>Courez vers la sortie avant d'être enseveli.</p>
+        <p style="font-size: 0.9rem; color: var(--accent-green)">
+            <span class="highlight">MOBILE :</span> Touchez gauche/droite pour esquiver.<br>
+            <span class="highlight">PC :</span> Flèches directionnelles.
+        </p>
+        <button class="btn" onclick="startGame()">S'ÉCHAPPER</button>
+    </div>
+
+    <!-- ÉCRAN GAME OVER -->
+    <div id="game-over-screen" class="ui-screen hidden">
+        <h1 style="color: #666">NOIR TOTAL</h1>
+        <p>Un rocher vous assomme. Tout devient froid...</p>
+        <h2>Direction: Prison de Prosa</h2>
+        <button class="btn" onclick="location.reload()">Réessayer</button>
+    </div>
+
+    <!-- ÉCRAN VICTOIRE -->
+    <div id="victory-screen" class="ui-screen hidden">
+        <h1 style="color: var(--accent-green)">LUMIÈRE !</h1>
+        <p>Vous jaillissez hors de la grotte alors qu'elle s'effondre. La forêt luxuriante vous accueille.</p>
+        <h2>Direction: Case 8</h2>
+        <button class="btn" onclick="location.reload()">Rejouer</button>
+    </div>
+</div>
+
+<script>
+    /* =========================================
+       CONFIG & MOTEUR GRAPHIQUE
+       ========================================= */
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false }); // Optimisation
+    
+    // Éléments UI
+    const uiElements = {
+        start: document.getElementById('start-screen'),
+        gameOver: document.getElementById('game-over-screen'),
+        victory: document.getElementById('victory-screen'),
+        hud: document.getElementById('hud'),
+        progressBar: document.getElementById('progressBar'),
+        lives: document.getElementById('livesContainer'),
+        touchLeft: document.getElementById('touch-left'),
+        touchRight: document.getElementById('touch-right'),
+        hint: document.getElementById('mobile-hint')
+    };
+
+    // Configuration Jeu
+    const CONSTANTS = {
+        PLAYER_SPEED: 0.8, // Facteur de vitesse relative à la largeur d'écran
+        GRAVITY: 0.5,
+        DURATION: 30000, // 30 sec
+        COLORS: {
+            bg: '#0d0c09',
+            rock: '#545042',
+            rockLight: '#757060',
+            player: '#81cbd6',
+            playerGlow: 'rgba(129, 203, 214, 0.4)',
+            dust: '#ece4cb',
+            danger: '#c63032'
+        }
+    };
+
+    // État du jeu
+    let state = {
+        running: false,
+        lastTime: 0,
+        timeElapsed: 0,
+        score: 0,
+        shake: 0,
+        rumbleTimer: 0,
+        difficulty: 1,
+        width: 0,
+        height: 0
+    };
+
+    let entities = {
+        player: null,
+        rocks: [],
+        particles: [],
+        telegraphs: [], // Indicateurs de chute
+        walls: [] // Pour l'effet de vitesse
+    };
+
+    let inputs = {
+        left: false,
+        right: false
+    };
+
+    /* =========================================
+       GESTION DES ENTRÉES (MOBILE & DESKTOP)
+       ========================================= */
+    function handleResize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        state.width = canvas.width;
+        state.height = canvas.height;
+        
+        if (entities.player) {
+            entities.player.y = state.height - 120;
+            // Replacer le joueur s'il est hors champ
+            if (entities.player.x > state.width) entities.player.x = state.width / 2;
+        }
+    }
+    window.addEventListener('resize', handleResize);
+
+    // Clavier
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a') inputs.left = true;
+        if (e.key === 'ArrowRight' || e.key === 'd') inputs.right = true;
+    });
+    window.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a') inputs.left = false;
+        if (e.key === 'ArrowRight' || e.key === 'd') inputs.right = false;
+    });
+
+    // Tactile (Multi-touch support)
+    function handleTouch(e) {
+        // e.preventDefault(); // Empêche scroll (géré par CSS touch-action)
+        inputs.left = false;
+        inputs.right = false;
+        
+        uiElements.touchLeft.classList.remove('touch-active');
+        uiElements.touchRight.classList.remove('touch-active');
+
+        for (let i = 0; i < e.touches.length; i++) {
+            const t = e.touches[i];
+            if (t.clientX < state.width / 2) {
+                inputs.left = true;
+                uiElements.touchLeft.classList.add('touch-active');
+            } else {
+                inputs.right = true;
+                uiElements.touchRight.classList.add('touch-active');
+            }
+        }
+    }
+
+    canvas.addEventListener('touchstart', handleTouch, {passive: true});
+    canvas.addEventListener('touchmove', handleTouch, {passive: true});
+    canvas.addEventListener('touchend', handleTouch);
+
+    /* =========================================
+       CLASSES DU JEU
+       ========================================= */
+    class Player {
+        constructor() {
+            this.width = 40;
+            this.height = 40;
+            this.x = state.width / 2 - 20;
+            this.y = state.height - 120;
+            this.velX = 0;
+            this.speed = 8;
+            this.lives = 3;
+            this.invincible = 0;
+            this.trail = []; // Traînée
+        }
+
+        update(dt) {
+            // Mouvement fluide
+            const targetVel = (inputs.right - inputs.left) * this.speed;
+            this.velX += (targetVel - this.velX) * 0.2; // Lissage
+            this.x += this.velX;
+
+            // Limites
+            if (this.x < 0) { this.x = 0; this.velX = 0; }
+            if (this.x > state.width - this.width) { this.x = state.width - this.width; this.velX = 0; }
+
+            // Invincibilité
+            if (this.invincible > 0) this.invincible -= dt;
+
+            // Traînée
+            if (Math.abs(this.velX) > 1) {
+                this.trail.push({x: this.x, y: this.y, alpha: 0.5});
+            }
+            if (this.trail.length > 5) this.trail.shift();
+            this.trail.forEach(t => t.alpha -= 0.05);
+        }
+
+        draw(ctx) {
+            // Dessin de la traînée
+            this.trail.forEach(t => {
+                if(t.alpha > 0) {
+                    ctx.fillStyle = `rgba(129, 203, 214, ${t.alpha})`;
+                    ctx.fillRect(t.x, t.y, this.width, this.height);
+                }
+            });
+
+            if (this.invincible > 0 && Math.floor(Date.now() / 100) % 2 === 0) return;
+
+            // Lumière autour du joueur (torche/aura)
+            // On ne peut pas utiliser createRadialGradient sur tout le canvas pour perf, 
+            // on dessine juste un cercle "glow"
+            ctx.save();
+            ctx.translate(this.x + this.width/2, this.y + this.height/2);
+            
+            // Aura
+            const glow = ctx.createRadialGradient(0, 0, 10, 0, 0, 150);
+            glow.addColorStop(0, CONSTANTS.COLORS.playerGlow);
+            glow.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(0, 0, 150, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Personnage (Incliné quand il court)
+            ctx.rotate(this.velX * 0.05);
+            ctx.fillStyle = CONSTANTS.COLORS.player;
+            // Forme simple mais dynamique
+            ctx.beginPath();
+            ctx.moveTo(0, -this.height/2);
+            ctx.lineTo(this.width/2, this.height/2);
+            ctx.lineTo(-this.width/2, this.height/2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        hit() {
+            if (this.invincible > 0) return;
+            this.lives--;
+            this.invincible = 1500; // 1.5s
+            state.shake = 30; // Gros impact
+            updateLivesUI();
+            
+            // Flash rouge
+            const flash = document.createElement('div');
+            flash.style.position = 'absolute';
+            flash.style.top = '0'; flash.style.left = '0';
+            flash.style.width = '100%'; flash.style.height = '100%';
+            flash.style.background = 'rgba(198, 48, 50, 0.4)';
+            flash.style.transition = 'opacity 0.2s';
+            document.body.appendChild(flash);
+            setTimeout(() => { flash.style.opacity = '0'; setTimeout(()=>flash.remove(), 200); }, 50);
+
+            if (this.lives <= 0) endGame(false);
+        }
+    }
+
+    class Rock {
+        constructor() {
+            this.size = Math.random() * 40 + 30;
+            this.x = Math.random() * (state.width - this.size);
+            this.y = -100;
+            // Plus on avance, plus ça tombe vite
+            this.speed = (Math.random() * 3 + 5) * state.difficulty; 
+            this.rotation = Math.random() * Math.PI;
+            this.rotSpeed = (Math.random() - 0.5) * 0.2;
+            
+            // Forme polygonale
+            this.points = [];
+            const sides = 6;
+            for(let i=0; i<sides; i++) {
+                const angle = (i/sides)*Math.PI*2;
+                const r = this.size/2 * (0.8 + Math.random()*0.4);
+                this.points.push({x: Math.cos(angle)*r, y: Math.sin(angle)*r});
+            }
+        }
+
+        update() {
+            this.y += this.speed;
+            this.rotation += this.rotSpeed;
+        }
+
+        draw(ctx) {
+            ctx.save();
+            ctx.translate(this.x + this.size/2, this.y + this.size/2);
+            ctx.rotate(this.rotation);
+            
+            ctx.fillStyle = CONSTANTS.COLORS.rock;
+            ctx.beginPath();
+            ctx.moveTo(this.points[0].x, this.points[0].y);
+            this.points.forEach(p => ctx.lineTo(p.x, p.y));
+            ctx.closePath();
+            ctx.fill();
+            
+            // Ajout d'un bord pour le volume
+            ctx.strokeStyle = CONSTANTS.COLORS.rockLight;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+    }
+
+    class Telegraph {
+        constructor(x, size) {
+            this.x = x;
+            this.size = size;
+            this.life = 600; // ms avant spawn
+            this.maxLife = 600;
+            this.particles = [];
+        }
+        
+        update(dt) {
+            this.life -= dt;
+            // Générer de la poussière qui tombe
+            if (Math.random() < 0.3) {
+                entities.particles.push(new Particle(
+                    this.x + Math.random()*this.size, 
+                    0, 
+                    CONSTANTS.COLORS.dust, 
+                    1
+                ));
+            }
+        }
+
+        draw(ctx) {
+            // Petit halo rouge discret en haut
+            const opacity = (this.life / this.maxLife) * 0.5;
+            ctx.fillStyle = `rgba(198, 48, 50, ${opacity})`;
+            ctx.fillRect(this.x, 0, this.size, 10);
+        }
+    }
+
+    class Particle {
+        constructor(x, y, color, speed) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.size = Math.random() * 4 + 2;
+            this.velX = (Math.random() - 0.5) * 5 * speed;
+            this.velY = (Math.random() - 0.5) * 5 * speed;
+            this.life = 1.0;
+        }
+
+        update() {
+            this.x += this.velX;
+            this.y += this.velY;
+            this.life -= 0.03;
+        }
+
+        draw(ctx) {
+            ctx.globalAlpha = this.life;
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+            ctx.globalAlpha = 1.0;
+        }
+    }
+
+    class WallSegment {
+        constructor(y, isLeft) {
+            this.y = y;
+            this.isLeft = isLeft;
+            this.width = Math.random() * 50 + 20;
+            this.height = 100;
+        }
+
+        update(speed) {
+            this.y += speed;
+        }
+
+        draw(ctx) {
+            ctx.fillStyle = '#080705'; // Très sombre
+            if (this.isLeft) {
+                ctx.fillRect(0, this.y, this.width, this.height);
+                ctx.strokeStyle = '#222';
+                ctx.beginPath(); ctx.moveTo(this.width, this.y); ctx.lineTo(this.width, this.y+this.height); ctx.stroke();
+            } else {
+                ctx.fillRect(state.width - this.width, this.y, this.width, this.height);
+                ctx.strokeStyle = '#222';
+                ctx.beginPath(); ctx.moveTo(state.width - this.width, this.y); ctx.lineTo(state.width - this.width, this.y+this.height); ctx.stroke();
+            }
+        }
+    }
+
+    /* =========================================
+       LOGIQUE DU JEU
+       ========================================= */
+    function spawnExplosion(x, y, color, count) {
+        for(let i=0; i<count; i++) {
+            entities.particles.push(new Particle(x, y, color, 1));
+        }
+    }
+
+    function updateLivesUI() {
+        uiElements.lives.innerHTML = '';
+        for(let i=0; i<3; i++) {
+            const h = document.createElement('div');
+            h.classList.add('heart');
+            if (i >= entities.player.lives) h.classList.add('lost');
+            uiElements.lives.appendChild(h);
+        }
+    }
+
+    function initGame() {
+        handleResize();
+        entities.player = new Player();
+        entities.rocks = [];
+        entities.particles = [];
+        entities.telegraphs = [];
+        entities.walls = [];
+        
+        // Remplir les murs initiaux
+        for(let y = -100; y < state.height; y+=100) {
+            entities.walls.push(new WallSegment(y, true));
+            entities.walls.push(new WallSegment(y, false));
+        }
+
+        state.timeElapsed = 0;
+        state.score = 0;
+        state.difficulty = 1;
+        state.running = true;
+        state.shake = 0;
+        state.rumbleTimer = 2000; // Premier grondement dans 2s
+
+        uiElements.hud.classList.remove('hidden');
+        uiElements.hint.classList.remove('hidden');
+        updateLivesUI();
+
+        state.lastTime = performance.now();
+        requestAnimationFrame(gameLoop);
+    }
+
+    function startGame() {
+        uiElements.start.classList.add('hidden');
+        initGame();
+    }
+
+    function endGame(victory) {
+        state.running = false;
+        uiElements.hud.classList.add('hidden');
+        uiElements.hint.classList.add('hidden');
+        uiElements.touchLeft.classList.remove('touch-active');
+        uiElements.touchRight.classList.remove('touch-active');
+
+        if (victory) uiElements.victory.classList.remove('hidden');
+        else uiElements.gameOver.classList.remove('hidden');
+    }
+
+    /* =========================================
+       BOUCLE PRINCIPALE
+       ========================================= */
+    function gameLoop(timestamp) {
+        if (!state.running) return;
+        
+        const dt = timestamp - state.lastTime;
+        state.lastTime = timestamp;
+
+        // Mise à jour Difficulté & Progression
+        state.timeElapsed += dt;
+        state.difficulty = 1 + (state.timeElapsed / CONSTANTS.DURATION);
+        const progress = Math.min((state.timeElapsed / CONSTANTS.DURATION) * 100, 100);
+        uiElements.progressBar.style.width = `${progress}%`;
+
+        // Événement Lou Garagai (Tremblement de terre)
+        state.rumbleTimer -= dt;
+        if (state.rumbleTimer <= 0) {
+            state.shake = 15;
+            state.rumbleTimer = Math.random() * 5000 + 3000; // Tous les 3-8 secondes
+            // Faire tomber plein de poussière
+            for(let i=0; i<10; i++) {
+                entities.particles.push(new Particle(Math.random()*state.width, 0, CONSTANTS.COLORS.dust, 0.5));
+            }
+        }
+
+        // --- SPAWN LOGIC ---
+        // 1. Ajouter des "telegraphs" (indices de chute)
+        if (Math.random() < 0.04 * state.difficulty) {
+            const size = Math.random() * 40 + 30;
+            const x = Math.random() * (state.width - size);
+            entities.telegraphs.push(new Telegraph(x, size));
+        }
+
+        // 2. Transformer telegraphs en rochers quand fini
+        for (let i = entities.telegraphs.length - 1; i >= 0; i--) {
+            const t = entities.telegraphs[i];
+            t.update(dt);
+            if (t.life <= 0) {
+                const rock = new Rock();
+                rock.x = t.x;
+                rock.size = t.size;
+                entities.rocks.push(rock);
+                entities.telegraphs.splice(i, 1);
+            }
+        }
+
+        // --- UPDATE ---
+        
+        // Murs (Effet de vitesse)
+        const wallSpeed = 10 * state.difficulty;
+        entities.walls.forEach(w => {
+            w.update(wallSpeed);
+            if (w.y > state.height) {
+                w.y = -100;
+                w.width = Math.random() * 50 + 20; // Varier la forme de la grotte
+            }
+        });
+
+        entities.player.update(dt);
+
+        // Rochers
+        for (let i = entities.rocks.length - 1; i >= 0; i--) {
+            const r = entities.rocks[i];
+            r.update();
+
+            // Collision Sol
+            if (r.y > state.height) {
+                spawnExplosion(r.x + r.size/2, state.height, CONSTANTS.COLORS.rock, 8);
+                state.shake += 2; 
+                entities.rocks.splice(i, 1);
+                continue;
+            }
+
+            // Collision Joueur (AABB simple)
+            if (
+                r.x < entities.player.x + entities.player.width &&
+                r.x + r.size > entities.player.x &&
+                r.y < entities.player.y + entities.player.height &&
+                r.y + r.size > entities.player.y
+            ) {
+                spawnExplosion(entities.player.x + entities.player.width/2, entities.player.y, CONSTANTS.COLORS.danger, 15);
+                entities.player.hit();
+                entities.rocks.splice(i, 1);
+            }
+        }
+
+        // Particules
+        for (let i = entities.particles.length - 1; i >= 0; i--) {
+            entities.particles[i].update();
+            if (entities.particles[i].life <= 0) entities.particles.splice(i, 1);
+        }
+
+        // Shake Decay
+        if (state.shake > 0) state.shake *= 0.9;
+        if (state.shake < 0.5) state.shake = 0;
+
+
+        // --- DRAW ---
+        // Effet de nuit : On remplit tout en noir semi-transparent pour laisser des traces (motion blur)
+        // ctx.fillStyle = 'rgba(13, 12, 9, 0.3)';
+        // ctx.fillRect(0, 0, state.width, state.height);
+        // Ou clean pour netteté :
+        ctx.fillStyle = CONSTANTS.COLORS.bg;
+        ctx.fillRect(0, 0, state.width, state.height);
+
+        // Screen Shake Apply
+        ctx.save();
+        if (state.shake > 0) {
+            const dx = (Math.random() - 0.5) * state.shake;
+            const dy = (Math.random() - 0.5) * state.shake;
+            ctx.translate(dx, dy);
+        }
+
+        // Dessin Murs
+        entities.walls.forEach(w => w.draw(ctx));
+
+        // Dessin Telegraphs
+        entities.telegraphs.forEach(t => t.draw(ctx));
+
+        // Dessin Particules (Derrière)
+        entities.particles.forEach(p => p.draw(ctx));
+
+        // Dessin Rochers
+        entities.rocks.forEach(r => r.draw(ctx));
+
+        // Dessin Joueur
+        entities.player.draw(ctx);
+
+        // Vignette "Atmosphère sombre" (Gradient radial inversé)
+        // On fait un gros gradient noir autour du joueur pour simuler l'obscurité
+        /* Pour la perf sur mobile, on évite les gros gradients full screen chaque frame si possible.
+           Mais ici c'est nécessaire pour l'effet "Incroyable".
+        */
+        ctx.globalCompositeOperation = 'multiply'; // Assombrit
+        const darkness = ctx.createRadialGradient(
+            entities.player.x + entities.player.width/2, 
+            entities.player.y + entities.player.height/2, 
+            100, 
+            state.width/2, 
+            state.height/2, 
+            state.width
+        );
+        darkness.addColorStop(0, 'rgba(0,0,0,0)'); // Clair au centre
+        darkness.addColorStop(1, 'rgba(0,0,0,0.8)'); // Sombre sur les bords
+        ctx.fillStyle = darkness;
+        ctx.fillRect(0,0,state.width, state.height);
+        ctx.globalCompositeOperation = 'source-over';
+
+        ctx.restore();
+
+        // Fin du jeu ?
+        if (state.timeElapsed >= CONSTANTS.DURATION) {
+            endGame(true);
+            return;
+        }
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    // Lancer Resize au chargement
+    handleResize();
+
+</script>
+</body>
+</html>

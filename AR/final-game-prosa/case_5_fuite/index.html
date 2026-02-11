@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prosa - Case 5 : La Fuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- POLICES --- */
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                 url('/assets/fonts/FuturaCondMedium.woff2') format('woff2');
+            font-weight: 400; font-display: swap;
+        }
+
+        /* --- VARIABLES --- */
+        :root {
+            --bg: #0d0c09;
+            --card: #1a1812;
+            --border: #3a3830;
+            --primary: #626247;
+            --accent: #81cbd6;   /* Cyan Interface */
+            --danger: #c63032;   /* Rouge Alerte */
+            --success: #4caf50;  /* Vert Succès */
+            --text: #ece4cb;
+            
+            --glow-blue: 0 0 10px rgba(129, 203, 214, 0.5);
+            --glow-red: 0 0 10px rgba(198, 48, 50, 0.5);
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-user-drag: none; touch-action: none; }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background-color: var(--bg); color: var(--text);
+            height: 100vh; width: 100vw; 
+            overflow: hidden; position: relative; 
+            font-family: 'Futura', sans-serif; 
+        }
+
+        /* CRT SCANLINE EFFECT GLOBALE */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute; inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 3px;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .hidden { display: none !important; }
+        .full-screen { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* ================= PHASE 1 : RADIAL UI ================= */
+        #phase-1 { 
+            background: radial-gradient(circle at center, #1a1812 0%, #000 100%); 
+            z-index: 10; 
+        }
+        
+        /* HUD */
+        .hud-top { 
+            position: absolute; top: 20px; width: 85%; max-width: 500px; 
+            border-bottom: 1px solid var(--border); padding-bottom: 10px;
+        }
+        .hud-row { display: flex; justify-content: space-between; font-size: 0.8rem; letter-spacing: 2px; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
+        
+        .timer-container { 
+            width: 100%; height: 4px; background: #222; 
+            position: relative; overflow: hidden;
+        }
+        .timer-bar { 
+            height: 100%; width: 100%; 
+            background: var(--accent); 
+            box-shadow: var(--glow-blue);
+            transition: width 0.1s linear; 
+        }
+
+        /* ANNEAUX */
+        #game-area-radial { 
+            position: relative; width: 80vmin; height: 80vmin; 
+            max-width: 500px; max-height: 500px; 
+            display: flex; justify-content: center; align-items: center; 
+        }
+        
+        .ring { 
+            position: absolute; border-radius: 50%; 
+            border: 1px solid var(--primary); 
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            display: flex; justify-content: center; cursor: pointer; 
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .ring:active { border-color: var(--text); }
+
+        .ring-outer { width: 100%; height: 100%; z-index: 1; border-style: dashed; }
+        .ring-middle { width: 70%; height: 70%; z-index: 2; background: rgba(255,255,255,0.02); }
+        .ring-inner { width: 40%; height: 40%; z-index: 3; background: var(--bg); border-width: 2px; }
+        
+        /* INDICATEURS LUMINEUX (NODES) */
+        .light-node { 
+            position: absolute; top: -2px; 
+            background: var(--primary); 
+            box-shadow: 0 0 5px var(--primary); 
+            transition: 0.3s; 
+        }
+        .ring-outer .light-node { width: 6px; height: 15px; top: -10px; }
+        .ring-middle .light-node { width: 4px; height: 20px; top: -10px; }
+        .ring-inner .light-node { width: 4px; height: 25px; top: -12px; }
+
+        /* FLÈCHE CIBLE */
+        .target-arrow { 
+            position: absolute; top: -30px; 
+            width: 0; height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--accent);
+            filter: drop-shadow(0 0 5px var(--accent));
+            animation: float 2s infinite ease-in-out;
+            z-index: 0; 
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* ÉTATS ACTIFS */
+        .locked { border-color: var(--accent) !important; border-style: solid; box-shadow: inset 0 0 15px rgba(129, 203, 214, 0.2); }
+        .light-active { background-color: var(--accent) !important; box-shadow: 0 0 15px var(--accent) !important; }
+
+        .core { 
+            position: absolute; width: 15%; height: 15%; border-radius: 50%; 
+            background: #000; z-index: 4; border: 1px solid var(--border); 
+            display: flex; justify-content: center; align-items: center; 
+        }
+        .core-status { width: 40%; height: 40%; background: #222; border-radius: 50%; transition: 0.5s; }
+
+        /* ================= PHASE 2 : TERMINAL REPAIR ================= */
+        #phase-2 { background: #080808; font-family: 'VT323', monospace; color: #aaa; }
+        
+        #repair-terminal {
+            position: relative; display: flex; flex-direction: column;
+            width: 95%; height: 90%; max-width: 800px; max-height: 600px;
+            border: 2px solid #444; border-radius: 4px;
+            background: #111;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9); overflow: hidden;
+        }
+
+        .term-header { 
+            display: flex; flex-direction: column; 
+            background: #000; padding: 15px; 
+            border-bottom: 2px solid #333; 
+        }
+        
+        .rad-label { color: var(--danger); font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
+        .rad-bg { width: 100%; height: 20px; background: #200; border: 1px solid #500; margin-top: 5px; position: relative; }
+        
+        /* Barres de progression hachurées */
+        .rad-bar { 
+            height: 100%; width: 0%; 
+            background: repeating-linear-gradient(45deg, var(--danger), var(--danger) 10px, #a00 10px, #a00 20px); 
+            transition: width 0.2s linear; 
+        }
+
+        #wire-panel { 
+            position: relative; flex-grow: 1; 
+            display: flex; justify-content: space-between; 
+            padding: 20px 40px; 
+            background: repeating-linear-gradient(0deg, #111, #111 2px, #141414 2px, #141414 4px);
+        }
+        canvas#wire-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+        
+        .column { display: flex; flex-direction: column; justify-content: space-around; width: 60px; z-index: 20; height: 100%; }
+        
+        .socket {
+            width: 44px; height: 44px; 
+            background: #1a1a1a; border: 2px solid #444; 
+            border-radius: 4px; /* Carré technique */
+            position: relative; cursor: pointer; 
+            display: flex; justify-content: center; align-items: center;
+        }
+        .socket::after { content: ''; width: 10px; height: 10px; background: #000; border-radius: 50%; box-shadow: inset 0 0 2px #fff; }
+        .socket.connected { border-color: currentColor !important; box-shadow: 0 0 10px currentColor; }
+
+        /* BREAKER (DISJONCTEUR) */
+        #breaker-panel {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 240px; height: 340px; 
+            background: #1a1a1a; border: 2px solid #555;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 0 60px #000; z-index: 40;
+        }
+        
+        .handle-track { 
+            position: relative; width: 50px; height: 160px; 
+            background: #000; border: 1px solid #333; 
+            border-radius: 4px; margin: 25px 0; 
+        }
+        
+        .handle {
+            position: absolute; left: -10px; bottom: 10px; 
+            width: 70px; height: 60px; border-radius: 2px;
+            background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+            box-shadow: 0 4px 10px #000; 
+            cursor: grab; display: flex; justify-content: center; align-items: center;
+            border-top: 1px solid #ff5252;
+        }
+        .handle::after { content: "|||"; color: rgba(0,0,0,0.5); font-weight: bold; transform: rotate(90deg); letter-spacing: 2px; }
+
+        /* ================= OVERLAYS (MODALES) ================= */
+        .overlay { 
+            position: fixed; inset: 0; 
+            background: rgba(10, 10, 8, 0.98); 
+            z-index: 100; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; padding: 20px;
+        }
+
+        h1 { 
+            color: var(--accent); font-size: 1.8rem; margin-bottom: 25px; 
+            text-transform: uppercase; letter-spacing: 4px; 
+            border-bottom: 2px solid var(--accent); padding-bottom: 10px;
+        }
+
+        .instruction-box { 
+            border-left: 4px solid var(--primary); 
+            background: rgba(255,255,255,0.02); 
+            padding: 20px; text-align: left; 
+            max-width: 400px; width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .step { margin: 12px 0; color: #ccc; font-size: 1.1rem; line-height: 1.4; display: flex; align-items: center; }
+        .step-num { color: var(--accent); font-weight: bold; margin-right: 15px; font-size: 1.2rem; }
+        
+        .warning-text { color: var(--danger); font-weight: bold; margin-top: 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .btn { 
+            background: transparent; border: 1px solid var(--accent); color: var(--accent);
+            padding: 15px 50px; font-family: 'Futura', sans-serif; 
+            text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
+        .btn:active { transform: scale(0.98); }
+        
+        .btn-danger { border-color: var(--danger); color: var(--danger); }
+        .btn-danger:hover { background: var(--danger); color: #fff; box-shadow: 0 0 15px var(--danger); }
+
+    </style>
+</head>
+<body>
+
+    <!-- ==============================================
+         PHASE 1 : PIRATAGE
+         ============================================== -->
+    <div id="phase-1-container" class="full-screen">
+        
+        <!-- INTRO PHASE 1 -->
+        <div id="p1-start-screen" class="overlay">
+            <h1>Verrouillage Système</h1>
+            <div class="instruction-box">
+                <div class="step"><span class="step-num">01</span> Tournez les anneaux tactiques.</div>
+                <div class="step"><span class="step-num">02</span> Alignez les signaux vers le haut.</div>
+                <div class="warning-text">Attention : Mécanisme couplé.</div>
+            </div>
+            <button class="btn" onclick="startPhase1()">Initialiser</button>
+        </div>
+
+        <!-- VICTOIRE PHASE 1 -->
+        <div id="p1-victory-screen" class="overlay hidden">
+            <h1 style="color: var(--success); border-color: var(--success);">Accès Autorisé</h1>
+            <p style="margin-bottom: 20px;">Le verrou est ouvert.<br>Panne électrique détectée.</p>
+            <button class="btn" onclick="goToPhase2()">Lancer Réparation</button>
+        </div>
+
+        <!-- ECHEC PHASE 1 -->
+        <div id="p1-fail-screen" class="overlay hidden">
+            <h1 style="color: var(--danger); border-color: var(--danger);">Intrusion Détectée</h1>
+            <button class="btn btn-danger" onclick="location.reload()">Réessayer</button>
+        </div>
+
+        <!-- JEU PHASE 1 -->
+        <div id="phase-1" class="full-screen">
+            <div class="hud-top">
+                <div class="hud-row">
+                    <span>SÉCURITÉ: NIV 5</span>
+                    <span>TEMPS RESTANT</span>
+                </div>
+                <div class="timer-container"><div id="p1-timer" class="timer-bar"></div></div>
+            </div>
+
+            <div id="game-area-radial">
+                <div class="target-arrow"></div>
+                <!-- Anneaux -->
+                <div class="ring ring-outer" id="ring-0" onclick="interactRing(0)">
+                    <div class="light-node" id="light-0"></div>
+                </div>
+                <div class="ring ring-middle" id="ring-1" onclick="interactRing(1)">
+                    <div class="light-node" id="light-1"></div>
+                </div>
+                <div class="ring ring-inner" id="ring-2" onclick="interactRing(2)">
+                    <div class="light-node" id="light-2"></div>
+                </div>
+                <div class="core"><div class="core-status" id="core-light"></div></div>
+            </div>
+            
+            <div style="position: absolute; bottom: 30px; color: var(--primary); font-size: 0.8rem; letter-spacing: 2px;">
+                ANALYSE DU SCHÉMA EN COURS...
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         PHASE 2 : RÉPARATION
+         ============================================== -->
+    <div id="phase-2-container" class="full-screen hidden">
+        <div id="phase-2" class="full-screen">
+            
+            <div id="repair-terminal">
+                
+                <!-- HUD TERMINAL -->
+                <div class="term-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.2rem; color: #fff;">UNITÉ ÉLECTRIQUE AUX-42</span>
+                        <div id="main-light" style="width: 12px; height: 12px; border-radius: 50%; background: #300; border: 1px solid #555;"></div>
+                    </div>
+                    
+                    <!-- Radiation Bar -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <span class="rad-label">Niveau de Radiation</span>
+                        <span id="rad-percent" style="color: var(--danger);">0%</span>
+                    </div>
+                    <div class="rad-bg">
+                        <div id="rad-bar" class="rad-bar"></div>
+                    </div>
+                </div>
+
+                <!-- OVERLAY START P2 -->
+                <div id="p2-start-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.95); z-index: 60; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+                    <h1 style="color: #fff; font-family: 'VT323'; font-size: 2.5rem; border: none; margin-bottom: 10px;">ALERTE CRITIQUE</h1>
+                    <div class="instruction-box" style="border-left: 4px solid var(--danger); font-family: 'VT323'; font-size: 1.3rem;">
+                        <div class="step" style="color:#aaa">1. Connectez les câbles par couleur.</div>
+                        <div class="step" style="color:#aaa">2. Activez le levier principal.</div>
+                        <div class="warning-text" style="color: var(--danger);">DANGER : Fuite radioactive imminente.</div>
+                    </div>
+                    <button class="btn" style="font-family: 'VT323'; font-size: 1.5rem; border-color: #fff; color: #fff;" onclick="initAudioAndStart()">COMMENCER</button>
+                </div>
+                
+                <!-- ECHEC P2 -->
+                <div id="p2-fail-overlay" class="hidden" style="position: absolute; inset: 0; background: rgba(30,0,0,0.95); z-index: 70; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <h1 style="color: var(--danger); font-family: 'VT323'; border: none; font-size: 3rem;">EXPOSITION MORTELLE</h1>
+                    <button class="btn btn-danger" style="font-family: 'VT323'; font-size: 1.5rem;" onclick="retryPhase2()">RÉINITIALISER</button>
+                </div>
+
+                <!-- ZONE CÂBLAGE -->
+                <div id="wire-panel">
+                    <canvas id="wire-canvas"></canvas>
+                    <div class="column" id="left-column"></div>
+                    <div class="column" id="right-column"></div>
+                </div>
+
+                <!-- DISJONCTEUR -->
+                <div id="breaker-panel">
+                    <div style="color: #888; font-size: 1.2rem; font-family: 'VT323'; margin-bottom: 10px; text-transform: uppercase;">Levier Principal</div>
+                    <div class="handle-track">
+                        <div id="breaker-handle" class="handle"></div>
+                    </div>
+                    <div id="voltage-text" style="color: #333; font-size: 3rem; margin-top: 15px; font-family: 'VT323';">0V</div>
+                    
+                    <button id="finish-btn" class="hidden btn" style="margin-top: 15px; font-family: 'VT323'; font-size: 1.5rem; border-color: var(--success); color: var(--success);" onclick="finishGame()">ÉVACUATION</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN DU JEU -->
+    <div id="final-screen" class="overlay hidden">
+        <h1 style="color: var(--success); border-color: var(--success);">Système Restauré</h1>
+        <p>Alimentation rétablie à 100%.</p>
+        <p>Porte ouverte. Évasion en cours.</p>
+        <button class="btn" onclick="location.reload()">Rejouer</button>
+    </div>
+
+    <script>
+        // --- CONFIG ---
+        const COLORS = ['red', 'blue', 'yellow', 'green'];
+        const HEX_COLORS = { 'red': '#d32f2f', 'blue': '#1976d2', 'yellow': '#fbc02d', 'green': '#388e3c' };
+        
+        // --- PHASE 1 ---
+        let p1Time = 60, p1Interval, p1Playing = false;
+        let angles = [0, 0, 0];
+
+        function startPhase1() {
+            document.getElementById('p1-start-screen').classList.add('hidden');
+            p1Playing = true;
+            
+            // Mélange
+            angles = [0, 0, 0];
+            for(let i=0; i<6; i++) {
+                reverseLogic(Math.floor(Math.random() * 3));
+            }
+            updateP1View();
+
+            // Timer
+            p1Interval = setInterval(() => {
+                if(!p1Playing) return;
+                p1Time -= 0.1;
+                let pct = (p1Time/60 * 100);
+                document.getElementById('p1-timer').style.width = pct + "%";
+                
+                if(pct < 30) document.getElementById('p1-timer').style.background = "var(--danger)";
+                if(p1Time <= 0) {
+                    p1Playing = false;
+                    clearInterval(p1Interval);
+                    document.getElementById('p1-fail-screen').classList.remove('hidden');
+                }
+            }, 100);
+        }
+
+        function interactRing(index) {
+            if(!p1Playing) return;
+            if(navigator.vibrate) navigator.vibrate(10);
+            applyLogic(index);
+            updateP1View();
+            if(angles.every(a => ((a % 360) + 360) % 360 === 0)) winPhase1();
+        }
+
+        function applyLogic(i) {
+            if (i === 0) { angles[0]+=90; angles[1]+=90; }
+            else if (i === 1) { angles[1]+=90; angles[2]+=90; }
+            else { angles[2]+=90; }
+        }
+        function reverseLogic(i) {
+            if (i === 0) { angles[0]-=90; angles[1]-=90; }
+            else if (i === 1) { angles[1]-=90; angles[2]-=90; }
+            else { angles[2]-=90; }
+        }
+
+        function updateP1View() {
+            const rings = [document.getElementById('ring-0'), document.getElementById('ring-1'), document.getElementById('ring-2')];
+            const lights = [document.getElementById('light-0'), document.getElementById('light-1'), document.getElementById('light-2')];
+            
+            rings.forEach((el, i) => {
+                el.style.transform = `rotate(${angles[i]}deg)`;
+                let norm = ((angles[i] % 360) + 360) % 360;
+                if(norm === 0) {
+                    lights[i].classList.add('light-active');
+                    el.classList.add('locked');
+                } else {
+                    lights[i].classList.remove('light-active');
+                    el.classList.remove('locked');
+                }
+            });
+        }
+
+        function winPhase1() {
+            p1Playing = false;
+            clearInterval(p1Interval);
+            document.getElementById('core-light').style.background = "var(--success)";
+            document.getElementById('core-light').style.boxShadow = "0 0 20px var(--success)";
+            setTimeout(() => document.getElementById('p1-victory-screen').classList.remove('hidden'), 500);
+        }
+
+        function goToPhase2() {
+            document.getElementById('phase-1-container').classList.add('hidden');
+            document.getElementById('phase-2-container').classList.remove('hidden');
+        }
+
+        // --- PHASE 2 ---
+        let audioCtx;
+        let wires = [], isDragging = false, activeWire = null, mousePos = {x:0, y:0};
+        let canvas, ctx;
+        let breakerUnlocked = false;
+        let p2Time = 0, p2MaxTime = 45, p2Interval, p2Playing = false;
+
+        function playSound(type) {
+            try {
+                if(!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+                
+                if (type === 'snap') {
+                    osc.type = 'square'; osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(100, now+0.1);
+                    gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.1);
+                    osc.start(); osc.stop(now+0.1);
+                } else if (type === 'clunk') {
+                    osc.type = 'triangle'; osc.frequency.setValueAtTime(100, now);
+                    gain.gain.setValueAtTime(0.2, now); gain.gain.linearRampToValueAtTime(0, now+0.2);
+                    osc.start(); osc.stop(now+0.2);
+                }
+            } catch(e){}
+        }
+
+        function initAudioAndStart() {
+            document.getElementById('p2-start-overlay').style.display = 'none';
+            try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
+            resetPhase2();
+        }
+
+        function resetPhase2() {
+            initWires();
+            resizeCanvas();
+            p2Playing = true;
+            p2Time = 0;
+            document.getElementById('p2-fail-overlay').classList.add('hidden');
+            
+            if(p2Interval) clearInterval(p2Interval);
+            p2Interval = setInterval(() => {
+                if(!p2Playing) return;
+                p2Time += 0.1;
+                let pct = (p2Time / p2MaxTime) * 100;
+                
+                document.getElementById('rad-bar').style.width = pct + "%";
+                document.getElementById('rad-percent').innerText = Math.floor(pct) + "%";
+
+                if(p2Time >= p2MaxTime) {
+                    p2Playing = false;
+                    clearInterval(p2Interval);
+                    document.getElementById('p2-fail-overlay').classList.remove('hidden');
+                }
+            }, 100);
+
+            renderLoop();
+        }
+
+        function retryPhase2() {
+            document.getElementById('wire-panel').style.opacity = '1';
+            document.getElementById('breaker-panel').style.display = 'none';
+            document.getElementById('breaker-handle').style.bottom = '10px';
+            document.getElementById('breaker-handle').classList.remove('on');
+            document.getElementById('voltage-text').innerText = "0V";
+            resetPhase2();
+        }
+
+        function initWires() {
+            canvas = document.getElementById('wire-canvas');
+            ctx = canvas.getContext('2d');
+            window.addEventListener('resize', resizeCanvas);
+
+            const leftCol = document.getElementById('left-column');
+            const rightCol = document.getElementById('right-column');
+            leftCol.innerHTML = ''; rightCol.innerHTML = '';
+            wires = [];
+
+            const rightColors = [...COLORS].sort(() => Math.random() - 0.5);
+
+            COLORS.forEach((color, idx) => {
+                const lSock = document.createElement('div');
+                lSock.className = 'socket';
+                lSock.style.borderColor = HEX_COLORS[color];
+                lSock.dataset.color = color;
+                leftCol.appendChild(lSock);
+                
+                lSock.addEventListener('mousedown', (e) => startDrag(e, idx));
+                lSock.addEventListener('touchstart', (e) => startDrag(e, idx));
+                wires.push({ color: color, startEl: lSock, endEl: null, connected: false });
+            });
+
+            rightColors.forEach(color => {
+                const rSock = document.createElement('div');
+                rSock.className = 'socket';
+                rSock.dataset.color = color;
+                rSock.style.borderColor = '#555';
+                rightCol.appendChild(rSock);
+            });
+
+            window.addEventListener('mousemove', moveDrag);
+            window.addEventListener('touchmove', moveDrag, {passive: false});
+            window.addEventListener('mouseup', endDrag);
+            window.addEventListener('touchend', endDrag);
+        }
+
+        function resizeCanvas() {
+            const panel = document.getElementById('wire-panel');
+            if(panel) { canvas.width = panel.offsetWidth; canvas.height = panel.offsetHeight; }
+        }
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            let cx = e.clientX; let cy = e.clientY;
+            if(e.touches && e.touches.length > 0) { cx = e.touches[0].clientX; cy = e.touches[0].clientY; }
+            else if(e.changedTouches && e.changedTouches.length > 0) { cx = e.changedTouches[0].clientX; cy = e.changedTouches[0].clientY; }
+            return { x: cx - rect.left, y: cy - rect.top };
+        }
+
+        function startDrag(e, idx) {
+            if(wires[idx].connected || !p2Playing) return;
+            isDragging = true;
+            activeWire = wires[idx];
+            mousePos = getPos(e);
+        }
+
+        function moveDrag(e) {
+            if(isDragging) { e.preventDefault(); mousePos = getPos(e); }
+        }
+
+        function endDrag(e) {
+            if(!isDragging || !activeWire) return;
+            isDragging = false;
+            
+            const rightSockets = document.querySelectorAll('#right-column .socket');
+            let cx = e.clientX; let cy = e.clientY;
+            if(e.changedTouches && e.changedTouches.length > 0) { cx = e.changedTouches[0].clientX; cy = e.changedTouches[0].clientY; }
+
+            rightSockets.forEach(sock => {
+                const rect = sock.getBoundingClientRect();
+                if(cx >= rect.left && cx <= rect.right && cy >= rect.top && cy <= rect.bottom) {
+                    if(sock.dataset.color === activeWire.color) {
+                        activeWire.connected = true;
+                        activeWire.endEl = sock;
+                        sock.classList.add('connected');
+                        sock.style.color = HEX_COLORS[activeWire.color];
+                        playSound('snap');
+                        checkP2Win();
+                    }
+                }
+            });
+            activeWire = null;
+        }
+
+        function renderLoop() {
+            if(!p2Playing && !breakerUnlocked) return;
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = 10;
+            const cRect = canvas.getBoundingClientRect();
+
+            wires.forEach(w => {
+                const sRect = w.startEl.getBoundingClientRect();
+                const x1 = (sRect.left + sRect.width/2) - cRect.left;
+                const y1 = (sRect.top + sRect.height/2) - cRect.top;
+                let x2, y2;
+
+                if(w.connected && w.endEl) {
+                    const eRect = w.endEl.getBoundingClientRect();
+                    x2 = (eRect.left + eRect.width/2) - cRect.left;
+                    y2 = (eRect.top + eRect.height/2) - cRect.top;
+                } else if (w === activeWire && isDragging) {
+                    x2 = mousePos.x; y2 = mousePos.y;
+                } else {
+                    x2 = x1 + 40; y2 = y1 + 20;
+                }
+
+                ctx.strokeStyle = HEX_COLORS[w.color];
+                ctx.shadowBlur = 10; ctx.shadowColor = HEX_COLORS[w.color];
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                
+                let cp1x = x1 + (x2-x1)*0.5, cp1y = y1;
+                let cp2x = x2 - (x2-x1)*0.5, cp2y = y2;
+                if(!w.connected && w !== activeWire) cp1y += 50;
+
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
+                ctx.stroke();
+            });
+            requestAnimationFrame(renderLoop);
+        }
+
+        function checkP2Win() {
+            if(wires.every(w => w.connected)) {
+                p2Playing = false; 
+                clearInterval(p2Interval);
+                document.getElementById('rad-bar').style.background = "#00e676";
+                setTimeout(() => {
+                    document.getElementById('wire-panel').style.opacity = '0.3';
+                    document.getElementById('breaker-panel').style.display = 'flex';
+                    breakerUnlocked = true;
+                    playSound('clunk');
+                }, 800);
+            }
+        }
+
+        // --- BREAKER ---
+        const handle = document.getElementById('breaker-handle');
+        let dragHandle = false;
+        let startY = 0;
+
+        handle.addEventListener('mousedown', startH);
+        handle.addEventListener('touchstart', startH);
+        window.addEventListener('mousemove', moveH);
+        window.addEventListener('touchmove', moveH, {passive: false});
+        window.addEventListener('mouseup', endH);
+        window.addEventListener('touchend', endH);
+
+        function startH(e) {
+            if(!breakerUnlocked) return;
+            dragHandle = true;
+            let cy = e.clientY || e.touches[0].clientY;
+            startY = cy;
+        }
+        function moveH(e) {
+            if(!dragHandle) return;
+            e.preventDefault();
+            let cy = e.clientY || e.touches[0].clientY;
+            let delta = startY - cy;
+            startY = cy;
+            let cur = parseInt(handle.style.bottom || '10');
+            let n = cur + delta;
+            if(n<10) n=10; if(n>90) n=90;
+            handle.style.bottom = n + 'px';
+        }
+        function endH() {
+            if(!dragHandle) return;
+            dragHandle = false;
+            let cur = parseInt(handle.style.bottom || '10');
+            if(cur > 80) {
+                handle.style.bottom = '90px';
+                handle.classList.add('on');
+                breakerUnlocked = false;
+                powerOn();
+            } else {
+                handle.style.bottom = '10px';
+                playSound('clunk');
+            }
+        }
+
+        function powerOn() {
+            playSound('clunk');
+            document.getElementById('main-light').style.background = "#0f0";
+            document.getElementById('main-light').style.boxShadow = "0 0 10px #0f0";
+            
+            let v = 0;
+            const inter = setInterval(() => {
+                v += 5;
+                if(v >= 230) { 
+                    v = 230; clearInterval(inter); 
+                    document.getElementById('finish-btn').classList.remove('hidden'); 
+                }
+                document.getElementById('voltage-text').innerText = v + "V";
+                document.getElementById('voltage-text').style.color = "#0f0";
+            }, 30);
+        }
+
+        function finishGame() {
+            document.getElementById('final-screen').classList.remove('hidden');
+        }
+
+    </script>
+</body>
+</html>

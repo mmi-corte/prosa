@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Case 7 : Le Sommet de Prosa</title>
+    <style>
+        /* --- POLICES --- */
+        @font-face {
+            font-family: 'Futura';
+            src: local('Futura'), local('Futura Condensed Medium'), url('https://fonts.cdnfonts.com/s/13263/FuturaCondensedMedium.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* --- VARIABLES --- */
+        :root {
+            --background: #1a1812;
+            --foreground: #ece4cb;
+            --card: #252218;
+            --primary: #626247;
+            --primary-dark: #4a4a35;
+            --accent-red: #c63032;
+            --accent-green: #81cbd6;
+            --dust: #ece4cb;
+            --yellow: #ffdb2c;
+            --purple: #300941;
+            --cyan: #81cbd6;
+            --font-main: 'Futura', 'Impact', sans-serif;
+        }
+
+        /* --- RESET & BASE --- */
+        * { box-sizing: border-box; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: var(--background);
+            font-family: var(--font-main);
+            color: var(--foreground);
+            touch-action: none; /* Bloque le scroll et le zoom */
+        }
+
+        /* --- CANVAS --- */
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated; 
+        }
+
+        /* --- UI OVERLAY --- */
+        #ui-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* --- HUD (In-Game) --- */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            display: none; /* Caché au début */
+        }
+
+        .bar-container {
+            width: 200px;
+            background: var(--card);
+            border: 2px solid var(--primary);
+            height: 20px;
+            position: relative;
+            transform: skewX(-10deg);
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--yellow);
+            width: 100%;
+            transition: width 0.1s;
+        }
+        
+        #timer-display {
+            font-size: 2rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(198, 48, 50, 0.5);
+        }
+
+        /* --- TOUCH ZONES VISUALS (Mobile) --- */
+        .touch-zone-hint {
+            position: absolute;
+            bottom: 20px;
+            width: 40%;
+            height: 100px;
+            border: 2px dashed rgba(98, 98, 71, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(236, 228, 203, 0.5);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+        #zone-left { left: 20px; }
+        #zone-right { right: 20px; }
+
+        /* --- SCREENS (Start/End) --- */
+        .screen {
+            background: rgba(26, 24, 18, 0.95);
+            padding: 30px;
+            border: 2px solid var(--primary);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            pointer-events: auto;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+            transform: skewX(-2deg);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: none;
+        }
+
+        .screen.active {
+            opacity: 1;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--yellow);
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            color: var(--accent-red);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--dust);
+            margin-bottom: 25px;
+        }
+
+        .controls-info {
+            display: flex;
+            flex-direction: column; /* Stack for mobile readability */
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            color: var(--primary-dark);
+            border-top: 1px solid var(--primary);
+            border-bottom: 1px solid var(--primary);
+            padding: 15px 0;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .key {
+            border: 1px solid var(--foreground);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: var(--foreground);
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        button {
+            background: var(--accent-red);
+            color: var(--background);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.4rem;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button:hover, button:active {
+            background: var(--yellow);
+            color: var(--background);
+            transform: scale(1.02);
+        }
+
+        /* --- SCANLINE EFFECT --- */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(26,24,18,0.9) 100%);
+            z-index: 99;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-layer">
+        
+        <!-- HUD -->
+        <div id="hud">
+            <div>
+                <div style="font-size:0.8rem; color:var(--primary);">INTÉGRITÉ</div>
+                <div class="bar-container">
+                    <div class="bar-fill" id="health-bar"></div>
+                </div>
+            </div>
+            <div id="timer-display">45s</div>
+        </div>
+
+        <!-- Touch Hints (Only visible during gameplay technically, but added to DOM) -->
+        <div id="touch-hints" style="display:none; width:100%; height:100%; position:absolute; top:0; left:0;">
+            <div class="touch-zone-hint" id="zone-left">TAP GAUCHE : SAUTER</div>
+            <div class="touch-zone-hint" id="zone-right">TAP DROITE : AVANCER</div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <h1>LA COLÈRE D'U MAGU</h1>
+            <p>
+                <b>SURVIVRE :</b> Les moulins s'activent.<br>Le vent vous pousse vers le vide.
+                <br>Ne tombez pas à gauche !
+            </p>
+            <div class="controls-info">
+                <span><span class="key">ÉCRAN GAUCHE</span> SAUTER</span>
+                <span><span class="key">ÉCRAN DROIT</span> AVANCER</span>
+                <span style="font-size: 0.8em; color: var(--dust); margin-top:5px;">(Relâchez la droite pour reculer avec le vent)</span>
+            </div>
+            <button onclick="startGame()">JOUER</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen">
+            <h1 style="color: var(--primary);">ÉCHEC</h1>
+            <h2>VOUS AVEZ CHUTÉ</h2>
+            <p>Le vent a eu raison de vous.<br>Le gardien vous attend en bas.</p>
+            <button onclick="goToPrison()">SUITE : LA PRISON</button>
+            <br><br>
+            <button onclick="location.reload()" style="font-size: 1rem; padding: 10px; background: transparent; border: 1px solid var(--primary); color: var(--dust);">RÉESSAYER</button>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victory-screen" class="screen">
+            <h1>SURVIE CONFIRMÉE</h1>
+            <p>Vous avez résisté à la tempête mécanique.<br>U Magu observe votre fuite.</p>
+            <button onclick="goToRebels()">SUITE : CAMP REBELLE</button>
+        </div>
+
+    </div>
+
+<script>
+/**
+ * PROSA GAME ENGINE - CASE 7 (Mobile Tuned)
+ * Tech: Vanilla JS + HTML5 Canvas
+ * Theme: Dark Khaki, Industrial, Windy
+ */
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Game State
+let gameState = 'MENU'; 
+let frames = 0;
+let score = 0;
+let timeLeft = 45;
+let difficultyMultiplier = 1;
+
+// Colors from CSS
+const COLORS = {
+    bg: '#1a1812',
+    player: '#ffdb2c',
+    ground: '#252218',
+    obstacle: '#c63032',
+    wind: '#ece4cb',
+    magu: '#300941',
+    primary: '#626247'
+};
+
+// Physics Constants (EASY MODE FOR MOBILE)
+const GRAVITY = 0.55;          // Reduced gravity for floatier jumps
+const WIND_FORCE_BASE = 0.15;  // Reduced base wind (was 0.2)
+const WIND_GUST_FORCE = 0.5;   // Reduced gust force (was 0.8)
+let currentWindForce = WIND_FORCE_BASE;
+
+// Camera Shake
+let shakeIntensity = 0;
+
+// Inputs
+const keys = {
+    ArrowRight: false,
+    ArrowLeft: false, // Not used in mobile scheme essentially
+    ArrowUp: false,
+    Space: false
+};
+
+// Entities
+let player;
+let obstacles = [];
+let particles = [];
+let backgroundMills = [];
+
+class Player {
+    constructor() {
+        this.w = 30;
+        this.h = 50;
+        this.x = canvas.width / 2;
+        this.y = canvas.height - 100;
+        this.vx = 0;
+        this.vy = 0;
+        this.speed = 5;
+        this.jumpPower = -14; // Higher jump
+        this.grounded = false;
+        this.health = 100;
+        this.maxHealth = 100;
+        this.color = COLORS.player;
+        this.invulnerable = 0;
+    }
+
+    update() {
+        // Movement Input
+        // Increased acceleration for mobile responsiveness
+        if (keys.ArrowRight) this.vx += 1.2; 
+        if (keys.ArrowLeft) this.vx -= 1.2;
+
+        // Friction
+        this.vx *= 0.9;
+
+        // Wind Push (Always pushes left)
+        this.vx -= currentWindForce;
+
+        // Jump
+        if ((keys.ArrowUp || keys.Space) && this.grounded) {
+            this.vy = this.jumpPower;
+            this.grounded = false;
+            // Add dust particles at feet
+            createParticles(this.x + this.w/2, this.y + this.h, 10, COLORS.dust);
+        }
+
+        // Apply Physics
+        this.vy += GRAVITY;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Floor Collision
+        let floorY = canvas.height - 80; // Height of ground
+        if (this.y + this.h > floorY) {
+            this.y = floorY - this.h;
+            this.vy = 0;
+            this.grounded = true;
+        }
+
+        // Screen Boundaries (Left is death, Right is wall)
+        if (this.x > canvas.width - this.w) {
+            this.x = canvas.width - this.w;
+            this.vx = 0;
+        }
+        
+        // Falling off left edge
+        if (this.x + this.w < 0) {
+            this.takeDamage(100); // Instant lose
+        }
+
+        // Invulnerability frame
+        if (this.invulnerable > 0) this.invulnerable--;
+    }
+
+    draw() {
+        ctx.save();
+        if (this.invulnerable > 0 && Math.floor(frames / 4) % 2 === 0) {
+            ctx.globalAlpha = 0.5;
+        }
+
+        // Draw Player Body (Simple shape for style)
+        ctx.fillStyle = this.color;
+        // Skew slightly based on movement
+        let skew = this.vx * -0.1;
+        ctx.transform(1, 0, skew, 1, this.x, this.y);
+        ctx.fillRect(0, 0, this.w, this.h);
+        
+        // Scarf/Cape blowing in wind
+        ctx.fillStyle = '#c63032';
+        ctx.beginPath();
+        ctx.moveTo(0, 10);
+        ctx.lineTo(this.w, 10);
+        ctx.lineTo(this.w + 20 + Math.sin(frames * 0.2) * 10, 5 + Math.sin(frames * 0.3)*5);
+        ctx.lineTo(this.w + 30 + Math.cos(frames * 0.2) * 10, 25);
+        ctx.lineTo(0, 20);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    takeDamage(amount) {
+        if (this.invulnerable > 0) return;
+        this.health -= amount;
+        this.invulnerable = 90; // 1.5 sec invulnerability (increased from 60)
+        shakeIntensity = 10;
+        updateHUD();
+        
+        if (this.health <= 0) {
+            endGame(false);
+        }
+    }
+}
+
+class Obstacle {
+    constructor() {
+        this.type = Math.random() > 0.6 ? 'DEBRIS' : 'BLADE'; 
+        this.w = this.type === 'DEBRIS' ? 30 : 50;
+        this.h = this.type === 'DEBRIS' ? 30 : 80;
+        
+        // Slower base speeds for obstacles
+        if (this.type === 'DEBRIS') {
+            this.x = canvas.width + Math.random() * 200;
+            this.y = -50;
+            this.vx = -3 - Math.random() * 3; // Slower debris
+            this.vy = 2 + Math.random() * 2; // Gravity
+            this.rotation = 0;
+            this.rotSpeed = (Math.random() - 0.5) * 0.2;
+        } else {
+            // Blade slides along ground or mid-air
+            this.x = canvas.width + 50;
+            this.y = Math.random() > 0.5 ? canvas.height - 80 - 80 : canvas.height - 80 - 140; 
+            this.vx = -5 - (Math.random() * 2 * difficultyMultiplier); // Slower blades
+            this.vy = 0;
+            this.rotation = frames * 0.1;
+            this.rotSpeed = 0.2;
+        }
+        
+        this.color = '#4a4a35'; 
+        this.markedForDeletion = false;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotSpeed;
+
+        if (this.x + this.w < -100) this.markedForDeletion = true;
+        if (this.y > canvas.height) this.markedForDeletion = true;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x + this.w/2, this.y + this.h/2);
+        ctx.rotate(this.rotation);
+        
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = COLORS.wind;
+        ctx.lineWidth = 1;
+
+        if (this.type === 'DEBRIS') {
+            ctx.beginPath();
+            ctx.moveTo(-this.w/2, -this.h/2);
+            ctx.lineTo(this.w/2, -this.h/4);
+            ctx.lineTo(this.w/2, this.h/2);
+            ctx.lineTo(-this.w/4, this.h/2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        } else {
+            ctx.fillStyle = '#222';
+            ctx.beginPath();
+            ctx.moveTo(0, -this.h/2);
+            ctx.lineTo(10, 0);
+            ctx.lineTo(0, this.h/2);
+            ctx.lineTo(-10, 0);
+            ctx.fill();
+            ctx.strokeStyle = '#c63032';
+            ctx.stroke();
+        }
+
+        ctx.restore();
+    }
+}
+
+class Particle {
+    constructor(x, y, color, speedX) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 3;
+        this.color = color;
+        this.vx = speedX || -5 - Math.random() * 10;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.life = 60;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life--;
+    }
+    draw() {
+        ctx.globalAlpha = this.life / 60;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.size, this.size);
+        ctx.globalAlpha = 1;
+    }
+}
+
+class BackgroundMill {
+    constructor(x, y, scale, speed) {
+        this.x = x;
+        this.y = y;
+        this.scale = scale;
+        this.speed = speed;
+        this.angle = Math.random() * Math.PI * 2;
+    }
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
+        ctx.rotate(this.angle);
+        
+        ctx.fillStyle = '#0f0e0b';
+        for(let i=0; i<3; i++) {
+            ctx.rotate((Math.PI * 2) / 3);
+            ctx.fillRect(-5, -100, 10, 100);
+        }
+        
+        ctx.restore();
+        this.angle -= this.speed; 
+    }
+}
+
+// --- CORE FUNCTIONS ---
+
+function init() {
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('keydown', e => {
+        if(e.code === 'ArrowRight') keys.ArrowRight = true;
+        if(e.code === 'ArrowLeft') keys.ArrowLeft = true;
+        if(e.code === 'ArrowUp') keys.ArrowUp = true;
+        if(e.code === 'Space') keys.Space = true;
+    });
+    window.addEventListener('keyup', e => {
+        if(e.code === 'ArrowRight') keys.ArrowRight = false;
+        if(e.code === 'ArrowLeft') keys.ArrowLeft = false;
+        if(e.code === 'ArrowUp') keys.ArrowUp = false;
+        if(e.code === 'Space') keys.Space = false;
+    });
+
+    // --- MOBILE TOUCH CONTROLS ---
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        // Handle Multitouch
+        for (let i = 0; i < e.touches.length; i++) {
+            const touchX = e.touches[i].clientX;
+            if (touchX < window.innerWidth / 2) {
+                keys.Space = true; // Left side tap = Jump
+            } else {
+                keys.ArrowRight = true; // Right side tap = Move Right
+            }
+        }
+    }, {passive: false});
+
+    canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        // Since we don't track individual touch IDs for simplicity in this engine, 
+        // we check what's remaining.
+        if (e.touches.length === 0) {
+            keys.Space = false;
+            keys.ArrowRight = false;
+        } else {
+            // Some finger is still down, check where
+            let leftPressed = false;
+            let rightPressed = false;
+            for (let i = 0; i < e.touches.length; i++) {
+                if (e.touches[i].clientX < window.innerWidth / 2) leftPressed = true;
+                else rightPressed = true;
+            }
+            keys.Space = leftPressed;
+            keys.ArrowRight = rightPressed;
+        }
+    });
+
+    // Generate Background Mills
+    for(let i=0; i<5; i++) {
+        backgroundMills.push(new BackgroundMill(
+            Math.random() * window.innerWidth,
+            window.innerHeight - 100 - Math.random() * 200,
+            0.5 + Math.random() * 1.5,
+            0.01 + Math.random() * 0.03
+        ));
+    }
+}
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    if(player) player.y = Math.min(player.y, canvas.height - 100);
+}
+
+function startGame() {
+    gameState = 'PLAYING';
+    document.getElementById('start-screen').classList.remove('active');
+    document.getElementById('hud').style.display = 'flex';
+    document.getElementById('touch-hints').style.display = 'block'; // Show hints
+    
+    player = new Player();
+    obstacles = [];
+    particles = [];
+    score = 0;
+    timeLeft = 45;
+    difficultyMultiplier = 1;
+    
+    // Timer Loop
+    let timerInt = setInterval(() => {
+        if(gameState !== 'PLAYING') {
+            clearInterval(timerInt);
+            return;
+        }
+        timeLeft--;
+        document.getElementById('timer-display').innerText = `SURVIE: ${timeLeft}s`;
+        
+        // Intensity Ramps up slower
+        difficultyMultiplier += 0.03; 
+        
+        // Wind gusts
+        if(timeLeft % 8 === 0) { // Less frequent gusts (every 8s)
+            currentWindForce = WIND_GUST_FORCE;
+            createParticles(canvas.width, canvas.height/2, 50, COLORS.dust);
+            shakeIntensity = 5;
+        } else {
+            currentWindForce = WIND_FORCE_BASE;
+        }
+
+        if(timeLeft <= 0) {
+            endGame(true);
+            clearInterval(timerInt);
+        }
+    }, 1000);
+
+    loop();
+}
+
+function createParticles(x, y, count, color) {
+    for(let i=0; i<count; i++) {
+        particles.push(new Particle(x, y + (Math.random() - 0.5) * 200, color));
+    }
+}
+
+function updateHUD() {
+    const bar = document.getElementById('health-bar');
+    const pct = (player.health / player.maxHealth) * 100;
+    bar.style.width = `${pct}%`;
+    if(pct < 30) bar.style.background = '#c63032';
+    else bar.style.background = '#ffdb2c';
+}
+
+function endGame(victory) {
+    gameState = victory ? 'VICTORY' : 'GAMEOVER';
+    document.getElementById('hud').style.display = 'none';
+    document.getElementById('touch-hints').style.display = 'none';
+    
+    setTimeout(() => {
+        if(victory) {
+            document.getElementById('victory-screen').classList.add('active');
+        } else {
+            document.getElementById('game-over-screen').classList.add('active');
+        }
+    }, 500);
+}
+
+// Button Actions
+window.goToPrison = function() {
+    alert("Redirection vers : Case 5 : La Prison...");
+    // window.location.href = '/case-5'; 
+};
+
+window.goToRebels = function() {
+    alert("Redirection vers : Case 9 : Le Camp des rebelles...");
+    // window.location.href = '/case-9';
+};
+
+// --- MAIN LOOP ---
+
+function loop() {
+    if(gameState !== 'PLAYING') return;
+    requestAnimationFrame(loop);
+    frames++;
+
+    // Shake Effect
+    let tx = 0, ty = 0;
+    if(shakeIntensity > 0) {
+        tx = (Math.random() - 0.5) * shakeIntensity;
+        ty = (Math.random() - 0.5) * shakeIntensity;
+        shakeIntensity *= 0.9;
+    }
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.save();
+    ctx.translate(tx, ty);
+
+    // 1. Draw Background
+    let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grad.addColorStop(0, '#0d0c09');
+    grad.addColorStop(1, '#252218');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = COLORS.purple;
+    ctx.globalAlpha = 0.3;
+    ctx.beginPath();
+    ctx.arc(canvas.width * 0.8, canvas.height - 200, 150, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    backgroundMills.forEach(mill => mill.draw());
+
+    // 2. Game Logic
+    // Spawn Obstacles (Spawn Rate reduced significantly)
+    // Was 60, now 80 (slower spawn)
+    if (frames % Math.floor(80 / difficultyMultiplier) === 0) {
+        obstacles.push(new Obstacle());
+    }
+
+    if(frames % 5 === 0) {
+        particles.push(new Particle(canvas.width, Math.random() * canvas.height, COLORS.dust, -15 - Math.random()*10));
+    }
+
+    particles.forEach((p, i) => {
+        p.update();
+        p.draw();
+        if(p.life <= 0) particles.splice(i, 1);
+    });
+
+    player.update();
+    player.draw();
+
+    obstacles.forEach((obs, i) => {
+        obs.update();
+        obs.draw();
+
+        if (
+            player.x < obs.x + obs.w &&
+            player.x + player.w > obs.x &&
+            player.y < obs.y + obs.h &&
+            player.y + player.h > obs.y
+        ) {
+            player.takeDamage(20); // Reduced Damage (20 instead of 35)
+            obs.markedForDeletion = true;
+            createParticles(player.x, player.y, 15, COLORS.obstacle);
+        }
+
+        if(obs.markedForDeletion) obstacles.splice(i, 1);
+    });
+
+    // Draw Ground
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0, canvas.height - 80, canvas.width, 80);
+    ctx.fillStyle = COLORS.primary;
+    ctx.fillRect(0, canvas.height - 80, canvas.width, 5);
+
+    ctx.restore();
+}
+
+// Start
+init();
+
+</script>
+</body>
+</html>
