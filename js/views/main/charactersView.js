@@ -1,9 +1,11 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { navigate } from "../../../router.js";
 import { showBackButton } from "../components/backButton.js";
+import { charactersData, fetchCharactersDetails } from "../../loadData.js";
 
 let characterDetailOverlay
 let isClosingCharacterDetail = false
+let charactersDetails
 
 export function charactersView(preventReload = false) {
     if (preventReload) {
@@ -41,12 +43,11 @@ export function charactersView(preventReload = false) {
         </div>
     `
 
-    let charactersData;
     const regionToggle = document.getElementById('regionToggle')
     const charactersRegionLabel = document.getElementById('charactersRegionLabel')
 
     const applyRegionFilter = () => {
-        if (!charactersData) return
+        if (!charactersData || Object.keys(charactersData).length === 0) return
 
         const selectedRegion = regionToggle && regionToggle.checked ? 'PROVENCE' : 'CORSE'
         if (charactersRegionLabel) {
@@ -60,29 +61,25 @@ export function charactersView(preventReload = false) {
             console.warn('Could not persist characters region:', error)
         }
 
-        const filtered = charactersData.filter(char => {
+        const filtered = Object.entries(charactersData).filter(([, char]) => {
             const region = (char.region || '').toString().toUpperCase()
             return region === selectedRegion
         })
         renderCharactersGrid(filtered)
     }
     async function loadCharacters() {
-        if (charactersData) {
-            return;
-        } else {
-            try {
-                const response = await fetch('./data/characters.json');
-                if (!response.ok) throw new Error('Failed to load characters data');
-
-                // Store data in memory for access later
-                charactersData = await response.json();
-                console.log("Characters data loaded:", charactersData.length, "characters.");
-
-                // Render grid
-                applyRegionFilter()
-            } catch (error) {
-                console.error("Critical: Could not load characters data", error);
+        try {
+            charactersDetails = await fetchCharactersDetails();
+            if (!charactersDetails) {
+                throw new Error('Failed to load characters details data');
             }
+
+            console.log("Characters data loaded:", Object.keys(charactersData || {}).length, "characters.");
+
+            // Render grid
+            applyRegionFilter()
+        } catch (error) {
+            console.error("Critical: Could not load characters data", error);
         }
     }
     loadCharacters()
@@ -104,11 +101,11 @@ export function charactersView(preventReload = false) {
     }
 }
 
-function renderCharactersGrid(charactersData) {
+function renderCharactersGrid(charactersEntries) {
     const charactersGrid = document.getElementById('charactersGrid')
     charactersGrid.innerHTML = ""
 
-    charactersData.forEach(char => {
+    charactersEntries.forEach(([key, char]) => {
         const card = document.createElement("div")
         card.className = "character-card"
 
@@ -136,12 +133,12 @@ function renderCharactersGrid(charactersData) {
         nameEl.textContent = char.name
 
         card.append(mediaWrapper, nameEl)
-        card.addEventListener("click", () => navigate('univers-prosa/encyclopedie-details', () => goToCharacterDetail(char)))
+        card.addEventListener("click", () => navigate('univers-prosa/encyclopedie-details', () => goToCharacterDetail(key, char)))
         charactersGrid.appendChild(card)
     })
 }
 
-function goToCharacterDetail(char) {
+function goToCharacterDetail(key, char) {
     characterDetailOverlay = document.createElement('div')
     characterDetailOverlay.classList.add('modal-overlay')
 
@@ -218,22 +215,24 @@ function goToCharacterDetail(char) {
         flagSecondEl.alt = 'Corsu'
     }
 
+    const detail = (charactersDetails && charactersDetails[key]) || {}
+
     // État de la langue (false = première langue, true = deuxième langue)
     let isSecondLanguage = false
 
     const updateDescription = () => {
         if (isProvencal) {
             // Personnage provençal: basculer entre corse et provençal
-            const description = isSecondLanguage ? (char.description_prov || char.description) : (char.description_co || char.description)
-            const role = isSecondLanguage ? (char.role_prov || char.role) : (char.role_co || char.role)
+            const description = isSecondLanguage ? (detail.description_co || detail.description) : detail.description
+            const role = isSecondLanguage ? (detail.role_co || detail.role) : detail.role
             characterDescription.innerHTML = `
             <p>${description}</p>
             <span class="role">${role}</span>
             `
         } else {
             // Personnage corse: basculer entre français et corse
-            const description = isSecondLanguage ? (char.description_co || char.description) : char.description
-            const role = isSecondLanguage ? (char.role_co || char.role) : char.role
+            const description = isSecondLanguage ? (detail.description_co || detail.description) : detail.description
+            const role = isSecondLanguage ? (detail.role_co || detail.role) : detail.role
             characterDescription.innerHTML = `
             <p>${description}</p>
             <span class="role">${role}</span>

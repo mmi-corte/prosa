@@ -1,6 +1,7 @@
 import { activePlayer, activeStepId } from "./gameEventHandler.js";
 
 export let stepsData = []
+export let charactersData = [];
 export let dialogsData = [];
 export let choicesData = [];
 export let riddlesData = [];
@@ -63,6 +64,33 @@ export async function fetchSteps() {
         console.log(`Steps data successfully loaded`);
     } catch (error) {
         console.error("Critical: Could not load steps data", error);
+    }
+}
+
+export async function fetchCharacters() {
+    try {
+        const response = await fetch('./data/characters.json');
+        if (!response.ok) throw new Error('Failed to load characters data');
+
+        const data = await response.json();
+        charactersData = data
+        console.log(`Characters data successfully loaded`);
+    } catch (error) {
+        console.error("Critical: Could not load characters data", error);
+    }
+}
+
+export async function fetchCharactersDetails() {
+    try {
+        const response = await fetch('./data/characters_details.json');
+        if (!response.ok) throw new Error('Failed to load characters details data');
+
+        const dataFetch = await response.json();
+        // Return the whole object so we can see both "1" (Corte) and "2" (Toulon)
+        return dataFetch;
+    } catch (error) {
+        console.error("Critical: Could not load characters details data", error);
+        return null;
     }
 }
 

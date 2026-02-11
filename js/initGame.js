@@ -1,4 +1,4 @@
-import { fetchAleasRiddles, fetchSteps } from "./loadData.js";
+import { charactersData, fetchAleasRiddles, fetchCharacters, fetchSteps } from "./loadData.js";
 
 export let playerCharactersData
 export let players = {}
@@ -7,6 +7,12 @@ export let globalDifficulty
 export let difficultyState
 
 export async function initGame() {
+    //Load characters data if not already loaded
+    if (!charactersData || Object.keys(charactersData).length === 0) {
+        await fetchCharacters()
+    }
+
+    //Check if there is game data
     const storedPlayers = localStorage.getItem('playersData');
     const storedDifficulty = localStorage.getItem('globalDifficulty')
     const storedDifficultyState = localStorage.getItem('difficultyState')
@@ -63,7 +69,7 @@ export function decrementDifficultyState() {
     console.log("Decreasing difficulty state")
     difficultyState += -1
     localStorage.setItem('difficultyState', JSON.stringify(difficultyState));
-    
+
     // Retourner true si le joueur a perdu (batterie à 0)
     return difficultyState <= 0;
 }
