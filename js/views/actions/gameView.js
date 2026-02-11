@@ -22,7 +22,7 @@ export function gameView(action) {
     iframe.style.width = '100vw';
     iframe.style.height = '100dvh';
     iframe.style.border = 'none';
-    iframe.style.zIndex = '9999';
+    iframe.style.zIndex = '899';
     iframe.allow = 'camera; microphone';
 
     gameContainer.appendChild(iframe);
@@ -148,7 +148,7 @@ export function gameView(action) {
                 align-items: center;
                 justify-content: center;
                 padding: 20px;
-                z-index: 9999;
+                z-index: 900;
                 font-family: monospace;
             `;
             debugDiv.innerHTML = `
