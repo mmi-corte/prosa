@@ -510,6 +510,92 @@
     }
   },
   "3": {
+    "01": {
+      "1": {
+        "random": true,
+        "text": [
+          {
+            "question": {
+              "fr": "question"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "bonne réponse"
+                },
+                "score": 1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "question"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "bonne réponse"
+                },
+                "score": 1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "question"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "mauvaise réponse"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "bonne réponse"
+                },
+                "score": 1
+              }
+            ]
+          }
+        ],
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
     "02": {
       "1": {
         "random": true,

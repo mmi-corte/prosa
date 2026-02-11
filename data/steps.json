@@ -602,6 +602,10 @@
         "1": {
           "type": "win",
           "nextStep": "04"
+        },
+        "2": {
+          "type": "still",
+          "nextStep": "01"
         }
       }
     },

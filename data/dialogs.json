@@ -2998,6 +2998,85 @@
     }
   },
   "3": {
+    "01": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous approchez d’une centrale qui a l’air de gérer la maintenance de câbles en provenance de l’île de Corte."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous devinez que Prosa est en partie alimentée par la Corse via des câbles sous-marins, qui sont gérés par un poste de maintenance."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une fois arrivé au niveau du bâtiment, vous vous retrouvez confronté à deux soldats, armés jusqu’aux dents, en patrouille."
+            }
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "À l’intérieur, un homme s’approche de vous. Il porte une combinaison de technicien et affiche un air un peu naïf."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Ah ! Vous devez être un soldat de l’organisation, non ? Vous tombez bien, un peu de compagnie fait toujours plaisir.\""
+            },
+            "character": "technicien_prosa"
+          },
+          {
+            "text": {
+              "fr": "\"Ici, c’est le cœur du système d’alimentation de l’île. Tout est entretenu par un drone sous-marin. Il surveille les conduits et les répare dès qu’il y a une anomalie.\""
+            },
+            "character": "technicien_prosa"
+          },
+          {
+            "text": {
+              "fr": "Vous êtes surpris mais ne laissez rien transparaitre pour qu’il continue de parler."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Sinon ce sont des moulins à vent immense qui sont notre principale source d’alimentation. On produit une quantité d’électricité énorme…\""
+            },
+            "character": "technicien_prosa"
+          },
+          {
+            "text": {
+              "fr": "Vous orientez la conversation pour qu’il vous explique comment traverser la chaine de montagne."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le technicien répond qu’il y a un chemin qui passe par-dessus la montagne derrière la centrale."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "02": {
       "1": {
         "default": {
