@@ -464,56 +464,6 @@
                 "score": 1
               }
             ]
-          },
-          {
-            "question": {
-              "fr": "question"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
-                },
-                "score": 1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "question"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
-                },
-                "score": 1
-              }
-            ]
           }
         ],
         "nextActionTypeWin": "dialog",
@@ -526,56 +476,6 @@
       "1": {
         "random": true,
         "text": [
-          {
-            "question": {
-              "fr": "question"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
-                },
-                "score": 1
-              }
-            ]
-          },
-          {
-            "question": {
-              "fr": "question"
-            },
-            "choices": [
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
-                },
-                "score": 1
-              }
-            ]
-          },
           {
             "question": {
               "fr": "question"

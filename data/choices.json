@@ -244,32 +244,6 @@
         ]
       }
     },
-    "07": {
-      "2": {
-        "question": {
-          "fr": "Que faites-vous ?",
-          "cor": "Chì fate ?"
-        },
-        "choices": [
-          {
-            "text": {
-              "fr": "Prendre la défense des deux frères",
-              "cor": "Difende i dui fratelli"
-            },
-            "nextActionType": "end",
-            "nextAction": "1"
-          },
-          {
-            "text": {
-              "fr": "Tenter de calmer la situation et éviter l'affrontement",
-              "cor": "Pruvà à calmà a situazione è evitari u cumbattu"
-            },
-            "nextActionType": "end",
-            "nextAction": "2"
-          }
-        ]
-      }
-    },
     "12": {
       "3": {
         "question": {
