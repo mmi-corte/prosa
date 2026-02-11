@@ -621,7 +621,15 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "06"
+          "nextStep": "06",
+          "unlockStep": "061",
+          "unlockedStepId": "06"
+        },
+        "2": {
+          "type": "win",
+          "nextStep": "06",
+          "unlockStep": "060",
+          "unlockedStepId": "06"
         }
       }
     },
@@ -668,6 +676,18 @@
         "2": {
           "type": "lose",
           "nextStep": "05"
+        }
+      }
+    },
+    "061": {
+      "actionType": "dialog",
+      "action": "3",
+      "end": {
+        "1": {
+          "type": "lose_turn",
+          "turnLoosed": "01",
+          "unlockStep": "060",
+          "unlockedStepId": "06"
         }
       }
     },

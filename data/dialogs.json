@@ -2998,6 +2998,118 @@
     }
   },
   "3": {
+    "03": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous arrivez à la rencontre de Gaspard, aux côtés du soldat. En discutant, vous apprenez que c’est un soldat droit et loyal, avec un certain sens de l’humour."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il connaît par ailleurs bien les chefs de l’organisation de Toulon, puisqu’il est originaire lui-même de Provence."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"D’ailleurs, c’est toujours moi qui me charge du réapprovisionnement… Pourquoi ce bon vieux Gény Maurel t’a choisi ?\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "Vous lui expliquez que c’est un remplacement temporaire, et que ça vous permet de faire vos preuves, notamment aux yeux de Gény."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Toujours à faire des tests sur les nouveaux, c’est vraiment un malin. Il y a une grotte qui débouche près de la ville. Peu utilisée. On y circule sans trop se faire remarquer. Si tu veux, je peux te l’indiquer.\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "Vous lui demandez ce qu’il pense des dirigeants de Toulon, par curiosité."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Gény c’est mon frère d’arme, une vraie tête. Alphonse Lévy sait toujours quoi dire, et surtout quand le dire.\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "\"À Toulon, ça lui a plutôt bien réussi. Moi, j’ai appris qu’il valait mieux écouter ce qu’il ne dit pas. Lou Drapé… disons qu’il inspire beaucoup de loyauté autour de lui.\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "\"Ce genre de loyauté ne naît jamais par hasard. Et toi que penses-tu de Lou Drapé ?\""
+            },
+            "character": "gaspard"
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Mm. C’est un point de vue qui se défend. L’autorité, ça rassure, je suppose.\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "\"Si c’est la hiérarchie qui te parle, suis le sentier balisé. C’est la route réglementaire.\""
+            },
+            "character": "gaspard"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Hahaha ! Au moins, t’as les yeux en face des trous, toi. La lucidité, ça sauve la vie ici.\""
+            },
+            "character": "gaspard"
+          },
+          {
+            "text": {
+              "fr": "\"Ne perds pas ton temps sur la route principale. Coupe par là, tu gagneras une bonne heure.\""
+            },
+            "character": "gaspard"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
+      }
+    },
     "04": {
       "1": {
         "default": {
@@ -3024,28 +3136,6 @@
           }
         ],
         "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous sortez de la grotte, essoufflé mais victorieux. Celle-ci s’effondre derrière vous violement."
-            }
-          },
-          {
-            "text": {
-              "fr": "Lorsque vous prenez le temps d’observer autour de vous, vous découvrez une forêt luxuriante. Vous approchez du centre de Prosa."
-            }
-          }
-        ],
-        "nextActionType": "end",
         "nextAction": "1"
       }
     },
@@ -3276,6 +3366,28 @@
           {
             "text": {
               "fr": "Lorsque vous prenez le temps d’observer autour de vous, vous découvrez une forêt luxuriante. Vous approchez du centre de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous empruntez le chemin que Gaspard vous à indiqué en direction de la grotte."
+            }
+          },
+          {
+            "text": {
+              "fr": "Bien qu'il s'agisse d'un chemin mieux balisé, celui-ci vous fait perdre un temps considérable."
             }
           }
         ],

@@ -295,6 +295,29 @@
     }
   },
   "3": {
+    "03": {
+      "1": {
+        "question": {
+          "fr": "Que pensez-vous de Lou Drapé ?"
+        },
+        "choices": [
+          {
+            "text": {
+              "fr": "Répondre que vous avez un profond respect pour lui."
+            },
+            "nextActionType": "dialog",
+            "nextAction": "2"
+          },
+          {
+            "text": {
+              "fr": "Répondre que vous ne l'appréciez pas."
+            },
+            "nextActionType": "dialog",
+            "nextAction": "3"
+          }
+        ]
+      }
+    },
     "08": {
       "1": {
         "question": {
