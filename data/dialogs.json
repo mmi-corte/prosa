@@ -14,14 +14,12 @@
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           },
           {
             "text": {
               "fr": "La voix se perd dans un flot de grésillement."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -40,38 +38,33 @@
               "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
               "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           },
           {
             "text": {
               "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
               "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           },
           {
             "text": {
               "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
               "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           },
           {
             "text": {
               "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
               "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           },
           {
             "text": {
               "fr": "La voix s'interrompt soudainement…"
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -90,42 +83,37 @@
           {
             "text": {
               "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
-            },
-            "pitch": 400,
-            "voice": ""
+            }
           },
           {
             "text": {
               "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Oh… ta gourde déborde. Je sens ton esprit ailleurs.\"",
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
-            "pitch": 650,
+            "character": "fata",
             "voice": "Case_2_Fata_1.mp3"
           },
           {
             "text": {
               "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.\"",
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
-            "pitch": 650,
+            "character": "fata",
             "voice": "Case_2_Fata_2.mp3"
           }
         ],
@@ -145,7 +133,7 @@
               "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
               "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
-            "pitch": 650,
+            "character": "fata",
             "voice": "Case_2_Fata_3.mp3"
           },
           {
@@ -153,21 +141,20 @@
               "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
               "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
             },
-            "pitch": 650,
+            "character": "fata",
             "voice": "Case_2_Fata_4.mp3"
           },
           {
             "text": {
               "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
-            "pitch": 650,
+            "character": "fata",
             "voice": "Case_2_Fata_5.mp3"
           }
         ],
@@ -185,20 +172,17 @@
           {
             "text": {
               "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -217,7 +201,7 @@
               "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
               "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
             },
-            "pitch": 600,
+            "character": "strega",
             "voice": "Case_2_Strega_1.mp3"
           },
           {
@@ -225,40 +209,36 @@
               "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
               "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
             },
-            "pitch": 600,
+            "character": "strega",
             "voice": "Case_2_Strega_2.mp3"
           },
           {
             "text": {
               "fr": "Vous faites un pas en arrière effrayé."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
               "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
-            "pitch": 600,
+            "character": "strega",
             "voice": "Case_2_Strega_3.mp3"
           },
           {
             "text": {
               "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Ils sont tous liés. Prosa… Corte… et le clan. Si personne n’agit… rien ne changera."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "Si le clan déteste autant U Spallistu c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé…. AU MUSÉE !"
-            },
-            "pitch": 400
+              "fr": "Si le clan déteste autant U Spallistu, c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé… AU MUSÉE !"
+            }
           }
         ],
         "nextActionType": "end",
@@ -277,29 +257,27 @@
           {
             "text": {
               "fr": "Une silhouette vous attend au fond de la salle principale."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Je t'attendais.\"",
               "cor": "\"T'aspettava.\""
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_3_Spallistu_1.mp3"
           },
           {
             "text": {
               "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
               "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_3_Spallistu_2.mp3"
           },
           {
@@ -312,7 +290,7 @@
               "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_3_Spallistu_3.mp3"
           }
         ],
@@ -332,7 +310,7 @@
               "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
               "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_3_Spallistu_4.mp3"
           }
         ],
@@ -352,7 +330,7 @@
               "fr": "\"Ton chemin te mènera à l’Orcu…\"",
               "cor": "\"A to strada ti purterà versu l’Orcu…\""
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_3_Spallistu_4-perdu.mp3"
           }
         ],
@@ -372,20 +350,17 @@
           {
             "text": {
               "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -402,8 +377,7 @@
           {
             "text": {
               "fr": "Objet obtenu : « La Carte des Vents » (jeton unique). Vous récupérez un jeton doré."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -422,7 +396,7 @@
               "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
               "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà."
             },
-            "pitch": 300,
+            "character": "spallistu",
             "voice": "Case_88_Spallistu_imposant.mp3"
           }
         ],
@@ -442,8 +416,7 @@
           {
             "text": {
               "fr": "L'Orcu est là. Immobile. Immense. Il vous jauge sans un mot, puis désigne un objet lourd posé au sol."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -462,7 +435,7 @@
               "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
               "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_4_Orcu_1.mp3"
           },
           {
@@ -470,7 +443,7 @@
               "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
               "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_4_Orcu_2.mp3"
           },
           {
@@ -478,7 +451,7 @@
               "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
               "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_4_Orcu_3.mp3"
           },
           {
@@ -486,14 +459,13 @@
               "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
               "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_4_Orcu_4.mp3"
           },
           {
             "text": {
               "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -512,14 +484,12 @@
           {
             "text": {
               "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "choice",
@@ -538,29 +508,27 @@
           {
             "text": {
               "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
               "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
             },
-            "pitch": 500,
+            "character": "signadora",
             "voice": ""
           },
           {
             "text": {
               "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments.\"",
               "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
             },
-            "pitch": 500,
+            "character": "signadora",
             "voice": "Case_2_Signadora_2.mp3"
           },
           {
@@ -568,7 +536,7 @@
               "fr": "\"Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns.\"",
               "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
             },
-            "pitch": 500,
+            "character": "signadora",
             "voice": ""
           },
           {
@@ -576,7 +544,7 @@
               "fr": "\"Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.\"",
               "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
             },
-            "pitch": 500,
+            "character": "signadora",
             "voice": ""
           }
         ],
@@ -594,20 +562,17 @@
           {
             "text": {
               "fr": "La chapelle se dresse à l’écart du village. Ses murs fissurés portent encore les cicatrices de l’effondrement du monde."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Autrefois lieu de recueillement, elle est devenue un avant-poste du clan. Des caisses de vivres, des armes et des réserves médicales y sont entassées."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Une veilleuse brûle sous le porche de pierre où deux gardes jouent aux cartes."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -624,20 +589,17 @@
           {
             "text": {
               "fr": "À l’intérieur, l’air est lourd. Des cierges éteints jonchent le sol."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Vous récupérez les médicaments et ressortez rapidement."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -656,15 +618,14 @@
           {
             "text": {
               "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !\"",
               "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
             },
-            "pitch": 350,
+            "character": "armurier_corte",
             "voice": "Case_7_Armurier_1.mp3"
           },
           {
@@ -672,7 +633,7 @@
               "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
               "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
-            "pitch": 550,
+            "character": "soldat1_corte",
             "voice": "Case_7_Soldat_1.mp3"
           },
           {
@@ -680,7 +641,7 @@
               "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
               "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
             },
-            "pitch": 600,
+            "character": "soldat2_corte",
             "voice": "Case_7_Soldat_2.mp3"
           },
           {
@@ -688,7 +649,7 @@
               "fr": "\"Jamais ! C'est mon héritage !\"",
               "cor": "\"Mai ! Hè a mo lascita !\""
             },
-            "pitch": 350,
+            "character": "armurier_corte",
             "voice": "Case_7_Armurier_2.mp3"
           }
         ],
@@ -728,8 +689,7 @@
           {
             "text": {
               "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -748,7 +708,7 @@
               "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
               "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
             },
-            "pitch": 350,
+            "character": "armurier_corte",
             "voice": "Case_7_Armurier_3.mp3"
           },
           {
@@ -756,7 +716,7 @@
               "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
               "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
             },
-            "pitch": 350,
+            "character": "armurier_corte",
             "voice": "Case_7_Armurier_4.mp3"
           }
         ],
@@ -776,7 +736,7 @@
               "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
               "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
             },
-            "pitch": 350,
+            "character": "armurier_corte",
             "voice": "Case_7_Armurier_5.mp3"
           }
         ],
@@ -797,15 +757,13 @@
             "text": {
               "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
               "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Soudain, en une seconde, il s'élance à toute vitesse vers le maquis.",
               "cor": "Poi in un secondu, si lancia à tutta velocità versu u macchja."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -824,21 +782,20 @@
               "fr": "\"Laissez-moi ! Laissez-moi !\"",
               "cor": "\"Linteti mi ! Linteti mi !\""
             },
-            "pitch": 700,
+            "character": "fulettu",
             "voice": "Case_67_Fulettu_1.mp3"
           },
           {
             "text": {
               "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
               "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
             },
-            "pitch": 700,
+            "character": "fulettu",
             "voice": "Case_67_Fulettu_2.mp3"
           },
           {
@@ -846,14 +803,13 @@
               "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
               "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
             },
-            "pitch": 700,
+            "character": "fulettu",
             "voice": "Case_67_Fulettu_2-5.mp3"
           },
           {
             "text": {
               "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
@@ -864,15 +820,14 @@
           {
             "text": {
               "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
               "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
             },
-            "pitch": 700,
+            "character": "fulettu",
             "voice": "Case_67_Fulettu_3.mp3"
           }
         ],
@@ -890,8 +845,7 @@
           {
             "text": {
               "fr": "Vous retournez à la fontaine, déçu d’avoir perdu votre temps."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -910,14 +864,12 @@
           {
             "text": {
               "fr": "Afin de continuer vos recherches, vous décidez de monter en haut du belvédère pour bénéficier d'une meilleure vue d'ensemble."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Après une marche épuisante, vous observez l'ensemble de la ville de Corte… Vous remarquez finalement deux endroits marquants et plusieurs choix s'offrent à vous."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "choice",
@@ -937,22 +889,20 @@
             "text": {
               "fr": "Vous rentrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
               "cor": "Entrate in u Frac, l'internu di u bastimentu hè silenziu, abbandunatu dapoi tantu tempu, e so sale d'esposizione trasformate in corridori scuri induve risonanu passi imaginarii."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "À peine avez-vous franchi l'entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d'enfant déformé par un large sourire.",
               "cor": "Appena avete francatu l'entrata chì a porta sbatte daretu à voi. Un visu fragile appare brevemente, u so visu di zitellu deformatu da un largu surrisu."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.",
-              "cor": "Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu."
+              "fr": "\"Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.\"",
+              "cor": "\"Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu.\""
             },
-            "pitch": 400,
+            "character": "fulettu",
             "voice": "Case_9_Fulettu_malicieux.mp3"
           }
         ],
@@ -971,14 +921,12 @@
             "text": {
               "fr": "Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.",
               "cor": "Scoprite un passaghju scunnisciutu daretu à una tenda tesa. Una botola grossolana sbocca in un corridore scuru, scavatu da i travagliadori per circulà senza attirà l'attenzione di i guardi."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -995,14 +943,12 @@
           {
             "text": {
               "fr": "Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré. "
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Votre seul chemin encore viable est A Piazza à u Duca."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1020,22 +966,25 @@
         "dialog": [
           {
             "text": {
-              "fr": "Le bruit régulier du métal, des pas et des souffles fatigués rythme l'endroit. Au-dessus des travailleurs, trois gardes de A Squadra d'Arozza (Les revenants) surveillent la scène, immobiles, l'arme en évidence, prêts à intervenir au moindre faux pas."
-            },
-            "pitch": 400
+              "fr": "Le bruit régulier du métal, des pas et des souffles fatigués rythme l'endroit."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au-dessus des travailleurs, trois gardes de A Squadra d'Arozza (Les revenants) surveillent la scène, immobiles, l'arme en évidence, prêts à intervenir au moindre faux pas."
+            }
           },
           {
             "text": {
               "fr": "Vous vous approchez du premier travailleur que vous croisez espérant récupérer des informations."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Ici on travaille… ou on regarde ailleurs. Y'en a qui baissent la tête pour survivre. D'autres qui serrent les dents… en attendant que ça casse. Fais attention à qui tu parles.",
               "cor": "Quì si travaglia… o si guarda in altrò. Ci n'hè chì abbassanu a testa per campà. Altri chì serranu i denti… aspittendu chì si rompa. Fà attenzione à quale parli."
             },
-            "pitch": 400,
+            "character": "travailleur_corte",
             "voice": "Case_10_travailleur_1.mp3"
           }
         ],
@@ -1053,21 +1002,19 @@
           {
             "text": {
               "fr": "Vous parler au premier travailleur, celui-ci creuse un troue avec une pelle."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "Ici… on ne parle pas. Hé ! Il pose des questions."
+              "fr": "\"Ici… on ne parle pas. Hé ! Il pose des questions.\""
             },
-            "pitch": 400,
+            "character": "travailleur_corte",
             "voice": "Case_10_travailleur_2.mp3"
           },
           {
             "text": {
               "fr": "La dénonciation tombe comme un couperet. Vous vous retrouvez face au clan, exposé, forcé d’affronter la garde. L’épreuve est brutale, sans soutien, chaque mouvement comptant double pour espérer vous en sortir."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -1084,21 +1031,19 @@
           {
             "text": {
               "fr": "Vous parlez au deuxième travailleur qui utilise un marteau pour clouer une planche."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrais avec toi."
+              "fr": "\"J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrais avec toi.\""
             },
-            "pitch": 400,
+            "character": "travailleur_corte",
             "voice": "Case_10_travailleur_3.mp3"
           },
           {
             "text": {
               "fr": "La dénonciation tombe comme un couperet. Vous vous retrouvez face au clan, exposé, forcé d’affronter la garde. L’épreuve est brutale, sans soutien, chaque mouvement comptant double pour espérer vous en sortir."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -1115,8 +1060,7 @@
           {
             "text": {
               "fr": "Une fois les gardes neutralisés, les travailleurs se dispersent dans un souffle de soulagement. Le travailleur équipé d’un marteau vous entraîne jusqu’au camp des travailleurs de la statue de Pascal Paoli."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1135,14 +1079,12 @@
           {
             "text": {
               "fr": "Le camp des rebelles est caché dans l’ancienne mairie de Corte à l’écart de la ville. Des tentes de fortune, assemblées à partir de bâches et de branchages, se pressent autour d’un feu central."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "L’air est empli de fumée, de poussière et de voix basses qui murmurent des ordres, des stratégies ou des prières pour ceux qui ont disparu."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -1159,14 +1101,12 @@
           {
             "text": {
               "fr": "L’armurier dépose les sacs d’armes et de munitions récupérées. Les rebelles s’organisent immédiatement, triant, répartissant, vérifiant les stocks. Chaque action est rapide, précise."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Chaque action est rapide, précise. Vous comprenez que ce camp n’est pas seulement un refuge : c’est une préparation pour l’affrontement à venir."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -1183,14 +1123,12 @@
           {
             "text": {
               "fr": "Le camp des rebelles est caché dans l’ancienne mairie de Corte à l’écart de la ville. Des tentes de fortune, assemblées à partir de bâches et de branchages, se pressent autour d’un feu central."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "L’air est empli de fumée, de poussière et de voix basses qui murmurent des ordres, des stratégies ou des prières pour ceux qui ont disparu."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -1207,14 +1145,12 @@
           {
             "text": {
               "fr": "Après avoir remis les médicaments à la vieille guérisseuse qui vous attend devant la chapelle, vous sentez un souffle de soulagement et de gratitude."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "La soigneuse vous invite à la suivre. Elle connaît un chemin discret à travers le maquis, loin des patrouilles du clan, un passage sûr pour rejoindre des rebelles."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -1233,7 +1169,7 @@
               "fr": "\"La route du cimetière ne s'ouvre pas aux inconnus. Nous préparons cette attaque depuis plusieurs jours maintenant.\"",
               "cor": "\"A strada di u campu santu ùn s’apre micca à i scunnisciuti. Preparemu st’attaccu dapoi parechji ghjorni avà.\""
             },
-            "pitch": 300,
+            "character": "chef_rebel_corte",
             "voice": "Case_11_voix_1.mp3"
           },
           {
@@ -1241,7 +1177,7 @@
               "fr": "\"Prouve ta valeur si tu veux combattre avec nous demain.\"",
               "cor": "\"Prova u to valore s’è tù voli cumbatte cun noi dumane.\""
             },
-            "pitch": 300,
+            "character": "chef_rebel_corte",
             "voice": "Case_11_voix_2.mp3"
           }
         ],
@@ -1259,14 +1195,12 @@
           {
             "text": {
               "fr": "Vous gagnez le respect des habitants du camp et leur confiance. Vous êtes désormais accepté et prêt à vous préparer avec eux pour le départ."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Le lendemain, vous affronterez A Strega sur la route du cimetière."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1284,16 +1218,25 @@
         "dialog": [
           {
             "text": {
-              "fr": "Le travailleur marteau raconte au camp l’altercation."
-            },
-            "pitch": 400
+              "fr": "Vous arrivez enfin au camp des travailleurs, un refuge aménagé à côté de la statue de Pascal Paoli."
+            }
+          },
+          {
+            "text": {
+              "fr": "Des tentes et des abris rudimentaires sont disposés autour de petits feux, où certains s’assoient simplement pour se reposer ou soigner des blessures."
+            }
+          },
+          {
+            "text": {
+              "fr": "L’atmosphère est calme mais tendue : chacun sait que le clan les surveille. Le travailleur marteau raconte au camp l’altercation."
+            }
           },
           {
             "text": {
               "fr": "\"Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.\"",
               "cor": "\"U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà.\""
             },
-            "pitch": 400,
+            "character": "chef_travailleur_corte",
             "voice": "Case_12_voix_1.mp3"
           }
         ],
@@ -1313,15 +1256,14 @@
           {
             "text": {
               "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de A Squadra d’Arrozza, vous devez faire face à A Strega."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
               "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
-            "pitch": 600,
+            "character": "strega",
             "voice": "case_13_strega_2.mp3"
           }
         ],
@@ -1341,20 +1283,18 @@
               "fr": "\"Je sais ce que tu veux… Quand U Sarpu saura que j'ai perdu, il mettra la Corse à feu et à sang… Je n'avais pas le choix… Protège notre île !\"",
               "cor": "\"Sò ciò chì voli… Quandu U Sarpu saperà ch'aghju persu, metterà a Corsica à focu è à sangue… Ùn avia micca scelta… Prutege a nostra isula !\""
             },
-            "pitch": 600,
+            "character": "strega",
             "voice": "case_13_strega_1.mp3"
           },
           {
             "text": {
               "fr": "A Strega expire une dernière fois et le silence tombe sur le camp."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Vous récupérez la pierre de l'Orcu et continuez votre quête vers Prosa."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1371,8 +1311,7 @@
           {
             "text": {
               "fr": "Votre quête se transforme en infiltration. Vous devez parvenir jusqu’à la demeure d’A Strega pour lui voler un fragment de la pierre de l’Orcu."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -1389,8 +1328,7 @@
           {
             "text": {
               "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoir volé A Strega et continuez votre quête vers Prosa. "
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1411,7 +1349,7 @@
               "fr": "\"Tu as tenu parole.\"",
               "cor": "\"Hai tenutu a to parolla.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_14_Orcu.mp3"
           },
           {
@@ -1468,7 +1406,7 @@
               "fr": "\"Tu as tenu parole.\"",
               "cor": "\"Hai tenutu a to parolla.\""
             },
-            "pitch": 350,
+            "character": "orcu",
             "voice": "Case_14_Orcu.mp3"
           },
           {
@@ -1603,7 +1541,7 @@
               "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
               "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -1615,7 +1553,7 @@
               "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
               "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -1637,7 +1575,7 @@
               "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
               "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -1649,7 +1587,7 @@
               "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
               "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {

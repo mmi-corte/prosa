@@ -4,7 +4,7 @@
     "region": "CORSE",
     "image": "Fulettu.webm",
     "pitch": 800,
-    "color": "#FFFFFF"
+    "color": "#d7b13b"
   },
   "squadra_darozza": {
     "name": "A Squadra d’Arozza",
@@ -17,8 +17,8 @@
     "name": "A Strega",
     "region": "CORSE",
     "image": "AStrega.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 350,
+    "color": "#96368B"
   },
   "magu": {
     "name": "U Magu",
@@ -31,15 +31,15 @@
     "name": "A Signadora",
     "region": "CORSE",
     "image": "signadora.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 340,
+    "color": "#a08ee6"
   },
   "mazzeru": {
     "name": "U Mazzeru",
     "region": "CORSE",
     "image": "mazzeru.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 300,
+    "color": "#45b9d5"
   },
   "strigone": {
     "name": "U Strigone",
@@ -52,23 +52,23 @@
     "name": "U Spallistu",
     "region": "CORSE",
     "image": "Spallistu.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 400,
+    "color": "#F5E5C0"
   },
   "orcu": {
     "name": "L'Orcu",
     "region": "CORSE",
     "image": "orcu.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 350,
+    "color": "#d7b13b"
   },
   "fata": {
     "id": 10,
     "name": "A Fata",
     "region": "CORSE",
     "image": "Fata.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 600,
+    "color": "#45b9d5"
   },
   "garagai": {
     "name": "Lou Garagaï",
@@ -132,5 +132,47 @@
     "image": "LouDrape.webm",
     "pitch": 800,
     "color": "#FFFFFF"
+  },
+  "radio": {
+    "isNarrativeOnly": true,
+    "name": "Radio",
+    "pitch": 500,
+    "color": "#d7b13b"
+  },
+  "armurier_corte": {
+    "isNarrativeOnly": true,
+    "name": "L'Armurier",
+    "pitch": 300,
+    "color": "#F39200"
+  },
+  "soldat1_corte": {
+    "isNarrativeOnly": true,
+    "name": "Soldat 1",
+    "pitch": 450,
+    "color": "#CC3032"
+  },
+  "soldat2_corte": {
+    "isNarrativeOnly": true,
+    "name": "Soldat 2",
+    "pitch": 650,
+    "color": "#85292b"
+  },
+  "travailleur_corte": {
+    "isNarrativeOnly": true,
+    "name": "Travailleur",
+    "pitch": 300,
+    "color": "#CC3032"
+  },
+  "chef_rebel_corte": {
+    "isNarrativeOnly": true,
+    "name": "Chef Rebelle",
+    "pitch": 250,
+    "color": "#75952B"
+  },
+    "chef_travailleur_corte": {
+    "isNarrativeOnly": true,
+    "name": "Chef des Travailleurs",
+    "pitch": 350,
+    "color": "#F5E5C0"
   }
 }

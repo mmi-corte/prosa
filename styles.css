@@ -413,7 +413,7 @@ body.light-mode .dialogWrapper {
   background-color: rgba(236, 228, 203, 0.9);
 }
 
-body.light-mode .dialogWrapper p {
+body.light-mode .dialogWrapper .dialogTextContainer {
   background: var(--card);
   border-color: var(--border);
   color: var(--foreground);
@@ -2150,7 +2150,7 @@ body.light-mode .logo-main {
   background-position: center;
 }
 
-.dialogWrapper p {
+.dialogWrapper .dialogTextContainer {
   padding: 30px;
   width: 100%;
   font-size: 1.4rem;
@@ -2162,6 +2162,27 @@ body.light-mode .logo-main {
   /* Avoid text select */
   user-select: none;
   -webkit-user-select: none;
+  position: relative;
+}
+
+.dialogWrapper div .characterNameBox {
+  position: absolute;
+  top: -17px;
+  left: 14px;
+  padding: 5px 15px;
+  background: var(--card);
+  border-radius: 10px;
+  font-size: 1.2rem;
+  transition: .2s ease-in-out;
+  opacity: 0;
+}
+
+.dialogWrapper div .characterNameBox.shown {
+  opacity: 1;
+}
+
+.dialogWrapper div .characterNameBox span {
+  filter: invert(1) grayscale(1) brightness(calc(130 / 100)) contrast(9000);
 }
 
 .actionWrapper {

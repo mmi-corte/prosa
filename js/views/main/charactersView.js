@@ -62,6 +62,7 @@ export function charactersView(preventReload = false) {
         }
 
         const filtered = Object.entries(charactersData).filter(([, char]) => {
+            if (char.isNarrativeOnly) return false
             const region = (char.region || '').toString().toUpperCase()
             return region === selectedRegion
         })

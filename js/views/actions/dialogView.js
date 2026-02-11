@@ -1,14 +1,16 @@
 import { clearContainer, gameContainer } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
-import { dialogsData } from "../../loadData.js";
+import { charactersData, dialogsData } from "../../loadData.js";
 import { getTranslation } from "../../langageManager.js";
 
 let textBox
+let textContainer
+let characterNameBox
+let characterName
 let data
 let currentDialogIndex = 0;
 let currentBackground
-let currentPitch = 400;
 let currentAudio = null;
 
 export function dialogView(action) {
@@ -21,9 +23,21 @@ export function dialogView(action) {
     wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`
     gameContainer.appendChild(wrapper);
 
+    textContainer = document.createElement('div');
+    textContainer.classList.add('dialogTextContainer');
+    wrapper.appendChild(textContainer);
+
     textBox = document.createElement('p');
     textBox.innerText = "";
-    wrapper.appendChild(textBox);
+    textContainer.appendChild(textBox);
+
+    characterNameBox = document.createElement('div');
+    characterNameBox.classList.add('characterNameBox');
+    textContainer.appendChild(characterNameBox);
+
+    characterName = document.createElement('span');
+    characterName.innerText = "";
+    characterNameBox.appendChild(characterName);
 
     //Reset var for index
     currentDialogIndex = 0;
@@ -31,10 +45,10 @@ export function dialogView(action) {
     updateDialog();
 
     //Add click event logic for next dialog
-    textBox.addEventListener('click', () => {
+    textContainer.addEventListener('click', () => {
         const activeText = getTranslation(data.dialog[currentDialogIndex].text);
 
-        if (isTyping) { //If typerite effect is still active...
+        if (isTyping) { //If typewrite effect is still active...
             skipTypeWrite()
             textBox.innerHTML = activeText;
         } else { //Go to next dialog if the text is fully displayed
@@ -43,7 +57,7 @@ export function dialogView(action) {
                 currentAudio.pause();
                 currentAudio = null;
             }
-            
+
             currentDialogIndex += 1;
             if (data.dialog.length > currentDialogIndex) {
                 updateDialog();
@@ -57,8 +71,25 @@ export function dialogView(action) {
 function updateDialog() {
     const activeText = getTranslation(data.dialog[currentDialogIndex].text);
     const voiceFile = data.dialog[currentDialogIndex].voice;
-    currentPitch = data.dialog[currentDialogIndex].pitch || undefined;
-    
+    const characterId = data.dialog[currentDialogIndex].character || "";
+    characterNameBox.style.backgroundColor = '#FFFFFF';
+    characterName.style.color = '#FFFFFF';
+    characterNameBox.classList.remove('shown')
+    let currentPitch = 400; // Default pitch
+    console.log(characterId)
+
+
+    if (characterId) {
+        const currentCharacter = getCharacterDetails(characterId);
+        if (currentCharacter) {
+            characterName.innerText = getTranslation(currentCharacter.name);
+            characterNameBox.style.backgroundColor = currentCharacter.color || '#FFFFFF';
+            characterName.style.color = currentCharacter.color || '#FFFFFF';
+            characterNameBox.classList.add('shown')
+            currentPitch = currentCharacter.pitch || 400;
+        }
+    }
+
     if (voiceFile) {
         // Play voice audio with typewriter effect (sound muted)
         currentAudio = new Audio(`./assets/steps/${activePlayer.localisation}/${activeStepId}/${voiceFile}`);
@@ -68,5 +99,9 @@ function updateDialog() {
         // No voice, use typewriter effect with sound
         typeWriteEffect(textBox, activeText, currentPitch);
     }
+}
+
+function getCharacterDetails(characterId) {
+    return charactersData[characterId] || null;
 }
 
