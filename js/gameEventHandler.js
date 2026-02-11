@@ -139,6 +139,7 @@ export function addUnlockedStep(stepId, unlockedStepId) {
 
 export function changePlayerLocalisation(localisation) {
     players[activePlayerId].localisation = localisation
+    players[activePlayerId].unlockedSteps = {}
     console.log(`Player localisation changed for player ID ${activePlayerId} to localisation ${localisation}`)
     console.log(players)
     updatePlayerLocalStorage()
