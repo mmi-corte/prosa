@@ -151,8 +151,26 @@ export function gameView(action) {
                 z-index: 9999;
                 font-family: monospace;
             `;
-            debugDiv.innerHTML = `<h2>❌ Erreur chargement: ${data.game}</h2><p>${error.message}</p>`;
+            debugDiv.innerHTML = `
+                <h2>❌ Erreur chargement: ${data.game}</h2>
+                <p>${error.message}</p>
+                <div style="display: flex; gap: 12px; margin-top: 20px;">
+                    <button id="debugWinBtn" style="padding: 10px 16px;">CallAction Win</button>
+                    <button id="debugLoseBtn" style="padding: 10px 16px;">CallAction Loose</button>
+                </div>
+            `;
             gameContainer.appendChild(debugDiv);
+
+            const debugWinBtn = debugDiv.querySelector('#debugWinBtn');
+            const debugLoseBtn = debugDiv.querySelector('#debugLoseBtn');
+
+            debugWinBtn?.addEventListener('click', () => {
+                callAction(data.nextActionTypeWin, data.nextActionWin);
+            });
+
+            debugLoseBtn?.addEventListener('click', () => {
+                callAction(data.nextActionTypeLose, data.nextActionLose);
+            });
         });
 
     // Listen for messages from iframe
