@@ -668,7 +668,7 @@
           "nextStep": "09"
         },
         "2": {
-          "type": "win",
+          "type": "lose",
           "nextStep": "05"
         }
       }

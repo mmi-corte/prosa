@@ -2998,6 +2998,76 @@
     }
   },
   "3": {
+    "07": {
+      "1": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Lorsque vous arrivez au sommet, devant vous, la chaine de montagnes s’étire comme une longue colonne vertébrale, et sur toute sa crête se dressent d’immenses moulins à vent."
+            }
+          },
+          {
+            "text": {
+              "fr": "Leurs pales, immenses, tournent lentement grâce aux vents marins, produisant un grondement sourd et régulier qui résonne à travers la roche."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Alors, tu es arrivé jusqu’ici… Je t’observe depuis le début de ton ascension. Tu te débrouilles bien pour un rebelle.\"",
+              "cor": "\"Allora, sè ghjuntu sin’à quì… Ti feghju dapoi u principiu di a to cullata. Ti sbrogli piuttostu bè per un ribellu.\""
+            },
+            "character": "magu"
+          },
+          {
+            "text": {
+              "fr": "Cet homme est comme apparu devant vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Malheureusement, moi U Magu, guérisseur et l’une des 7 têtes du Serpent de Prosa, je vais devoir te stopper. Ton courage met en péril notre existence.\"",
+              "cor": "\"Disgrasiamente, eiu U Magu, guariscidore è una di e 7 teste di u Serpu di Prosa, aghju da esse custrettu à fatti pienta. U to curagiu mette in perìculu a nostra esistenza.\""
+            },
+            "character": "magu"
+          },
+          {
+            "text": {
+              "fr": "U Magu tend la main vers un levier, déclenchant l’activation d’un système de sécurité."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il utilise le terrain comme arme. L’affrontement n’est pas un combat classique : c’est une lutte contre l’altitude, le vent, le métal et le risque permanent de tomber."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous avez pu fuir le terrible système d’U Magu, mais cet affrontement vous a atteint psychologiquement. Vous vous empressez de redescendre la montagne pour ne plus vous faire surprendre de la sorte."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "08": {
       "1": {
         "default": {

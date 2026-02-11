@@ -173,6 +173,15 @@
     }
   },
   "3": {
+    "07": {
+      "1": {
+        "game": "magu_affrontement",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "2",
+        "nextActionTypeLose": "end",
+        "nextActionLose": "2"
+      }
+    },
     "10": {
       "1": {
         "game": "labyrinthe",
