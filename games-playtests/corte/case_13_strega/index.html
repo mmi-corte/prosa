@@ -5,8 +5,218 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Mini jeu : A Strega</title>
-<link rel="stylesheet" href="style.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400&display=swap');
+
+    :root {
+        --background: #1a1812;
+        --foreground: #ece4cb;
+        --card: #252218;
+        --primary: #626247;
+        --primary-light: #7a7a5a;
+        --muted: #2a2820;
+        --muted-foreground: #9a9680;
+        --accent-red: #c63032;
+        --accent-cyan: #81cbd6;
+        --border: #3a3830;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: none; /* Crucial pour empêcher le scroll */
+    }
+
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: var(--background);
+        font-family: 'Inter', sans-serif;
+        user-select: none;
+        -webkit-user-select: none;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        color: var(--foreground);
+    }
+
+    canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* --- UI LAYER --- */
+    #ui-layer {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        display: flex; flex-direction: column; justify-content: space-between;
+        z-index: 10;
+    }
+
+    /* HUD */
+    .hud-header {
+        padding: 15px;
+        padding-top: max(15px, env(safe-area-inset-top));
+        padding-left: max(15px, env(safe-area-inset-left));
+        padding-right: max(15px, env(safe-area-inset-right));
+        display: flex; justify-content: space-between; align-items: flex-start;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        pointer-events: none;
+    }
+
+    .bars-wrapper {
+        display: flex; flex-direction: column; gap: 5px;
+    }
+
+    .bar-group { display: flex; align-items: center; gap: 10px; }
+
+    .bar-container {
+        position: relative;
+        width: 140px; height: 12px;
+        background: var(--muted); border: 1px solid var(--border);
+        border-radius: 6px; overflow: hidden;
+    }
+
+    .bar-fill { height: 100%; width: 100%; transition: width 0.2s; }
+    #mana-bar { background: linear-gradient(90deg, #405a6a, var(--accent-cyan)); box-shadow: 0 0 10px var(--accent-cyan); }
+    #health-bar { background: linear-gradient(90deg, #6a2a2a, var(--accent-red)); box-shadow: 0 0 10px var(--accent-red); }
+
+    .stat-label { 
+        color: var(--foreground); font-size: 10px; 
+        text-transform: uppercase; font-weight: bold; letter-spacing: 1px; width: 50px;
+    }
+
+    #objective-text {
+        color: var(--accent-red); font-family: 'Cinzel', serif; font-size: 16px;
+        text-align: right; margin-top: 5px; font-weight: bold;
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    /* CONTROLS (MOBILE) */
+    #mobile-controls {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 50;
+    }
+
+    /* JOYSTICK */
+    .joystick-area {
+        position: absolute; bottom: 40px; left: 40px;
+        width: 140px; height: 140px;
+        pointer-events: auto;
+    }
+
+    #joystick-base {
+        position: absolute; 
+        width: 100%; height: 100%;
+        border: 2px solid rgba(255, 255, 255, 0.1); 
+        border-radius: 50%;
+        background: rgba(0,0,0,0.2); 
+        backdrop-filter: blur(2px);
+    }
+
+    #joystick-stick {
+        position: absolute; width: 60px; height: 60px;
+        background: rgba(255, 255, 255, 0.2); border-radius: 50%;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        border: 2px solid rgba(255,255,255,0.4);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        transition: transform 0.05s;
+    }
+
+    /* BOUTON FANTOME */
+    #ghost-btn-container {
+        position: absolute; bottom: 40px; right: 40px;
+        pointer-events: auto;
+    }
+
+    #ghost-btn {
+        width: 90px; height: 90px; border-radius: 50%;
+        border: 3px solid var(--accent-cyan); background: rgba(129, 203, 214, 0.1);
+        color: var(--accent-cyan); font-weight: bold; font-family: 'Cinzel', serif;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        font-size: 12px; box-shadow: 0 0 25px rgba(129, 203, 214, 0.2);
+        transition: all 0.2s;
+        backdrop-filter: blur(4px);
+    }
+    
+    #ghost-btn span { font-size: 24px; margin-bottom: 2px; }
+
+    #ghost-btn.active {
+        background: rgba(129, 203, 214, 0.4);
+        box-shadow: 0 0 40px var(--accent-cyan);
+        transform: scale(0.95);
+        color: #fff;
+    }
+    
+    #ghost-btn.cooldown {
+        border-color: #555; color: #555; background: rgba(0,0,0,0.5);
+        box-shadow: none;
+    }
+
+    /* ECRAN ORIENTATION */
+    #rotate-device {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #000; z-index: 10000;
+        display: none; flex-direction: column; align-items: center; justify-content: center;
+        color: var(--foreground); text-align: center;
+    }
+
+    .rotate-icon { font-size: 50px; margin-bottom: 20px; animation: spin 2s infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 25% { transform: rotate(-90deg); } 100% { transform: rotate(-90deg); } }
+
+    @media screen and (orientation: portrait) {
+        #rotate-device { display: flex; }
+    }
+
+    /* MENUS */
+    .screen {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(180deg, #14120d 0%, #1a1812 100%); z-index: 999;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        pointer-events: auto; transition: opacity 0.5s;
+        text-align: center;
+        padding: 30px;
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif; font-size: 40px; color: var(--foreground);
+        margin: 0; text-shadow: 0 0 20px rgba(0,0,0,0.5); letter-spacing: 2px;
+    }
+
+    h2 { font-size: 16px; color: var(--muted-foreground); letter-spacing: 6px; margin-bottom: 30px; text-transform: uppercase; }
+
+    .btn {
+        background: rgba(98, 98, 71, 0.3); border: 2px solid var(--primary-light); color: var(--foreground);
+        padding: 16px 60px; font-size: 20px; font-family: 'Cinzel', serif; font-weight: bold;
+        cursor: pointer; transition: 0.2s; margin-top: 20px; text-transform: uppercase;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .btn:active { background: var(--primary-light); color: #000; transform: scale(0.95); }
+
+    .instructions {
+        color: var(--muted-foreground); font-size: 13px; margin-top: 30px; line-height: 1.6; max-width: 500px;
+        background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid var(--border);
+    }
+
+    .instructions b { color: var(--foreground); }
+    .instructions .alert { color: var(--accent-red); font-weight: bold; }
+    .instructions .hint { color: var(--accent-cyan); font-weight: bold; }
+
+    /* FX */
+    #pulse-overlay {
+        position: absolute; top:0; left:0; width:100%; height:100%;
+        box-shadow: inset 0 0 0 0 rgba(255, 0, 0, 0);
+        opacity: 0; pointer-events: none; transition: opacity 0.2s, box-shadow 0.2s;
+        z-index: 5;
+    }
+    .danger { box-shadow: inset 0 0 100px rgba(198, 48, 50, 0.6) !important; opacity: 1 !important; }
+
+</style>
 </head>
 <body>
 
@@ -23,25 +233,32 @@
 </div>
 
 <!-- UI -->
-<div id="ui-layer">
+<div id="ui-layer" style="display:none;">
     <div class="hud-header">
-        <div class="status-group">
-            <div class="stat-label">Esprit</div>
-            <div class="bar-container"><div id="mana-bar" class="bar-fill"></div></div>
-            <div class="stat-label">Santé</div>
-            <div class="bar-container"><div id="health-bar" class="bar-fill"></div></div>
+        <div class="bars-wrapper">
+            <div class="bar-group">
+                <div class="stat-label">Esprit</div>
+                <div class="bar-container"><div id="mana-bar" class="bar-fill"></div></div>
+            </div>
+            <div class="bar-group">
+                <div class="stat-label">Santé</div>
+                <div class="bar-container"><div id="health-bar" class="bar-fill"></div></div>
+            </div>
         </div>
-        <div id="objective-text">MODE CAUCHEMAR</div>
+        <div id="objective-text">INFILTRATION</div>
     </div>
 
     <!-- TOUCH CONTROLS -->
-    <div id="mobile-controls" style="display: none;">
-        <div class="touch-zone-left" id="joy-zone">
-            <div id="joystick-base"><div id="joystick-stick"></div></div>
+    <div id="mobile-controls">
+        <div class="joystick-area" id="joy-zone">
+            <div id="joystick-base">
+                <div id="joystick-stick"></div>
+            </div>
         </div>
-        <div class="touch-zone-right">
-            <div id="ghost-btn-container">
-                <div id="ghost-btn">FANTÔME</div>
+        <div id="ghost-btn-container">
+            <div id="ghost-btn">
+                <span>👻</span>
+                FANTÔME
             </div>
         </div>
     </div>
@@ -50,16 +267,13 @@
 <!-- MENUS -->
 <div id="menu-screen" class="screen">
     <h1>A STREGA</h1>
-    <h2>Infiltration</h2>
-    <button class="btn" onclick="window.startGame()">JOUER</button>
+    <h2>Infiltration Nocturne</h2>
+    <button class="btn" onclick="startGame()">JOUER</button>
     <div class="instructions">
-        <b>DÉFI :</b> Infiltrez le camp d’A Strega et récupérez le talisman sans vous faire repérer.<br>
-        <br>
-        <span class="hint">CONTRÔLES :</span> Maintenez un doigt ou cliquez sur l'écran pour vous diriger. Relâchez pour arrêter.<br>
-        <br>
-        <span class="alert">MODE FANTÔME AUTO :</span> Le mode fantôme s'active automatiquement si vous êtes détecté par un garde ou si vous approchez d'une porte barricadée. Attention : votre énergie (Esprit) se vide rapidement !<br>
-        <br>
-        <span class="hint">CONSEIL :</span> Planifiez votre route et évitez les gardes. Une fois détecté, le fantôme vous aide à traverser les zones dangereuses.
+        <b>MISSION :</b> Infiltrez le camp et volez le talisman.<br><br>
+        <span class="hint">JOYSTICK GAUCHE :</span> Déplacez-vous en silence.<br>
+        <span class="hint">BOUTON DROIT :</span> Activez la forme spectrale pour traverser les murs et devenir invisible.<br><br>
+        <span class="alert">ATTENTION :</span> Si un garde vous voit, le mode fantôme s'active automatiquement, drainant votre énergie vitale.
     </div>
 </div>
 
@@ -69,6 +283,573 @@
     <button class="btn" onclick="location.reload()">RÉESSAYER</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+/**
+ * A STREGA - MOBILE OPTIMIZED
+ * Moteur JS Monolithique
+ */
+(function() { // DEBUT IIFE pour éviter les erreurs de déclaration globale
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false }); // Optimisation perf
+    let W, H;
+
+    // --- CONFIGURATION ---
+    const TILE_SIZE = 60;
+    const PLAYER_SPEED = 4.0;
+    const GHOST_SPEED_MOD = 1.3;
+    const GUARD_SPEED = 1.8;
+    const GUARD_VISION = 220;
+
+    // --- ÉTATS ---
+    let gameState = 'MENU';
+    let frames = 0;
+    let isMobile = true; // Force mobile logic
+
+    // --- INPUTS ---
+    let joystick = { active: false, dx: 0, dy: 0, originX: 0, originY: 0, id: null };
+    let ghostBtnPressed = false;
+
+    // --- ENTITÉS ---
+    let camera = { x: 0, y: 0 };
+    let player = { 
+        x: 0, y: 0, r: 15, 
+        vx: 0, vy: 0,
+        hp: 100, mana: 100, 
+        ghost: false, noise: 0,
+        hasTalisman: false,
+        ghostOnCooldown: false
+    };
+    let map = [];
+    let floorTiles = [];
+    let guards = [];
+    let particles = [];
+    let talisman = { x: 0, y: 0, active: true };
+    let exitZone = { x: 0, y: 0, w: 100, h: 100 };
+    let spawnZone = { x: 0, y: 0, w: 0, h: 0 };
+    let wasDetected = false;
+
+    // --- MAP LEVEL ---
+    // 1=Mur, 0=Sol, 3=Portail, 9=Objectif
+    const LEVEL_MAP = [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1], 
+        [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,3,0,0,0,0,0,1,1,1,0,1,1,1,1], 
+        [1,1,1,1,1,0,0,0,0,0,3,0,0,0,0,0,0,1], 
+        [1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1], 
+        [1,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,1], 
+        [1,0,0,0,0,0,1,0,1,0,3,0,0,1,0,0,0,1], 
+        [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,9,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    // --- INITIALISATION ---
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // EXPOSITION GLOBALE pour le onclick HTML
+    window.startGame = function() {
+        // Demander le plein écran
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(e => console.log(e));
+        }
+        
+        document.getElementById('menu-screen').style.opacity = 0;
+        setTimeout(() => {
+            document.getElementById('menu-screen').style.display = 'none';
+            document.getElementById('ui-layer').style.display = 'block';
+        }, 500);
+
+        buildLevel();
+        setupTouchControls();
+        gameState = 'PLAYING';
+        loop();
+    };
+
+    function buildLevel() {
+        map = []; guards = []; floorTiles = []; particles = [];
+        
+        for(let y=0; y<LEVEL_MAP.length; y++) {
+            for(let x=0; x<LEVEL_MAP[y].length; x++) {
+                let type = LEVEL_MAP[y][x];
+                let px = x * TILE_SIZE;
+                let py = y * TILE_SIZE;
+
+                if(type === 1) map.push({x: px, y: py, w: TILE_SIZE, h: TILE_SIZE, type: 'wall'});
+                if(type === 3) map.push({x: px, y: py, w: TILE_SIZE, h: TILE_SIZE, type: 'gate'});
+                if(type === 9) {
+                    talisman.x = px + TILE_SIZE/2; 
+                    talisman.y = py + TILE_SIZE/2;
+                }
+                // Décor au sol
+                if(type !== 1 && Math.random() > 0.8) {
+                    floorTiles.push({x: px + Math.random()*TILE_SIZE, y: py + Math.random()*TILE_SIZE, s: Math.random()*4+2});
+                }
+            }
+        }
+
+        player.x = 2 * TILE_SIZE; 
+        player.y = 2 * TILE_SIZE;
+        player.hp = 100; player.mana = 100;
+        player.hasTalisman = false;
+        
+        // Zone de départ sûre
+        spawnZone = { x: 0, y: 0, w: 5 * TILE_SIZE, h: 4 * TILE_SIZE };
+        exitZone = { x: 1 * TILE_SIZE, y: 1 * TILE_SIZE, w: TILE_SIZE, h: TILE_SIZE };
+
+        // Gardes
+        guards.push(createGuard(8 * TILE_SIZE, 5 * TILE_SIZE, false));
+        guards.push(createGuard(14 * TILE_SIZE, 5 * TILE_SIZE, false));
+        guards.push(createGuard(4 * TILE_SIZE, 3 * TILE_SIZE, false));
+        guards.push(createGuard(8 * TILE_SIZE, 8 * TILE_SIZE, false));
+        guards.push(createGuard(13 * TILE_SIZE, 8 * TILE_SIZE, true)); // Boss
+    }
+
+    function createGuard(x, y, isBoss) {
+        return {
+            x: x, y: y, angle: 0,
+            startX: x, startY: y,
+            timer: Math.random() * 100,
+            viewRadius: isBoss ? GUARD_VISION + 60 : GUARD_VISION,
+            fov: 1.0,
+            speed: isBoss ? GUARD_SPEED * 1.2 : GUARD_SPEED,
+            isBoss: isBoss
+        };
+    }
+
+    // --- GAME LOOP ---
+    function loop() {
+        if(gameState !== 'PLAYING') return;
+        requestAnimationFrame(loop);
+        frames++;
+        update();
+        render();
+    }
+
+    function update() {
+        // 1. GESTION DES INPUTS (JOYSTICK)
+        let speed = PLAYER_SPEED;
+        
+        // Auto-Ghost (Détection ou Porte)
+        let autoGhost = wasDetected;
+        
+        // Détection de porte proche pour auto-ghost (Confort joueur)
+        if (!autoGhost) {
+            for(let w of map) {
+                if(w.type === 'gate') {
+                    let dist = Math.hypot(player.x - (w.x + w.w/2), player.y - (w.y + w.h/2));
+                    if(dist < 50) { autoGhost = true; break; }
+                }
+            }
+        }
+
+        // Activation Fantôme
+        let wantGhost = ghostBtnPressed || autoGhost;
+        
+        if(wantGhost && player.mana > 0 && !player.ghostOnCooldown) {
+            player.ghost = true;
+            player.mana -= 0.8; // Drain
+            if(frames % 5 === 0) spawnParticle(player.x, player.y, '#81cbd6');
+            if(player.mana <= 0) {
+                player.ghostOnCooldown = true;
+                player.mana = 0;
+                updateGhostBtnUI();
+            }
+        } else {
+            player.ghost = false;
+            if(player.mana < 100) player.mana += 0.3; // Regen
+            if(player.ghostOnCooldown && player.mana > 40) player.ghostOnCooldown = false;
+        }
+        updateGhostBtnUI(); // Update Visual state
+
+        if(player.ghost) speed *= GHOST_SPEED_MOD;
+
+        // 2. MOUVEMENT JOUEUR
+        if(joystick.active) {
+            player.vx = joystick.dx * speed;
+            player.vy = joystick.dy * speed;
+            // Bruit seulement si on bouge vite et pas en fantome
+            player.noise = (!player.ghost && (Math.abs(joystick.dx) > 0.5 || Math.abs(joystick.dy) > 0.5)) ? 1 : 0;
+        } else {
+            player.vx = 0; player.vy = 0;
+            player.noise = 0;
+        }
+
+        let nextX = player.x + player.vx;
+        let nextY = player.y + player.vy;
+        
+        // Collision Murs (Pas de collision en fantome sauf limites monde)
+        if(player.ghost) {
+            if(nextX > 0 && nextX < LEVEL_MAP[0].length * TILE_SIZE) player.x = nextX;
+            if(nextY > 0 && nextY < LEVEL_MAP.length * TILE_SIZE) player.y = nextY;
+        } else {
+            if(!checkWallCollision(nextX, player.y)) player.x = nextX;
+            if(!checkWallCollision(player.x, nextY)) player.y = nextY;
+        }
+
+        // 3. CAMÉRA
+        camera.x += (player.x - W/2 - camera.x) * 0.1;
+        camera.y += (player.y - H/2 - camera.y) * 0.1;
+
+        // 4. LOGIQUE JEU
+        // Objectif
+        if(talisman.active && Math.hypot(player.x - talisman.x, player.y - talisman.y) < 30) {
+            talisman.active = false;
+            player.hasTalisman = true;
+            document.getElementById('objective-text').innerText = "FUYEZ ! (ALARME)";
+            // Boost difficulté
+            guards.forEach(g => { g.speed *= 1.3; g.viewRadius += 50; });
+            spawnPulse(player.x, player.y, '#ffd700');
+        }
+
+        // Victoire
+        if(player.hasTalisman && Math.hypot(player.x - (exitZone.x+TILE_SIZE/2), player.y - (exitZone.y+TILE_SIZE/2)) < 50) {
+            endGame(true);
+        }
+
+        // Gardes & Détection
+        let dangerLevel = 0;
+        wasDetected = false;
+
+        guards.forEach(g => {
+            // Patrouille simple
+            g.timer++;
+            let targetX = g.startX + Math.sin(g.timer * 0.02) * 120;
+            let targetY = g.startY;
+            if(g.isBoss) {
+                targetX = g.startX + Math.cos(g.timer * 0.015) * 150;
+                targetY = g.startY + Math.sin(g.timer * 0.015) * 80;
+            }
+
+            // Si joueur fait du bruit proche, le garde se tourne
+            let dist = Math.hypot(player.x - g.x, player.y - g.y);
+            if(dist < 200 && player.noise > 0) {
+                g.angle = Math.atan2(player.y - g.y, player.x - g.x);
+                spawnParticle(g.x, g.y, '#ffaa00'); // "?"
+            } else {
+                // Mouvement normal
+                let dx = targetX - g.x;
+                let dy = targetY - g.y;
+                if(Math.hypot(dx, dy) > 2) {
+                    g.angle = Math.atan2(dy, dx);
+                    g.x += Math.cos(g.angle) * g.speed;
+                    g.y += Math.sin(g.angle) * g.speed;
+                }
+            }
+
+            // Vision
+            if(!player.ghost) {
+                if(dist < g.viewRadius) {
+                    // Angle check
+                    let angleToPlayer = Math.atan2(player.y - g.y, player.x - g.x);
+                    let diff = angleToPlayer - g.angle;
+                    // Normalize -PI to PI
+                    while(diff < -Math.PI) diff += Math.PI*2;
+                    while(diff > Math.PI) diff -= Math.PI*2;
+
+                    if(Math.abs(diff) < g.fov / 2) {
+                        // Raycast check mur
+                        if(!raycast(g.x, g.y, player.x, player.y)) {
+                            // Safe zone check
+                            let inSpawn = (player.x < spawnZone.w && player.y < spawnZone.h);
+                            if (!inSpawn) {
+                                wasDetected = true;
+                                dangerLevel = 1;
+                                player.hp -= 2;
+                                if(player.hp <= 0) endGame(false);
+                                spawnParticle(player.x, player.y, '#c63032');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // UI Updates
+        let overlay = document.getElementById('pulse-overlay');
+        if(dangerLevel > 0) overlay.classList.add('danger');
+        else overlay.classList.remove('danger');
+
+        document.getElementById('mana-bar').style.width = player.mana + '%';
+        document.getElementById('health-bar').style.width = player.hp + '%';
+
+        // Particles Update
+        for(let i=particles.length-1; i>=0; i--) {
+            let p = particles[i];
+            p.life--;
+            p.x += p.vx; p.y += p.vy;
+            p.size *= 0.95;
+            if(p.life <= 0) particles.splice(i,1);
+        }
+    }
+
+    function render() {
+        // Fond
+        ctx.fillStyle = '#14120d';
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.save();
+        ctx.translate(-camera.x, -camera.y);
+
+        // Sol
+        floorTiles.forEach(t => {
+            ctx.fillStyle = '#1f1d16';
+            ctx.fillRect(t.x, t.y, t.s, t.s);
+        });
+
+        // Spawn Zone
+        ctx.strokeStyle = 'rgba(129, 203, 214, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([10, 10]);
+        ctx.strokeRect(spawnZone.x, spawnZone.y, spawnZone.w, spawnZone.h);
+        ctx.setLineDash([]);
+
+        // Sortie
+        if(player.hasTalisman) {
+            ctx.fillStyle = 'rgba(255, 215, 0, 0.1)';
+            ctx.fillRect(exitZone.x, exitZone.y, exitZone.w, exitZone.h);
+            ctx.strokeStyle = '#ffd700';
+            ctx.strokeRect(exitZone.x, exitZone.y, exitZone.w, exitZone.h);
+        }
+
+        // Vision Gardes (Cone)
+        guards.forEach(g => {
+            let grad = ctx.createRadialGradient(g.x, g.y, 10, g.x, g.y, g.viewRadius);
+            grad.addColorStop(0, g.isBoss ? 'rgba(255, 0, 80, 0.3)' : 'rgba(198, 48, 50, 0.2)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(g.x, g.y);
+            ctx.arc(g.x, g.y, g.viewRadius, g.angle - g.fov/2, g.angle + g.fov/2);
+            ctx.fill();
+            
+            // Corps Garde
+            ctx.fillStyle = g.isBoss ? '#c63032' : '#8a2325';
+            ctx.beginPath(); ctx.arc(g.x, g.y, 14, 0, Math.PI*2); ctx.fill();
+            // Yeux
+            let ex = g.x + Math.cos(g.angle)*10;
+            let ey = g.y + Math.sin(g.angle)*10;
+            ctx.fillStyle = '#fff';
+            ctx.beginPath(); ctx.arc(ex, ey, 4, 0, Math.PI*2); ctx.fill();
+        });
+
+        // Murs & Portes
+        map.forEach(w => {
+            if(w.type === 'gate') {
+                ctx.fillStyle = '#1a1a1a';
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.strokeStyle = '#333'; ctx.lineWidth = 2;
+                ctx.beginPath();
+                for(let i=10; i<w.w; i+=15) { ctx.moveTo(w.x+i, w.y); ctx.lineTo(w.x+i, w.y+w.h); }
+                ctx.stroke();
+            } else {
+                ctx.fillStyle = '#252218'; // Mur base
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.fillStyle = '#0f0e0b'; // Ombre portée simple
+                ctx.fillRect(w.x, w.y+w.h-5, w.w, 5);
+                ctx.strokeStyle = '#3a3830';
+                ctx.strokeRect(w.x, w.y, w.w, w.h);
+            }
+        });
+
+        // Talisman
+        if(talisman.active) {
+            ctx.shadowBlur = 20; ctx.shadowColor = '#ffd700';
+            ctx.fillStyle = '#ffd700';
+            let float = Math.sin(frames*0.05)*5;
+            ctx.beginPath(); ctx.arc(talisman.x, talisman.y + float, 8, 0, Math.PI*2); ctx.fill();
+            ctx.shadowBlur = 0;
+            // Guide
+            drawGuidance(talisman.x, talisman.y, '#ffd700');
+        } else {
+            // Guide vers sortie
+            drawGuidance(exitZone.x + exitZone.w/2, exitZone.y + exitZone.h/2, '#81cbd6');
+        }
+
+        // Joueur
+        if(player.ghost) {
+            ctx.shadowBlur = 20; ctx.shadowColor = '#81cbd6';
+            ctx.fillStyle = '#81cbd6';
+            ctx.globalAlpha = 0.6;
+        } else {
+            ctx.shadowBlur = 10; ctx.shadowColor = '#000';
+            ctx.fillStyle = '#ece4cb';
+            ctx.globalAlpha = 1;
+        }
+        ctx.beginPath(); ctx.arc(player.x, player.y, player.r, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+
+        // Particules
+        particles.forEach(p => {
+            ctx.fillStyle = p.c;
+            ctx.globalAlpha = p.life / 20;
+            ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+        ctx.globalAlpha = 1;
+
+        ctx.restore();
+    }
+
+    // --- UTILS ---
+    function checkWallCollision(x, y) {
+        let r = player.r;
+        for(let w of map) {
+            // En mode fantome on ignore les portes
+            if(player.ghost && w.type === 'gate') continue;
+            if(x + r > w.x && x - r < w.x + w.w && y + r > w.y && y - r < w.y + w.h) return true;
+        }
+        return false;
+    }
+
+    function raycast(x1, y1, x2, y2) {
+        let dist = Math.hypot(x2-x1, y2-y1);
+        let steps = dist / 20; // Optimisation
+        for(let i=1; i<steps; i++) {
+            let t = i/steps;
+            let cx = x1 + (x2-x1)*t;
+            let cy = y1 + (y2-y1)*t;
+            for(let w of map) {
+                // Les murs bloquent la vue
+                if(w.type === 'wall' && cx > w.x && cx < w.x+w.w && cy > w.y && cy < w.y+w.h) return true;
+            }
+        }
+        return false;
+    }
+
+    function spawnParticle(x, y, c) {
+        particles.push({
+            x:x, y:y, c:c,
+            vx:(Math.random()-0.5)*2, vy:(Math.random()-0.5)*2,
+            life: 20, size: 4
+        });
+    }
+    function spawnPulse(x, y, c) { spawnParticle(x,y,c); spawnParticle(x,y,c); }
+
+    function drawGuidance(tx, ty, color) {
+        const steps = 4;
+        for (let i = 1; i <= steps; i++) {
+            const t = i / (steps + 1);
+            const gx = player.x + (tx - player.x) * t;
+            const gy = player.y + (ty - player.y) * t;
+            const size = 2 + Math.sin(frames * 0.1 - i) * 1;
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.4;
+            ctx.beginPath(); ctx.arc(gx, gy, Math.max(0, size), 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    // --- TOUCH CONTROLS (JOYSTICK) ---
+    function setupTouchControls() {
+        const zone = document.getElementById('joy-zone');
+        const stick = document.getElementById('joystick-stick');
+        const base = document.getElementById('joystick-base');
+        const maxDist = 35; // Rayon max du stick
+
+        const ghostBtn = document.getElementById('ghost-btn-container');
+
+        // JOYSTICK LOGIC
+        zone.addEventListener('touchstart', e => {
+            e.preventDefault();
+            const touch = e.changedTouches[0];
+            joystick.id = touch.identifier;
+            joystick.active = true;
+            
+            // Centre du joystick
+            const rect = base.getBoundingClientRect();
+            joystick.originX = rect.left + rect.width / 2;
+            joystick.originY = rect.top + rect.height / 2;
+            
+            updateStick(touch.clientX, touch.clientY);
+        }, {passive: false});
+
+        zone.addEventListener('touchmove', e => {
+            e.preventDefault();
+            if(!joystick.active) return;
+            
+            for(let i=0; i<e.changedTouches.length; i++) {
+                if(e.changedTouches[i].identifier === joystick.id) {
+                    updateStick(e.changedTouches[i].clientX, e.changedTouches[i].clientY);
+                    break;
+                }
+            }
+        }, {passive: false});
+
+        const endJoystick = (e) => {
+            e.preventDefault();
+            joystick.active = false;
+            joystick.dx = 0;
+            joystick.dy = 0;
+            stick.style.transform = `translate(-50%, -50%)`;
+        };
+
+        zone.addEventListener('touchend', endJoystick);
+        zone.addEventListener('touchcancel', endJoystick);
+
+        function updateStick(cx, cy) {
+            let dx = cx - joystick.originX;
+            let dy = cy - joystick.originY;
+            let dist = Math.hypot(dx, dy);
+            
+            // Normalisation
+            let ndx = dx / dist;
+            let ndy = dy / dist;
+
+            // Limite visuelle
+            if(dist > maxDist) {
+                dx = ndx * maxDist;
+                dy = ndy * maxDist;
+            }
+
+            // Output pour le jeu (-1 à 1)
+            joystick.dx = dx / maxDist;
+            joystick.dy = dy / maxDist;
+
+            stick.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+        }
+
+        // GHOST BTN
+        const toggleGhost = (e) => {
+            e.preventDefault();
+            ghostBtnPressed = true;
+        };
+        const releaseGhost = (e) => {
+            e.preventDefault();
+            ghostBtnPressed = false;
+        };
+
+        ghostBtn.addEventListener('touchstart', toggleGhost, {passive: false});
+        ghostBtn.addEventListener('touchend', releaseGhost);
+        ghostBtn.addEventListener('mousedown', toggleGhost); // Pour test PC
+        ghostBtn.addEventListener('mouseup', releaseGhost);
+    }
+
+    function updateGhostBtnUI() {
+        const btn = document.getElementById('ghost-btn');
+        if(player.ghost) btn.classList.add('active');
+        else btn.classList.remove('active');
+        
+        if(player.ghostOnCooldown) btn.classList.add('cooldown');
+        else btn.classList.remove('cooldown');
+    }
+
+    // --- GAME OVER ---
+    function endGame(win) {
+        gameState = 'END';
+        let sc = document.getElementById('end-screen');
+        sc.style.display = 'flex';
+        setTimeout(() => sc.style.opacity = 1, 10);
+        
+        document.getElementById('end-title').innerText = win ? "VICTOIRE" : "ÉCHEC";
+        document.getElementById('end-title').style.color = win ? "#ffd700" : "#c63032";
+        document.getElementById('end-reason').innerText = win ? "Le Talisman est à vous." : "Repéré. Mission avortée.";
+    }
+})(); // FIN IIFE
+</script>
 </body>
 </html>
