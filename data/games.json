@@ -2,7 +2,7 @@
   "1": {
     "01": {
       "1": {
-        "game": "case_1_radio",
+        "game": "corte/case_1_radio",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -11,7 +11,7 @@
     },
     "04": {
       "1": {
-        "game": "case_4_orcu",
+        "game": "corte/case_4_orcu",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -20,7 +20,7 @@
     },
     "06": {
       "1": {
-        "game": "case_6_signadora",
+        "game": "corte/case_6_signadora",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "3",
         "nextActionTypeLose": "end",
@@ -29,7 +29,7 @@
     },
     "07": {
       "1": {
-        "game": "case_7_armurier",
+        "game": "corte/case_7_armurier",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "5",
         "nextActionTypeLose": "end",
@@ -38,7 +38,7 @@
     },
     "67": {
       "1": {
-        "game": "case_67_fullettu",
+        "game": "corte/case_67_fullettu",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "dialog",
@@ -47,7 +47,7 @@
     },
     "09": {
       "1": {
-        "game": "case_9_frac",
+        "game": "corte/case_9_frac",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "dialog",
@@ -56,7 +56,7 @@
     },
     "10": {
       "1": {
-        "game": "case_10_piazza_duca",
+        "game": "corte/case_10_piazza_duca",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -65,14 +65,14 @@
     },
     "13": {
       "1": {
-        "game": "case_13_strega2",
+        "game": "corte/case_13_strega2",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "3",
         "nextActionTypeLose": "end",
         "nextActionLose": "2"
       },
       "2": {
-        "game": "case_13_strega",
+        "game": "corte/case_13_strega",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "5",
         "nextActionTypeLose": "end",
@@ -81,7 +81,7 @@
     },
     "14": {
       "1": {
-        "game": "case_14_traversee",
+        "game": "corte/case_14_traversee",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "dialog",
@@ -92,7 +92,7 @@
   "2": {
     "01": {
       "1": {
-        "game": "case_1_radio",
+        "game": "corte/case_1_radio",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -101,7 +101,7 @@
     },
     "03": {
       "1": {
-        "game": "case_3_cimetiere_toulon",
+        "game": "toulon/case_3_cimetiere_toulon",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "dialog",
@@ -110,7 +110,7 @@
     },
     "04": {
       "1": {
-        "game": "case_4_jardin_alexandre",
+        "game": "toulon/case_4_jardin_alexandre",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -119,7 +119,7 @@
     },
     "06": {
       "1": {
-        "game": "case_6_champs_mars",
+        "game": "toulon/case_6_champs_mars",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -128,7 +128,7 @@
     },
     "09": {
       "1": {
-        "game": "case_9_opera",
+        "game": "toulon/case_9_opera",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -146,7 +146,7 @@
     },
     "13": {
       "1": {
-        "game": "case_13_MMI",
+        "game": "toulon/case_13_MMI",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -155,7 +155,7 @@
     },
     "14": {
       "1": {
-        "game": "case_12_mairie",
+        "game": "toulon/case_12_mairie",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -164,7 +164,7 @@
     },
     "15": {
       "1": {
-        "game": "case_15_port",
+        "game": "toulon/case_15_port",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -175,7 +175,7 @@
   "3": {
     "04": {
       "1": {
-        "game": "case_4_escalade",
+        "game": "prosa/case_4_escalade",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -184,7 +184,7 @@
     },
     "05": {
       "1": {
-        "game": "case_5_fuite",
+        "game": "prosa/case_5_fuite",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -193,7 +193,7 @@
     },
     "06": {
       "1": {
-        "game": "case_6_grotte",
+        "game": "prosa/case_6_grotte",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -202,7 +202,7 @@
     },
     "07": {
       "1": {
-        "game": "case_7_magu",
+        "game": "prosa/case_7_magu",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
