@@ -33,7 +33,7 @@ export async function initGame() {
         //If the game is loaded, fetch the steps JSON, aleas riddles and tracked dialogs
         await fetchSteps()
         await fetchAleasRiddles()
-        playedDialogs = JSON.parse(localStorage.getItem('playedDialogs') || '{}')
+        playedDialogs = JSON.parse(localStorage.getItem('playedDialogs'))
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {
@@ -102,7 +102,19 @@ export function resetGame() {
     gameInitialized = false
 }
 
-
-export function savePlayedDialogs() {
-    localStorage.setItem('playedDialogs', JSON.stringify(playedDialogs))
+export function trackDialog(localisation, stepId, dialogId) {
+    // Initialize localisation if needed
+    if (!playedDialogs[localisation]) {
+        playedDialogs[localisation] = {}
+    }
+    // Initialize stepId array if needed
+    if (!playedDialogs[localisation][stepId]) {
+        playedDialogs[localisation][stepId] = []
+    }
+    // Add dialogId if not already tracked
+    if (!playedDialogs[localisation][stepId].includes(dialogId)) {
+        playedDialogs[localisation][stepId].push(dialogId)
+        localStorage.setItem('playedDialogs', JSON.stringify(playedDialogs))
+        console.log('Dialog tracked:', { localisation, stepId, dialogId }, 'Current playedDialogs:', playedDialogs)
+    }
 }

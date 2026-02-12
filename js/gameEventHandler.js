@@ -1,4 +1,4 @@
-import { players, savePlayedDialogs } from "./initGame.js";
+import { players } from "./initGame.js";
 import { loadCurrentStepData, stepsData } from "./loadData.js";
 import { choiceView } from "./views/actions/choiceView.js";
 import { dialogView } from "./views/actions/dialogView.js";
@@ -15,7 +15,6 @@ let activePlayerId
 export let activePlayer
 export let activeStepId
 export let activeStep
-export let playedDialogs = {}
 
 /**
  * Fonction 
@@ -149,22 +148,5 @@ export function changePlayerLocalisation(localisation) {
 function updatePlayerLocalStorage() {
     localStorage.setItem('playersData', JSON.stringify(players));
     console.log("Player data saved")
-}
-
-export function trackDialog(localisation, stepId, dialogId) {
-    // Initialize localisation if needed
-    if (!playedDialogs[localisation]) {
-        playedDialogs[localisation] = {}
-    }
-    // Initialize stepId array if needed
-    if (!playedDialogs[localisation][stepId]) {
-        playedDialogs[localisation][stepId] = []
-    }
-    // Add dialogId if not already tracked
-    if (!playedDialogs[localisation][stepId].includes(dialogId)) {
-        playedDialogs[localisation][stepId].push(dialogId)
-        savePlayedDialogs()
-        console.log('Dialog tracked:', { localisation, stepId, dialogId })
-    }
 }
 

@@ -1,8 +1,9 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activePlayer, activeStepId, callAction, trackDialog, playedDialogs } from "../../gameEventHandler.js";
+import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { charactersData, dialogsData } from "../../loadData.js";
 import { getTranslation } from "../../langageManager.js";
+import { playedDialogs, trackDialog } from "../../initGame.js";
 
 let textBox
 let textContainer
@@ -20,14 +21,26 @@ export function dialogView(action) {
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('dialogWrapper');
-    wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`
+    wrapper.style.opacity = '0'; // Start hidden
     gameContainer.appendChild(wrapper);
+
+    // Preload background image
+    const bgImg = new Image();
+    bgImg.onload = () => {
+        wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`;
+        wrapper.style.opacity = '1'; // Show when loaded
+    };
+    bgImg.onerror = () => {
+        // Still show even if error
+        wrapper.style.opacity = '1';
+    };
+    bgImg.src = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl}`;
 
     // Create foreground container
     foregroundContainer = document.createElement('div');
     foregroundContainer.classList.add('foregroundImage');
     if (data.default.foregroundUrl) {
-        foregroundContainer.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl})`;
+        foregroundContainer.style.opacity = '0'; // Start hidden
     }
     wrapper.appendChild(foregroundContainer);
 
@@ -99,9 +112,27 @@ function updateDialog() {
 
     // Update foreground visibility
     if (showForeground) {
-        foregroundContainer.classList.add('shown');
+        // Wait for image to load before showing
+        if (data.default.foregroundUrl) {
+            const img = new Image();
+            img.onload = () => {
+                foregroundContainer.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl})`;
+                foregroundContainer.classList.add('shown');
+                foregroundContainer.style.opacity = '1';
+            };
+            img.onerror = () => {
+                // Still show even if error
+                foregroundContainer.classList.add('shown');
+                foregroundContainer.style.opacity = '1';
+            };
+            img.src = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl}`;
+        } else {
+            foregroundContainer.classList.add('shown');
+            foregroundContainer.style.opacity = '1';
+        }
     } else {
         foregroundContainer.classList.remove('shown');
+        foregroundContainer.style.opacity = '0';
     }
 
     let currentPitch = 400; // Default pitch
@@ -133,6 +164,7 @@ function getCharacterDetails(characterId) {
 }
 
 function hasPlayedDialog(dialogId) {
+    console.log(playedDialogs)
     if (playedDialogs && playedDialogs?.[activePlayer.localisation]?.[activeStepId]?.includes(dialogId)) {
         return true
     } else {
