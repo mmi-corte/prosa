@@ -1,8 +1,9 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
+import { activePlayer, activeStepId, callAction, trackDialog } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { charactersData, dialogsData } from "../../loadData.js";
 import { getTranslation } from "../../langageManager.js";
+import { playedDialogs } from "../../initGame.js";
 
 let textBox
 let textContainer
@@ -10,7 +11,6 @@ let characterNameBox
 let characterName
 let data
 let currentDialogIndex = 0;
-let currentBackground
 let currentAudio = null;
 
 export function dialogView(action) {
@@ -22,6 +22,17 @@ export function dialogView(action) {
     wrapper.classList.add('dialogWrapper');
     wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`
     gameContainer.appendChild(wrapper);
+
+    if (hasPlayedDialog(action)) {
+        const skipButtion = document.createElement('button');
+        skipButtion.innerText = "Passer ce dialogue";
+        skipButtion.classList.add('skipDialogButton');
+        skipButtion.addEventListener('click', () => {
+            stopDialogAudio();
+            callAction(data.nextActionType, data.nextAction);
+        });
+        wrapper.appendChild(skipButtion);
+    }
 
     textContainer = document.createElement('div');
     textContainer.classList.add('dialogTextContainer');
@@ -103,3 +114,20 @@ function getCharacterDetails(characterId) {
     return charactersData[characterId] || null;
 }
 
+function hasPlayedDialog(dialogId) {
+    if (playedDialogs?.[activePlayer.localisation]?.[activeStepId]?.includes(dialogId)) {
+        return true
+    } else {
+        trackDialog(activePlayer.localisation, activeStepId, dialogId)
+        return false
+    }
+}
+
+function stopDialogAudio() {
+    skipTypeWrite();
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+};

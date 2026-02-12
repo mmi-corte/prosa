@@ -271,7 +271,7 @@ body.light-mode label {
 }
 
 body.light-mode .btn,
-body.light-mode button:not(.toggle-switch):not(.menu-btn):not(.menu-btn-big):not(.discover-btn):not(.back-btn-circle):not(.settings-btn):not(.difficulty-continue-btn):not(.key-validate) {
+body.light-mode button:not(.toggle-switch):not(.menu-btn):not(.menu-btn-big):not(.discover-btn):not(.back-btn-circle):not(.settings-btn):not(.difficulty-continue-btn):not(.key-validate):not(.skipDialogButton) {
   background-color: var(--card);
   border-color: var(--border);
 }
@@ -2360,7 +2360,7 @@ body.light-mode .logo-main {
 
 .dialogWrapper {
   justify-content: end;
-  gap: 30px;
+  gap: 15px;
 }
 
 .playerSelect,
@@ -2408,6 +2408,16 @@ body.light-mode .logo-main {
 
 .dialogWrapper div .characterNameBox span {
   filter: invert(1) grayscale(1) brightness(calc(130 / 100)) contrast(9000);
+}
+
+.dialogWrapper .skipDialogButton {
+  padding: 10px 20px;
+  display: flex;
+  background: var(--foreground);
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  color: var(--background);
+  font-weight: 500;
 }
 
 .actionWrapper {
