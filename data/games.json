@@ -101,7 +101,7 @@
     },
     "03": {
       "1": {
-        "game": "tarasca_defense",
+        "game": "case_3.1_tarasca",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "dialog",
@@ -110,7 +110,7 @@
     },
     "04": {
       "1": {
-        "game": "labyrinthe_escape",
+        "game": "case_3.2_matagot",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -119,7 +119,7 @@
     },
     "06": {
       "1": {
-        "game": "wagon_infiltration",
+        "game": "case_5.1_wagon",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -128,7 +128,7 @@
     },
     "09": {
       "1": {
-        "game": "son_opera",
+        "game": "case_7_opera",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -137,7 +137,7 @@
     },
     "12": {
       "1": {
-        "game": "loudrape_epreuve",
+        "game": "",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -146,7 +146,7 @@
     },
     "13": {
       "1": {
-        "game": "mmi_epreuve",
+        "game": "case_11_MMI",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -155,7 +155,7 @@
     },
     "14": {
       "1": {
-        "game": "mairie_duel",
+        "game": "case_10_mairie",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -164,7 +164,7 @@
     },
     "15": {
       "1": {
-        "game": "port_infiltration",
+        "game": "case_13_port",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -175,7 +175,7 @@
   "3": {
     "04": {
       "1": {
-        "game": "escalade",
+        "game": "case_4_escalade",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -184,7 +184,7 @@
     },
     "05": {
       "1": {
-        "game": "prison_evasion",
+        "game": "case_5_fuite",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -193,7 +193,7 @@
     },
     "06": {
       "1": {
-        "game": "lou_garagai_grotte",
+        "game": "case_6_grotte",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -202,7 +202,7 @@
     },
     "07": {
       "1": {
-        "game": "magu_affrontement",
+        "game": "case_7_magu",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -211,7 +211,7 @@
     },
     "10": {
       "1": {
-        "game": "labyrinthe",
+        "game": "",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -220,7 +220,7 @@
     },
     "11": {
       "1": {
-        "game": "cle_epreuve",
+        "game": "",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -229,7 +229,7 @@
     },
     "12": {
       "1": {
-        "game": "drac_affrontement",
+        "game": "",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -238,7 +238,7 @@
     },
     "13": {
       "1": {
-        "game": "fin_strigonu",
+        "game": "",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
