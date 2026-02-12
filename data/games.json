@@ -103,9 +103,9 @@
       "1": {
         "game": "toulon/case_3_cimetiere_toulon",
         "nextActionTypeWin": "dialog",
-        "nextActionWin": "4",
+        "nextActionWin": "3",
         "nextActionTypeLose": "dialog",
-        "nextActionLose": "3"
+        "nextActionLose": "2"
       }
     },
     "04": {
