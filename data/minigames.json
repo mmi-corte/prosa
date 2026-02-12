@@ -2,127 +2,127 @@
   {
     "id": "case_1_radio",
     "title": "Case 1 - Radio",
-    "path": "./final-game/case_1_radio/index.html",
+    "path": "./games-playtests/corte/case_1_radio/index.html",
+    "collection": "final-game"
+  },
+  {
+    "id": "case_4_orcu",
+    "title": "Case 4 - Orcu",
+    "path": "./games-playtests/corte/case_4_orcu/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_10_piazza_duca",
     "title": "Case 10 - Piazza Duca",
-    "path": "./games-playtests/case_10_piazza_duca/index.html",
+    "path": "./games-playtests/corte/case_10_piazza_duca/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_6_signadora",
     "title": "Case 6 - Signadora",
-    "path": "./final-game/case_6_signadora/index.html",
+    "path": "./games-playtests/corte/case_6_signadora/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_7_armurier",
     "title": "Case 7 - Armurier",
-    "path": "./final-game/case_7_armurier/game.html",
+    "path": "./games-playtests/corte/case_7_armurier/game.html",
     "collection": "final-game"
   },
   {
-    "id": "case_8_fulettu",
+    "id": "case_67_fullettu",
     "title": "Case 67 - Fulettu",
-    "path": "./final-game/case_8_fulettu/index.html",
+    "path": "./games-playtests/corte/case_67_fullettu/index.html",
     "collection": "final-game"
   },
   {
-    "id": "case_10_frac",
+    "id": "case_9_frac",
     "title": "Case 9 - Frac",
-    "path": "./final-game/case_10_frac/index.html",
-    "collection": "final-game"
-  },
-  {
-    "id": "case_11_squadra",
-    "title": "Case 10 - Squadra",
-    "path": "./final-game/case_11_squadra/index.html",
+    "path": "./games-playtests/corte/case_9_frac/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_13_strega",
     "title": "Case 13 - Strega",
-    "path": "./final-game/case_13_strega/index.html",
+    "path": "./games-playtests/corte/case_13_strega/index.html",
     "collection": "final-game"
   },
   {
-    "id": "case_13_strega_partie_2",
+    "id": "case_13_strega2",
     "title": "Case 13 - Strega (Partie 2)",
-    "path": "./final-game/case_13_strega_partie_2/index.html",
+    "path": "./games-playtests/corte/case_13_strega2/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_14_traversee",
     "title": "Case 14 - La Traversee",
-    "path": "./games-playtests/case_14_traversee/index.html",
+    "path": "./games-playtests/corte/case_14_traversee/index.html",
     "collection": "final-game"
   },
   {
     "id": "case_3_cimetiere_toulon",
     "title": "Case 3 - Cimetiere Toulon",
-    "path": "./games-playtests/case_3_cimetiere_toulon/index.html",
+    "path": "./games-playtests/toulon/case_3_cimetiere_toulon/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_4_jardin_alexandre",
     "title": "Case 4 - Jardin Alexandre",
-    "path": "./games-playtests/case_4_jardin_alexandre/index.html",
+    "path": "./games-playtests/toulon/case_4_jardin_alexandre/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_6_champs_mars",
     "title": "Case 6 - Champs Mars",
-    "path": "./games-playtests/case_6_champs_mars/index.html",
+    "path": "./games-playtests/toulon/case_6_champs_mars/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_9_opera",
     "title": "Case 9 - Opera",
-    "path": "./games-playtests/case_9_opera/index.html",
+    "path": "./games-playtests/toulon/case_9_opera/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_12_mairie",
     "title": "Case 12 - Mairie",
-    "path": "./games-playtests/case_12_mairie/index.html",
+    "path": "./games-playtests/toulon/case_12_mairie/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_13_MMI",
     "title": "Case 13 - MMI",
-    "path": "./games-playtests/case_13_MMI/index.html",
+    "path": "./games-playtests/toulon/case_13_MMI/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_15_port",
     "title": "Case 15 - Port",
-    "path": "./games-playtests/case_15_port/index.html",
+    "path": "./games-playtests/toulon/case_15_port/index.html",
     "collection": "final-game-toulon"
   },
   {
     "id": "case_4_escalade",
     "title": "Case 4 - Escalade",
-    "path": "./final-game-prosa/case_4_escalade/index.html",
+    "path": "./games-playtests/prosa/case_4_escalade/index.html",
     "collection": "final-game-prosa"
   },
   {
     "id": "case_5_fuite",
     "title": "Case 5 - Fuite",
-    "path": "./final-game-prosa/case_5_fuite/index.html",
+    "path": "./games-playtests/prosa/case_5_fuite/index.html",
     "collection": "final-game-prosa"
   },
   {
     "id": "case_6_grotte",
     "title": "Case 6 - Grotte",
-    "path": "./final-game-prosa/case_6_grotte/index.html",
+    "path": "./games-playtests/prosa/case_6_grotte/index.html",
     "collection": "final-game-prosa"
   },
   {
     "id": "case_7_magu",
     "title": "Case 7 - Magu",
-    "path": "./final-game-prosa/case_7_magu/index.html",
+    "path": "./games-playtests/prosa/case_7_magu/index.html",
     "collection": "final-game-prosa"
   }
 ]
