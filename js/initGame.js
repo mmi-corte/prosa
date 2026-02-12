@@ -89,6 +89,9 @@ export function resetGame() {
     players = null
     localStorage.clear('playersData')
 
+    //Reset played dialogs
+    playedDialogs = null
+
     //Reset difficulty indicator
     localStorage.clear('globalDifficulty')
     localStorage.clear('difficultyState')
