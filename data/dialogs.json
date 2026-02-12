@@ -2070,8 +2070,8 @@
     "05": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "fada_lavandula_fond.webp",
+          "foregroundUrl": "fada_lavandula.webp",
           "sound": "",
           "music": ""
         },
@@ -2080,17 +2080,22 @@
             "text": {
               "fr": "\"Approche, enfant… on ne marche pas avec une blessure pareille, laisse-moi t’aider.\""
             },
-            "character": "fada_lavandula"
+            "character": "fada_lavandula",
+            "foreground": true
           },
           {
             "text": {
               "fr": "La guérisseuse vous aide et vous héberge un moment. Peu à peu, vos forces reviennent. Le temps passe lentement, rythmé par les gestes précis de Fada Lavandula."
-            }
+            },
+            "character": "fada_lavandula",
+            "foreground": true
           },
           {
             "text": {
               "fr": "Lorsque vous vous sentez d’aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec. "
-            }
+            },
+            "character": "fada_lavandula",
+            "foreground": true
           }
         ],
         "nextActionType": "end",
