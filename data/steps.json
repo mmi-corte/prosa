@@ -227,14 +227,14 @@
           "nextStep": "14"
         },
         "2": {
-          "type": "lose",
+          "type": "still",
           "nextStep": "13"
         }
       }
     },
     "131": {
       "actionType": "dialog",
-      "action": "3",
+      "action": "4",
       "end": {
         "1": {
           "type": "win",
@@ -265,7 +265,7 @@
     },
     "141": {
       "actionType": "dialog",
-      "action": "3",
+      "action": "4",
       "end": {
         "1": {
           "type": "special_end",

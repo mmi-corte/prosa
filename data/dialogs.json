@@ -475,7 +475,7 @@
     "05": {
       "1": {
         "default": {
-          "backgroundUrl": "TrioFontaine_case5.webp",
+          "backgroundUrl": "TrioFontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1210,7 +1210,7 @@
     "12": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "place_paoli.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1230,7 +1230,19 @@
             "text": {
               "fr": "L’atmosphère est calme mais tendue : chacun sait que le clan les surveille. Le travailleur marteau raconte au camp l’altercation."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "chef_travailleur.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "\"Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.\"",
@@ -1247,7 +1259,7 @@
     "13": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "route_cimetière_bataille.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1257,7 +1269,19 @@
             "text": {
               "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de A Squadra d’Arrozza, vous devez faire face à A Strega."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "case_13.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
@@ -1270,9 +1294,9 @@
         "nextActionType": "game",
         "nextAction": "1"
       },
-      "2": {
+      "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "pierre_orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1300,9 +1324,9 @@
         "nextActionType": "end",
         "nextAction": "1"
       },
-      "3": {
+      "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "strega.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1317,9 +1341,9 @@
         "nextActionType": "game",
         "nextAction": "2"
       },
-      "4": {
+      "5": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "pierre_orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1338,7 +1362,7 @@
     "14": {
       "1": {
         "default": {
-          "backgroundUrl": "orcubateau.jpg",
+          "backgroundUrl": "Orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1356,7 +1380,19 @@
             "text": {
               "fr": "Après avoir remis la pierre à l'Orcu, vous et le colosse quittez la plage à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "orcubateau.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "Un silence étrange s'installe. Vous regardez la mer et le ciel, sentez le sel sur votre peau, écoutez le clapotis des eaux. Pour un instant, la traversée devient un moment de calme et de contemplation."
@@ -1371,9 +1407,9 @@
         "nextActionType": "game",
         "nextAction": "1"
       },
-      "2": {
+      "3": {
         "default": {
-          "backgroundUrl": "Orcu_patrouille.jpg",
+          "backgroundUrl": "Orcu_patrouille.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1393,9 +1429,9 @@
         "nextActionType": "end",
         "nextAction": "2"
       },
-      "3": {
+      "4": {
         "default": {
-          "backgroundUrl": "orcubateau.jpg",
+          "backgroundUrl": "Orcu.jpg",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
