@@ -9,6 +9,7 @@
               "fr": "Où t’arrêterais-tu pour observer sans être vu ?",
               "cor": "Induve ti firmassi per osservà senza esse vistu ?"
             },
+            "voice": "riddles/Question_1_Fata.mp3",
             "choices": [
               {
                 "text": {
@@ -38,6 +39,7 @@
               "fr": "Qu’est-ce qui trahit un passage ancien ?",
               "cor": "Chì cosa tradisce un passaghju anticu ?"
             },
+            "voice": "riddles/Question_2_Fata.mp3",
             "choices": [
               {
                 "text": {
@@ -67,6 +69,7 @@
               "fr": "Si quelqu’un te surveillait, qu’entendrais-tu en premier ?",
               "cor": "Chì cosa sentirebbe prima se qualcunu ti stesse guardando ?"
             },
+            "voice": "riddles/Question_3_Fata.mp3",
             "choices": [
               {
                 "text": {
