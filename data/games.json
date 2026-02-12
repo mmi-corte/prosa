@@ -112,7 +112,7 @@
       "1": {
         "game": "toulon/case_4_jardin_alexandre",
         "nextActionTypeWin": "dialog",
-        "nextActionWin": "2",
+        "nextActionWin": "3",
         "nextActionTypeLose": "end",
         "nextActionLose": "2"
       }

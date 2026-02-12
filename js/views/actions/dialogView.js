@@ -13,11 +13,14 @@ let characterName
 let data
 let currentDialogIndex = 0;
 let currentAudio = null;
+let currentForegroundSrc = "";
 
 export function dialogView(action) {
     clearContainer();
 
     data = dialogsData[action];
+
+    currentForegroundSrc = "";
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('dialogWrapper');
@@ -104,7 +107,8 @@ function updateDialog() {
     const activeText = getTranslation(data.dialog[currentDialogIndex].text);
     const voiceFile = data.dialog[currentDialogIndex].voice;
     const characterId = data.dialog[currentDialogIndex].character || "";
-    const showForeground = data.dialog[currentDialogIndex].foreground || false;
+    const foregroundFile = data.dialog[currentDialogIndex].foreground || "";
+    const showForeground = Boolean(foregroundFile);
 
     characterNameBox.style.backgroundColor = '#FFFFFF';
     characterName.style.color = '#FFFFFF';
@@ -112,23 +116,28 @@ function updateDialog() {
 
     // Update foreground visibility
     if (showForeground) {
-        // Wait for image to load before showing
-        if (data.default.foregroundUrl) {
+        const nextSrc = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${foregroundFile}`;
+        if (currentForegroundSrc === nextSrc) {
+            foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
+            foregroundContainer.classList.add('shown');
+            foregroundContainer.style.opacity = '1';
+        } else {
+            // Wait for image to load before showing
             const img = new Image();
             img.onload = () => {
-                foregroundContainer.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl})`;
+                currentForegroundSrc = nextSrc;
+                foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
                 foregroundContainer.classList.add('shown');
                 foregroundContainer.style.opacity = '1';
             };
             img.onerror = () => {
                 // Still show even if error
+                currentForegroundSrc = nextSrc;
+                foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
                 foregroundContainer.classList.add('shown');
                 foregroundContainer.style.opacity = '1';
             };
-            img.src = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl}`;
-        } else {
-            foregroundContainer.classList.add('shown');
-            foregroundContainer.style.opacity = '1';
+            img.src = nextSrc;
         }
     } else {
         foregroundContainer.classList.remove('shown');

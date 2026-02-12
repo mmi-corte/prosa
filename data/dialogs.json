@@ -1758,7 +1758,6 @@
       "2": {
         "default": {
           "backgroundUrl": "tunnel.webp",
-          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1767,28 +1766,28 @@
             "text": {
               "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
             },
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.\""
             },
             "character": "gyptis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la La Fédération Li Rais de Prouvènço de Toulon, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie du U Sarpu a Sette Capi.\""
             },
             "character": "protis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Le port est une zone constamment surveillée, tu risques ta vie.\""
             },
             "character": "protis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           }
         ],
         "nextActionType": "dialog",
@@ -1797,7 +1796,6 @@
       "3": {
         "default": {
           "backgroundUrl": "tunnel.webp",
-          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1806,28 +1804,28 @@
             "text": {
               "fr": "Vous les regardez remplit de détermination sans rien dire."
             },
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Tu sembles toujours déterminé à atteindre le port malgré nos avertissements. L’Opéra peut t’aider. Des gens importants y passent encore.\""
             },
             "character": "gyptis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port\""
             },
             "character": "gyptis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "\"Sylvain a essayé de résister. Ils l’ont envoyé sur Prosa. Comme les autres.\""
             },
             "character": "protis",
-            "foreground": true
+            "foreground": "gyptis_protis.webp"
           }
         ],
         "nextActionType": "dialog",
@@ -1836,7 +1834,6 @@
       "4": {
         "default": {
           "backgroundUrl": "tunnel.webp",
-          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1845,12 +1842,14 @@
             "text": {
               "fr": "\"Tu as le choix entre deux routes pour avancer. Longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.\""
             },
-            "character": "gyptis"
+            "character": "gyptis",
+            "foreground": "gyptis_protis.webp"
           },
           {
             "text": {
               "fr": "Vous les remercier sincèrement pour leur aide et continuez votre chemin."
-            }
+            },
+            "foreground": "gyptis_protis.webp"
           }
         ],
         "nextActionType": "choice",
@@ -1895,7 +1894,6 @@
       "1": {
         "default": {
           "backgroundUrl": "tarasca.webp",
-          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
@@ -1910,27 +1908,27 @@
               "fr": "\"Pas un pas de plus. Que fais-tu ici ?\""
             },
             "character": "sainte_marthe",
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
               "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme."
             },
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
               "fr": "\"Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux.\""
             },
             "character": "sainte_marthe",
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
               "fr": "\"Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.\""
             },
             "character": "sainte_marthe",
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
@@ -1947,7 +1945,7 @@
               "fr": "\"Ils sont morts à cause d’elle. J’accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t’accompagnerai plus loin.\""
             },
             "character": "sainte_marthe",
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
@@ -1961,7 +1959,6 @@
       "2": {
         "default": {
           "backgroundUrl": "tarasca.webp",
-          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
@@ -1975,13 +1972,13 @@
             "text": {
               "fr": "Sainte-Marthe, en larmes, vous supplie de fuir vers la rue adjacente où vous trouverez un abri."
             },
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           },
           {
             "text": {
               "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement"
             },
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           }
         ],
         "nextActionType": "end",
@@ -1990,7 +1987,6 @@
       "3": {
         "default": {
           "backgroundUrl": "tarasca_detruite.webp",
-          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
@@ -2004,7 +2000,7 @@
             "text": {
               "fr": "Devant l’amas de métal fumant, Sainte-Marthe, submergée par l’émotion, vous remercie. Elle avoue être ingénieure en robotique et connaître un endroit tout proche qui pourra vous aider à progresser vers le port."
             },
-            "foreground": true
+            "foreground": "sainte_marthe.webp"
           }
         ],
         "nextActionType": "end",
@@ -2014,8 +2010,7 @@
     "04": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "ruelle.webp",
           "sound": "",
           "music": ""
         },
@@ -2023,12 +2018,30 @@
           {
             "text": {
               "fr": "Dans une ruelle étroite, une silhouette noire surgit l’animal est trop grand pour être un simple chat. Immobile, il semble vous observer. Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage."
-            }
+            },
+            "foreground": "matagot.webp"
           },
           {
             "text": {
-              "fr": "Après quelques secondes, le félin s’enfuit soudainement. En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. C’est un lieu ravagé par des débris et la végétation."
+              "fr": "Après quelques secondes, le félin s’enfuit soudainement."
             }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "jardin.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "En le poursuivant, vous pénétrez dans le Jardin Alexandre Ier. C’est un lieu ravagé par des débris et la végétation."
+            },
+            "foreground": "matagot.webp"
           },
           {
             "text": {
@@ -2039,10 +2052,9 @@
         "nextActionType": "game",
         "nextAction": "1"
       },
-      "2": {
+      "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "jardin.webp",
           "sound": "",
           "music": ""
         },
@@ -2055,12 +2067,14 @@
           {
             "text": {
               "fr": "Au centre repose un objet singulier : un roseau, droit et intact, dont l’extrémité est taillée en forme de clef. Sa présence semble volontaire, comme déposée là pour être trouvée."
-            }
+            },
+            "foreground": "roseau.webp"
           },
           {
             "text": {
               "fr": "Sans s’attarder davantage, vous rangez le roseau et reprenez votre route."
-            }
+            },
+            "foreground": "roseau.webp"
           }
         ],
         "nextActionType": "end",
@@ -2071,7 +2085,6 @@
       "1": {
         "default": {
           "backgroundUrl": "fada_lavandula_fond.webp",
-          "foregroundUrl": "fada_lavandula.webp",
           "sound": "",
           "music": ""
         },
@@ -2081,21 +2094,21 @@
               "fr": "\"Approche, enfant… on ne marche pas avec une blessure pareille, laisse-moi t’aider.\""
             },
             "character": "fada_lavandula",
-            "foreground": true
+            "foreground": "fada_lavandula.webp"
           },
           {
             "text": {
               "fr": "La guérisseuse vous aide et vous héberge un moment. Peu à peu, vos forces reviennent. Le temps passe lentement, rythmé par les gestes précis de Fada Lavandula."
             },
             "character": "fada_lavandula",
-            "foreground": true
+            "foreground": "fada_lavandula.webp"
           },
           {
             "text": {
               "fr": "Lorsque vous vous sentez d’aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec. "
             },
             "character": "fada_lavandula",
-            "foreground": true
+            "foreground": "fada_lavandula.webp"
           }
         ],
         "nextActionType": "end",
@@ -2105,8 +2118,7 @@
     "06": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "champ_mars.webp",
           "sound": "",
           "music": ""
         },
@@ -2122,8 +2134,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "champ_mars.webp",
           "sound": "",
           "music": ""
         },
@@ -2143,7 +2154,8 @@
             "text": {
               "fr": "\"Il ne fallait pas le laisser traîner si c’était si précieux.\""
             },
-            "character": "soldat_flrp"
+            "character": "soldat_flrp",
+            "foreground": "soldat_flrp.webp"
           }
         ],
         "nextActionType": "choice",
@@ -2153,8 +2165,7 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "coulobre.webp",
           "sound": "",
           "music": ""
         },
@@ -2177,8 +2188,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "coulobre.webp",
           "sound": "",
           "music": ""
         },
@@ -2223,8 +2233,7 @@
     "08": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "champ_mars.webp",
           "sound": "",
           "music": ""
         },
@@ -2237,34 +2246,40 @@
           {
             "text": {
               "fr": "Vêtue de cuir et de fourrure, un fusil fermement serré contre elle, elle force naturellement les passants à s’écarter."
-            }
+            },
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
               "fr": "Elle s’impose immédiatement. Vous entendez les murmures des soldats: c’est la Cabro d’Or, une figure majeure de l’organisation Prosa, venue à Toulon pour des affaires internes."
-            }
+            },
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
               "fr": "Elle s’arrête, écoute les explications des deux frères sans les interrompre. Puis son regard se pose sur les soldats."
-            }
+            },
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
               "fr": "\"Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.\""
             },
-            "character": "cabro_dor"
+            "character": "cabro_dor",
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
               "fr": "Humiliés, les soldats obéissent sans discuter et quittent les lieux. La Cabro d’Or se tourne alors vers vous."
-            }
+            },
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
               "fr": "\"Peu auraient pris ce risque. Garde l’œil ouvert. Je devine aisément tes intention jeune homme.\""
             },
-            "character": "cabro_dor"
+            "character": "cabro_dor",
+            "foreground": "cabro_dor.webp"
           },
           {
             "text": {
