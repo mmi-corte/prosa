@@ -182,15 +182,128 @@ function goToCharacterDetail(key, char) {
     const isDetailVideo = /\.(mp4|webm|ogg)$/i.test(detailMediaPath)
 
     if (isDetailVideo) {
+        const videoWrapper = document.createElement('div')
+        videoWrapper.className = 'character-video-wrapper'
+        
         const video = document.createElement('video')
         video.src = `./assets/characters/${detailMediaPath}`
         video.muted = false
         video.loop = true
-        video.controls = true
+        video.controls = false
         video.autoplay = true
         video.playsInline = true
         video.setAttribute('aria-label', char.name)
-        characterDetailImage.replaceWith(video)
+        
+        // Créer les contrôles personnalisés
+        const controls = document.createElement('div')
+        controls.className = 'custom-video-controls'
+        controls.innerHTML = `
+            <button class="video-play-btn" aria-label="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
+            <div class="video-progress">
+                <div class="video-progress-bar"></div>
+                <input type="range" class="video-progress-slider" min="0" max="100" value="0" aria-label="Progress">
+            </div>
+            <div class="video-time">
+                <span class="video-current-time">0:00</span>
+                <span class="video-duration">0:00</span>
+            </div>
+            <button class="video-volume-btn" aria-label="Mute/Unmute">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </button>
+            <input type="range" class="video-volume-slider" min="0" max="100" value="100" aria-label="Volume">
+            <button class="video-fullscreen-btn" aria-label="Fullscreen">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+            </button>
+        `
+        
+        videoWrapper.appendChild(video)
+        videoWrapper.appendChild(controls)
+        characterDetailImage.replaceWith(videoWrapper)
+        
+        // Gérer les contrôles personnalisés
+        const playBtn = controls.querySelector('.video-play-btn')
+        const progressSlider = controls.querySelector('.video-progress-slider')
+        const currentTimeSpan = controls.querySelector('.video-current-time')
+        const durationSpan = controls.querySelector('.video-duration')
+        const volumeBtn = controls.querySelector('.video-volume-btn')
+        const volumeSlider = controls.querySelector('.video-volume-slider')
+        const fullscreenBtn = controls.querySelector('.video-fullscreen-btn')
+        
+        playBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play()
+                playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>'
+            } else {
+                video.pause()
+                playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+            }
+        })
+        
+        video.addEventListener('loadedmetadata', () => {
+            durationSpan.textContent = formatTime(video.duration)
+            progressSlider.max = video.duration
+        })
+        
+        video.addEventListener('timeupdate', () => {
+            currentTimeSpan.textContent = formatTime(video.currentTime)
+            progressSlider.value = video.currentTime
+        })
+        
+        progressSlider.addEventListener('input', (e) => {
+            video.currentTime = e.target.value
+        })
+        
+        volumeSlider.addEventListener('input', (e) => {
+            video.volume = e.target.value / 100
+            updateVolumeIcon()
+        })
+        
+        volumeBtn.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false
+                volumeSlider.value = video.volume * 100
+            } else {
+                video.muted = true
+                volumeSlider.value = 0
+            }
+            updateVolumeIcon()
+        })
+        
+        const updateVolumeIcon = () => {
+            if (video.muted || video.volume === 0) {
+                volumeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C23.16 14.88 24 13.53 24 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zm-11-5L5.41 5 4 6.41 17.59 20 19 18.59 12 11.59V3H8.59L7 4.41 8 5.41v6.59z"/></svg>'
+            } else if (video.volume < 0.5) {
+                volumeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>'
+            } else {
+                volumeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>'
+            }
+        }
+        
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                videoWrapper.requestFullscreen().catch(err => console.log(err))
+            } else {
+                document.exitFullscreen()
+            }
+        })
+        
+        video.addEventListener('play', () => {
+            playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>'
+        })
+        
+        video.addEventListener('pause', () => {
+            playBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+        })
+        
+        updateVolumeIcon()
     } else {
         characterDetailImage.src = `./assets/characters/${detailMediaPath}`
         characterDetailImage.alt = `Illustration ${char.name}`
@@ -290,6 +403,13 @@ function goToCharacterDetail(key, char) {
         updateDescription()
         updateFlagsStyle()
     })
+}
+
+function formatTime(seconds) {
+    if (!seconds || isNaN(seconds)) return '0:00'
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
 }
 
 function closeCharacterDetail(skipNavigate = false) {
