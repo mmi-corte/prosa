@@ -56,7 +56,7 @@
     },
     "10": {
       "1": {
-        "game": "case_10_squadra",
+        "game": "case_10_piazza_duca",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -81,7 +81,7 @@
     },
     "14": {
       "1": {
-        "game": "case_14_orcu",
+        "game": "case_14_traversee",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "dialog",
@@ -101,7 +101,7 @@
     },
     "03": {
       "1": {
-        "game": "case_3.1_tarasca",
+        "game": "case_3_cimetiere_toulon",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "dialog",
@@ -110,7 +110,7 @@
     },
     "04": {
       "1": {
-        "game": "case_3.2_matagot",
+        "game": "case_4_jardin_alexandre",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -119,7 +119,7 @@
     },
     "06": {
       "1": {
-        "game": "case_5.1_wagon",
+        "game": "case_6_champs_mars",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -128,7 +128,7 @@
     },
     "09": {
       "1": {
-        "game": "case_7_opera",
+        "game": "case_9_opera",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -146,7 +146,7 @@
     },
     "13": {
       "1": {
-        "game": "case_11_MMI",
+        "game": "case_13_MMI",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -155,7 +155,7 @@
     },
     "14": {
       "1": {
-        "game": "case_10_mairie",
+        "game": "case_12_mairie",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -164,7 +164,7 @@
     },
     "15": {
       "1": {
-        "game": "case_13_port",
+        "game": "case_15_port",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
