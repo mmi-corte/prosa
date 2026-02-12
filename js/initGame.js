@@ -5,6 +5,7 @@ export let players = {}
 export let gameInitialized = false
 export let globalDifficulty
 export let difficultyState
+export let playedDialogs
 
 export async function initGame() {
     //Load characters data if not already loaded
@@ -29,9 +30,10 @@ export async function initGame() {
         //Set the global initialized state to true
         gameInitialized = true
 
-        //If the game is loaded, fetch the steps JSON and aleas riddles
+        //If the game is loaded, fetch the steps JSON, aleas riddles and tracked dialogs
         await fetchSteps()
         await fetchAleasRiddles()
+        playedDialogs = JSON.parse(localStorage.getItem('playedDialogs') || '{}')
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {
@@ -95,4 +97,9 @@ export function resetGame() {
 
     //Reset global game state
     gameInitialized = false
+}
+
+
+export function savePlayedDialogs() {
+    localStorage.setItem('playedDialogs', JSON.stringify(playedDialogs))
 }
