@@ -3,69 +3,651 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PROSA - FRAC RUNNER 3D</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Import Three.js -->
+    <title>PROSA - FRAC RUNNER</title>
+    <style>
+        /* --- FONTS --- */
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Futura';
+            src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'),
+                url('/assets/fonts/FuturaCondMedium.woff2') format('woff2'),
+                url('/assets/fonts/FuturaCondMedium.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* --- PALETTE PROSA --- */
+        :root {
+            --bg-dark: #1a1812;
+            --bg-card-light: #ece4cb; /* Beige du screen */
+            --bg-card-dark: #252218;  /* Marron sombre du screen */
+            --text-light: #ece4cb;
+            --text-dark: #1a1812;
+            --accent: #626247;        /* Kaki */
+            --danger: #c63032;        /* Rouge */
+            --gold: #ffdb2c;          /* Jaune/Or */
+            --ui-font: 'Futura', sans-serif;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--ui-font);
+            overflow: hidden;
+            user-select: none;
+            -webkit-touch-callout: none;
+            touch-action: none;
+        }
+
+        #game-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            outline: none;
+        }
+
+        /* --- UI OVERLAYS (Style Carte Prosa) --- */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(26, 24, 18, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            padding: 20px;
+            transition: opacity 0.4s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Carte de menu principale (Style Screen) */
+        .menu-card {
+            background: var(--bg-card-light);
+            color: var(--text-dark);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px; /* Coins arrondis comme sur le screen */
+            padding: 40px 30px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transform: translateY(0);
+            transition: transform 0.2s;
+        }
+
+        .menu-card h1 {
+            font-size: 2.5rem;
+            line-height: 0.9;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .menu-card p {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.8;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .action-btn {
+            background: var(--text-dark);
+            color: var(--bg-card-light);
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-family: var(--ui-font);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-btn::after {
+            content: '→';
+            font-size: 1.2rem;
+        }
+
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* --- HUD Minimaliste --- */
+        #hud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hud-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Barre de Danger Minimaliste */
+        .danger-line-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            z-index: 15;
+        }
+        
+        .danger-line {
+            height: 100%;
+            background: var(--danger);
+            width: 0%;
+            transition: width 0.2s linear;
+        }
+        
+        .danger-warning {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--danger);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* --- TUTO --- */
+        .tuto-overlay {
+            position: absolute;
+            bottom: 15%;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+        }
+        
+        .swipe-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--text-light);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            position: relative;
+        }
+        
+        .swipe-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--text-light);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: swipeMove 1.5s infinite ease-in-out;
+        }
+
+        @keyframes swipeMove {
+            0% { transform: translate(-15px, -50%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(15px, -50%); opacity: 0; }
+        }
+        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.8; } 100% { opacity: 0.3; } }
+
+        /* Vignette Rouge (Danger) */
+        #vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 50%, rgba(198, 48, 50, 0.9) 150%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.2s;
+        }
+
+    </style>
+    <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-<div id="game-container">
+<div id="game-wrapper">
     <div id="vignette"></div>
-    
+
     <!-- HUD -->
     <div id="hud" class="hidden">
-        <div>
-            <div class="score-label">PROXIMITÉ GARDE</div>
-            <div class="danger-meter"><div class="danger-fill" id="danger-bar"></div></div>
+        <div class="hud-item">
+            <span class="label">SORTIE DANS</span>
+            <span class="value" id="dist-display">250m</span>
         </div>
-        <div class="score-box">
-            <div class="score-label">DISTANCE RESTANTE</div>
-            <div class="score-val" id="score-display">250m</div>
-            <div class="score-label" style="color:var(--yellow); margin-top:5px;">SOUVENIRS: <span id="coin-display">0</span></div>
+        <div class="hud-item" style="align-items: flex-end;">
+            <span class="label">FRAGMENTS</span>
+            <span class="value" id="coin-display" style="color: var(--gold)">0</span>
         </div>
     </div>
+    
+    <div id="danger-ui" class="hidden">
+        <div class="danger-line-container">
+            <div class="danger-line" id="danger-fill"></div>
+        </div>
+        <div class="danger-warning" id="danger-text">GARDE PROCHE</div>
+    </div>
 
-    <div id="hint-text" class="hint hidden">GLISSER ou FLÈCHES pour bouger</div>
+    <!-- TUTO -->
+    <div id="tuto-ui" class="tuto-overlay hidden">
+        <div class="swipe-icon"></div>
+        <span class="label">GLISSER POUR BOUGER</span>
+    </div>
 
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay">
-        <h1>FRAC RUNNER</h1>
-        <div class="subtitle">
-            Vous rentrez dans le Frac, l’intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d’exposition transformées en couloirs sombres où résonnent des pas imaginaires. À peine avez-vous franchi l’entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d’enfant déformé par un large sourire.
+        <div class="menu-card">
+            <h1>COMMENCER LA<br>PARTIE</h1>
+            <p>Échappez à la vigilance des gardes. Récupérez les fragments de mémoire pour trouver la sortie.</p>
+            <button class="action-btn" onclick="initGame()">ENTRER DANS L'OMBRE</button>
         </div>
-        <div class="dialogue-box">
-            <span class="character-name">U Fulettu</span>
-            <span class="dialogue-text">"Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m’agace. Ça m’intrigue. Voyons ce que tu fais… quand il n’y a plus personne."</span>
-        </div>
-        <button class="btn" onclick="initGame()">S'ÉCHAPPER</button>
     </div>
 
-    <!-- GAME OVER SCREEN -->
-    <div id="gameover-screen" class="overlay hidden">
-        <h1 style="color: var(--danger)">CAPTULÉ</h1>
-        <div class="subtitle">
-            Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré.
-            <br><br>
-            <em>Votre seul chemin encore viable est A Piazza à u Duca.</em>
+    <!-- FAIL SCREEN -->
+    <div id="fail-screen" class="overlay hidden">
+        <div class="menu-card" style="background: var(--bg-card-dark); color: var(--text-light);">
+            <h1 style="color: var(--danger)">ÉCHEC</h1>
+            <p>Le garde vous a intercepté.</p>
+            <div style="margin-top: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                <span class="label">DISTANCE RESTANTE</span><br>
+                <span class="value" id="fail-dist">0m</span>
+            </div>
+            <button class="action-btn" style="background: var(--text-light); color: var(--bg-card-dark);" onclick="resetGame()">RÉESSAYER</button>
         </div>
-        <button class="btn" onclick="resetGame()">RÉESSAYER</button>
     </div>
 
     <!-- WIN SCREEN -->
     <div id="win-screen" class="overlay hidden">
-        <h1 style="color: var(--accent)">ÉVASION RÉUSSIE</h1>
-        <div class="subtitle">
-            Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.
-            <br><br>
-            En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli.
+        <div class="menu-card" style="background: var(--accent); color: white;">
+            <h1>SORTIE<br>TROUVÉE</h1>
+            <p>Vous avez rejoint la statue de Pascal Paoli.</p>
+            <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <span class="label">FRAGMENTS COLLECTÉS</span><br>
+                <span class="value" id="win-coins">0</span>
+            </div>
+            <button class="action-btn" style="background: white; color: var(--accent);" onclick="finishGame()">CONTINUER</button>
         </div>
-        <button class="btn" onclick="nextStep()">VERS LA STATUE</button>
     </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+    // --- CONFIGURATION ---
+    const CONFIG = {
+        laneWidth: 3.0,
+        speedBase: 0.7, 
+        speedMax: 1.8,
+        goal: 250,
+        colors: {
+            bg: 0x1a1812,
+            player: 0x81cbd6,
+            ground: 0x252218,
+            obstacle: 0x626247,
+            coin: 0xffdb2c,
+            fog: 0x1a1812
+        }
+    };
 
+    // State
+    let state = {
+        playing: false,
+        speed: 0,
+        dist: 0,
+        coins: 0,
+        lane: 1, // 0, 1, 2
+        guard: 0, // 0-100%
+        shake: 0
+    };
+
+    let scene, camera, renderer, player;
+    let objects = [];
+    let frameId;
+    
+    // Touch Logic
+    let touchStartX = 0;
+    let isTouching = false;
+
+    // --- THREE.JS INIT ---
+    function initThree() {
+        const container = document.getElementById('game-wrapper');
+        
+        // Scene setup
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(CONFIG.colors.bg);
+        scene.fog = new THREE.Fog(CONFIG.colors.fog, 10, 60); // Brouillard linéaire plus doux
+
+        // Camera setup (Optimisée mobile vertical)
+        camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 4, 7);
+        camera.lookAt(0, 0, -5);
+
+        // Renderer setup
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(renderer.domElement);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(10, 20, 5);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 1024;
+        dirLight.shadow.mapSize.height = 1024;
+        scene.add(dirLight);
+
+        // Floor (Infini visuel)
+        const planeGeo = new THREE.PlaneGeometry(100, 200);
+        const planeMat = new THREE.MeshPhongMaterial({ 
+            color: CONFIG.colors.ground,
+            shininess: 0 
+        });
+        const ground = new THREE.Mesh(planeGeo, planeMat);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.z = -50;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        // Grid Decor (Esthétique minimaliste)
+        const grid = new THREE.GridHelper(100, 20, 0x3a3830, 0x1a1812);
+        grid.position.y = 0.02;
+        grid.position.z = -50;
+        scene.add(grid);
+
+        // Player (Capsule abstraite propre)
+        // Correction: CapsuleGeometry n'existe pas dans r128, utilisation de CylinderGeometry
+        const playerGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.5, 16);
+        const playerMat = new THREE.MeshPhongMaterial({ 
+            color: CONFIG.colors.player,
+            shininess: 30
+        });
+        player = new THREE.Mesh(playerGeo, playerMat);
+        player.position.set(0, 1, 0);
+        player.castShadow = true;
+        scene.add(player);
+
+        // --- EVENTS ---
+        window.addEventListener('resize', onResize);
+        
+        // Touch events
+        renderer.domElement.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            isTouching = true;
+        }, {passive: false});
+
+        renderer.domElement.addEventListener('touchmove', e => {
+            if (!isTouching || !state.playing) return;
+            const x = e.touches[0].clientX;
+            const diff = x - touchStartX;
+            
+            if (Math.abs(diff) > 30) {
+                moveLane(diff > 0 ? 1 : -1);
+                isTouching = false; // Force re-touch
+            }
+        }, {passive: false});
+        
+        renderer.domElement.addEventListener('touchend', () => isTouching = false);
+
+        // Keyboard (Debug)
+        window.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') moveLane(-1);
+            if (e.key === 'ArrowRight') moveLane(1);
+        });
+    }
+
+    function onResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function moveLane(dir) {
+        state.lane = Math.max(0, Math.min(2, state.lane + dir));
+        document.getElementById('tuto-ui').classList.add('hidden');
+    }
+
+    // --- GAME LOGIC ---
+
+    function initGame() {
+        if (!scene) initThree();
+        
+        // Reset Logic
+        state.playing = true;
+        state.speed = CONFIG.speedBase;
+        state.dist = 0;
+        state.coins = 0;
+        state.lane = 1;
+        state.guard = 0;
+        
+        // Clear Objects
+        objects.forEach(o => scene.remove(o.mesh));
+        objects = [];
+
+        // UI Transition
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('fail-screen').classList.add('hidden');
+        document.getElementById('win-screen').classList.add('hidden');
+        document.getElementById('hud').classList.remove('hidden');
+        document.getElementById('danger-ui').classList.remove('hidden');
+        document.getElementById('tuto-ui').classList.remove('hidden');
+
+        animate();
+    }
+
+    function resetGame() {
+        cancelAnimationFrame(frameId);
+        initGame();
+    }
+
+    function finishGame() {
+        window.parent.postMessage({ type: 'game_complete', game: 'frac_runner' }, '*');
+    }
+
+    function spawnObject() {
+        const lane = Math.floor(Math.random() * 3);
+        const xPos = (lane - 1) * CONFIG.laneWidth;
+        const zPos = -70; // Spawn plus loin pour fluidité
+
+        const isCoin = Math.random() < 0.3;
+        
+        if (isCoin) {
+            // Fragment (Losange flottant)
+            const geo = new THREE.OctahedronGeometry(0.4);
+            const mat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.coin });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(xPos, 1, zPos);
+            scene.add(mesh);
+            objects.push({ mesh, type: 'coin', active: true });
+        } else {
+            // Obstacle (Cube minimaliste mat)
+            const h = Math.random() > 0.5 ? 2 : 3.5;
+            const geo = new THREE.BoxGeometry(2, h, 2);
+            const mat = new THREE.MeshStandardMaterial({ 
+                color: CONFIG.colors.obstacle,
+                roughness: 0.8
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(xPos, h/2, zPos);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            scene.add(mesh);
+            objects.push({ mesh, type: 'obstacle', active: true });
+        }
+    }
+
+    function update() {
+        if (!state.playing) return;
+
+        // Vitesse (Accélération très légère)
+        if (state.speed < CONFIG.speedMax) state.speed += 0.0001;
+        state.dist += state.speed * 0.15;
+
+        // Mouvement Player (Lerp fluide)
+        const targetX = (state.lane - 1) * CONFIG.laneWidth;
+        player.position.x += (targetX - player.position.x) * 0.12;
+        // Rotation subtile quand on bouge
+        player.rotation.z = -(targetX - player.position.x) * 0.1;
+        player.rotation.y = -(targetX - player.position.x) * 0.05;
+
+        // Spawn
+        // Probabilité ajustée à la vitesse pour garder densité constante
+        if (Math.random() < 0.03 * (state.speed / CONFIG.speedBase)) spawnObject();
+
+        // Objets Loop
+        for (let i = objects.length - 1; i >= 0; i--) {
+            let o = objects[i];
+            o.mesh.position.z += state.speed;
+
+            // Collision Check
+            if (o.active && o.mesh.position.z > -1 && o.mesh.position.z < 1) {
+                // Zone de hit un peu permissive
+                if (Math.abs(o.mesh.position.x - player.position.x) < 1.0) {
+                    
+                    if (o.type === 'coin') {
+                        // Collecte
+                        state.coins++;
+                        scene.remove(o.mesh);
+                        o.active = false;
+                        state.guard = Math.max(0, state.guard - 10);
+                    } else {
+                        // IMPACT OBSTACLE (Pas de ralentissement !)
+                        state.guard += 35; // Augmente danger
+                        state.shake = 15; // Secousse caméra
+                        
+                        scene.remove(o.mesh); // Disparait pour ne pas bloquer
+                        o.active = false;
+                    }
+                }
+            }
+
+            // Cleanup
+            if (o.mesh.position.z > 5) {
+                scene.remove(o.mesh);
+                objects.splice(i, 1);
+            }
+
+            // Anim Coin
+            if (o.type === 'coin') {
+                o.mesh.rotation.y += 0.05;
+                o.mesh.position.y = 1 + Math.sin(Date.now() * 0.005 + o.mesh.position.z) * 0.2;
+            }
+        }
+
+        // Logic Guard (Baisse doucement)
+        if (state.guard > 0) state.guard -= 0.08;
+        if (state.guard >= 100) gameOver();
+
+        // Win
+        if (state.dist >= CONFIG.goal) gameWin();
+
+        // UI Updates
+        document.getElementById('dist-display').innerText = Math.max(0, Math.floor(CONFIG.goal - state.dist)) + "m";
+        document.getElementById('coin-display').innerText = state.coins;
+        document.getElementById('danger-fill').style.width = Math.min(100, state.guard) + "%";
+        document.getElementById('danger-text').style.opacity = state.guard > 50 ? 1 : 0;
+        
+        // Effects
+        document.getElementById('vignette').style.opacity = state.guard / 120; // Vignette rouge
+        
+        if (state.shake > 0) {
+            camera.position.x = (Math.random() - 0.5) * 0.3;
+            state.shake *= 0.9;
+        } else {
+            camera.position.x = 0;
+        }
+    }
+
+    function gameOver() {
+        state.playing = false;
+        document.getElementById('hud').classList.add('hidden');
+        document.getElementById('danger-ui').classList.add('hidden');
+        document.getElementById('fail-dist').innerText = Math.floor(CONFIG.goal - state.dist) + "m";
+        document.getElementById('fail-screen').classList.remove('hidden');
+    }
+
+    function gameWin() {
+        state.playing = false;
+        document.getElementById('hud').classList.add('hidden');
+        document.getElementById('danger-ui').classList.add('hidden');
+        document.getElementById('win-coins').innerText = state.coins;
+        document.getElementById('win-screen').classList.remove('hidden');
+    }
+
+    function animate() {
+        frameId = requestAnimationFrame(animate);
+        update();
+        renderer.render(scene, camera);
+    }
+
+    // Init onload
+    window.onload = initThree;
+
+</script>
 </body>
 </html>
