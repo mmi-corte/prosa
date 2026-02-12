@@ -1690,8 +1690,7 @@
               "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
               "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
             },
-            "pitch": 400,
-            "voice": ""
+            "character": "radio"
           }
         ],
         "nextActionType": "game",
@@ -1709,19 +1708,19 @@
             "text": {
               "fr": "\"Si quelqu’un m’entend, il existe une île entre Toulon et Corte. Là-bas, l’eau est claire et les récoltes sont abondantes.\""
             },
-            "pitch": 400
+            "character": "radio"
           },
           {
             "text": {
               "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meure. J’ai tenté de résister mais j’ai échoué… \""
             },
-            "pitch": 400
+            "character": "radio"
           },
           {
             "text": {
               "fr": "\"J’ai besoin de vous. Rejoignez Prosa et continuer ma révolution !\""
             },
-            "pitch": 400
+            "character": "radio"
           }
         ],
         "nextActionType": "end",
@@ -1740,20 +1739,17 @@
           {
             "text": {
               "fr": "Vous êtes assis sur les rails rouillés. Les quais sont déserts, envahis par la nature. Au fond, un groupe de civils avance lentement, encadré par des silhouettes armées."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "L’un d’eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n’est libre et l’île, réel ou non vous apparait soudain comme une évidence."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Vous êtes maintenant déterminé à en savoir plus."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "dialog",
@@ -1769,27 +1765,26 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semble fiable et bienveillant. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
-            },
-            "pitch": 400
+              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
+            }
           },
           {
             "text": {
               "fr": "\"Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.\""
             },
-            "pitch": 500
+            "character": "gyptis"
           },
           {
             "text": {
               "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la La Fédération Li Rais de Prouvènço de Toulon, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie du U Sarpu a Sette Capi.\""
             },
-            "pitch": 400
+            "character": "protis"
           },
           {
             "text": {
               "fr": "\"Le port est une zone constamment surveillée, tu risques ta vie.\""
             },
-            "pitch": 400
+            "character": "protis"
           }
         ],
         "nextActionType": "dialog",
@@ -1806,26 +1801,25 @@
           {
             "text": {
               "fr": "Vous les regardez remplit de détermination sans rien dire."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Tu sembles toujours déterminé à atteindre le port malgré nos avertissements. L’Opéra peut t’aider. Des gens importants y passent encore.\""
             },
-            "pitch": 500
+            "character": "gyptis"
           },
           {
             "text": {
               "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port\""
             },
-            "pitch": 400
+            "character": "gyptis"
           },
           {
             "text": {
               "fr": "\"Sylvain a essayé de résister. Ils l’ont envoyé sur Prosa. Comme les autres.\""
             },
-            "pitch": 400
+            "character": "protis"
           }
         ],
         "nextActionType": "dialog",
@@ -1843,13 +1837,12 @@
             "text": {
               "fr": "\"Tu as le choix entre deux routes pour avancer. Longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.\""
             },
-            "pitch": 500
+            "character": "gyptis"
           },
           {
             "text": {
               "fr": "Vous les remercier sincèrement pour leur aide et continuez votre chemin."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "choice",
@@ -1866,8 +1859,7 @@
           {
             "text": {
               "fr": "Le tunnel semble être calme mais vous entendez un bruitmétallique inquiétant au bout."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1884,8 +1876,7 @@
           {
             "text": {
               "fr": "Les ruelles sont un passage tranquille mais qui vous semble dangereux maintenant que vous avez choisi la rébellion."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -1904,33 +1895,30 @@
           {
             "text": {
               "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre de celui-ci, une jeune femme est agenouillée devant une sépulture. Lorsqu’il s’approche, elle se redresse brusquement et braque une arbalète."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Pas un pas de plus. Que fais-tu ici ?\""
             },
-            "pitch": 600,
-            "voice": ""
+            "character": "sainte_marthe"
           },
           {
             "text": {
               "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "\"Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux.\""
             },
-            "pitch": 600
+            "character": "sainte_marthe"
           },
           {
             "text": {
-              "fr": "Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé."
+              "fr": "\"Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.\""
             },
-            "pitch": 600
+            "character": "sainte_marthe"
           }
         ],
         "nextActionType": "dialog",
@@ -1947,26 +1935,23 @@
           {
             "text": {
               "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l’ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer comme deux yeux menaçants."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
-              "fr": "Vous lui faits remarquer qu’elle ne pourra pas la dissimuler éternellement et qu’il vaut mieux s’en débarrasser. Vous lui proposez votre aide en échange de son soutien pour poursuivre votre route vers le port."
-            },
-            "pitch": 600
+              "fr": "Vous lui faite remarquer qu’elle ne pourra pas la dissimuler éternellement et qu’il vaut mieux s’en débarrasser. Vous lui proposez votre aide en échange de son soutien pour poursuivre votre route vers le port."
+            }
           },
           {
             "text": {
               "fr": "\"Ils sont morts à cause d’elle. J’accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t’accompagnerai plus loin.\""
             },
-            "pitch": 600
+            "character": "sainte_marthe"
           },
           {
             "text": {
               "fr": "Elle vous explique le système d’auto-défense : un détecteur réagit à toute agression, déclenchant un champ thermique brûlant et une décharge électrique mortelle."
-            },
-            "pitch": 600
+            }
           }
         ],
         "nextActionType": "game",
@@ -1983,14 +1968,12 @@
           {
             "text": {
               "fr": "La Tarasca s’active. Une décharge vous projette au sol. Sainte-Marthe, en larmes, vous supplie de fuir vers la rue adjacente où vous trouverais un abri."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement"
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -2007,8 +1990,7 @@
           {
             "text": {
               "fr": "La Tarasca est détruite. Devant l’amas de métal fumant, Sainte-Marthe, submergée par l’émotion, vous remercie. Elle avoue être ingénieure en robotique et connaître un endroit tout proche qui pourra vous aider à progresser vers le port."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -2027,20 +2009,17 @@
           {
             "text": {
               "fr": "Dans une ruelle étroite, une silhouette noire surgit l’animal est trop grand pour être un simple chat. Immobile, il semble vous observer. Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Après quelques secondes, le félin s’enfuit soudainement. En le poursuivant vous pénétrez dans le Jardin Alexandre Ier. C’est un lieu ravagé par des débris et la végétation."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Les allées encombrée forment un véritable labyrinthe et le Matagot comme fière de vous avoir amenez au centre de ce labyrinthe s’enfuit à travers une ouverture trop étroite pour le suivre."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "game",
@@ -2057,20 +2036,17 @@
           {
             "text": {
               "fr": "En vous éloignant des passages encombrés du jardin, vous découvrez un chemin plus discret. Celui-ci débouche sur une petite clairière étonnamment dégagée. Le calme y est presque irréel."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Au centre repose un objet singulier : un roseau, droit et intact, dont l’extrémité est taillée en forme de clef. Sa présence semble volontaire, comme déposée là pour être trouvée."
-            },
-            "pitch": 400
+            }
           },
           {
             "text": {
               "fr": "Sans s’attarder davantage, vous rangez le roseau et reprenez votre route."
-            },
-            "pitch": 400
+            }
           }
         ],
         "nextActionType": "end",
@@ -2090,7 +2066,7 @@
             "text": {
               "fr": "\"Approche, enfant… on ne marche pas avec une blessure pareille, laisse-moi t’aider.\""
             },
-            "pitch": 1500
+            "character": "fada_lavandula"
           },
           {
             "text": {
@@ -2099,7 +2075,7 @@
           },
           {
             "text": {
-              "fr": " Lorsque vous vous sentez d’aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec. "
+              "fr": "Lorsque vous vous sentez d’aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec. "
             }
           }
         ],
@@ -2141,12 +2117,14 @@
           {
             "text": {
               "fr": "\"On voulait juste manger… c’était pour l’anniversaire de notre mère.\""
-            }
+            },
+            "character": "frere_aine_toulon"
           },
           {
             "text": {
               "fr": "\"Il ne fallait pas le laisser traîner si c’était si précieux.\""
-            }
+            },
+            "character": "soldat_flrp"
           }
         ],
         "nextActionType": "choice",
@@ -2164,15 +2142,15 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Triste, comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j’ai déniché : un masque à gaz permettant de filtrer les radiations.\""
+              "fr": "\"Triste comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j’ai déniché : un masque à gaz permettant de filtrer les radiations.\""
             },
-            "pitch": 200
+            "character": "jean"
           },
           {
             "text": {
               "fr": "\"Je te propose un jeu, afin de pimenter un peu la journée. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !\""
             },
-            "pitch": 200
+            "character": "jean"
           }
         ],
         "nextActionType": "riddle",
@@ -2256,7 +2234,7 @@
             "text": {
               "fr": "\"Vous avez dépassé les limites. Disparaissez et vous reviendrez avec de quoi réparer ce que vous avez détruit.\""
             },
-            "pitch": 550
+            "character": "cabro_dor"
           },
           {
             "text": {
@@ -2267,7 +2245,7 @@
             "text": {
               "fr": "\"Peu auraient pris ce risque. Garde l’œil ouvert. Je devine aisément tes intention jeune homme.\""
             },
-            "pitch": 550
+            "character": "cabro_dor"
           },
           {
             "text": {
@@ -2382,13 +2360,13 @@
             "text": {
               "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
             },
-            "pitch": 500
+            "character": "sebastien"
           },
           {
             "text": {
               "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
             },
-            "pitch": 500
+            "character": "sebastien"
           }
         ],
         "nextActionType": "riddle",
@@ -2406,13 +2384,13 @@
             "text": {
               "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
             },
-            "pitch": 500
+            "character": "sebastien"
           },
           {
             "text": {
               "fr": "\"Le Père Lucien connaît les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est lui.\""
             },
-            "pitch": 500
+            "character": "sebastien"
           }
         ],
         "nextActionType": "end",
@@ -2442,7 +2420,7 @@
             "text": {
               "fr": "\"Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?\""
             },
-            "pitch": 350
+            "character": "pere_lucien"
           },
           {
             "text": {
@@ -2453,13 +2431,13 @@
             "text": {
               "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrais par radio cette nuit.\""
             },
-            "pitch": 350
+            "character": "pere_lucien"
           },
           {
             "text": {
               "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
             },
-            "pitch": 350
+            "character": "pere_lucien"
           }
         ],
         "nextActionType": "end",
@@ -2545,7 +2523,7 @@
             "text": {
               "fr": "\"Ne bouge plus. C'est ton seul avertissement.\""
             },
-            "pitch": 400
+            "character": "lou_drape"
           }
         ],
         "nextActionType": "game",
@@ -2648,7 +2626,7 @@
             "text": {
               "fr": "\"Toi. Je ne t'ai jamais vu. Viens par ici !\""
             },
-            "pitch": 300
+            "character": "officier_toulon"
           }
         ],
         "nextActionType": "riddle",
@@ -2857,7 +2835,7 @@
               "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
               "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -2869,7 +2847,7 @@
               "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
               "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -2891,7 +2869,7 @@
               "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
               "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -2903,7 +2881,7 @@
               "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
               "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {

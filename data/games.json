@@ -103,9 +103,9 @@
       "1": {
         "game": "tarasca_defense",
         "nextActionTypeWin": "dialog",
-        "nextActionWin": "3",
+        "nextActionWin": "4",
         "nextActionTypeLose": "dialog",
-        "nextActionLose": "4"
+        "nextActionLose": "3"
       }
     },
     "04": {
