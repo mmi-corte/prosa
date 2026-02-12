@@ -3272,14 +3272,14 @@
               "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
               "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
               "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
               "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -3301,7 +3301,7 @@
               "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
               "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -3313,7 +3313,7 @@
               "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
               "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
             },
-            "pitch": 300
+            "character": "mazzeru"
           },
           {
             "text": {
@@ -3503,8 +3503,8 @@
           },
           {
             "text": {
-              "fr": "\"Alors, tu es arrivé jusqu’ici… Je t’observe depuis le début de ton ascension. Tu te débrouilles bien pour un rebelle.\"",
-              "cor": "\"Allora, sè ghjuntu sin’à quì… Ti feghju dapoi u principiu di a to cullata. Ti sbrogli piuttostu bè per un ribellu.\""
+              "fr": "\"Alors, tu es arrivé jusqu’ici… Je t’observe depuis le début de ton ascension. Tu te débrouilles bien… pour un rebelle.\"",
+              "cor": "\"Allora, sè ghjuntu sin’à quì… Ti feghju dapoi u principiu di a to cullata. Ti sbrogli piuttostu bè… per un ribellu.\""
             },
             "character": "magu"
           },
@@ -4050,7 +4050,8 @@
             "text": {
               "fr": "\"Je t’en prie, prends place juste ici.\"",
               "cor": "\"Ti pregu, possa ghjustu quì\""
-            }
+            },
+            "character": "strigone"
           },
           {
             "text": {
@@ -4076,13 +4077,15 @@
             "text": {
               "fr": "\"Allons… installe-toi. Cela ne changera rien à ce qui t’attend. La tour est encerclée, chaque issue est verrouillée. Tu n’as nulle part où fuir.\"",
               "cor": "\"Andemu… mettiti à pusà. A to sorte sera listessa. A torra hè minacciata è tutte è surtite so cundanate. Ùn ai locu per fughjè.\""
-            }
+            },
+            "character": "strigone"
           },
           {
             "text": {
               "fr": "\"Mais je dois l’admettre… remonter toute la chaîne de commandement pour parvenir jusqu’ici force presque le respect.\"",
               "cor": "\"Ma devu ricunnosce un fattu… rifà tuttu u fillu di cumandu per ghjunghje sin’à quì impone guasi u rispettu.\""
-            }
+            },
+            "character": "strigone"
           },
           {
             "text": {
@@ -4115,7 +4118,8 @@
             "text": {
               "fr": "\"Je n’aime pas me répéter.\"",
               "cor": "\"Ùn mi piace à ripete.\""
-            }
+            },
+            "character": "strigone"
           }
         ],
         "nextActionType": "dialog",
@@ -4138,7 +4142,8 @@
             "text": {
               "fr": "\"Pourquoi s’abaisser à une confrontation barbare ?\"",
               "cor": "\"Perchè sotumetessi à una cunfruntazione barbara ? \""
-            }
+            },
+            "character": "strigone"
           },
           {
             "text": {
