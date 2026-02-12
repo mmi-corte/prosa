@@ -24,8 +24,8 @@
     "name": "U Magu",
     "region": "CORSE",
     "image": "UMagu.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 350,
+    "color": "#CC3032"
   },
   "signadora": {
     "name": "A Signadora",
@@ -45,8 +45,8 @@
     "name": "U Strigone",
     "region": "CORSE",
     "image": "U_Strigone.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 350,
+    "color": "#1a1a1b"
   },
   "spallistu": {
     "name": "U Spallistu",
@@ -70,19 +70,19 @@
     "pitch": 600,
     "color": "#45b9d5"
   },
-  "garagai": {
+  "lou_garagai": {
     "name": "Lou Garagaï",
     "region": "PROVENCE",
     "image": "lougaragai.webp",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 300,
+    "color": "#d7b13b"
   },
   "drac": {
     "name": "Lou Drac",
     "region": "PROVENCE",
     "image": "drac.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 500,
+    "color": "#464622"
   },
   "cabro_dor": {
     "name": "La Cabro d’Or",
@@ -228,5 +228,17 @@
     "name": "Officier",
     "pitch": 450,
     "color": "#FFDE00"
+  },
+  "technicien_prosa": {
+    "isNarrativeOnly": true,
+    "name": "Technicien Prosa",
+    "pitch": 450,
+    "color": "#FFDE00"
+  },
+  "gaspard": {
+    "isNarrativeOnly": true,
+    "name": "Gaspard",
+    "pitch": 450,
+    "color": "#d7b13b"
   }
 }
