@@ -1,12 +1,12 @@
 import { clearContainer, gameContainer } from "../../../app.js";
-import { activePlayer, activeStepId, callAction, trackDialog } from "../../gameEventHandler.js";
+import { activePlayer, activeStepId, callAction, trackDialog, playedDialogs } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { charactersData, dialogsData } from "../../loadData.js";
 import { getTranslation } from "../../langageManager.js";
-import { playedDialogs } from "../../initGame.js";
 
 let textBox
 let textContainer
+let foregroundContainer
 let characterNameBox
 let characterName
 let data
@@ -22,6 +22,14 @@ export function dialogView(action) {
     wrapper.classList.add('dialogWrapper');
     wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`
     gameContainer.appendChild(wrapper);
+
+    // Create foreground container
+    foregroundContainer = document.createElement('div');
+    foregroundContainer.classList.add('foregroundImage');
+    if (data.default.foregroundUrl) {
+        foregroundContainer.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.foregroundUrl})`;
+    }
+    wrapper.appendChild(foregroundContainer);
 
     if (hasPlayedDialog(action)) {
         const skipButtion = document.createElement('button');
@@ -83,9 +91,19 @@ function updateDialog() {
     const activeText = getTranslation(data.dialog[currentDialogIndex].text);
     const voiceFile = data.dialog[currentDialogIndex].voice;
     const characterId = data.dialog[currentDialogIndex].character || "";
+    const showForeground = data.dialog[currentDialogIndex].foreground || false;
+
     characterNameBox.style.backgroundColor = '#FFFFFF';
     characterName.style.color = '#FFFFFF';
     characterNameBox.classList.remove('shown')
+
+    // Update foreground visibility
+    if (showForeground) {
+        foregroundContainer.classList.add('shown');
+    } else {
+        foregroundContainer.classList.remove('shown');
+    }
+
     let currentPitch = 400; // Default pitch
 
     if (characterId) {
@@ -115,7 +133,7 @@ function getCharacterDetails(characterId) {
 }
 
 function hasPlayedDialog(dialogId) {
-    if (playedDialogs?.[activePlayer.localisation]?.[activeStepId]?.includes(dialogId)) {
+    if (playedDialogs && playedDialogs?.[activePlayer.localisation]?.[activeStepId]?.includes(dialogId)) {
         return true
     } else {
         trackDialog(activePlayer.localisation, activeStepId, dialogId)

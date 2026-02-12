@@ -15,6 +15,7 @@ let activePlayerId
 export let activePlayer
 export let activeStepId
 export let activeStep
+export let playedDialogs = {}
 
 /**
  * Fonction 
