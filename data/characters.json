@@ -88,8 +88,8 @@
     "name": "La Cabro d’Or",
     "region": "PROVENCE",
     "image": "cabrodor.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 600,
+    "color": "#CC3032"
   },
   "matagot": {
     "name": "Le Matagot",
@@ -102,8 +102,8 @@
     "name": "Fada Lavandula",
     "region": "PROVENCE",
     "image": "feelavandula.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 700,
+    "color": "#96368B"
   },
   "gyptis_e_protis": {
     "name": "Gyptis e Protis",
@@ -126,12 +126,12 @@
     "pitch": 800,
     "color": "#FFFFFF"
   },
-  "drape": {
+  "lou_drape": {
     "name": "Lou Drapé",
     "region": "PROVENCE",
     "image": "LouDrape.webm",
-    "pitch": 800,
-    "color": "#FFFFFF"
+    "pitch": 350,
+    "color": "#1a1a1b"
   },
   "radio": {
     "isNarrativeOnly": true,
@@ -169,10 +169,64 @@
     "pitch": 250,
     "color": "#75952B"
   },
-    "chef_travailleur_corte": {
+  "chef_travailleur_corte": {
     "isNarrativeOnly": true,
     "name": "Chef des Travailleurs",
     "pitch": 350,
     "color": "#F5E5C0"
+  },
+  "gyptis": {
+    "isNarrativeOnly": true,
+    "name": "Gyptis",
+    "pitch": 600,
+    "color": "#F39200"
+  },
+  "protis": {
+    "isNarrativeOnly": true,
+    "name": "Protis",
+    "pitch": 450,
+    "color": "#FFDE00"
+  },
+  "sainte_marthe": {
+    "isNarrativeOnly": true,
+    "name": "Sainte Marthe",
+    "pitch": 350,
+    "color": "#a08ee6"
+  },
+  "frere_aine_toulon": {
+    "isNarrativeOnly": true,
+    "name": "Frère Aîné",
+    "pitch": 450,
+    "color": "#FFDE00"
+  },
+  "soldat_flrp": {
+    "isNarrativeOnly": true,
+    "name": "Soldat FLRP",
+    "pitch": 300,
+    "color": "#464622"
+  },
+  "jean": {
+    "isNarrativeOnly": true,
+    "name": "Jean",
+    "pitch": 250,
+    "color": "#CC3032"
+  },
+  "sebastien": {
+    "isNarrativeOnly": true,
+    "name": "Sébastien",
+    "pitch": 450,
+    "color": "#F5E5C0"
+  },
+  "pere_lucien": {
+    "isNarrativeOnly": true,
+    "name": "Père Lucien",
+    "pitch": 500,
+    "color": "#75952B"
+  },
+  "officier_toulon": {
+    "isNarrativeOnly": true,
+    "name": "Officier",
+    "pitch": 450,
+    "color": "#FFDE00"
   }
 }
