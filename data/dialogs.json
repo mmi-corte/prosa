@@ -1468,7 +1468,7 @@
     "prosa_orcu": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "prosa_planlarge.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1478,12 +1478,36 @@
             "text": {
               "fr": "Vous accostez enfin sur la plage de Prosa, l’eau turquoise roulant doucement sur le sable clair."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "plan_large_plage.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "Devant vous, une immense chaîne de montagnes s’élève, imposante et infranchissable à première vue, bloquant toute vue sur l’intérieur de l’île et donnant au lieu une impression d’isolement total. Les sommets découpés se détachent sur le ciel, formant une barrière naturelle."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "plan_moyen_orcu.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "L’Orcu apparaît à vos côtés, immobile et silencieux. Il explique qu’il repart sur Corte pour garder le passage vers Prosa ouvert."
@@ -1507,7 +1531,7 @@
     "prosa_jail": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1534,7 +1558,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1556,7 +1580,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1638,7 +1662,7 @@
     "prosa_beach": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "prosa_planlarge.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1648,7 +1672,19 @@
             "text": {
               "fr": "Grâce à la carte des vents, vous parvenez à contourner les patrouilles et les obstacles naturels qui barrent l’accès à l’île."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "plan_large_plage.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "Vous découvrez une plage étroite, presque invisible depuis la mer, dissimulée derrière une série de falaises escarpées et de rochers recouverts de végétation."
@@ -1658,7 +1694,19 @@
             "text": {
               "fr": "Devant vous, la chaîne de montagnes s’élève, massive et infranchissable, mais ici, la plage cachée offre un point de départ discret et stratégique."
             }
-          },
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "plan_moyen_orcu.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "L’Orcu apparaît à vos côtés, immobile et silencieux. Il explique qu’il repart à Corte pour garder le passage vers Prosa ouvert."
