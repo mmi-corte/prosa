@@ -2419,6 +2419,7 @@ body.light-mode .logo-main {
   border: 1px solid var(--border);
   color: var(--background);
   font-weight: 500;
+  z-index: 100;
 }
 
 .dialogWrapper .foregroundImage {
