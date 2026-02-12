@@ -27,13 +27,13 @@
         /* --- PALETTE PROSA --- */
         :root {
             --bg-dark: #1a1812;
-            --bg-card-light: #ece4cb; /* Beige du screen */
-            --bg-card-dark: #252218;  /* Marron sombre du screen */
+            --bg-card-light: #ece4cb; 
+            --bg-card-dark: #252218;  
             --text-light: #ece4cb;
             --text-dark: #1a1812;
-            --accent: #626247;        /* Kaki */
-            --danger: #c63032;        /* Rouge */
-            --gold: #ffdb2c;          /* Jaune/Or */
+            --accent: #626247;        
+            --danger: #c63032;        
+            --gold: #ffdb2c;          
             --ui-font: 'Futura', sans-serif;
         }
 
@@ -64,7 +64,7 @@
             outline: none;
         }
 
-        /* --- UI OVERLAYS (Style Carte Prosa) --- */
+        /* --- UI OVERLAYS --- */
         .overlay {
             position: absolute;
             inset: 0;
@@ -85,13 +85,12 @@
             z-index: -1;
         }
 
-        /* Carte de menu principale (Style Screen) */
         .menu-card {
             background: var(--bg-card-light);
             color: var(--text-dark);
             width: 100%;
             max-width: 400px;
-            border-radius: 20px; /* Coins arrondis comme sur le screen */
+            border-radius: 20px;
             padding: 40px 30px;
             text-align: left;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -119,6 +118,26 @@
             font-weight: 400;
         }
 
+        .instructions-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .instruction-text {
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            text-align: center;
+            line-height: 1.4;
+            color: var(--accent);
+        }
+
         .action-btn {
             background: var(--text-dark);
             color: var(--bg-card-light);
@@ -130,7 +149,7 @@
             text-transform: uppercase;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -145,7 +164,7 @@
             transform: scale(0.98);
         }
 
-        /* --- HUD Minimaliste --- */
+        /* --- HUD --- */
         #hud {
             position: absolute;
             top: 0;
@@ -179,7 +198,6 @@
             line-height: 1;
         }
 
-        /* Barre de Danger Minimaliste */
         .danger-line-container {
             position: absolute;
             top: 0;
@@ -211,47 +229,6 @@
             transition: opacity 0.3s;
         }
 
-        /* --- TUTO --- */
-        .tuto-overlay {
-            position: absolute;
-            bottom: 15%;
-            width: 100%;
-            text-align: center;
-            pointer-events: none;
-            opacity: 0.6;
-            animation: pulse 2s infinite;
-        }
-        
-        .swipe-icon {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--text-light);
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            position: relative;
-        }
-        
-        .swipe-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background: var(--text-light);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: swipeMove 1.5s infinite ease-in-out;
-        }
-
-        @keyframes swipeMove {
-            0% { transform: translate(-15px, -50%); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translate(15px, -50%); opacity: 0; }
-        }
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.8; } 100% { opacity: 0.3; } }
-
-        /* Vignette Rouge (Danger) */
         #vignette {
             position: absolute;
             inset: 0;
@@ -290,17 +267,18 @@
         <div class="danger-warning" id="danger-text">GARDE PROCHE</div>
     </div>
 
-    <!-- TUTO -->
-    <div id="tuto-ui" class="tuto-overlay hidden">
-        <div class="swipe-icon"></div>
-        <span class="label">GLISSER POUR BOUGER</span>
-    </div>
-
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay">
         <div class="menu-card">
             <h1>COMMENCER LA<br>PARTIE</h1>
             <p>Échappez à la vigilance des gardes. Récupérez les fragments de mémoire pour trouver la sortie.</p>
+            
+            <div class="instructions-block">
+                <div class="instruction-text">
+                    Pour vous déplacer faites glisser votre doigt<br>soit à gauche soit à droite
+                </div>
+            </div>
+
             <button class="action-btn" onclick="initGame()">ENTRER DANS L'OMBRE</button>
         </div>
     </div>
@@ -336,7 +314,7 @@
 <script>
     // --- CONFIGURATION ---
     const CONFIG = {
-        laneWidth: 3.0,
+        laneWidth: 2.2, // Largeur voies
         speedBase: 0.7, 
         speedMax: 1.8,
         goal: 250,
@@ -358,7 +336,6 @@
         coins: 0,
         lane: 1, // 0, 1, 2
         guard: 0, // 0-100%
-        shake: 0
     };
 
     let scene, camera, renderer, player;
@@ -376,9 +353,9 @@
         // Scene setup
         scene = new THREE.Scene();
         scene.background = new THREE.Color(CONFIG.colors.bg);
-        scene.fog = new THREE.Fog(CONFIG.colors.fog, 10, 60); // Brouillard linéaire plus doux
+        scene.fog = new THREE.Fog(CONFIG.colors.fog, 10, 60);
 
-        // Camera setup (Optimisée mobile vertical)
+        // Camera setup
         camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.set(0, 4, 7);
         camera.lookAt(0, 0, -5);
@@ -402,7 +379,7 @@
         dirLight.shadow.mapSize.height = 1024;
         scene.add(dirLight);
 
-        // Floor (Infini visuel)
+        // Floor
         const planeGeo = new THREE.PlaneGeometry(100, 200);
         const planeMat = new THREE.MeshPhongMaterial({ 
             color: CONFIG.colors.ground,
@@ -414,14 +391,13 @@
         ground.receiveShadow = true;
         scene.add(ground);
 
-        // Grid Decor (Esthétique minimaliste)
+        // Grid Decor
         const grid = new THREE.GridHelper(100, 20, 0x3a3830, 0x1a1812);
         grid.position.y = 0.02;
         grid.position.z = -50;
         scene.add(grid);
 
-        // Player (Capsule abstraite propre)
-        // Correction: CapsuleGeometry n'existe pas dans r128, utilisation de CylinderGeometry
+        // Player
         const playerGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.5, 16);
         const playerMat = new THREE.MeshPhongMaterial({ 
             color: CONFIG.colors.player,
@@ -448,7 +424,7 @@
             
             if (Math.abs(diff) > 30) {
                 moveLane(diff > 0 ? 1 : -1);
-                isTouching = false; // Force re-touch
+                isTouching = false; 
             }
         }, {passive: false});
         
@@ -469,7 +445,6 @@
 
     function moveLane(dir) {
         state.lane = Math.max(0, Math.min(2, state.lane + dir));
-        document.getElementById('tuto-ui').classList.add('hidden');
     }
 
     // --- GAME LOGIC ---
@@ -495,7 +470,6 @@
         document.getElementById('win-screen').classList.add('hidden');
         document.getElementById('hud').classList.remove('hidden');
         document.getElementById('danger-ui').classList.remove('hidden');
-        document.getElementById('tuto-ui').classList.remove('hidden');
 
         animate();
     }
@@ -512,12 +486,12 @@
     function spawnObject() {
         const lane = Math.floor(Math.random() * 3);
         const xPos = (lane - 1) * CONFIG.laneWidth;
-        const zPos = -70; // Spawn plus loin pour fluidité
+        const zPos = -70;
 
         const isCoin = Math.random() < 0.3;
         
         if (isCoin) {
-            // Fragment (Losange flottant)
+            // Fragment
             const geo = new THREE.OctahedronGeometry(0.4);
             const mat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.coin });
             const mesh = new THREE.Mesh(geo, mat);
@@ -525,9 +499,9 @@
             scene.add(mesh);
             objects.push({ mesh, type: 'coin', active: true });
         } else {
-            // Obstacle (Cube minimaliste mat)
+            // Obstacle (Réduit en largeur)
             const h = Math.random() > 0.5 ? 2 : 3.5;
-            const geo = new THREE.BoxGeometry(2, h, 2);
+            const geo = new THREE.BoxGeometry(1.5, h, 1.5);
             const mat = new THREE.MeshStandardMaterial({ 
                 color: CONFIG.colors.obstacle,
                 roughness: 0.8
@@ -544,83 +518,65 @@
     function update() {
         if (!state.playing) return;
 
-        // Vitesse (Accélération très légère)
         if (state.speed < CONFIG.speedMax) state.speed += 0.0001;
         state.dist += state.speed * 0.15;
 
-        // Mouvement Player (Lerp fluide)
+        // Mouvement Player
         const targetX = (state.lane - 1) * CONFIG.laneWidth;
-        player.position.x += (targetX - player.position.x) * 0.12;
-        // Rotation subtile quand on bouge
-        player.rotation.z = -(targetX - player.position.x) * 0.1;
-        player.rotation.y = -(targetX - player.position.x) * 0.05;
+        player.position.x += (targetX - player.position.x) * 0.1;
+        
+        // Rotation très légère mais stable
+        player.rotation.z = -(targetX - player.position.x) * 0.05;
+        player.rotation.y = -(targetX - player.position.x) * 0.02;
 
-        // Spawn
-        // Probabilité ajustée à la vitesse pour garder densité constante
         if (Math.random() < 0.03 * (state.speed / CONFIG.speedBase)) spawnObject();
 
-        // Objets Loop
         for (let i = objects.length - 1; i >= 0; i--) {
             let o = objects[i];
             o.mesh.position.z += state.speed;
 
-            // Collision Check
             if (o.active && o.mesh.position.z > -1 && o.mesh.position.z < 1) {
-                // Zone de hit un peu permissive
                 if (Math.abs(o.mesh.position.x - player.position.x) < 1.0) {
                     
                     if (o.type === 'coin') {
-                        // Collecte
                         state.coins++;
                         scene.remove(o.mesh);
                         o.active = false;
                         state.guard = Math.max(0, state.guard - 10);
                     } else {
-                        // IMPACT OBSTACLE (Pas de ralentissement !)
-                        state.guard += 35; // Augmente danger
-                        state.shake = 15; // Secousse caméra
-                        
-                        scene.remove(o.mesh); // Disparait pour ne pas bloquer
+                        state.guard += 35; 
+                        // ZÉRO TREMBLEMENT
+                        scene.remove(o.mesh);
                         o.active = false;
                     }
                 }
             }
 
-            // Cleanup
             if (o.mesh.position.z > 5) {
                 scene.remove(o.mesh);
                 objects.splice(i, 1);
             }
 
-            // Anim Coin
             if (o.type === 'coin') {
                 o.mesh.rotation.y += 0.05;
                 o.mesh.position.y = 1 + Math.sin(Date.now() * 0.005 + o.mesh.position.z) * 0.2;
             }
         }
 
-        // Logic Guard (Baisse doucement)
         if (state.guard > 0) state.guard -= 0.08;
         if (state.guard >= 100) gameOver();
 
-        // Win
         if (state.dist >= CONFIG.goal) gameWin();
 
-        // UI Updates
         document.getElementById('dist-display').innerText = Math.max(0, Math.floor(CONFIG.goal - state.dist)) + "m";
         document.getElementById('coin-display').innerText = state.coins;
         document.getElementById('danger-fill').style.width = Math.min(100, state.guard) + "%";
         document.getElementById('danger-text').style.opacity = state.guard > 50 ? 1 : 0;
         
-        // Effects
-        document.getElementById('vignette').style.opacity = state.guard / 120; // Vignette rouge
+        document.getElementById('vignette').style.opacity = state.guard / 120;
         
-        if (state.shake > 0) {
-            camera.position.x = (Math.random() - 0.5) * 0.3;
-            state.shake *= 0.9;
-        } else {
-            camera.position.x = 0;
-        }
+        // Caméra parfaitement stable (zéro shake)
+        camera.position.x = 0;
     }
 
     function gameOver() {
@@ -645,7 +601,6 @@
         renderer.render(scene, camera);
     }
 
-    // Init onload
     window.onload = initThree;
 
 </script>
