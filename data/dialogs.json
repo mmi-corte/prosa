@@ -1679,7 +1679,7 @@
     "01": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1698,7 +1698,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "radio.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
