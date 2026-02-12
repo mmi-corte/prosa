@@ -1,7 +1,5 @@
-import { clearContainer, gameContainer, headerLeft } from "../../../app.js"
-import { navigate } from "../../../router.js";
+import { clearContainer, gameContainer } from "../../../app.js"
 import { showBackButton } from "../components/backButton.js";
-import { menuView } from "./menuView.js"
 
 export function seasonsView() {
     clearContainer()
@@ -63,26 +61,38 @@ function renderCinematicsGrid(cinematicsData) {
             </div>
             <div class="character-card-name">${cinematic.title}</div>
     `
-        card.addEventListener("click", () => navigate("univers-prosa/saisons/details", goToCinematicDetail(cinematic)))
+        card.addEventListener("click", () => openCinematicModal(cinematic))
         cinematicsGrid.appendChild(card)
     })
 }
 
-function goToCinematicDetail(cinematic) {
+function openCinematicModal(cinematic) {
+    const existingModal = document.querySelector('.modal-overlay')
+    if (existingModal) existingModal.remove()
+
     const container = document.createElement('div')
     container.classList.add('modal-overlay')
 
+    const videoMarkup = cinematic.video
+        ? `
+            <video 
+                id="cinematicVideo"
+                src="${cinematic.video}"
+                controls 
+                autoplay 
+                style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+            </video>
+        `
+        : `
+            <div class="cinematic-empty">
+                <p>Video indisponible</p>
+            </div>
+        `
+
     container.innerHTML = `
         <div class="modal-content cinematic-modal">
-
             <div class="cinematic-player" id="cinematicPlayer">
-                <video 
-                    id="cinematicVideo"
-                    src="${cinematic.video || ""}"
-                    controls 
-                    autoplay 
-                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
-                </video>
+                ${videoMarkup}
             </div>
 
             <div class="cinematic-info">
@@ -95,8 +105,34 @@ function goToCinematicDetail(cinematic) {
 
     gameContainer.appendChild(container)
 
-    // Close modal when clicking outside
-    container.addEventListener('click', (e) => {
-        window.history.back()
+    const video = container.querySelector('#cinematicVideo')
+    primeCinematicVideo(video)
+
+    // Close modal when clicking outside the content
+    container.addEventListener('click', () => {
+        container.remove()
     })
+    container.querySelector('.modal-content')?.addEventListener('click', (event) => {
+        event.stopPropagation()
+    })
+
+    video?.addEventListener('click', (event) => {
+        event.stopPropagation()
+        primeCinematicVideo(video)
+    })
+}
+
+function primeCinematicVideo(video) {
+    if (!video) return
+
+    video.muted = false
+    video.volume = 1
+    video.playsInline = true
+
+    const playPromise = video.play()
+    if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+            // Ignore autoplay restrictions; user interaction will retry.
+        })
+    }
 }

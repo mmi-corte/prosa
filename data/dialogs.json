@@ -1730,7 +1730,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "gare.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1757,8 +1757,8 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tunnel.webp",
+          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1766,25 +1766,29 @@
           {
             "text": {
               "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
-            }
+            },
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Tu comptes vraiment aller au port ? Tu ne te rends pas compte du danger que cela représente.\""
             },
-            "character": "gyptis"
+            "character": "gyptis",
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la La Fédération Li Rais de Prouvènço de Toulon, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie du U Sarpu a Sette Capi.\""
             },
-            "character": "protis"
+            "character": "protis",
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Le port est une zone constamment surveillée, tu risques ta vie.\""
             },
-            "character": "protis"
+            "character": "protis",
+            "foreground": true
           }
         ],
         "nextActionType": "dialog",
@@ -1792,8 +1796,8 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tunnel.webp",
+          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1801,25 +1805,29 @@
           {
             "text": {
               "fr": "Vous les regardez remplit de détermination sans rien dire."
-            }
+            },
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Tu sembles toujours déterminé à atteindre le port malgré nos avertissements. L’Opéra peut t’aider. Des gens importants y passent encore.\""
             },
-            "character": "gyptis"
+            "character": "gyptis",
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port\""
             },
-            "character": "gyptis"
+            "character": "gyptis",
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Sylvain a essayé de résister. Ils l’ont envoyé sur Prosa. Comme les autres.\""
             },
-            "character": "protis"
+            "character": "protis",
+            "foreground": true
           }
         ],
         "nextActionType": "dialog",
@@ -1827,8 +1835,8 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tunnel.webp",
+          "foregroundUrl": "gyptis_protis.webp",
           "sound": "",
           "music": ""
         },
@@ -1850,7 +1858,7 @@
       },
       "5": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "tunnel.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -1858,7 +1866,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Le tunnel semble être calme mais vous entendez un bruitmétallique inquiétant au bout."
+              "fr": "Le tunnel semble être calme mais vous entendez un bruit métallique inquiétant au bout."
             }
           }
         ],
@@ -1886,8 +1894,8 @@
     "03": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tarasca.webp",
+          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
@@ -1901,37 +1909,29 @@
             "text": {
               "fr": "\"Pas un pas de plus. Que fais-tu ici ?\""
             },
-            "character": "sainte_marthe"
+            "character": "sainte_marthe",
+            "foreground": true
           },
           {
             "text": {
               "fr": "Vous affirmez que vous ne faites que traverser le cimetière pour rejoindre le port. Elle vous observe, hésite, puis abaisse son arme."
-            }
+            },
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Peu de gens disent la vérité ici. Ce lieu cache quelque chose de très dangereux.\""
             },
-            "character": "sainte_marthe"
+            "character": "sainte_marthe",
+            "foreground": true
           },
           {
             "text": {
               "fr": "\"Une arme de destruction massive qui pourrait mener au chaos si elle tombe dans les mains de Lou Drapé.\""
             },
-            "character": "sainte_marthe"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
+            "character": "sainte_marthe",
+            "foreground": true
+          },
           {
             "text": {
               "fr": "Elle vous conduit au fond du cimetière. Une masse métallique gigantesque repose dans l’ombre : la Tarasca, un camion blindé aux phares encore allumés qui semblent vous observer comme deux yeux menaçants."
@@ -1946,7 +1946,8 @@
             "text": {
               "fr": "\"Ils sont morts à cause d’elle. J’accepte ta proposition… mais ce sera dangereux. Si jamais nous ressortons victorieux, je t’accompagnerai plus loin.\""
             },
-            "character": "sainte_marthe"
+            "character": "sainte_marthe",
+            "foreground": true
           },
           {
             "text": {
@@ -1957,40 +1958,53 @@
         "nextActionType": "game",
         "nextAction": "1"
       },
-      "3": {
+      "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tarasca.webp",
+          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "La Tarasca s’active. Une décharge vous projette au sol. Sainte-Marthe, en larmes, vous supplie de fuir vers la rue adjacente où vous trouverais un abri."
+              "fr": "La Tarasca s’active. Une décharge vous projette au sol."
             }
           },
           {
             "text": {
+              "fr": "Sainte-Marthe, en larmes, vous supplie de fuir vers la rue adjacente où vous trouverez un abri."
+            },
+            "foreground": true
+          },
+          {
+            "text": {
               "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement"
-            }
+            },
+            "foreground": true
           }
         ],
         "nextActionType": "end",
         "nextAction": "1"
       },
-      "4": {
+      "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "tarasca_detruite.webp",
+          "foregroundUrl": "sainte_marthe.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "La Tarasca est détruite. Devant l’amas de métal fumant, Sainte-Marthe, submergée par l’émotion, vous remercie. Elle avoue être ingénieure en robotique et connaître un endroit tout proche qui pourra vous aider à progresser vers le port."
+              "fr": "La Tarasca est détruite."
             }
+          },
+          {
+            "text": {
+              "fr": "Devant l’amas de métal fumant, Sainte-Marthe, submergée par l’émotion, vous remercie. Elle avoue être ingénieure en robotique et connaître un endroit tout proche qui pourra vous aider à progresser vers le port."
+            },
+            "foreground": true
           }
         ],
         "nextActionType": "end",

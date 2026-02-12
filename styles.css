@@ -2430,9 +2430,9 @@ body.light-mode .logo-main {
   left: 0;
   background-size: contain;
   background-position: center;
-  filter: drop-shadow(0px 0px 10px #656565);
+  filter: drop-shadow(0px 0px 2px #656565);
   opacity: 0;
-  transition: .2s ease-out;
+  transition: .3s cubic-bezier(0, .29, .85, .94);
   transform: translateY(11%);
   background-repeat: no-repeat;
 }
