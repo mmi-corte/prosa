@@ -76,8 +76,6 @@ function updateDialog() {
     characterName.style.color = '#FFFFFF';
     characterNameBox.classList.remove('shown')
     let currentPitch = 400; // Default pitch
-    console.log(characterId)
-
 
     if (characterId) {
         const currentCharacter = getCharacterDetails(characterId);
