@@ -88,5 +88,47 @@
     "title": "Case 7 - Opera",
     "path": "./final-game-toulon/case_7_opera/index.html",
     "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_10_mairie",
+    "title": "Case 10 - Mairie",
+    "path": "./final-game-toulon/case_10_mairie/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_11_MMI",
+    "title": "Case 11 - MMI",
+    "path": "./final-game-toulon/case_11_MMI/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_13_port",
+    "title": "Case 13 - Port",
+    "path": "./final-game-toulon/case_13_port/index.html",
+    "collection": "final-game-toulon"
+  },
+  {
+    "id": "case_4_escalade",
+    "title": "Case 4 - Escalade",
+    "path": "./final-game-prosa/case_4_escalade/index.html",
+    "collection": "final-game-prosa"
+  },
+  {
+    "id": "case_5_fuite",
+    "title": "Case 5 - Fuite",
+    "path": "./final-game-prosa/case_5_fuite/index.html",
+    "collection": "final-game-prosa"
+  },
+  {
+    "id": "case_6_grotte",
+    "title": "Case 6 - Grotte",
+    "path": "./final-game-prosa/case_6_grotte/index.html",
+    "collection": "final-game-prosa"
+  },
+  {
+    "id": "case_7_magu",
+    "title": "Case 7 - Magu",
+    "path": "./final-game-prosa/case_7_magu/index.html",
+    "collection": "final-game-prosa"
   }
 ]
