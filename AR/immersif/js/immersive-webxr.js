@@ -93,19 +93,19 @@ function showIOSPrompt() {
     iosNotice.id = 'ios-notice';
     iosNotice.style.cssText = 'background: #f59e0b22; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center;';
     iosNotice.innerHTML = `
-      <p style="margin: 0 0 12px 0; color: #fbbf24;">📱 <strong>iOS Detected</strong></p>
+      <p style="margin: 0 0 12px 0; color: #fbbf24;">📱 <strong>iOS Détecté</strong></p>
       <p style="margin: 0 0 12px 0; font-size: 14px; color: #d4d4d4;">
-        Safari has limited WebXR support.<br>
-        For the best AR experience, use the <strong>WebXR Viewer</strong> app.
+        Safari a un support WebXR limité.<br>
+        Pour une meilleure expérience AR, utilisez l'application <strong>WebXR Viewer</strong>.
       </p>
       <button id="open-xr-viewer-btn" style="background: #f59e0b; color: #000; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 8px; display: block; width: 100%;">
-        � Open in WebXR Viewer
+        📲 Ouvrir dans WebXR Viewer
       </button>
       <a href="https://apps.apple.com/app/webxr-viewer/id1295998056" target="_blank" style="color: #fbbf24; font-size: 13px; display: block; margin-bottom: 12px;">
-        Don't have it? Download WebXR Viewer
+        Pas encore installé ? Télécharger WebXR Viewer
       </a>
       <button id="try-safari-btn" style="background: transparent; color: #9a9680; border: 1px solid #9a9680; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 13px;">
-        Try Safari Anyway
+        Essayer avec Safari
       </button>
     `;
     
@@ -133,7 +133,7 @@ function checkWebXRSupport() {
   // Check for AR support
   navigator.xr.isSessionSupported('immersive-ar').then(async supported => {
     if (!supported) {
-      showError('WebXR AR not supported on this device/browser.');
+      showError('WebXR AR non supporté sur cet appareil/navigateur.');
       return;
     }
     console.log('WebXR AR is supported');
@@ -158,7 +158,7 @@ function checkWebXRSupport() {
     }
   }).catch(err => {
     console.error('WebXR check failed:', err);
-    showError('WebXR not available: ' + err.message);
+    showError('WebXR non disponible : ' + err.message);
   });
 }
 
@@ -197,7 +197,7 @@ async function init() {
       showIOSPrompt();
       return;
     }
-    showError('WebXR not supported. Please use a compatible browser (Chrome on Android).');
+    showError('WebXR non supporté. Veuillez utiliser un navigateur compatible (Chrome sur Android).');
     return;
   }
   
@@ -405,7 +405,7 @@ async function startARSession() {
       console.warn('DOM Overlay not supported - subtitles may not be visible');
     }
   } catch (err) {
-    showError('Failed to start AR: ' + err.message);
+    showError('Échec du démarrage AR : ' + err.message);
     return;
   }
   
@@ -564,7 +564,7 @@ async function loadAllCharacters() {
     return allCharacters;
   } catch (err) {
     console.error('Failed to load characters:', err);
-    showError('Failed to load character data');
+    showError('Échec du chargement des personnages');
     return [];
   }
 }
