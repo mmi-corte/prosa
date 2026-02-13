@@ -2482,44 +2482,47 @@
     "11": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "cathedrale.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "Vous pénétrez à l'intérieur de la cathédrale. Au centre, un homme est agenouillé en prière."
+              "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, des femmes agenouillées en prière. Ce sont Li Lavandiero de Niue."
             }
           },
           {
             "text": {
-              "fr": "Il s'agit du Père Lucien, très célèbre pour sa gentillesse à Toulon. Respectueux, vous attendez la fin de sa prière. Puis l'homme se redresse et se présente."
+              "fr": "Respectueux, vous attendez la fin de leur prière. Elles se redressent et se présentent."
             }
           },
           {
             "text": {
-              "fr": "\"Bonjour, mon enfant. Je suis le Père Lucien. Peu osent franchir ces portes désormais. Que puis-je pour toi ?\""
+              "fr": "\"Bonjour, mon enfant. Peu osent franchir ces portes désormais. Que pouvons-nous faire pour toi ?\""
             },
-            "character": "pere_lucien"
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
           },
           {
             "text": {
-              "fr": "Rempli de confiance, vous lui expliquez la raison de votre venue."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Je le préviendrais par radio cette nuit.\""
+              "fr": "Rempli de confiance, vous leur expliquez la raison de votre venue."
             },
-            "character": "pere_lucien"
+            "foreground": "lavandiero.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Nous le préviendrons par radio cette nuit.\""
+            },
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
           },
           {
             "text": {
               "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
             },
-            "character": "pere_lucien"
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
           }
         ],
         "nextActionType": "end",
@@ -2537,7 +2540,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Avant de suivre le Père Lucien, vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
+              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
             }
           },
           {
@@ -2558,8 +2561,7 @@
     "12": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
