@@ -768,7 +768,7 @@
     "67": {
       "1": {
         "default": {
-          "backgroundUrl": "fulettu_fontaine.webp",
+          "backgroundUrl": "fontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -778,7 +778,8 @@
             "text": {
               "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
               "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
-            }
+            },
+            "foreground": "fullettu_1.webp"
           },
           {
             "text": {
@@ -792,7 +793,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "mairie_chef_12_1.webp",
+          "backgroundUrl": "foret.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -804,12 +805,14 @@
               "cor": "\"Linteti mi ! Linteti mi !\""
             },
             "character": "fulettu",
-            "voice": "Case_67_Fulettu_1.mp3"
+            "voice": "Case_67_Fulettu_1.mp3",
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
               "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
-            }
+            },
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
@@ -817,7 +820,8 @@
               "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
             },
             "character": "fulettu",
-            "voice": "Case_67_Fulettu_2.mp3"
+            "voice": "Case_67_Fulettu_2.mp3",
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
@@ -825,23 +829,26 @@
               "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
             },
             "character": "fulettu",
-            "voice": "Case_67_Fulettu_2-5.mp3"
+            "voice": "Case_67_Fulettu_2-5.mp3",
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
               "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
-            }
+            },
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
               "fr": "Mais pour parvenir jusqu’à elle, vous avez besoin de récupérer l’un des fragments du dolmen de l’Orcu."
             },
-            "pitch": 400
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
               "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
-            }
+            },
+            "foreground": "fullettu_2.webp"
           },
           {
             "text": {
@@ -849,7 +856,8 @@
               "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
             },
             "character": "fulettu",
-            "voice": "Case_67_Fulettu_3.mp3"
+            "voice": "Case_67_Fulettu_3.mp3",
+            "foreground": "fullettu_1.webp"
           }
         ],
         "nextActionType": "end",
@@ -857,8 +865,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "fulettu_fontaine.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "fontaine.webp",
           "sound": "",
           "music": ""
         },
