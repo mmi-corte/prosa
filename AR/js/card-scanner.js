@@ -602,15 +602,20 @@ function toggleMute() {
   }
   
   const muteBtn = document.getElementById('mute-btn');
+  const soundOnIcon = document.getElementById('sound-on-icon');
+  const soundOffIcon = document.getElementById('sound-off-icon');
+  
   if (muteBtn) {
     if (isMuted) {
       muteBtn.classList.add('muted');
-      muteBtn.innerHTML = '🔇';
       muteBtn.title = 'Unmute';
+      if (soundOnIcon) soundOnIcon.classList.add('hidden');
+      if (soundOffIcon) soundOffIcon.classList.remove('hidden');
     } else {
       muteBtn.classList.remove('muted');
-      muteBtn.innerHTML = '🔊';
       muteBtn.title = 'Mute';
+      if (soundOnIcon) soundOnIcon.classList.remove('hidden');
+      if (soundOffIcon) soundOffIcon.classList.add('hidden');
     }
   }
   

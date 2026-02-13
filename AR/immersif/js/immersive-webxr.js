@@ -312,6 +312,16 @@ function setupUI() {
     });
   }
   
+  // AR Mute button
+  const arMuteBtn = document.getElementById('ar-mute-btn');
+  if (arMuteBtn) {
+    arMuteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      console.log('Mute button clicked');
+      toggleMute();
+    });
+  }
+  
   // Subtitle elements - ensure hidden initially
   subtitleElement = document.getElementById('subtitles');
   subtitleTextElement = document.getElementById('subtitleText');
@@ -457,11 +467,13 @@ async function startARSession() {
       }, 500);
     }
     
-    // Show language toggle and back button
+    // Show language toggle, back button, and mute button
     const langToggle = document.getElementById('language-toggle');
     if (langToggle) langToggle.classList.add('visible');
     const arBackBtn = document.getElementById('ar-back-btn');
     if (arBackBtn) arBackBtn.classList.add('visible');
+    const arMuteBtn = document.getElementById('ar-mute-btn');
+    if (arMuteBtn) arMuteBtn.classList.add('visible');
     
     // Show hint briefly
     const arHint = document.getElementById('ar-hint');
@@ -487,11 +499,13 @@ function onSessionEnd() {
   hideSubtitle();
   hasShownGreeting = false;
   
-  // Hide language toggle and back button
+  // Hide language toggle, back button, and mute button
   const langToggle = document.getElementById('language-toggle');
   if (langToggle) langToggle.classList.remove('visible');
   const arBackBtn = document.getElementById('ar-back-btn');
   if (arBackBtn) arBackBtn.classList.remove('visible');
+  const arMuteBtn = document.getElementById('ar-mute-btn');
+  if (arMuteBtn) arMuteBtn.classList.remove('visible');
   
   renderer.setAnimationLoop(null);
   
@@ -1098,6 +1112,7 @@ function loadVideoLayer(key, config, path) {
 // Audio
 // ============================================
 let audioElement = null;
+let isMuted = false;
 
 function setupCharacterSound() {
   if (!characterData?.sounds) return;
@@ -1219,6 +1234,56 @@ function stopAllAudio() {
   videoTextures.forEach(vt => {
     if (vt.video) vt.video.pause();
   });
+}
+
+function toggleMute() {
+  try {
+    isMuted = !isMuted;
+    console.log('toggleMute called, isMuted:', isMuted);
+    
+    // Mute/unmute the audio element directly
+    if (audioElement) {
+      audioElement.muted = isMuted;
+      console.log('audioElement muted:', audioElement.muted);
+    }
+    
+    // Mute/unmute via AudioListener gain node
+    if (camera && camera.userData && camera.userData.audioListener) {
+      const listener = camera.userData.audioListener;
+      if (listener.gain) {
+        listener.gain.gain.value = isMuted ? 0 : 1;
+        console.log('AudioListener gain set to:', listener.gain.gain.value);
+      }
+    }
+    
+    // Mute/unmute video textures
+    videoTextures.forEach(vt => {
+      if (vt.video) vt.video.muted = isMuted;
+    });
+    
+    // Update UI
+    const muteBtn = document.getElementById('ar-mute-btn');
+    const soundOnIcon = document.getElementById('ar-sound-on-icon');
+    const soundOffIcon = document.getElementById('ar-sound-off-icon');
+    
+    if (muteBtn) {
+      if (isMuted) {
+        muteBtn.classList.add('muted');
+        muteBtn.title = 'Unmute';
+        if (soundOnIcon) soundOnIcon.classList.add('hidden');
+        if (soundOffIcon) soundOffIcon.classList.remove('hidden');
+      } else {
+        muteBtn.classList.remove('muted');
+        muteBtn.title = 'Mute';
+        if (soundOnIcon) soundOnIcon.classList.remove('hidden');
+        if (soundOffIcon) soundOffIcon.classList.add('hidden');
+      }
+    }
+    
+    console.log('Audio muted:', isMuted);
+  } catch (err) {
+    console.error('Error in toggleMute:', err);
+  }
 }
 
 // ============================================
