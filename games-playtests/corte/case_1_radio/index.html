@@ -2,139 +2,445 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEM ACCESS: WASTELAND RADAR</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROSA INTERFACE FINAL</title>
+    <style>
+        /* =========================================
+           1. DESIGN SYSTEM PROSA
+           ========================================= */
+        
+        @font-face {
+            font-family: 'ProsaFont';
+            src: local('Futura-Bold'), local('Impact'), sans-serif;
+            font-weight: 700;
+        }
+
+        @font-face {
+            font-family: 'ProsaFontRegular';
+            src: local('Futura-Medium'), local('Arial'), sans-serif;
+            font-weight: 400;
+        }
+
+        :root {
+            --bg-dark: #121212;
+            --card-cream: #ece4cb;
+            --card-dark: #1e1e1e;
+            --text-on-cream: #121212;
+            --text-on-dark: #ece4cb;
+            --accent: #626247;
+            
+            --radius-xl: 32px;
+            --radius-md: 16px;
+            --radius-pill: 999px;
+            --gap: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-on-dark);
+            font-family: 'ProsaFontRegular', sans-serif;
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        h1, h2, .title-font {
+            font-family: 'ProsaFont', sans-serif;
+            text-transform: uppercase;
+            line-height: 0.95;
+        }
+
+        /* =========================================
+           2. LAYOUT
+           ========================================= */
+
+        .top-bar {
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .logo { font-size: 1.8rem; letter-spacing: 4px; color: var(--card-cream); }
+
+        .main-layout {
+            flex: 1; display: flex; flex-direction: column; gap: var(--gap); position: relative;
+        }
+
+        .card {
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            transition: transform 0.2s ease;
+        }
+
+        .card-hero {
+            background-color: var(--card-cream); color: var(--text-on-cream);
+            flex: 3; position: relative;
+        }
+
+        .card-secondary {
+            background-color: var(--card-dark); color: var(--text-on-dark);
+            border: 1px solid rgba(236, 228, 203, 0.1); flex: 2;
+        }
+
+        .card-title { font-size: 2rem; max-width: 80%; }
+        .card-subtitle {
+            font-size: 0.9rem; opacity: 0.7; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: bold;
+        }
+
+        .btn-action {
+            width: 100%; padding: 20px;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            border: 1px solid rgba(236, 228, 203, 0.3);
+            color: var(--card-cream);
+            text-transform: uppercase;
+            font-family: 'ProsaFontRegular', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+            cursor: pointer; text-align: center; margin-top: auto;
+        }
+        
+        .btn-action.filled {
+            background: var(--card-cream); color: var(--bg-dark);
+            border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* =========================================
+           3. GAME UI
+           ========================================= */
+        
+        #game-view {
+            display: none; flex: 1; flex-direction: column; gap: var(--gap); height: 100%;
+        }
+
+        .monitor-card {
+            background: var(--card-dark);
+            border-radius: var(--radius-xl);
+            flex: 1; position: relative; overflow: hidden;
+            border: 1px solid rgba(236, 228, 203, 0.1);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        canvas { width: 100%; height: 100%; display: block; }
+
+        .overlay-status {
+            position: absolute; top: 20px; left: 24px; right: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .progress-dots {
+            display: flex; gap: 8px;
+            position: absolute; left: 50%; transform: translateX(-50%);
+        }
+        .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            border: 1px solid var(--card-cream); opacity: 0.3;
+            transition: all 0.3s;
+        }
+        .dot.active { opacity: 1; background: var(--card-cream); box-shadow: 0 0 10px var(--card-cream); }
+        .dot.done { opacity: 1; background: var(--card-cream); }
+
+        .status-tag {
+            background: rgba(0,0,0,0.4); padding: 6px 14px;
+            border-radius: var(--radius-pill); font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1); color: var(--card-cream);
+        }
+        .status-tag.active {
+            background: var(--card-cream); color: var(--bg-dark);
+            border-color: var(--card-cream); font-weight: bold;
+        }
+
+        .controls-container {
+            background: var(--card-cream); border-radius: var(--radius-xl);
+            padding: 24px; display: flex; flex-direction: column; gap: 20px;
+            color: var(--bg-dark);
+        }
+
+        .slider-row { display: flex; flex-direction: column; gap: 8px; }
+        .slider-label {
+            display: flex; justify-content: space-between;
+            font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+        }
+
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]:focus { outline: none; }
+        
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 8px; background: rgba(18, 18, 18, 0.1);
+            border-radius: var(--radius-pill);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 28px; width: 28px;
+            border-radius: 50%; background: var(--bg-dark);
+            margin-top: -10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* =========================================
+           4. MODAL SUCCÈS
+           ========================================= */
+        #success-view {
+            display: none; position: fixed; inset: 0; background: var(--bg-dark);
+            z-index: 99; padding: 20px;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        
+        .success-card {
+            background: var(--card-cream); color: var(--bg-dark);
+            width: 100%; height: 100%; border-radius: var(--radius-xl);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 40px;
+        }
+
+        .big-icon { font-size: 4rem; margin-bottom: 20px; }
+
+    </style>
 </head>
-<body id="gameBody">
-    <!-- Modal Message Radio -->
-    <div id="radioModal" class="modal" style="display:none;">
-        <div class="modal-content radio-modal">
-            <div class="radio-header">
-                <span class="radio-icon">📻</span>
-                <div class="frequency-display">
-                    <span class="freq-label">FRÉQUENCE:</span>
-                    <span class="freq-value blink">107.9 MHz</span>
+<body>
+    <!-- LANDING -->
+    <div id="landing-view" class="main-layout">
+        <div class="card card-hero" onclick="App.start()">
+            <div style="position: absolute; top:24px; right: 24px; opacity: 0.3;">●</div>
+            <div class="card-subtitle">Module 01</div>
+            <h1 class="card-title title-font">INTERCEPTION<br>SIGNAL HF</h1>
+        </div>
+
+        <div class="card card-secondary">
+            <div class="card-subtitle">Mission</div>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px;">
+                Signal Haute Fréquence détecté. Synchronisez <strong>3 ondes complexes</strong> pour établir la connexion.
+            </p>
+            <div style="display: flex; gap: 10px;">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+            </div>
+        </div>
+
+        <button class="btn-action filled" onclick="App.start()">LANCER LE PROTOCOLE</button>
+    </div>
+
+    <!-- GAME -->
+    <div id="game-view">
+        <div class="monitor-card">
+            <canvas id="waveCanvas"></canvas>
+            
+            <div class="overlay-status">
+                <div class="status-tag" id="timer-badge">60s</div>
+                
+                <div class="progress-dots">
+                    <div class="dot" id="dot-0"></div>
+                    <div class="dot" id="dot-1"></div>
+                    <div class="dot" id="dot-2"></div>
+                </div>
+
+                <div style="display:flex; gap:5px;">
+                    <div class="status-tag" id="badge-p">PHASE</div>
+                    <div class="status-tag" id="badge-a">AMP</div>
                 </div>
             </div>
-            <div class="radio-static">
-                [GRÉSILLEMENT... INTERFÉRENCE... SIGNAL CAPTÉ]
+        </div>
+
+        <div class="controls-container">
+            <div class="slider-row">
+                <div class="slider-label">
+                    <span>Décalage Fin</span>
+                    <span id="val-phase">0%</span>
+                </div>
+                <input type="range" id="input-phase" min="0" max="628" value="314">
             </div>
-            <div id="radioMessage" class="radio-message"></div>
-            <div class="radio-controls">
-                <button id="skipRadio" class="terminal-button small-btn">&gt; PASSER</button>
-                <button id="continueFromRadio" class="terminal-button" style="display:none;">&gt; CONTINUER</button>
+
+            <div class="slider-row" style="margin-top: 10px;">
+                <div class="slider-label">
+                    <span>Puissance</span>
+                    <span id="val-amp">60%</span>
+                </div>
+                <input type="range" id="input-amp" min="20" max="100" value="60">
             </div>
         </div>
     </div>
 
-    <!-- Modal des Règles -->
-    <div id="rulesModal" class="modal" style="display:flex;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="glitch">&gt;&gt; MISSION: RÉCUPÉRATION SIGNAL RADIO &lt;&lt;</span>
-            </div>
-            <div class="modal-body">
-                <p class="terminal-line">[PROTOCOLE DE MISSION ACTIVÉ...]</p>
-                <br>
-                <p class="rule-item"><span class="prompt">&gt;</span> <strong>OBJECTIF:</strong> Synchronisez 3 signaux successifs pour établir la connexion complète avec l'émetteur rebelle.</p>
-                
-                <p class="rule-item"><span class="prompt">&gt;</span> <strong>CONTRÔLE PHASE:</strong> Ajustez le décalage temporel de votre onde pour qu'elle corresponde au signal cible.</p>
-                
-                <p class="rule-item"><span class="prompt">&gt;</span> <strong>CONTRÔLE AMPLITUDE:</strong> Réglez la puissance de votre signal pour qu'elle corresponde à l'amplitude cible.</p>
-                
-                <p class="rule-item"><span class="prompt">&gt;</span> <strong>DIFFICULTÉ:</strong> Le signal rebelle dérive continuellement. Vous devez maintenir la synchronisation pour valider chaque étape.</p>
-                
-                <p class="rule-item"><span class="prompt">&gt;</span> <strong>TEMPS LIMITE:</strong> Synchronisez les 3 signaux avant la fin du temps imparti (50 secondes).</p>
-                <br>
-                <p class="terminal-line">[SYSTÈME PRÊT - ATTENDANT AUTORISATION...]</p>
-            </div>
-            <button id="closeModal" class="terminal-button">&gt; COMMENCEZ LE SCAN</button>
-        </div>
-    </div>
-
-    <!-- Game Container -->
-    <div class="container" style="display:none;" id="gameContainer">
-        <div class="terminal-header">
-            <span class="glitch">SYSTEM ACCESS: RADIO FREQUENCE 107.9 MHz</span>
-        </div>
-
-        <div class="game-section">
-            <!-- Control Panel -->
-            <div class="control-panel">
-                <div class="panel-title">&gt;&gt; ÉTAT DU SYSTÈME</div>
-                <div class="stat">
-                    <span class="label">TEMPS RESTANT:</span>
-                    <span class="value" id="timer">15</span>
-                </div>
-                <div class="stat">
-                    <span class="label">SIGNAUX SYNC:</span>
-                    <span class="value" id="successCount">0/3</span>
-                </div>
-                <div class="stat">
-                    <span class="label">PHASE:</span>
-                    <span class="value" id="phaseStatus" style="font-size: 1rem;">DÉSYNC</span>
-                </div>
-                <div class="stat">
-                    <span class="label">AMPLITUDE:</span>
-                    <span class="value" id="amplitudeStatus" style="font-size: 1rem;">DÉSYNC</span>
-                </div>
-                <button id="startBtn" class="terminal-button" style="display:none;">&gt; DÉMARRER SCAN</button>
-            </div>
-
-            <!-- Wave Display -->
-            <div class="wave-container">
-                <div class="wave-label">&gt;&gt; OSCILLOSCOPE SIGNAL</div>
-                <canvas id="waveCanvas"></canvas>
-                
-                <!-- Radio Dial Container -->
-                <div class="radio-dial-container">
-                    <!-- Phase Dial -->
-                    <div class="dial-section">
-                        <div class="dial-title">RÉGLAGE DE PHASE</div>
-                        <div class="radio-dial">
-                            <div class="dial-ticks">
-                                <div class="tick major"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick major"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick major"></div>
-                            </div>
-                            <div class="dial-center-zone"></div>
-                            <div class="needle" id="needlePhase"></div>
-                        </div>
-                        <input type="range" id="tuningSliderPhase" min="0" max="628" value="314" step="1">
-                    </div>
-
-                    <!-- Amplitude Dial -->
-                    <div class="dial-section">
-                        <div class="dial-title">RÉGLAGE D'AMPLITUDE</div>
-                        <div class="radio-dial">
-                            <div class="dial-ticks">
-                                <div class="tick major"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick major"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick"></div>
-                                <div class="tick major"></div>
-                            </div>
-                            <div class="dial-center-zone"></div>
-                            <div class="needle amplitude-needle" id="needleAmplitude"></div>
-                        </div>
-                        <input type="range" id="tuningSliderAmplitude" min="20" max="100" value="60" step="1">
-                    </div>
-                </div>
+    <!-- SUCCESS -->
+    <div id="success-view">
+        <div class="success-card">
+            <div class="big-icon">✦</div>
+            <h1 class="card-title title-font" style="margin-bottom: 10px;">CONNEXION<br>ÉTABLIE</h1>
+            <p style="opacity: 0.7; font-weight: 500;">Fréquences alignées. Données reçues.</p>
+            
+            <div style="margin-top: auto; width: 100%;">
+                <button class="btn-action" style="background: var(--bg-dark); color: var(--card-cream); border:none;" onclick="App.next()">CONTINUER</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const App = {
+            state: {
+                running: false,
+                stage: 0,
+                maxStages: 3,
+                tPhase: 0, tAmp: 50,
+                pPhase: Math.PI, pAmp: 60,
+                time: 60,
+                locks: 0
+            },
+            
+            start: function() {
+                document.getElementById('landing-view').style.display = 'none';
+                const gameView = document.getElementById('game-view');
+                gameView.style.display = 'flex';
+                
+                this.canvas = document.getElementById('waveCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.resize();
+                
+                this.state.running = true;
+                this.state.stage = 0;
+                this.updateDots();
+                this.newTarget();
+                
+                requestAnimationFrame(() => this.loop());
+                
+                this.timerInt = setInterval(() => {
+                    this.state.time--;
+                    document.getElementById('timer-badge').innerText = this.state.time + 's';
+                    if(this.state.time <= 0) location.reload();
+                }, 1000);
+
+                document.getElementById('input-phase').addEventListener('input', (e) => {
+                    this.state.pPhase = e.target.value / 100;
+                });
+                document.getElementById('input-amp').addEventListener('input', (e) => {
+                    this.state.pAmp = parseFloat(e.target.value);
+                });
+            },
+
+            resize: function() {
+                if (!this.canvas) return;
+                this.canvas.width = this.canvas.offsetWidth;
+                this.canvas.height = this.canvas.offsetHeight;
+            },
+
+            newTarget: function() {
+                this.state.tPhase = Math.random() * 6.28; 
+                this.state.tAmp = 30 + Math.random() * 60; 
+                this.state.locks = 0;
+            },
+
+            updateDots: function() {
+                for(let i=0; i<3; i++) {
+                    const el = document.getElementById('dot-'+i);
+                    el.className = 'dot';
+                    if(i < this.state.stage) el.classList.add('done');
+                    else if(i === this.state.stage) el.classList.add('active');
+                }
+            },
+
+            advanceStage: function() {
+                this.state.stage++;
+                if(this.state.stage >= this.state.maxStages) {
+                    this.win();
+                } else {
+                    const canvas = document.getElementById('waveCanvas');
+                    canvas.style.opacity = 0;
+                    setTimeout(() => canvas.style.opacity = 1, 150);
+                    
+                    this.updateDots();
+                    this.newTarget();
+                }
+            },
+
+            loop: function() {
+                if(!this.state.running) return;
+                
+                const { width, height } = this.canvas;
+                const ctx = this.ctx;
+                
+                ctx.fillStyle = '#1e1e1e';
+                ctx.fillRect(0,0,width,height);
+
+                // Grille de fond subtile pour aspect technique
+                ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+                ctx.lineWidth = 1;
+                const gridSize = 40;
+                for(let i=0; i<width; i+=gridSize) { ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,height); ctx.stroke(); }
+                
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+                ctx.moveTo(0, height/2); ctx.lineTo(width, height/2);
+                ctx.stroke();
+
+                const pSync = Math.abs((this.state.pPhase % 6.28) - (this.state.tPhase % 6.28)) < 0.3;
+                const aSync = Math.abs(this.state.pAmp - this.state.tAmp) < 8;
+
+                const bP = document.getElementById('badge-p');
+                const bA = document.getElementById('badge-a');
+                if(pSync) bP.classList.add('active'); else bP.classList.remove('active');
+                if(aSync) bA.classList.add('active'); else bA.classList.remove('active');
+
+                // Target (Pointillés discrets)
+                ctx.setLineDash([2, 4]); // Pointillés plus fins
+                this.drawWave(this.state.tPhase, this.state.tAmp, '#626247', 2); // Kaki
+                ctx.setLineDash([]);
+
+                let color = '#ece4cb'; // Beige
+                let thick = 3; // Trait un peu plus fin pour haute fréquence
+                
+                if(pSync && aSync) {
+                    color = '#ffffff';
+                    this.state.locks++;
+                    // Feedback visuel de progression
+                    ctx.fillStyle = 'rgba(236, 228, 203, 0.1)';
+                    ctx.fillRect(0, 0, width * (this.state.locks/50), height);
+                    
+                    if(this.state.locks > 50) this.advanceStage();
+                } else {
+                    this.state.locks = Math.max(0, this.state.locks-2);
+                }
+                this.drawWave(this.state.pPhase, this.state.pAmp, color, thick);
+
+                requestAnimationFrame(() => this.loop());
+            },
+
+            drawWave: function(phase, amp, color, thick) {
+                const ctx = this.ctx;
+                const { width, height } = this.canvas;
+                
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = thick;
+                
+                // HAUTE FRÉQUENCE ICI : Multiplicateur augmenté à 15
+                // Cela crée environ 12-15 cycles à l'écran
+                const freq = (Math.PI * 15) / width;
+                
+                for(let x=0; x<width; x++) { // x++ au lieu de x+=2 pour plus de précision en HF
+                    const y = height/2 + Math.sin(x * freq + phase) * (amp * 1.0); 
+                    if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+                }
+                ctx.stroke();
+            },
+
+            win: function() {
+                this.state.running = false;
+                clearInterval(this.timerInt);
+                document.getElementById('success-view').style.display = 'flex';
+            },
+
+            next: function() {
+                if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:true}, '*');
+                console.log('Niveau Suivant');
+            }
+        };
+
+        window.addEventListener('resize', () => App.resize());
+
+    </script>
 </body>
 </html>
