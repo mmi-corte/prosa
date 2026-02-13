@@ -1,4 +1,9 @@
-const CACHE_NAME = 'cache-prosa-game-v5';
+const CACHE_NAME = 'cache-prosa-game-v6';
+// Service Worker logging utilise toujours le même système
+// (les SWs n'ont pas accès à localStorage directement lors du démarrage)
+const logSW = (...args) => {
+  console.log('%c[Service Worker]', 'color: #7ed321; font-weight: bold;', ...args);
+};
 
 const ASSETS_TO_CACHE = [
   // BOOTSTRAP MINIMUM - Fichiers critiques pour démarrer l'app
@@ -57,16 +62,23 @@ const ASSETS_TO_CACHE = [
 // + les stratégies de cache du fetch event (Cache First, Network First, etc.)
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installation...');
+  logSW('⚙️ Installing Service Worker...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Mise en cache des fichiers du jeu...');
+      logSW(`📦 Caching ${ASSETS_TO_CACHE.length} bootstrap files to ${CACHE_NAME}...`);
       return cache.addAll(ASSETS_TO_CACHE).catch((error) => {
-        console.error('[Service Worker] Erreur lors de la mise en cache:', error);
+        console.error('[Service Worker] ❌ Cache installation error:', error);
       });
     })
   );
   self.skipWaiting();
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    logSW('📤 New version ready, activating immediately...');
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener('fetch', (event) => {
@@ -78,14 +90,29 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  // Exclure AR et mini-jeux (network-only)
-  if (
-    url.pathname.includes('/AR/') ||
-    url.pathname.includes('/games/') ||
-    url.pathname.includes('/final-game/') ||
-    url.pathname.includes('/games-playtests/') ||
-    url.pathname.includes('/games_index_veryOld/')
-  ) {
+  // **Navigation (HTML) - network first avec fallback cache**
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          logSW(`⚠️ Offline HTML, using cache: ${url.pathname}`);
+          return caches.match(event.request) || caches.match('./index.html');
+        })
+    );
+    return;
+  }
+
+  // Exclure AR (network-only)
+  if (url.pathname.includes('/AR/')) {
     return;
   }
 
@@ -160,7 +187,6 @@ self.addEventListener('fetch', (event) => {
             const responseClone = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseClone);
-              console.log(`[Service Worker] Données mises à jour: ${event.request.url}`);
             });
           }
           return networkResponse;
@@ -188,13 +214,12 @@ self.addEventListener('fetch', (event) => {
           const responseClone = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseClone);
-            console.log(`[Service Worker] Media mis en cache: ${event.request.url}`);
           });
 
           return networkResponse;
         }).catch(() => {
           if (event.request.destination === 'image') {
-            console.warn(`[Service Worker] Impossible de charger l'image: ${event.request.url}`);
+            logSW(`⚠️ Impossible de charger l'image: ${event.request.url}`);
             return caches.match('./assets/favicon/favicon.svg');
           }
           return caches.match(event.request);
@@ -212,13 +237,12 @@ self.addEventListener('fetch', (event) => {
             const responseClone = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseClone);
-              console.log(`[Service Worker] JS mis à jour: ${event.request.url}`);
             });
           }
           return response;
         })
         .catch(() => {
-          console.warn(`[Service Worker] Utilisation du cache pour: ${event.request.url}`);
+          logSW(`⚠️ Offline JS, using cache: ${event.request.url}`);
           return caches.match(event.request);
         })
     );
@@ -241,12 +265,11 @@ self.addEventListener('fetch', (event) => {
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
-            console.log(`[Service Worker] Asset mis en cache: ${event.request.url}`);
           });
           
           return response;
         }).catch(() => {
-          console.warn(`[Service Worker] Offline - pas de cache pour: ${event.request.url}`);
+          logSW(`⚠️ Offline - pas de cache pour: ${event.request.url}`);
           return undefined;
         });
       })
@@ -255,13 +278,13 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activation...');
+  logSW('🚀 Activating Service Worker...');
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(
         keyList.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[Service Worker] Suppression ancien cache:', key);
+            logSW(`🗑️ Deleting old cache: ${key}`);
             return caches.delete(key);
           }
         })
@@ -269,4 +292,5 @@ self.addEventListener('activate', (event) => {
     })
   );
   self.clients.claim();
+  logSW(`✅ Service Worker activated with cache: ${CACHE_NAME}`);
 });

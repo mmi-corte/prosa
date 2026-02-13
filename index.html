@@ -56,17 +56,61 @@
   </main>
 
   <script src="./assets/libs/lottie.min.js"></script>
-  <script src="./js/preloadAssets.js"></script>
   <script type="module" src="./app.js"></script>
 
   <!-- <script type="module" src="./fronts/start_view_1/app.js"></script> -->
   <script>
+    // Service Worker registration with centralized logging
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("./service-worker.js")
-          .then((reg) => console.log("Service Worker enregistré !", reg))
-          .catch((err) => console.error("Erreur SW :", err));
+      window.addEventListener("load", async () => {
+        try {
+          const reg = await navigator.serviceWorker.register("./service-worker.js");
+          window.swLog?.log("✅ Service Worker registered!", reg);
+
+          if (navigator.onLine) {
+            window.swLog?.log("🔄 Checking for updates...");
+            reg.update();
+          }
+
+          if (reg.waiting) {
+            window.swLog?.log("📤 Activating waiting Service Worker...");
+            reg.waiting.postMessage({ type: "SKIP_WAITING" });
+          }
+
+          reg.addEventListener("updatefound", () => {
+            const newWorker = reg.installing;
+            if (!newWorker) return;
+
+            window.swLog?.log("🔨 New Service Worker installing...");
+
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                window.swLog?.log("📤 New Service Worker ready, activating...");
+                newWorker.postMessage({ type: "SKIP_WAITING" });
+              }
+            });
+          });
+
+          let refreshing = false;
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (refreshing) return;
+            refreshing = true;
+            window.swLog?.log("🔄 Controller changed, reloading...");
+            window.location.reload();
+          });
+
+          // Log online/offline events
+          window.addEventListener("online", () => {
+            window.swLog?.log("📡 Back online!");
+          });
+
+          window.addEventListener("offline", () => {
+            window.swLog?.log("📴 Went offline - using cached content");
+          });
+
+        } catch (err) {
+          window.swLog?.error("❌ Service Worker registration error:", err);
+        }
       });
     }
   </script>

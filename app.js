@@ -6,6 +6,11 @@ import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
 import { navigate } from "./router.js"
 import { removeBackButton } from "./js/views/components/backButton.js"
+import { startResourceLogging } from "./js/preloadAssets.js"
+
+// Use pre-instantiated loggers from preloadAssets.js
+const appLogger = window.appLog
+const preloadLogger = window.preloadLog
 
 export const gameContainer = document.getElementById('gameContainer')
 export const headerLeft = document.getElementById('headerLeft')
@@ -42,30 +47,46 @@ window.initProsaLogoLottie = function initProsaLogoLottie() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  startResourceLogging(window.preloadLog);
+
+  appLogger.log('🎮 Starting app initialization...');
+  const initStart = performance.now();
 
   // Initialize language manager first (async to load translations)
+  appLogger.log('📝 Loading language manager...');
+  const langStart = performance.now();
   await initLanguageManager()
+  appLogger.perf('Language manager loaded', performance.now() - langStart);
 
   // Initialize game data and wait for it to complete
+  appLogger.log('💾 Loading game data...');
+  const gameStart = performance.now();
   await initGame()
+  appLogger.perf('Game data loaded', performance.now() - gameStart);
+  
   if (gameInitialized) {
-    console.log("Previous game found, successfuly initialized save data")
+    appLogger.log("✅ Previous game found, save data restored");
   } else {
-    console.log("No game initialized.")
+    appLogger.log("ℹ️ No existing game, starting fresh");
   }
 
   //loadingView()
 
   //Then, load progression screen
   if (gameInitialized) {
+    appLogger.log('🎯 Resuming previous game...');
     navigate('resume', progressionView())
   } else {
+    appLogger.log('🎯 Opening main menu...');
     navigate('menu', menuView())
   }
 
   if (window.initProsaLogoLottie) {
+    appLogger.log('🎨 Initializing Lottie animations...');
     window.initProsaLogoLottie()
   }
+
+  appLogger.perf('Total app initialization', performance.now() - initStart);
 
   // ====================================
   // ============= HEADER LOGO ==========
@@ -74,6 +95,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   headerLogo.addEventListener('click', (e) => {
     e.preventDefault();
+    appLogger.log('🏠 Navigating to menu');
     navigate('menu', menuView)
   });
 });

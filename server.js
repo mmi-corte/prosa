@@ -4,6 +4,42 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+// Bump Service Worker cache version on server start
+function bumpServiceWorkerCache() {
+  const swPath = path.join(__dirname, 'service-worker.js');
+  const cacheNameRegex = /const CACHE_NAME = 'cache-prosa-game-v(\d+)';/;
+
+  if (!fs.existsSync(swPath)) {
+    console.warn('Service worker not found, cache bump skipped.');
+    return;
+  }
+
+  const swContent = fs.readFileSync(swPath, 'utf8');
+  const match = swContent.match(cacheNameRegex);
+
+  if (!match) {
+    console.warn('CACHE_NAME pattern not found, cache bump skipped.');
+    return;
+  }
+
+  const currentVersion = Number.parseInt(match[1], 10);
+  if (!Number.isFinite(currentVersion)) {
+    console.warn('Invalid CACHE_NAME version, cache bump skipped.');
+    return;
+  }
+
+  const nextVersion = currentVersion + 1;
+  const updatedContent = swContent.replace(
+    cacheNameRegex,
+    `const CACHE_NAME = 'cache-prosa-game-v${nextVersion}';`
+  );
+
+  fs.writeFileSync(swPath, updatedContent, 'utf8');
+  console.log(`CACHE_NAME bumped: v${currentVersion} -> v${nextVersion}`);
+}
+
+bumpServiceWorkerCache();
+
 // Generate self-signed certificate
 const forge = require('node-forge');
 const pki = forge.pki;
