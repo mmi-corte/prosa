@@ -74,8 +74,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "plan-riviere.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "riviere_fond_2.webp",
           "sound": "",
           "music": ""
         },
@@ -93,7 +92,8 @@
           {
             "text": {
               "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
-            }
+            },
+            "foreground": "fata_1.webp"
           },
           {
             "text": {
@@ -101,12 +101,14 @@
               "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
             },
             "character": "fata",
-            "voice": "Case_2_Fata_1.mp3"
+            "voice": "Case_2_Fata_1.mp3",
+            "foreground": "fata_1.webp"
           },
           {
             "text": {
               "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
-            }
+            },
+            "foreground": "fata_1.webp"
           },
           {
             "text": {
@@ -114,7 +116,8 @@
               "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
             },
             "character": "fata",
-            "voice": "Case_2_Fata_2.mp3"
+            "voice": "Case_2_Fata_2.mp3",
+            "foreground": "fata_1.webp"
           }
         ],
         "nextActionType": "riddle",
@@ -122,8 +125,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "plan-fata.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "riviere_fond_2.webp",
           "sound": "",
           "music": ""
         },
@@ -134,7 +136,8 @@
               "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
             },
             "character": "fata",
-            "voice": "Case_2_Fata_3.mp3"
+            "voice": "Case_2_Fata_3.mp3",
+            "foreground": "fata_1.webp"
           },
           {
             "text": {
@@ -142,7 +145,8 @@
               "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
             },
             "character": "fata",
-            "voice": "Case_2_Fata_4.mp3"
+            "voice": "Case_2_Fata_4.mp3",
+            "foreground": "fata_1.webp"
           },
           {
             "text": {
@@ -155,7 +159,8 @@
               "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
             },
             "character": "fata",
-            "voice": "Case_2_Fata_5.mp3"
+            "voice": "Case_2_Fata_5.mp3",
+            "foreground": "fata_1.webp"
           }
         ],
         "nextActionType": "end",
@@ -163,8 +168,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "plan-passerelle.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "riviere_fond_2.webp",
           "sound": "",
           "music": ""
         },
@@ -172,8 +176,20 @@
           {
             "text": {
               "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
-            }
-          },
+            },
+            "foreground": "fata_2.webp"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "plan-passerelle_2.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
           {
             "text": {
               "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
@@ -183,26 +199,15 @@
             "text": {
               "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
             }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "4"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "Strega-passerelle.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
+          },
           {
             "text": {
               "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
               "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
             },
             "character": "strega",
-            "voice": "Case_2_Strega_1.mp3"
+            "voice": "Case_2_Strega_1.mp3",
+            "foreground": "strega.webp"
           },
           {
             "text": {
@@ -210,7 +215,8 @@
               "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
             },
             "character": "strega",
-            "voice": "Case_2_Strega_2.mp3"
+            "voice": "Case_2_Strega_2.mp3",
+            "foreground": "strega.webp"
           },
           {
             "text": {
@@ -223,7 +229,8 @@
               "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
             },
             "character": "strega",
-            "voice": "Case_2_Strega_3.mp3"
+            "voice": "Case_2_Strega_3.mp3",
+            "foreground": "strega.webp"
           },
           {
             "text": {
