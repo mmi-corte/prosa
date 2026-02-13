@@ -278,7 +278,7 @@
             "text": {
               "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
             },
-              "foreground": "spallistu.webp"
+            "foreground": "spallistu.webp"
           },
           {
             "text": {
@@ -293,7 +293,7 @@
             "text": {
               "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts."
             },
-              "foreground": "spallistu.webp"
+            "foreground": "spallistu.webp"
           },
           {
             "text": {
@@ -402,11 +402,12 @@
         "dialog": [
           {
             "text": {
-              "fr": "L’Orcu t’attend. Ne le fais pas patienter.",
-              "cor": "L’Orcu t’aspetta. Ùn lu fà aspettà."
+              "fr": "\"L’Orcu t’attend. Ne le fais pas patienter.\"",
+              "cor": "\"L’Orcu t’aspetta. Ùn lu fà aspettà.\""
             },
             "character": "spallistu",
-            "voice": "Case_88_Spallistu_imposant.mp3"
+            "voice": "Case_88_Spallistu_imposant.mp3",
+            "foreground": "spallistu.webp"
           }
         ],
         "nextActionType": "end",
@@ -416,8 +417,7 @@
     "04": {
       "1": {
         "default": {
-          "backgroundUrl": "orcu.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "orcu_fond.webp",
           "sound": "",
           "music": ""
         },
@@ -434,7 +434,6 @@
       "2": {
         "default": {
           "backgroundUrl": "pierredelorcu.webp",
-          "foregroundUrl": "",
           "sound": "",
           "music": ""
         },
@@ -445,7 +444,8 @@
               "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
             },
             "character": "orcu",
-            "voice": "Case_4_Orcu_1.mp3"
+            "voice": "Case_4_Orcu_1.mp3",
+            "foreground": "orcu.webp"
           },
           {
             "text": {
@@ -453,7 +453,8 @@
               "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
             },
             "character": "orcu",
-            "voice": "Case_4_Orcu_2.mp3"
+            "voice": "Case_4_Orcu_2.mp3",
+            "foreground": "orcu.webp"
           },
           {
             "text": {
@@ -461,7 +462,8 @@
               "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
             },
             "character": "orcu",
-            "voice": "Case_4_Orcu_3.mp3"
+            "voice": "Case_4_Orcu_3.mp3",
+            "foreground": "orcu.webp"
           },
           {
             "text": {
@@ -469,12 +471,14 @@
               "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
             },
             "character": "orcu",
-            "voice": "Case_4_Orcu_4.mp3"
+            "voice": "Case_4_Orcu_4.mp3",
+            "foreground": "orcu.webp"
           },
           {
             "text": {
               "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
-            }
+            },
+            "foreground": "orcu.webp"
           }
         ],
         "nextActionType": "end",
@@ -538,7 +542,7 @@
               "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
             },
             "character": "signadora",
-            "voice": "Case_2_Signadora_2.mp3"
+            "voice": "Case_2_Signadora_1.mp3"
           },
           {
             "text": {
@@ -546,7 +550,7 @@
               "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
             },
             "character": "signadora",
-            "voice": ""
+            "voice": "Case_2_Signadora_2.mp3"
           },
           {
             "text": {
@@ -554,7 +558,7 @@
               "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
             },
             "character": "signadora",
-            "voice": ""
+            "voice": "Case_2_Signadora_3.mp3"
           }
         ],
         "nextActionType": "dialog",
@@ -618,8 +622,7 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "armurier.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "fontaine.webp",
           "sound": "",
           "music": ""
         },
@@ -627,7 +630,8 @@
           {
             "text": {
               "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
-            }
+            },
+            "foreground": "confrontation.webp"
           },
           {
             "text": {
@@ -635,7 +639,8 @@
               "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
             },
             "character": "armurier_corte",
-            "voice": "Case_7_Armurier_1.mp3"
+            "voice": "Case_7_Armurier_1.mp3",
+            "foreground": "armurier.webp"
           },
           {
             "text": {
@@ -643,7 +648,8 @@
               "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
             },
             "character": "soldat1_corte",
-            "voice": "Case_7_Soldat_1.mp3"
+            "voice": "Case_7_Soldat_1.mp3",
+            "foreground": "soldat_1.webp"
           },
           {
             "text": {
@@ -651,15 +657,18 @@
               "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
             },
             "character": "soldat2_corte",
-            "voice": "Case_7_Soldat_2.mp3"
+            "voice": "Case_7_Soldat_2.mp3",
+            "foreground": "soldat_2.webp"
           },
           {
             "text": {
               "fr": "\"Jamais ! C'est mon héritage !\"",
-              "cor": "\"Mai ! Hè a mo lascita !\""
+              "cor": "\"Mai ! Hè a mo lascita !\"",
+              "foreground": "armurier.webp"
             },
             "character": "armurier_corte",
-            "voice": "Case_7_Armurier_2.mp3"
+            "voice": "Case_7_Armurier_2.mp3",
+            "foreground": "armurier.webp"
           }
         ],
         "nextActionType": "choice",
@@ -667,8 +676,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "confrontation.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "fontaine.webp",
           "sound": "",
           "music": ""
         },
@@ -676,12 +684,14 @@
           {
             "text": {
               "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
-            }
+            },
+            "foreground": "confrontation.webp"
           },
           {
             "text": {
               "fr": "Vous êtes en partie dépouillé avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
-            }
+            },
+            "foreground": "confrontation.webp"
           }
         ],
         "nextActionType": "token",
@@ -689,7 +699,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "confrontation.webp",
+          "backgroundUrl": "fontaine.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -698,7 +708,8 @@
           {
             "text": {
               "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
-            }
+            },
+            "foreground": "confrontation.webp"
           }
         ],
         "nextActionType": "dialog",
@@ -706,8 +717,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "armurier.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "armurerie.webp",
           "sound": "",
           "music": ""
         },
@@ -718,7 +728,8 @@
               "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
             },
             "character": "armurier_corte",
-            "voice": "Case_7_Armurier_3.mp3"
+            "voice": "Case_7_Armurier_3.mp3",
+            "foreground": "armurier.webp"
           },
           {
             "text": {
@@ -726,7 +737,8 @@
               "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
             },
             "character": "armurier_corte",
-            "voice": "Case_7_Armurier_4.mp3"
+            "voice": "Case_7_Armurier_4.mp3",
+            "foreground": "armurier.webp"
           }
         ],
         "nextActionType": "game",
@@ -734,8 +746,7 @@
       },
       "5": {
         "default": {
-          "backgroundUrl": "armurier.webp",
-          "foregroundUrl": "",
+          "backgroundUrl": "armurerie.webp",
           "sound": "",
           "music": ""
         },
@@ -746,7 +757,8 @@
               "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
             },
             "character": "armurier_corte",
-            "voice": "Case_7_Armurier_5.mp3"
+            "voice": "Case_7_Armurier_5.mp3",
+            "foreground": "armurier.webp"
           }
         ],
         "nextActionType": "end",

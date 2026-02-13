@@ -14,6 +14,7 @@ let data
 let currentDialogIndex = 0;
 let currentAudio = null;
 let currentForegroundSrc = "";
+const FOREGROUND_HIDE_DELAY = 300;
 
 export function dialogView(action) {
     clearContainer();
@@ -120,28 +121,34 @@ function updateDialog() {
         if (currentForegroundSrc === nextSrc) {
             foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
             foregroundContainer.classList.add('shown');
-            foregroundContainer.style.opacity = '1';
         } else {
-            // Wait for image to load before showing
-            const img = new Image();
-            img.onload = () => {
-                currentForegroundSrc = nextSrc;
-                foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
-                foregroundContainer.classList.add('shown');
-                foregroundContainer.style.opacity = '1';
-            };
-            img.onerror = () => {
-                // Still show even if error
-                currentForegroundSrc = nextSrc;
-                foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
-                foregroundContainer.classList.add('shown');
-                foregroundContainer.style.opacity = '1';
-            };
-            img.src = nextSrc;
+            // Sequential swap: hide -> update URL -> show
+            foregroundContainer.classList.remove('shown');
+
+            // Wait for the hide transition to finish before changing the image
+            setTimeout(() => {
+                // Wait for image to load before showing
+                const img = new Image();
+                img.onload = () => {
+                    currentForegroundSrc = nextSrc;
+                    foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
+                    if (showForeground) {
+                        foregroundContainer.classList.add('shown');
+                    }
+                };
+                img.onerror = () => {
+                    // Still show even if error
+                    currentForegroundSrc = nextSrc;
+                    foregroundContainer.style.backgroundImage = `url(${nextSrc})`;
+                    if (showForeground) {
+                        foregroundContainer.classList.add('shown');
+                    }
+                };
+                img.src = nextSrc;
+            }, FOREGROUND_HIDE_DELAY);
         }
     } else {
         foregroundContainer.classList.remove('shown');
-        foregroundContainer.style.opacity = '0';
     }
 
     let currentPitch = 400; // Default pitch
