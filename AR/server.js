@@ -95,7 +95,9 @@ const mimeTypes = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.wav': 'audio/wav',
+  '.mp3': 'audio/mpeg',
   '.mp4': 'video/mp4',
+  '.webm': 'video/webm',
   '.woff': 'application/font-woff',
   '.ttf': 'application/font-ttf',
   '.eot': 'application/vnd.ms-fontobject',
@@ -106,47 +108,47 @@ const mimeTypes = {
   '.mind': 'application/octet-stream'
 };
 
+// Case-insensitive file path resolver
+function findFilePathCaseInsensitive(requestedPath) {
+  // If file exists with exact case, return it
+  if (fs.existsSync(requestedPath)) {
+    return requestedPath;
+  }
+  
+  // Split into parts and try to match each part case-insensitively
+  const parts = requestedPath.split(/[/\\]/);
+  let currentPath = '.';
+  
+  for (let i = 1; i < parts.length; i++) {
+    const part = parts[i];
+    if (!part) continue;
+    
+    try {
+      const entries = fs.readdirSync(currentPath);
+      const match = entries.find(entry => entry.toLowerCase() === part.toLowerCase());
+      
+      if (match) {
+        currentPath = path.join(currentPath, match);
+      } else {
+        // No match found, return original path (will result in 404)
+        return requestedPath;
+      }
+    } catch (e) {
+      return requestedPath;
+    }
+  }
+  
+  return currentPath;
+}
+
 // Create HTTPS server
 const server = https.createServer(options, (req, res) => {
   console.log(`${req.method} ${req.url}`);
 
-  // Handle POST requests for saving JSON
-  if (req.method === 'POST' && req.url === '/api/save-characters') {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      try {
-        // Validate JSON
-        const data = JSON.parse(body);
-        
-        // Save to file
-        const filePath = path.join(__dirname, 'data', 'characters.json');
-        fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8', (err) => {
-          if (err) {
-            console.error('Error saving characters.json:', err);
-            res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: 'Failed to save file' }));
-          } else {
-            console.log('✅ characters.json saved successfully');
-            res.writeHead(200, { 
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
-            });
-            res.end(JSON.stringify({ success: true }));
-          }
-        });
-      } catch (parseError) {
-        console.error('Invalid JSON:', parseError);
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Invalid JSON' }));
-      }
-    });
-    return;
-  }
-  
-  // Handle OPTIONS for CORS preflight
+  // Parse URL (remove query string)
+  let urlPath = req.url.split('?')[0];
+
+  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.writeHead(204, {
       'Access-Control-Allow-Origin': '*',
@@ -157,35 +159,118 @@ const server = https.createServer(options, (req, res) => {
     return;
   }
 
-  // Parse URL
-  let filePath = '.' + req.url;
+  // Handle API: Save characters.json
+  if (req.method === 'POST' && urlPath === '/api/save-characters') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        const filePath = path.join(__dirname, 'AR', 'data', 'characters.json');
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end(JSON.stringify({ success: true }));
+        console.log('✅ characters.json saved');
+      } catch (err) {
+        res.writeHead(500, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        });
+        res.end(JSON.stringify({ error: err.message }));
+        console.log('❌ Save failed:', err.message);
+      }
+    });
+    return;
+  }
+
+  let filePath = '.' + urlPath;
+  
+  // Default to index.html for root
   if (filePath === './') {
     filePath = './index.html';
   } else if (filePath === './immersive' || filePath === './immersive/') {
     filePath = './immersive.html';
-  } else if (filePath === './cards' || filePath === './cards/') {
-    filePath = './cards/index.html';
+  }
+
+  // Resolve case-insensitive path
+  filePath = findFilePathCaseInsensitive(filePath);
+
+  // If it's a directory without trailing slash, redirect to add the slash
+  // This ensures relative paths in HTML resolve correctly
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory() && !urlPath.endsWith('/')) {
+    res.writeHead(301, { 'Location': urlPath + '/' });
+    res.end();
+    return;
+  }
+
+  // Check if path is a directory, if so serve index.html
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    filePath = path.join(filePath, 'index.html');
   }
 
   // Get file extension
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
 
-  // Read and serve file
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end('<h1>404 - File Not Found</h1>', 'utf-8');
-      } else {
-        res.writeHead(500);
-        res.end(`Server Error: ${error.code}`, 'utf-8');
-      }
-    } else {
-      res.writeHead(200, {
+  // Check if file exists first
+  if (!fs.existsSync(filePath)) {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.end('<h1>404 - File Not Found</h1>', 'utf-8');
+    return;
+  }
+
+  // Handle video files with range request support
+  if (extname === '.mp4' || extname === '.webm' || extname === '.ogg') {
+    const stat = fs.statSync(filePath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+
+    if (range) {
+      // Parse range header
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunkSize = (end - start) + 1;
+
+      const file = fs.createReadStream(filePath, { start, end });
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
         'Content-Type': contentType,
         'Access-Control-Allow-Origin': '*'
       });
+      file.pipe(res);
+    } else {
+      // No range requested - send full file
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Accept-Ranges': 'bytes',
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+    return;
+  }
+
+  // Read and serve other files normally
+  fs.readFile(filePath, (error, content) => {
+    if (error) {
+      res.writeHead(500);
+      res.end(`Server Error: ${error.code}`, 'utf-8');
+    } else {
+      // Add WebXR-friendly headers
+      const headers = {
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*',
+        'Permissions-Policy': 'xr-spatial-tracking=*, camera=*, microphone=*'
+      };
+      
+      res.writeHead(200, headers);
       res.end(content, 'utf-8');
     }
   });
@@ -250,17 +335,72 @@ server.listen(PORT, HOST, () => {
 const httpHandler = (req, res) => {
   console.log(`[HTTP] ${req.method} ${req.url}`);
 
-  let filePath = '.' + req.url;
+  // Parse URL (remove query string)
+  let urlPath = req.url.split('?')[0];
+  let filePath = '.' + urlPath;
+  
   if (filePath === './') {
     filePath = './index.html';
   } else if (filePath === './immersive' || filePath === './immersive/') {
     filePath = './immersive.html';
-  } else if (filePath === './cards' || filePath === './cards/') {
-    filePath = './cards/index.html';
+  }
+
+  // Resolve case-insensitive path
+  filePath = findFilePathCaseInsensitive(filePath);
+
+  // If it's a directory without trailing slash, redirect to add the slash
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory() && !urlPath.endsWith('/')) {
+    res.writeHead(301, { 'Location': urlPath + '/' });
+    res.end();
+    return;
+  }
+
+  // Check if path is a directory, if so serve index.html
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    filePath = path.join(filePath, 'index.html');
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
+
+  // Handle video/audio files with range request support (required for iOS)
+  if (extname === '.mp4' || extname === '.mp3' || extname === '.webm' || extname === '.wav') {
+    if (!fs.existsSync(filePath)) {
+      res.writeHead(404);
+      res.end('Not found');
+      return;
+    }
+    
+    const stat = fs.statSync(filePath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+    
+    if (range) {
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunkSize = (end - start) + 1;
+      const file = fs.createReadStream(filePath, { start, end });
+      
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      file.pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Accept-Ranges': 'bytes',
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+    return;
+  }
 
   fs.readFile(filePath, (error, content) => {
     if (error) {

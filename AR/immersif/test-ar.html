@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebXR AR Test</title>
+  <style>
+    body { margin: 0; }
+    #start-btn {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    #info {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      font-family: monospace;
+      z-index: 1000;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <button id="start-btn">Start AR</button>
+  <div id="info">Loading...</div>
+  
+  <script type="module">
+    import * as THREE from 'three';
+    
+    let scene, camera, renderer;
+    let cube;
+    
+    function init() {
+      // Scene
+      scene = new THREE.Scene();
+      scene.background = null; // Important for AR
+      
+      // Camera
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
+      
+      // Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.xr.enabled = true;
+      document.body.appendChild(renderer.domElement);
+      
+      // Simple cube
+      cube = new THREE.Mesh(
+        new THREE.BoxGeometry(0.2, 0.2, 0.2),
+        new THREE.MeshBasicMaterial({ color: 0xff0000 })
+      );
+      cube.position.set(0, 0, -1); // 1m in front
+      scene.add(cube);
+      
+      // Light
+      scene.add(new THREE.AmbientLight(0xffffff, 1));
+      
+      document.getElementById('info').textContent = 'Ready. Click Start AR.';
+      
+      // Start button
+      document.getElementById('start-btn').onclick = startAR;
+    }
+    
+    async function startAR() {
+      document.getElementById('start-btn').style.display = 'none';
+      
+      if (!navigator.xr) {
+        document.getElementById('info').textContent = 'WebXR not supported';
+        return;
+      }
+      
+      const supported = await navigator.xr.isSessionSupported('immersive-ar');
+      if (!supported) {
+        document.getElementById('info').textContent = 'AR not supported';
+        return;
+      }
+      
+      try {
+        const session = await navigator.xr.requestSession('immersive-ar');
+        
+        document.getElementById('info').innerHTML = `
+          Session: OK<br>
+          Blend mode: ${session.environmentBlendMode}<br>
+          Rendering...
+        `;
+        
+        await renderer.xr.setSession(session);
+        
+        // Render loop
+        renderer.setAnimationLoop((time, frame) => {
+          if (cube) {
+            cube.rotation.y += 0.01;
+            cube.rotation.x += 0.005;
+          }
+          renderer.render(scene, camera);
+        });
+        
+        session.addEventListener('end', () => {
+          document.getElementById('info').textContent = 'Session ended';
+          document.getElementById('start-btn').style.display = 'block';
+          renderer.setAnimationLoop(null);
+        });
+        
+      } catch (e) {
+        document.getElementById('info').textContent = 'Error: ' + e.message;
+      }
+    }
+    
+    init();
+  </script>
+</body>
+</html>

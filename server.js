@@ -95,7 +95,9 @@ const mimeTypes = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.wav': 'audio/wav',
+  '.mp3': 'audio/mpeg',
   '.mp4': 'video/mp4',
+  '.webm': 'video/webm',
   '.woff': 'application/font-woff',
   '.ttf': 'application/font-ttf',
   '.eot': 'application/vnd.ms-fontobject',
@@ -261,10 +263,14 @@ const server = https.createServer(options, (req, res) => {
       res.writeHead(500);
       res.end(`Server Error: ${error.code}`, 'utf-8');
     } else {
-      res.writeHead(200, {
+      // Add WebXR-friendly headers
+      const headers = {
         'Content-Type': contentType,
-        'Access-Control-Allow-Origin': '*'
-      });
+        'Access-Control-Allow-Origin': '*',
+        'Permissions-Policy': 'xr-spatial-tracking=*, camera=*, microphone=*'
+      };
+      
+      res.writeHead(200, headers);
       res.end(content, 'utf-8');
     }
   });
@@ -356,6 +362,45 @@ const httpHandler = (req, res) => {
 
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
+
+  // Handle video/audio files with range request support (required for iOS)
+  if (extname === '.mp4' || extname === '.mp3' || extname === '.webm' || extname === '.wav') {
+    if (!fs.existsSync(filePath)) {
+      res.writeHead(404);
+      res.end('Not found');
+      return;
+    }
+    
+    const stat = fs.statSync(filePath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+    
+    if (range) {
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunkSize = (end - start) + 1;
+      const file = fs.createReadStream(filePath, { start, end });
+      
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      file.pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Accept-Ranges': 'bytes',
+        'Content-Type': contentType,
+        'Access-Control-Allow-Origin': '*'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+    return;
+  }
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
