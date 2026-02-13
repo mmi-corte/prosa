@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Prosa - Case 10 : La Mairie</title>
     <style>
-        /* --- POLICES ET VARIABLES --- */
+        /* --- POLICES ET VARIABLES --- */ 
         @font-face { 
             font-family: 'Futura'; 
             src: url('/assets/fonts/futuramediumcondensedbt.ttf') format('truetype'), 
@@ -342,8 +342,11 @@
         #mobile-trigger-zone {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 5;
+            /* FIX 1: Z-Index très élevé pour être AU DESSUS de game-area (20) et capter le touch */
+            z-index: 100;
             display: none;
+            /* FIX 2: touch-action none pour désactiver les délais du navigateur */
+            touch-action: none;
         }
 
         /* Progress Dots below bar */
@@ -802,6 +805,13 @@
 
         // --- CONTROLS ---
         mobileTrigger.addEventListener('touchstart', handleAction, {passive: false});
+        // FIX 3: Ajout d'écouteurs directs sur les conteneurs de jeu au cas où
+        barContainer.addEventListener('touchstart', handleAction, {passive: false});
+        gameContainer.addEventListener('touchstart', (e) => {
+           if(gameState.isPlaying) handleAction(e);
+        }, {passive: false});
+
+        // Souris fallback
         barContainer.addEventListener('mousedown', handleAction);
         
         document.addEventListener('keydown', (e) => {
