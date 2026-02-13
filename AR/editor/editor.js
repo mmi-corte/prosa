@@ -506,8 +506,10 @@ function render3DAssets(char) {
     const isVisible = isVisibleInCurrentMode(asset);
     return `
     <div class="asset-card ${!isVisible ? 'hidden-in-mode' : ''}" data-index="${index}" data-type="3d">
-      <div class="asset-preview">
-        <span class="asset-preview-icon">📦</span>
+      <div class="asset-preview asset-preview-3d" data-model-path="../${asset.path}" data-asset-index="${index}">
+        <div class="thumbnail-loading">
+          <div class="thumbnail-spinner"></div>
+        </div>
       </div>
       <div class="asset-name">${asset.id || 'Model ' + (index + 1)}</div>
       <div class="asset-path">${asset.path || 'No path'}</div>
@@ -520,6 +522,19 @@ function render3DAssets(char) {
       </div>
     </div>
   `}).join('');
+  
+  // Load 3D thumbnails asynchronously
+  elements.assets3dList.querySelectorAll('.asset-preview-3d').forEach(async (previewEl) => {
+    const modelPath = previewEl.dataset.modelPath;
+    if (modelPath) {
+      try {
+        const dataURL = await thumbnailRenderer.renderThumbnail(modelPath);
+        previewEl.innerHTML = `<img src="${dataURL}" alt="3D Preview" class="thumbnail-img">`;
+      } catch (err) {
+        previewEl.innerHTML = `<span class="asset-preview-icon">📦</span>`;
+      }
+    }
+  });
   
   // Add event listeners
   elements.assets3dList.querySelectorAll('.edit-asset-btn').forEach(btn => {
@@ -1925,7 +1940,135 @@ const preview = {
   meshes: [],
   videos: [],
   audios: [],
+  mixers: [],
+  clock: null,
+  animationData: {}, // Store animation info per asset: { assetId: { clips: [], currentClip, action, mixer, speed } }
   mode: 'scan'
+};
+
+// ============================================
+// 3D Model Thumbnail Renderer
+// ============================================
+const thumbnailRenderer = {
+  renderer: null,
+  scene: null,
+  camera: null,
+  gltfLoader: null,
+  
+  init() {
+    if (this.renderer) return; // Already initialized
+    
+    // Create off-screen renderer
+    this.renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true,
+      preserveDrawingBuffer: true 
+    });
+    this.renderer.setSize(120, 120);
+    this.renderer.setPixelRatio(1);
+    this.renderer.setClearColor(0x1a1812, 1);
+    
+    // Create scene
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x252218);
+    
+    // Camera for thumbnail view
+    this.camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    this.camera.position.set(2, 1.5, 2);
+    this.camera.lookAt(0, 0.5, 0);
+    
+    // Lighting
+    const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+    this.scene.add(ambient);
+    
+    const directional = new THREE.DirectionalLight(0xffffff, 0.6);
+    directional.position.set(3, 3, 3);
+    this.scene.add(directional);
+    
+    // GLTF Loader
+    this.gltfLoader = new THREE.GLTFLoader();
+  },
+  
+  async renderThumbnail(modelPath) {
+    this.init();
+    
+    return new Promise((resolve, reject) => {
+      // Clear previous model with proper disposal
+      const toRemove = [];
+      this.scene.traverse(child => {
+        if (child.userData.isModel || (child.parent && child.parent.userData.isModel)) {
+          toRemove.push(child);
+        }
+      });
+      toRemove.forEach(obj => {
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) {
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach(m => m.dispose());
+          } else {
+            obj.material.dispose();
+          }
+        }
+        this.scene.remove(obj);
+      });
+      
+      // Load new model
+      this.gltfLoader.load(
+        modelPath,
+        (gltf) => {
+          const model = gltf.scene;
+          model.userData.isModel = true;
+          
+          // Mark all children as part of the model for cleanup
+          model.traverse(child => {
+            child.userData.isModel = true;
+          });
+          
+          // Center and fit model
+          const box = new THREE.Box3().setFromObject(model);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          
+          // Scale to fit in view
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scale = maxDim > 0 ? 1.5 / maxDim : 1;
+          model.scale.setScalar(scale);
+          
+          // Center model
+          model.position.sub(center.multiplyScalar(scale));
+          model.position.y += (size.y * scale) / 2;
+          
+          this.scene.add(model);
+          
+          // Render
+          this.renderer.render(this.scene, this.camera);
+          
+          // Get data URL
+          const dataURL = this.renderer.domElement.toDataURL('image/png');
+          
+          // Clean up model and dispose resources
+          model.traverse(child => {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach(m => m.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          });
+          this.scene.remove(model);
+          
+          resolve(dataURL);
+        },
+        undefined,
+        (error) => {
+          console.error('Thumbnail load error:', error);
+          reject(error);
+        }
+      );
+    });
+  }
 };
 
 // Chroma key shader for green screen removal in preview
@@ -2024,6 +2167,7 @@ function closePreview() {
   }
   
   preview.meshes = [];
+  preview.mixers = [];
   preview.scene = null;
   preview.camera = null;
   preview.renderer = null;
@@ -2068,6 +2212,9 @@ function initPreviewScene() {
   const gridHelper = new THREE.GridHelper(10, 10, 0x444444, 0x333333);
   preview.scene.add(gridHelper);
   
+  // Initialize animation clock
+  preview.clock = new THREE.Clock();
+  
   // Handle resize
   const handleResize = () => {
     if (!preview.renderer) return;
@@ -2084,10 +2231,23 @@ function initPreviewScene() {
     preview.animationId = requestAnimationFrame(animate);
     if (preview.controls) preview.controls.update();
     
+    // Update animation mixers
+    if (preview.clock && preview.mixers.length > 0) {
+      const delta = preview.clock.getDelta();
+      preview.mixers.forEach(mixer => mixer.update(delta));
+    }
+    
     // Update video textures
     preview.videos.forEach(v => {
       if (v.texture && v.video.readyState >= v.video.HAVE_CURRENT_DATA) {
         v.texture.needsUpdate = true;
+      }
+    });
+    
+    // Update billboards - make meshes face camera if billboard is enabled
+    preview.meshes.forEach(mesh => {
+      if (mesh.userData.billboard !== false) {
+        mesh.lookAt(preview.camera.position);
       }
     });
     
@@ -2101,6 +2261,8 @@ function initPreviewScene() {
 function loadPreviewAssets(char) {
   const loading = document.getElementById('preview-loading');
   preview.meshes = [];
+  preview.mixers = [];
+  preview.animationData = {};
   
   // Clear existing meshes (except lights and grid)
   preview.scene.children = preview.scene.children.filter(obj => 
@@ -2130,11 +2292,10 @@ function loadPreviewAssets(char) {
     preview.camera.position.set(0, 1, 4);
     preview.controls.target.set(0, 0.5, 0);
     
-    // Load 2D assets
+    // Load 2D assets - load ALL, control visibility via mesh.visible
     const assets2d = char.assets?.['2d'] || [];
     assets2d.forEach(asset => {
-      // Show asset if visibleIn is not defined OR includes 'scan'
-      if (asset.visibleIn && !asset.visibleIn.includes('scan')) return;
+      const shouldBeVisible = !asset.visibleIn || asset.visibleIn.includes('scan');
       
       const promise = new Promise((resolve) => {
         const assetPath = '../' + asset.path;
@@ -2155,7 +2316,7 @@ function loadPreviewAssets(char) {
           // AR coords: x=left/right, y=up/down, z=depth (towards viewer is positive)
           // Three.js: x=left/right, y=up, z=towards camera
           const pos = asset.position || { x: 0, y: 0, z: 0 };
-          mesh.position.set(pos.x, pos.y + scale/2, pos.z);
+          mesh.position.set(pos.x, pos.y, pos.z);
           mesh.userData.baseScale = scale;
           
           // Apply rotation (convert degrees to radians)
@@ -2167,6 +2328,9 @@ function loadPreviewAssets(char) {
           );
           
           mesh.userData.assetId = asset.id;
+          mesh.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
+          mesh.userData.billboard = asset.billboard !== false;
+          mesh.visible = shouldBeVisible;
           preview.scene.add(mesh);
           preview.meshes.push(mesh);
           resolve();
@@ -2175,11 +2339,10 @@ function loadPreviewAssets(char) {
       loadPromises.push(promise);
     });
     
-    // Load 3D models
+    // Load 3D models - load ALL, control visibility via mesh.visible
     const assets3d = char.assets?.['3d'] || [];
     assets3d.forEach(asset => {
-      // Show asset if visibleIn is not defined OR includes 'scan'
-      if (asset.visibleIn && !asset.visibleIn.includes('scan')) return;
+      const shouldBeVisible3d = !asset.visibleIn || asset.visibleIn.includes('scan');
       
       const promise = new Promise((resolve) => {
         const loader = new THREE.GLTFLoader();
@@ -2200,7 +2363,56 @@ function loadPreviewAssets(char) {
             THREE.MathUtils.degToRad(rot.z)
           );
           
+          // Store animation data for this asset
+          if (gltf.animations && gltf.animations.length > 0) {
+            console.log('📽️ Available animations for', asset.id + ':', gltf.animations.map(a => `"${a.name}" (${a.duration.toFixed(2)}s)`).join(', '));
+            
+            const mixer = new THREE.AnimationMixer(model);
+            const clipName = asset.animation?.clipName;
+            let clipIndex = 0;
+            
+            if (clipName) {
+              const foundIndex = gltf.animations.findIndex(a => a.name === clipName);
+              if (foundIndex >= 0) clipIndex = foundIndex;
+            }
+            
+            const clip = gltf.animations[clipIndex];
+            const action = mixer.clipAction(clip);
+            const speed = asset.animation?.speed || 1;
+            action.timeScale = speed;
+            
+            if (asset.animation?.loop !== false) {
+              action.setLoop(THREE.LoopRepeat);
+            } else {
+              action.setLoop(THREE.LoopOnce);
+              action.clampWhenFinished = true;
+            }
+            
+            // Only play if animation is enabled
+            if (asset.animation) {
+              action.play();
+            }
+            
+            preview.mixers.push(mixer);
+            preview.animationData[asset.id] = {
+              clips: gltf.animations.map((a, i) => ({ name: a.name || `Animation ${i}`, duration: a.duration, index: i })),
+              currentClipIndex: clipIndex,
+              action: action,
+              mixer: mixer,
+              model: model,
+              allClips: gltf.animations,
+              speed: speed,
+              loop: asset.animation?.loop !== false,
+              playing: !!asset.animation
+            };
+          } else {
+            console.log('📽️ No animations found in', asset.id);
+          }
+          
           model.userData.assetId = asset.id;
+          model.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
+          model.userData.billboard = asset.billboard !== false;
+          model.visible = shouldBeVisible3d;
           preview.scene.add(model);
           preview.meshes.push(model);
           resolve();
@@ -2214,123 +2426,271 @@ function loadPreviewAssets(char) {
     preview.camera.position.set(0, 1.6, 0); // Eye level
     preview.controls.target.set(0, 1.6, -5);
     
-    // Load layers
-    const layers = char.layers || {};
-    const sortedLayers = Object.entries(layers)
-      .map(([key, layer]) => ({ key, ...layer }))
-      .sort((a, b) => (a.order || 0) - (b.order || 0));
+    // Check for layers (legacy fata format) or assets.2d (newer format)
+    const hasLayers = char.layers && Object.keys(char.layers).length > 0;
+    const assets2dImmersive = char.assets?.['2d'] || [];
     
-    sortedLayers.forEach(layer => {
-      // Show layer if visibleIn is not defined OR includes 'immersive'
-      if (layer.visibleIn && !layer.visibleIn.includes('immersive')) return;
+    if (hasLayers) {
+      // Legacy format: load from layers object
+      const layers = char.layers;
+      const sortedLayers = Object.entries(layers)
+        .map(([key, layer]) => ({ key, ...layer }))
+        .sort((a, b) => (a.order || 0) - (b.order || 0));
       
-      const isVideo = layer.type === 'video';
-      
-      const promise = new Promise((resolve) => {
-        if (isVideo) {
-          // Create video texture - wait for metadata before creating mesh
-          const video = document.createElement('video');
-          video.src = '../' + layer.path;
-          video.crossOrigin = 'anonymous';
-          video.loop = layer.loop ?? true;
-          video.muted = true;
-          video.playsInline = true;
-          
-          video.addEventListener('loadedmetadata', () => {
-            const videoTexture = new THREE.VideoTexture(video);
-            videoTexture.minFilter = THREE.LinearFilter;
-            videoTexture.magFilter = THREE.LinearFilter;
+      sortedLayers.forEach(layer => {
+        // Always load all layers - visibility is controlled via mesh.visible
+        const shouldBeVisible = !layer.visibleIn || layer.visibleIn.includes('immersive');
+        
+        const isVideo = layer.type === 'video';
+        
+        const promise = new Promise((resolve) => {
+          if (isVideo) {
+            // Create video texture - wait for metadata before creating mesh
+            const video = document.createElement('video');
+            video.src = '../' + layer.path;
+            video.crossOrigin = 'anonymous';
+            video.loop = layer.loop ?? true;
+            video.muted = true;
+            video.playsInline = true;
             
-            // Store video+texture for updates (with layerKey for volume control)
-            preview.videos.push({ video, texture: videoTexture, layerKey: layer.key });
+            video.addEventListener('loadedmetadata', () => {
+              const videoTexture = new THREE.VideoTexture(video);
+              videoTexture.minFilter = THREE.LinearFilter;
+              videoTexture.magFilter = THREE.LinearFilter;
+              
+              // Store video+texture for updates (with layerKey for volume control)
+              preview.videos.push({ video, texture: videoTexture, layerKey: layer.key });
+              
+              // Use actual video dimensions - create at unit size, use mesh.scale
+              const aspect = video.videoWidth / video.videoHeight;
+              const scale = layer.scale || 1;
+              const geo = new THREE.PlaneGeometry(aspect, 1);
+              
+              // Use chroma key shader if chromaKey is specified
+              let mat;
+              if (layer.chromaKey) {
+                const keyColor = new THREE.Color(layer.chromaKey);
+                mat = new THREE.ShaderMaterial({
+                  uniforms: {
+                    tDiffuse: { value: videoTexture },
+                    keyColor: { value: keyColor },
+                    similarity: { value: layer.tolerance || 0.4 },
+                    smoothness: { value: layer.smoothness || 0.08 },
+                    spill: { value: layer.spill || 0.1 }
+                  },
+                  vertexShader: ChromaKeyShader.vertexShader,
+                  fragmentShader: ChromaKeyShader.fragmentShader,
+                  transparent: true,
+                  side: THREE.DoubleSide,
+                  depthWrite: false
+                });
+              } else {
+                mat = new THREE.MeshBasicMaterial({
+                  map: videoTexture,
+                  transparent: true,
+                  side: THREE.DoubleSide
+                });
+              }
+              const mesh = new THREE.Mesh(geo, mat);
+              // Apply scaleX/scaleY for stretch if specified (like in-game)
+              const scaleX = layer.scaleX || 1;
+              const scaleY = layer.scaleY || 1;
+              mesh.scale.set(scale * scaleX, scale * scaleY, 1);
+              mesh.userData.baseScale = scale;
+              mesh.userData.scaleX = scaleX;
+              mesh.userData.scaleY = scaleY;
+              
+              const pos = layer.position || { x: 0, y: 0, z: 0 };
+              mesh.position.set(pos.x, pos.y, pos.z);
+              
+              mesh.userData.layerKey = layer.key;
+              mesh.userData.billboard = layer.billboard !== false; // default true
+              mesh.userData.visibleIn = layer.visibleIn || ['scan', 'immersive'];
+              // Set visibility based on current preview mode
+              const currentMode = preview.mode || 'immersive';
+              mesh.visible = mesh.userData.visibleIn.includes(currentMode);
+              preview.scene.add(mesh);
+              preview.meshes.push(mesh);
+              
+              video.play().catch(e => console.warn('Video autoplay blocked:', e));
+              resolve();
+            });
             
-            // Use actual video dimensions - create at unit size, use mesh.scale
-            const aspect = video.videoWidth / video.videoHeight;
-            const scale = layer.scale || 1;
-            const geo = new THREE.PlaneGeometry(aspect, 1);
+            video.addEventListener('error', (e) => {
+              console.error('Video load error:', layer.path, e);
+              resolve();
+            });
             
-            // Use chroma key shader if chromaKey is specified
-            let mat;
-            if (layer.chromaKey) {
-              const keyColor = new THREE.Color(layer.chromaKey);
-              mat = new THREE.ShaderMaterial({
-                uniforms: {
-                  tDiffuse: { value: videoTexture },
-                  keyColor: { value: keyColor },
-                  similarity: { value: layer.tolerance || 0.4 },
-                  smoothness: { value: layer.smoothness || 0.08 },
-                  spill: { value: layer.spill || 0.1 }
-                },
-                vertexShader: ChromaKeyShader.vertexShader,
-                fragmentShader: ChromaKeyShader.fragmentShader,
-                transparent: true,
-                side: THREE.DoubleSide,
-                depthWrite: false
-              });
-            } else {
-              mat = new THREE.MeshBasicMaterial({
-                map: videoTexture,
+            video.load();
+            
+          } else {
+            const assetPath = '../' + layer.path;
+            textureLoader.load(assetPath, (texture) => {
+              const ratio = texture.image.width / texture.image.height;
+              const scale = layer.scale || 1;
+              // Create at unit size, use mesh.scale for actual scaling
+              const geo = new THREE.PlaneGeometry(ratio, 1);
+              const mat = new THREE.MeshBasicMaterial({
+                map: texture,
                 transparent: true,
                 side: THREE.DoubleSide
               });
-            }
-            const mesh = new THREE.Mesh(geo, mat);
-            // Apply scaleX/scaleY for stretch if specified (like in-game)
-            const scaleX = layer.scaleX || 1;
-            const scaleY = layer.scaleY || 1;
-            mesh.scale.set(scale * scaleX, scale * scaleY, 1);
-            mesh.userData.baseScale = scale;
-            mesh.userData.scaleX = scaleX;
-            mesh.userData.scaleY = scaleY;
-            
-            const pos = layer.position || { x: 0, y: 0, z: 0 };
-            mesh.position.set(pos.x, pos.y, pos.z);
-            
-            mesh.userData.layerKey = layer.key;
-            preview.scene.add(mesh);
-            preview.meshes.push(mesh);
-            
-            video.play().catch(e => console.warn('Video autoplay blocked:', e));
-            resolve();
-          });
-          
-          video.addEventListener('error', (e) => {
-            console.error('Video load error:', layer.path, e);
-            resolve();
-          });
-          
-          video.load();
-          
-        } else {
-          const assetPath = '../' + layer.path;
+              const mesh = new THREE.Mesh(geo, mat);
+              // Apply scaleX/scaleY for stretch if specified (like in-game)
+              const scaleX = layer.scaleX || 1;
+              const scaleY = layer.scaleY || 1;
+              mesh.scale.set(scale * scaleX, scale * scaleY, 1);
+              mesh.userData.baseScale = scale;
+              mesh.userData.scaleX = scaleX;
+              mesh.userData.scaleY = scaleY;
+              
+              const pos = layer.position || { x: 0, y: 0, z: 0 };
+              mesh.position.set(pos.x, pos.y, pos.z);
+              
+              mesh.userData.layerKey = layer.key;
+              mesh.userData.billboard = layer.billboard !== false; // default true
+              mesh.userData.visibleIn = layer.visibleIn || ['scan', 'immersive'];
+              // Set visibility based on current preview mode
+              const currentModeImg = preview.mode || 'immersive';
+              mesh.visible = mesh.userData.visibleIn.includes(currentModeImg);
+              preview.scene.add(mesh);
+              preview.meshes.push(mesh);
+              resolve();
+            }, undefined, resolve);
+          }
+        });
+        loadPromises.push(promise);
+      });
+    } else if (assets2dImmersive.length > 0) {
+      // Newer format: load from assets.2d array (filter by visibleIn)
+      console.log('Editor: Loading assets.2d for immersive mode:', assets2dImmersive.length, 'assets');
+      
+      // Sort by z position (background first)
+      const sortedAssets = [...assets2dImmersive].sort((a, b) => {
+        const zA = a.position?.z ?? 0;
+        const zB = b.position?.z ?? 0;
+        return zA - zB;
+      });
+      
+      sortedAssets.forEach(asset => {
+        const shouldBeVisible = !asset.visibleIn || asset.visibleIn.includes('immersive');
+        
+        const promise = new Promise((resolve) => {
+          const assetPath = '../' + asset.path;
           textureLoader.load(assetPath, (texture) => {
             const ratio = texture.image.width / texture.image.height;
-            const scale = layer.scale || 1;
-            // Create at unit size, use mesh.scale for actual scaling
+            const scale = asset.scale || 1;
             const geo = new THREE.PlaneGeometry(ratio, 1);
             const mat = new THREE.MeshBasicMaterial({
               map: texture,
               transparent: true,
+              opacity: asset.opacity ?? 1,
               side: THREE.DoubleSide
             });
             const mesh = new THREE.Mesh(geo, mat);
-            // Apply scaleX/scaleY for stretch if specified (like in-game)
-            const scaleX = layer.scaleX || 1;
-            const scaleY = layer.scaleY || 1;
-            mesh.scale.set(scale * scaleX, scale * scaleY, 1);
-            mesh.userData.baseScale = scale;
-            mesh.userData.scaleX = scaleX;
-            mesh.userData.scaleY = scaleY;
+            mesh.scale.set(scale, scale, 1);
             
-            const pos = layer.position || { x: 0, y: 0, z: 0 };
+            const pos = asset.position || { x: 0, y: 0, z: 0 };
             mesh.position.set(pos.x, pos.y, pos.z);
+            mesh.userData.baseScale = scale;
             
-            mesh.userData.layerKey = layer.key;
+            const rot = asset.rotation || { x: 0, y: 0, z: 0 };
+            mesh.rotation.set(
+              THREE.MathUtils.degToRad(rot.x),
+              THREE.MathUtils.degToRad(rot.y),
+              THREE.MathUtils.degToRad(rot.z)
+            );
+            
+            mesh.userData.assetId = asset.id;
+            mesh.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
+            mesh.userData.billboard = asset.billboard !== false;
+            mesh.visible = shouldBeVisible;
             preview.scene.add(mesh);
             preview.meshes.push(mesh);
             resolve();
           }, undefined, resolve);
-        }
+        });
+        loadPromises.push(promise);
+      });
+    }
+    
+    // Load 3D models for immersive mode - load ALL, control visibility via mesh.visible
+    const assets3dImmersive = char.assets?.['3d'] || [];
+    assets3dImmersive.forEach(asset => {
+      const shouldBeVisible3d = !asset.visibleIn || asset.visibleIn.includes('immersive');
+      
+      const promise = new Promise((resolve) => {
+        const loader = new THREE.GLTFLoader();
+        const assetPath = '../' + asset.path;
+        loader.load(assetPath, (gltf) => {
+          const model = gltf.scene;
+          const scale = asset.scale || 1;
+          model.scale.set(scale, scale, scale);
+          
+          const pos = asset.position || { x: 0, y: 0, z: 0 };
+          model.position.set(pos.x, pos.y, pos.z);
+          
+          const rot = asset.rotation || { x: 0, y: 0, z: 0 };
+          model.rotation.set(
+            THREE.MathUtils.degToRad(rot.x),
+            THREE.MathUtils.degToRad(rot.y),
+            THREE.MathUtils.degToRad(rot.z)
+          );
+          
+          // Store animation data for this asset
+          if (gltf.animations && gltf.animations.length > 0) {
+            console.log('📽️ Available animations for', asset.id + ':', gltf.animations.map(a => `"${a.name}" (${a.duration.toFixed(2)}s)`).join(', '));
+            
+            const mixer = new THREE.AnimationMixer(model);
+            const clipName = asset.animation?.clipName;
+            let clipIndex = 0;
+            
+            if (clipName) {
+              const foundIndex = gltf.animations.findIndex(a => a.name === clipName);
+              if (foundIndex >= 0) clipIndex = foundIndex;
+            }
+            
+            const clip = gltf.animations[clipIndex];
+            const action = mixer.clipAction(clip);
+            const speed = asset.animation?.speed || 1;
+            action.timeScale = speed;
+            
+            if (asset.animation?.loop !== false) {
+              action.setLoop(THREE.LoopRepeat);
+            } else {
+              action.setLoop(THREE.LoopOnce);
+              action.clampWhenFinished = true;
+            }
+            
+            // Only play if animation is enabled
+            if (asset.animation) {
+              action.play();
+            }
+            
+            preview.mixers.push(mixer);
+            preview.animationData[asset.id] = {
+              clips: gltf.animations.map((a, i) => ({ name: a.name || `Animation ${i}`, duration: a.duration, index: i })),
+              currentClipIndex: clipIndex,
+              action: action,
+              mixer: mixer,
+              model: model,
+              allClips: gltf.animations,
+              speed: speed,
+              loop: asset.animation?.loop !== false,
+              playing: !!asset.animation
+            };
+          } else {
+            console.log('📽️ No animations found in', asset.id);
+          }
+          
+          model.userData.assetId = asset.id;
+          model.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
+          model.userData.billboard = asset.billboard !== false;
+          model.visible = shouldBeVisible3d;
+          preview.scene.add(model);
+          preview.meshes.push(model);
+          resolve();
+        }, undefined, resolve);
       });
       loadPromises.push(promise);
     });
@@ -2340,6 +2700,7 @@ function loadPreviewAssets(char) {
   Promise.all(loadPromises).then(() => {
     loading.classList.add('hidden');
     populatePreviewControls(char);
+    populateAnimationControls();
   });
 }
 
@@ -2375,44 +2736,51 @@ function populatePreviewControls(char) {
   container.innerHTML = '';
   
   if (preview.mode === 'scan') {
-    // 2D Assets
+    // 2D Assets - show ALL, visibility checkboxes control which modes they appear in
     const assets2d = char.assets?.['2d'] || [];
     assets2d.forEach((asset, idx) => {
-      // Show asset if visibleIn is not defined OR includes 'scan'
-      if (asset.visibleIn && !asset.visibleIn.includes('scan')) return;
       container.appendChild(createAssetControlCard(asset, '2d', idx, '🖼️'));
     });
     
-    // 3D Assets
+    // 3D Assets - show ALL, visibility checkboxes control which modes they appear in
     const assets3d = char.assets?.['3d'] || [];
     assets3d.forEach((asset, idx) => {
-      // Show asset if visibleIn is not defined OR includes 'scan'
-      if (asset.visibleIn && !asset.visibleIn.includes('scan')) return;
       container.appendChild(createAssetControlCard(asset, '3d', idx, '📦'));
     });
     
-    // Sounds for scan mode
+    // Sounds for scan mode - show ALL sounds
     const sounds = char.sounds || {};
     Object.entries(sounds).forEach(([key, sound]) => {
-      // Show sound if visibleIn is not defined OR includes 'scan'
-      if (sound.visibleIn && !sound.visibleIn.includes('scan')) return;
       container.appendChild(createSoundControlCard(key, sound));
     });
   } else {
-    // Layers
-    const layers = char.layers || {};
-    Object.entries(layers).forEach(([key, layer]) => {
-      // Show layer if visibleIn is not defined OR includes 'immersive'
-      if (layer.visibleIn && !layer.visibleIn.includes('immersive')) return;
-      const icon = layer.type === 'video' ? '🎬' : '🖼️';
-      container.appendChild(createLayerControlCard(key, layer, icon));
+    // Check for layers (legacy format) or assets.2d (newer format)
+    const hasLayers = char.layers && Object.keys(char.layers).length > 0;
+    const assets2dImmersive = char.assets?.['2d'] || [];
+    
+    if (hasLayers) {
+      // Legacy format: Layers - show ALL layers, visibility checkboxes control which modes they appear in
+      const layers = char.layers;
+      Object.entries(layers).forEach(([key, layer]) => {
+        const icon = layer.type === 'video' ? '🎬' : '🖼️';
+        container.appendChild(createLayerControlCard(key, layer, icon));
+      });
+    } else if (assets2dImmersive.length > 0) {
+      // Newer format: use assets.2d for immersive mode
+      assets2dImmersive.forEach((asset, idx) => {
+        container.appendChild(createAssetControlCard(asset, '2d', idx, '🖼️'));
+      });
+    }
+    
+    // 3D Assets for immersive mode - show ALL, visibility checkboxes control which modes they appear in
+    const assets3d = char.assets?.['3d'] || [];
+    assets3d.forEach((asset, idx) => {
+      container.appendChild(createAssetControlCard(asset, '3d', idx, '📦'));
     });
     
-    // Sounds for immersive mode
+    // Sounds for immersive mode - show ALL sounds
     const sounds = char.sounds || {};
     Object.entries(sounds).forEach(([key, sound]) => {
-      // Show sound if visibleIn is not defined OR includes 'immersive'
-      if (sound.visibleIn && !sound.visibleIn.includes('immersive')) return;
       container.appendChild(createSoundControlCard(key, sound));
     });
   }
@@ -2425,9 +2793,18 @@ function createAssetControlCard(asset, assetType, index, icon) {
   card.dataset.assetIndex = index;
   card.dataset.assetId = asset.id;
   
+  // Check if asset is visible in current mode
+  const currentMode = preview.mode || 'scan';
+  const visibleIn = asset.visibleIn || ['scan', 'immersive'];
+  const isHiddenInCurrentMode = !visibleIn.includes(currentMode);
+  
+  if (isHiddenInCurrentMode) {
+    card.classList.add('hidden-in-mode');
+  }
+  
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
-      <span class="preview-asset-name">${icon} ${asset.id || 'Asset ' + index}</span>
+      <span class="preview-asset-name">${icon} ${asset.id || 'Asset ' + index} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
       <span class="preview-asset-type">${assetType.toUpperCase()}</span>
     </div>
     <div class="preview-asset-card-body">
@@ -2467,6 +2844,37 @@ function createAssetControlCard(asset, assetType, index, icon) {
         </div>
       </div>
       
+      ${assetType === '3d' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Rotation (°)</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="1" value="${asset.rotation?.x || 0}"
+              data-prop="rotation.x" data-type="${assetType}" data-index="${index}"
+              oninput="updatePreviewAsset(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="1" value="${asset.rotation?.y || 0}"
+              data-prop="rotation.y" data-type="${assetType}" data-index="${index}"
+              oninput="updatePreviewAsset(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="1" value="${asset.rotation?.z || 0}"
+              data-prop="rotation.z" data-type="${assetType}" data-index="${index}"
+              oninput="updatePreviewAsset(this)">
+          </div>
+        </div>
+      </div>
+      ` : ''}
+      ${assetType === '3d' ? `
+      <div class="preview-control-group animation-controls" id="anim-controls-${asset.id}">
+        <div class="preview-control-label"><span>🎬 Animation</span></div>
+        <div class="anim-controls-placeholder">Loading animations...</div>
+      </div>
+      ` : ''}
       <div class="preview-control-group">
         <div class="preview-control-label">
           <span>Opacity</span>
@@ -2478,10 +2886,187 @@ function createAssetControlCard(asset, assetType, index, icon) {
           data-prop="opacity" data-type="${assetType}" data-index="${index}"
           oninput="updatePreviewAsset(this)">
       </div>
+      
+      <div class="preview-control-group">
+        <label class="preview-checkbox-label">
+          <input type="checkbox" ${asset.billboard !== false ? 'checked' : ''}
+            data-prop="billboard" data-type="${assetType}" data-index="${index}"
+            onchange="updatePreviewAsset(this)">
+          <span>Always face camera (billboard)</span>
+        </label>
+      </div>
+      
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Visibility</span></div>
+        <div class="preview-visibility-row">
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!asset.visibleIn || asset.visibleIn.includes('scan') ? 'checked' : ''}
+              data-prop="visibleIn.scan" data-type="${assetType}" data-index="${index}"
+              onchange="updatePreviewAsset(this)">
+            <span>📱 Scan</span>
+          </label>
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!asset.visibleIn || asset.visibleIn.includes('immersive') ? 'checked' : ''}
+              data-prop="visibleIn.immersive" data-type="${assetType}" data-index="${index}"
+              onchange="updatePreviewAsset(this)">
+            <span>🥽 Immersive</span>
+          </label>
+        </div>
+      </div>
     </div>
   `;
   
   return card;
+}
+
+// Populate animation controls after models are loaded
+function populateAnimationControls() {
+  Object.entries(preview.animationData).forEach(([assetId, animData]) => {
+    const container = document.getElementById(`anim-controls-${assetId}`);
+    if (!container) return;
+    
+    const placeholder = container.querySelector('.anim-controls-placeholder');
+    if (!placeholder) return;
+    
+    if (animData.clips.length === 0) {
+      placeholder.textContent = 'No animations in model';
+      return;
+    }
+    
+    // Build animation clip options
+    const clipOptions = animData.clips.map((clip, i) => 
+      `<option value="${i}" ${i === animData.currentClipIndex ? 'selected' : ''}>${clip.name} (${clip.duration.toFixed(1)}s)</option>`
+    ).join('');
+    
+    placeholder.outerHTML = `
+      <label class="preview-checkbox-label">
+        <input type="checkbox" ${animData.playing ? 'checked' : ''}
+          data-anim-prop="enabled" data-asset-id="${assetId}"
+          onchange="updateAnimationControl(this)">
+        <span>Enable animation</span>
+      </label>
+      <div class="preview-control-subgroup">
+        <label class="anim-select-label">Clip:</label>
+        <select class="anim-clip-select" data-anim-prop="clip" data-asset-id="${assetId}"
+          onchange="updateAnimationControl(this)">
+          ${clipOptions}
+        </select>
+      </div>
+      <div class="preview-control-subgroup">
+        <div class="preview-control-label">
+          <span>Speed</span>
+          <span class="preview-control-value" id="speed-val-${assetId}">${animData.speed.toFixed(2)}x</span>
+        </div>
+        <input type="range" class="preview-slider" 
+          min="0.1" max="3" step="0.1" 
+          value="${animData.speed}"
+          data-anim-prop="speed" data-asset-id="${assetId}"
+          oninput="updateAnimationControl(this)">
+      </div>
+      <label class="preview-checkbox-label">
+        <input type="checkbox" ${animData.loop ? 'checked' : ''}
+          data-anim-prop="loop" data-asset-id="${assetId}"
+          onchange="updateAnimationControl(this)">
+        <span>Loop</span>
+      </label>
+    `;
+  });
+}
+
+// Handle animation control changes
+function updateAnimationControl(input) {
+  const assetId = input.dataset.assetId;
+  const prop = input.dataset.animProp;
+  const animData = preview.animationData[assetId];
+  
+  if (!animData) return;
+  
+  switch (prop) {
+    case 'enabled':
+      animData.playing = input.checked;
+      if (input.checked) {
+        animData.action.play();
+      } else {
+        animData.action.stop();
+      }
+      break;
+      
+    case 'clip':
+      const clipIndex = parseInt(input.value);
+      if (clipIndex !== animData.currentClipIndex) {
+        // Stop current action
+        animData.action.stop();
+        
+        // Create new action for selected clip
+        const newClip = animData.allClips[clipIndex];
+        const newAction = animData.mixer.clipAction(newClip);
+        newAction.timeScale = animData.speed;
+        
+        if (animData.loop) {
+          newAction.setLoop(THREE.LoopRepeat);
+        } else {
+          newAction.setLoop(THREE.LoopOnce);
+          newAction.clampWhenFinished = true;
+        }
+        
+        if (animData.playing) {
+          newAction.play();
+        }
+        
+        animData.currentClipIndex = clipIndex;
+        animData.action = newAction;
+      }
+      break;
+      
+    case 'speed':
+      animData.speed = parseFloat(input.value);
+      animData.action.timeScale = animData.speed;
+      const speedLabel = document.getElementById(`speed-val-${assetId}`);
+      if (speedLabel) speedLabel.textContent = animData.speed.toFixed(2) + 'x';
+      break;
+      
+    case 'loop':
+      animData.loop = input.checked;
+      if (animData.loop) {
+        animData.action.setLoop(THREE.LoopRepeat);
+      } else {
+        animData.action.setLoop(THREE.LoopOnce);
+        animData.action.clampWhenFinished = true;
+      }
+      break;
+  }
+  
+  // Update the JSON config for this asset
+  updateAssetAnimationConfig(assetId);
+}
+
+// Update the character JSON with animation config
+function updateAssetAnimationConfig(assetId) {
+  const char = getSelectedCharacter();
+  if (!char) return;
+  
+  const animData = preview.animationData[assetId];
+  if (!animData) return;
+  
+  // Find the asset in the character's 3d assets
+  const asset = char.assets?.['3d']?.find(a => a.id === assetId);
+  if (!asset) return;
+  
+  if (animData.playing) {
+    // Set or update animation config
+    const clipName = animData.clips[animData.currentClipIndex]?.name;
+    asset.animation = {
+      clipName: clipName,
+      speed: animData.speed,
+      loop: animData.loop
+    };
+  } else {
+    // Remove animation config if disabled
+    delete asset.animation;
+  }
+  
+  // Mark as modified
+  markUnsaved();
 }
 
 function createLayerControlCard(key, layer, icon) {
@@ -2489,9 +3074,18 @@ function createLayerControlCard(key, layer, icon) {
   card.className = 'preview-asset-card';
   card.dataset.layerKey = key;
   
+  // Check if layer is visible in current mode
+  const currentMode = preview.mode || 'immersive';
+  const visibleIn = layer.visibleIn || ['scan', 'immersive'];
+  const isHiddenInCurrentMode = !visibleIn.includes(currentMode);
+  
+  if (isHiddenInCurrentMode) {
+    card.classList.add('hidden-in-mode');
+  }
+  
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
-      <span class="preview-asset-name">${icon} ${key}</span>
+      <span class="preview-asset-name">${icon} ${key} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
       <span class="preview-asset-type">${layer.type === 'video' ? 'VIDEO' : 'IMAGE'}</span>
     </div>
     <div class="preview-asset-card-body">
@@ -2555,6 +3149,33 @@ function createLayerControlCard(key, layer, icon) {
         </div>
       </div>
       
+      <div class="preview-control-group">
+        <label class="preview-checkbox-label">
+          <input type="checkbox" ${layer.billboard !== false ? 'checked' : ''}
+            data-prop="billboard" data-layer="${key}"
+            onchange="updatePreviewLayer(this)">
+          <span>Always face camera (billboard)</span>
+        </label>
+      </div>
+      
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Visibility</span></div>
+        <div class="preview-visibility-row">
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!layer.visibleIn || layer.visibleIn.includes('scan') ? 'checked' : ''}
+              data-prop="visibleIn.scan" data-layer="${key}"
+              onchange="updatePreviewLayer(this)">
+            <span>📱 Scan</span>
+          </label>
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!layer.visibleIn || layer.visibleIn.includes('immersive') ? 'checked' : ''}
+              data-prop="visibleIn.immersive" data-layer="${key}"
+              onchange="updatePreviewLayer(this)">
+            <span>🥽 Immersive</span>
+          </label>
+        </div>
+      </div>
+      
       ${layer.type === 'video' ? `
       <div class="preview-control-group">
         <div class="preview-control-label">
@@ -2614,6 +3235,15 @@ function createSoundControlCard(key, sound) {
   card.className = 'preview-asset-card';
   card.dataset.soundKey = key;
   
+  // Check if sound is visible in current mode
+  const currentMode = preview.mode || 'scan';
+  const visibleIn = sound.visibleIn || ['scan', 'immersive'];
+  const isHiddenInCurrentMode = !visibleIn.includes(currentMode);
+  
+  if (isHiddenInCurrentMode) {
+    card.classList.add('hidden-in-mode');
+  }
+  
   // Create audio element for preview
   let audioEl = preview.audios.find(a => a.key === key)?.audio;
   if (!audioEl) {
@@ -2625,7 +3255,7 @@ function createSoundControlCard(key, sound) {
   
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
-      <span class="preview-asset-name">🔊 ${key}</span>
+      <span class="preview-asset-name">🔊 ${key} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
       <span class="preview-asset-type">SOUND</span>
     </div>
     <div class="preview-asset-card-body">
@@ -2639,6 +3269,23 @@ function createSoundControlCard(key, sound) {
           value="${sound.volume ?? 0.5}"
           data-prop="volume" data-sound="${key}"
           oninput="updatePreviewSound(this)">
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Visibility</span></div>
+        <div class="preview-visibility-row">
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!sound.visibleIn || sound.visibleIn.includes('scan') ? 'checked' : ''}
+              data-prop="visibleIn.scan" data-sound="${key}"
+              onchange="updatePreviewSound(this)">
+            <span>📱 Scan</span>
+          </label>
+          <label class="preview-checkbox-label small">
+            <input type="checkbox" ${!sound.visibleIn || sound.visibleIn.includes('immersive') ? 'checked' : ''}
+              data-prop="visibleIn.immersive" data-sound="${key}"
+              onchange="updatePreviewSound(this)">
+            <span>🥽 Immersive</span>
+          </label>
+        </div>
       </div>
       <div class="preview-control-group" style="flex-direction: row; gap: 8px;">
         <button class="preview-sound-btn" onclick="togglePreviewSound('${key}')" id="sound-toggle-${key}">
@@ -2657,15 +3304,18 @@ function createSoundControlCard(key, sound) {
 function updatePreviewSound(input) {
   const prop = input.dataset.prop;
   const soundKey = input.dataset.sound;
-  const value = parseFloat(input.value);
+  const isCheckbox = input.type === 'checkbox';
+  const value = isCheckbox ? input.checked : parseFloat(input.value);
   
-  // Update value display
-  const valDisplay = document.getElementById(`volume-val-sound-${soundKey}`);
-  if (valDisplay) valDisplay.textContent = (value * 100).toFixed(0) + '%';
+  // Update value display (skip for checkboxes)
+  if (!isCheckbox && prop === 'volume') {
+    const valDisplay = document.getElementById(`volume-val-sound-${soundKey}`);
+    if (valDisplay) valDisplay.textContent = (value * 100).toFixed(0) + '%';
+  }
   
   // Update audio volume
   const audioInfo = preview.audios.find(a => a.key === soundKey);
-  if (audioInfo?.audio) {
+  if (prop === 'volume' && audioInfo?.audio) {
     audioInfo.audio.volume = value;
   }
   
@@ -2673,7 +3323,45 @@ function updatePreviewSound(input) {
   if (document.getElementById('preview-autosave')?.checked) {
     const char = getSelectedCharacter();
     if (char?.sounds?.[soundKey]) {
-      char.sounds[soundKey].volume = value;
+      if (prop === 'volume') {
+        char.sounds[soundKey].volume = value;
+      } else if (prop.startsWith('visibleIn.')) {
+        // Handle visibility toggle for scan/immersive mode
+        const mode = prop.split('.')[1]; // 'scan' or 'immersive'
+        let currentVisibleIn = char.sounds[soundKey].visibleIn;
+        if (!currentVisibleIn) {
+          currentVisibleIn = ['scan', 'immersive'];
+          char.sounds[soundKey].visibleIn = currentVisibleIn;
+        }
+        
+        if (value && !currentVisibleIn.includes(mode)) {
+          currentVisibleIn.push(mode);
+        } else if (!value) {
+          const idx = currentVisibleIn.indexOf(mode);
+          if (idx > -1) currentVisibleIn.splice(idx, 1);
+        }
+        
+        // Update card visual indicator
+        const currentMode = preview.mode || 'scan';
+        const newVisible = currentVisibleIn.includes(currentMode);
+        const card = document.querySelector(`.preview-asset-card[data-sound-key="${soundKey}"]`);
+        if (card) {
+          if (newVisible) {
+            card.classList.remove('hidden-in-mode');
+          } else {
+            card.classList.add('hidden-in-mode');
+          }
+          const nameSpan = card.querySelector('.preview-asset-name');
+          if (nameSpan) {
+            const indicator = nameSpan.querySelector('.hidden-indicator');
+            if (!newVisible && !indicator) {
+              nameSpan.insertAdjacentHTML('beforeend', '<span class="hidden-indicator">👁️‍🗨️</span>');
+            } else if (newVisible && indicator) {
+              indicator.remove();
+            }
+          }
+        }
+      }
       markUnsaved();
     }
   }
@@ -2710,40 +3398,93 @@ function updatePreviewAsset(input) {
   const prop = input.dataset.prop;
   const assetType = input.dataset.type;
   const index = parseInt(input.dataset.index);
-  const value = parseFloat(input.value);
+  const isCheckbox = input.type === 'checkbox';
+  const value = isCheckbox ? input.checked : parseFloat(input.value);
   
-  // Update value display
-  const propName = prop.split('.')[0];
-  const valDisplay = document.getElementById(`${propName}-val-${assetType}-${index}`);
-  if (valDisplay) valDisplay.textContent = value.toFixed(2);
+  // Update value display (skip for checkboxes)
+  if (!isCheckbox) {
+    const propName = prop.split('.')[0];
+    const valDisplay = document.getElementById(`${propName}-val-${assetType}-${index}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(2);
+  }
   
   // Find the mesh
-  const mesh = preview.meshes.find(m => 
-    m.userData.assetId === getSelectedCharacter()?.assets?.[assetType]?.[index]?.id
-  );
+  const char = getSelectedCharacter();
+  const assetId = char?.assets?.[assetType]?.[index]?.id;
+  const mesh = preview.meshes.find(m => m.userData.assetId === assetId);
   
-  if (!mesh) return;
+  if (!mesh) {
+    console.warn('Mesh not found for asset:', assetType, index, assetId);
+    return;
+  }
   
   // Update mesh
   if (prop === 'scale') {
-    // Set scale directly - geometry is unit size
-    mesh.scale.set(value, value, 1);
-    // Update Y position to keep asset grounded
-    const char = getSelectedCharacter();
-    const posY = char?.assets?.[assetType]?.[index]?.position?.y || 0;
-    mesh.position.y = posY + value / 2;
+    // For 3D models, scale uniformly; for 2D planes, keep flat
+    if (assetType === '3d') {
+      mesh.scale.set(value, value, value);
+    } else {
+      mesh.scale.set(value, value, 1);
+    }
   } else if (prop.startsWith('position.')) {
     const axis = prop.split('.')[1];
     if (axis === 'x') mesh.position.x = value;
-    else if (axis === 'y') mesh.position.y = value + mesh.scale.y / 2;
+    else if (axis === 'y') mesh.position.y = value;
     else if (axis === 'z') mesh.position.z = value;
+  } else if (prop.startsWith('rotation.')) {
+    // Rotation for 3D models (degrees to radians)
+    const axis = prop.split('.')[1];
+    const radians = THREE.MathUtils.degToRad(value);
+    if (axis === 'x') mesh.rotation.x = radians;
+    else if (axis === 'y') mesh.rotation.y = radians;
+    else if (axis === 'z') mesh.rotation.z = radians;
   } else if (prop === 'opacity') {
     if (mesh.material) mesh.material.opacity = value;
+  } else if (prop === 'billboard') {
+    mesh.userData.billboard = value;
+  } else if (prop.startsWith('visibleIn.')) {
+    // Handle visibility toggle for scan/immersive mode
+    const mode = prop.split('.')[1]; // 'scan' or 'immersive'
+    let currentVisibleIn = mesh.userData.visibleIn;
+    if (!currentVisibleIn) {
+      currentVisibleIn = ['scan', 'immersive'];
+      mesh.userData.visibleIn = currentVisibleIn;
+    }
+    
+    if (value && !currentVisibleIn.includes(mode)) {
+      currentVisibleIn.push(mode);
+    } else if (!value) {
+      const idx = currentVisibleIn.indexOf(mode);
+      if (idx > -1) currentVisibleIn.splice(idx, 1);
+    }
+    
+    // Update mesh visibility based on current preview mode
+    const currentMode = preview.mode || 'scan';
+    const newVisible = currentVisibleIn.includes(currentMode);
+    mesh.visible = newVisible;
+    
+    // Update card visual indicator
+    const card = document.querySelector(`.preview-asset-card[data-asset-id="${assetId}"]`);
+    if (card) {
+      if (newVisible) {
+        card.classList.remove('hidden-in-mode');
+      } else {
+        card.classList.add('hidden-in-mode');
+      }
+      const nameSpan = card.querySelector('.preview-asset-name');
+      if (nameSpan) {
+        const indicator = nameSpan.querySelector('.hidden-indicator');
+        if (!newVisible && !indicator) {
+          nameSpan.insertAdjacentHTML('beforeend', '<span class="hidden-indicator">👁️‍🗨️</span>');
+        } else if (newVisible && indicator) {
+          indicator.remove();
+        }
+      }
+    }
   }
   
   // Auto-save to data if enabled
   if (document.getElementById('preview-autosave')?.checked) {
-    const char = getSelectedCharacter();
     if (char?.assets?.[assetType]?.[index]) {
       if (prop === 'scale') {
         char.assets[assetType][index].scale = value;
@@ -2753,8 +3494,21 @@ function updatePreviewAsset(input) {
         }
         const axis = prop.split('.')[1];
         char.assets[assetType][index].position[axis] = value;
+      } else if (prop.startsWith('rotation.')) {
+        if (!char.assets[assetType][index].rotation) {
+          char.assets[assetType][index].rotation = { x: 0, y: 0, z: 0 };
+        }
+        const axis = prop.split('.')[1];
+        char.assets[assetType][index].rotation[axis] = value;
       } else if (prop === 'opacity') {
         char.assets[assetType][index].opacity = value;
+      } else if (prop === 'billboard') {
+        char.assets[assetType][index].billboard = value;
+      } else if (prop.startsWith('visibleIn.')) {
+        // Save visibleIn array from mesh userData
+        if (mesh?.userData.visibleIn) {
+          char.assets[assetType][index].visibleIn = [...mesh.userData.visibleIn];
+        }
       }
       markUnsaved();
     }
@@ -2764,24 +3518,30 @@ function updatePreviewAsset(input) {
 function updatePreviewLayer(input) {
   const prop = input.dataset.prop;
   const layerKey = input.dataset.layer;
-  const value = parseFloat(input.value);
+  const isCheckbox = input.type === 'checkbox';
+  const value = isCheckbox ? input.checked : parseFloat(input.value);
   
-  // Update value display
-  const propName = prop.split('.')[0];
-  const valDisplay = document.getElementById(`${propName}-val-${layerKey}`) || 
-                     document.getElementById(`${propName}-val-layer-${layerKey}`);
-  if (valDisplay) {
-    if (prop === 'volume') {
-      valDisplay.textContent = (value * 100).toFixed(0) + '%';
-    } else {
-      valDisplay.textContent = value.toFixed(2);
+  // Update value display (skip for checkboxes)
+  if (!isCheckbox) {
+    const propName = prop.split('.')[0];
+    const valDisplay = document.getElementById(`${propName}-val-${layerKey}`) || 
+                       document.getElementById(`${propName}-val-layer-${layerKey}`);
+    if (valDisplay) {
+      if (prop === 'volume') {
+        valDisplay.textContent = (value * 100).toFixed(0) + '%';
+      } else {
+        valDisplay.textContent = value.toFixed(2);
+      }
     }
   }
   
   // Find the mesh
   const mesh = preview.meshes.find(m => m.userData.layerKey === layerKey);
   
-  if (!mesh) return;
+  if (!mesh) {
+    console.warn('Mesh not found for layer:', layerKey, 'Available:', preview.meshes.map(m => m.userData.layerKey));
+    return;
+  }
   
   // Update mesh
   if (prop === 'scale') {
@@ -2807,6 +3567,54 @@ function updatePreviewLayer(input) {
     if (axis === 'x') mesh.position.x = value;
     else if (axis === 'y') mesh.position.y = value;
     else if (axis === 'z') mesh.position.z = value;
+  } else if (prop === 'billboard') {
+    // Store billboard setting on mesh userData for preview render loop
+    mesh.userData.billboard = value;
+  } else if (prop.startsWith('visibleIn.')) {
+    // Handle visibility toggle for scan/immersive mode
+    const mode = prop.split('.')[1]; // 'scan' or 'immersive'
+    let currentVisibleIn = mesh.userData.visibleIn;
+    if (!currentVisibleIn) {
+      currentVisibleIn = ['scan', 'immersive'];
+      mesh.userData.visibleIn = currentVisibleIn;
+    }
+    
+    console.log('Visibility toggle:', layerKey, mode, value, 'current:', [...currentVisibleIn]);
+    
+    if (value && !currentVisibleIn.includes(mode)) {
+      currentVisibleIn.push(mode);
+    } else if (!value) {
+      const idx = currentVisibleIn.indexOf(mode);
+      if (idx > -1) currentVisibleIn.splice(idx, 1);
+    }
+    
+    console.log('After toggle:', [...currentVisibleIn]);
+    
+    // Update mesh visibility based on current preview mode
+    const currentMode = preview.mode || state.previewMode || 'immersive';
+    const newVisible = currentVisibleIn.includes(currentMode);
+    console.log('Setting mesh.visible:', newVisible, 'mode:', currentMode);
+    mesh.visible = newVisible;
+    
+    // Update card visual indicator
+    const card = document.querySelector(`.preview-asset-card[data-layer-key="${layerKey}"]`);
+    if (card) {
+      if (newVisible) {
+        card.classList.remove('hidden-in-mode');
+      } else {
+        card.classList.add('hidden-in-mode');
+      }
+      // Update hidden indicator in header
+      const nameSpan = card.querySelector('.preview-asset-name');
+      if (nameSpan) {
+        const indicator = nameSpan.querySelector('.hidden-indicator');
+        if (!newVisible && !indicator) {
+          nameSpan.insertAdjacentHTML('beforeend', '<span class="hidden-indicator">👁️‍🗨️</span>');
+        } else if (newVisible && indicator) {
+          indicator.remove();
+        }
+      }
+    }
   } else if (prop === 'volume') {
     // Update video volume
     const videoInfo = preview.videos?.find(v => v.layerKey === layerKey);
@@ -2839,6 +3647,8 @@ function updatePreviewLayer(input) {
         }
         const axis = prop.split('.')[1];
         char.layers[layerKey].position[axis] = value;
+      } else if (prop === 'billboard') {
+        char.layers[layerKey].billboard = value;
       } else if (prop === 'tolerance') {
         char.layers[layerKey].tolerance = value;
       } else if (prop === 'smoothness') {
@@ -2847,6 +3657,12 @@ function updatePreviewLayer(input) {
         char.layers[layerKey].spill = value;
       } else if (prop === 'volume') {
         char.layers[layerKey].volume = value;
+      } else if (prop.startsWith('visibleIn.')) {
+        // Save visibleIn array from mesh userData
+        const mesh = preview.meshes.find(m => m.userData.layerKey === layerKey);
+        if (mesh?.userData.visibleIn) {
+          char.layers[layerKey].visibleIn = [...mesh.userData.visibleIn];
+        }
       }
       markUnsaved();
     }

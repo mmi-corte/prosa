@@ -367,6 +367,13 @@ function load3DModel(character, contentGroup) {
         );
       }
       
+      // Log available animations
+      if (gltf.animations && gltf.animations.length > 0) {
+        console.log('📽️ Available animations for', character.id + ':', gltf.animations.map(a => `"${a.name}" (${a.duration.toFixed(2)}s)`).join(', '));
+      } else {
+        console.log('📽️ No animations found in', character.id);
+      }
+      
       // Play animations if available
       if (modelConfig.animation && gltf.animations && gltf.animations.length > 0) {
         const mixer = new THREE.AnimationMixer(model);

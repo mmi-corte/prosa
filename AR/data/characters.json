@@ -27,8 +27,8 @@
             "scale": 2.5,
             "position": {
               "x": 0,
-              "y": 0,
-              "z": -0.3
+              "y": -0.31,
+              "z": -0.96
             },
             "rotation": {
               "x": 0,
@@ -38,7 +38,8 @@
             "opacity": 1,
             "visibleIn": [
               "scan"
-            ]
+            ],
+            "billboard": false
           },
           {
             "id": "middleground",
@@ -57,7 +58,8 @@
             "opacity": 1,
             "visibleIn": [
               "scan"
-            ]
+            ],
+            "billboard": false
           },
           {
             "id": "character",
@@ -65,7 +67,7 @@
             "scale": 1,
             "position": {
               "x": -0.3,
-              "y": 0,
+              "y": 0.48,
               "z": 0
             },
             "rotation": {
@@ -76,15 +78,16 @@
             "opacity": 1,
             "visibleIn": [
               "scan"
-            ]
+            ],
+            "billboard": false
           },
           {
             "id": "foreground",
             "path": "assets/img/characters/foregroundfata.png",
-            "scale": 1.5,
+            "scale": 1.59,
             "position": {
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "z": 0.1
             },
             "rotation": {
@@ -95,24 +98,46 @@
             "opacity": 1,
             "visibleIn": [
               "scan"
-            ]
+            ],
+            "billboard": false
           }
         ],
-        "3d": []
+        "3d": [
+          {
+            "id": "fata-model",
+            "path": "assets/3D/fata.glb",
+            "scale": 0.63,
+            "position": {
+              "x": -0.95,
+              "y": 0.04,
+              "z": -2.35
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "immersive"
+            ],
+            "billboard": false
+          }
+        ]
       },
       "layers": {
         "background": {
           "path": "assets/img/characters/backgroundfata.png",
-          "scale": 24,
+          "scale": 5,
           "position": {
             "x": 0,
-            "y": 0,
-            "z": -8
+            "y": -0.08,
+            "z": -3.15
           },
           "order": 0,
           "visibleIn": [
             "immersive"
-          ]
+          ],
+          "billboard": false
         },
         "waterfall": {
           "type": "video",
@@ -121,11 +146,11 @@
           "tolerance": 0.4,
           "smoothness": 0.08,
           "spill": 0.5,
-          "scale": 9,
+          "scale": 1.6,
           "position": {
-            "x": -1.5,
-            "y": 3.2,
-            "z": -7.5
+            "x": -0.24,
+            "y": 0.39,
+            "z": -3.08
           },
           "loop": true,
           "muted": true,
@@ -133,47 +158,46 @@
           "visibleIn": [
             "immersive"
           ],
-          "scaleX": 1
+          "scaleX": 1,
+          "billboard": false
         },
         "middleground": {
           "path": "assets/img/characters/middlegroundfata.png",
-          "scale": 8,
+          "scale": 3.5,
           "position": {
             "x": 0,
-            "y": 0,
-            "z": -5
+            "y": 0.08,
+            "z": -2.63
           },
           "order": 1,
           "visibleIn": [
             "immersive"
-          ]
+          ],
+          "billboard": false
         },
         "character": {
           "path": "assets/img/characters/fata_char.png",
-          "scale": 2.5,
+          "scale": 1.1,
           "position": {
-            "x": -1.5,
-            "y": 0,
-            "z": -4
+            "x": -0.73,
+            "y": 0.34,
+            "z": -1.73
           },
           "order": 2,
-          "visibleIn": [
-            "immersive"
-          ]
+          "visibleIn": []
         },
         "foreground": {
           "path": "assets/img/characters/foregroundfata.png",
-          "scale": 6,
-          "scaleX": 1.5,
+          "scale": 1.9,
+          "scaleX": 1.38,
           "position": {
             "x": 0,
-            "y": 1,
-            "z": -3.8
+            "y": 0.32,
+            "z": -1.63
           },
           "order": 3,
-          "visibleIn": [
-            "immersive"
-          ]
+          "visibleIn": [],
+          "billboard": false
         }
       },
       "sounds": {
@@ -226,10 +250,10 @@
           {
             "id": "character",
             "path": "assets/img/characters/strega_char.png",
-            "scale": 1.02,
+            "scale": 1.76,
             "position": {
               "x": 0,
-              "y": 0,
+              "y": 0.17,
               "z": 0
             },
             "rotation": {
@@ -268,6 +292,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu oses t'approcher de moi ? Je suis A Strega, celle qui maintient l'équilibre de ces terres. Chaque graine que je flétris est un sacrifice nécessaire.",
+          "co": "Osi avvicinatti à mè ? Sò A Strega, quella chì mantene l'equilibriu di ste terre. Ogni simente ch'ellu appassiscu hè un sacrifiziu necessariu."
+        },
+        "lore": {
+          "fr": "Prosa m'a choisie pour purifier cette île. Sans mon pouvoir, les terres seraient envahies par le chaos. L'infertilité est ma bénédiction... et ma malédiction.",
+          "co": "Prosa m'hà sceltu per purificà st'isula. Senza u mo putere, e terre seranu invase da u caos. A sterilità hè a mo benedizione... è a mo maledizione."
+        }
       }
     },
     {
@@ -291,7 +325,7 @@
             "position": {
               "x": -0.4,
               "y": 0,
-              "z": 0
+              "z": -1.11
             },
             "rotation": {
               "x": 0,
@@ -303,18 +337,19 @@
           {
             "id": "background",
             "path": "assets/img/characters/signadora_bg.png",
-            "scale": 1,
+            "scale": 1.11,
             "position": {
-              "x": 0,
-              "y": 0,
-              "z": -0.1
+              "x": -0.33,
+              "y": 0.08,
+              "z": -1.2
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0
             },
-            "opacity": 1
+            "opacity": 1,
+            "billboard": false
           }
         ],
         "3d": []
@@ -324,6 +359,16 @@
           "path": "assets/sound/fountain.mp3",
           "volume": 0.7,
           "loop": true
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Approche, étranger... Laisse-moi lire ton âme à travers l'huile sacrée. Je suis A Signadora, guérisseuse de ce qui ne se voit pas.",
+          "co": "Avvicinati, straneru... Lasciami leghje l'anima toia à traversu l'oliu sacru. Sò A Signadora, guaritrice di ciò chì ùn si vede micca."
+        },
+        "lore": {
+          "fr": "Mes prières et mes herbes ont soigné des générations de Corses. L'Ochju, le mauvais œil... je sais le reconnaître et le chasser. Viens à la fontaine si ton cœur est lourd.",
+          "co": "E mo preghiere è e mo erbe anu curatu generazioni di Corsi. L'Ochju... sacciu ricunnosce è cacciallu. Veni à a funtana si u to core hè pis.antinu."
         }
       }
     },
@@ -378,6 +423,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Hé toi ! T'as quelque chose à manger ? Je suis U Fullettu, et mon estomac gronde plus fort que le tonnerre ! Donne-moi à manger, et peut-être je te montrerai un passage secret...",
+          "co": "Ehi tù ! Hai qualcosa da manghjà ? Sò U Fullettu, è u mo stomacu rumba più forte di u tonu ! Dami da manghjà, è forsi ti mostru un passasu sicretu..."
+        },
+        "lore": {
+          "fr": "On dit que je suis vif comme le vent, et c'est vrai ! Avec mon bras de fer, j'ai appris à me débrouiller. Les tours que je joue ? Ils gardent les gens sur leurs gardes... et moi en vie.",
+          "co": "Si dice chì sò vivu cum'è u ventu, è hè veru ! Cù u mo bracciu di ferru, aghju amparatu à campà. I scherzi ch'e facciu ? Tenenu a ghjente attenta... è mè vivu."
+        }
       }
     },
     {
@@ -430,6 +485,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "*Grésillement radio* ... *Respiration mécanique derrière le masque* ... *Geste brutal du bras : HALTE*",
+          "co": "*Grisgilamentu radiu* ... *Respirazione meccanica detru à a maschera* ... *Gestu brutale di u bracciu : FERMA*"
+        },
+        "lore": {
+          "fr": "*Cliquetis d'armes* ... *Signal radio codé* ... *Silence oppressant* ... *Pas lourds synchronisés*",
+          "co": "*Clicchettiu d'arme* ... *Signale radiu cudatu* ... *Silenziu uppressante* ... *Passi pisanti sincrunizzati*"
         }
       }
     },
@@ -484,6 +549,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Ah, un visiteur... Rare sont ceux qui trouvent mon moulin. Je suis U Magu, maître des vents et des remèdes. Dis-moi, qu'est-ce qui t'afflige ?",
+          "co": "Ah, un visitatore... Raru sò quelli chì trovanu u mo mulinu. Sò U Magu, maestru di i venti è di i rimedii. Dimmi, chissu chì t'affligge ?"
+        },
+        "lore": {
+          "fr": "Les moulins tournent, le vent souffle, et moi j'observe. La botanique et la médecine... deux faces d'une même pièce. Parfois, il faut ouvrir pour guérir.",
+          "co": "I mulini giranu, u ventu suffia, è iò osservu. A botanica è a medicina... duie facce di a stessa pezza. Talvòlta, ci vòle apre per curà."
+        }
       }
     },
     {
@@ -536,6 +611,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu me vois... mais moi, je te vois vraiment. Mes yeux sont éteints, mais ma Seconda Vista pénètre ton âme. Je suis U Mazzeru... celui qui chasse dans les rêves.",
+          "co": "Tu mi vedi... ma iò, ti vedu veramente. L'ochji mo sò spenti, ma a mo Seconda Vista penetra l'anima toia. Sò U Mazzeru... quellu chì caccia in i sogni."
+        },
+        "lore": {
+          "fr": "J'ai été U Sarpu à Sette Capi, dirigeant de Prosa. Maintenant, emprisonné dans les ténèbres, je perçois ce que les yeux ne peuvent voir. La mort... elle me parle.",
+          "co": "Sò statu U Sarpu à Sette Capi, dirigente di Prosa. Avali, imprigiunatu in e tenebre, percepiscu ciò chì l'ochji ùn ponnu vede. A morte... mi parla."
         }
       }
     },
@@ -590,6 +675,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Bienvenue dans ma tour de verre. Je suis U Strigone, et du haut de ces murs, je vois tout. Chaque mouvement, chaque rébellion... rien n'échappe à mon regard.",
+          "co": "Benvenutu in a mo torre di vetru. Sò U Strigone, è da quassù, vedu tuttu. Ogni muvimentu, ogni ribellione... niente scappa à u mo sguardu."
+        },
+        "lore": {
+          "fr": "Le calcul et la précision m'ont porté au pouvoir. Je commande les forces militaires de Prosa avec une main de fer. L'élégance froide... c'est la clé de la domination.",
+          "co": "U calculu è a precisione m'anu purtatu à u putere. Cumandu e forze militare di Prosa cù una manu di ferru. L'eleganza fredda... hè a chjave di a duminazione."
+        }
       }
     },
     {
@@ -643,6 +738,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Les montagnes parlent à celui qui sait écouter... Je suis U Spallistu, berger des âmes errantes. Ces omoplates sur mon bâton ? Elles prédisent l'avenir.",
+          "co": "E muntagne parlanu à quellu chì sà ascultà... Sò U Spallistu, pastore di l'ànime errante. Ste spalle nantu à u mo bastone ? Predicenu l'avvandà."
+        },
+        "lore": {
+          "fr": "Cinquante années à parcourir ces terres, à lire les signes dans les os des moutons. Mon regard a vu trop de morts, trop de souffrance. Mais les montagnes demeurent.",
+          "co": "Cinquant'anni à percorre ste terre, à leghje i segni in l'osse di e pecore. U mo sguardu hà vistu troppu morti, troppu sofferenza. Ma e muntagne restanu."
+        }
       }
     },
     {
@@ -688,7 +793,32 @@
             "opacity": 0.8
           }
         ],
-        "3d": []
+        "3d": [
+          {
+            "id": "orcu-model",
+            "path": "assets/3D/orcu.glb",
+            "scale": 1,
+            "position": {
+              "x": 0,
+              "y": -1,
+              "z": -2
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "immersive"
+            ],
+            "billboard": false,
+            "animation": {
+              "clipName": "Armature|Sit_Cross_Legged_on_Floor|baselayer",
+              "speed": 1,
+              "loop": true
+            }
+          }
+        ]
       },
       "sounds": {
         "intro": {
@@ -696,13 +826,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "... Tu veux traverser ? La mer vers Prosa n'est pas clémente. Je suis L'Orcu. Un passeur. Je t'observe... et je décide si tu mérites mon aide.",
+          "co": "... Voì traversà ? A mare versu Prosa ùn hè clemente. Sò L'Orcu. Un passatore. Ti osservu... è decidu s'ellu mèriti u mo aiutu."
+        },
+        "lore": {
+          "fr": "Je suis une force de la nature, né des vagues et des rochers. Peu parlent en ma présence... car mes silences pèsent plus lourd que les mots. Si tu es digne, suis-moi.",
+          "co": "Sò una forza di a natura, natu di l'onde è di e rocce. Pochi parlanu in a mo presenza... perchè i mo silenzii pesanu più di e parolle. S'ellu si degnu, seguimi."
+        }
       }
     },
     {
       "id": "garagaï",
       "name": "Lou Garagaï",
       "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Vièi òme sempre armat de soun coutel, counoais cado camin e cado groto, e sap esploita lou terren per sa survìo.",
       "region": "PROVENCE",
       "themeColor": "#6D4C41",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -749,13 +889,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu t'aventures loin des sentiers battus... Je suis Lou Garagaï, et ce couteau ne me quitte jamais. Chaque grotte, chaque passage, je les connais par cœur.",
+          "oc": "T'aventures luench dei camin batut... Si Lou Garagaï, e aqueu coutel me quito jamai. Cado groto, cado passage, lei counisse per còr."
+        },
+        "lore": {
+          "fr": "Ces collines sont mon royaume depuis des décennies. La survie dans ces terres hostiles ? C'est connaître le terrain mieux que quiconque. Et je survis.",
+          "oc": "Aquelei colino soun moun reiaume despièi de decenni. La survìo dins aquelei terro oustilo ? Es counouisse lou terren mies que degun. E survivou."
+        }
       }
     },
     {
       "id": "drac",
       "name": "Lou Drac",
       "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Òme discret au mantèu usat que pòrto de tracei de brulòri e de graissa e dount lou regard perçant repèro tout ço que pòu se sauva, e là ounte tout se truco, eu remedou.",
       "region": "PROVENCE",
       "themeColor": "#FF5722",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -802,13 +952,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Quelque chose de cassé ? Apporte-le-moi. Je suis Lou Drac, et mes mains ont réparé ce que tous croyaient perdu. Ces brûlures ? Le prix du savoir.",
+          "oc": "Quaucarren de cassa ? Aporto-lou-me. Si Lou Drac, e mei man an repara ço que toutei cresien pèrdut. Aquelei brulòri ? Lou pres dau sabèr."
+        },
+        "lore": {
+          "fr": "Là où tout se brise, moi je répare. Mon manteau porte les traces de mille machines ressuscitées. Dans ce monde de ruines, l'ingéniosité est la seule monnaie.",
+          "oc": "Là ounte tout se truco, ieu remedou. Moun manteu porto lei tracei de milo machino ressuscitado. Dins aqueu mounde de ruino, l'engèni es la soulet mounedò."
+        }
       }
     },
     {
       "id": "cabrodor",
       "name": "La Cabro d'Or",
       "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Pòrto d'abit en pèu de cabro, roubust e souple. Se desplaço em' uno agilitat instintivo e em discrecioun. Imagi de grimpairiso dei nauturo, soun fusi à luneto es sempre prest.",
       "region": "PROVENCE",
       "themeColor": "#FFD700",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -855,13 +1015,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu m'as trouvée ? Impressionnant... Je suis La Cabro d'Or, et mes yeux voient tout depuis les hauteurs. Mon fusil ne rate jamais sa cible.",
+          "oc": "M'as troubado ? Impressiounant... Si La Cabro d'Or, e mei iue veson tout despièi lei nauturo. Moun fusi manco jamai sa ciblo."
+        },
+        "lore": {
+          "fr": "Je grimpe là où les chèvres elles-mêmes n'osent pas aller. Ces habits en peau ? Ils me rendent invisible dans les rochers. La discrétion... c'est la survie.",
+          "oc": "Grimòu là ounte lei cabro elei-memo oso pas ana. Aquelei habit en pèu ? Me rendon invesiblo dins lei rouco. La discrecioun... es la survìo."
+        }
       }
     },
     {
       "id": "matagot",
       "name": "Le Matagot",
       "description": "Petit chat noir et maigre, aux yeux d'un blanc perçant. Sa démarche fluide et silencieuse. Il se glisse entre les ruines, observant et parfois volant de la nourriture.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Pichot cat negre e maigre, emé d'iue d'un blanc perçant. Sa demarcho fluido e silenciouso. Se glisso entre lei ruino, observant e parfes voulant de nutritura.",
       "region": "PROVENCE",
       "themeColor": "#212121",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -908,13 +1078,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "*Miaou* ... *Ronronnement grave* ... *Yeux blancs qui luisent dans l'ombre* ... *Frottement contre vos jambes*",
+          "oc": "*Miaòu* ... *Rounrounament gràu* ... *Iue blanc que luson dins l'oumbro* ... *Fregament contro vouòstrei cambo*"
+        },
+        "lore": {
+          "fr": "*Miaulement insistant* ... *Silence absolu* ... *Pupilles qui s'élargissent* ... *Disparition soudaine dans les ombres*",
+          "oc": "*Miaulament insistent* ... *Silenci absoulu* ... *Pupilo que s'eslarguisson* ... *Desaparicioun subito dins l'oumbro*"
+        }
       }
     },
     {
       "id": "lavandula",
       "name": "Fada Lavandula",
       "description": "Vieille femme au dos voûté, mains tachées de sève et d'huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Vièio fremo au dòs voutat, man tacado de sevo e d'òli. Pòrto un tablié usat e de vestit emé de mòutiu de flour estilisado. Soun regard perçant escruto lei que venon cerca soun ajudo.",
       "region": "PROVENCE",
       "themeColor": "#9C27B0",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -961,13 +1141,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu cherches un remède, n'est-ce pas ? Je suis Fada Lavandula, et ces mains tachées connaissent chaque plante de cette terre. Approche, que je t'examine.",
+          "oc": "Cerco un remedi, pas vrai ? Si Fado Lavandula, e aquelei man tacado counouisson cado planto d'aquelo terro. Aprocho, que t'examinè."
+        },
+        "lore": {
+          "fr": "Mes huiles et mes herbes ont guéri des générations. Cette lavande que tu sens ? Elle apaise l'âme autant que le corps. Les fadas n'ont jamais disparu... nous veillons.",
+          "oc": "Mei oli e mei erbo an guarìt de generacioun. Aquelo lavando que sentes ? Apaiso l'ànimo autant que lou còrs. Lei fado an jamai disparu... vellan."
+        }
       }
     },
     {
       "id": "gyptisprotis",
       "name": "Gyptis e Protis",
       "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d'ancrage.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Gyptis e Protis formon un duo respectat. Sei vestit soun ournat de mòutiu inspirat de coco e de vaguo estilisado, simbòu de stabiletat e d'ancragi.",
       "region": "PROVENCE",
       "themeColor": "#0288D1",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -1014,13 +1204,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Nous sommes Gyptis et Protis, anciens fondateurs revenus guider les survivants. Nos vêtements portent les symboles de la mer... car c'est d'elle que naît tout espoir.",
+          "oc": "Sian Gyptis e Protis, ancient foundatour revengut per guida lei sobrevivent. Nostei vestit pòrton lei simbòu de la mar... car es d'elo que naisse tout esper."
+        },
+        "lore": {
+          "fr": "Il y a des millénaires, nous avons fondé Massalia. Aujourd'hui, nous revenons pour bâtir de nouveau. Les coquillages et les vagues sur nos habits ? Stabilité et ancrage.",
+          "oc": "Fa de milenari, avian foundat Massalia. Vuei, revenen per basti de nòu. Lei coco e lei vaguo sus nostei habit ? Stabiletat e ancragi."
+        }
       }
     },
     {
       "id": "tarasca",
       "name": "La Tarasca",
       "description": "Camion de guerre improvisé, la Tarasca avance comme une bête mécanique. Là où elle passe, il ne reste que le silence et la cendre.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Camioun de guerro improuvisado, la Tarasco avanço coumo uno bèstio mecanico. Là ounte passo, resto plus que lou silènci e la cendre.",
       "region": "PROVENCE",
       "themeColor": "#B71C1C",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -1067,13 +1267,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "*VROMBISSEMENT MÉCANIQUE* ... *Crissement de pneus sur l'asphalte* ... *Rugissement du moteur*",
+          "oc": "*VROUMBISSAMENT MECANI* ... *Cressiament de pneumatic* ... *Rugissament dóu motour*"
+        },
+        "lore": {
+          "fr": "*Grondement sourd qui fait trembler le sol* ... *Klaxon retentissant* ... *Fracas de métal contre métal*",
+          "oc": "*Groumpidou sourd que fai trantouia lou souòu* ... *Còrn retiendissant* ... *Fracas de metan contro metan*"
+        }
       }
     },
     {
       "id": "coulobre",
       "name": "La Coulobre",
       "description": "Un brouillard dense et jaunâtre chargé d'odeurs de métal et de pourriture. Son odeur attire de nombreux serpents. Elle ne fait pas de bruit, mais marque ceux qui la traversent.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Un brumoul dense e jaunastre cargat d'oudour de metan e de purritudò. Soun oudour atiro de noumbrous serp. Fai pas de brut, mai marco quei que la traverson.",
       "region": "PROVENCE",
       "themeColor": "#827717",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -1120,13 +1330,23 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "*Silence oppressant* ... *Sifflements de serpents dans la brume* ... *L'air devient épais et jaunâtre*",
+          "oc": "*Silenci oupressant* ... *Siblament de serp dins lou brumoul* ... *L'aire devèn espés e jaunastre*"
+        },
+        "lore": {
+          "fr": "*Odeur de métal et de pourriture* ... *Glissement silencieux* ... *Frissons involontaires parcourent votre échine*",
+          "oc": "*Oudour de metan e de purritudò* ... *Rampament silencious* ... *Frissoun envoulountàri parcòron vouòstro esquino*"
+        }
       }
     },
     {
       "id": "drape",
       "name": "Lou Drapé",
       "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
-      "descriptionProvencal": "Description en provençal...",
+      "descriptionProvencal": "Òme grand au visagi mascat per un fòulard, soun chivau maigrit es cubèrt de cicatris coumo eu. Mostro cap d'emoucioun, e sei passagi laisson darriè eu la destrucioun.",
       "region": "PROVENCE",
       "themeColor": "#424242",
       "portrait": "assets/img/characters/placeholder_char.png",
@@ -1172,6 +1392,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "... *Silence* Je suis Lou Drapé. Mon visage est caché, mon cheval porte mes cicatrices. Là où je passe... il ne reste que destruction.",
+          "oc": "... *Silènci* Si Lou Drapa. Ma facio es rescounduò, moun chivau pòrto mei cicatris. Là ounte passe... resto pas que destrucioun."
+        },
+        "lore": {
+          "fr": "Je ne montre aucune émotion car il n'en reste plus. Mon cheval amaigri et moi sommes les derniers témoins d'un monde révolu. Nous chevauchons vers l'oubli.",
+          "oc": "Mostrou cap d'emoucioun car n'en resto plus. Moun chivau maigrit e ieu sian lei darnièi testemunis d'un mounde revoulut. Chevauchau vers l'oublit."
         }
       }
     },
@@ -1228,6 +1458,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Une forge, du métal, et mes mains... C'est tout ce dont j'ai besoin. Je suis Livia, forgeronne. Le clan m'a tout pris, mais ils n'ont pas pris mon savoir.",
+          "co": "Una forghjina, u ferru, è e mo mani... Hecì tuttu ciò chì m'occòre. Sò Livia, fabbra. U clan m'hà presu tuttu, ma ùn anu micca presu u mo sapere."
+        },
+        "lore": {
+          "fr": "Ma colère m'a guidée au début... maintenant, je mets mes compétences au service des réfugiés. Chaque lame que je forge est une promesse de liberté.",
+          "co": "A mo rabbia m'hà guidatu à u principiu... avali, mettu e mo capicità à u serviziu di i rifugiati. Ogni lama ch'ellu fogu hè una prumessa di libertà."
+        }
       }
     },
     {
@@ -1282,6 +1522,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu entends ce grésillement ? C'est ma radio. Je suis Orsetta, et les ondes sont ma voix. Mon grand-père m'a appris la mer... les machines m'ont appris le reste.",
+          "co": "Senti stu fisciu ? Hecì a mo radiu. Sò Orsetta, è l'onde sò a mo voce. U mo babbone m'hà amparatu a mare... e macchine m'anu amparatu u restu."
+        },
+        "lore": {
+          "fr": "Mon navire a été détruit, ma famille dispersée. Mais dans les débris technologiques de Corti, j'ai trouvé ma voie. Cette radio... c'est mon arme.",
+          "co": "U mo navilu hè statu distruttu, a mo famiglia dispersa. Ma in i detriti tecnulogichi di Corti, aghju trovu a mo via. Sta radiu... hè l'arma moia."
         }
       }
     },
@@ -1338,6 +1588,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "On m'appelle l'Ombre du maquis. Je suis Bastianu, ancien garde-chasse devenu rebelle. Le clan pense m'avoir brisé... ils se trompent.",
+          "co": "Mi chjamanu l'Ombra di u maquis. Sò Bastianu, anzianu guardia di caccia diventatu ribellu. U clan pensa ch'ellu m'abbia rottu... si sbaglianu."
+        },
+        "lore": {
+          "fr": "J'ai saboté leurs opérations, sauvé des rebelles. Cette radio volée ? C'est ma connexion avec la résistance. Le maquis est mon sanctuaire.",
+          "co": "Aghju sabotatu e so operazioni, salvatu ribelli. Sta radiu rubata ? Hecì a mo cunnessione cù a resistenza. U maquis hè u mo santuariu."
+        }
       }
     },
     {
@@ -1391,6 +1651,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Stop. Avant de faire quoi que ce soit, évalue la situation. Je suis Marc, ancien de la sécurité civile. L'hésitation tue... la préparation sauve.",
+          "oc": "Stop. Avans de faire quaucarren, estimo la situacioun. Si Marc, ancien de la seguretat civilo. L'esitacioun tuò... la preparacioun sauvo."
+        },
+        "lore": {
+          "fr": "Des années de gestion de crises m'ont appris une chose : savoir quand s'arrêter pour laisser passer le danger. La patience... c'est l'arme ultime.",
+          "oc": "D'annado de gestioun de criso m'an apreis uno causo : sabè quand s'arresta per laissa passa lou danger. La paciènci... es l'armo ultimio."
         }
       }
     },
@@ -1446,6 +1716,16 @@
           "volume": 0.7,
           "loop": false
         }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Tu vois cette machine ? Je peux la faire marcher. Je suis Léo, mécanicien. Depuis l'attaque de la Tarasca, je répare ce qui reste pour qu'on survive.",
+          "oc": "Veses aquelo machino ? La pòdi faire marcha. Si Léo, mecanician. Despièi l'ataco de la Tarasco, reparòu ço que resto per que sobrevivoun."
+        },
+        "lore": {
+          "fr": "La Tarasca m'a pris des proches il y a dix ans. Près de l'ancienne université de Toulon, j'ai trouvé refuge. Chaque machine réparée est une petite victoire.",
+          "oc": "La Tarasco m'a preis de proche fa des an. Pres de l'anciano universitat de Toulon, ai troubat refugi. Cado machino reparado es uno pichoto victòri."
+        }
       }
     },
     {
@@ -1499,6 +1779,16 @@
           "path": "assets/sound/placeholder.mp3",
           "volume": 0.7,
           "loop": false
+        }
+      },
+      "subtitles": {
+        "greeting": {
+          "fr": "Pas si vite. Approche avec précaution. Je suis le Docteur Valérie, chercheuse en microbiologie. Ces échantillons sont fragiles... comme l'espoir de trouver un remède.",
+          "oc": "Pas tant lèu. Aprocho em precaucioun. Si lou Dòctour Valérie, cercairo en microbioulogio. Aquelei eschantioun soun fragil... coumo l'esper de trouba un remedi."
+        },
+        "lore": {
+          "fr": "Des années d'isolement m'ont permis de perfectionner mes recherches. La nature cache des médicaments que la science ancienne ignorait. Méthode et patience... voilà mes outils.",
+          "oc": "D'annado d'isoulament m'an permeis de perfeciouna mei recerco. La naturo rescound de medicament que la scienço anciano ignouravo. Metòdo e paciènci... veiquì mei util."
         }
       }
     }

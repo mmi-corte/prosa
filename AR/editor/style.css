@@ -570,6 +570,39 @@ body {
   opacity: 0.5;
 }
 
+/* 3D Model Thumbnail */
+.asset-preview-3d {
+  position: relative;
+}
+
+.asset-preview-3d .thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.thumbnail-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: thumbnail-spin 0.8s linear infinite;
+}
+
+@keyframes thumbnail-spin {
+  to { transform: rotate(360deg); }
+}
+
 .asset-name {
   font-weight: 500;
   font-size: 0.875rem;
@@ -1866,6 +1899,46 @@ body {
 .preview-xyz-input.y label { color: #22c55e; }
 .preview-xyz-input.z label { color: #3b82f6; }
 
+/* Checkbox toggle control */
+.preview-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.preview-checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
+.preview-checkbox-label:hover {
+  color: var(--text-primary);
+}
+
+/* Small checkbox variant */
+.preview-checkbox-label.small {
+  font-size: 0.7rem;
+  gap: 4px;
+}
+
+.preview-checkbox-label.small input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
+/* Visibility row for scan/immersive toggles */
+.preview-visibility-row {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  margin-top: 4px;
+}
+
 /* Marker plane in preview */
 .preview-marker-info {
   position: absolute;
@@ -1898,4 +1971,74 @@ body {
 
 .preview-sound-btn:active {
   transform: scale(0.95);
+}
+
+/* Hidden layer indicator */
+.preview-asset-card.hidden-in-mode {
+  opacity: 0.5;
+  border-left: 3px solid var(--warning-color, #f59e0b);
+}
+
+.preview-asset-card.hidden-in-mode .preview-asset-card-header {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.hidden-indicator {
+  font-size: 0.7rem;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+/* Animation Controls */
+.animation-controls {
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.animation-controls .preview-control-label {
+  color: var(--accent-primary);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.anim-controls-placeholder {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.preview-control-subgroup {
+  margin: var(--spacing-xs) 0;
+}
+
+.anim-select-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-right: var(--spacing-xs);
+}
+
+.anim-clip-select {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.anim-clip-select:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+.animation-controls .preview-checkbox-label {
+  margin: var(--spacing-xs) 0;
+}
+
+.animation-controls .preview-slider {
+  margin-top: 4px;
 }
