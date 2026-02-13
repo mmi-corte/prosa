@@ -165,7 +165,7 @@ function checkWebXRSupport() {
 // ============================================
 // Initialization
 // ============================================
-function init() {
+async function init() {
   console.log('Initializing WebXR AR experience...');
   
   // Check for character ID in URL (for MindAR scan integration)
@@ -175,6 +175,19 @@ function init() {
   if (characterFromUrl) {
     console.log('Character from URL:', characterFromUrl);
     CONFIG.characterId = characterFromUrl;
+  }
+  
+  // Load character data early so we can show correct info even if WebXR fails
+  if (CONFIG.characterId) {
+    try {
+      await loadAllCharacters();
+      const character = allCharacters.find(c => c.id === CONFIG.characterId);
+      if (character) {
+        updateStartScreenForCharacter(character);
+      }
+    } catch (err) {
+      console.warn('Could not pre-load character data:', err);
+    }
   }
   
   // Check WebXR support
@@ -277,24 +290,25 @@ function setupUI() {
     startBtn.addEventListener('click', startARSession);
   }
   
-  // Back to menu button
+  // Back to menu button - redirect to main app encyclopedia
   const backBtn = document.getElementById('back-to-menu-btn');
   if (backBtn) {
     backBtn.addEventListener('click', () => {
-      // Clear URL param
-      const url = new URL(window.location);
-      url.searchParams.delete('character');
-      url.searchParams.delete('id');
-      window.history.replaceState({}, '', url);
-      
-      // Reset character selection
-      CONFIG.characterId = null;
-      
-      // Hide start screen, show menu
-      const startScreen = document.getElementById('start-screen');
-      if (startScreen) startScreen.style.display = 'none';
-      
-      showCharacterMenu();
+      // Redirect to main app's character encyclopedia
+      window.location.href = '../../index.html#univers-prosa/encyclopedie';
+    });
+  }
+  
+  // AR Back button (visible during AR session) - redirect to main app encyclopedia
+  const arBackBtn = document.getElementById('ar-back-btn');
+  if (arBackBtn) {
+    arBackBtn.addEventListener('click', () => {
+      // End AR session if active
+      if (xrSession) {
+        xrSession.end();
+      }
+      // Redirect to main app's character encyclopedia
+      window.location.href = '../../index.html#univers-prosa/encyclopedie';
     });
   }
   
@@ -415,10 +429,10 @@ async function startARSession() {
   
   // Cycle through tips during loading
   const tips = [
-    '💡 Tenez votre téléphone à hauteur des yeux',
-    '🔊 Utilisez des écouteurs pour le son spatial',
-    '🚶 Marchez pour vous déplacer dans la scène',
-    '💬 Approchez-vous pour entendre les dialogues'
+    'Tenez votre téléphone à hauteur des yeux',
+    'Utilisez des écouteurs pour le son spatial',
+    'Marchez pour vous déplacer dans la scène',
+    'Approchez-vous pour entendre les dialogues'
   ];
   let tipIndex = 0;
   const tipElement = document.querySelector('.ar-tip');
@@ -443,9 +457,11 @@ async function startARSession() {
       }, 500);
     }
     
-    // Show language toggle
+    // Show language toggle and back button
     const langToggle = document.getElementById('language-toggle');
     if (langToggle) langToggle.classList.add('visible');
+    const arBackBtn = document.getElementById('ar-back-btn');
+    if (arBackBtn) arBackBtn.classList.add('visible');
     
     // Show hint briefly
     const arHint = document.getElementById('ar-hint');
@@ -471,9 +487,11 @@ function onSessionEnd() {
   hideSubtitle();
   hasShownGreeting = false;
   
-  // Hide language toggle
+  // Hide language toggle and back button
   const langToggle = document.getElementById('language-toggle');
   if (langToggle) langToggle.classList.remove('visible');
+  const arBackBtn = document.getElementById('ar-back-btn');
+  if (arBackBtn) arBackBtn.classList.remove('visible');
   
   renderer.setAnimationLoop(null);
   
@@ -636,25 +654,20 @@ function updateStartScreenForCharacter(character) {
     aboutSection.textContent = character.description;
   }
   
-  // Update AR loading icon based on character
+  // Initialize AR loading Lottie animation if not already done
   const arLoadingIcon = document.querySelector('.ar-loading-icon');
-  if (arLoadingIcon) {
-    // Use first character of name as emoji fallback
-    const icons = {
-      'fata': '🧚',
-      'strega': '🧙‍♀️',
-      'signadora': '🙏',
-      'fullettu': '👻',
-      'squadra': '⚔️',
-      'magu': '🔮',
-      'mazzeru': '🌙',
-      'orcu': '👹',
-      'drac': '🐉',
-      'matagot': '🐱',
-      'tarasca': '🦎',
-      'default': '✨'
-    };
-    arLoadingIcon.textContent = icons[character.id] || icons['default'];
+  if (arLoadingIcon && !arLoadingIcon.dataset.lottieInit && window.lottie) {
+    const lottiePath = arLoadingIcon.getAttribute('data-lottie');
+    if (lottiePath) {
+      window.lottie.loadAnimation({
+        container: arLoadingIcon,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: window.resolvePath ? window.resolvePath(lottiePath) : lottiePath
+      });
+      arLoadingIcon.dataset.lottieInit = 'true';
+    }
   }
   
   // Apply theme color

@@ -373,7 +373,7 @@
       }
     },
     {
-      "id": "fullettu",
+      "id": "fulettu",
       "name": "U Fullettu",
       "description": "U Fullettu, pourrait être un enfant d'une dizaine d'années. Il porte un bandeau blanc sur le front. Sa caractéristique la plus frappante est son bras gauche manquant, remplacé par une prothèse de fer. Vif comme l'air, malicieux et jouant de mauvais tours, il n'offre sa loyauté qu'à ceux qui peuvent remplir son estomac.",
       "descriptionCorsican": "U Fulettu puderia esse un zitellu d'una decina d'anni. Porta un fasciu biancu nant'à u fronte. A so particularità a più rimarchevule hè ch'ellu li manca u bracciu mancu, rimpiazzatu da una prutesi di ferru. Vivu cum'è u ventu, astutu è burlone, li piace à fà scherzi – à spessu gattivi.",
@@ -436,7 +436,7 @@
       }
     },
     {
-      "id": "squadra",
+      "id": "squadra_darozza",
       "name": "A Squadra d'Arozza",
       "description": "A Squadra d'Arozza est une unité d'élite, agissant sur Corti, vouée corps et âme à A Strega. Ils portent un masque à gaz et une armure tactique lourde dissimulée sous un long manteau sombre dont la doublure vert acide crée un fort contraste.",
       "descriptionCorsican": "A Squadra d'Arozza hè un'unità d'elita, chì opera in Corti, cunsacrata corpu è anima à A Strega. Portanu un maschera à gasu è un'armatura tattica greve piatta sottu à un longu mantellu scuru, chì a so fodera di culore verde àcidu crea un cuntrastu forte.",
@@ -839,7 +839,7 @@
       }
     },
     {
-      "id": "garagaï",
+      "id": "lou_garagai",
       "name": "Lou Garagaï",
       "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
       "descriptionProvencal": "Vièi òme sempre armat de soun coutel, counoais cado camin e cado groto, e sap esploita lou terren per sa survìo.",
@@ -965,7 +965,7 @@
       }
     },
     {
-      "id": "cabrodor",
+      "id": "cabro_dor",
       "name": "La Cabro d'Or",
       "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
       "descriptionProvencal": "Pòrto d'abit en pèu de cabro, roubust e souple. Se desplaço em' uno agilitat instintivo e em discrecioun. Imagi de grimpairiso dei nauturo, soun fusi à luneto es sempre prest.",
@@ -1091,7 +1091,7 @@
       }
     },
     {
-      "id": "lavandula",
+      "id": "fada_lavandula",
       "name": "Fada Lavandula",
       "description": "Vieille femme au dos voûté, mains tachées de sève et d'huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
       "descriptionProvencal": "Vièio fremo au dòs voutat, man tacado de sevo e d'òli. Pòrto un tablié usat e de vestit emé de mòutiu de flour estilisado. Soun regard perçant escruto lei que venon cerca soun ajudo.",
@@ -1154,7 +1154,7 @@
       }
     },
     {
-      "id": "gyptisprotis",
+      "id": "gyptis_e_protis",
       "name": "Gyptis e Protis",
       "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d'ancrage.",
       "descriptionProvencal": "Gyptis e Protis formon un duo respectat. Sei vestit soun ournat de mòutiu inspirat de coco e de vaguo estilisado, simbòu de stabiletat e d'ancragi.",
@@ -1343,7 +1343,7 @@
       }
     },
     {
-      "id": "drape",
+      "id": "lou_drape",
       "name": "Lou Drapé",
       "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
       "descriptionProvencal": "Òme grand au visagi mascat per un fòulard, soun chivau maigrit es cubèrt de cicatris coumo eu. Mostro cap d'emoucioun, e sei passagi laisson darriè eu la destrucioun.",

@@ -751,6 +751,7 @@ body {
 }
 
 .character-card-large {
+  position: relative;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -2306,6 +2307,44 @@ body {
 .character-language-switch--inline .language-flag {
   width: 28px;
   height: 28px;
+}
+
+/* AR Button */
+.character-ar-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(98, 98, 71, 0.85);
+  border: 1px solid rgba(236, 228, 203, 0.3);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-family: 'Futura', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.character-ar-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.character-ar-button:hover {
+  background: rgba(139, 127, 85, 0.95);
+  border-color: rgba(236, 228, 203, 0.5);
+  transform: scale(1.05);
+}
+
+.character-ar-button:active {
+  transform: scale(0.97);
 }
 
 .difficulty-info-modal .close-btn {
