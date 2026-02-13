@@ -2,133 +2,431 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Épreuve de Force - L'Orcu</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROSA - FORCE TEST FINAL</title>
+    <style>
+        /* =========================================
+           1. DESIGN SYSTEM PROSA
+           ========================================= */
+        
+        @font-face {
+            font-family: 'ProsaFont';
+            src: local('Futura-Bold'), local('Impact'), sans-serif;
+            font-weight: 700;
+        }
+
+        @font-face {
+            font-family: 'ProsaFontRegular';
+            src: local('Futura-Medium'), local('Arial'), sans-serif;
+            font-weight: 400;
+        }
+
+        :root {
+            --bg-dark: #121212;
+            --card-cream: #ece4cb;
+            --card-dark: #1e1e1e;
+            --text-on-cream: #121212;
+            --text-on-dark: #ece4cb;
+            --accent: #626247;
+            
+            --radius-xl: 32px;
+            --radius-pill: 999px;
+            --gap: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-on-dark);
+            font-family: 'ProsaFontRegular', sans-serif;
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            touch-action: manipulation; 
+            user-select: none;
+        }
+
+        h1, h2, .title-font {
+            font-family: 'ProsaFont', sans-serif;
+            text-transform: uppercase;
+            line-height: 0.95;
+        }
+
+        /* =========================================
+           2. LAYOUT
+           ========================================= */
+
+        .top-bar {
+            height: 60px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 10px;
+        }
+        .logo { font-size: 1.8rem; letter-spacing: 4px; color: var(--card-cream); }
+
+        .main-layout {
+            flex: 1; display: flex; flex-direction: column; gap: var(--gap);
+        }
+
+        .card {
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            transition: transform 0.1s ease;
+        }
+
+        .card-hero {
+            background-color: var(--card-cream); color: var(--text-on-cream);
+            flex: 3; position: relative;
+        }
+
+        .card-secondary {
+            background-color: var(--card-dark); color: var(--text-on-dark);
+            border: 1px solid rgba(236, 228, 203, 0.1); flex: 2;
+        }
+
+        .card-title { font-size: 2rem; max-width: 90%; }
+        .card-subtitle {
+            font-size: 0.9rem; opacity: 0.7; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: bold;
+        }
+
+        .btn-action {
+            width: 100%; padding: 20px;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            border: 1px solid rgba(236, 228, 203, 0.3);
+            color: var(--card-cream);
+            text-transform: uppercase;
+            font-family: 'ProsaFontRegular', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+            cursor: pointer; text-align: center; margin-top: auto;
+        }
+        
+        .btn-action.filled {
+            background: var(--card-cream); color: var(--bg-dark);
+            border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* =========================================
+           3. GAME UI
+           ========================================= */
+        
+        #game-view {
+            display: none; flex: 1; flex-direction: column; gap: var(--gap); height: 100%;
+        }
+
+        /* MONITOR (Visualisation) */
+        .monitor-card {
+            background: var(--card-dark);
+            border-radius: var(--radius-xl);
+            flex: 2;
+            position: relative; overflow: hidden;
+            border: 1px solid rgba(236, 228, 203, 0.1);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .monitor-card::after {
+            content: " ";
+            display: block; position: absolute; inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px; pointer-events: none; z-index: 10; opacity: 0.5;
+        }
+
+        .overlay-status {
+            position: absolute; top: 20px; left: 24px; right: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 20;
+        }
+
+        .status-tag {
+            background: rgba(0,0,0,0.4); padding: 6px 14px;
+            border-radius: var(--radius-pill); font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1); color: var(--card-cream);
+            transition: all 0.3s;
+        }
+        
+        .status-tag.active {
+            background: var(--card-cream);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        /* LE GROS POURCENTAGE */
+        .big-percent {
+            font-family: 'ProsaFont';
+            font-size: 7rem;
+            color: var(--card-cream);
+            z-index: 5;
+            text-align: center;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.1s, transform 0.1s;
+            text-shadow: 0 0 20px rgba(236, 228, 203, 0.1);
+        }
+
+        .intensity-low { opacity: 0.5; }
+        .intensity-med { opacity: 0.8; text-shadow: 0 0 30px rgba(236, 228, 203, 0.3); }
+        .intensity-high { 
+            color: #ffffff; opacity: 1; 
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 10px rgba(236, 228, 203, 0.8);
+            animation: shake 0.1s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            50% { transform: translate(-1px, -2px) rotate(-1deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        /* TAP ZONE */
+        .tap-card {
+            background: var(--card-cream);
+            color: var(--bg-dark);
+            flex: 1;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.05s, background-color 0.1s;
+            touch-action: none; 
+        }
+
+        .tap-card:active {
+            transform: scale(0.96);
+            background-color: #fff;
+        }
+
+        .tap-text {
+            font-family: 'ProsaFont';
+            font-size: 3rem;
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+
+        .tap-hint {
+            position: absolute; bottom: 15px;
+            font-size: 0.7rem; opacity: 0.6; text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        /* =========================================
+           4. MODAL SUCCÈS / ECHEC
+           ========================================= */
+        .modal-view {
+            display: none; position: fixed; inset: 0; background: var(--bg-dark);
+            z-index: 99; padding: 20px;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        
+        .modal-card {
+            width: 100%; height: 100%; border-radius: var(--radius-xl);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 40px;
+        }
+        
+        .success-style { background: var(--card-cream); color: var(--bg-dark); }
+        .fail-style { background: var(--card-dark); color: var(--text-on-dark); border: 1px solid #c63032; }
+
+        .big-icon { font-size: 4rem; margin-bottom: 20px; }
+
+    </style>
 </head>
-<body id="gameBody">
-    <!-- Modal des Règles -->
-    <div id="rulesModal" class="modal" style="display:flex;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="title-wrapper">
-                    <svg class="sword-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
-                        <path d="M13 19l6-6"></path>
-                        <path d="M16 16l4 4"></path>
-                        <path d="M19 21l2-2"></path>
-                    </svg>
-                    <span class="title">ÉPREUVE DE FORCE</span>
-                    <svg class="sword-icon flipped" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
-                        <path d="M13 19l6-6"></path>
-                        <path d="M16 16l4 4"></path>
-                        <path d="M19 21l2-2"></path>
-                    </svg>
-                </div>
+<body>
+
+    <div class="top-bar">
+        <div class="logo title-font">PROSA</div>
+    </div>
+
+    <!-- LANDING PAGE -->
+    <div id="landing-view" class="main-layout">
+        <div class="card card-hero" onclick="App.start()">
+            <div style="position: absolute; top:24px; right: 24px; opacity: 0.3;">●</div>
+            <div class="card-subtitle">Module 02</div>
+            <h1 class="card-title title-font">SURCHARGE<br>SYSTÈME</h1>
+        </div>
+
+        <div class="card card-secondary">
+            <div class="card-subtitle">Instruction</div>
+            <p style="font-size: 0.9rem; opacity: 0.8;">
+                Tapotez rapidement la zone de contrôle pour accumuler l'énergie jusqu'à <strong>100%</strong>.
+            </p>
+        </div>
+
+        <button class="btn-action filled" onclick="App.start()">INITIALISER</button>
+    </div>
+
+    <!-- GAME INTERFACE -->
+    <div id="game-view">
+        
+        <div class="monitor-card" id="monitor">
+            <div class="overlay-status">
+                <div class="status-tag" id="timer-badge">14.0s</div>
+                <div class="status-tag">CHARGE</div>
             </div>
-            <div class="modal-body">
-                <p class="intro-text">L'Orcu vous défie de prouver votre valeur...</p>
-                
-                <div class="rule-item">
-                    <span class="rule-number">1</span>
-                    <p><strong>OBJECTIF:</strong> Appuyez le plus vite possible sur la zone de force pour remplir la jauge avant la fin du temps imparti.</p>
-                </div>
-                
-                <div class="rule-item">
-                    <span class="rule-number">2</span>
-                    <p><strong>TEMPS:</strong> Vous avez 9 secondes pour prouver votre force.</p>
-                </div>
-                
-                <div class="rule-item">
-                    <span class="rule-number">3</span>
-                    <p><strong>VICTOIRE:</strong> Remplissez la jauge à 100% pour impressionner l'Orcu.</p>
-                </div>
-                
-                <div class="rule-item">
-                    <span class="rule-number">4</span>
-                    <p><strong>ÉCHEC:</strong> Si vous échouez, vous perdez 1 tour pour vous reposer avant de réessayer.</p>
-                </div>
-                
-                <p class="ready-text">Prêt à relever le défi ?</p>
-            </div>
-            <button id="startGameBtn" class="btn-primary">COMMENCER L'ÉPREUVE</button>
+            
+            <div class="big-percent intensity-low" id="percent-display">0%</div>
+        </div>
+
+        <div class="card tap-card" id="tap-zone">
+            <div class="tap-text">TAP!</div>
+            <div class="tap-hint">MAINTENIR LA CADENCE</div>
         </div>
     </div>
 
-    <!-- Modal de Victoire -->
-    <div id="victoryModal" class="modal" style="display:none;">
-        <div class="modal-content victory">
-            <div class="result-icon victory-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-            </div>
-            <h2>VICTOIRE</h2>
-            <p>L'Orcu est impressionné par votre force !</p>
-            <p class="score-text">Score: <span id="finalScore">0</span>%</p>
-            <button id="continueBtn" class="btn-primary">CONTINUER</button>
-        </div>
-    </div>
-
-    <!-- Modal d'Échec -->
-    <div id="failModal" class="modal" style="display:none;">
-        <div class="modal-content fail">
-            <div class="result-icon fail-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                </svg>
-            </div>
-            <h2>ÉCHEC</h2>
-            <p>Vous n'avez pas réussi à impressionner l'Orcu.</p>
-            <p class="penalty-text">Vous perdez 1 tour pour vous reposer.</p>
-            <button id="retryBtn" class="btn-primary">RÉESSAYER</button>
-        </div>
-    </div>
-
-    <!-- Game Container -->
-    <div class="container" id="gameContainer" style="display:none;">
-        <div class="game-header">
-            <span class="game-title">ÉPREUVE DE FORCE</span>
-        </div>
-
-        <div class="game-content">
-            <!-- Timer -->
-            <div class="timer-section">
-                <div class="timer-label">TEMPS RESTANT</div>
-                <div class="timer-display" id="timerDisplay">9.0</div>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="progress-section">
-                <div class="progress-label">FORCE</div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                    <div class="progress-markers">
-                        <span>0%</span>
-                        <span>50%</span>
-                        <span>100%</span>
-                    </div>
-                </div>
-                <div class="progress-value" id="progressValue">0%</div>
-            </div>
-
-            <!-- Tap Zone -->
-            <div class="tap-zone-container">
-                <div class="tap-instruction">APPUYEZ RAPIDEMENT</div>
-                <button class="tap-zone" id="tapZone">
-                    <div class="tap-icon"></div>
-                    <div class="tap-text">FORCE</div>
-                    <div class="tap-ripple" id="tapRipple"></div>
-                </button>
-                <div class="tap-counter">Taps: <span id="tapCounter">0</span></div>
+    <!-- SUCCESS MODAL -->
+    <div id="success-view" class="modal-view">
+        <div class="modal-card success-style">
+            <div class="big-icon">✦</div>
+            <h1 class="card-title title-font" style="margin-bottom: 10px;">PUISSANCE<br>MAXIMALE</h1>
+            <p style="opacity: 0.7; font-weight: 500;">Surcharge système réussie.</p>
+            
+            <div style="margin-top: auto; width: 100%;">
+                <button class="btn-action" style="background: var(--bg-dark); color: var(--card-cream); border:none;" onclick="App.next()">CONTINUER</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- FAIL MODAL -->
+    <div id="fail-view" class="modal-view">
+        <div class="modal-card fail-style">
+            <div class="big-icon" style="color:#c63032">⚠</div>
+            <h1 class="card-title title-font" style="margin-bottom: 10px; color:#c63032">ÉNERGIE<br>INSUFFISANTE</h1>
+            <p style="opacity: 0.7;">Le système n'a pas atteint le seuil critique.</p>
+            
+            <div style="margin-top: auto; width: 100%;">
+                <button class="btn-action" style="background: transparent; border: 1px solid #c63032; color: #c63032;" onclick="location.reload()">RÉESSAYER</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const App = {
+            config: {
+                duration: 14,
+                decayRate: 0.5,
+                tapGain: 4.5,
+                winThreshold: 100
+            },
+            state: {
+                running: false,
+                timerStarted: false, // Nouveau flag
+                progress: 0,
+                timeLeft: 14,
+                scale: 1
+            },
+
+            start: function() {
+                document.getElementById('landing-view').style.display = 'none';
+                document.getElementById('game-view').style.display = 'flex';
+                
+                this.tapZone = document.getElementById('tap-zone');
+                this.percentEl = document.getElementById('percent-display');
+                this.timerBadge = document.getElementById('timer-badge');
+                
+                const handleTap = (e) => {
+                    if (e.cancelable) e.preventDefault();
+                    if (!this.state.running) return;
+                    
+                    // --- LANCEMENT DU CHRONO AU PREMIER TAP ---
+                    if (!this.state.timerStarted) {
+                        this.state.timerStarted = true;
+                        this.timerBadge.classList.add('active'); // Indique que c'est parti
+                        this.startTimer();
+                    }
+                    
+                    // Incrément
+                    this.state.progress += this.config.tapGain;
+                    
+                    // Win Check
+                    if(this.state.progress >= this.config.winThreshold) {
+                        this.state.progress = 100;
+                        this.updateVisuals();
+                        this.endGame(true);
+                        return;
+                    }
+
+                    // FX
+                    this.state.scale = 1.2;
+                    if(navigator.vibrate) navigator.vibrate(15);
+                    this.updateVisuals();
+                };
+
+                this.tapZone.addEventListener('touchstart', handleTap, {passive: false});
+                this.tapZone.addEventListener('mousedown', handleTap);
+
+                this.state.running = true;
+                this.loop();
+                
+                // Note: Le timer n'est plus lancé ici
+            },
+
+            startTimer: function() {
+                this.timerInt = setInterval(() => {
+                    this.state.timeLeft -= 0.1;
+                    document.getElementById('timer-badge').innerText = Math.max(0, this.state.timeLeft).toFixed(1) + 's';
+                    
+                    if(this.state.timeLeft <= 0) {
+                        this.endGame(false);
+                    }
+                }, 100);
+            },
+
+            loop: function() {
+                if(!this.state.running) return;
+
+                // Decay Logic - Seulement si le jeu a vraiment commencé
+                if(this.state.timerStarted && this.state.progress > 0) {
+                    this.state.progress -= this.config.decayRate;
+                    if(this.state.progress < 0) this.state.progress = 0;
+                }
+
+                // Animation scale retour
+                if(this.state.scale > 1) {
+                    this.state.scale -= 0.05;
+                }
+
+                this.updateVisuals();
+                requestAnimationFrame(() => this.loop());
+            },
+
+            updateVisuals: function() {
+                const val = Math.floor(this.state.progress);
+                this.percentEl.innerText = val + '%';
+                
+                const baseScale = 1 + (this.state.progress / 300); 
+                const finalScale = baseScale * this.state.scale;
+                this.percentEl.style.transform = `scale(${finalScale})`;
+
+                this.percentEl.className = 'big-percent'; 
+                if (val > 80) {
+                    this.percentEl.classList.add('intensity-high');
+                } else if (val > 40) {
+                    this.percentEl.classList.add('intensity-med');
+                } else {
+                    this.percentEl.classList.add('intensity-low');
+                }
+            },
+
+            endGame: function(win) {
+                this.state.running = false;
+                if(this.timerInt) clearInterval(this.timerInt);
+                
+                if(win) {
+                    document.getElementById('success-view').style.display = 'flex';
+                } else {
+                    document.getElementById('fail-view').style.display = 'flex';
+                }
+            },
+
+            next: function() {
+                if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:true}, '*');
+                console.log('Terminé');
+            }
+        };
+    </script>
 </body>
 </html>
