@@ -256,7 +256,6 @@
       "1": {
         "default": {
           "backgroundUrl": "plan-musee.webp",
-          "foregroundUrl": "",
           "sound": "",
           "music": ""
         },
@@ -272,12 +271,14 @@
               "cor": "\"T'aspettava.\""
             },
             "character": "spallistu",
-            "voice": "Case_3_Spallistu_1.mp3"
+            "voice": "Case_3_Spallistu_1.mp3",
+            "foreground": "spallistu.webp"
           },
           {
             "text": {
               "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
-            }
+            },
+              "foreground": "spallistu.webp"
           },
           {
             "text": {
@@ -285,12 +286,14 @@
               "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
             },
             "character": "spallistu",
-            "voice": "Case_3_Spallistu_2.mp3"
+            "voice": "Case_3_Spallistu_2.mp3",
+            "foreground": "spallistu.webp"
           },
           {
             "text": {
               "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts."
-            }
+            },
+              "foreground": "spallistu.webp"
           },
           {
             "text": {
@@ -298,7 +301,8 @@
               "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
             },
             "character": "spallistu",
-            "voice": "Case_3_Spallistu_3.mp3"
+            "voice": "Case_3_Spallistu_3.mp3",
+            "foreground": "spallistu.webp"
           }
         ],
         "nextActionType": "riddle",
@@ -307,7 +311,6 @@
       "2": {
         "default": {
           "backgroundUrl": "spallistu_decors.webp",
-          "foregroundUrl": "",
           "sound": "",
           "music": ""
         },
@@ -327,7 +330,6 @@
       "3": {
         "default": {
           "backgroundUrl": "plan-spallistu.webp",
-          "foregroundUrl": "",
           "sound": "",
           "music": ""
         },

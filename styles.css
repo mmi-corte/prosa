@@ -2426,19 +2426,19 @@ body.light-mode .logo-main {
 .dialogWrapper .foregroundImage {
   position: absolute;
   width: 90%;
-  height: 90%;
+  height: 80%;
   top: 0;
   left: 0;
   background-size: contain;
   background-position: center;
-  filter: drop-shadow(0px 0px 2px #656565);
+  filter: drop-shadow(0px 0px 10px #65656542);
   opacity: 0;
   transition: .3s cubic-bezier(0, .29, .85, .94);
   background-repeat: no-repeat;
   bottom: 0%;
   left: 50%;
   transform: translate(-50%, 1%);
-  margin: auto auto 0 auto;
+  margin: auto auto 10% auto;
 }
 
 .dialogWrapper .foregroundImage.shown {
