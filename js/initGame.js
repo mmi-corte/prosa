@@ -33,7 +33,7 @@ export async function initGame() {
         //If the game is loaded, fetch the steps JSON, aleas riddles and tracked dialogs
         await fetchSteps()
         await fetchAleasRiddles()
-        playedDialogs = JSON.parse(localStorage.getItem('playedDialogs'))
+        playedDialogs = JSON.parse(localStorage.getItem('playedDialogs')) || {}
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {
@@ -90,7 +90,7 @@ export function resetGame() {
     localStorage.clear('playersData')
 
     //Reset played dialogs
-    playedDialogs = null
+    playedDialogs = {}
 
     //Reset difficulty indicator
     localStorage.clear('globalDifficulty')
@@ -103,6 +103,9 @@ export function resetGame() {
 }
 
 export function trackDialog(localisation, stepId, dialogId) {
+    if (!playedDialogs) {
+        playedDialogs = {}
+    }
     // Initialize localisation if needed
     if (!playedDialogs[localisation]) {
         playedDialogs[localisation] = {}
