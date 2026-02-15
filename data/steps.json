@@ -410,8 +410,22 @@
           "nextStep": "09"
         },
         "2": {
-          "type": "still",
-          "nextStep": "07"
+          "type": "lose_turn",
+          "turnLoosed": "1",
+          "unlockStep": "071",
+          "unlockedStepId": "07"
+        }
+      }
+    },
+    "071": {
+      "actionType": "dialog",
+      "action": "5",
+      "end": {
+        "1": {
+          "type": "win",
+          "nextStep": "09",
+          "unlockStep": "070",
+          "unlockedStepId": "07"
         }
       }
     },

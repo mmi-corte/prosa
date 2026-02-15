@@ -209,14 +209,14 @@
               "fr": "Passer par le tunnel (cimetière)"
             },
             "nextActionType": "dialog",
-            "nextAction": "5"
+            "nextAction": "3"
           },
           {
             "text": {
               "fr": "Passer par les ruelles (jardin Alexandre Ier)"
             },
             "nextActionType": "dialog",
-            "nextAction": "6"
+            "nextAction": "4"
           }
         ]
       }

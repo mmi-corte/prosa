@@ -1840,7 +1840,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de lui raconter le message radio et votre intention de trouver l’île."
+              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de leur raconter le message radio et votre intention de trouver l’île."
             },
             "foreground": "gyptis_protis.webp"
           },
@@ -1864,18 +1864,7 @@
             },
             "character": "protis",
             "foreground": "gyptis_protis.webp"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "3"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "tunnel.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
+          },
           {
             "text": {
               "fr": "Vous les regardez remplit de détermination sans rien dire."
@@ -1884,7 +1873,7 @@
           },
           {
             "text": {
-              "fr": "\"Tu sembles toujours déterminé à atteindre le port malgré nos avertissements. L’Opéra peut t’aider. Des gens importants y passent encore.\""
+              "fr": "\"Si tu veux toujours te rendre au port malgré nos avertissements, l’Opéra peut t’aider. Des gens importants y passent encore.\""
             },
             "character": "gyptis",
             "foreground": "gyptis_protis.webp"
@@ -1902,18 +1891,7 @@
             },
             "character": "protis",
             "foreground": "gyptis_protis.webp"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "4"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "tunnel.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
+          },
           {
             "text": {
               "fr": "\"Tu as le choix entre deux routes pour avancer. Longer le tunnel pour déboucher vers le cimetière… ou passer par les ruelles pour atteindre le jardin Alexandre 1er.\""
@@ -1931,7 +1909,7 @@
         "nextActionType": "choice",
         "nextAction": "1"
       },
-      "5": {
+      "3": {
         "default": {
           "backgroundUrl": "tunnel.webp",
           "foregroundUrl": "",
@@ -1948,17 +1926,16 @@
         "nextActionType": "end",
         "nextAction": "1"
       },
-      "6": {
+      "4": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "ruelle.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "Les ruelles sont un passage tranquille mais qui vous semble dangereux maintenant que vous avez choisi la rébellion."
+              "fr": "Les ruelles sont un passage tranquille, mais qui vous semble dangereux maintenant que vous avez choisi la rébellion."
             }
           }
         ],
@@ -2121,7 +2098,7 @@
           },
           {
             "text": {
-              "fr": "Les allées encombrée forment un véritable labyrinthe et le Matagot comme fière de vous avoir amenez au centre de ce labyrinthe s’enfuit à travers une ouverture trop étroite pour le suivre."
+              "fr": "Les allées encombrée forment un véritable labyrinthe et le Matagot, comme fière de vous avoir amenez au centre de ce labyrinthe, s’enfuit à travers une ouverture trop étroite pour le suivre."
             }
           }
         ],
@@ -2176,14 +2153,12 @@
             "text": {
               "fr": "La guérisseuse vous aide et vous héberge un moment. Peu à peu, vos forces reviennent. Le temps passe lentement, rythmé par les gestes précis de Fada Lavandula."
             },
-            "character": "fada_lavandula",
             "foreground": "fada_lavandula.webp"
           },
           {
             "text": {
               "fr": "Lorsque vous vous sentez d’aplomb à repartir, guidé par ses indications, vous quittez finalement le refuge. Votre corps est rétabli, mais votre esprit est troublé par votre échec. "
             },
-            "character": "fada_lavandula",
             "foreground": "fada_lavandula.webp"
           }
         ],
@@ -2217,7 +2192,12 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous attendez le moment opportun avant de vous lancer. Le convoi vous dépose au Champ de Mars. À peine descendu, une scène capte votre attention. Trois membres de la La Fédération Li Rais de Prouvènço de Toulon encerclent deux frères aux vêtements usés. L’un d’eux écrase ce qui semble être un gâteau."
+              "fr": "Vous attendez le moment opportun avant de vous lancer. Le convoi vous dépose au Champ de Mars. À peine descendu, une scène capte votre attention."
+            }
+          },
+          {
+            "text": {
+              "fr": "Trois membres de la La Fédération Li Rais de Prouvènço de Toulon encerclent deux frères aux vêtements usés. L’un d’eux écrase ce qui semble être un gâteau."
             }
           },
           {
@@ -2241,22 +2221,35 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "coulobre.webp",
+          "backgroundUrl": "decharge.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
+              "fr": "Derrière un amas de gravats, le joueur débouche sur la décharge de Toulon. L’odeur de ferraille rouillée et de déchets en décomposition est suffocante. Des montagnes de détritus s’étendent à perte de vue."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au milieu de ce chaos, un homme fouille méthodiquement les déchets, allongé près d’un vieux matelas usé, entouré d’objets hétéroclites."
+            },
+            "foreground": "jean.webp"
+          },
+          {
+            "text": {
               "fr": "\"Triste comme endroit, tu ne trouves pas ? Ça fait un moment que je fouille ces déchets… et regarde ce que j’ai déniché : un masque à gaz permettant de filtrer les radiations.\""
             },
-            "character": "jean"
+            "character": "jean",
+            "foreground": "jean.webp"
           },
           {
             "text": {
               "fr": "\"Je te propose un jeu, afin de pimenter un peu la journée. Tu réponds à mon énigme et le masque est à toi. Tu te trompes… et tu repars sans rien !\""
             },
-            "character": "jean"
+            "character": "jean",
+            "foreground": "jean.webp"
           }
         ],
         "nextActionType": "riddle",
@@ -2264,6 +2257,23 @@
       },
       "2": {
         "default": {
+          "backgroundUrl": "decharge.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Suite à votre réponse, Jean vous remet le masque à gaz avec un sourire satisfait."
+            },
+            "foreground": "masque.webp"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
           "backgroundUrl": "coulobre.webp",
           "sound": "",
           "music": ""
@@ -2278,15 +2288,37 @@
             "text": {
               "fr": "Ce nuage empoisonné, qui attire serpents et maladies, bloque le passage. Pourtant, c’est la seule route sûre vers l’Opéra."
             }
+          },
+          {
+            "text": {
+              "fr": "Grâce au masque à gaz, votre traversée vers les sous-terrains se trouve grandment facilitée."
+            },
+            "foreground": "masque.webp"
           }
         ],
         "nextActionType": "end",
         "nextAction": "1"
       },
-      "3": {
+      "4": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "decharge.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Suite à votre réponse, Jean ne semble pas satisfait. Il retourne à ses fouilles en conservant le masque à gaz."
+            },
+            "foreground": "jean.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "coulobre.webp",
           "sound": "",
           "music": ""
         },
@@ -2300,10 +2332,15 @@
             "text": {
               "fr": "Ce nuage empoisonné, qui attire serpents et maladies, bloque le passage. Pourtant, c’est la seule route sûre vers l’Opéra."
             }
+          },
+          {
+            "text": {
+              "fr": "Sans le masque à gaz, vous êtes contraint de traverser la Coulobre sans protection. L’odeur nauséabonde et les effets toxiques vous affaiblissent et vous ont considérablement ralenti."
+            }
           }
         ],
         "nextActionType": "end",
-        "nextAction": "2"
+        "nextAction": "1"
       }
     },
     "08": {
@@ -2370,8 +2407,7 @@
     "09": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "opera.webp",
           "sound": "",
           "music": ""
         },
@@ -2387,8 +2423,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "opera.webp",
           "sound": "",
           "music": ""
         },
@@ -2404,8 +2439,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "opera.webp",
           "sound": "",
           "music": ""
         },
@@ -2421,8 +2455,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "opera.webp",
           "sound": "",
           "music": ""
         },
@@ -2434,7 +2467,23 @@
           },
           {
             "text": {
-              "fr": "À l'aide du roseau trouvé dans le jardin, vous parvenez à progresser dans l'Opéra sans encombre."
+              "fr": "À l'aide du roseau trouvé dans le jardin, vous parvenez à ouvrir une trappe qui révèle un passage dissimulé."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "opera.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez à ouvrir une trappe qui révèle un passage dissimulé."
             }
           }
         ],
@@ -2445,8 +2494,7 @@
     "10": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "sebastien.webp",
           "sound": "",
           "music": ""
         },
@@ -2469,14 +2517,12 @@
           {
             "text": {
               "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
-            },
-            "character": "sebastien"
+            }
           },
           {
             "text": {
               "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
-            },
-            "character": "sebastien"
+            }
           }
         ],
         "nextActionType": "riddle",
@@ -2484,8 +2530,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "sebastien.webp",
           "sound": "",
           "music": ""
         },
@@ -2493,14 +2538,12 @@
           {
             "text": {
               "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
-            },
-            "character": "sebastien"
+            }
           },
           {
             "text": {
-              "fr": "\"Le Père Lucien connaît les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est lui.\""
-            },
-            "character": "sebastien"
+              "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est sont elles.\""
+            }
           }
         ],
         "nextActionType": "end",
@@ -2510,7 +2553,7 @@
     "11": {
       "1": {
         "default": {
-          "backgroundUrl": "cathedrale.webp",
+          "backgroundUrl": "cathedrale_int.webp",
           "sound": "",
           "music": ""
         },
@@ -2547,7 +2590,7 @@
           },
           {
             "text": {
-              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
+              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout, tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
             },
             "character": "lavandiero",
             "foreground": "lavandiero.webp"
@@ -2560,26 +2603,27 @@
     "93": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "entrepot.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez le passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
+              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez un passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
             }
           },
           {
             "text": {
               "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la La Fédération Li Rais de Prouvènço de Toulon à votre taille."
-            }
+            },
+            "foreground": "tenu_flrp.webp"
           },
           {
             "text": {
               "fr": "Celui-ci vous sera probablement utile pour la suite de votre aventure."
-            }
+            },
+            "foreground": "tenu_flrp.webp"
           }
         ],
         "nextActionType": "end",
@@ -2603,19 +2647,7 @@
             "text": {
               "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
             }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
+          },
           {
             "text": {
               "fr": "Le sol tremble légèrement. Puis un cheval apparaît au bout de l'avenue, avançant lentement, la tête basse."
@@ -2624,18 +2656,46 @@
           {
             "text": {
               "fr": "Sur son dos se tient un homme grand, raide, au visage dissimulé derrière un foulard gris. Ses bras et son manteau sont marqués de brûlures anciennes."
-            }
+            },
+            "foreground": "lou_drape.webp"
           },
           {
             "text": {
               "fr": "C'est Lou Drapé, un des trois chefs de l'organisation de Toulon, dont la réputation dépasse toutes les autres. Un tir sec retentit. La balle passe juste devant votre visage."
-            }
+            },
+            "foreground": "lou_drape.webp"
           },
           {
             "text": {
               "fr": "\"Ne bouge plus. C'est ton seul avertissement.\""
             },
-            "character": "lou_drape"
+            "character": "lou_drape",
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Lou Drapé vous observe longuement, sans la moindre trace d'empathie. Il veut vous tester, mesurer si vous représentez un obstacle."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Il propose alors un jeu, d'un ton qui ne laisse aucune place à la négociation. Lou Drapé jette un pistolet à vos pieds."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Le pistolet ne possède qu'une balle. Il se place sur son cheval, à une dizaine de mètres, arme à la main mais non levée."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Quand je donne le signal, on se retourne et on tire. Le plus rapide gagne.\""
+            },
+            "character": "lou_drape",
+            "foreground": "lou_drape.webp"
           }
         ],
         "nextActionType": "game",
@@ -2643,8 +2703,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
@@ -2662,7 +2721,8 @@
           {
             "text": {
               "fr": "Vous endossez alors le déguisement que vous avez récupéré pour tenter de tromper la vigilance des gardes."
-            }
+            },
+            "foreground": "tenu_flrp.webp"
           }
         ],
         "nextActionType": "end",
@@ -2672,8 +2732,7 @@
     "13": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mmi.webp",
           "sound": "",
           "music": ""
         },
@@ -2701,8 +2760,7 @@
     "14": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
@@ -2710,12 +2768,14 @@
           {
             "text": {
               "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main."
-            }
+            },
+            "foreground": "tenu_flrp.webp"
           },
           {
             "text": {
               "fr": "Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée : ceux-ci se contentent d'un simple salut, sans même lever les yeux."
-            }
+            },
+            "foreground": "tenu_flrp.webp"
           },
           {
             "text": {
@@ -2728,8 +2788,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
@@ -2738,7 +2797,8 @@
             "text": {
               "fr": "\"Toi. Je ne t'ai jamais vu. Viens par ici !\""
             },
-            "character": "officier_toulon"
+            "character": "officier_toulon",
+            "foreground": "soldat_flrp.webp"
           }
         ],
         "nextActionType": "riddle",
@@ -2746,8 +2806,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
@@ -2755,21 +2814,16 @@
           {
             "text": {
               "fr": "L’officier se laisse convaincre. Votre badge, Votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnement."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous remarquez une modeste embarcation sur le port et vous décidez de l’emprunter pour atteindre enfin l’île de Prosa"
-            }
+            },
+            "foreground": "soldat_flrp.webp"
           }
         ],
-        "nextActionType": "end",
-        "nextAction": "1"
+        "nextActionType": "dialog",
+        "nextAction": "5"
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "mairie.webp",
           "sound": "",
           "music": ""
         },
@@ -2777,23 +2831,40 @@
           {
             "text": {
               "fr": "L'officier comprend instantanément que quelque chose cloche."
-            }
+            },
+            "foreground": "soldat_flrp.webp"
           },
           {
             "text": {
               "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation"
-            }
+            },
+            "foreground": "soldat_flrp.webp"
           }
         ],
         "nextActionType": "end",
         "nextAction": "2"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "port.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous remarquez une modeste embarcation sur le port et vous décidez de l’emprunter pour atteindre enfin l’île de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
       }
     },
     "15": {
       "1": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "port.webp",
           "sound": "",
           "music": ""
         },
@@ -2814,21 +2885,22 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
+          "backgroundUrl": "port.webp",
           "sound": "",
           "music": ""
         },
         "dialog": [
           {
             "text": {
-              "fr": "Vous parvenez finalement au bout du quai. Darius vous attend, prévenu par radio par le Père Lucien. Il a un plan d'évasion prêt."
-            }
+              "fr": "Vous parvenez finalement au bout du quai. Darius vous attend, prévenu par radio par Li Lavandiero di Niue. Il a un plan d'évasion prêt."
+            },
+            "foreground": "darius.webp"
           },
           {
             "text": {
               "fr": "Il vous fait embarquer sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
-            }
+            },
+            "foreground": "darius.webp"
           }
         ],
         "nextActionType": "end",

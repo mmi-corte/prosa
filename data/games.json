@@ -129,8 +129,8 @@
     "09": {
       "1": {
         "game": "toulon/case_9_opera",
-        "nextActionTypeWin": "end",
-        "nextActionWin": "1",
+        "nextActionTypeWin": "dialog",
+        "nextActionWin": "5",
         "nextActionTypeLose": "end",
         "nextActionLose": "2"
       }
