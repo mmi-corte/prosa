@@ -335,7 +335,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 24px;
+  padding: 80px 24px 40px;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -472,29 +472,40 @@ body {
   background: var(--primary-dark);
 }
 
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  border: 1px solid var(--muted-foreground);
-  border-radius: 8px;
-  padding: 12px 24px;
-  color: var(--muted-foreground);
-  font-family: 'Futura', 'Segoe UI', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 20px;
+.start-screen > .back-btn-circle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 600;
 }
 
-.back-btn:hover {
-  border-color: var(--foreground);
+.back-btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(26, 24, 18, 0.8);
+  border: 1.5px solid rgba(236, 228, 203, 0.2);
   color: var(--foreground);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
-.back-btn:active {
-  transform: scale(0.97);
+.back-btn-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.back-btn-circle:hover {
+  border-color: var(--foreground);
+  background: rgba(26, 24, 18, 0.95);
+}
+
+.back-btn-circle:active {
+  transform: scale(0.95);
 }
 
 .permission-note {
