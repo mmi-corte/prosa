@@ -115,7 +115,7 @@
   "tarasca": {
     "name": "La Tarasca",
     "region": "PROVENCE",
-    "image": "Tarraske.webm",
+    "image": "tarraske.webm",
     "pitch": 800,
     "color": "#FFFFFF"
   },
