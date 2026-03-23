@@ -236,7 +236,7 @@
         <div id="card-end" class="menu-card" style="display: none; background-color: var(--card-dark); color: var(--foreground);">
             <h1 id="end-title" style="color: var(--accent-red);">ÉCHEC</h1>
             <p id="end-desc">Vous avez été repéré.</p>
-            <button class="btn-primary" onclick="location.reload()" style="background: var(--foreground); color: var(--background);">REJOUER</button>
+            <button class="btn-primary" id="end-btn" onclick="location.reload()" style="background: var(--foreground); color: var(--background);">REJOUER</button>
         </div>
     </div>
 
@@ -663,18 +663,33 @@ const Game = (function() {
         state = 'END';
         cancelAnimationFrame(loopId);
         document.getElementById('ui-layer').style.opacity = 0;
-        
+
         let card = document.getElementById('card-end');
         let title = document.getElementById('end-title');
         let desc = document.getElementById('end-desc');
-        
+        let btn = document.getElementById('end-btn');
+
         card.style.display = 'flex';
         if(win) {
             title.innerText = "SUCCÈS"; title.style.color = CFG.colors.talisman;
             desc.innerText = "Infiltration réussie.";
+            btn.innerText = "CONTINUER";
+            btn.onclick = function() { window.parent.postMessage({type:'minigame-complete',success:true},'*'); };
         } else {
             title.innerText = "ÉCHEC"; title.style.color = CFG.colors.guard;
             desc.innerText = "Vous avez été repéré.";
+            btn.innerText = "RÉESSAYER";
+            btn.onclick = function() { location.reload(); };
+            // Add abandon button
+            if (!document.getElementById('abandon-btn')) {
+                let abandonBtn = document.createElement('button');
+                abandonBtn.id = 'abandon-btn';
+                abandonBtn.className = 'btn-primary';
+                abandonBtn.innerText = 'ABANDONNER';
+                abandonBtn.style.cssText = 'background:transparent;color:#888;border:1px solid #555;margin-top:8px;';
+                abandonBtn.onclick = function() { window.parent.postMessage({type:'minigame-complete',success:false},'*'); };
+                btn.parentNode.appendChild(abandonBtn);
+            }
         }
         document.getElementById('menu-layer').style.display = 'flex';
     }

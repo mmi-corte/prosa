@@ -4,7 +4,7 @@ import { loadingView } from "./js/views/main/loadingView.js"
 import { menuView } from "./js/views/main/menuView.js"
 import { settingView } from "./js/views/main/settingView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
-import { navigate } from "./router.js"
+import { navigate, callView } from "./router.js"
 import { removeBackButton } from "./js/views/components/backButton.js"
 import { startResourceLogging } from "./js/preloadAssets.js"
 
@@ -72,8 +72,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   //loadingView()
 
-  //Then, load progression screen
-  if (gameInitialized) {
+  // Check if URL hash specifies a view to navigate to (e.g. returning from AR)
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash && initialHash !== 'menu') {
+    appLogger.log(`🎯 Navigating to hash route: ${initialHash}`);
+    // Replace current history entry with menu so back button doesn't leave the app
+    history.replaceState({ view: 'menu' }, '', '#menu');
+    // Then push the target view on top, so history.back() goes to menu
+    navigate(initialHash, () => callView(initialHash));
+  } else if (gameInitialized) {
     appLogger.log('🎯 Resuming previous game...');
     navigate('resume', progressionView())
   } else {
@@ -84,6 +91,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (window.initProsaLogoLottie) {
     appLogger.log('🎨 Initializing Lottie animations...');
     window.initProsaLogoLottie()
+  }
+
+  // Hide the app loading screen
+  const appLoadingScreen = document.getElementById('app-loading-screen');
+  if (appLoadingScreen) {
+    appLoadingScreen.classList.add('hidden');
+    setTimeout(() => appLoadingScreen.remove(), 600);
   }
 
   appLogger.perf('Total app initialization', performance.now() - initStart);

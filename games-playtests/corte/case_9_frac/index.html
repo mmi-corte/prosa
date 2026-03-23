@@ -293,6 +293,7 @@
                 <span class="value" id="fail-dist">0m</span>
             </div>
             <button class="action-btn" style="background: var(--text-light); color: var(--bg-card-dark);" onclick="resetGame()">RÉESSAYER</button>
+            <button class="action-btn" style="background: transparent; color: var(--text-light); border: 1px solid rgba(255,255,255,0.3); margin-top: 0;" onclick="finishGame(false)">ABANDONNER</button>
         </div>
     </div>
 
@@ -305,7 +306,7 @@
                 <span class="label">FRAGMENTS COLLECTÉS</span><br>
                 <span class="value" id="win-coins">0</span>
             </div>
-            <button class="action-btn" style="background: white; color: var(--accent);" onclick="finishGame()">CONTINUER</button>
+            <button class="action-btn" style="background: white; color: var(--accent);" onclick="finishGame(true)">CONTINUER</button>
         </div>
     </div>
 
@@ -479,8 +480,8 @@
         initGame();
     }
 
-    function finishGame() {
-        window.parent.postMessage({ type: 'game_complete', game: 'frac_runner' }, '*');
+    function finishGame(success) {
+        window.parent.postMessage({ type: 'minigame-complete', success: success }, '*');
     }
 
     function spawnObject() {

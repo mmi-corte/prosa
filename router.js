@@ -64,7 +64,7 @@ export function navigate(viewName, viewFunction, updateUrl = true) {
     }
 }
 
-function callView(viewName) {
+export function callView(viewName) {
     //Handle exceprions
     if (viewName === 'univers-prosa/encyclopedie') {
         const preventReload = lastViewName === 'univers-prosa/encyclopedie-details'

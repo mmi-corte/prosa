@@ -27,30 +27,6 @@ export function gameView(action) {
 
     gameContainer.appendChild(iframe);
 
-    // Add skip buttons (always visible for testing)
-    const skipBtns = document.createElement('div');
-    skipBtns.id = 'minigame-skip-btns';
-    skipBtns.style.cssText = `
-        position: fixed;
-        top: 8px;
-        right: 8px;
-        display: flex;
-        gap: 6px;
-        z-index: 1000;
-    `;
-    skipBtns.innerHTML = `
-        <button id="skipWinBtn" style="padding: 4px 8px; font-size: 10px; opacity: 0.7;">✓ Win</button>
-        <button id="skipLoseBtn" style="padding: 4px 8px; font-size: 10px; opacity: 0.7;">✗ Lose</button>
-    `;
-    gameContainer.appendChild(skipBtns);
-
-    skipBtns.querySelector('#skipWinBtn').addEventListener('click', () => {
-        window.postMessage({ type: 'minigame-complete', success: true }, '*');
-    });
-    skipBtns.querySelector('#skipLoseBtn').addEventListener('click', () => {
-        window.postMessage({ type: 'minigame-complete', success: false }, '*');
-    });
-
     // Hide header
     const header = document.querySelector('.header');
     if (header) {
@@ -184,13 +160,12 @@ export function gameView(action) {
 
     // Listen for messages from iframe
     const handleMessage = (event) => {
-        if (event.data && event.data.type === 'minigame-complete') {
+        const validTypes = ['minigame-complete', 'GAME_COMPLETE', 'game_complete'];
+        if (event.data && validTypes.includes(event.data.type)) {
             console.log(`🎮 Game finished:`, event.data);
 
             // Cleanup
             iframe.remove();
-            const skipBtnsEl = document.getElementById('minigame-skip-btns');
-            if (skipBtnsEl) skipBtnsEl.remove();
             const header = document.querySelector('.header');
             if (header) header.style.display = '';
 

@@ -64,10 +64,6 @@ const elements = {
   interactionProximity: document.getElementById('interaction-proximity'),
   interactionSubtitleDist: document.getElementById('interaction-subtitle-dist'),
   
-  // Preview
-  previewCanvas: document.getElementById('preview-canvas'),
-  previewInfo: document.getElementById('preview-info'),
-  
   // Modals
   assetModal: document.getElementById('asset-modal'),
   importModal: document.getElementById('import-modal'),
@@ -208,9 +204,14 @@ function setupEventListeners() {
     tab.addEventListener('click', () => switchTab(tab.dataset.tab));
   });
   
-  // Preview mode toggle (both preview panel and inline)
-  document.querySelectorAll('.mode-btn, .mode-btn-inline').forEach(btn => {
+  // Preview mode toggle (inline in tabs header)
+  document.querySelectorAll('.mode-btn-inline').forEach(btn => {
     btn.addEventListener('click', () => setPreviewMode(btn.dataset.mode));
+  });
+
+  // Asset summary bar click-to-tab
+  document.querySelectorAll('.summary-item[data-tab]').forEach(item => {
+    item.addEventListener('click', () => switchTab(item.dataset.tab));
   });
   
   // Add asset buttons
@@ -1643,10 +1644,9 @@ function switchTab(tabId) {
 
 function setPreviewMode(mode) {
   state.previewMode = mode;
-  // Update both preview panel buttons AND inline toggle buttons
-  document.querySelectorAll('.mode-btn, .mode-btn-inline').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll(`[data-mode="${mode}"]`).forEach(btn => btn.classList.add('active'));
-  
+  document.querySelectorAll('.mode-btn-inline').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll(`.mode-btn-inline[data-mode="${mode}"]`).forEach(btn => btn.classList.add('active'));
+
   // Re-render asset lists to show filtered results
   const char = getSelectedCharacter();
   if (char) {
@@ -1655,26 +1655,6 @@ function setPreviewMode(mode) {
     renderLayers(char);
     renderSounds(char);
   }
-  updatePreview();
-}
-
-function updatePreview() {
-  const char = getSelectedCharacter();
-  if (!char) {
-    elements.previewCanvas.innerHTML = '<div class="preview-placeholder"><span>Select a character to preview</span></div>';
-    return;
-  }
-  
-  // For now, show a simple preview with the portrait
-  elements.previewCanvas.innerHTML = `
-    <div style="text-align: center; padding: 20px;">
-      <div style="background: ${char.themeColor}20; border: 2px solid ${char.themeColor}; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
-        <img src="../${char.portrait}" alt="${char.name}" style="max-width: 150px; max-height: 150px; object-fit: contain;" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>'">
-      </div>
-      <h4 style="margin: 0 0 8px 0;">${char.name}</h4>
-      <p style="font-size: 12px; color: var(--text-muted); margin: 0;">Mode: ${state.previewMode === 'scan' ? '📱 Scan' : '🥽 Immersive'}</p>
-    </div>
-  `;
 }
 
 function updatePreviewInfo(char) {
@@ -1683,8 +1663,6 @@ function updatePreviewInfo(char) {
   document.getElementById('info-layers-count').textContent = Object.keys(char.layers || {}).length;
   document.getElementById('info-sounds-count').textContent = Object.keys(char.sounds || {}).length;
   document.getElementById('info-subtitles-count').textContent = Object.keys(char.subtitles || {}).length;
-  
-  updatePreview();
 }
 
 // ============================================
@@ -2701,6 +2679,7 @@ function loadPreviewAssets(char) {
     loading.classList.add('hidden');
     populatePreviewControls(char);
     populateAnimationControls();
+    repositionGrid();
   });
 }
 
@@ -2723,6 +2702,24 @@ function resetPreviewCamera() {
     preview.controls.target.set(0, 1.6, -5);
   }
   preview.controls.update();
+}
+
+function repositionGrid() {
+  const gridHelper = preview.scene.children.find(obj => obj.type === 'GridHelper');
+  if (!gridHelper) return;
+
+  // Use only 3D models (Groups/Objects loaded from GLTF) to find the floor
+  const models = preview.meshes.filter(m => m.visible && (m.type === 'Group' || m.type === 'Object3D'));
+  if (models.length === 0) {
+    gridHelper.position.y = 0;
+    return;
+  }
+
+  const box = new THREE.Box3();
+  models.forEach(m => box.expandByObject(m));
+
+  if (box.isEmpty()) return;
+  gridHelper.position.y = box.min.y;
 }
 
 // ============================================

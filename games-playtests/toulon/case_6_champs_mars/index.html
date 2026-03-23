@@ -473,9 +473,12 @@
                 els.endTitle.style.color = "var(--accent-green)";
                 els.story.style.display = "block";
                 els.btnAction.innerText = "CONTINUER";
-                els.btnAction.onclick = () => alert("Mission suivante..."); // Placeholder
+                els.btnAction.onclick = () => { window.parent.postMessage({type:'minigame-complete',success:true},'*'); };
                 els.btnAction.style.background = "var(--accent-green)";
                 els.btnAction.style.color = "#fff";
+                // Remove abandon button if exists
+                const existingAbandon = els.end.querySelector('.abandon-btn');
+                if (existingAbandon) existingAbandon.remove();
             } else {
                 els.endTitle.style.color = "var(--accent-red)";
                 els.story.style.display = "none";
@@ -483,6 +486,15 @@
                 els.btnAction.onclick = startGame;
                 els.btnAction.style.background = "var(--bg-card)";
                 els.btnAction.style.color = "var(--ui-dark)";
+                // Add abandon button
+                if (!els.end.querySelector('.abandon-btn')) {
+                    const abandonBtn = document.createElement('button');
+                    abandonBtn.className = 'abandon-btn';
+                    abandonBtn.innerText = 'ABANDONNER';
+                    abandonBtn.style.cssText = 'background:transparent;color:#888;border:1px solid #555;padding:12px 24px;font-family:inherit;font-size:0.9rem;cursor:pointer;margin-top:10px;text-transform:uppercase;';
+                    abandonBtn.onclick = () => { window.parent.postMessage({type:'minigame-complete',success:false},'*'); };
+                    els.btnAction.parentNode.insertBefore(abandonBtn, els.btnAction.nextSibling);
+                }
             }
 
             setTimeout(() => els.end.classList.add('visible'), 500);

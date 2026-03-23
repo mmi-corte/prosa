@@ -29,7 +29,7 @@ export function menuView() {
       </div>
 
       <footer class="menu-footer">
-        <button class="discover-btn" id="discoverBtn">Découvrir l'univers de Prosa</button>
+        <button class="discover-btn" id="discoverBtn">L'univers de Prosa</button>
       </footer>
     </div>
   `
@@ -107,18 +107,18 @@ export function menuView() {
 
 
 
-// Page "Découvrir l'univers de Prosa" (full page)
+// Page "L'univers de Prosa" (full page)
 function showDiscoverPage() {
   clearContainer()
   showBackButton()
 
   gameContainer.innerHTML = `
     <div class="menuWrapper discover-wrapper">
-      <h1 class="menu-title menu-title-left">DÉCOUVRIR L'UNIVERS</h1>
+      <h1 class="menu-title menu-title-left">L'UNIVERS</h1>
 
       <nav class="menu-buttons discover-buttons">
         <button class="menu-btn btn-extra" id="discoverCharactersBtn">
-          <span class="btn-title">Découvrir les personnages</span>
+          <span class="btn-title">Les personnages</span>
           <span class="btn-subtitle">pouvoirs, histoire</span>
           <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -127,7 +127,7 @@ function showDiscoverPage() {
         </button>
 
         <button class="menu-btn" id="discoverSeasonsBtn">
-          <span class="btn-title">Découvrir les saisons</span>
+          <span class="btn-title">Les saisons</span>
           <span class="btn-subtitle">épisodes, aventures</span>
           <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10" />
@@ -136,7 +136,7 @@ function showDiscoverPage() {
         </button>
 
         <button class="menu-btn" id="discoverMinigamesBtn">
-          <span class="btn-title">Découvrir les mini-jeux</span>
+          <span class="btn-title">Les mini-jeux</span>
           <span class="btn-subtitle">répertoire complet</span>
           <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="7" height="7" />

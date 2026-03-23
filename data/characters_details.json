@@ -59,7 +59,7 @@
     "role": "Fée de l’eau, elle est neutre, offrant parfois de l’aide en échange de la non révélation d’un secret qu’elle garde (tabou). C’est une Déesse de la Fertilité. Loyal / Bon",
     "role_co": "Fata di l’acqua, hè neutra : dà qualchì volta u so aiutu in cambiu di u sicretu ch’ella tene. Hè una Dea di a Fertilità. Leale / Bona"
   },
-  "garagai": {
+  "lou_garagai": {
     "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
     "description_co": "Description en provençal...",
     "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n'hésite pas à trahir ou abandonner ceux qu'il accompagne pour survivre. Mauvais",
@@ -107,7 +107,7 @@
     "role": "Zone empoisonnée par des substances chimiques, la Coulobre représente la conséquence directe de la négligence humaine. Elle est mauvaise, car elle tue sans distinction et rend les lieux inhabitables. Mauvais",
     "role_co": "Rolu en provençal"
   },
-  "drape": {
+  "lou_drape": {
     "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
     "description_co": "Description en provençal...",
     "role": "Chef de bande violent et stratège, Lou Drapé sème la peur sur les routes et impose sa loi par le sang. Son alignement est mauvais, car il ne vit que du pillage et du désespoir des autres. Mauvais",

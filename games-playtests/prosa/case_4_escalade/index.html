@@ -250,13 +250,14 @@
             <p>Tu as manqué de force.</p>
             <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 100m</p>
             <button id="btn-retry">Réessayer</button>
+            <button id="btn-abandon" style="background:transparent;color:#888;border:1px solid #555;padding:10px 20px;margin-top:8px;cursor:pointer;font-family:inherit;">Abandonner</button>
         </div>
 
         <!-- Victory -->
         <div id="win-screen" class="card interactive hidden">
             <h1 style="color: var(--accent-green)">Sommet Atteint !</h1>
             <p>Bravo ! Tu as vaincu la montagne.</p>
-            <button id="btn-next">Case Suivante</button>
+            <button id="btn-next">Continuer</button>
         </div>
     </div>
     
@@ -554,9 +555,13 @@
         if(btnRetry) btnRetry.addEventListener('click', function() { game.start(); });
 
         var btnNext = document.getElementById('btn-next');
-        if(btnNext) btnNext.addEventListener('click', function() { 
-            alert("Direction: Case 7 (U Magu)");
-            // window.location.href = "case7.html"; 
+        if(btnNext) btnNext.addEventListener('click', function() {
+            window.parent.postMessage({type:'minigame-complete',success:true},'*');
+        });
+
+        var btnAbandon = document.getElementById('btn-abandon');
+        if(btnAbandon) btnAbandon.addEventListener('click', function() {
+            window.parent.postMessage({type:'minigame-complete',success:false},'*');
         });
 
         /**

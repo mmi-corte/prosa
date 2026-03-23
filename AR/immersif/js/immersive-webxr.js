@@ -42,6 +42,16 @@ let animationClock = new THREE.Clock();
 let xrSession = null;
 let isARActive = false;
 
+// Hit-test & placement state
+let hitTestSource = null;
+let hitTestSourceRequested = false;
+let reticle = null;
+let characterPlaced = false;
+let stableHitCount = 0;
+let lastHitPosition = new THREE.Vector3();
+let fallbackPlaceRequested = false;
+let moveAnimation = null;
+
 // Subtitle state
 let currentLanguage = 'fr';
 let subtitleElement = null;
@@ -283,6 +293,170 @@ function setupScene() {
   updateStatus('Ready to start AR');
 }
 
+// ============================================
+// Hit-Test & Tap-to-Place
+// ============================================
+function createReticle() {
+  const ring = new THREE.RingGeometry(0.15, 0.2, 32).rotateX(-Math.PI / 2);
+  const mat = new THREE.MeshBasicMaterial({ color: 0xece4cb, opacity: 0.7, transparent: true });
+  reticle = new THREE.Mesh(ring, mat);
+  reticle.matrixAutoUpdate = false;
+  reticle.visible = false;
+  scene.add(reticle);
+}
+
+function requestHitTestSource() {
+  if (hitTestSourceRequested || !xrSession) return;
+  hitTestSourceRequested = true;
+
+  xrSession.requestReferenceSpace('viewer').then(viewerSpace => {
+    xrSession.requestHitTestSource({ space: viewerSpace }).then(source => {
+      hitTestSource = source;
+      console.log('Hit-test source ready');
+    }).catch(err => {
+      console.warn('Hit-test not available:', err);
+      hitTestSourceRequested = false;
+      // Auto-place in front if hit-test unavailable
+      if (!characterPlaced) {
+        placeCharacterInFront();
+      }
+    });
+  }).catch(err => {
+    console.warn('Could not get viewer reference space:', err);
+    hitTestSourceRequested = false;
+    if (!characterPlaced) {
+      placeCharacterInFront();
+    }
+  });
+}
+
+function updateHitTest(frame) {
+  if (!hitTestSource) return;
+
+  const referenceSpace = renderer.xr.getReferenceSpace();
+  if (!referenceSpace) return;
+
+  const hitTestResults = frame.getHitTestResults(hitTestSource);
+
+  if (hitTestResults.length > 0) {
+    const hit = hitTestResults[0];
+    const pose = hit.getPose(referenceSpace);
+
+    if (pose) {
+      reticle.visible = true;
+      reticle.matrix.fromArray(pose.transform.matrix);
+
+      // Auto-place after a few stable hits to avoid noisy first detections
+      if (!characterPlaced) {
+        const currentPos = new THREE.Vector3();
+        currentPos.setFromMatrixPosition(reticle.matrix);
+
+        const drift = lastHitPosition.distanceTo(currentPos);
+        lastHitPosition.copy(currentPos);
+
+        // Count frames where hit position is reasonably stable (< 20cm drift)
+        if (drift < 0.2) {
+          stableHitCount++;
+        } else {
+          stableHitCount = Math.max(0, stableHitCount - 1);
+        }
+
+        // Place after 5 stable frames
+        if (stableHitCount >= 5) {
+          placeCharacterAtReticle();
+        }
+      }
+    }
+  } else {
+    reticle.visible = false;
+    stableHitCount = 0;
+  }
+}
+
+function placeCharacterInFront() {
+  if (!characterGroup) return;
+
+  // Place 2m in front of camera at ground level
+  const dir = new THREE.Vector3(0, 0, -1);
+  dir.applyQuaternion(camera.quaternion);
+  dir.y = 0; // Keep on same horizontal plane
+  dir.normalize();
+
+  const pos = camera.position.clone().add(dir.multiplyScalar(2));
+  pos.y = camera.position.y - 1.5; // Approximate ground level
+
+  characterGroup.position.copy(pos);
+  faceCharacterToCamera();
+  characterGroup.visible = true;
+  characterPlaced = true;
+
+  console.log('Character auto-placed in front at:', pos.toArray().map(v => v.toFixed(2)));
+  showRepositionHint();
+}
+
+function placeCharacterAtReticle() {
+  if (!characterGroup || !reticle.visible) return;
+
+  // Extract position from reticle matrix
+  const pos = new THREE.Vector3();
+  pos.setFromMatrixPosition(reticle.matrix);
+
+  characterGroup.position.copy(pos);
+  faceCharacterToCamera();
+  characterGroup.visible = true;
+  characterPlaced = true;
+
+  console.log('Character placed at:', pos.toArray().map(v => v.toFixed(2)));
+
+  // Show repositioning hint after first placement
+  showRepositionHint();
+}
+
+function faceCharacterToCamera() {
+  if (!characterGroup || !camera) return;
+  // Rotate character to face camera on Y axis only (keep upright)
+  const camPos = new THREE.Vector3();
+  camera.getWorldPosition(camPos);
+  const charPos = characterGroup.position.clone();
+  camPos.y = charPos.y; // Ignore vertical difference
+  characterGroup.lookAt(camPos);
+}
+
+function showRepositionHint() {
+  const arHint = document.getElementById('ar-hint');
+  if (!arHint) return;
+
+  arHint.querySelector('span').textContent = 'Touchez pour repositionner le personnage';
+  arHint.style.display = 'flex';
+  arHint.classList.add('visible');
+  setTimeout(() => {
+    arHint.classList.remove('visible');
+    setTimeout(() => { arHint.style.display = 'none'; }, 500);
+  }, 3000);
+}
+
+function onSelectTap() {
+  // Reposition character to where reticle is pointing
+  if (!characterPlaced || !reticle || !reticle.visible || !characterGroup) return;
+
+  const pos = new THREE.Vector3();
+  pos.setFromMatrixPosition(reticle.matrix);
+
+  // Start move animation (runs inside XR render loop via onXRFrame)
+  moveAnimation = {
+    startPos: characterGroup.position.clone(),
+    endPos: pos,
+    startTime: performance.now(),
+    duration: 300
+  };
+
+  // Reset proximity/greeting since character moved
+  hasShownGreeting = false;
+  hideSubtitle();
+
+  console.log('Character repositioning to:', pos.toArray().map(v => v.toFixed(2)));
+}
+
 function setupUI() {
   const startBtn = document.getElementById('start-webxr-ar-btn') || document.getElementById('start-btn');
   if (startBtn) {
@@ -426,7 +600,27 @@ async function startARSession() {
   // Load character and setup scene
   await loadCharacterData();
   setupCharacterScene();
-  
+
+  // Hide character until placed
+  characterPlaced = false;
+  if (characterGroup) characterGroup.visible = false;
+
+  // Setup hit-test for tap-to-place
+  createReticle();
+  requestHitTestSource();
+
+  // Listen for taps (select event) to reposition character
+  xrSession.addEventListener('select', onSelectTap);
+
+  // Fallback flag: placeCharacterInFront will be called from the render loop
+  // after 5s so the camera position is up-to-date
+  setTimeout(() => {
+    if (!characterPlaced) {
+      console.log('Hit-test fallback: will auto-place on next frame');
+      fallbackPlaceRequested = true;
+    }
+  }, 5000);
+
   // Start render loop
   renderer.setAnimationLoop(onXRFrame);
   
@@ -494,7 +688,18 @@ function onSessionEnd() {
   console.log('AR session ended');
   isARActive = false;
   xrSession = null;
-  
+
+  // Clean up hit-test
+  hitTestSource = null;
+  hitTestSourceRequested = false;
+  characterPlaced = false;
+  stableHitCount = 0;
+  fallbackPlaceRequested = false;
+  if (reticle) {
+    scene.remove(reticle);
+    reticle = null;
+  }
+
   stopAllAudio();
   hideSubtitle();
   hasShownGreeting = false;
@@ -527,19 +732,39 @@ function onXRFrame(time, frame) {
     console.log('XR Frame', frameCount);
   }
   
+  // Update hit-test reticle
+  updateHitTest(frame);
+
+  // Fallback placement (runs in render loop so camera position is valid)
+  if (fallbackPlaceRequested && !characterPlaced) {
+    fallbackPlaceRequested = false;
+    placeCharacterInFront();
+  }
+
+  // Animate character repositioning
+  if (moveAnimation) {
+    const t = Math.min((time - moveAnimation.startTime) / moveAnimation.duration, 1);
+    const ease = t * (2 - t); // ease-out
+    characterGroup.position.lerpVectors(moveAnimation.startPos, moveAnimation.endPos, ease);
+    if (t >= 1) {
+      faceCharacterToCamera();
+      moveAnimation = null;
+    }
+  }
+
   // Update animation mixers
   const delta = animationClock.getDelta();
   animationMixers.forEach(mixer => mixer.update(delta));
-  
+
   // Update billboards to face camera
   updateBillboards();
-  
+
   // Update video textures
   updateVideoTextures();
-  
+
   // Check proximity for subtitles
   checkCharacterProximity();
-  
+
   // Render - Three.js handles everything including camera passthrough
   renderer.render(scene, camera);
 }

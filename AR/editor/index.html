@@ -126,6 +126,15 @@
             </div>
           </section>
 
+          <!-- Asset Summary Bar -->
+          <div class="asset-summary" id="asset-summary">
+            <span class="summary-item" data-tab="assets-2d"><span class="summary-count" id="info-2d-count">0</span> 2D</span>
+            <span class="summary-item" data-tab="assets-3d"><span class="summary-count" id="info-3d-count">0</span> 3D</span>
+            <span class="summary-item" data-tab="layers"><span class="summary-count" id="info-layers-count">0</span> Layers</span>
+            <span class="summary-item" data-tab="sounds"><span class="summary-count" id="info-sounds-count">0</span> Sounds</span>
+            <span class="summary-item" data-tab="immersive"><span class="summary-count" id="info-subtitles-count">0</span> Subtitles</span>
+          </div>
+
           <!-- Tabs for Assets -->
           <div class="tabs-header">
             <div class="tabs">
@@ -233,43 +242,6 @@
         </div>
       </main>
 
-      <!-- Preview Panel -->
-      <aside class="preview-panel">
-        <div class="preview-header">
-          <h3>Preview</h3>
-          <div class="preview-mode-toggle">
-            <button class="mode-btn active" data-mode="scan">📱 Scan</button>
-            <button class="mode-btn" data-mode="immersive">🥽 Immersive</button>
-          </div>
-        </div>
-        <div class="preview-canvas" id="preview-canvas">
-          <div class="preview-placeholder">
-            <span>Select a character to preview</span>
-          </div>
-        </div>
-        <div class="preview-info" id="preview-info">
-          <div class="info-row">
-            <span class="info-label">2D Assets:</span>
-            <span class="info-value" id="info-2d-count">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">3D Models:</span>
-            <span class="info-value" id="info-3d-count">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Layers:</span>
-            <span class="info-value" id="info-layers-count">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Sounds:</span>
-            <span class="info-value" id="info-sounds-count">0</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Subtitles:</span>
-            <span class="info-value" id="info-subtitles-count">0</span>
-          </div>
-        </div>
-      </aside>
     </div>
   </div>
 

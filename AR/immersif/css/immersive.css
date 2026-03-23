@@ -473,6 +473,9 @@ body {
 }
 
 .back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
   border: 1px solid var(--muted-foreground);
   border-radius: 8px;

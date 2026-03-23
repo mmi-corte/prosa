@@ -61,13 +61,15 @@
 
   <!-- UI Overlay -->
   <div id="ui-overlay">
+    <!-- Back Button (top left, consistent with main app) -->
+    <button id="back-btn" class="control-btn back-btn-topleft" title="Retour">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
     <!-- Control Buttons (top right) -->
     <div id="control-buttons">
-      <button id="back-btn" class="control-btn" title="Back to Menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
       <button id="mute-btn" class="control-btn" title="Mute/Unmute">
         <svg id="sound-on-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>

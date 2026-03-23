@@ -352,6 +352,7 @@
                 <p style="color:var(--muted-foreground)">La structure s'est effondrée sur l'unité.</p>
             </div>
             <button class="btn-action" onclick="game.reset()">RÉINITIALISER</button>
+            <button class="btn-action" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')">ABANDONNER</button>
         </div>
 
         <!-- WIN SCREEN -->
@@ -362,7 +363,7 @@
                 <p style="color:var(--accent-green); font-size: 1.2rem;">EXTRACTION TERMINÉE</p>
                 <p style="color:var(--foreground)">Accès au Port de Toulon autorisé.</p>
             </div>
-            <button class="btn-action" onclick="game.nextLevel()">CONTINUER</button>
+            <button class="btn-action" onclick="window.parent.postMessage({type:'minigame-complete',success:true},'*')">CONTINUER</button>
         </div>
     </div>
 

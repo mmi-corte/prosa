@@ -310,7 +310,10 @@
                 this.timerInt = setInterval(() => {
                     this.state.time--;
                     document.getElementById('timer-badge').innerText = this.state.time + 's';
-                    if(this.state.time <= 0) location.reload();
+                    if(this.state.time <= 0) {
+                        clearInterval(this.timerInt);
+                        if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:false}, '*');
+                    }
                 }, 1000);
 
                 document.getElementById('input-phase').addEventListener('input', (e) => {

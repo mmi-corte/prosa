@@ -272,7 +272,7 @@
             <h1 style="color: var(--primary);">ÉCHEC</h1>
             <h2>VOUS AVEZ CHUTÉ</h2>
             <p>Le vent a eu raison de vous.<br>Le gardien vous attend en bas.</p>
-            <button onclick="goToPrison()">SUITE : LA PRISON</button>
+            <button onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')">ABANDONNER</button>
             <br><br>
             <button onclick="location.reload()" style="font-size: 1rem; padding: 10px; background: transparent; border: 1px solid var(--primary); color: var(--dust);">RÉESSAYER</button>
         </div>
@@ -281,7 +281,7 @@
         <div id="victory-screen" class="screen">
             <h1>SURVIE CONFIRMÉE</h1>
             <p>Vous avez résisté à la tempête mécanique.<br>U Magu observe votre fuite.</p>
-            <button onclick="goToRebels()">SUITE : CAMP REBELLE</button>
+            <button onclick="window.parent.postMessage({type:'minigame-complete',success:true},'*')">CONTINUER</button>
         </div>
 
     </div>

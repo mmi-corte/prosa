@@ -584,7 +584,7 @@
             statusEl.innerHTML = "<span style='color:var(--accent-red)'>DISSONANCE !</span>";
             wrapperEl.classList.add('shake');
             isGameActive = false;
-            
+
             setTimeout(() => {
                 wrapperEl.classList.remove('shake');
                 statusEl.innerHTML = "Concentrez-vous...";
@@ -592,6 +592,15 @@
                 startBtn.disabled = false;
                 startBtn.style.opacity = '1';
                 startBtn.style.pointerEvents = 'auto';
+                // Add abandon button if not present
+                if (!document.getElementById('abandon-btn')) {
+                    const abandonBtn = document.createElement('button');
+                    abandonBtn.id = 'abandon-btn';
+                    abandonBtn.innerText = 'ABANDONNER';
+                    abandonBtn.style.cssText = 'background:transparent;color:#888;border:1px solid #555;padding:10px 24px;font-family:inherit;font-size:0.9rem;cursor:pointer;margin-top:10px;';
+                    abandonBtn.onclick = () => { window.parent.postMessage({type:'minigame-complete',success:false},'*'); };
+                    startBtn.parentNode.insertBefore(abandonBtn, startBtn.nextSibling);
+                }
             }, 1000);
         }
 
@@ -601,12 +610,12 @@
             setTimeout(() => playTone(0), 0);
             setTimeout(() => playTone(2), 200);
             setTimeout(() => playTone(1), 400);
-            
+
             statusEl.innerHTML = "";
             trapdoorEl.classList.add('open');
-            
+
             setTimeout(() => {
-                console.log("Navigation vers la suite...");
+                window.parent.postMessage({type:'minigame-complete',success:true},'*');
             }, 2000);
         }
 

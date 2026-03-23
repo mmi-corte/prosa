@@ -189,7 +189,7 @@ body {
 
 .main-container {
   display: grid;
-  grid-template-columns: 280px 1fr 300px;
+  grid-template-columns: 280px 1fr;
   height: calc(100vh - 64px);
 }
 
@@ -893,85 +893,36 @@ body {
 }
 
 /* ============================================
-   Preview Panel
+   Asset Summary Bar
    ============================================ */
 
-.preview-panel {
-  background: var(--bg-secondary);
-  border-left: 1px solid var(--border-color);
+.asset-summary {
   display: flex;
-  flex-direction: column;
-}
-
-.preview-header {
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.preview-header h3 {
-  font-size: 1rem;
-  margin-bottom: var(--spacing-sm);
-}
-
-.preview-mode-toggle {
-  display: flex;
-  gap: var(--spacing-xs);
-}
-
-.mode-btn {
-  flex: 1;
-  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.summary-item {
   font-size: 0.8rem;
+  color: var(--text-secondary);
   cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
   transition: var(--transition-fast);
 }
 
-.mode-btn:hover {
+.summary-item:hover {
   background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
-.mode-btn.active {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-  color: white;
-}
-
-.preview-canvas {
-  flex: 1;
-  background: var(--bg-primary);
-  margin: var(--spacing-md);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  position: relative;
-  overflow: hidden;
-}
-
-.preview-placeholder {
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
-
-.preview-info {
-  padding: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--spacing-xs) 0;
-  font-size: 0.8rem;
-}
-
-.info-label {
-  color: var(--text-secondary);
+.summary-count {
+  font-weight: 600;
+  color: var(--accent-primary);
 }
 
 .info-value {
@@ -1246,10 +1197,6 @@ body {
     grid-template-columns: 260px 1fr;
   }
   
-  .preview-panel {
-    display: none;
-  }
-  
   .header-left h1 {
     font-size: 1rem;
   }
@@ -1325,10 +1272,6 @@ body {
   
   .editor-container {
     max-width: 100%;
-  }
-  
-  .preview-panel {
-    display: none;
   }
   
   /* Tabs scroll horizontally */
