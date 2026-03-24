@@ -884,7 +884,7 @@ body.light-mode .logo-main {
 
 .minigames-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 14px;
   margin-top: 8px;
 }
@@ -893,8 +893,8 @@ body.light-mode .logo-main {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 18px;
+  gap: 0;
+  padding: 0;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 45%),
@@ -904,7 +904,13 @@ body.light-mode .logo-main {
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
-  min-height: 120px;
+}
+
+.minigame-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
 }
 
 .minigame-card::after {
@@ -930,6 +936,7 @@ body.light-mode .logo-main {
   font-family: 'Futura', "Futura PT", "Century Gothic", sans-serif;
   font-size: 1.05rem;
   letter-spacing: 0.04em;
+  padding: 14px 16px 0;
 }
 
 .minigame-cta {
@@ -940,6 +947,7 @@ body.light-mode .logo-main {
   text-transform: uppercase;
   color: var(--accent-green);
   margin-top: auto;
+  padding: 8px 16px 14px;
 }
 
 .minigame-cta::after {

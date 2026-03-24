@@ -48,6 +48,7 @@ function renderMinigames(minigames) {
     const card = document.createElement("button")
     card.className = "minigame-card"
     card.innerHTML = `
+      ${game.thumbnail ? `<img class="minigame-thumbnail" src="./assets/minigame_thumbnail/${game.thumbnail}" alt="${game.title}">` : ''}
       <span class="minigame-title">${game.title}</span>
       <span class="minigame-cta">Ouvrir</span>
     `

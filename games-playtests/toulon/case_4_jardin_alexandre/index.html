@@ -162,6 +162,10 @@
             render();
         }
 
+        function sendResult(success) {
+            window.parent.postMessage({ type: 'minigame-complete', success: success }, '*');
+        }
+
         function resetGame() {
             gameState = 'intro';
             playerPos = { x: 1, y: 1 };
@@ -414,10 +418,10 @@
                                 ? `Vous avez échappé au Matagot avec ${timeLeft}s restantes.` 
                                 : 'Le jardin Alexandre Ier vous a englouti.'}
                         </p>
-                        <button onclick="${gameState === 'won' ? 'window.parent.postMessage({type:'minigame-complete',success:true},'*')' : 'resetGame()'}" class="px-8 py-3 bg-[#3a3830] text-[#ece4cb] font-bold uppercase tracking-widest hover:bg-[#ece4cb] hover:text-[#1a1812] transition-colors cursor-pointer border border-[#555]">
+                        <button onclick="${gameState === 'won' ? 'sendResult(true)' : 'resetGame()'}" class="px-8 py-3 bg-[#3a3830] text-[#ece4cb] font-bold uppercase tracking-widest hover:bg-[#ece4cb] hover:text-[#1a1812] transition-colors cursor-pointer border border-[#555]">
                             ${gameState === 'won' ? 'Continuer' : 'Recommencer'}
                         </button>
-                        ${gameState === 'lost' ? '<button onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')" class="px-8 py-3 bg-transparent text-[#888] font-bold uppercase tracking-widest cursor-pointer border border-[#555] mt-4">Abandonner</button>' : ''}
+                        ${gameState === 'lost' ? '<button onclick="sendResult(false)" class="px-8 py-3 bg-transparent text-[#888] font-bold uppercase tracking-widest cursor-pointer border border-[#555] mt-4">Abandonner</button>' : ''}
                     </div>
                 </div>
                 ` : ''}
