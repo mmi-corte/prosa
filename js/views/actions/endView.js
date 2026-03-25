@@ -41,7 +41,7 @@ export function endView(action, special_end = false) {
 
         //Vous êtes bloqué pendant X tours
         case "lose_turn":
-            showEndModal("Vous êtes bloqué pendant", activeStep.end[action].turnLoosed, "tours")
+            showEndModal("Vous êtes bloqué pendant", activeStep.end[action].turnLoosed, activeStep.end[action].turnLoosed === "1" ? "tour" : "tours")
             break;
         //Cas spécial arrivé à Prosa
         case "special_end":
@@ -68,7 +68,7 @@ function showEndModal(text01, text02, text03 = null) {
 
     const textNextStep = document.createElement('div')
     textNextStep.classList.add('next_step')
-    textNextStep.innerText = text02
+    textNextStep.innerText = /^\d+$/.test(text02) ? String(parseInt(text02, 10)) : text02
     wrapper.appendChild(textNextStep)
 
     if (text03) {

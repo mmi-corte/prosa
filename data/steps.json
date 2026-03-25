@@ -703,7 +703,7 @@
       "end": {
         "1": {
           "type": "lose_turn",
-          "turnLoosed": "01",
+          "turnLoosed": "1",
           "unlockStep": "060",
           "unlockedStepId": "06"
         }
@@ -823,11 +823,11 @@
       "end": {
         "1": {
           "type": "win",
-          "nextStep": "fin_strigonu"
+          "nextStep": "Fin — U Strigone"
         },
         "2": {
           "type": "win",
-          "nextStep": "fin_mazzeru"
+          "nextStep": "Fin — U Mazzeru"
         }
       }
     }
