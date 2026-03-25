@@ -1,988 +1,5 @@
 {
   "1": {
-    "01": {
-      "1": {
-        "default": {
-          "backgroundUrl": "radio.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
-              "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
-            },
-            "character": "radio"
-          },
-          {
-            "text": {
-              "fr": "La voix se perd dans un flot de grésillement."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "radio.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
-              "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
-            },
-            "character": "radio"
-          },
-          {
-            "text": {
-              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-              "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
-            },
-            "character": "radio"
-          },
-          {
-            "text": {
-              "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
-              "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
-            },
-            "character": "radio"
-          },
-          {
-            "text": {
-              "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
-              "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
-            },
-            "character": "radio"
-          },
-          {
-            "text": {
-              "fr": "La voix s'interrompt soudainement…"
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "02": {
-      "1": {
-        "default": {
-          "backgroundUrl": "riviere_fond_2.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête."
-            }
-          },
-          {
-            "text": {
-              "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
-            }
-          },
-          {
-            "text": {
-              "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
-            },
-            "foreground": "fata_1.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Oh… ta gourde déborde. Je sens ton esprit ailleurs.\"",
-              "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
-            },
-            "character": "fata",
-            "voice": "Case_2_Fata_1.mp3",
-            "foreground": "fata_1.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
-            },
-            "foreground": "fata_1.webp"
-          },
-          {
-            "text": {
-              "fr": "\"En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.\"",
-              "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
-            },
-            "character": "fata",
-            "voice": "Case_2_Fata_2.mp3",
-            "foreground": "fata_1.webp"
-          }
-        ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "riviere_fond_2.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
-              "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
-            },
-            "character": "fata",
-            "voice": "Case_2_Fata_3.mp3",
-            "foreground": "fata_1.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
-              "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
-            },
-            "character": "fata",
-            "voice": "Case_2_Fata_4.mp3",
-            "foreground": "fata_1.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
-              "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
-            },
-            "character": "fata",
-            "voice": "Case_2_Fata_5.mp3",
-            "foreground": "fata_1.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "riviere_fond_2.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
-            },
-            "foreground": "fata_2.webp"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "4"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "plan-passerelle_2.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
-            }
-          },
-          {
-            "text": {
-              "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
-              "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
-            },
-            "character": "strega",
-            "voice": "Case_2_Strega_1.mp3",
-            "foreground": "strega.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
-              "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
-            },
-            "character": "strega",
-            "voice": "Case_2_Strega_2.mp3",
-            "foreground": "strega.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous faites un pas en arrière effrayé."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
-              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
-            },
-            "character": "strega",
-            "voice": "Case_2_Strega_3.mp3",
-            "foreground": "strega.webp"
-          },
-          {
-            "text": {
-              "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle."
-            }
-          },
-          {
-            "text": {
-              "fr": "Ils sont tous liés. Prosa… Corte… et le clan. Si personne n’agit… rien ne changera."
-            }
-          },
-          {
-            "text": {
-              "fr": "Si le clan déteste autant U Spallistu, c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé… AU MUSÉE !"
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "03": {
-      "1": {
-        "default": {
-          "backgroundUrl": "plan-musee.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Une silhouette vous attend au fond de la salle principale."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Je t'attendais.\"",
-              "cor": "\"T'aspettava.\""
-            },
-            "character": "spallistu",
-            "voice": "Case_3_Spallistu_1.mp3",
-            "foreground": "spallistu.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
-            },
-            "foreground": "spallistu.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
-              "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
-            },
-            "character": "spallistu",
-            "voice": "Case_3_Spallistu_2.mp3",
-            "foreground": "spallistu.webp"
-          },
-          {
-            "text": {
-              "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts."
-            },
-            "foreground": "spallistu.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
-              "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
-            },
-            "character": "spallistu",
-            "voice": "Case_3_Spallistu_3.mp3",
-            "foreground": "spallistu.webp"
-          }
-        ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "spallistu_decors.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
-              "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
-            },
-            "character": "spallistu",
-            "voice": "Case_3_Spallistu_4.mp3"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "plan-spallistu.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Ton chemin te mènera à l’Orcu…\"",
-              "cor": "\"A to strada ti purterà versu l’Orcu…\""
-            },
-            "character": "spallistu",
-            "voice": "Case_3_Spallistu_4-perdu.mp3"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "88": {
-      "1": {
-        "default": {
-          "backgroundUrl": "portemecanique_88.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
-            }
-          },
-          {
-            "text": {
-              "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre."
-            }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "sallecarte.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Objet obtenu : « La Carte des Vents » (jeton unique). Vous récupérez un jeton doré."
-            }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "3"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "sallecarte.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"L’Orcu t’attend. Ne le fais pas patienter.\"",
-              "cor": "\"L’Orcu t’aspetta. Ùn lu fà aspettà.\""
-            },
-            "character": "spallistu",
-            "voice": "Case_88_Spallistu_imposant.mp3",
-            "foreground": "spallistu.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "04": {
-      "1": {
-        "default": {
-          "backgroundUrl": "orcu_fond.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "L'Orcu est là. Immobile. Immense. Il vous jauge sans un mot, puis désigne un objet lourd posé au sol."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "pierredelorcu.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
-              "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
-            },
-            "character": "orcu",
-            "voice": "Case_4_Orcu_1.mp3",
-            "foreground": "orcu.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
-              "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
-            },
-            "character": "orcu",
-            "voice": "Case_4_Orcu_2.mp3",
-            "foreground": "orcu.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
-              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
-            },
-            "character": "orcu",
-            "voice": "Case_4_Orcu_3.mp3",
-            "foreground": "orcu.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
-              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
-            },
-            "character": "orcu",
-            "voice": "Case_4_Orcu_4.mp3",
-            "foreground": "orcu.webp"
-          },
-          {
-            "text": {
-              "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
-            },
-            "foreground": "orcu.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "05": {
-      "1": {
-        "default": {
-          "backgroundUrl": "TrioFontaine.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec."
-            }
-          },
-          {
-            "text": {
-              "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents."
-            }
-          }
-        ],
-        "nextActionType": "choice",
-        "nextAction": "1"
-      }
-    },
-    "06": {
-      "1": {
-        "default": {
-          "backgroundUrl": "GP-signadora.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
-              "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
-            },
-            "character": "signadora",
-            "voice": ""
-          },
-          {
-            "text": {
-              "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments.\"",
-              "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
-            },
-            "character": "signadora",
-            "voice": "Case_2_Signadora_1.mp3"
-          },
-          {
-            "text": {
-              "fr": "\"Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns.\"",
-              "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
-            },
-            "character": "signadora",
-            "voice": "Case_2_Signadora_2.mp3"
-          },
-          {
-            "text": {
-              "fr": "\"Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.\"",
-              "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
-            },
-            "character": "signadora",
-            "voice": "Case_2_Signadora_3.mp3"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "chapelle.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "La chapelle se dresse à l’écart du village. Ses murs fissurés portent encore les cicatrices de l’effondrement du monde."
-            }
-          },
-          {
-            "text": {
-              "fr": "Autrefois lieu de recueillement, elle est devenue un avant-poste du clan. Des caisses de vivres, des armes et des réserves médicales y sont entassées."
-            }
-          },
-          {
-            "text": {
-              "fr": "Une veilleuse brûle sous le porche de pierre où deux gardes jouent aux cartes."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "interieur_chapelle.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "À l’intérieur, l’air est lourd. Des cierges éteints jonchent le sol."
-            }
-          },
-          {
-            "text": {
-              "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous récupérez les médicaments et ressortez rapidement."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "07": {
-      "1": {
-        "default": {
-          "backgroundUrl": "fontaine.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
-            },
-            "foreground": "confrontation.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !\"",
-              "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
-            },
-            "character": "armurier_corte",
-            "voice": "Case_7_Armurier_1.mp3",
-            "foreground": "armurier.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
-              "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
-            },
-            "character": "soldat1_corte",
-            "voice": "Case_7_Soldat_1.mp3",
-            "foreground": "soldat_1.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
-              "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
-            },
-            "character": "soldat2_corte",
-            "voice": "Case_7_Soldat_2.mp3",
-            "foreground": "soldat_2.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Jamais ! C'est mon héritage !\"",
-              "cor": "\"Mai ! Hè a mo lascita !\"",
-              "foreground": "armurier.webp"
-            },
-            "character": "armurier_corte",
-            "voice": "Case_7_Armurier_2.mp3",
-            "foreground": "armurier.webp"
-          }
-        ],
-        "nextActionType": "choice",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "fontaine.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
-            },
-            "foreground": "confrontation.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous êtes en partie dépouillé avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
-            },
-            "foreground": "confrontation.webp"
-          }
-        ],
-        "nextActionType": "token",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "fontaine.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
-            },
-            "foreground": "confrontation.webp"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "4"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "armurerie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
-              "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
-            },
-            "character": "armurier_corte",
-            "voice": "Case_7_Armurier_3.mp3",
-            "foreground": "armurier.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
-              "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
-            },
-            "character": "armurier_corte",
-            "voice": "Case_7_Armurier_4.mp3",
-            "foreground": "armurier.webp"
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "5": {
-        "default": {
-          "backgroundUrl": "armurerie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
-              "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
-            },
-            "character": "armurier_corte",
-            "voice": "Case_7_Armurier_5.mp3",
-            "foreground": "armurier.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "67": {
-      "1": {
-        "default": {
-          "backgroundUrl": "fontaine.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
-              "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
-            },
-            "foreground": "fullettu_1.webp"
-          },
-          {
-            "text": {
-              "fr": "Soudain, en une seconde, il s'élance à toute vitesse vers le maquis.",
-              "cor": "Poi in un secondu, si lancia à tutta velocità versu u macchja."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "foret.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Laissez-moi ! Laissez-moi !\"",
-              "cor": "\"Linteti mi ! Linteti mi !\""
-            },
-            "character": "fulettu",
-            "voice": "Case_67_Fulettu_1.mp3",
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
-            },
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
-              "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
-            },
-            "character": "fulettu",
-            "voice": "Case_67_Fulettu_2.mp3",
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
-              "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
-            },
-            "character": "fulettu",
-            "voice": "Case_67_Fulettu_2-5.mp3",
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
-            },
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "Mais pour parvenir jusqu’à elle, vous avez besoin de récupérer l’un des fragments du dolmen de l’Orcu."
-            },
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
-            },
-            "foreground": "fullettu_2.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
-              "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
-            },
-            "character": "fulettu",
-            "voice": "Case_67_Fulettu_3.mp3",
-            "foreground": "fullettu_1.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "fontaine.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous retournez à la fontaine, déçu d’avoir perdu votre temps."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "2"
-      }
-    },
-    "08": {
-      "1": {
-        "default": {
-          "backgroundUrl": "belvederecase9.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Afin de continuer vos recherches, vous décidez de monter en haut du belvédère pour bénéficier d'une meilleure vue d'ensemble."
-            }
-          },
-          {
-            "text": {
-              "fr": "Après une marche épuisante, vous observez l'ensemble de la ville de Corte… Vous remarquez finalement deux endroits marquants et plusieurs choix s'offrent à vous."
-            }
-          }
-        ],
-        "nextActionType": "choice",
-        "nextAction": "1"
-      }
-    },
-    "09": {
-      "1": {
-        "default": {
-          "backgroundUrl": "frac.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous rentrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
-              "cor": "Entrate in u Frac, l'internu di u bastimentu hè silenziu, abbandunatu dapoi tantu tempu, e so sale d'esposizione trasformate in corridori scuri induve risonanu passi imaginarii."
-            }
-          },
-          {
-            "text": {
-              "fr": "À peine avez-vous franchi l'entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d'enfant déformé par un large sourire.",
-              "cor": "Appena avete francatu l'entrata chì a porta sbatte daretu à voi. Un visu fragile appare brevemente, u so visu di zitellu deformatu da un largu surrisu."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.\"",
-              "cor": "\"Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu.\""
-            },
-            "character": "fulettu",
-            "voice": "Case_9_Fulettu_malicieux.mp3"
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "int_frac.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.",
-              "cor": "Scoprite un passaghju scunnisciutu daretu à una tenda tesa. Una botola grossolana sbocca in un corridore scuru, scavatu da i travagliadori per circulà senza attirà l'attenzione di i guardi."
-            }
-          },
-          {
-            "text": {
-              "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "frac.webp",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré. "
-            }
-          },
-          {
-            "text": {
-              "fr": "Votre seul chemin encore viable est A Piazza à u Duca."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "2"
-      }
-    },
     "10": {
       "1": {
         "default": {
@@ -1493,6 +510,989 @@
         "nextAction": "1"
       }
     },
+    "67": {
+      "1": {
+        "default": {
+          "backgroundUrl": "fontaine.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous interpellez un enfant qui vous observait discrètement. Il paraît craintif et recule.",
+              "cor": "Interropate un zitellu chì vi osservava discretamente. Pari timurosu è retrocede."
+            },
+            "foreground": "fullettu_1.webp"
+          },
+          {
+            "text": {
+              "fr": "Soudain, en une seconde, il s'élance à toute vitesse vers le maquis.",
+              "cor": "Poi in un secondu, si lancia à tutta velocità versu u macchja."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "foret.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Laissez-moi ! Laissez-moi !\"",
+              "cor": "\"Linteti mi ! Linteti mi !\""
+            },
+            "character": "fulettu",
+            "voice": "Case_67_Fulettu_1.mp3",
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
+            },
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Je… je n’étais pas là pour vous nuire, je vous en supplie. On m’a demandé de surveiller, d’écouter… de prévenir le clan s’il y avait des mouvements.\"",
+              "cor": "\"Eiu… eiu ùn eru micca quì per fà vi male, a vi ghjurgu. M’anu dumandatu di surveglià, d’ascoltà… d’avvisà u clan s’ellu ci era muvimenti.\""
+            },
+            "character": "fulettu",
+            "voice": "Case_67_Fulettu_2.mp3",
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Ils me donnent à manger en échange. Je n’ai pas vraiment le choix…\"",
+              "cor": "\"Mi danu da manghjà in cambiu. Ùn aghju tantu a scelta…\""
+            },
+            "character": "fulettu",
+            "voice": "Case_67_Fulettu_2-5.mp3",
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
+            },
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "Mais pour parvenir jusqu’à elle, vous avez besoin de récupérer l’un des fragments du dolmen de l’Orcu."
+            },
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "S’il vous aide, il n’aura plus à travailler pour le clan."
+            },
+            "foreground": "fullettu_2.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Je sais où se trouvent ceux qui pourraient vous aider, mais c’est dangereux…\"",
+              "cor": "\"Sò induve sò quelli chì vi ponu aiutà, ma hè periculosu…\""
+            },
+            "character": "fulettu",
+            "voice": "Case_67_Fulettu_3.mp3",
+            "foreground": "fullettu_1.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "fontaine.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous retournez à la fontaine, déçu d’avoir perdu votre temps."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
+      }
+    },
+    "88": {
+      "1": {
+        "default": {
+          "backgroundUrl": "portemecanique_88.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un mécanisme cède. La paroi glisse lentement, révélant une pièce cachée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au centre, une carte ancienne, parchemin fragile, marquée de lignes rouges. Les vents. Les courants."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous comprenez : cette carte est une clé pour traverser la mer sans encombre."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "sallecarte.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Objet obtenu : « La Carte des Vents » (jeton unique). Vous récupérez un jeton doré."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "sallecarte.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"L’Orcu t’attend. Ne le fais pas patienter.\"",
+              "cor": "\"L’Orcu t’aspetta. Ùn lu fà aspettà.\""
+            },
+            "character": "spallistu",
+            "voice": "Case_88_Spallistu_imposant.mp3",
+            "foreground": "spallistu.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "01": {
+      "1": {
+        "default": {
+          "backgroundUrl": "radio.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"…si entend… île… Dict… Refuge… Pro…\"",
+              "cor": "\"…si sente… isula… Ditt… Rifugiu… Pro…\""
+            },
+            "character": "radio"
+          },
+          {
+            "text": {
+              "fr": "La voix se perd dans un flot de grésillement."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "radio.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Si quelqu'un m'entend… Il existe une île entre Toulon et Corte. Là-bas, l'eau est claire et les récoltes sont abondantes.\"",
+              "cor": "\"S'ellu qualchissia mi sente… Esiste un'isula trà Tolone è Corti. Quallà, l'acqua hè chjara è e riccolte sò abbundanti.\""
+            },
+            "character": "radio"
+          },
+          {
+            "text": {
+              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
+              "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
+            },
+            "character": "radio"
+          },
+          {
+            "text": {
+              "fr": "\"J'ai tenté de résister, mais j'ai échoué…\"",
+              "cor": "\"Aghju pruvatu à resistà, mà aghju fiascatu…\""
+            },
+            "character": "radio"
+          },
+          {
+            "text": {
+              "fr": "\"J'ai besoin de vous… Rejoignez Prosa, et continuez ma révolution !\"",
+              "cor": "\"Aghju bisognu di voi… Ghjunghje à Prosa, è cuntinuate a mo rivuluzione !\""
+            },
+            "character": "radio"
+          },
+          {
+            "text": {
+              "fr": "La voix s'interrompt soudainement…"
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "02": {
+      "1": {
+        "default": {
+          "backgroundUrl": "riviere_fond_2.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous agenouillez et remplissez votre gourde d'eau. Le bruit du courant couvre vos pensées… mais le message radio tourne encore dans votre tête."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un doute persiste. Partir pour Prosa ou continuer à survivre dans un monde injuste ?"
+            }
+          },
+          {
+            "text": {
+              "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
+            },
+            "foreground": "fata_1.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Oh… ta gourde déborde. Je sens ton esprit ailleurs.\"",
+              "cor": "\"Oh… a to zucca si rivocca. Ùn ci sì micca quì.\""
+            },
+            "character": "fata",
+            "voice": "Case_2_Fata_1.mp3",
+            "foreground": "fata_1.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
+            },
+            "foreground": "fata_1.webp"
+          },
+          {
+            "text": {
+              "fr": "\"En effet c’est préoccupant… Avant de t’aider je dois savoir si je peux te faire confiance.\"",
+              "cor": "\"Hè vera, hè stranu… Nanzu d’aiutatti, devu sapè s’è ti possu fà cunfidenza.\""
+            },
+            "character": "fata",
+            "voice": "Case_2_Fata_2.mp3",
+            "foreground": "fata_1.webp"
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "riviere_fond_2.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Maintenant que tu as ma confiance, il faut que je te dise quelque chose. Le clan I Muntagnoli qui dirige Corte obéit à l’organisation de Prosa.\"",
+              "cor": "\"Avà ch’è tù ai a mio fidanza, ci vole ch’è ti dica qualcosa. U clan di I Muntagnoli, chì dirigenu à Corti, ubbidisce à i stessi patroni chè quelli di Prosa.\""
+            },
+            "character": "fata",
+            "voice": "Case_2_Fata_3.mp3",
+            "foreground": "fata_1.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Leur règne n’apporte que famine et tristesse, cela fait longtemps que je rêve qu’il prenne fin.\"",
+              "cor": "\"È hè ora chì qualchissia ci mittessi fine.\""
+            },
+            "character": "fata",
+            "voice": "Case_2_Fata_4.mp3",
+            "foreground": "fata_1.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Alors commence par te rendre au Musée. Cherche U Spallistu. Il t’aidera.\"",
+              "cor": "\"Tandu, principia per andà à u Museu. Cerca U Spallistu. Ti darà una manu.\""
+            },
+            "character": "fata",
+            "voice": "Case_2_Fata_5.mp3",
+            "foreground": "fata_1.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "riviere_fond_2.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "A Fata ne répond pas. Elle se détourne, et s’en va lentement…"
+            },
+            "foreground": "fata_2.webp"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "plan-passerelle_2.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous éloignez et vous engagez sur la passerelle de bois qui surplombe la rivière."
+            }
+          },
+          {
+            "text": {
+              "fr": "Quelqu’un vous bouscule et votre gourde tombe sur le sol."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Si tu veux survivre… tu ferais mieux de comprendre comment ce monde fonctionne.\"",
+              "cor": "\"S’è tù voli campà… faresti megliu à capì cumu funziona stu mondu.\""
+            },
+            "character": "strega",
+            "voice": "Case_2_Strega_1.mp3",
+            "foreground": "strega.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Cette eau appartient au clan I Muntagnoli et à ceux qui le dirigent… Et c’est moi qu’ils ont choisi pour gouverner cette île !\"",
+              "cor": "\"St’acqua ùn appartene più chè à u clanu di i Muntagnoli è à quelli chì u dirigenu… è sò eiu scelta da guvernà st’isula !\""
+            },
+            "character": "strega",
+            "voice": "Case_2_Strega_2.mp3",
+            "foreground": "strega.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous faites un pas en arrière effrayé."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Continue à te taire, et Prosa te laissera vivre un jour de plus. Réfléchis trop… et tu finiras seul comme U Spallistu, enfermé dans le passé.\"",
+              "cor": "\"Cuntinueghji à stà zittu, è camparè forse un ghjornu di più. Pensi troppu… è cumpiarè solu, cum’è U Spallistu, chjosu in u passatu.\""
+            },
+            "character": "strega",
+            "voice": "Case_2_Strega_3.mp3",
+            "foreground": "strega.webp"
+          },
+          {
+            "text": {
+              "fr": "Elle s’éloigne, disparaissant de l’autre côté de la passerelle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Ils sont tous liés. Prosa… Corte… et le clan. Si personne n’agit… rien ne changera."
+            }
+          },
+          {
+            "text": {
+              "fr": "Si le clan déteste autant U Spallistu, c’est qu’il peut peut-être aider, mais où le trouver… dans le passé, dans le passé… AU MUSÉE !"
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "03": {
+      "1": {
+        "default": {
+          "backgroundUrl": "plan-musee.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une silhouette vous attend au fond de la salle principale."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je t'attendais.\"",
+              "cor": "\"T'aspettava.\""
+            },
+            "character": "spallistu",
+            "voice": "Case_3_Spallistu_1.mp3",
+            "foreground": "spallistu.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
+            },
+            "foreground": "spallistu.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Corte obéit à I Muntagnoli. I Muntagnoli obéissent à Prosa. Et Prosa étouffe le monde pendant que les autres meurent.\"",
+              "cor": "\"Corti ubbidisce à i Muntagnoli. I Muntagnoli ubbidiscenu à Prosa. È Prosa affoca u mondu mentre chì l’altri morenu.\""
+            },
+            "character": "spallistu",
+            "voice": "Case_3_Spallistu_2.mp3",
+            "foreground": "spallistu.webp"
+          },
+          {
+            "text": {
+              "fr": "U Spallistu sort une omoplate de mouton et la fait rouler entre ses doigts."
+            },
+            "foreground": "spallistu.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Dis-moi… es-tu prêt à savoir ce qui t’attend ?\"",
+              "cor": "\"Dimmi… Sè prontu à sapè ciò chì t'aspetta ?\""
+            },
+            "character": "spallistu",
+            "voice": "Case_3_Spallistu_3.mp3",
+            "foreground": "spallistu.webp"
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "spallistu_decors.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l’Orcu. Mais avant… regarde mieux autour de toi. Le vent garde la mémoire des routes oubliées.\"",
+              "cor": "\"A to strada ti purterà versu l’Orcu. Ma prima… guarda megliu intornu à tè. U ventu tene a memoria di e strade scurdate.\""
+            },
+            "character": "spallistu",
+            "voice": "Case_3_Spallistu_4.mp3"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "plan-spallistu.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Ton chemin te mènera à l’Orcu…\"",
+              "cor": "\"A to strada ti purterà versu l’Orcu…\""
+            },
+            "character": "spallistu",
+            "voice": "Case_3_Spallistu_4-perdu.mp3"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "04": {
+      "1": {
+        "default": {
+          "backgroundUrl": "orcu_fond.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L'Orcu est là. Immobile. Immense. Il vous jauge sans un mot, puis désigne un objet lourd posé au sol."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "pierredelorcu.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Tu veux la mer. Moi, je veux les pierres. Mais pas n’importe lesquelles : des fragments du dolmen du Diavule.\"",
+              "cor": "\"Tù voli u mare. Eiu, vogliu a petra. Ma micca n’importa qualessa : un frammentu di a stazzona di u Diavule.\""
+            },
+            "character": "orcu",
+            "voice": "Case_4_Orcu_1.mp3",
+            "foreground": "orcu.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Ce sont des pierres anciennes, transmises dans ma famille de génération en génération. On dit qu’elles sont chargées de la mémoire de l’île, des traditions des anciens bergers corses… et même du secret du Diavule lui-même.\"",
+              "cor": "\"Si dice ch’ella porta in ella a memoria di l’isula, e tradizione di l’antichi pastori corsi… è ancu u sicretu di u Diavule stessu.\""
+            },
+            "character": "orcu",
+            "voice": "Case_4_Orcu_2.mp3",
+            "foreground": "orcu.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Aujourd’hui, les pierres sont entre de mauvaises mains : elles sont gardées par A Strega.\"",
+              "cor": "\"Oghje, a petra hè in gattive mane : hè tenuta da A Strega.\""
+            },
+            "character": "orcu",
+            "voice": "Case_4_Orcu_3.mp3",
+            "foreground": "orcu.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Infiltre le camp I Muntagnoli. Affronte A Strega, ramène-moi un fragment et je t’aiderai à traverser.\"",
+              "cor": "\"Entri in u campu di i Muntagnoli, Fà fronte à A Strega, è riportami u frammentu. Tandu, t’aiuteraghju à varcà.\""
+            },
+            "character": "orcu",
+            "voice": "Case_4_Orcu_4.mp3",
+            "foreground": "orcu.webp"
+          },
+          {
+            "text": {
+              "fr": "Déterminé et avec un objectif précis en tête, vous vous dirigez vers la fontaine de Corte pour y recueillir des indices sur A Strega."
+            },
+            "foreground": "orcu.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "05": {
+      "1": {
+        "default": {
+          "backgroundUrl": "TrioFontaine.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La vieille fontaine de pierre trône au centre de la place. L'eau ne coule plus depuis longtemps, laissant les bassins à sec."
+            }
+          },
+          {
+            "text": {
+              "fr": "Pourtant, la vie s'y agite encore. Plusieurs personnages importants y sont présents."
+            }
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      }
+    },
+    "06": {
+      "1": {
+        "default": {
+          "backgroundUrl": "GP-signadora.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
+              "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
+            },
+            "character": "signadora",
+            "voice": ""
+          },
+          {
+            "text": {
+              "fr": "Vous lui expliquez discrètement que vous recherchez des informations sur le clan."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Un homme est tombé malade après avoir mangé une nourriture souillée par les radiations. Pour le soigner, il me faut des médicaments.\"",
+              "cor": "\"Un omu hè cascatu malatu dopu à avè manghjatu un cibu imbruttatu da e radiazione. Per curallu, mi ci volenu medicine.\""
+            },
+            "character": "signadora",
+            "voice": "Case_2_Signadora_1.mp3"
+          },
+          {
+            "text": {
+              "fr": "\"Autrefois accessibles à tous, ils sont désormais enfermés dans la chapelle Saint-Antoine et réservés à quelques-uns.\"",
+              "cor": "\"Un tempu, eranu accessibili à tutti, ma oghje sò chjosi in a cappella di Sant'Antone è riservati à unipochi.\""
+            },
+            "character": "signadora",
+            "voice": "Case_2_Signadora_2.mp3"
+          },
+          {
+            "text": {
+              "fr": "\"Prends-en peu, juste assez pour sauver une vie. Lorsque tu les auras, je pourrai te donner les informations que tu désires.\"",
+              "cor": "\"Piglianne pocu, ghjustu ciò ch'ellu ci vole per salvà una vita. Quandu l'avarè, ti possu dà l'infurmazione ch'è tù cerchi.\""
+            },
+            "character": "signadora",
+            "voice": "Case_2_Signadora_3.mp3"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "chapelle.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "La chapelle se dresse à l’écart du village. Ses murs fissurés portent encore les cicatrices de l’effondrement du monde."
+            }
+          },
+          {
+            "text": {
+              "fr": "Autrefois lieu de recueillement, elle est devenue un avant-poste du clan. Des caisses de vivres, des armes et des réserves médicales y sont entassées."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une veilleuse brûle sous le porche de pierre où deux gardes jouent aux cartes."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "interieur_chapelle.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "À l’intérieur, l’air est lourd. Des cierges éteints jonchent le sol."
+            }
+          },
+          {
+            "text": {
+              "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous récupérez les médicaments et ressortez rapidement."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "07": {
+      "1": {
+        "default": {
+          "backgroundUrl": "fontaine.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un homme à la stature athlétique, couvert de poussière et armé d'un vieux fusil, se tient face à deux soldats du clan. La tension est palpable."
+            },
+            "foreground": "confrontation.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Ça fait des semaines que je travaille ! Donnez-moi ce qui m'est dû !\"",
+              "cor": "\"Sò settimane ch'eu travagliu ! Datemi ciò chè hè meiu !\""
+            },
+            "character": "armurier_corte",
+            "voice": "Case_7_Armurier_1.mp3",
+            "foreground": "armurier.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Ton dû ? Je crois que t’as pas vraiment compris à qui tu t’adresses.\"",
+              "cor": "\"Ciò chì hè toiu ? Credu ch’ùn ai micca capitu bè cun qual’parli.\""
+            },
+            "character": "soldat1_corte",
+            "voice": "Case_7_Soldat_1.mp3",
+            "foreground": "soldat_1.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Donne ton fusil et tu t’en sortiras peut-être.\"",
+              "cor": "\"Dà mi u to fucile è forse ne sorterai vivu.\""
+            },
+            "character": "soldat2_corte",
+            "voice": "Case_7_Soldat_2.mp3",
+            "foreground": "soldat_2.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Jamais ! C'est mon héritage !\"",
+              "cor": "\"Mai ! Hè a mo lascita !\"",
+              "foreground": "armurier.webp"
+            },
+            "character": "armurier_corte",
+            "voice": "Case_7_Armurier_2.mp3",
+            "foreground": "armurier.webp"
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "fontaine.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Après une vaine tentative de négociation, les deux gardes vous plaquent contre le mur et commencent à vous fouiller."
+            },
+            "foreground": "confrontation.webp"
+          },
+          {
+            "text": {
+              "fr": "Vous êtes en partie dépouillé avant que l’homme athlétique n’intervienne. Ensemble, vous arrivez à prendre la fuite."
+            },
+            "foreground": "confrontation.webp"
+          }
+        ],
+        "nextActionType": "token",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "fontaine.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous en venez aux mains avec les gardes avant d’être rejoint par l’homme que vous défendiez. Ensemble, vous arrivez à prendre la fuite."
+            },
+            "foreground": "confrontation.webp"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "4"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "armurerie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
+              "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
+            },
+            "character": "armurier_corte",
+            "voice": "Case_7_Armurier_3.mp3",
+            "foreground": "armurier.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Maintenant, j’ai choisi mon camp et je pense que toi aussi. Aide-moi à récupérer le plus d’armes avant qu’ils n’arrivent !\"",
+              "cor": "\"Avà aghju sceltu u mo partitu, è pensu chì tù dinù. Aiutami à ricuperà u più arme pussibule nanzu ch’elli ghjunganu !\""
+            },
+            "character": "armurier_corte",
+            "voice": "Case_7_Armurier_4.mp3",
+            "foreground": "armurier.webp"
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "armurerie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Parfait. Plus bas, dissimulé dans l’ancienne mairie de Corte, un petit camp nous attend. Les rebelles s’y rassemblent depuis des semaines. Suis-moi.\"",
+              "cor": "\"Perfettu. Più in bassu, piattatu in l’anziana merria di Corti, ci aspetta un picculu gruppu di ribelli. Quelli s’adduniscenu quallà dapoi settimane. Seguita mi.\""
+            },
+            "character": "armurier_corte",
+            "voice": "Case_7_Armurier_5.mp3",
+            "foreground": "armurier.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "08": {
+      "1": {
+        "default": {
+          "backgroundUrl": "belvederecase9.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Afin de continuer vos recherches, vous décidez de monter en haut du belvédère pour bénéficier d'une meilleure vue d'ensemble."
+            }
+          },
+          {
+            "text": {
+              "fr": "Après une marche épuisante, vous observez l'ensemble de la ville de Corte… Vous remarquez finalement deux endroits marquants et plusieurs choix s'offrent à vous."
+            }
+          }
+        ],
+        "nextActionType": "choice",
+        "nextAction": "1"
+      }
+    },
+    "09": {
+      "1": {
+        "default": {
+          "backgroundUrl": "frac.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous rentrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
+              "cor": "Entrate in u Frac, l'internu di u bastimentu hè silenziu, abbandunatu dapoi tantu tempu, e so sale d'esposizione trasformate in corridori scuri induve risonanu passi imaginarii."
+            }
+          },
+          {
+            "text": {
+              "fr": "À peine avez-vous franchi l'entrée que la porte claque derrière vous. Un visage frêle apparaît brièvement, son visage d'enfant déformé par un large sourire.",
+              "cor": "Appena avete francatu l'entrata chì a porta sbatte daretu à voi. Un visu fragile appare brevemente, u so visu di zitellu deformatu da un largu surrisu."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Depuis la fontaine… je te regarde. Tu hésites. Tu choisis. Tu te trompes parfois. Ça m'agace. Ça m'intrigue. Voyons ce que tu fais… quand il n'y a plus personne.\"",
+              "cor": "\"Dapoi a funtana… ti guardemu. Esiti. Scegli. Ti sbagli à volte. Mi agace. Mi intriga. Vedemu ciò chì faci… quandu ùn ci hè più nimu.\""
+            },
+            "character": "fulettu",
+            "voice": "Case_9_Fulettu_malicieux.mp3"
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "int_frac.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous découvrez un passage dissimulé derrière une bâche tendue. Une trappe grossière débouche sur un couloir sombre, creusé par les travailleurs pour circuler sans attirer l’attention des gardes.",
+              "cor": "Scoprite un passaghju scunnisciutu daretu à una tenda tesa. Una botola grossolana sbocca in un corridore scuru, scavatu da i travagliadori per circulà senza attirà l'attenzione di i guardi."
+            }
+          },
+          {
+            "text": {
+              "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "frac.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Les gardes vous encerclent. Vous leur échappez de peu, mais la fuite vous coûte un temps précieux. Votre détour forcé vous éloigne de la fontaine, désormais impossible à rejoindre sans être repéré. "
+            }
+          },
+          {
+            "text": {
+              "fr": "Votre seul chemin encore viable est A Piazza à u Duca."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
+      }
+    },
     "prosa_orcu": {
       "1": {
         "default": {
@@ -1752,6 +1752,422 @@
     }
   },
   "2": {
+    "10": {
+      "1": {
+        "default": {
+          "backgroundUrl": "sebastien.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Un bruit de pas précipité attire alors votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il se présente comme Sébastien, et dès le premier instant, son comportement vous intrigue. Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
+            }
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "sebastien.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est sont elles.\""
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "11": {
+      "1": {
+        "default": {
+          "backgroundUrl": "cathedrale_int.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, des femmes agenouillées en prière. Ce sont Li Lavandiero de Niue."
+            }
+          },
+          {
+            "text": {
+              "fr": "Respectueux, vous attendez la fin de leur prière. Elles se redressent et se présentent."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Bonjour, mon enfant. Peu osent franchir ces portes désormais. Que pouvons-nous faire pour toi ?\""
+            },
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
+          },
+          {
+            "text": {
+              "fr": "Rempli de confiance, vous leur expliquez la raison de votre venue."
+            },
+            "foreground": "lavandiero.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Nous le préviendrons par radio cette nuit.\""
+            },
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout, tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
+            },
+            "character": "lavandiero",
+            "foreground": "lavandiero.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "12": {
+      "1": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le sol tremble légèrement. Puis un cheval apparaît au bout de l'avenue, avançant lentement, la tête basse."
+            }
+          },
+          {
+            "text": {
+              "fr": "Sur son dos se tient un homme grand, raide, au visage dissimulé derrière un foulard gris. Ses bras et son manteau sont marqués de brûlures anciennes."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "C'est Lou Drapé, un des trois chefs de l'organisation de Toulon, dont la réputation dépasse toutes les autres. Un tir sec retentit. La balle passe juste devant votre visage."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Ne bouge plus. C'est ton seul avertissement.\""
+            },
+            "character": "lou_drape",
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Lou Drapé vous observe longuement, sans la moindre trace d'empathie. Il veut vous tester, mesurer si vous représentez un obstacle."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Il propose alors un jeu, d'un ton qui ne laisse aucune place à la négociation. Lou Drapé jette un pistolet à vos pieds."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "Le pistolet ne possède qu'une balle. Il se place sur son cheval, à une dizaine de mètres, arme à la main mais non levée."
+            },
+            "foreground": "lou_drape.webp"
+          },
+          {
+            "text": {
+              "fr": "\"Quand je donne le signal, on se retourne et on tire. Le plus rapide gagne.\""
+            },
+            "character": "lou_drape",
+            "foreground": "lou_drape.webp"
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous endossez alors le déguisement que vous avez récupéré pour tenter de tromper la vigilance des gardes."
+            },
+            "foreground": "tenu_flrp.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "13": {
+      "1": {
+        "default": {
+          "backgroundUrl": "mmi.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Paniqué par votre échec, vous traversez les rues de Toulon, évitant patrouilles et obstacles."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir. Vous l’utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais soudain le sol tremble et vous sentez que le bâtiment n’est pas stable."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "14": {
+      "1": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main."
+            },
+            "foreground": "tenu_flrp.webp"
+          },
+          {
+            "text": {
+              "fr": "Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée : ceux-ci se contentent d'un simple salut, sans même lever les yeux."
+            },
+            "foreground": "tenu_flrp.webp"
+          },
+          {
+            "text": {
+              "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "\"Toi. Je ne t'ai jamais vu. Viens par ici !\""
+            },
+            "character": "officier_toulon",
+            "foreground": "soldat_flrp.webp"
+          }
+        ],
+        "nextActionType": "riddle",
+        "nextAction": "1"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L’officier se laisse convaincre. Votre badge, Votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnement."
+            },
+            "foreground": "soldat_flrp.webp"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "5"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "mairie.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "L'officier comprend instantanément que quelque chose cloche."
+            },
+            "foreground": "soldat_flrp.webp"
+          },
+          {
+            "text": {
+              "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation"
+            },
+            "foreground": "soldat_flrp.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "2"
+      },
+      "5": {
+        "default": {
+          "backgroundUrl": "port.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous remarquez une modeste embarcation sur le port et vous décidez de l’emprunter pour atteindre enfin l’île de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "15": {
+      "1": {
+        "default": {
+          "backgroundUrl": "port.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance."
+            }
+          },
+          {
+            "text": {
+              "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "port.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez finalement au bout du quai. Darius vous attend, prévenu par radio par Li Lavandiero di Niue. Il a un plan d'évasion prêt."
+            },
+            "foreground": "darius.webp"
+          },
+          {
+            "text": {
+              "fr": "Il vous fait embarquer sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
+            },
+            "foreground": "darius.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "93": {
+      "1": {
+        "default": {
+          "backgroundUrl": "entrepot.webp",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez un passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
+            }
+          },
+          {
+            "text": {
+              "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la La Fédération Li Rais de Prouvènço de Toulon à votre taille."
+            },
+            "foreground": "tenu_flrp.webp"
+          },
+          {
+            "text": {
+              "fr": "Celui-ci vous sera probablement utile pour la suite de votre aventure."
+            },
+            "foreground": "tenu_flrp.webp"
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
     "01": {
       "1": {
         "default": {
@@ -2491,426 +2907,10 @@
         "nextAction": "1"
       }
     },
-    "10": {
-      "1": {
-        "default": {
-          "backgroundUrl": "sebastien.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Un bruit de pas précipité attire alors votre attention lorsque vous descendez la trappe. Un homme surgit d'une pièce voisine."
-            }
-          },
-          {
-            "text": {
-              "fr": "Il se présente comme Sébastien, et dès le premier instant, son comportement vous intrigue. Ses cheveux sont en bataille, ses gestes sont rapides et désordonnés."
-            }
-          },
-          {
-            "text": {
-              "fr": "Il semble parler tout seul, commentant parfois ses propres actions avec un sourire étrange."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
-            }
-          }
-        ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "sebastien.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est sont elles.\""
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "11": {
-      "1": {
-        "default": {
-          "backgroundUrl": "cathedrale_int.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous pénétrez à l'intérieur de la cathédrale, au centre, des femmes agenouillées en prière. Ce sont Li Lavandiero de Niue."
-            }
-          },
-          {
-            "text": {
-              "fr": "Respectueux, vous attendez la fin de leur prière. Elles se redressent et se présentent."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Bonjour, mon enfant. Peu osent franchir ces portes désormais. Que pouvons-nous faire pour toi ?\""
-            },
-            "character": "lavandiero",
-            "foreground": "lavandiero.webp"
-          },
-          {
-            "text": {
-              "fr": "Rempli de confiance, vous leur expliquez la raison de votre venue."
-            },
-            "foreground": "lavandiero.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Tu devras aller à la mairie. Là-bas, Darius pourra t'aider à atteindre Prosa. Nous le préviendrons par radio cette nuit.\""
-            },
-            "character": "lavandiero",
-            "foreground": "lavandiero.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout, tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
-            },
-            "character": "lavandiero",
-            "foreground": "lavandiero.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "93": {
-      "1": {
-        "default": {
-          "backgroundUrl": "entrepot.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez un passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
-            }
-          },
-          {
-            "text": {
-              "fr": "Après une fouille rapide, cherchant tout objet susceptible de vous être utile, vous découvrez finalement un uniforme de la La Fédération Li Rais de Prouvènço de Toulon à votre taille."
-            },
-            "foreground": "tenu_flrp.webp"
-          },
-          {
-            "text": {
-              "fr": "Celui-ci vous sera probablement utile pour la suite de votre aventure."
-            },
-            "foreground": "tenu_flrp.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "12": {
-      "1": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le sol tremble légèrement. Puis un cheval apparaît au bout de l'avenue, avançant lentement, la tête basse."
-            }
-          },
-          {
-            "text": {
-              "fr": "Sur son dos se tient un homme grand, raide, au visage dissimulé derrière un foulard gris. Ses bras et son manteau sont marqués de brûlures anciennes."
-            },
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "C'est Lou Drapé, un des trois chefs de l'organisation de Toulon, dont la réputation dépasse toutes les autres. Un tir sec retentit. La balle passe juste devant votre visage."
-            },
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Ne bouge plus. C'est ton seul avertissement.\""
-            },
-            "character": "lou_drape",
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "Lou Drapé vous observe longuement, sans la moindre trace d'empathie. Il veut vous tester, mesurer si vous représentez un obstacle."
-            },
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "Il propose alors un jeu, d'un ton qui ne laisse aucune place à la négociation. Lou Drapé jette un pistolet à vos pieds."
-            },
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "Le pistolet ne possède qu'une balle. Il se place sur son cheval, à une dizaine de mètres, arme à la main mais non levée."
-            },
-            "foreground": "lou_drape.webp"
-          },
-          {
-            "text": {
-              "fr": "\"Quand je donne le signal, on se retourne et on tire. Le plus rapide gagne.\""
-            },
-            "character": "lou_drape",
-            "foreground": "lou_drape.webp"
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Après un long trajet, vous atteignez un carrefour d'où vous apercevez enfin la mairie."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le bâtiment est lourdement surveillé : plusieurs membres de l'organisation montent la garde devant l'entrée. Le lieu ressemble davantage à une forteresse qu'à un bâtiment administratif."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous endossez alors le déguisement que vous avez récupéré pour tenter de tromper la vigilance des gardes."
-            },
-            "foreground": "tenu_flrp.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "13": {
-      "1": {
-        "default": {
-          "backgroundUrl": "mmi.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Paniqué par votre échec, vous traversez les rues de Toulon, évitant patrouilles et obstacles."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous vous arrêtez rapidement à l'IUT MMI, un ancien lieu de savoir. Vous l’utilisez comme un point de repère et de refuge temporaire avant de reprendre votre route."
-            }
-          },
-          {
-            "text": {
-              "fr": "Mais soudain le sol tremble et vous sentez que le bâtiment n’est pas stable."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      }
-    },
-    "14": {
-      "1": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous endossez la combinaison de membre de l'organisation et gardez le badge fermement en main."
-            },
-            "foreground": "tenu_flrp.webp"
-          },
-          {
-            "text": {
-              "fr": "Grâce à cet équipement, vous traversez sans difficulté les gardes postés à l'entrée : ceux-ci se contentent d'un simple salut, sans même lever les yeux."
-            },
-            "foreground": "tenu_flrp.webp"
-          },
-          {
-            "text": {
-              "fr": "Mais une fois à l'intérieur du bâtiment, la situation se complique. Un officier de rang supérieur, plus méfiant, s'arrête net en vous voyant : il ne vous reconnaît pas."
-            }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "\"Toi. Je ne t'ai jamais vu. Viens par ici !\""
-            },
-            "character": "officier_toulon",
-            "foreground": "soldat_flrp.webp"
-          }
-        ],
-        "nextActionType": "riddle",
-        "nextAction": "1"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "L’officier se laisse convaincre. Votre badge, Votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnement."
-            },
-            "foreground": "soldat_flrp.webp"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "5"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "mairie.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "L'officier comprend instantanément que quelque chose cloche."
-            },
-            "foreground": "soldat_flrp.webp"
-          },
-          {
-            "text": {
-              "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation"
-            },
-            "foreground": "soldat_flrp.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "2"
-      },
-      "5": {
-        "default": {
-          "backgroundUrl": "port.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous remarquez une modeste embarcation sur le port et vous décidez de l’emprunter pour atteindre enfin l’île de Prosa."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "15": {
-      "1": {
-        "default": {
-          "backgroundUrl": "port.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous vous approchez du port. Une tension silencieuse s'installe. Le lieu, unique passage vers l'extérieur de la ville, est constamment placé sous haute surveillance."
-            }
-          },
-          {
-            "text": {
-              "fr": "Les quais sont quadrillés par des patrouilles faisant des rondes mécaniques ou scrutant attentivement le moindre mouvement suspect."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "port.webp",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous parvenez finalement au bout du quai. Darius vous attend, prévenu par radio par Li Lavandiero di Niue. Il a un plan d'évasion prêt."
-            },
-            "foreground": "darius.webp"
-          },
-          {
-            "text": {
-              "fr": "Il vous fait embarquer sur son embarcation de fortune et Toulon devient peu à peu un point noir à l’horizon."
-            },
-            "foreground": "darius.webp"
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
     "prosa_rebel": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_plage_prosa.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2949,7 +2949,7 @@
     "prosa_jail": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2976,7 +2976,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2998,7 +2998,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3080,7 +3080,7 @@
     "prosa_soldier": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_plage_prosa.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3134,6 +3134,367 @@
     }
   },
   "3": {
+    "10": {
+      "1": {
+        "default": {
+          "backgroundUrl": "_confrontation.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous arrivez aux portes de la ville, équipé et entouré de vos alliés. L’entrée est verrouillée sous la surveillance de deux gardes lourdement armés, fusils d’assaut modernes en main, armures épaisses couvrant leurs silhouettes rigides."
+            }
+          },
+          {
+            "text": {
+              "fr": "Aux côtés des rebelles, vous choisissez de faire front et de les affronter sans détour."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous forcez l’entrée de la ville. Tandis que vos alliés retiennent les gardes dans un échange brutal, vous vous élancez vers la Tour qui domine le centre urbain."
+            }
+          },
+          {
+            "text": {
+              "fr": "Autour de vous, les habitants s’affolent, les cris se mêlent aux ordres hurlés. L’armée se mobilise, déterminée à vous arrêter."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais vous avancez sans hésiter, animé par une seule certitude : atteindre le cœur de l’organisation Prosa, quoi qu’il en coûte."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
+    "11": {
+      "1": {
+        "default": {
+          "backgroundUrl": "_tour_entree.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous atteignez enfin la base de la Tour principale. L’édifice domine le reste de l’île : une haute structure de métal blanc et de verre, battue en permanence par les vents puissants des hauteurs."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous arrivez devant l’entrée principale. La porte d’accès, massive, est verrouillée par un système mécanique renforcé. Un unique garde monte la faction devant elle."
+            }
+          },
+          {
+            "text": {
+              "fr": "Mais ce n’est pas un simple soldat : tout chez lui trahit l’entraînement et l’endurance de quelqu’un capable de rester immobile pendant des heures. Ses épaules sont larges, son regard acéré."
+            }
+          },
+          {
+            "text": {
+              "fr": "À sa ceinture pend un trousseau de clés. L’une d’elles, plus lourde, plus ancienne que les autres, est celle qui ouvre le passage vers l’intérieur de la Tour."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "_tour_entree.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une fois la clé récupérée, la lourde porte cède dans un grincement profond. Vous pénétrez seul dans l’antre du pouvoir de Prosa."
+            }
+          },
+          {
+            "text": {
+              "fr": "Derrière ces murs se cache le maître de la Tour, celui qui dirige l’île, celui qui profite de ses richesses… et celui que vous devez destituer. "
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "12": {
+      "1": {
+        "default": {
+          "backgroundUrl": "drac_tour.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
+            },
+            "character": "drac"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "drac_tour.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
+            }
+          },
+          {
+            "text": {
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
+            },
+            "character": "drac"
+          },
+          {
+            "text": {
+              "fr": "\"Je me doutais que tu finirais par atteindre cette salle, cela ne m’étonne pas de te croiser de nouveau. Mais cette fois, je ne détournerai pas le regard sur ta présence.\""
+            },
+            "character": "drac"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "drac_tour.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous comprenez que vous n’avez pas le choix : pour accéder à l’ascenseur menant à la salle d'U Strigonne, le chef des armées, vous devez vaincre Le Drac."
+            }
+          },
+          {
+            "text": {
+              "fr": "La survie du monde dépend de cette confrontation. Une épreuve se dresse au cœur de votre face-à-face : un défi imposé par Le Drac lui-même, reflet de son esprit et de sa position au sein de Prosa."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      },
+      "4": {
+        "default": {
+          "backgroundUrl": "drac_tour.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Encore haletant de votre victoire contre Le Drac, vous montez dans l'ascenseur de verre. Tandis qu'il s'élève, Prosa se déploie sous vos pieds : ses toits battus par les vents, ses patrouilles lointaines et l’océan se brisant contre les falaises."
+            }
+          },
+          {
+            "text": {
+              "fr": "Le poids de l'instant vous oppresse. Dans le reflet de la paroi, vous croisez votre propre regard, marqué par la lutte mais résolu."
+            }
+          },
+          {
+            "text": {
+              "fr": "« C’est à toi de sauver le monde », murmurez-vous pour sceller ce pacte."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un ding cristallin retentit, vibrant dans votre poitrine comme un coup de tonnerre. Les portes coulissent. Le sommet est atteint."
+            }
+          }
+        ],
+        "nextActionType": "end",
+        "nextAction": "1"
+      }
+    },
+    "13": {
+      "1": {
+        "default": {
+          "backgroundUrl": "_strigone.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Vous franchissez le seuil de la salle, encore porté par l’adrénaline de l’ascension. La pièce s’ouvre devant vous dans une clarté froide, baignée d’une lumière tamisée."
+            }
+          },
+          {
+            "text": {
+              "fr": "Au centre, U Strigonne est assis sur un fauteuil en cuir, le dos tourné, un verre à la main."
+            }
+          },
+          {
+            "text": {
+              "fr": "Sa posture est relâchée, presque élégante, comme si rien — ni la révolte, ni les morts, ni votre infiltration — ne pouvait ébranler sa tranquillité."
+            }
+          },
+          {
+            "text": {
+              "fr": "Sans se retourner, U Strigonne lève légèrement son verre."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je t’en prie, prends place juste ici.\"",
+              "cor": "\"Ti pregu, possa ghjustu quì\""
+            },
+            "character": "strigone"
+          },
+          {
+            "text": {
+              "fr": "Il vous désigne la chaise en face de lui, vous invitant à vous asseoir. Vous refusez sans hésiter. U Strigonne se tourne alors vers vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "Un sourire étire ses traits — rien de chaleureux, seulement la satisfaction froide de celui qui se croit déjà victorieux."
+            }
+          },
+          {
+            "text": {
+              "fr": "Il renouvelle son invitation d’une voix posée, presque paternaliste, comme s’il s’adressait à un enfant entêté."
+            }
+          },
+          {
+            "text": {
+              "fr": "À ses yeux, la partie est déjà terminée… et vous l’avez perdue."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Allons… installe-toi. Cela ne changera rien à ce qui t’attend. La tour est encerclée, chaque issue est verrouillée. Tu n’as nulle part où fuir.\"",
+              "cor": "\"Andemu… mettiti à pusà. A to sorte sera listessa. A torra hè minacciata è tutte è surtite so cundanate. Ùn ai locu per fughjè.\""
+            },
+            "character": "strigone"
+          },
+          {
+            "text": {
+              "fr": "\"Mais je dois l’admettre… remonter toute la chaîne de commandement pour parvenir jusqu’ici force presque le respect.\"",
+              "cor": "\"Ma devu ricunnosce un fattu… rifà tuttu u fillu di cumandu per ghjunghje sin’à quì impone guasi u rispettu.\""
+            },
+            "character": "strigone"
+          },
+          {
+            "text": {
+              "fr": "Vous n’avez plus de patience pour les courtoisies. Vous dites que vous ne regrettez rien, que vous vous êtes battu jusqu’ici pour une raison, et que vous souhaitez terminer tout cela maintenant."
+            }
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "2"
+      },
+      "2": {
+        "default": {
+          "backgroundUrl": "_strigone.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Une détonation sèche vous répond. Une balle file à quelques centimètres de votre oreille et vient se ficher dans le mur derrière vous."
+            }
+          },
+          {
+            "text": {
+              "fr": "Vous vous figez. U Strigonne pointe désormais son arme dans votre direction, toujours assis, toujours calme, comme s’il venait simplement d’attirer l’attention d’un convive distrait."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Je n’aime pas me répéter.\"",
+              "cor": "\"Ùn mi piace à ripete.\""
+            },
+            "character": "strigone"
+          }
+        ],
+        "nextActionType": "dialog",
+        "nextAction": "3"
+      },
+      "3": {
+        "default": {
+          "backgroundUrl": "_strigone.webp",
+          "foregroundUrl": "",
+          "sound": "",
+          "music": ""
+        },
+        "dialog": [
+          {
+            "text": {
+              "fr": "Lorsque vous prenez place, U Strigonne pose le revolver sur la table, le fait tourner lentement du bout des doigts. Un jeu dangereux se dessine dans son sourire."
+            }
+          },
+          {
+            "text": {
+              "fr": "\"Pourquoi s’abaisser à une confrontation barbare ?\"",
+              "cor": "\"Perchè sotumetessi à una cunfruntazione barbara ? \""
+            },
+            "character": "strigone"
+          },
+          {
+            "text": {
+              "fr": "Le chef des armée U Strigonne propose un jeu où l’issue n’en laissera qu’un seul d’entre vous vivant. Une façon « élégante » d’en finir, dit-il, comme si la mort pouvait être un raffinement."
+            }
+          }
+        ],
+        "nextActionType": "game",
+        "nextAction": "1"
+      }
+    },
     "01": {
       "1": {
         "default": {
@@ -3216,7 +3577,7 @@
     "02": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "poste_maintenance_toulon.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3243,7 +3604,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "poste_maintenance_toulon.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3413,7 +3774,7 @@
     "05": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mazzeru_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3435,7 +3796,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mazzeru_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3456,14 +3817,16 @@
               "fr": "\"Tu n’es pas d’ici. Et pourtant… tu es arrivé jusqu’ici.\"",
               "cor": "\"Ùn sì micca d’issu locu. È puru… sì ghjuntu sin’à quì.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
               "fr": "\"J’ai été quelqu’un, ici. J’ai servi Prosa avant de comprendre ce qu’elle exigeait réellement.\"",
               "cor": "\"Sò statu qualchissia, quì. Aghju servutu Prosa nanzu di capì ciò ch’ella esigia veramente.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
@@ -3485,7 +3848,8 @@
               "fr": "\"Mon premier affrontement m’a coûté la vue. Ma seconde tentative… ma liberté.\"",
               "cor": "\"U mo primu scontru m’hà custatu a vista. A mio seconda prova… a mio libertà.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
@@ -3497,7 +3861,8 @@
               "fr": "\"Alors dis-moi… Qui es-tu, toi ? Un hasard ? Un prisonnier de plus ?\"",
               "cor": "\"Allora dimmi… Quale sì tù ? Un casu ? Un altru prigiuneru ?\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
@@ -3510,7 +3875,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mazzeru_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3532,7 +3897,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mazzeru_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3549,7 +3914,7 @@
       },
       "5": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "mazzeru_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3573,7 +3938,7 @@
     "06": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "lougaragai_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3593,13 +3958,15 @@
             "text": {
               "fr": "\"De quel droit tu te trouves ici ? Cette grotte n’est pas accessible sans mon accord.\""
             },
-            "character": "lou_garagai"
+            "character": "lou_garagai",
+            "foreground": "lougaragai_perso.webp"
           },
           {
             "text": {
               "fr": "\"Viens ici. On va discuter un peu toi et moi…\""
             },
-            "character": "lou_garagai"
+            "character": "lou_garagai",
+            "foreground": "lougaragai_perso.webp"
           },
           {
             "text": {
@@ -3610,7 +3977,8 @@
             "text": {
               "fr": "\"Tu oses fuir ? Mauvaise idée. Je connais chaque pierre de cette grotte.\""
             },
-            "character": "lou_garagai"
+            "character": "lou_garagai",
+            "foreground": "lougaragai_perso.webp"
           },
           {
             "text": {
@@ -3623,7 +3991,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "lougaragai_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3645,7 +4013,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "lougaragai_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3669,7 +4037,7 @@
     "07": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "magu_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3690,7 +4058,8 @@
               "fr": "\"Alors, tu es arrivé jusqu’ici… Je t’observe depuis le début de ton ascension. Tu te débrouilles bien… pour un rebelle.\"",
               "cor": "\"Allora, sè ghjuntu sin’à quì… Ti feghju dapoi u principiu di a to cullata. Ti sbrogli piuttostu bè… per un ribellu.\""
             },
-            "character": "magu"
+            "character": "magu",
+            "foreground": "magu_perso.webp"
           },
           {
             "text": {
@@ -3702,7 +4071,8 @@
               "fr": "\"Malheureusement, moi U Magu, guérisseur et l’une des 7 têtes du Serpent de Prosa, je vais devoir te stopper. Ton courage met en péril notre existence.\"",
               "cor": "\"Disgrasiamente, eiu U Magu, guariscidore è una di e 7 teste di u Serpu di Prosa, aghju da esse custrettu à fatti pienta. U to curagiu mette in perìculu a nostra esistenza.\""
             },
-            "character": "magu"
+            "character": "magu",
+            "foreground": "magu_perso.webp"
           },
           {
             "text": {
@@ -3720,7 +4090,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "magu_decors.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3739,7 +4109,7 @@
     "08": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3784,7 +4154,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3806,7 +4176,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3835,7 +4205,7 @@
     "09": {
       "1": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3867,7 +4237,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3889,7 +4259,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3921,7 +4291,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "",
+          "backgroundUrl": "_camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3937,21 +4307,24 @@
               "fr": "\"Regardez-le bien. Ce n’est pas le moment du doute, mais la volonté de voir Prosa respirer à nouveau. Il a traversé l’ombre à mes côtés sans faiblir.\"",
               "cor": "\"Fighjatellu bè. Ùn hè micca l’ora di u dubbitu, ma a vulintà di vede Prosa rinvivisce. Hà francatu l’ombra à fiancu à mè senza trima.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
               "fr": "\"Si nous restons entre nous, nous ne sommes qu’une poignée de spectateurs de notre propre chute. Pour que l’étincelle devienne un incendie, nous avons besoin de mains neuves et de cœurs qui n’ont pas encore appris à désespérer.\"",
               "cor": "\"S’è no stemu trà di noi, ùn simu chè una manata di spettatori di a nostra sprofundura. Per fà chì l’incenti diventi un focu maiò, avemu bisognu di mani nove è di cori chì ùn anu ancu amparatu à dispirassi.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
               "fr": "\"Il est venu pour la cause. Demain, il marchera avec nous.\"",
               "cor": "\"Hè vinutu per a causa. Dumane, marchjerà cun noi.\""
             },
-            "character": "mazzeru"
+            "character": "mazzeru",
+            "foreground": "mazzeru_perso.webp"
           },
           {
             "text": {
@@ -3975,367 +4348,6 @@
           }
         ],
         "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "10": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous arrivez aux portes de la ville, équipé et entouré de vos alliés. L’entrée est verrouillée sous la surveillance de deux gardes lourdement armés, fusils d’assaut modernes en main, armures épaisses couvrant leurs silhouettes rigides."
-            }
-          },
-          {
-            "text": {
-              "fr": "Aux côtés des rebelles, vous choisissez de faire front et de les affronter sans détour."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous forcez l’entrée de la ville. Tandis que vos alliés retiennent les gardes dans un échange brutal, vous vous élancez vers la Tour qui domine le centre urbain."
-            }
-          },
-          {
-            "text": {
-              "fr": "Autour de vous, les habitants s’affolent, les cris se mêlent aux ordres hurlés. L’armée se mobilise, déterminée à vous arrêter."
-            }
-          },
-          {
-            "text": {
-              "fr": "Mais vous avancez sans hésiter, animé par une seule certitude : atteindre le cœur de l’organisation Prosa, quoi qu’il en coûte."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      }
-    },
-    "11": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous atteignez enfin la base de la Tour principale. L’édifice domine le reste de l’île : une haute structure de métal blanc et de verre, battue en permanence par les vents puissants des hauteurs."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous arrivez devant l’entrée principale. La porte d’accès, massive, est verrouillée par un système mécanique renforcé. Un unique garde monte la faction devant elle."
-            }
-          },
-          {
-            "text": {
-              "fr": "Mais ce n’est pas un simple soldat : tout chez lui trahit l’entraînement et l’endurance de quelqu’un capable de rester immobile pendant des heures. Ses épaules sont larges, son regard acéré."
-            }
-          },
-          {
-            "text": {
-              "fr": "À sa ceinture pend un trousseau de clés. L’une d’elles, plus lourde, plus ancienne que les autres, est celle qui ouvre le passage vers l’intérieur de la Tour."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Une fois la clé récupérée, la lourde porte cède dans un grincement profond. Vous pénétrez seul dans l’antre du pouvoir de Prosa."
-            }
-          },
-          {
-            "text": {
-              "fr": "Derrière ces murs se cache le maître de la Tour, celui qui dirige l’île, celui qui profite de ses richesses… et celui que vous devez destituer. "
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "12": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
-            }
-          },
-          {
-            "text": {
-              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
-            }
-          },
-          {
-            "text": {
-              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
-            },
-            "character": "drac"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "3"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous parvenez enfin au rez-de-chaussée de la Tour. À peine avez-vous fait quelques pas qu’une voix résonne dans l’immense hall métallique."
-            }
-          },
-          {
-            "text": {
-              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
-            }
-          },
-          {
-            "text": {
-              "fr": "Son regard perçant semble vous transpercer, et un sourire froid se dessine lentement sur ses lèvres."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Tu n’iras pas plus loin. Aucun intrus ne franchit ce niveau.\""
-            },
-            "character": "drac"
-          },
-          {
-            "text": {
-              "fr": "\"Je me doutais que tu finirais par atteindre cette salle, cela ne m’étonne pas de te croiser de nouveau. Mais cette fois, je ne détournerai pas le regard sur ta présence.\""
-            },
-            "character": "drac"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "3"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous comprenez que vous n’avez pas le choix : pour accéder à l’ascenseur menant à la salle d'U Strigonne, le chef des armées, vous devez vaincre Le Drac."
-            }
-          },
-          {
-            "text": {
-              "fr": "La survie du monde dépend de cette confrontation. Une épreuve se dresse au cœur de votre face-à-face : un défi imposé par Le Drac lui-même, reflet de son esprit et de sa position au sein de Prosa."
-            }
-          }
-        ],
-        "nextActionType": "game",
-        "nextAction": "1"
-      },
-      "4": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Encore haletant de votre victoire contre Le Drac, vous montez dans l'ascenseur de verre. Tandis qu'il s'élève, Prosa se déploie sous vos pieds : ses toits battus par les vents, ses patrouilles lointaines et l’océan se brisant contre les falaises."
-            }
-          },
-          {
-            "text": {
-              "fr": "Le poids de l'instant vous oppresse. Dans le reflet de la paroi, vous croisez votre propre regard, marqué par la lutte mais résolu."
-            }
-          },
-          {
-            "text": {
-              "fr": "« C’est à toi de sauver le monde », murmurez-vous pour sceller ce pacte."
-            }
-          },
-          {
-            "text": {
-              "fr": "Un ding cristallin retentit, vibrant dans votre poitrine comme un coup de tonnerre. Les portes coulissent. Le sommet est atteint."
-            }
-          }
-        ],
-        "nextActionType": "end",
-        "nextAction": "1"
-      }
-    },
-    "13": {
-      "1": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Vous franchissez le seuil de la salle, encore porté par l’adrénaline de l’ascension. La pièce s’ouvre devant vous dans une clarté froide, baignée d’une lumière tamisée."
-            }
-          },
-          {
-            "text": {
-              "fr": "Au centre, U Strigonne est assis sur un fauteuil en cuir, le dos tourné, un verre à la main."
-            }
-          },
-          {
-            "text": {
-              "fr": "Sa posture est relâchée, presque élégante, comme si rien — ni la révolte, ni les morts, ni votre infiltration — ne pouvait ébranler sa tranquillité."
-            }
-          },
-          {
-            "text": {
-              "fr": "Sans se retourner, U Strigonne lève légèrement son verre."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Je t’en prie, prends place juste ici.\"",
-              "cor": "\"Ti pregu, possa ghjustu quì\""
-            },
-            "character": "strigone"
-          },
-          {
-            "text": {
-              "fr": "Il vous désigne la chaise en face de lui, vous invitant à vous asseoir. Vous refusez sans hésiter. U Strigonne se tourne alors vers vous."
-            }
-          },
-          {
-            "text": {
-              "fr": "Un sourire étire ses traits — rien de chaleureux, seulement la satisfaction froide de celui qui se croit déjà victorieux."
-            }
-          },
-          {
-            "text": {
-              "fr": "Il renouvelle son invitation d’une voix posée, presque paternaliste, comme s’il s’adressait à un enfant entêté."
-            }
-          },
-          {
-            "text": {
-              "fr": "À ses yeux, la partie est déjà terminée… et vous l’avez perdue."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Allons… installe-toi. Cela ne changera rien à ce qui t’attend. La tour est encerclée, chaque issue est verrouillée. Tu n’as nulle part où fuir.\"",
-              "cor": "\"Andemu… mettiti à pusà. A to sorte sera listessa. A torra hè minacciata è tutte è surtite so cundanate. Ùn ai locu per fughjè.\""
-            },
-            "character": "strigone"
-          },
-          {
-            "text": {
-              "fr": "\"Mais je dois l’admettre… remonter toute la chaîne de commandement pour parvenir jusqu’ici force presque le respect.\"",
-              "cor": "\"Ma devu ricunnosce un fattu… rifà tuttu u fillu di cumandu per ghjunghje sin’à quì impone guasi u rispettu.\""
-            },
-            "character": "strigone"
-          },
-          {
-            "text": {
-              "fr": "Vous n’avez plus de patience pour les courtoisies. Vous dites que vous ne regrettez rien, que vous vous êtes battu jusqu’ici pour une raison, et que vous souhaitez terminer tout cela maintenant."
-            }
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "2"
-      },
-      "2": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Une détonation sèche vous répond. Une balle file à quelques centimètres de votre oreille et vient se ficher dans le mur derrière vous."
-            }
-          },
-          {
-            "text": {
-              "fr": "Vous vous figez. U Strigonne pointe désormais son arme dans votre direction, toujours assis, toujours calme, comme s’il venait simplement d’attirer l’attention d’un convive distrait."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Je n’aime pas me répéter.\"",
-              "cor": "\"Ùn mi piace à ripete.\""
-            },
-            "character": "strigone"
-          }
-        ],
-        "nextActionType": "dialog",
-        "nextAction": "3"
-      },
-      "3": {
-        "default": {
-          "backgroundUrl": "",
-          "foregroundUrl": "",
-          "sound": "",
-          "music": ""
-        },
-        "dialog": [
-          {
-            "text": {
-              "fr": "Lorsque vous prenez place, U Strigonne pose le revolver sur la table, le fait tourner lentement du bout des doigts. Un jeu dangereux se dessine dans son sourire."
-            }
-          },
-          {
-            "text": {
-              "fr": "\"Pourquoi s’abaisser à une confrontation barbare ?\"",
-              "cor": "\"Perchè sotumetessi à una cunfruntazione barbara ? \""
-            },
-            "character": "strigone"
-          },
-          {
-            "text": {
-              "fr": "Le chef des armée U Strigonne propose un jeu où l’issue n’en laissera qu’un seul d’entre vous vivant. Une façon « élégante » d’en finir, dit-il, comme si la mort pouvait être un raffinement."
-            }
-          }
-        ],
-        "nextActionType": "game",
         "nextAction": "1"
       }
     }

@@ -2437,8 +2437,8 @@ body.light-mode .logo-main {
   height: 80%;
   top: 0;
   left: 0;
-  background-size: contain;
-  background-position: center;
+  background-size: 120%;
+  background-position: center bottom;
   filter: drop-shadow(-5px -5px 11px #00000047);
   opacity: 0;
   transition: .2s cubic-bezier(0, .29, .85, .94);
