@@ -2910,7 +2910,7 @@
     "prosa_rebel": {
       "1": {
         "default": {
-          "backgroundUrl": "_plage_prosa.webp",
+          "backgroundUrl": "plage_prosa.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2949,7 +2949,7 @@
     "prosa_jail": {
       "1": {
         "default": {
-          "backgroundUrl": "_prison.webp",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2976,7 +2976,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "_prison.webp",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -2998,7 +2998,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "_prison.webp",
+          "backgroundUrl": "prison.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3080,7 +3080,7 @@
     "prosa_soldier": {
       "1": {
         "default": {
-          "backgroundUrl": "_plage_prosa.webp",
+          "backgroundUrl": "plage_prosa.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3137,7 +3137,7 @@
     "10": {
       "1": {
         "default": {
-          "backgroundUrl": "_confrontation.webp",
+          "backgroundUrl": "confrontation.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3176,7 +3176,7 @@
     "11": {
       "1": {
         "default": {
-          "backgroundUrl": "_tour_entree.webp",
+          "backgroundUrl": "tour_entree.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3208,7 +3208,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "_tour_entree.webp",
+          "backgroundUrl": "tour_entree.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3360,7 +3360,7 @@
     "13": {
       "1": {
         "default": {
-          "backgroundUrl": "_strigone.webp",
+          "backgroundUrl": "strigone.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3438,7 +3438,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "_strigone.webp",
+          "backgroundUrl": "strigone.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3467,7 +3467,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "_strigone.webp",
+          "backgroundUrl": "strigone.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4109,7 +4109,7 @@
     "08": {
       "1": {
         "default": {
-          "backgroundUrl": "_drac.webp",
+          "backgroundUrl": "drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4154,7 +4154,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "_drac.webp",
+          "backgroundUrl": "drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4176,7 +4176,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "_drac.webp",
+          "backgroundUrl": "drac.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4205,7 +4205,7 @@
     "09": {
       "1": {
         "default": {
-          "backgroundUrl": "_camp_rebelle.webp",
+          "backgroundUrl": "camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4237,7 +4237,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "_camp_rebelle.webp",
+          "backgroundUrl": "camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4259,7 +4259,7 @@
       },
       "3": {
         "default": {
-          "backgroundUrl": "_camp_rebelle.webp",
+          "backgroundUrl": "camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -4291,7 +4291,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "_camp_rebelle.webp",
+          "backgroundUrl": "camp_rebelle.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
