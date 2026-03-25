@@ -427,12 +427,14 @@ const game = {
 
         poem.innerText = "L'Orcu écoute...";
 
-        // Notify parent app after a short delay
-        setTimeout(() => {
-            if (window.finishGame) {
-                window.finishGame(win);
-            }
-        }, 2000);
+        // Show continue or abandon button
+        if (win) {
+            const btnContinue = document.getElementById('btn-continue');
+            if (btnContinue) btnContinue.classList.remove('hidden');
+        } else {
+            const btnAbandon = document.getElementById('btn-abandon');
+            if (btnAbandon) btnAbandon.classList.remove('hidden');
+        }
 
         if (apiKey) {
             try {

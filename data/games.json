@@ -137,7 +137,7 @@
     },
     "12": {
       "1": {
-        "game": "",
+        "game": "toulon/case_12_mairie",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -155,7 +155,7 @@
     },
     "14": {
       "1": {
-        "game": "toulon/case_12_mairie",
+        "game": "",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",

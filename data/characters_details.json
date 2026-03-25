@@ -61,56 +61,56 @@
   },
   "lou_garagai": {
     "description": "Vieil homme toujours armé de son couteau, il connaît chaque sentier et chaque grotte, et sait exploiter le terrain pour sa survie.",
-    "description_co": "Description en provençal...",
-    "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n'hésite pas à trahir ou abandonner ceux qu'il accompagne pour survivre. Mauvais",
-    "role_co": "Rolu en provençal"
+    "description_co": "Òme vièi, toujour arma de soun còutèu, counèis chasque camin e chasque baumo, e sap esplouita lou terrèn pèr sa survido.",
+    "role": "Guide des montagnes et trafiquant de ressources, le Lou Garagaï agit selon son intérêt personnel. Son alignement est mauvais, car il n’hésite pas à trahir ou abandonner ceux qu’il accompagne pour survivre. Mauvais",
+    "role_co": "Guido dis aup e traficant de ressourço, Lou Garagaï agis segound soun interès personau. Soun aliniamen es marrit, car esito pas de trahi o d’abandouna li que l’acòmpagnon pèr soubreviòure. Marrit"
   },
   "drac": {
     "description": "Homme discret au manteau usé qui porte des traces de brûlures et de graisse et dont le regard perçant repère tout ce qui peut être sauvé, et là où tout se casse, lui répare.",
-    "description_co": "Description en provençal...",
-    "role": "Artisan et réparateur itinérant, lou Drac rétablit un semblant d'ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu'il croise, même si son aide se monnaie cher. Gentil",
-    "role_co": "Rolu en provençal"
+    "description_co": "Òme discrèt au mantèu usa que porto de traço de brudaduro e de graisso e dóu regard persant que repèro tout ço que pòu èstre sauva, e mounte tout se casso, éu reparo.",
+    "role": "Artisan et réparateur itinérant, lou Drac rétablit un semblant d’ordre dans le chaos en redonnant vie aux outils et aux armes des survivants. Son alignement est bon, car il aide ceux qu’il croise, même si son aide se monnaie cher. Gentil",
+    "role_co": "Artisan e reparaire ambulant, lou Drac restablo un semblant d’òrdre dins lou caòs en tournant baìa lis ùti e lis armo di sourviòure. Soun aliniamen es bòn, car ajudo li que rescontro, mòu que soun ajudo se pago caro. Gentì"
   },
   "cabro_dor": {
     "description": "Elle porte des habits en peau de chèvre, robustes et souples. Elle se déplace avec une agilité instinctive et avec discrétion. Ses bottes et gants en cuir épais lui permettent une adhérence maximale. Image de grimpeuse des hauteurs, son fusil à lunette est toujours prêt.",
-    "description_co": "Description en provençal...",
-    "role": "Sentinelle solitaire, la Cabro d'Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
-    "role_co": "Rolu en provençal"
+    "description_co": "Porto de vèsti en pèu de cabro, roubusto e souòuplo. Se desplaço emé uno agileta instintivo e emé discrecioun. Si boto e gant de cuèr espés ié permèton uno aderenço maximo. Imajo de grimpairis di sòumo, soun fusiòu de luneto es toujour prèst.",
+    "role": "Sentinelle solitaire, la Cabro d’Or veille sur les hauteurs de la Provence et défend les innocents. Son alignement est bon. gentil",
+    "role_co": "Sentinello soularié, la Cabro d’Or vèio sus lis auturo de la Prouvènço e defènd lis innoucènt. Soun aliniamen es bòn. Gentì"
   },
   "matagot": {
     "description": "Petit chat noir et maigre, aux yeux d’un blanc perçant. Sa démarche fluide et silencieuse. Il se glisse entre les ruines, observant et parfois volant de la nourriture.",
-    "description_co": "Description en provençal...",
-    "role": "Considéré comme un présage, le Matagot suit souvent les groupes de pillards ou les lieux de mort. Son alignement est mauvais, car sa présence annonce toujours un malheur, même s'il n'en est pas la cause directe. Mauvais",
-    "role_co": "Rolu en provençal"
+    "description_co": "Pichòu cat negre e magre, emé lis uèi d’un blanc persant. Sa demarcho fluido e silenciouso. Se gisso entre li ruino, óuservant e de fes voulant de mangiòu.",
+    "role": "Considéré comme un présage, le Matagot suit souvent les groupes de pillards ou les lieux de mort. Son alignement est mauvais, car sa présence annonce toujours un malheur, même s’il n’en est pas la cause directe. Mauvais",
+    "role_co": "Counsidéra coume un presagi, lou Matagòt sèg souvènt li groupo de piòu o li luòc de mort. Soun aliniamen es marrit, car sa presenço anòuncio toujour un malur, mòu s’en es pas la causo dirèito. Marrit"
   },
   "fada_lavandula": {
     "description": "Vieille femme au dos voûté, mains tachées de sève et d’huiles. Elle porte un tablier usé et des vêtements aux motifs de fleurs stylisées. Son regard perçant scrute ceux qui viennent chercher son aide.",
-    "description_co": "Description en provençal...",
+    "description_co": "Vièio femo au dous envòuta, man tacado de sòuvo e d’òli. Porto un devantau usa e de vèsti emé de mòutì de flour estilisado. Soun regard persant escrupo li que vènon cerca soun ajudo.",
     "role": "Guérisseuse recluse et herboriste, elle détient le savoir qui maintient la vie dans les zones hostiles. Son alignement est bon, car elle soigne sans distinction et transmet son savoir avec rigueur et patience. gentil",
-    "role_co": "Rolu en provençal"
+    "role_co": "Guarisseuso reclueso e erbouristo, detèn lou saupre que mantèn la vido dins li zòuno oustilo. Soun aliniamen es bòn, car sòugno sènso distincien e transmèt soun saupre emé rigour e pacienço. Gentì"
   },
   "gyptis_e_protis": {
     "description": "Gyptis et Protis forment un duo respecté. Leurs vêtements sont ornés de motifs inspirés de coquillages et de vagues stylisées, symboles de stabilité et d’ancrage. Leur allure contraste avec la misère ambiante, et ils inspirent confiance aux survivants.",
-    "description_co": "Description en provençal...",
-    "role": "Dirigeants d'une communauté reconstruite, Gyptis et Protis incarnent la stabilité et la renaissance. Leur alignement est bon, car ils restaurent l'ordre et la solidarité dans un monde dévasté. Gentil",
-    "role_co": "Rolu en provençal"
+    "description_co": "Gyptis e Protis fouòrmon un duo respeta. Si vèsti soun óurnado de mòutì inspira de couquiòu e de vago estilisado, simbòu d’estabileta e d’ancrajo. Sa mino countrastro emé la misèri ambianto, e inspìron counfianço i sourviòure.",
+    "role": "Dirigeants d’une communauté reconstruite, Gyptis et Protis incarnent la stabilité et la renaissance. Leur alignement est bon, car ils restaurent l’ordre et la solidarité dans un monde dévasté. Gentil",
+    "role_co": "Dirìgènt d’uno coumunita recounstrucho, Gyptis e Protis incàrnon l’estabileta e la renaissenço. Sa aliniamen es bòn, car restàuron l’òrdre e la soulidarita dins un mounde devasta. Gentì"
   },
   "tarasca": {
     "description": "Camion de guerre improvisé, la Tarasca avance comme une bête mécanique. Là où elle passe, il ne reste que le silence et la cendre.",
-    "description_co": "Description en provençal...",
-    "role": "Symbole de destruction et de pouvoir, la Tarasca sert d'arme de domination pour une faction violente qui règne par la terreur. Son alignement est mauvais, incarnant la brutalité humaine et la soif de contrôle dans un monde sans lois. Mauvais",
-    "role_co": "Rolu en provençal"
+    "description_co": "Camioun de guerro impròuvisa, la Tarasco avanço coume uno bèsti mecanico. Mounte passo, rèsto que lou silènci e la cèndre.",
+    "role": "Symbole de destruction et de pouvoir, la Tarasca sert d’arme de domination pour une faction violente qui règne par la terreur. Son alignement est mauvais, incarnant la brutalité humaine et la soif de contrôle dans un monde sans lois. Mauvais",
+    "role_co": "Simbòu de destrucien e de pòudé, la Tarasco sèr d’armo de douminacien pèr uno facien vioulènto que règno pèr la terrour. Soun aliniamen es marrit, incàrnant la brutalita umano e la set de countròu dins un mounde sènso lei. Marrit"
   },
   "coulobre": {
     "description": "Un brouillard dense et jaunâtre chargé d’odeurs de métal et de pourriture. Son odeur attire de nombreux serpents. Elle ne fait pas de bruit, mais marque ceux qui la traversent : toux, brûlures, peau craquelée.",
-    "description_co": "Description en provençal...",
+    "description_co": "Un brouiòu espés e jaunàstre carga d’óudour de metau e de pourrissoun. Soun óudour atiro de noumbrèu serpènt. Fai pas de brut, mai marco li que la travèrson : tous, brudaduro, pèu crebado.",
     "role": "Zone empoisonnée par des substances chimiques, la Coulobre représente la conséquence directe de la négligence humaine. Elle est mauvaise, car elle tue sans distinction et rend les lieux inhabitables. Mauvais",
-    "role_co": "Rolu en provençal"
+    "role_co": "Zòuno empòuisounado pèr de substanço chimico, la Coulòbro represènto la counsequenço dirèito de la negligènço umano. Es marrìdo, car tuo sènso distincien e rènd li luòc inabitàbli. Marrit"
   },
   "lou_drape": {
     "description": "Homme grand au visage masqué par un foulard son cheval amaigri est couvert de cicatrices comme lui. Il ne montre aucune émotion, et ses passages laissent derrière lui la destruction.",
-    "description_co": "Description en provençal...",
+    "description_co": "Òme grand au visajo masca pèr un fòulard, soun chivau amagri es cubèrt de cicatrìço coume éu. Mouòstro ges d’emoucien, e si passajo laisson darrié éu la destrucien.",
     "role": "Chef de bande violent et stratège, Lou Drapé sème la peur sur les routes et impose sa loi par le sang. Son alignement est mauvais, car il ne vit que du pillage et du désespoir des autres. Mauvais",
-    "role_co": "Rolu en provençal"
+    "role_co": "Chèfe de bando vioulènt e estratèjo, Lou Drapé sèmo la pòu sus li routo e impauso sa lei pèr lou sang. Soun aliniamen es marrit, car vìu que dóu pilhajo e dóu desesperànço dis àutri. Marrit"
   }
 }

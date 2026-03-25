@@ -276,6 +276,7 @@
         <div id="p1-fail-screen" class="overlay hidden">
             <h1 style="color: var(--danger); border-color: var(--danger);">Intrusion Détectée</h1>
             <button class="btn btn-danger" onclick="location.reload()">Réessayer</button>
+            <button class="btn" onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')" style="margin-top:8px;background:transparent;color:#888;border-color:#555;">ABANDONNER</button>
         </div>
 
         <!-- JEU PHASE 1 -->
@@ -349,6 +350,7 @@
                 <div id="p2-fail-overlay" class="hidden" style="position: absolute; inset: 0; background: rgba(30,0,0,0.95); z-index: 70; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <h1 style="color: var(--danger); font-family: 'VT323'; border: none; font-size: 3rem;">EXPOSITION MORTELLE</h1>
                     <button class="btn btn-danger" style="font-family: 'VT323'; font-size: 1.5rem;" onclick="retryPhase2()">RÉINITIALISER</button>
+                    <button class="btn" onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')" style="margin-top:8px;background:transparent;color:#888;border-color:#555;font-family:'VT323';font-size:1.2rem;">ABANDONNER</button>
                 </div>
 
                 <!-- ZONE CÂBLAGE -->

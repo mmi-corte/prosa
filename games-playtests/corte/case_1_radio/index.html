@@ -266,6 +266,20 @@
         </div>
     </div>
 
+    <!-- FAIL -->
+    <div id="fail-view" style="display:none; position:fixed; inset:0; background:var(--bg-dark); z-index:99; padding:20px; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="background:var(--card-dark); color:var(--text-on-dark); width:100%; height:100%; border-radius:var(--radius-xl); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px; border:1px solid rgba(236,228,203,0.1);">
+            <div class="big-icon" style="color:#c63032;">⚠</div>
+            <h1 class="card-title title-font" style="margin-bottom: 10px; color:#c63032;">SIGNAL<br>PERDU</h1>
+            <p style="opacity: 0.7;">Le temps est écoulé. Connexion impossible.</p>
+
+            <div style="margin-top: auto; width: 100%;">
+                <button class="btn-action" style="background:transparent; border:1px solid #c63032; color:#c63032;" onclick="location.reload()">RÉESSAYER</button>
+                <button class="btn-action" style="background:transparent; border:1px solid #555; color:#888; margin-top:8px;" onclick="if(window.parent)window.parent.postMessage({type:'GAME_COMPLETE',success:false},'*')">ABANDONNER</button>
+            </div>
+        </div>
+    </div>
+
     <!-- SUCCESS -->
     <div id="success-view">
         <div class="success-card">
@@ -312,7 +326,8 @@
                     document.getElementById('timer-badge').innerText = this.state.time + 's';
                     if(this.state.time <= 0) {
                         clearInterval(this.timerInt);
-                        if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:false}, '*');
+                        this.state.running = false;
+                        document.getElementById('fail-view').style.display = 'flex';
                     }
                 }, 1000);
 
@@ -438,7 +453,6 @@
 
             next: function() {
                 if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:true}, '*');
-                console.log('Niveau Suivant');
             }
         };
 

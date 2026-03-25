@@ -29,16 +29,19 @@ export function dialogView(action) {
     gameContainer.appendChild(wrapper);
 
     // Preload background image
-    const bgImg = new Image();
-    bgImg.onload = () => {
-        wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`;
-        wrapper.style.opacity = '1'; // Show when loaded
-    };
-    bgImg.onerror = () => {
-        // Still show even if error
+    if (data.default.backgroundUrl) {
+        const bgImg = new Image();
+        bgImg.onload = () => {
+            wrapper.style.backgroundImage = `url(./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl})`;
+            wrapper.style.opacity = '1'; // Show when loaded
+        };
+        bgImg.onerror = () => {
+            wrapper.style.opacity = '1';
+        };
+        bgImg.src = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl}`;
+    } else {
         wrapper.style.opacity = '1';
-    };
-    bgImg.src = `./assets/steps/${activePlayer.localisation}/${activeStepId}/${data.default.backgroundUrl}`;
+    }
 
     // Create foreground container
     foregroundContainer = document.createElement('div');

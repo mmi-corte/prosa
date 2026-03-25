@@ -1459,7 +1459,7 @@
       },
       "4": {
         "default": {
-          "backgroundUrl": "Orcu.jpg",
+          "backgroundUrl": "Orcu.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""
@@ -3164,7 +3164,7 @@
       },
       "2": {
         "default": {
-          "backgroundUrl": "poste_maintenance_toulon_planmoyen.webp",
+          "backgroundUrl": "poste_maintenance_corse.webp",
           "foregroundUrl": "",
           "sound": "",
           "music": ""

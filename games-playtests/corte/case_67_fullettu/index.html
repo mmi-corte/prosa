@@ -64,8 +64,11 @@
                 <p><strong class="highlight">U Fulettu :</strong> "C'est bon ! J'arrête ! Tu es vraiment coriace..."</p>
                 <p>Il vous indique la route vers le cimetière pour trouver A Strega.</p>
             </div>
-            <button class="btn btn-success" onclick="location.reload()">
-                Rejouer (Étape 13)
+            <button class="btn btn-success" onclick="if(window.finishGame) window.finishGame(true); else window.parent.postMessage({type:'minigame-complete',success:true},'*')">
+                CONTINUER
+            </button>
+            <button class="btn" onclick="location.reload()" style="margin-top:8px;">
+                Rejouer
             </button>
         </div>
 
@@ -77,6 +80,9 @@
             </div>
             <button class="btn btn-danger" onclick="Game.reset()">
                 Réessayer
+            </button>
+            <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else window.parent.postMessage({type:'minigame-complete',success:false},'*')" style="margin-top:8px;background:transparent;color:#888;border-color:#555;">
+                ABANDONNER
             </button>
         </div>
     </div>

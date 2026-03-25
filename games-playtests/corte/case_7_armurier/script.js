@@ -387,13 +387,15 @@ function endGame() {
     document.getElementById('end-message').className = `italic text-lg mb-10 ${color}`;
     setTimeout(() => { rankEl.style.opacity = '1'; rankEl.style.transform = 'rotate(12deg) scale(1)'; }, 500);
     
-    // Finish game after a short delay (S, A, B = win, C, D = lose)
+    // Show continue or abandon button based on result (S, A, B = win, C, D = lose)
     const isWin = gs.totalScore > 3000;
-    setTimeout(() => {
-        if (window.finishGame) {
-            window.finishGame(isWin);
-        }
-    }, 2500);
+    const btnContinue = document.getElementById('btn-continue');
+    const btnAbandon = document.getElementById('btn-abandon');
+    if (isWin) {
+        if (btnContinue) btnContinue.classList.remove('hidden');
+    } else {
+        if (btnAbandon) btnAbandon.classList.remove('hidden');
+    }
 }
 
 function log(msg, color) { DOM.log.innerHTML = `<span class="${color}">${msg}</span>`; }

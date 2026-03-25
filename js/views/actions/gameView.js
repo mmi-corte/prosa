@@ -14,6 +14,13 @@ export function gameView(action) {
 
     console.log(`🎮 Starting game: ${data.game}`);
 
+    // If no minigame is defined yet, skip directly to win action
+    if (!data.game) {
+        console.warn('No minigame defined for this step, auto-advancing.');
+        callAction(data.nextActionTypeWin, data.nextActionWin);
+        return;
+    }
+
     // Create iframe for isolated game execution
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
@@ -25,138 +32,42 @@ export function gameView(action) {
     iframe.style.zIndex = '899';
     iframe.allow = 'camera; microphone';
 
-    gameContainer.appendChild(iframe);
-
     // Hide header
     const header = document.querySelector('.header');
     if (header) {
         header.style.display = 'none';
     }
 
-    // Load the game's HTML into the iframe
-    fetch(`./games-playtests/${data.game}/index.html`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(html => {
-            console.log(`✅ Loaded HTML for game: ${data.game} (index.html)`);
+    // Load game via src so location.reload() works inside minigames
+    iframe.src = `./games-playtests/${data.game}/index.html`;
 
-            // Parse to extract resources
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            // Get stylesheets
-            const styleLinks = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'))
-                .map(link => {
-                    let href = link.getAttribute('href');
-                    if (!href.startsWith('http')) {
-                        href = `./games-playtests/${data.game}/${href.split('/').pop()}`;
-                    }
-                    return `<link rel="stylesheet" href="${href}">`;
-                })
-                .join('');
-
-            // Get inline styles
-            const inlineStyles = Array.from(doc.querySelectorAll('style'))
-                .map(style => `<style>${style.textContent}</style>`)
-                .join('');
-
-            // Get body content
-            const bodyContent = doc.body.innerHTML;
-
-            // Get scripts
-            const scripts = Array.from(doc.querySelectorAll('script[src]'))
-                .map(script => {
-                    let src = script.getAttribute('src');
-                    if (!src.startsWith('http')) {
-                        src = `./games-playtests/${data.game}/${src.split('/').pop()}`;
-                    }
-                    return `<script src="${src}"><\/script>`;
-                })
-                .join('');
-
-            // Build complete HTML
-            const completeHTML = `
-                <!DOCTYPE html>
-                <html lang="fr">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-                    ${styleLinks}
-                    ${inlineStyles}
-                    <style>
-                        * { box-sizing: border-box; }
-                        html, body {
-                            margin: 0;
-                            padding: 0;
-                            width: 100%;
-                            height: 100%;
-                            min-height: 100dvh;
-                            overflow: auto;
-                            -webkit-overflow-scrolling: touch;
-                        }
-                        body {
-                            padding-top: env(safe-area-inset-top);
-                            padding-right: env(safe-area-inset-right);
-                            padding-bottom: env(safe-area-inset-bottom);
-                            padding-left: env(safe-area-inset-left);
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${bodyContent}
-                    <script>
-                        // Communication with parent frame
-                        window.finishGame = function(success) {
-                            window.parent.postMessage(
-                                { type: 'minigame-complete', success: success },
-                                '*'
-                            );
-                        };
-                    </script>
-                    ${scripts}
-                </body>
-                </html>
+    iframe.onload = () => {
+        try {
+            // Inject finishGame helper for games that use it
+            const script = iframe.contentDocument.createElement('script');
+            script.textContent = `
+                if (typeof window.finishGame === 'undefined') {
+                    window.finishGame = function(success) {
+                        window.parent.postMessage(
+                            { type: 'minigame-complete', success: success },
+                            '*'
+                        );
+                    };
+                }
             `;
+            iframe.contentDocument.head.appendChild(script);
+            console.log(`✅ Game loaded in iframe: ${data.game}`);
+        } catch (e) {
+            console.warn('Could not inject finishGame helper:', e);
+        }
+    };
 
-            // Write to iframe
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            iframeDoc.open();
-            iframeDoc.write(completeHTML);
-            iframeDoc.close();
+    iframe.onerror = () => {
+        console.error('Error loading minigame:', data.game);
+        if (header) header.style.display = '';
+    };
 
-            console.log(`✅ Game loaded in iframe`);
-        })
-        .catch(error => {
-            console.error('Error loading minigame:', error);
-            const header = document.querySelector('.header');
-            if (header) header.style.display = '';
-
-            // Debug message
-            const debugDiv = document.createElement('div');
-            debugDiv.style.cssText = `
-                position: fixed;
-                top: 0; left: 0;
-                width: 100vw; height: 100vh;
-                background: #1a1a1a;
-                color: #fff;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                z-index: 900;
-                font-family: monospace;
-            `;
-            debugDiv.innerHTML = `
-                <h2>❌ Erreur chargement: ${data.game}</h2>
-                <p>${error.message}</p>
-            `;
-            gameContainer.appendChild(debugDiv);
-        });
+    gameContainer.appendChild(iframe);
 
     // Listen for messages from iframe
     const handleMessage = (event) => {

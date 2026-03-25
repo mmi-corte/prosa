@@ -69,7 +69,9 @@
             <p id="end-poem" class="text-sm italic text-[#ece4cb] leading-relaxed">...</p>
         </div>
         
+        <button id="btn-continue" class="btn-action hidden" onclick="if(window.finishGame) window.finishGame(true); else window.parent.postMessage({type:'minigame-complete',success:true},'*')">CONTINUER</button>
         <button class="btn-action" onclick="location.reload()">REJOUER</button>
+        <button id="btn-abandon" class="btn-action hidden" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else window.parent.postMessage({type:'minigame-complete',success:false},'*')">ABANDONNER</button>
     </div>
 </div>
 

@@ -445,12 +445,7 @@ const Game = {
             document.getElementById('fail-screen').classList.remove('hidden');
         }
         
-        // Finish game after a short delay
-        setTimeout(() => {
-            if (window.finishGame) {
-                window.finishGame(win);
-            }
-        }, 2000);
+        // Buttons in HTML handle continue/abandon
     }
 };
 

@@ -208,29 +208,29 @@
         "text": [
           {
             "question": {
-              "fr": "Quelle est la bonne réponse ?",
-              "cor": ""
+              "fr": "Un vrai combattant connaît sa terre. Corte fut la capitale d'une nation libre. Quel homme en fut le chef, celui dont le nom résonne encore dans nos montagnes ?",
+              "cor": "Un veru cumbattente cunnosce a so terra. Corti fù a capitale d'una nazione libera. Quale omu ne fù u capu, quellu chì u so nome risona sempre in e nostre muntagne ?"
             },
             "voice": "",
             "choices": [
               {
                 "text": {
-                  "fr": "Bonne réponse",
-                  "cor": ""
+                  "fr": "Pascal Paoli",
+                  "cor": "Pasquale Paoli"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "Mauvaise",
-                  "cor": ""
+                  "fr": "Napoléon Bonaparte",
+                  "cor": "Napulione Bonaparte"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "Mauvaise",
-                  "cor": ""
+                  "fr": "Sampiero Corso",
+                  "cor": "Sampieru Corsu"
                 },
                 "score": -1
               }
@@ -238,29 +238,29 @@
           },
           {
             "question": {
-              "fr": "Quelle est la bonne réponse V2 ?",
-              "cor": ""
+              "fr": "Dans nos montagnes, quand un berger dit « avà ci vole a Signadora », que demande-t-il ?",
+              "cor": "In e nostre muntagne, quandu un pastore dice « avà ci vole a Signadora », chì dumanda ?"
             },
             "voice": "",
             "choices": [
               {
                 "text": {
-                  "fr": "Bonne réponse",
-                  "cor": ""
+                  "fr": "Quelqu'un pour lever le mauvais œil",
+                  "cor": "Qualchissia per caccià l'ochju"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "Mauvaise",
-                  "cor": ""
+                  "fr": "Une arme pour se défendre",
+                  "cor": "Un'arma per si difende"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "Mauvaise",
-                  "cor": ""
+                  "fr": "Un messager pour prévenir le village",
+                  "cor": "Un messageru per avvisà u paese"
                 },
                 "score": -1
               }
@@ -268,29 +268,29 @@
           },
           {
             "question": {
-              "fr": "Quelle est la bonne réponse V3 ?",
-              "cor": ""
+              "fr": "Le maquis nous protège et nous nourrit. Quel arbre donne le fruit qui a sauvé les Corses de la famine pendant des siècles ?",
+              "cor": "A machja ci prutege è ci nutrisce. Quale arburu dà u fruttu chì hà salvatu i Corsi da a fami dapoi seculi ?"
             },
             "voice": "",
             "choices": [
               {
                 "text": {
-                  "fr": "Bonne réponse",
-                  "cor": ""
+                  "fr": "Le châtaignier",
+                  "cor": "U castagnu"
                 },
                 "score": 1
               },
               {
                 "text": {
-                  "fr": "Mauvaise réponse",
-                  "cor": ""
+                  "fr": "L'olivier",
+                  "cor": "L'alivu"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "Mauvaise réponse",
-                  "cor": ""
+                  "fr": "Le chêne vert",
+                  "cor": "L'lecciu"
                 },
                 "score": -1
               }
@@ -409,26 +409,76 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "Je suis invisible à l'œil, mais je tue plus sûrement qu'une lame. Dans les ruines, je m'infiltre par la peau. Le vent me porte et la pluie me nourrit. Qui suis-je ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "La rouille"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "La radiation"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "La poussière"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Dans cette décharge, tout a une seconde vie. Mais un objet ne doit jamais être réutilisé, même s'il semble intact. Lequel ?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Une bouteille en verre"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Un masque à gaz dont le filtre est percé"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Un câble électrique dénudé"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Quand la nuit tombe sur Toulon, les survivants allument un feu. Mais un feu mal placé peut tuer aussi sûrement que le froid. Pourquoi ?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "La fumée attire les pillards"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Le bois humide explose"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Le feu éloigne les animaux utiles"
+                },
+                "score": -1
               }
             ]
           }
@@ -445,24 +495,74 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "Avant la Ruina, une princesse et un marin fondèrent une cité qui devint le cœur de la Provence. Quel est le nom de cette cité ?"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Toulon"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Massalia"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Arles"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Les anciens de Provence disaient : « Lou sòu vai, lou sòu vèn. » Que signifie ce proverbe ?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Le soleil se lève, le soleil se couche"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "bonne réponse"
+                  "fr": "L'argent va, l'argent vient"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Le vent souffle et s'en va"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "Quel vent violent, soufflant du nord, a toujours façonné le caractère des Provençaux ?"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Le Sirocco"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "La Tramontane"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Le Mistral"
                 },
                 "score": 1
               }
@@ -481,26 +581,76 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "L'officier vous fixe. « Tout membre connaît le protocole. Qui doit-on prévenir en premier en cas d'intrusion dans le périmètre sud ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Le poste de garde principal"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "Le commandant de secteur"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "La patrouille la plus proche"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "« Tu prétends servir ici. Alors dis-moi : quel est le nom de code de notre opération de ravitaillement depuis la Provence ? »"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Opération Tramontane"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Opération Mistral"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Opération Levant"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "« Dernière question. Quand un soldat est affecté à Toulon, à qui prête-t-il serment ? »"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Au général de Toulon"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "À la communauté et à ses chefs"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Au conseil des anciens"
+                },
+                "score": -1
               }
             ]
           }
@@ -519,76 +669,76 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "Le soldat vous dévisage. « Si tu viens vraiment de la part de Gény, tu sais comment Prosa s'alimente. D'où vient l'énergie de cette île ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "De panneaux solaires sur les crêtes"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "De câbles sous-marins reliés au continent"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "D'un réacteur enfoui sous la montagne"
+                },
+                "score": -1
               }
             ]
           },
           {
             "question": {
-              "fr": "question"
+              "fr": "« Les moulins sur la crête, tu les vois ? Ils ne servent pas à moudre le grain. À quoi servent-ils ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "À produire de l'énergie grâce au vent"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "À pomper l'eau des nappes souterraines"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "À signaler la position de l'île aux navires"
+                },
+                "score": -1
               }
             ]
           },
           {
             "question": {
-              "fr": "question"
+              "fr": "« Dernière chose. Prosa est reliée à deux territoires par des câbles de maintenance. Lesquels ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "La Sardaigne et la Corse"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "La Corse et la Provence"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "La Provence et l'Italie"
+                },
+                "score": -1
               }
             ]
           }
@@ -605,26 +755,51 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "Le technicien hésite. « Prouve-moi que tu comprends ce lieu. Que transportent les câbles sous-marins entre la Provence et Prosa ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Des données de communication"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "De l'énergie électrique"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "De l'eau potable sous pression"
+                },
+                "score": -1
+              }
+            ]
+          },
+          {
+            "question": {
+              "fr": "« Et si quelqu'un sabotait un câble, quel serait le premier signe visible sur l'île ? »"
+            },
+            "choices": [
+              {
+                "text": {
+                  "fr": "Les moulins cesseraient de tourner"
+                },
+                "score": -1
+              },
+              {
+                "text": {
+                  "fr": "Les lumières de la ville s'éteindraient"
+                },
+                "score": 1
+              },
+              {
+                "text": {
+                  "fr": "La mer changerait de couleur"
+                },
+                "score": -1
               }
             ]
           }
@@ -641,76 +816,76 @@
         "text": [
           {
             "question": {
-              "fr": "question"
+              "fr": "Un rebelle s'avance, les bras croisés. « Tu prétends te battre pour Prosa. Alors dis-moi : qui est celui que les rebelles appellent le Serpent ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Le chef de l'organisation qui contrôle l'île"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "Le symbole de Prosa, dont les 7 têtes sont les gardiens de l'île"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Un espion infiltré parmi les rebelles"
+                },
+                "score": -1
               }
             ]
           },
           {
             "question": {
-              "fr": "question"
+              "fr": "« Si tu as traversé tout ça pour arriver ici, tu sais ce qui alimente les chaînes de Prosa. Qu'est-ce que l'île vole au continent ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Des vivres et des médicaments"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "L'énergie, via des câbles sous-marins"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Des prisonniers pour travailler dans les mines"
+                },
+                "score": -1
               }
             ]
           },
           {
             "question": {
-              "fr": "question"
+              "fr": "« Une dernière chose. Pourquoi te battre ? Qu'est-ce qui distingue un rebelle d'un simple fugitif ? »"
             },
             "choices": [
               {
                 "text": {
-                  "fr": "mauvaise réponse"
+                  "fr": "Un rebelle fuit le danger, un fugitif le cherche"
                 },
                 "score": -1
               },
               {
                 "text": {
-                  "fr": "mauvaise réponse"
-                },
-                "score": -1
-              },
-              {
-                "text": {
-                  "fr": "bonne réponse"
+                  "fr": "Un rebelle se bat pour les autres, un fugitif ne se bat que pour lui-même"
                 },
                 "score": 1
+              },
+              {
+                "text": {
+                  "fr": "Un rebelle obéit aux ordres, un fugitif agit seul"
+                },
+                "score": -1
               }
             ]
           }
