@@ -211,7 +211,7 @@
     },
     "10": {
       "1": {
-        "game": "",
+        "game": "prosa/case_10_assaut",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",
@@ -220,7 +220,7 @@
     },
     "11": {
       "1": {
-        "game": "",
+        "game": "prosa/case_11_tour",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "2",
         "nextActionTypeLose": "end",
@@ -229,7 +229,7 @@
     },
     "12": {
       "1": {
-        "game": "",
+        "game": "prosa/case_12_drac",
         "nextActionTypeWin": "dialog",
         "nextActionWin": "4",
         "nextActionTypeLose": "end",
@@ -238,7 +238,7 @@
     },
     "13": {
       "1": {
-        "game": "",
+        "game": "prosa/case_13_strigone",
         "nextActionTypeWin": "end",
         "nextActionWin": "1",
         "nextActionTypeLose": "end",

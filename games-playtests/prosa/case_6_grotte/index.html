@@ -299,14 +299,14 @@
         <p>Un rocher vous assomme. Tout devient froid...</p>
         <h2>Direction: Prison de Prosa</h2>
         <button class="btn" onclick="location.reload()">Réessayer</button>
-        <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')">Abandonner</button>
+        <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">Abandonner</button>
     </div>
 
     <!-- ÉCRAN VICTOIRE -->
     <div id="victory-screen" class="ui-screen hidden">
         <h1 style="color: var(--accent-green)">LUMIÈRE !</h1>
         <p>Vous jaillissez hors de la grotte alors qu'elle s'effondre. La forêt luxuriante vous accueille.</p>
-        <button class="btn" onclick="window.parent.postMessage({type:'minigame-complete',success:true},'*')">Continuer</button>
+        <button class="btn" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">Continuer</button>
     </div>
 </div>
 

@@ -598,7 +598,7 @@
                     abandonBtn.id = 'abandon-btn';
                     abandonBtn.innerText = 'ABANDONNER';
                     abandonBtn.style.cssText = 'background:transparent;color:#888;border:1px solid #555;padding:10px 24px;font-family:inherit;font-size:0.9rem;cursor:pointer;margin-top:10px;';
-                    abandonBtn.onclick = () => { window.parent.postMessage({type:'minigame-complete',success:false},'*'); };
+                    abandonBtn.onclick = () => { ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back()); };
                     startBtn.parentNode.insertBefore(abandonBtn, startBtn.nextSibling);
                 }
             }, 1000);
@@ -615,7 +615,7 @@
             trapdoorEl.classList.add('open');
 
             setTimeout(() => {
-                window.parent.postMessage({type:'minigame-complete',success:true},'*');
+                if (window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back());
             }, 2000);
         }
 

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(cp games-playtests/corte/case_6_signadora/style.css games-playtests/prosa/case_11_tour/style.css)",
+      "Bash(cp games-playtests/corte/case_6_signadora/script.js games-playtests/prosa/case_11_tour/script.js)",
+      "Bash(cp games-playtests/corte/case_13_strega2/styles.css games-playtests/prosa/case_12_drac/styles.css)",
+      "Bash(cp games-playtests/corte/case_13_strega2/script.js games-playtests/prosa/case_12_drac/script.js)"
+    ]
+  }
+}

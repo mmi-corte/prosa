@@ -6,7 +6,7 @@ const game = {
         hp: 100,
         enemyHp: 100,
         combo: 0,
-        turn: 'IDLE', // IDLE, AIMING, ENEMY_CHARGING, ENEMY_ATTACKING
+        turn: 'IDLE',
         cursorPos: 0,
         cursorDir: 1,
         qteTargets: [],
@@ -17,15 +17,12 @@ const game = {
     loops: { cursor: null, particle: null, qte: null },
 
     init: function() {
-        // Cache DOM elements
         const ids = ['intro-screen', 'story-screen', 'choice-screen', 'combat-screen', 'end-screen', 'tutorial-overlay',
                      'story-text-container', 'story-dots', 'flash-overlay', 'game-container',
                      'player-hp', 'enemy-hp-fill', 'support-badge', 'messages-layer', 'qte-layer',
                      'btn-assault', 'precision-bar', 'state-defense', 'state-waiting', 'p-cursor',
                      'alert-box', 'enemy-visual', 'end-title', 'end-msg', 'end-btn', 'end-icon'];
         ids.forEach(id => this.elements[id] = document.getElementById(id));
-
-        // Start Particles
         this.initParticles();
     },
 
@@ -42,10 +39,10 @@ const game = {
 
     // --- NARRATION ---
     storySlides: [
-        { t: "Place Padoue. Début de soirée.", s: "Le bruit régulier du métal, des pas et des souffles fatigués rythme l’endroit." },
-        { t: "A Piazza à u Duca", s: "Des silhouettes courbées déplacent des caisses. D'autres rincent des outils, le regard vide." },
-        { t: "La Menace", s: "Trois gardes de la Squadra d’Arozza surveillent la scène. Immobiles. L’arme en évidence." },
-        { t: "Le Choix", s: "Vous devez récupérer des informations. Mais attention à qui vous parlez..." }
+        { t: "La Tour du Drac", s: "Vous avez force l'entree de la tour. Les escaliers s'enfoncent dans l'obscurite." },
+        { t: "Le Gardien", s: "Au sommet, une silhouette massive vous attend. Le Drac, chasseur legendaire, garde l'acces au donjon du Strigone." },
+        { t: "L'Affrontement", s: "Ses yeux brillent dans la penombre. Il ne vous laissera pas passer sans combattre." },
+        { t: "Le Choix", s: "Comment affronter cette creature ? Par la force brute, ou en exploitant le terrain ?" }
     ],
     storyIndex: 0,
 
@@ -87,7 +84,6 @@ const game = {
 
         this.updateHud();
         this.elements['support-badge'].style.display = mode === 'NORMAL' ? 'block' : 'none';
-
         this.elements['tutorial-overlay'].classList.add('active');
     },
 
@@ -101,7 +97,6 @@ const game = {
         this.elements['player-hp'].innerText = Math.ceil(this.state.hp);
         this.elements['player-hp'].classList.toggle('hp-low', this.state.hp < 30);
 
-        // Enemy HP Bar
         const maxHp = this.state.difficulty === 'HARD' ? 150 : 100;
         const pct = Math.max(0, (this.state.enemyHp / maxHp) * 100);
         this.elements['enemy-hp-fill'].style.width = pct + '%';
@@ -110,13 +105,11 @@ const game = {
     setTurnState: function(state) {
         this.state.turn = state;
 
-        // Toggle UI Elements
         this.elements['btn-assault'].classList.toggle('active', state === 'IDLE');
         this.elements['precision-bar'].classList.toggle('active', state === 'AIMING');
         this.elements['state-defense'].classList.toggle('active', state === 'ENEMY_ATTACKING');
         this.elements['state-waiting'].style.display = state === 'ENEMY_CHARGING' ? 'flex' : 'none';
 
-        // Effects
         this.elements['alert-box'].style.opacity = state === 'ENEMY_ATTACKING' ? 1 : 0;
         if(state === 'ENEMY_ATTACKING') this.elements['enemy-visual'].classList.add('attacking');
         else this.elements['enemy-visual'].classList.remove('attacking');
@@ -172,9 +165,9 @@ const game = {
             this.state.combo++;
         } else if(pos >= 25 && pos <= 75) {
             dmg = 12;
-            this.spawnMsg("TOUCHÉ", 'hit');
+            this.spawnMsg("TOUCHE", 'hit');
         } else {
-            this.spawnMsg("RATÉ", 'miss');
+            this.spawnMsg("RATE", 'miss');
             this.state.combo = 0;
         }
 
@@ -186,7 +179,7 @@ const game = {
                 setTimeout(() => {
                     this.state.enemyHp -= 5;
                     this.updateHud();
-                    this.spawnMsg("+5 ALLIÉ", 'ally');
+                    this.spawnMsg("+5 TERRAIN", 'ally');
                 }, 200);
             }
         }
@@ -204,7 +197,6 @@ const game = {
         this.setTurnState('ENEMY_ATTACKING');
         this.elements['qte-layer'].innerHTML = '';
 
-        // Targets centered in upper area
         const targets = [
             {id: 1, x: 20 + Math.random()*20, y: 15 + Math.random()*15},
             {id: 2, x: 50 + Math.random()*10, y: 25 + Math.random()*15},
@@ -286,23 +278,23 @@ const game = {
     endGame: function(victory) {
         this.setPhase('END');
         if(victory) {
-            this.elements['end-title'].innerText = "ZONE SÉCURISÉE";
+            this.elements['end-title'].innerText = "DRAC VAINCU";
             this.elements['end-title'].style.color = "#fff";
-            this.elements['end-msg'].innerText = "Le chemin vers Pascal Paoli est libre.";
+            this.elements['end-msg'].innerText = "Le Drac s'effondre. L'ascenseur vers le sommet est libre.";
             this.elements['end-btn'].innerText = "CONTINUER";
             this.elements['end-btn'].onclick = () => {
                 if (window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back());
             };
             this.elements['end-icon'].innerHTML = `<svg class="icon-xl" style="color:var(--accent-green);" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`;
         } else {
-            this.elements['end-title'].innerText = "DÉSYNCHRONISATION";
+            this.elements['end-title'].innerText = "TERRASSE";
             this.elements['end-title'].style.color = "var(--accent-red)";
-            this.elements['end-msg'].innerText = "Sujet critique. Mémoire instable.";
-            this.elements['end-btn'].innerText = "RECHARGER";
+            this.elements['end-msg'].innerText = "Le Drac est trop puissant. Vous etes repousse.";
+            this.elements['end-btn'].innerText = "CONTINUER";
             this.elements['end-btn'].onclick = () => {
                 if (window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back());
             };
-            this.elements['end-icon'].innerHTML = `<svg class="icon-xl animate-pulse" style="color:var(--accent-red);" viewBox="0 0 24 24"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="m12.5 17-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg>`;
+            this.elements['end-icon'].innerHTML = `<svg class="icon-xl animate-pulse" style="color:var(--accent-red);" viewBox="0 0 24 24"><path d="M9 3h6l2 7H7l2-7z"/><path d="M12 10v8"/><path d="M8 18h8"/></svg>`;
         }
     },
 
@@ -364,5 +356,4 @@ const game = {
     }
 };
 
-// Start
 window.onload = () => game.init();

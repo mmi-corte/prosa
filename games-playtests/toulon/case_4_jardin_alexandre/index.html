@@ -163,7 +163,7 @@
         }
 
         function sendResult(success) {
-            window.parent.postMessage({ type: 'minigame-complete', success: success }, '*');
+            if (window.parent !== window) { window.parent.postMessage({ type: 'minigame-complete', success: success }, '*'); } else { ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back()); }
         }
 
         function resetGame() {

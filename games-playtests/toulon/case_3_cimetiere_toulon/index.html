@@ -260,7 +260,7 @@
         <button onclick="startGame()" class="px-8 py-3 border-2 border-[#ff2a2a] text-[#ff2a2a] font-military text-2xl hover:bg-[#ff2a2a] hover:text-black transition-colors">
             RELANCER LE SYSTÈME
         </button>
-        <button onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')" class="px-8 py-3 border-2 border-[#555] text-[#888] font-military text-xl hover:bg-[#555] hover:text-black transition-colors mt-4">
+        <button onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" class="px-8 py-3 border-2 border-[#555] text-[#888] font-military text-xl hover:bg-[#555] hover:text-black transition-colors mt-4">
             ABANDONNER
         </button>
     </div>
@@ -268,7 +268,7 @@
     <div id="win-screen" class="screen bg-cyan-900/20 backdrop-blur">
         <h2 class="text-[#00f0ff] text-6xl font-military mb-4 glow-cyan">CIBLE N.S.</h2>
         <p class="text-[#ece4cb] font-military text-xl mb-8 tracking-widest">TARASCA NEUTRALISÉE</p>
-        <button onclick="window.parent.postMessage({type:'minigame-complete',success:true},'*')" class="px-8 py-3 border-2 border-[#00f0ff] text-[#00f0ff] font-military text-2xl hover:bg-[#00f0ff] hover:text-black transition-colors">
+        <button onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" class="px-8 py-3 border-2 border-[#00f0ff] text-[#00f0ff] font-military text-2xl hover:bg-[#00f0ff] hover:text-black transition-colors">
             CONTINUER
         </button>
     </div>

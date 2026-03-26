@@ -145,5 +145,33 @@
     "path": "./games-playtests/prosa/case_7_magu/index.html",
     "collection": "final-game-prosa",
     "thumbnail": "magu.png"
+  },
+  {
+    "id": "case_10_assaut",
+    "title": "Case 10 - Assaut des Portes",
+    "path": "./games-playtests/prosa/case_10_assaut/index.html",
+    "collection": "final-game-prosa",
+    "thumbnail": "assaut.png"
+  },
+  {
+    "id": "case_11_tour",
+    "title": "Case 11 - Infiltration de la Tour",
+    "path": "./games-playtests/prosa/case_11_tour/index.html",
+    "collection": "final-game-prosa",
+    "thumbnail": "tour.png"
+  },
+  {
+    "id": "case_12_drac",
+    "title": "Case 12 - Le Drac",
+    "path": "./games-playtests/prosa/case_12_drac/index.html",
+    "collection": "final-game-prosa",
+    "thumbnail": "drac.png"
+  },
+  {
+    "id": "case_13_strigone",
+    "title": "Case 13 - U Strigone",
+    "path": "./games-playtests/prosa/case_13_strigone/index.html",
+    "collection": "final-game-prosa",
+    "thumbnail": "strigone.png"
   }
 ]

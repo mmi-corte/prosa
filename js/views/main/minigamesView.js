@@ -1,7 +1,7 @@
 import { clearContainer, gameContainer } from "../../../app.js"
 import { showBackButton } from "../components/backButton.js"
 
-const COLLECTION_ORDER = ["final-game", "final-game-toulon"]
+const COLLECTION_ORDER = ["final-game", "final-game-toulon", "final-game-prosa"]
 
 export function minigamesView() {
   clearContainer()
@@ -53,7 +53,7 @@ function renderMinigames(minigames) {
       <span class="minigame-cta">Ouvrir</span>
     `
     card.addEventListener("click", () => {
-      window.location.href = game.path
+      window.location.href = game.path + "?from=minigames"
     })
     grid.appendChild(card)
   })

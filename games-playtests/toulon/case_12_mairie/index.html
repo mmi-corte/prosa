@@ -516,7 +516,7 @@
                 <div style="width: 25px; height: 40px; border-bottom: 6px solid var(--accent-green); border-right: 6px solid var(--accent-green); transform: rotate(45deg) translate(-4px, -4px);"></div>
             </div>
             <p>Vous avez atteint les portes sans bruit.</p>
-            <button class="btn" onclick="window.parent.postMessage({type:'minigame-complete',success:true},'*')">CONTINUER</button>
+            <button class="btn" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
         </div>
 
         <!-- ÉCRAN DE DÉFAITE -->
@@ -527,7 +527,7 @@
             </div>
             <p>L'alarme a été déclenchée.</p>
             <button class="btn" onclick="resetGame()">RÉESSAYER</button>
-            <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="window.parent.postMessage({type:'minigame-complete',success:false},'*')">ABANDONNER</button>
+            <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">ABANDONNER</button>
         </div>
 
     </div>

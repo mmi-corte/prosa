@@ -78,7 +78,7 @@ class Game {
         this.guard = {
             state: GUARD_STATE.SAFE,
             timer: 0,
-            nextSwitch: 200
+            nextSwitch: 240
         };
 
         this.maxTime = 60; // Secondes
@@ -140,7 +140,7 @@ class Game {
         
         this.guard.state = GUARD_STATE.SAFE;
         this.guard.timer = 0;
-        this.guard.nextSwitch = 60 + Math.random() * 60; 
+        this.guard.nextSwitch = 120 + Math.random() * 120;
         this.updateGuardUI();
         this.updateTimerUI();
     }
@@ -324,7 +324,9 @@ if (failBtn) {
     const handleFail = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back());
+        if (window.finishGame) {
+            window.finishGame(false);
+        }
     };
     failBtn.addEventListener('touchend', handleFail, { passive: false });
     failBtn.addEventListener('pointerup', handleFail);
@@ -335,7 +337,9 @@ if (winBtn) {
     const handleWin = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back());
+        if (window.finishGame) {
+            window.finishGame(true);
+        }
     };
     winBtn.addEventListener('touchend', handleWin, { passive: false });
     winBtn.addEventListener('pointerup', handleWin);

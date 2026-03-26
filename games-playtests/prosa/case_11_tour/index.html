@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infiltration de la Tour</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+        <div id="timer-display">60</div>
+        <div id="eye" class="status-indicator"></div>
+    </div>
+
+    <div id="alert-msg">NE BOUGEZ PAS !</div>
+
+    <div id="progress-container" class="hidden">
+        <div id="progress-fill"></div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="overlay">
+        <h1>Infiltration</h1>
+
+        <div class="story-context">
+            "Un garde patrouille devant l'entree principale de la Tour. A sa ceinture, la cle qui ouvre la porte blindee."<br><br>
+            "Approchez-vous sans bruit. Derobez la cle avant qu'il ne vous repere."
+        </div>
+
+        <div class="instruction-box">
+            <p style="border-bottom: 1px solid var(--border); padding-bottom:10px; margin-bottom:15px;">CONSIGNES DE MISSION</p>
+            <p><span class="key-instruction">MAINTENIR</span> pour avancer</p>
+            <p><span class="key-instruction">RELACHER</span> immediatement quand le voyant est <span style="color:var(--accent-red); font-weight:bold;">ROUGE</span></p>
+        </div>
+        <button onclick="game.start()">LANCER LA MISSION</button>
+    </div>
+
+    <!-- Fail Screen -->
+    <div id="fail-screen" class="overlay hidden">
+        <h2 id="fail-reason" style="font-size: 30px;">REPERE</h2>
+        <p id="fail-desc" style="font-size: 18px; margin-bottom: 30px;">Le garde vous a repere.</p>
+        <button onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
+    </div>
+
+    <!-- Win Screen -->
+    <div id="win-screen" class="overlay hidden">
+        <h1 style="color: var(--accent-green); border-color: var(--accent-green);">Succes</h1>
+        <p>Cle recuperee. La porte de la Tour est ouverte.</p>
+        <button onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

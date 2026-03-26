@@ -215,13 +215,13 @@
                 </div>
             </div>
             <p id="end-message" class="text-zinc-400 italic text-lg mb-10">Calcul du rang...</p>
-            <button id="btn-continue" onclick="if(window.finishGame) window.finishGame(true); else window.parent.postMessage({type:'minigame-complete',success:true},'*')" class="w-full py-5 bg-white text-black font-bold text-xl uppercase tracking-[0.3em] hover:bg-zinc-200 transition-colors rounded hidden">
+            <button id="btn-continue" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" class="w-full py-5 bg-white text-black font-bold text-xl uppercase tracking-[0.3em] hover:bg-zinc-200 transition-colors rounded hidden">
                 CONTINUER
             </button>
             <button onclick="location.reload()" class="w-full py-5 bg-transparent text-zinc-400 font-bold text-xl uppercase tracking-[0.3em] hover:bg-zinc-800 transition-colors rounded border border-zinc-600 mt-3">
                 RÉESSAYER
             </button>
-            <button id="btn-abandon" onclick="if(window.finishGame) window.finishGame(false); else window.parent.postMessage({type:'minigame-complete',success:false},'*')" class="w-full py-5 bg-transparent text-zinc-500 font-bold text-lg uppercase tracking-[0.3em] hover:bg-zinc-800 transition-colors rounded border border-zinc-700 mt-2 hidden">
+            <button id="btn-abandon" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" class="w-full py-5 bg-transparent text-zinc-500 font-bold text-lg uppercase tracking-[0.3em] hover:bg-zinc-800 transition-colors rounded border border-zinc-700 mt-2 hidden">
                 ABANDONNER
             </button>
         </div>
