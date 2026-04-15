@@ -60,7 +60,8 @@
     "region": "CORSE",
     "image": "orcu.webm",
     "pitch": 350,
-    "color": "#d7b13b"
+    "color": "#d7b13b",
+    "arEnabled": true
   },
   "fata": {
     "id": 10,
@@ -68,7 +69,8 @@
     "region": "CORSE",
     "image": "Fata.webm",
     "pitch": 600,
-    "color": "#45b9d5"
+    "color": "#45b9d5",
+    "arEnabled": true
   },
   "lou_garagai": {
     "name": "Lou Garagaï",
@@ -131,7 +133,8 @@
     "region": "PROVENCE",
     "image": "LouDrape.webm",
     "pitch": 350,
-    "color": "#1a1a1b"
+    "color": "#1a1a1b",
+    "arEnabled": true
   },
   "radio": {
     "isNarrativeOnly": true,

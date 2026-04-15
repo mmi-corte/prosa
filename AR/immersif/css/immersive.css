@@ -524,79 +524,6 @@ body {
   left: 0;
 }
 
-/* Subtitles - Interactive box for character dialog */
-.subtitles {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  max-width: 85%;
-  text-align: center;
-  pointer-events: none;
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.subtitles.visible {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
-.subtitles:active {
-  transform: translateX(-50%) scale(0.98);
-}
-
-.subtitles span {
-  display: block;
-  background: linear-gradient(135deg, rgba(26, 24, 18, 0.95), rgba(40, 35, 28, 0.95));
-  color: var(--foreground);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border);
-  font-family: 'Futura', 'Segoe UI', sans-serif;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-.subtitles span small {
-  display: block;
-  margin-top: 6px;
-  font-size: 10px;
-  color: #b8b0a0;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.subtitle-test-btn {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: #2196F3;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 24px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 150;
-  transition: all 0.3s ease;
-  pointer-events: auto;
-}
-
-.subtitle-test-btn:active {
-  transform: scale(0.95);
-  background: #1976D2;
-}
-
 /* AR Overlay Container - for WebXR DOM Overlay feature */
 #ar-overlay {
   position: fixed;
@@ -610,41 +537,6 @@ body {
 
 #ar-overlay button {
   pointer-events: auto;
-}
-
-/* Language Toggle Button */
-.language-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  left: auto;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 100;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.language-toggle.visible {
-  display: flex;
-}
-
-.language-toggle:active {
-  transform: scale(0.95);
-  background: rgba(255, 255, 255, 0.2);
 }
 
 /* AR Back Button */

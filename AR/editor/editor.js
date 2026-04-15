@@ -42,6 +42,7 @@ const elements = {
   charId: document.getElementById('char-id'),
   charName: document.getElementById('char-name'),
   charRegion: document.getElementById('char-region'),
+  charArEnabled: document.getElementById('char-ar-enabled'),
   charColor: document.getElementById('char-color'),
   charColorText: document.getElementById('char-color-text'),
   charDescription: document.getElementById('char-description'),
@@ -182,12 +183,14 @@ function setupEventListeners() {
   // Import/Export
   document.getElementById('import-btn').addEventListener('click', showImportModal);
   document.getElementById('export-btn').addEventListener('click', exportJSON);
+  document.getElementById('save-btn').addEventListener('click', saveNow);
   document.getElementById('clear-local-btn').addEventListener('click', clearLocalStorage);
   
   // Preview
   document.getElementById('preview-btn').addEventListener('click', openPreview);
   document.getElementById('preview-close').addEventListener('click', closePreview);
   document.getElementById('preview-reset').addEventListener('click', resetPreviewCamera);
+  document.getElementById('preview-save').addEventListener('click', saveNow);
   document.querySelectorAll('input[name="preview-mode"]').forEach(radio => {
     radio.addEventListener('change', (e) => updatePreviewMode(e.target.value));
   });
@@ -241,7 +244,7 @@ function setupEventListeners() {
   const infoInputs = [
     'char-id', 'char-name', 'char-region', 'char-color', 'char-color-text',
     'char-description', 'char-description-alt', 'char-portrait', 'char-type',
-    'marker-file', 'marker-index'
+    'marker-file', 'marker-index', 'char-ar-enabled'
   ];
   
   infoInputs.forEach(id => {
@@ -352,6 +355,7 @@ function populateEditor(char) {
   elements.charRegion.value = char.region || 'CORSE';
   elements.charColor.value = char.themeColor || '#6366F1';
   elements.charColorText.value = char.themeColor || '#6366F1';
+  if (elements.charArEnabled) elements.charArEnabled.checked = !!char.arEnabled;
   elements.charDescription.value = char.description || '';
   elements.charDescriptionAlt.value = char.descriptionCorsican || char.descriptionProvencal || '';
   elements.charPortrait.value = char.portrait || '';
@@ -385,6 +389,7 @@ function saveCharacterInfo() {
   char.description = elements.charDescription.value;
   char.portrait = elements.charPortrait.value;
   char.characterType = elements.charType.value || undefined;
+  char.arEnabled = elements.charArEnabled ? elements.charArEnabled.checked : !!char.arEnabled;
   
   // Handle regional description
   if (char.region === 'PROVENCE') {
@@ -1046,6 +1051,7 @@ function openAssetModal(type, key = null) {
 
 function closeAssetModal() {
   elements.assetModal.classList.remove('active');
+  elements.assetModal.style.zIndex = '';
   currentModalContext = { type: null, key: null };
 }
 
@@ -1394,7 +1400,23 @@ function saveAssetFromModal() {
   closeAssetModal();
   populateEditor(char);
   showToast('Asset saved', 'success');
+
+  // Refresh preview if open
+  const previewModal = document.getElementById('preview-modal');
+  if (previewModal && previewModal.classList.contains('active')) {
+    loadPreviewAssets(char);
+  }
 }
+
+/**
+ * Open asset modal from preview panel — brings modal on top of preview
+ */
+function openAssetModalFromPreview(type) {
+  openAssetModal(type, null);
+  // Ensure the modal is above the preview
+  elements.assetModal.style.zIndex = '20000';
+}
+
 
 function save2DAsset(char, index, visibleIn) {
   if (!char.assets) char.assets = {};
@@ -1793,6 +1815,20 @@ function clearLocalStorage() {
   }
 }
 
+/**
+ * Immediate save triggered by Save button
+ */
+async function saveNow() {
+  state.unsavedChanges = true; // force save even if already synced
+  const btn = document.getElementById('save-btn');
+  if (btn) btn.querySelector('.btn-text').textContent = ' Saving...';
+  await autoSave();
+  if (btn) {
+    btn.querySelector('.btn-text').textContent = ' Saved!';
+    setTimeout(() => { btn.querySelector('.btn-text').textContent = ' Save'; }, 2000);
+  }
+}
+
 // Debounced auto-save (saves 1 second after last change)
 const debouncedAutoSave = debounce(autoSave, 1000);
 
@@ -1920,7 +1956,8 @@ const preview = {
   audios: [],
   mixers: [],
   clock: null,
-  animationData: {}, // Store animation info per asset: { assetId: { clips: [], currentClip, action, mixer, speed } }
+  animationData: {},
+  sceneGroup: null,
   mode: 'scan'
 };
 
@@ -2105,8 +2142,9 @@ function openPreview() {
   // Set mode to match editor
   const currentMode = state.previewMode || 'scan';
   preview.mode = currentMode;
+  preview.cameraInitialized = false;
   document.querySelector(`input[name="preview-mode"][value="${currentMode}"]`).checked = true;
-  
+
   initPreviewScene();
   loadPreviewAssets(char);
 }
@@ -2223,9 +2261,19 @@ function initPreviewScene() {
     });
     
     // Update billboards - make meshes face camera if billboard is enabled
+    // Skip billboard for meshes using wrapped geometry (non-plane shapes)
     preview.meshes.forEach(mesh => {
-      if (mesh.userData.billboard !== false) {
+      if (mesh.userData.isSoundIndicator) return; // Sound indicators have fixed orientation
+      if (mesh.userData.billboard !== false && !mesh.userData.wrapShape) {
         mesh.lookAt(preview.camera.position);
+      } else if (mesh.userData.billboard === false && mesh.userData.needsRotationReset) {
+        const rot = mesh.userData.baseRotation || { x: 0, y: 0, z: 0 };
+        mesh.rotation.set(
+          THREE.MathUtils.degToRad(rot.x),
+          THREE.MathUtils.degToRad(rot.y),
+          THREE.MathUtils.degToRad(rot.z)
+        );
+        mesh.userData.needsRotationReset = false;
       }
     });
     
@@ -2238,17 +2286,51 @@ function initPreviewScene() {
 
 function loadPreviewAssets(char) {
   const loading = document.getElementById('preview-loading');
+  // Preserve camera position across reloads (only if already set for this mode)
+  const savedCamPos = preview.cameraInitialized ? preview.camera.position.clone() : null;
+  const savedTarget = preview.cameraInitialized ? preview.controls.target.clone() : null;
   preview.meshes = [];
   preview.mixers = [];
   preview.animationData = {};
-  
+
+  // Stop and clean up any existing videos
+  if (preview.videos) {
+    preview.videos.forEach(v => {
+      if (v.video) { v.video.pause(); v.video.src = ''; }
+    });
+  }
+  preview.videos = [];
+
+  // Stop and clean up any existing audios
+  if (preview.audios) {
+    preview.audios.forEach(a => {
+      if (a.audio) { a.audio.pause(); a.audio.src = ''; }
+    });
+  }
+  preview.audios = [];
+
   // Clear existing meshes (except lights and grid)
-  preview.scene.children = preview.scene.children.filter(obj => 
-    obj.type === 'AmbientLight' || 
-    obj.type === 'DirectionalLight' || 
+  preview.scene.children = preview.scene.children.filter(obj =>
+    obj.type === 'AmbientLight' ||
+    obj.type === 'DirectionalLight' ||
     obj.type === 'GridHelper'
   );
-  
+
+  // Create scene group for collective transforms
+  preview.sceneGroup = new THREE.Group();
+  const sceneTransform = char.sceneTransform || {};
+  const sPos = sceneTransform.position || { x: 0, y: 0, z: 0 };
+  const sRot = sceneTransform.rotation || { x: 0, y: 0, z: 0 };
+  const sScale = sceneTransform.scale ?? 1;
+  preview.sceneGroup.position.set(sPos.x, sPos.y, sPos.z);
+  preview.sceneGroup.rotation.set(
+    THREE.MathUtils.degToRad(sRot.x),
+    THREE.MathUtils.degToRad(sRot.y),
+    THREE.MathUtils.degToRad(sRot.z)
+  );
+  preview.sceneGroup.scale.setScalar(sScale);
+  preview.scene.add(preview.sceneGroup);
+
   const textureLoader = new THREE.TextureLoader();
   let loadPromises = [];
   
@@ -2264,11 +2346,15 @@ function loadPreviewAssets(char) {
     const markerPlane = new THREE.Mesh(markerGeo, markerMat);
     markerPlane.rotation.x = -Math.PI / 2; // Lay flat on ground
     markerPlane.position.y = 0.01;
+
     preview.scene.add(markerPlane);
     
-    // Camera position for scan mode - viewing from front
-    preview.camera.position.set(0, 1, 4);
-    preview.controls.target.set(0, 0.5, 0);
+    // Camera position for scan mode - viewing from front (only on first load)
+    if (!savedCamPos) {
+      preview.camera.position.set(0, 1, 4);
+      preview.controls.target.set(0, 0.5, 0);
+      preview.cameraInitialized = true;
+    }
     
     // Load 2D assets - load ALL, control visibility via mesh.visible
     const assets2d = char.assets?.['2d'] || [];
@@ -2280,23 +2366,36 @@ function loadPreviewAssets(char) {
         textureLoader.load(assetPath, (texture) => {
           const ratio = texture.image.width / texture.image.height;
           const scale = asset.scale || 1;
-          // Create geometry at unit size, use mesh.scale for actual scaling
-          const geo = new THREE.PlaneGeometry(ratio, 1);
+          const curvature = migrateCurvature(asset);
+          const curveAxis = asset.curveAxis || 'x';
+          const shape = curvature > 0.01 ? 'bend' : 'plane';
+          const geo = buildWrapGeometry(shape, curvature, ratio, curveAxis);
           const mat = new THREE.MeshBasicMaterial({
             map: texture,
             transparent: true,
             opacity: asset.opacity ?? 1,
-            side: THREE.DoubleSide
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            depthTest: false,
+            alphaTest: 0.01
           });
           const mesh = new THREE.Mesh(geo, mat);
-          mesh.scale.set(scale, scale, 1);
-          
-          // AR coords: x=left/right, y=up/down, z=depth (towards viewer is positive)
-          // Three.js: x=left/right, y=up, z=towards camera
+          const scaleX = asset.scaleX || 1;
+          const scaleY = asset.scaleY || 1;
+          const scaleZ = asset.scaleZ || 1;
+          mesh.scale.set(scale * scaleX, scale * scaleY, scaleZ);
+
           const pos = asset.position || { x: 0, y: 0, z: 0 };
           mesh.position.set(pos.x, pos.y, pos.z);
+
           mesh.userData.baseScale = scale;
-          
+          mesh.userData.scaleX = scaleX;
+          mesh.userData.scaleY = scaleY;
+          mesh.userData.scaleZ = scaleZ;
+          mesh.userData.aspectRatio = ratio;
+          mesh.userData.curveAxis = curveAxis;
+          mesh.userData.wrapShape = curvature > 0.01 ? 'bend' : null;
+
           // Apply rotation (convert degrees to radians)
           const rot = asset.rotation || { x: 0, y: 0, z: 0 };
           mesh.rotation.set(
@@ -2304,12 +2403,14 @@ function loadPreviewAssets(char) {
             THREE.MathUtils.degToRad(rot.y),
             THREE.MathUtils.degToRad(rot.z)
           );
-          
+          mesh.userData.baseRotation = rot;
+
           mesh.userData.assetId = asset.id;
           mesh.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
           mesh.userData.billboard = asset.billboard !== false;
+          mesh.renderOrder = Math.round((asset.order ?? 0) * 10);
           mesh.visible = shouldBeVisible;
-          preview.scene.add(mesh);
+          preview.sceneGroup.add(mesh);
           preview.meshes.push(mesh);
           resolve();
         }, undefined, resolve);
@@ -2391,7 +2492,7 @@ function loadPreviewAssets(char) {
           model.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
           model.userData.billboard = asset.billboard !== false;
           model.visible = shouldBeVisible3d;
-          preview.scene.add(model);
+          preview.sceneGroup.add(model);
           preview.meshes.push(model);
           resolve();
         }, undefined, resolve);
@@ -2400,9 +2501,12 @@ function loadPreviewAssets(char) {
     });
     
   } else {
-    // Immersive mode
-    preview.camera.position.set(0, 1.6, 0); // Eye level
-    preview.controls.target.set(0, 1.6, -5);
+    // Immersive mode (only set camera on first load)
+    if (!savedCamPos) {
+      preview.camera.position.set(0, 1.6, 2); // Slightly back from scene
+      preview.controls.target.set(0, 0.5, -2);
+      preview.cameraInitialized = true;
+    }
     
     // Check for layers (legacy fata format) or assets.2d (newer format)
     const hasLayers = char.layers && Object.keys(char.layers).length > 0;
@@ -2460,13 +2564,16 @@ function loadPreviewAssets(char) {
                   fragmentShader: ChromaKeyShader.fragmentShader,
                   transparent: true,
                   side: THREE.DoubleSide,
-                  depthWrite: false
+                  depthWrite: false,
+                  depthTest: false
                 });
               } else {
                 mat = new THREE.MeshBasicMaterial({
                   map: videoTexture,
                   transparent: true,
-                  side: THREE.DoubleSide
+                  side: THREE.DoubleSide,
+                  depthWrite: false,
+                  depthTest: false
                 });
               }
               const mesh = new THREE.Mesh(geo, mat);
@@ -2474,22 +2581,32 @@ function loadPreviewAssets(char) {
               const scaleX = layer.scaleX || 1;
               const scaleY = layer.scaleY || 1;
               mesh.scale.set(scale * scaleX, scale * scaleY, 1);
+
               mesh.userData.baseScale = scale;
               mesh.userData.scaleX = scaleX;
               mesh.userData.scaleY = scaleY;
-              
+
               const pos = layer.position || { x: 0, y: 0, z: 0 };
               mesh.position.set(pos.x, pos.y, pos.z);
-              
+              const rot = layer.rotation || { x: 0, y: 0, z: 0 };
+              mesh.rotation.set(
+                THREE.MathUtils.degToRad(rot.x),
+                THREE.MathUtils.degToRad(rot.y),
+                THREE.MathUtils.degToRad(rot.z)
+              );
+              mesh.userData.baseRotation = rot;
+              // Use layer order for stable render ordering (avoids distance-sort issues with curved geometry)
+              mesh.renderOrder = Math.round((layer.order ?? 0) * 10);
+
               mesh.userData.layerKey = layer.key;
               mesh.userData.billboard = layer.billboard !== false; // default true
               mesh.userData.visibleIn = layer.visibleIn || ['scan', 'immersive'];
               // Set visibility based on current preview mode
               const currentMode = preview.mode || 'immersive';
               mesh.visible = mesh.userData.visibleIn.includes(currentMode);
-              preview.scene.add(mesh);
+              preview.sceneGroup.add(mesh);
               preview.meshes.push(mesh);
-              
+
               video.play().catch(e => console.warn('Video autoplay blocked:', e));
               resolve();
             });
@@ -2506,32 +2623,50 @@ function loadPreviewAssets(char) {
             textureLoader.load(assetPath, (texture) => {
               const ratio = texture.image.width / texture.image.height;
               const scale = layer.scale || 1;
-              // Create at unit size, use mesh.scale for actual scaling
-              const geo = new THREE.PlaneGeometry(ratio, 1);
+              const curvature = migrateCurvature(layer);
+              const curveAxisL = layer.curveAxis || 'x';
+              const lShape = curvature > 0.01 ? 'bend' : 'plane';
+              const geo = buildWrapGeometry(lShape, curvature, ratio, curveAxisL);
               const mat = new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
-                side: THREE.DoubleSide
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                depthTest: false,
+                alphaTest: 0.01
               });
               const mesh = new THREE.Mesh(geo, mat);
               // Apply scaleX/scaleY for stretch if specified (like in-game)
               const scaleX = layer.scaleX || 1;
               const scaleY = layer.scaleY || 1;
-              mesh.scale.set(scale * scaleX, scale * scaleY, 1);
+              const scaleZ = layer.scaleZ || 1;
+              mesh.scale.set(scale * scaleX, scale * scaleY, scaleZ);
               mesh.userData.baseScale = scale;
               mesh.userData.scaleX = scaleX;
               mesh.userData.scaleY = scaleY;
-              
+              mesh.userData.scaleZ = scaleZ;
+              mesh.userData.aspectRatio = ratio;
+              mesh.userData.wrapShape = curvature > 0.01 ? 'bend' : null;
+              mesh.userData.curveAxis = curveAxisL;
+
               const pos = layer.position || { x: 0, y: 0, z: 0 };
               mesh.position.set(pos.x, pos.y, pos.z);
-              
+              const rot = layer.rotation || { x: 0, y: 0, z: 0 };
+              mesh.rotation.set(
+                THREE.MathUtils.degToRad(rot.x),
+                THREE.MathUtils.degToRad(rot.y),
+                THREE.MathUtils.degToRad(rot.z)
+              );
+              mesh.userData.baseRotation = rot;
+              mesh.renderOrder = Math.round((layer.order ?? 0) * 10);
+
               mesh.userData.layerKey = layer.key;
               mesh.userData.billboard = layer.billboard !== false; // default true
               mesh.userData.visibleIn = layer.visibleIn || ['scan', 'immersive'];
               // Set visibility based on current preview mode
               const currentModeImg = preview.mode || 'immersive';
               mesh.visible = mesh.userData.visibleIn.includes(currentModeImg);
-              preview.scene.add(mesh);
+              preview.sceneGroup.add(mesh);
               preview.meshes.push(mesh);
               resolve();
             }, undefined, resolve);
@@ -2539,10 +2674,8 @@ function loadPreviewAssets(char) {
         });
         loadPromises.push(promise);
       });
-    } else if (assets2dImmersive.length > 0) {
-      // Newer format: load from assets.2d array (filter by visibleIn)
-      console.log('Editor: Loading assets.2d for immersive mode:', assets2dImmersive.length, 'assets');
-      
+    }
+    if (assets2dImmersive.length > 0) {
       // Sort by z position (background first)
       const sortedAssets = [...assets2dImmersive].sort((a, b) => {
         const zA = a.position?.z ?? 0;
@@ -2558,32 +2691,50 @@ function loadPreviewAssets(char) {
           textureLoader.load(assetPath, (texture) => {
             const ratio = texture.image.width / texture.image.height;
             const scale = asset.scale || 1;
-            const geo = new THREE.PlaneGeometry(ratio, 1);
+            const curvature = migrateCurvature(asset);
+            const curveAxisI = asset.curveAxis || 'x';
+            const iShape = curvature > 0.01 ? 'bend' : 'plane';
+            const geo = buildWrapGeometry(iShape, curvature, ratio, curveAxisI);
             const mat = new THREE.MeshBasicMaterial({
               map: texture,
               transparent: true,
               opacity: asset.opacity ?? 1,
-              side: THREE.DoubleSide
+              side: THREE.DoubleSide,
+              depthWrite: false,
+              depthTest: false,
+              alphaTest: 0.01
             });
             const mesh = new THREE.Mesh(geo, mat);
-            mesh.scale.set(scale, scale, 1);
-            
+            const scaleX = asset.scaleX || 1;
+            const scaleY = asset.scaleY || 1;
+            const scaleZ = asset.scaleZ || 1;
+            mesh.scale.set(scale * scaleX, scale * scaleY, scaleZ);
+
             const pos = asset.position || { x: 0, y: 0, z: 0 };
             mesh.position.set(pos.x, pos.y, pos.z);
+
             mesh.userData.baseScale = scale;
-            
+            mesh.userData.scaleX = scaleX;
+            mesh.userData.scaleY = scaleY;
+            mesh.userData.scaleZ = scaleZ;
+            mesh.userData.aspectRatio = ratio;
+            mesh.userData.wrapShape = curvature > 0.01 ? 'bend' : null;
+            mesh.userData.curveAxis = curveAxisI;
+
             const rot = asset.rotation || { x: 0, y: 0, z: 0 };
             mesh.rotation.set(
               THREE.MathUtils.degToRad(rot.x),
               THREE.MathUtils.degToRad(rot.y),
               THREE.MathUtils.degToRad(rot.z)
             );
-            
+            mesh.userData.baseRotation = rot;
+
             mesh.userData.assetId = asset.id;
             mesh.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
             mesh.userData.billboard = asset.billboard !== false;
+            mesh.renderOrder = Math.round((asset.order ?? 0) * 10);
             mesh.visible = shouldBeVisible;
-            preview.scene.add(mesh);
+            preview.sceneGroup.add(mesh);
             preview.meshes.push(mesh);
             resolve();
           }, undefined, resolve);
@@ -2604,10 +2755,11 @@ function loadPreviewAssets(char) {
           const model = gltf.scene;
           const scale = asset.scale || 1;
           model.scale.set(scale, scale, scale);
-          
+
           const pos = asset.position || { x: 0, y: 0, z: 0 };
           model.position.set(pos.x, pos.y, pos.z);
-          
+
+
           const rot = asset.rotation || { x: 0, y: 0, z: 0 };
           model.rotation.set(
             THREE.MathUtils.degToRad(rot.x),
@@ -2665,7 +2817,7 @@ function loadPreviewAssets(char) {
           model.userData.visibleIn = asset.visibleIn || ['scan', 'immersive'];
           model.userData.billboard = asset.billboard !== false;
           model.visible = shouldBeVisible3d;
-          preview.scene.add(model);
+          preview.sceneGroup.add(model);
           preview.meshes.push(model);
           resolve();
         }, undefined, resolve);
@@ -2674,9 +2826,26 @@ function loadPreviewAssets(char) {
     });
   }
   
+  // Add sound indicators to scene
+  const sounds = char.sounds || {};
+  Object.entries(sounds).forEach(([key, sound]) => {
+    const visibleIn = sound.visibleIn || ['scan', 'immersive'];
+    const indicator = buildSoundIndicator(sound, key);
+    indicator.visible = visibleIn.includes(preview.mode);
+    indicator.userData.visibleIn = visibleIn;
+    preview.sceneGroup.add(indicator);
+    preview.meshes.push(indicator);
+  });
+
   // Hide loading when done
   Promise.all(loadPromises).then(() => {
     loading.classList.add('hidden');
+    // Restore camera position if this was a reload (not first load)
+    if (savedCamPos && savedTarget) {
+      preview.camera.position.copy(savedCamPos);
+      preview.controls.target.copy(savedTarget);
+      preview.controls.update();
+    }
     populatePreviewControls(char);
     populateAnimationControls();
     repositionGrid();
@@ -2685,6 +2854,7 @@ function loadPreviewAssets(char) {
 
 function updatePreviewMode(mode) {
   preview.mode = mode;
+  preview.cameraInitialized = false;
   const char = getSelectedCharacter();
   if (char) {
     loadPreviewAssets(char);
@@ -2698,28 +2868,132 @@ function resetPreviewCamera() {
     preview.camera.position.set(0, 1, 4);
     preview.controls.target.set(0, 0.5, 0);
   } else {
-    preview.camera.position.set(0, 1.6, 0);
-    preview.controls.target.set(0, 1.6, -5);
+    preview.camera.position.set(0, 1.6, 2);
+    preview.controls.target.set(0, 0.5, -2);
   }
   preview.controls.update();
 }
 
-function repositionGrid() {
-  const gridHelper = preview.scene.children.find(obj => obj.type === 'GridHelper');
-  if (!gridHelper) return;
+function deleteAssetFromPreview(assetType, index) {
+  if (!confirm('Delete this asset?')) return;
+  const char = getSelectedCharacter();
+  if (!char || !char.assets?.[assetType]) return;
+  char.assets[assetType].splice(index, 1);
+  markUnsaved();
+  loadPreviewAssets(char);
+}
 
-  // Use only 3D models (Groups/Objects loaded from GLTF) to find the floor
-  const models = preview.meshes.filter(m => m.visible && (m.type === 'Group' || m.type === 'Object3D'));
-  if (models.length === 0) {
-    gridHelper.position.y = 0;
-    return;
+function deleteLayerFromPreview(key) {
+  if (!confirm('Delete this layer?')) return;
+  const char = getSelectedCharacter();
+  if (!char || !char.layers) return;
+  delete char.layers[key];
+  markUnsaved();
+  loadPreviewAssets(char);
+}
+
+function deleteSoundFromPreview(key) {
+  if (!confirm('Delete this sound?')) return;
+  const char = getSelectedCharacter();
+  if (!char || !char.sounds) return;
+  delete char.sounds[key];
+  markUnsaved();
+  loadPreviewAssets(char);
+}
+
+// ============================================
+// Card Drag-and-Drop Reordering
+// ============================================
+let draggedCard = null;
+
+function onCardDragStart(e) {
+  draggedCard = this;
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function initDragHandle(card) {
+  card.draggable = false;
+  const handle = card.querySelector('.drag-handle');
+  if (!handle) return;
+  handle.addEventListener('mousedown', () => { card.draggable = true; });
+  handle.addEventListener('touchstart', () => { card.draggable = true; }, { passive: true });
+  document.addEventListener('mouseup', () => { card.draggable = false; });
+  document.addEventListener('touchend', () => { card.draggable = false; });
+}
+
+function onCardDragEnd() {
+  this.classList.remove('dragging');
+  document.querySelectorAll('.preview-asset-card.drag-over').forEach(c => c.classList.remove('drag-over'));
+  draggedCard = null;
+}
+
+function onCardDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  if (this === draggedCard || !draggedCard) return;
+  // Only allow reorder among same type group (skip scene card)
+  if (this.classList.contains('scene-card')) return;
+  document.querySelectorAll('.preview-asset-card.drag-over').forEach(c => c.classList.remove('drag-over'));
+  this.classList.add('drag-over');
+}
+
+function onCardDrop(e) {
+  e.preventDefault();
+  if (!draggedCard || draggedCard === this) return;
+  this.classList.remove('drag-over');
+
+  const container = document.getElementById('preview-asset-list');
+  // Get all draggable cards (exclude scene card and add buttons)
+  const cards = [...container.querySelectorAll('.preview-asset-card:not(.scene-card)')];
+  const fromIndex = cards.indexOf(draggedCard);
+  const toIndex = cards.indexOf(this);
+  if (fromIndex < 0 || toIndex < 0) return;
+
+  // Move DOM element
+  if (fromIndex < toIndex) {
+    this.parentNode.insertBefore(draggedCard, this.nextSibling);
+  } else {
+    this.parentNode.insertBefore(draggedCard, this);
   }
 
-  const box = new THREE.Box3();
-  models.forEach(m => box.expandByObject(m));
+  // Now read the new order from DOM and apply to data + meshes
+  applyCardOrder();
+}
 
-  if (box.isEmpty()) return;
-  gridHelper.position.y = box.min.y;
+function applyCardOrder() {
+  const char = getSelectedCharacter();
+  if (!char) return;
+
+  const container = document.getElementById('preview-asset-list');
+  // Only reorder visual cards (assets + layers), skip sound cards
+  const cards = [...container.querySelectorAll('.preview-asset-card:not(.scene-card)')]
+    .filter(c => c.dataset.orderType !== 'sound');
+
+  cards.forEach((card, visualIndex) => {
+    const orderValue = visualIndex;
+
+    if (card.dataset.assetType && card.dataset.assetIndex != null) {
+      const type = card.dataset.assetType;
+      const idx = parseInt(card.dataset.assetIndex);
+      const asset = char.assets?.[type]?.[idx];
+      if (asset) asset.order = orderValue;
+      const assetId = card.dataset.assetId;
+      const mesh = preview.meshes.find(m => m.userData.assetId === assetId);
+      if (mesh) mesh.renderOrder = orderValue * 10;
+    } else if (card.dataset.layerKey) {
+      const key = card.dataset.layerKey;
+      if (char.layers?.[key]) char.layers[key].order = orderValue;
+      const mesh = preview.meshes.find(m => m.userData.layerKey === key);
+      if (mesh) mesh.renderOrder = orderValue * 10;
+    }
+  });
+
+  markUnsaved();
+}
+
+function repositionGrid() {
+  // Grid stays fixed at y=0 as a stable reference plane
 }
 
 // ============================================
@@ -2729,57 +3003,219 @@ function repositionGrid() {
 function populatePreviewControls(char) {
   const container = document.getElementById('preview-asset-list');
   if (!container) return;
-  
+
   container.innerHTML = '';
-  
+
+  // Add asset buttons at the top
+  const addBtnsRow = document.createElement('div');
+  addBtnsRow.className = 'preview-add-btns';
+  addBtnsRow.innerHTML = `
+    <button class="btn btn-small btn-accent" id="preview-add-2d">+ 2D Asset</button>
+    <button class="btn btn-small btn-accent" id="preview-add-3d">+ 3D Model</button>
+    <button class="btn btn-small btn-accent" id="preview-add-sound">+ Sound</button>
+    <button class="btn btn-small btn-accent" id="preview-add-layer">+ Layer</button>
+  `;
+  container.appendChild(addBtnsRow);
+
+  const orderHint = document.createElement('div');
+  orderHint.className = 'preview-order-hint';
+  orderHint.textContent = 'Drag cards to reorder — bottom draws on top';
+  container.appendChild(orderHint);
+
+  addBtnsRow.querySelector('#preview-add-2d').addEventListener('click', () => openAssetModalFromPreview('2d'));
+  addBtnsRow.querySelector('#preview-add-3d').addEventListener('click', () => openAssetModalFromPreview('3d'));
+  addBtnsRow.querySelector('#preview-add-sound').addEventListener('click', () => openAssetModalFromPreview('sound'));
+  addBtnsRow.querySelector('#preview-add-layer').addEventListener('click', () => openAssetModalFromPreview('layer'));
+
+  // Scene-level transform card (always first)
+  container.appendChild(createSceneControlCard(char));
+
   if (preview.mode === 'scan') {
-    // 2D Assets - show ALL, visibility checkboxes control which modes they appear in
-    const assets2d = char.assets?.['2d'] || [];
-    assets2d.forEach((asset, idx) => {
+    // 2D Assets - sorted by draw order, visibility checkboxes control which modes they appear in
+    const assets2d = (char.assets?.['2d'] || [])
+      .map((asset, idx) => ({ asset, idx }))
+      .sort((a, b) => (a.asset.order ?? 0) - (b.asset.order ?? 0));
+    assets2d.forEach(({ asset, idx }) => {
       container.appendChild(createAssetControlCard(asset, '2d', idx, '🖼️'));
     });
-    
-    // 3D Assets - show ALL, visibility checkboxes control which modes they appear in
-    const assets3d = char.assets?.['3d'] || [];
-    assets3d.forEach((asset, idx) => {
+
+    // 3D Assets - sorted by draw order, visibility checkboxes control which modes they appear in
+    const assets3d = (char.assets?.['3d'] || [])
+      .map((asset, idx) => ({ asset, idx }))
+      .sort((a, b) => (a.asset.order ?? 0) - (b.asset.order ?? 0));
+    assets3d.forEach(({ asset, idx }) => {
       container.appendChild(createAssetControlCard(asset, '3d', idx, '📦'));
     });
-    
-    // Sounds for scan mode - show ALL sounds
+
+    // Sounds section — separate from visual ordering
     const sounds = char.sounds || {};
-    Object.entries(sounds).forEach(([key, sound]) => {
-      container.appendChild(createSoundControlCard(key, sound));
-    });
-  } else {
-    // Check for layers (legacy format) or assets.2d (newer format)
-    const hasLayers = char.layers && Object.keys(char.layers).length > 0;
-    const assets2dImmersive = char.assets?.['2d'] || [];
-    
-    if (hasLayers) {
-      // Legacy format: Layers - show ALL layers, visibility checkboxes control which modes they appear in
-      const layers = char.layers;
-      Object.entries(layers).forEach(([key, layer]) => {
-        const icon = layer.type === 'video' ? '🎬' : '🖼️';
-        container.appendChild(createLayerControlCard(key, layer, icon));
-      });
-    } else if (assets2dImmersive.length > 0) {
-      // Newer format: use assets.2d for immersive mode
-      assets2dImmersive.forEach((asset, idx) => {
-        container.appendChild(createAssetControlCard(asset, '2d', idx, '🖼️'));
+    if (Object.keys(sounds).length) {
+      const soundLabel = document.createElement('div');
+      soundLabel.className = 'preview-order-hint';
+      soundLabel.textContent = 'Sounds';
+      container.appendChild(soundLabel);
+      Object.entries(sounds).forEach(([key, sound]) => {
+        container.appendChild(createSoundControlCard(key, sound));
       });
     }
-    
-    // 3D Assets for immersive mode - show ALL, visibility checkboxes control which modes they appear in
+  } else {
+    // Merge all visual items (layers + 2d assets + 3d assets) into one sorted list
+    const allVisuals = [];
+
+    const layers = char.layers || {};
+    Object.entries(layers).forEach(([key, layer]) => {
+      allVisuals.push({ kind: 'layer', order: layer.order ?? 0, key, layer });
+    });
+
+    const assets2dImmersive = char.assets?.['2d'] || [];
+    assets2dImmersive.forEach((asset, idx) => {
+      allVisuals.push({ kind: '2d', order: asset.order ?? 0, asset, idx });
+    });
+
     const assets3d = char.assets?.['3d'] || [];
     assets3d.forEach((asset, idx) => {
-      container.appendChild(createAssetControlCard(asset, '3d', idx, '📦'));
+      allVisuals.push({ kind: '3d', order: asset.order ?? 0, asset, idx });
     });
-    
-    // Sounds for immersive mode - show ALL sounds
+
+    allVisuals.sort((a, b) => a.order - b.order);
+
+    allVisuals.forEach(item => {
+      if (item.kind === 'layer') {
+        const icon = item.layer.type === 'video' ? '🎬' : '🖼️';
+        container.appendChild(createLayerControlCard(item.key, item.layer, icon));
+      } else if (item.kind === '2d') {
+        container.appendChild(createAssetControlCard(item.asset, '2d', item.idx, '🖼️'));
+      } else if (item.kind === '3d') {
+        container.appendChild(createAssetControlCard(item.asset, '3d', item.idx, '📦'));
+      }
+    });
+
+    // Sounds section — separate from visual ordering
     const sounds = char.sounds || {};
-    Object.entries(sounds).forEach(([key, sound]) => {
-      container.appendChild(createSoundControlCard(key, sound));
-    });
+    if (Object.keys(sounds).length) {
+      const soundLabel = document.createElement('div');
+      soundLabel.className = 'preview-order-hint';
+      soundLabel.textContent = 'Sounds';
+      container.appendChild(soundLabel);
+      Object.entries(sounds).forEach(([key, sound]) => {
+        container.appendChild(createSoundControlCard(key, sound));
+      });
+    }
+  }
+}
+
+function createSceneControlCard(char) {
+  const st = char.sceneTransform || {};
+  const pos = st.position || { x: 0, y: 0, z: 0 };
+  const rot = st.rotation || { x: 0, y: 0, z: 0 };
+  const scale = st.scale ?? 1;
+
+  const card = document.createElement('div');
+  card.className = 'preview-asset-card scene-card';
+  card.innerHTML = `
+    <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')" style="background:var(--accent-primary);color:#fff;">
+      <span class="preview-asset-name">🎬 Entire Scene</span>
+      <span class="preview-asset-type">GROUP</span>
+    </div>
+    <div class="preview-asset-card-body">
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Scale</span>
+          <span class="preview-control-value" id="scene-scale-val">${scale.toFixed(2)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.05" max="10" step="0.01"
+          value="${scale}"
+          data-prop="scale" data-scene="true"
+          oninput="updateSceneTransform(this)">
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Position</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="0.1" value="${pos.x}"
+              data-prop="position.x" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="0.1" value="${pos.y}"
+              data-prop="position.y" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="0.1" value="${pos.z}"
+              data-prop="position.z" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Rotation</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="1" value="${rot.x}"
+              data-prop="rotation.x" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="1" value="${rot.y}"
+              data-prop="rotation.y" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="1" value="${rot.z}"
+              data-prop="rotation.z" data-scene="true"
+              oninput="updateSceneTransform(this)">
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function updateSceneTransform(input) {
+  const prop = input.dataset.prop;
+  const value = parseFloat(input.value);
+  const group = preview.sceneGroup;
+  if (!group) return;
+
+  if (prop === 'scale') {
+    group.scale.setScalar(value);
+    const valDisplay = document.getElementById('scene-scale-val');
+    if (valDisplay) valDisplay.textContent = value.toFixed(2);
+  } else if (prop.startsWith('position.')) {
+    const axis = prop.split('.')[1];
+    group.position[axis] = value;
+  } else if (prop.startsWith('rotation.')) {
+    const axis = prop.split('.')[1];
+    group.rotation[axis] = THREE.MathUtils.degToRad(value);
+  }
+
+  // Auto-save
+  if (document.getElementById('preview-autosave')?.checked) {
+    const char = getSelectedCharacter();
+    if (char) {
+      if (!char.sceneTransform) char.sceneTransform = {};
+      if (prop === 'scale') {
+        char.sceneTransform.scale = value;
+      } else if (prop.startsWith('position.')) {
+        if (!char.sceneTransform.position) char.sceneTransform.position = { x: 0, y: 0, z: 0 };
+        char.sceneTransform.position[prop.split('.')[1]] = value;
+      } else if (prop.startsWith('rotation.')) {
+        if (!char.sceneTransform.rotation) char.sceneTransform.rotation = { x: 0, y: 0, z: 0 };
+        char.sceneTransform.rotation[prop.split('.')[1]] = value;
+      }
+      markUnsaved();
+    }
   }
 }
 
@@ -2799,10 +3235,21 @@ function createAssetControlCard(asset, assetType, index, icon) {
     card.classList.add('hidden-in-mode');
   }
   
+  card.dataset.orderType = assetType;
+  card.dataset.orderKey = asset.id || String(index);
+  card.addEventListener('dragstart', onCardDragStart);
+  card.addEventListener('dragend', onCardDragEnd);
+  card.addEventListener('dragover', onCardDragOver);
+  card.addEventListener('drop', onCardDrop);
+
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
+      <span class="drag-handle" title="Drag to reorder">⠿</span>
       <span class="preview-asset-name">${icon} ${asset.id || 'Asset ' + index} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
-      <span class="preview-asset-type">${assetType.toUpperCase()}</span>
+      <span class="preview-asset-header-actions">
+        <span class="preview-asset-type">${assetType.toUpperCase()}</span>
+        <button class="btn-delete-asset" data-type="${assetType}" data-index="${index}" title="Delete asset" onclick="event.stopPropagation(); deleteAssetFromPreview('${assetType}', ${index})">✕</button>
+      </span>
     </div>
     <div class="preview-asset-card-body">
       <div class="preview-control-group">
@@ -2810,13 +3257,47 @@ function createAssetControlCard(asset, assetType, index, icon) {
           <span>Scale</span>
           <span class="preview-control-value" id="scale-val-${assetType}-${index}">${(asset.scale || 1).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0.05" max="10" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0.05" max="10" step="0.01"
           value="${asset.scale || 1}"
           data-prop="scale" data-type="${assetType}" data-index="${index}"
           oninput="updatePreviewAsset(this)">
       </div>
-      
+      ${assetType === '2d' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Scale X</span>
+          <span class="preview-control-value" id="scaleX-val-${assetType}-${index}">${(asset.scaleX || 1).toFixed(2)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="5" step="0.01"
+          value="${asset.scaleX || 1}"
+          data-prop="scaleX" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Scale Y</span>
+          <span class="preview-control-value" id="scaleY-val-${assetType}-${index}">${(asset.scaleY || 1).toFixed(2)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="5" step="0.01"
+          value="${asset.scaleY || 1}"
+          data-prop="scaleY" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Scale Z (Depth)</span>
+          <span class="preview-control-value" id="scaleZ-val-${assetType}-${index}">${(asset.scaleZ || 1).toFixed(2)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="5" step="0.01"
+          value="${asset.scaleZ || 1}"
+          data-prop="scaleZ" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+      </div>
+      ` : ''}
       <div class="preview-control-group">
         <div class="preview-control-label"><span>Position</span></div>
         <div class="preview-xyz-row">
@@ -2841,7 +3322,6 @@ function createAssetControlCard(asset, assetType, index, icon) {
         </div>
       </div>
       
-      ${assetType === '3d' ? `
       <div class="preview-control-group">
         <div class="preview-control-label"><span>Rotation (°)</span></div>
         <div class="preview-xyz-row">
@@ -2865,6 +3345,30 @@ function createAssetControlCard(asset, assetType, index, icon) {
           </div>
         </div>
       </div>
+      ${assetType === '2d' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Curvature</span>
+          <span class="preview-control-value" id="curvature-val-${assetType}-${index}">${(asset.curvature || 0).toFixed(1)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="6.28" step="0.1"
+          value="${asset.curvature || 0}"
+          data-prop="curvature" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">0 = flat · 3.14 = half-circle · 6.28 = full wrap</small>
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Curve Axis</span></div>
+        <div class="preview-axis-toggle">
+          <label><input type="radio" name="curveAxis-${assetType}-${index}" value="x" ${(asset.curveAxis || 'x') === 'x' ? 'checked' : ''}
+            data-prop="curveAxis" data-type="${assetType}" data-index="${index}"
+            onchange="updatePreviewAsset(this)"> Horizontal</label>
+          <label><input type="radio" name="curveAxis-${assetType}-${index}" value="y" ${asset.curveAxis === 'y' ? 'checked' : ''}
+            data-prop="curveAxis" data-type="${assetType}" data-index="${index}"
+            onchange="updatePreviewAsset(this)"> Vertical</label>
+        </div>
+      </div>
       ` : ''}
       ${assetType === '3d' ? `
       <div class="preview-control-group animation-controls" id="anim-controls-${asset.id}">
@@ -2883,7 +3387,7 @@ function createAssetControlCard(asset, assetType, index, icon) {
           data-prop="opacity" data-type="${assetType}" data-index="${index}"
           oninput="updatePreviewAsset(this)">
       </div>
-      
+
       <div class="preview-control-group">
         <label class="preview-checkbox-label">
           <input type="checkbox" ${asset.billboard !== false ? 'checked' : ''}
@@ -2912,7 +3416,8 @@ function createAssetControlCard(asset, assetType, index, icon) {
       </div>
     </div>
   `;
-  
+
+  initDragHandle(card);
   return card;
 }
 
@@ -3080,10 +3585,21 @@ function createLayerControlCard(key, layer, icon) {
     card.classList.add('hidden-in-mode');
   }
   
+  card.dataset.orderType = 'layer';
+  card.dataset.orderKey = key;
+  card.addEventListener('dragstart', onCardDragStart);
+  card.addEventListener('dragend', onCardDragEnd);
+  card.addEventListener('dragover', onCardDragOver);
+  card.addEventListener('drop', onCardDrop);
+
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
+      <span class="drag-handle" title="Drag to reorder">⠿</span>
       <span class="preview-asset-name">${icon} ${key} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
-      <span class="preview-asset-type">${layer.type === 'video' ? 'VIDEO' : 'IMAGE'}</span>
+      <span class="preview-asset-header-actions">
+        <span class="preview-asset-type">${layer.type === 'video' ? 'VIDEO' : 'IMAGE'}</span>
+        <button class="btn-delete-asset" data-layer="${key}" title="Delete layer" onclick="event.stopPropagation(); deleteLayerFromPreview('${key}')">✕</button>
+      </span>
     </div>
     <div class="preview-asset-card-body">
       <div class="preview-control-group">
@@ -3115,12 +3631,26 @@ function createLayerControlCard(key, layer, icon) {
           <span>Scale Y</span>
           <span class="preview-control-value" id="scaleY-val-layer-${key}">${(layer.scaleY || 1).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0.1" max="5" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0.1" max="5" step="0.01"
           value="${layer.scaleY || 1}"
           data-prop="scaleY" data-layer="${key}"
           oninput="updatePreviewLayer(this)">
       </div>
+
+      ${layer.type !== 'video' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Scale Z (Depth)</span>
+          <span class="preview-control-value" id="scaleZ-val-layer-${key}">${(layer.scaleZ || 1).toFixed(2)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="5" step="0.01"
+          value="${layer.scaleZ || 1}"
+          data-prop="scaleZ" data-layer="${key}"
+          oninput="updatePreviewLayer(this)">
+      </div>
+      ` : ''}
       
       <div class="preview-control-group">
         <div class="preview-control-label"><span>Position</span></div>
@@ -3145,7 +3675,57 @@ function createLayerControlCard(key, layer, icon) {
           </div>
         </div>
       </div>
-      
+
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Rotation (&deg;)</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="1" value="${layer.rotation?.x || 0}"
+              data-prop="rotation.x" data-layer="${key}"
+              oninput="updatePreviewLayer(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="1" value="${layer.rotation?.y || 0}"
+              data-prop="rotation.y" data-layer="${key}"
+              oninput="updatePreviewLayer(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="1" value="${layer.rotation?.z || 0}"
+              data-prop="rotation.z" data-layer="${key}"
+              oninput="updatePreviewLayer(this)">
+          </div>
+        </div>
+      </div>
+
+      ${layer.type !== 'video' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Curvature</span>
+          <span class="preview-control-value" id="curvature-val-layer-${key}">${(layer.curvature || 0).toFixed(1)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="6.28" step="0.1"
+          value="${layer.curvature || 0}"
+          data-prop="curvature" data-layer="${key}"
+          oninput="updatePreviewLayer(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">0 = flat · 3.14 = half-circle · 6.28 = full wrap</small>
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Curve Axis</span></div>
+        <div class="preview-axis-toggle">
+          <label><input type="radio" name="curveAxis-layer-${key}" value="x" ${(layer.curveAxis || 'x') === 'x' ? 'checked' : ''}
+            data-prop="curveAxis" data-layer="${key}"
+            onchange="updatePreviewLayer(this)"> Horizontal</label>
+          <label><input type="radio" name="curveAxis-layer-${key}" value="y" ${layer.curveAxis === 'y' ? 'checked' : ''}
+            data-prop="curveAxis" data-layer="${key}"
+            onchange="updatePreviewLayer(this)"> Vertical</label>
+        </div>
+      </div>
+      ` : ''}
+
       <div class="preview-control-group">
         <label class="preview-checkbox-label">
           <input type="checkbox" ${layer.billboard !== false ? 'checked' : ''}
@@ -3175,24 +3755,58 @@ function createLayerControlCard(key, layer, icon) {
       
       ${layer.type === 'video' ? `
       <div class="preview-control-group">
+        <label class="preview-checkbox-label">
+          <input type="checkbox" ${layer.loop !== false ? 'checked' : ''}
+            data-prop="loop" data-layer="${key}"
+            onchange="updatePreviewLayer(this)">
+          <span>Loop</span>
+        </label>
+      </div>
+      <div class="preview-control-group">
+        <label class="preview-checkbox-label">
+          <input type="checkbox" ${layer.muted !== false ? 'checked' : ''}
+            data-prop="muted" data-layer="${key}"
+            onchange="updatePreviewLayer(this)">
+          <span>Muted</span>
+        </label>
+      </div>
+      <div class="preview-control-group">
         <div class="preview-control-label">
-          <span>🔊 Volume</span>
+          <span>Volume</span>
           <span class="preview-control-value" id="volume-val-${key}">${((layer.volume ?? 0) * 100).toFixed(0)}%</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0" max="1" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0" max="1" step="0.01"
           value="${layer.volume ?? 0}"
           data-prop="volume" data-layer="${key}"
           oninput="updatePreviewLayer(this)">
       </div>
-      ${layer.chromaKey ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Chroma Key</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="color" value="${layer.chromaKey || '#00FF00'}" style="width:36px;height:28px;border:none;padding:0;cursor:pointer;"
+            data-prop="chromaKey" data-layer="${key}"
+            oninput="updatePreviewLayer(this)">
+          <input type="text" value="${layer.chromaKey || ''}" placeholder="none" style="flex:1;font-size:12px;"
+            data-prop="chromaKeyText" data-layer="${key}"
+            oninput="updatePreviewLayer(this)">
+          <label class="preview-checkbox-label small" style="white-space:nowrap;">
+            <input type="checkbox" ${layer.chromaKey ? 'checked' : ''}
+              data-prop="chromaKeyEnabled" data-layer="${key}"
+              onchange="updatePreviewLayer(this)">
+            <span>On</span>
+          </label>
+        </div>
+      </div>
       <div class="preview-control-group">
         <div class="preview-control-label">
           <span>Chroma Tolerance</span>
           <span class="preview-control-value" id="tolerance-val-${key}">${(layer.tolerance || 0.4).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0.05" max="1" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0.05" max="1" step="0.01"
           value="${layer.tolerance || 0.4}"
           data-prop="tolerance" data-layer="${key}"
           oninput="updatePreviewLayer(this)">
@@ -3202,8 +3816,8 @@ function createLayerControlCard(key, layer, icon) {
           <span>Smoothness</span>
           <span class="preview-control-value" id="smoothness-val-${key}">${(layer.smoothness || 0.08).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0.001" max="0.5" step="0.001" 
+        <input type="range" class="preview-slider"
+          min="0.001" max="0.5" step="0.001"
           value="${layer.smoothness || 0.08}"
           data-prop="smoothness" data-layer="${key}"
           oninput="updatePreviewLayer(this)">
@@ -3213,17 +3827,17 @@ function createLayerControlCard(key, layer, icon) {
           <span>Spill Suppression</span>
           <span class="preview-control-value" id="spill-val-${key}">${(layer.spill || 0.1).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0" max="1" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0" max="1" step="0.01"
           value="${layer.spill || 0.1}"
           data-prop="spill" data-layer="${key}"
           oninput="updatePreviewLayer(this)">
       </div>
       ` : ''}
-      ` : ''}
     </div>
   `;
-  
+
+  initDragHandle(card);
   return card;
 }
 
@@ -3253,20 +3867,137 @@ function createSoundControlCard(key, sound) {
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
       <span class="preview-asset-name">🔊 ${key} ${isHiddenInCurrentMode ? '<span class="hidden-indicator">👁️‍🗨️</span>' : ''}</span>
-      <span class="preview-asset-type">SOUND</span>
+      <span class="preview-asset-header-actions">
+        <span class="preview-asset-type">SOUND</span>
+        <button class="btn-delete-asset" data-sound="${key}" title="Delete sound" onclick="event.stopPropagation(); deleteSoundFromPreview('${key}')">✕</button>
+      </span>
     </div>
     <div class="preview-asset-card-body">
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>File Path</span></div>
+        <input type="text" value="${sound.path || ''}" placeholder="assets/sound/..."
+          style="width:100%;font-size:12px;"
+          data-prop="path" data-sound="${key}"
+          onchange="updatePreviewSound(this)">
+      </div>
+
+      <div class="preview-control-group">
+        <label class="preview-checkbox-label">
+          <input type="checkbox" ${sound.loop !== false ? 'checked' : ''}
+            data-prop="loop" data-sound="${key}"
+            onchange="updatePreviewSound(this)">
+          <span>Loop</span>
+        </label>
+      </div>
+
       <div class="preview-control-group">
         <div class="preview-control-label">
           <span>Volume</span>
           <span class="preview-control-value" id="volume-val-sound-${key}">${((sound.volume ?? 0.5) * 100).toFixed(0)}%</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0" max="1" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0" max="1" step="0.01"
           value="${sound.volume ?? 0.5}"
           data-prop="volume" data-sound="${key}"
           oninput="updatePreviewSound(this)">
       </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Position</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="0.1" value="${sound.position?.x || 0}"
+              data-prop="position.x" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="0.1" value="${sound.position?.y || 1}"
+              data-prop="position.y" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="0.1" value="${sound.position?.z || 0}"
+              data-prop="position.z" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label"><span>Rotation</span></div>
+        <div class="preview-xyz-row">
+          <div class="preview-xyz-input x">
+            <label>X</label>
+            <input type="number" step="1" value="${sound.rotation?.x || 0}"
+              data-prop="rotation.x" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+          <div class="preview-xyz-input y">
+            <label>Y</label>
+            <input type="number" step="1" value="${sound.rotation?.y || 0}"
+              data-prop="rotation.y" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+          <div class="preview-xyz-input z">
+            <label>Z</label>
+            <input type="number" step="1" value="${sound.rotation?.z || 0}"
+              data-prop="rotation.z" data-sound="${key}"
+              oninput="updatePreviewSound(this)">
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Cone Angle</span>
+          <span class="preview-control-value" id="coneAngle-val-sound-${key}">${(sound.coneAngle || 60)}°</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="10" max="360" step="5"
+          value="${sound.coneAngle || 60}"
+          data-prop="coneAngle" data-sound="${key}"
+          oninput="updatePreviewSound(this)">
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Range</span>
+          <span class="preview-control-value" id="maxDistance-val-sound-${key}">${(sound.maxDistance || 5).toFixed(1)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.5" max="30" step="0.5"
+          value="${sound.maxDistance || 5}"
+          data-prop="maxDistance" data-sound="${key}"
+          oninput="updatePreviewSound(this)">
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Ref Distance</span>
+          <span class="preview-control-value" id="refDistance-val-sound-${key}">${(sound.refDistance || 1).toFixed(1)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="10" step="0.1"
+          value="${sound.refDistance || 1}"
+          data-prop="refDistance" data-sound="${key}"
+          oninput="updatePreviewSound(this)">
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Rolloff Factor</span>
+          <span class="preview-control-value" id="rolloffFactor-val-sound-${key}">${(sound.rolloffFactor || 1).toFixed(1)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.1" max="10" step="0.1"
+          value="${sound.rolloffFactor || 1}"
+          data-prop="rolloffFactor" data-sound="${key}"
+          oninput="updatePreviewSound(this)">
+      </div>
+
       <div class="preview-control-group">
         <div class="preview-control-label"><span>Visibility</span></div>
         <div class="preview-visibility-row">
@@ -3294,7 +4025,7 @@ function createSoundControlCard(key, sound) {
       </div>
     </div>
   `;
-  
+
   return card;
 }
 
@@ -3302,42 +4033,116 @@ function updatePreviewSound(input) {
   const prop = input.dataset.prop;
   const soundKey = input.dataset.sound;
   const isCheckbox = input.type === 'checkbox';
-  const value = isCheckbox ? input.checked : parseFloat(input.value);
-  
-  // Update value display (skip for checkboxes)
-  if (!isCheckbox && prop === 'volume') {
-    const valDisplay = document.getElementById(`volume-val-sound-${soundKey}`);
-    if (valDisplay) valDisplay.textContent = (value * 100).toFixed(0) + '%';
+  const isText = input.type === 'text';
+  const value = isCheckbox ? input.checked : (isText ? input.value : parseFloat(input.value));
+
+  // Update value displays
+  if (!isCheckbox && !isText) {
+    if (prop === 'volume') {
+      const valDisplay = document.getElementById(`volume-val-sound-${soundKey}`);
+      if (valDisplay) valDisplay.textContent = (value * 100).toFixed(0) + '%';
+    } else if (prop === 'coneAngle') {
+      const valDisplay = document.getElementById(`coneAngle-val-sound-${soundKey}`);
+      if (valDisplay) valDisplay.textContent = value + '°';
+    } else if (prop === 'maxDistance') {
+      const valDisplay = document.getElementById(`maxDistance-val-sound-${soundKey}`);
+      if (valDisplay) valDisplay.textContent = value.toFixed(1);
+    } else if (prop === 'refDistance') {
+      const valDisplay = document.getElementById(`refDistance-val-sound-${soundKey}`);
+      if (valDisplay) valDisplay.textContent = value.toFixed(1);
+    } else if (prop === 'rolloffFactor') {
+      const valDisplay = document.getElementById(`rolloffFactor-val-sound-${soundKey}`);
+      if (valDisplay) valDisplay.textContent = value.toFixed(1);
+    }
   }
-  
-  // Update audio volume
+
+  // Update audio element
   const audioInfo = preview.audios.find(a => a.key === soundKey);
-  if (prop === 'volume' && audioInfo?.audio) {
-    audioInfo.audio.volume = value;
+  if (audioInfo?.audio) {
+    if (prop === 'volume') audioInfo.audio.volume = value;
+    else if (prop === 'loop') audioInfo.audio.loop = value;
+    else if (prop === 'path') { audioInfo.audio.src = '../' + value; }
   }
-  
+
+  // Update 3D sound indicator mesh
+  const indicator = preview.meshes.find(m => m.userData.soundKey === soundKey);
+  if (indicator) {
+    if (prop.startsWith('position.')) {
+      const axis = prop.split('.')[1];
+      indicator.position[axis] = value;
+    } else if (prop.startsWith('rotation.')) {
+      const axis = prop.split('.')[1];
+      indicator.rotation[axis] = THREE.MathUtils.degToRad(value);
+    } else if (prop === 'coneAngle' || prop === 'maxDistance') {
+      // Rebuild cone with new parameters
+      const char = getSelectedCharacter();
+      const soundData = char?.sounds?.[soundKey];
+      const angle = prop === 'coneAngle' ? value : (soundData?.coneAngle || 60);
+      const range = prop === 'maxDistance' ? value : (soundData?.maxDistance || 5);
+      const oldCone = indicator.userData.cone;
+      if (oldCone) {
+        oldCone.geometry.dispose();
+        oldCone.material.dispose();
+        indicator.remove(oldCone);
+      }
+      const newCone = buildSoundCone(angle, range);
+      newCone.userData.isSoundCone = true;
+      indicator.add(newCone);
+      indicator.userData.cone = newCone;
+    }
+  }
+
   // Auto-save to data if enabled
   if (document.getElementById('preview-autosave')?.checked) {
     const char = getSelectedCharacter();
     if (char?.sounds?.[soundKey]) {
       if (prop === 'volume') {
         char.sounds[soundKey].volume = value;
+      } else if (prop.startsWith('position.')) {
+        if (!char.sounds[soundKey].position) {
+          char.sounds[soundKey].position = { x: 0, y: 1, z: 0 };
+        }
+        const axis = prop.split('.')[1];
+        char.sounds[soundKey].position[axis] = value;
+      } else if (prop.startsWith('rotation.')) {
+        if (!char.sounds[soundKey].rotation) {
+          char.sounds[soundKey].rotation = { x: 0, y: 0, z: 0 };
+        }
+        const axis = prop.split('.')[1];
+        char.sounds[soundKey].rotation[axis] = value;
+      } else if (prop === 'coneAngle') {
+        char.sounds[soundKey].coneAngle = value;
+      } else if (prop === 'maxDistance') {
+        char.sounds[soundKey].maxDistance = value;
+      } else if (prop === 'refDistance') {
+        char.sounds[soundKey].refDistance = value;
+      } else if (prop === 'rolloffFactor') {
+        char.sounds[soundKey].rolloffFactor = value;
+      } else if (prop === 'loop') {
+        char.sounds[soundKey].loop = value;
+      } else if (prop === 'path') {
+        char.sounds[soundKey].path = value;
       } else if (prop.startsWith('visibleIn.')) {
-        // Handle visibility toggle for scan/immersive mode
-        const mode = prop.split('.')[1]; // 'scan' or 'immersive'
+        const mode = prop.split('.')[1];
         let currentVisibleIn = char.sounds[soundKey].visibleIn;
         if (!currentVisibleIn) {
           currentVisibleIn = ['scan', 'immersive'];
           char.sounds[soundKey].visibleIn = currentVisibleIn;
         }
-        
+
         if (value && !currentVisibleIn.includes(mode)) {
           currentVisibleIn.push(mode);
         } else if (!value) {
           const idx = currentVisibleIn.indexOf(mode);
           if (idx > -1) currentVisibleIn.splice(idx, 1);
         }
-        
+
+        // Update indicator visibility
+        if (indicator) {
+          indicator.visible = currentVisibleIn.includes(preview.mode);
+          indicator.userData.visibleIn = [...currentVisibleIn];
+        }
+
         // Update card visual indicator
         const currentMode = preview.mode || 'scan';
         const newVisible = currentVisibleIn.includes(currentMode);
@@ -3391,54 +4196,265 @@ function stopPreviewSound(key) {
   if (btn) btn.textContent = '▶️ Play';
 }
 
+/**
+ * Build a 3D sound indicator: a speaker icon (canvas sprite) + wireframe cone showing direction.
+ * Returns a THREE.Group with .userData.cone for live updates.
+ */
+function buildSoundIndicator(sound, key) {
+  const group = new THREE.Group();
+  group.userData.soundKey = key;
+  group.userData.isSoundIndicator = true;
+
+  // --- Speaker icon as a canvas sprite ---
+  const canvas = document.createElement('canvas');
+  canvas.width = 128;
+  canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+  // Circle background
+  ctx.fillStyle = '#6366f1';
+  ctx.beginPath();
+  ctx.arc(64, 64, 56, 0, Math.PI * 2);
+  ctx.fill();
+  // Speaker body
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(36, 46, 18, 36);
+  // Speaker cone
+  ctx.beginPath();
+  ctx.moveTo(54, 46);
+  ctx.lineTo(76, 28);
+  ctx.lineTo(76, 100);
+  ctx.lineTo(54, 82);
+  ctx.closePath();
+  ctx.fill();
+  // Sound waves
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  for (let i = 1; i <= 3; i++) {
+    ctx.beginPath();
+    ctx.arc(76, 64, 8 + i * 8, -Math.PI * 0.35, Math.PI * 0.35);
+    ctx.stroke();
+  }
+
+  const spriteTex = new THREE.CanvasTexture(canvas);
+  const spriteMat = new THREE.SpriteMaterial({ map: spriteTex, depthTest: false });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.scale.set(0.4, 0.4, 0.4);
+  group.add(sprite);
+
+  // --- Wireframe cone showing sound direction ---
+  const coneAngle = sound.coneAngle || 60;
+  const coneRange = sound.maxDistance || 5;
+  const cone = buildSoundCone(coneAngle, coneRange);
+  cone.userData.isSoundCone = true;
+  group.add(cone);
+  group.userData.cone = cone;
+
+  // Always render on top of visual assets
+  group.renderOrder = 9999;
+  sprite.renderOrder = 9999;
+  cone.renderOrder = 9998;
+
+  // Position & rotation
+  const pos = sound.position || { x: 0, y: 1, z: 0 };
+  group.position.set(pos.x, pos.y, pos.z);
+  const rot = sound.rotation || { x: 0, y: 0, z: 0 };
+  group.rotation.set(
+    THREE.MathUtils.degToRad(rot.x),
+    THREE.MathUtils.degToRad(rot.y),
+    THREE.MathUtils.degToRad(rot.z)
+  );
+
+  return group;
+}
+
+/**
+ * Build a wireframe cone mesh representing sound spread.
+ * Opens along -Z (forward direction).
+ */
+function buildSoundCone(angleDeg, range) {
+  const halfAngle = THREE.MathUtils.degToRad(angleDeg / 2);
+  const radius = Math.tan(halfAngle) * range;
+  const segments = 24;
+  const geo = new THREE.ConeGeometry(radius, range, segments, 1, true);
+  // ConeGeometry points along +Y by default; rotate so it points along -Z
+  geo.rotateX(Math.PI / 2);
+  // Shift so apex is at origin (the sound source)
+  geo.translate(0, 0, -range / 2);
+  const mat = new THREE.MeshBasicMaterial({
+    color: 0x6366f1,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.35,
+    depthTest: false
+  });
+  return new THREE.Mesh(geo, mat);
+}
+
+/**
+ * Migrate old wrapShape/wrapRadius values to the new curvature model.
+ * Returns curvature in radians (0 = flat).
+ */
+function migrateCurvature(obj) {
+  if (obj.curvature != null) return obj.curvature;
+  // Migrate from old shape-based system
+  const shape = obj.wrapShape || 'plane';
+  if (shape === 'plane' || !shape) return 0;
+  if (shape === 'half-cylinder') return Math.PI;
+  if (shape === 'cylinder-270') return Math.PI * 1.5;
+  if (shape === 'cylinder') return Math.PI * 2;
+  if (shape === 'bend') return obj.wrapRadius || 2;
+  return 0;
+}
+
+/**
+ * Build a geometry for a 2D asset based on its wrap/bend settings.
+ * shape: 'plane' or 'bend'
+ * radius: bend amount — 0 = flat, higher = more curved (acts as arc angle in radians, e.g. 1 = ~57°, 3.14 = 180°, 6.28 = 360°)
+ * aspectRatio: width/height of the texture
+ */
+function buildWrapGeometry(shape, radius, aspectRatio, curveAxis) {
+  if (shape === 'plane' || !shape) {
+    return new THREE.PlaneGeometry(aspectRatio, 1);
+  }
+  return buildBentPlane(aspectRatio, 1, radius, curveAxis);
+}
+
+/**
+ * Creates a subdivided plane bent into a circular arc.
+ * width/height: plane dimensions before bending
+ * bendAngle: total arc angle in radians (0 = flat, PI = half-circle, 2*PI = full circle)
+ * curveAxis: 'x' (horizontal bend, default) or 'y' (vertical bend)
+ */
+function buildBentPlane(width, height, bendAngle, curveAxis) {
+  if (bendAngle <= 0.01) return new THREE.PlaneGeometry(width, height);
+
+  const isVertical = curveAxis === 'y';
+  const span = isVertical ? height : width;
+  const segments = Math.max(32, Math.round(bendAngle * 16));
+  const segX = isVertical ? 1 : segments;
+  const segY = isVertical ? segments : 1;
+  const geo = new THREE.PlaneGeometry(width, height, segX, segY);
+  const pos = geo.attributes.position;
+
+  const R = span / (2 * Math.sin(bendAngle / 2));
+
+  for (let i = 0; i < pos.count; i++) {
+    const coord = isVertical ? pos.getY(i) : pos.getX(i);
+    const angle = (coord / span) * bendAngle;
+    const newCoord = R * Math.sin(angle);
+    const newZ = R * (1 - Math.cos(angle));
+    if (isVertical) {
+      pos.setY(i, newCoord);
+    } else {
+      pos.setX(i, newCoord);
+    }
+    pos.setZ(i, newZ);
+  }
+  pos.needsUpdate = true;
+  geo.computeVertexNormals();
+  return geo;
+}
+
 function updatePreviewAsset(input) {
   const prop = input.dataset.prop;
   const assetType = input.dataset.type;
   const index = parseInt(input.dataset.index);
   const isCheckbox = input.type === 'checkbox';
-  const value = isCheckbox ? input.checked : parseFloat(input.value);
-  
-  // Update value display (skip for checkboxes)
-  if (!isCheckbox) {
+  const isRadio = input.type === 'radio';
+  const isSelect = input.tagName === 'SELECT';
+  const value = isCheckbox ? input.checked : (isSelect || isRadio ? input.value : parseFloat(input.value));
+
+  // Update value display (skip for checkboxes and selects)
+  if (!isCheckbox && !isSelect) {
     const propName = prop.split('.')[0];
     const valDisplay = document.getElementById(`${propName}-val-${assetType}-${index}`);
-    if (valDisplay) valDisplay.textContent = value.toFixed(2);
+    if (valDisplay) valDisplay.textContent = typeof value === 'number' ? value.toFixed(2) : value;
   }
-  
+
   // Find the mesh
   const char = getSelectedCharacter();
   const assetId = char?.assets?.[assetType]?.[index]?.id;
   const mesh = preview.meshes.find(m => m.userData.assetId === assetId);
-  
+
   if (!mesh) {
     console.warn('Mesh not found for asset:', assetType, index, assetId);
     return;
   }
-  
+
   // Update mesh
   if (prop === 'scale') {
-    // For 3D models, scale uniformly; for 2D planes, keep flat
+    mesh.userData.baseScale = value;
     if (assetType === '3d') {
       mesh.scale.set(value, value, value);
     } else {
-      mesh.scale.set(value, value, 1);
+      const sx = mesh.userData.scaleX || 1;
+      const sy = mesh.userData.scaleY || 1;
+      const sz = mesh.userData.scaleZ || 1;
+      mesh.scale.set(value * sx, value * sy, sz);
     }
+  } else if (prop === 'scaleX') {
+    mesh.userData.scaleX = value;
+    const base = mesh.userData.baseScale || 1;
+    mesh.scale.x = base * value;
+  } else if (prop === 'scaleY') {
+    mesh.userData.scaleY = value;
+    const base = mesh.userData.baseScale || 1;
+    mesh.scale.y = base * value;
+  } else if (prop === 'scaleZ') {
+    mesh.scale.z = value;
+    mesh.userData.scaleZ = value;
   } else if (prop.startsWith('position.')) {
     const axis = prop.split('.')[1];
     if (axis === 'x') mesh.position.x = value;
     else if (axis === 'y') mesh.position.y = value;
     else if (axis === 'z') mesh.position.z = value;
   } else if (prop.startsWith('rotation.')) {
-    // Rotation for 3D models (degrees to radians)
     const axis = prop.split('.')[1];
     const radians = THREE.MathUtils.degToRad(value);
     if (axis === 'x') mesh.rotation.x = radians;
     else if (axis === 'y') mesh.rotation.y = radians;
     else if (axis === 'z') mesh.rotation.z = radians;
+    if (!mesh.userData.baseRotation) mesh.userData.baseRotation = { x: 0, y: 0, z: 0 };
+    mesh.userData.baseRotation[axis] = value;
   } else if (prop === 'opacity') {
     if (mesh.material) mesh.material.opacity = value;
+  } else if (prop === 'order') {
+    mesh.renderOrder = Math.round(value * 10);
   } else if (prop === 'billboard') {
     mesh.userData.billboard = value;
+    if (!value) mesh.userData.needsRotationReset = true;
+  } else if (prop === 'curveAxis') {
+    mesh.userData.curveAxis = value;
+    // Rebuild geometry if currently curved
+    const curCurvature = migrateCurvature(char?.assets?.[assetType]?.[index] || {});
+    if (curCurvature > 0.01) {
+      const aspect = mesh.userData.aspectRatio || 1;
+      const oldGeo = mesh.geometry;
+      mesh.geometry = buildWrapGeometry('bend', curCurvature, aspect, value);
+      oldGeo.dispose();
+    }
+  } else if (prop === 'curvature') {
+    // Rebuild geometry with new curvature
+    const aspect = mesh.userData.aspectRatio || 1;
+    const cAxis = mesh.userData.curveAxis || 'x';
+    const shape = value > 0.01 ? 'bend' : 'plane';
+    const oldGeo = mesh.geometry;
+    const newGeo = buildWrapGeometry(shape, value, aspect, cAxis);
+    mesh.geometry = newGeo;
+    oldGeo.dispose();
+    mesh.userData.wrapShape = value > 0.01 ? 'bend' : null;
+    // Auto-disable billboard when curved
+    if (value > 0.01) {
+      mesh.userData.billboard = false;
+      const card = document.querySelector(`.preview-asset-card[data-asset-id="${assetId}"]`);
+      if (card) {
+        const bbCheckbox = card.querySelector('[data-prop="billboard"]');
+        if (bbCheckbox) bbCheckbox.checked = false;
+      }
+    }
+    const valDisplay = document.getElementById(`curvature-val-${assetType}-${index}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(1);
   } else if (prop.startsWith('visibleIn.')) {
     // Handle visibility toggle for scan/immersive mode
     const mode = prop.split('.')[1]; // 'scan' or 'immersive'
@@ -3485,6 +4501,12 @@ function updatePreviewAsset(input) {
     if (char?.assets?.[assetType]?.[index]) {
       if (prop === 'scale') {
         char.assets[assetType][index].scale = value;
+      } else if (prop === 'scaleX') {
+        char.assets[assetType][index].scaleX = value;
+      } else if (prop === 'scaleY') {
+        char.assets[assetType][index].scaleY = value;
+      } else if (prop === 'scaleZ') {
+        char.assets[assetType][index].scaleZ = value;
       } else if (prop.startsWith('position.')) {
         if (!char.assets[assetType][index].position) {
           char.assets[assetType][index].position = { x: 0, y: 0, z: 0 };
@@ -3499,6 +4521,8 @@ function updatePreviewAsset(input) {
         char.assets[assetType][index].rotation[axis] = value;
       } else if (prop === 'opacity') {
         char.assets[assetType][index].opacity = value;
+      } else if (prop === 'order') {
+        char.assets[assetType][index].order = value;
       } else if (prop === 'billboard') {
         char.assets[assetType][index].billboard = value;
       } else if (prop.startsWith('visibleIn.')) {
@@ -3506,6 +4530,13 @@ function updatePreviewAsset(input) {
         if (mesh?.userData.visibleIn) {
           char.assets[assetType][index].visibleIn = [...mesh.userData.visibleIn];
         }
+      } else if (prop === 'curveAxis') {
+        char.assets[assetType][index].curveAxis = value;
+      } else if (prop === 'curvature') {
+        char.assets[assetType][index].curvature = value;
+        // Clean up old properties if present
+        delete char.assets[assetType][index].wrapShape;
+        delete char.assets[assetType][index].wrapRadius;
       }
       markUnsaved();
     }
@@ -3516,10 +4547,12 @@ function updatePreviewLayer(input) {
   const prop = input.dataset.prop;
   const layerKey = input.dataset.layer;
   const isCheckbox = input.type === 'checkbox';
-  const value = isCheckbox ? input.checked : parseFloat(input.value);
-  
-  // Update value display (skip for checkboxes)
-  if (!isCheckbox) {
+  const isRadio = input.type === 'radio';
+  const isSelect = input.tagName === 'SELECT';
+  const value = isCheckbox ? input.checked : (isSelect || isRadio ? input.value : parseFloat(input.value));
+
+  // Update value display (skip for checkboxes and selects)
+  if (!isCheckbox && !isSelect) {
     const propName = prop.split('.')[0];
     const valDisplay = document.getElementById(`${propName}-val-${layerKey}`) || 
                        document.getElementById(`${propName}-val-layer-${layerKey}`);
@@ -3542,31 +4575,72 @@ function updatePreviewLayer(input) {
   
   // Update mesh
   if (prop === 'scale') {
-    // Preserve scaleX/scaleY when updating scale
+    // Preserve scaleX/scaleY/scaleZ when updating scale
     const scaleX = mesh.userData.scaleX || 1;
     const scaleY = mesh.userData.scaleY || 1;
-    mesh.scale.set(value * scaleX, value * scaleY, 1);
+    mesh.scale.set(value * scaleX, value * scaleY, mesh.userData.scaleZ || 1);
     mesh.userData.baseScale = value;
   } else if (prop === 'scaleX') {
-    // Update scaleX while preserving base scale and scaleY
     const baseScale = mesh.userData.baseScale || 1;
     const scaleY = mesh.userData.scaleY || 1;
-    mesh.scale.set(baseScale * value, baseScale * scaleY, 1);
+    mesh.scale.set(baseScale * value, baseScale * scaleY, mesh.userData.scaleZ || 1);
     mesh.userData.scaleX = value;
   } else if (prop === 'scaleY') {
     // Update scaleY while preserving base scale and scaleX
     const baseScale = mesh.userData.baseScale || 1;
     const scaleX = mesh.userData.scaleX || 1;
-    mesh.scale.set(baseScale * scaleX, baseScale * value, 1);
+    mesh.scale.set(baseScale * scaleX, baseScale * value, mesh.userData.scaleZ || 1);
     mesh.userData.scaleY = value;
+  } else if (prop === 'scaleZ') {
+    mesh.scale.z = value;
+    mesh.userData.scaleZ = value;
   } else if (prop.startsWith('position.')) {
     const axis = prop.split('.')[1];
     if (axis === 'x') mesh.position.x = value;
     else if (axis === 'y') mesh.position.y = value;
     else if (axis === 'z') mesh.position.z = value;
+  } else if (prop.startsWith('rotation.')) {
+    const axis = prop.split('.')[1];
+    const radians = THREE.MathUtils.degToRad(value);
+    if (axis === 'x') mesh.rotation.x = radians;
+    else if (axis === 'y') mesh.rotation.y = radians;
+    else if (axis === 'z') mesh.rotation.z = radians;
+    if (!mesh.userData.baseRotation) mesh.userData.baseRotation = { x: 0, y: 0, z: 0 };
+    mesh.userData.baseRotation[axis] = value;
+  } else if (prop === 'curveAxis') {
+    mesh.userData.curveAxis = value;
+    const curCurvature = migrateCurvature(char?.layers?.[layerKey] || {});
+    if (curCurvature > 0.01) {
+      const aspect = mesh.userData.aspectRatio || 1;
+      const oldGeo = mesh.geometry;
+      mesh.geometry = buildWrapGeometry('bend', curCurvature, aspect, value);
+      oldGeo.dispose();
+    }
+  } else if (prop === 'curvature') {
+    const aspect = mesh.userData.aspectRatio || 1;
+    const cAxis = mesh.userData.curveAxis || 'x';
+    const shape = value > 0.01 ? 'bend' : 'plane';
+    const oldGeo = mesh.geometry;
+    const newGeo = buildWrapGeometry(shape, value, aspect, cAxis);
+    mesh.geometry = newGeo;
+    oldGeo.dispose();
+    mesh.userData.wrapShape = value > 0.01 ? 'bend' : null;
+    if (value > 0.01) {
+      mesh.userData.billboard = false;
+      const card = document.querySelector(`.preview-asset-card[data-layer-key="${layerKey}"]`);
+      if (card) {
+        const bbCheckbox = card.querySelector('[data-prop="billboard"]');
+        if (bbCheckbox) bbCheckbox.checked = false;
+      }
+    }
+    const valDisplay = document.getElementById(`curvature-val-layer-${layerKey}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(1);
+  } else if (prop === 'order') {
+    mesh.renderOrder = Math.round(value * 10);
   } else if (prop === 'billboard') {
     // Store billboard setting on mesh userData for preview render loop
     mesh.userData.billboard = value;
+    if (!value) mesh.userData.needsRotationReset = true;
   } else if (prop.startsWith('visibleIn.')) {
     // Handle visibility toggle for scan/immersive mode
     const mode = prop.split('.')[1]; // 'scan' or 'immersive'
@@ -3575,22 +4649,15 @@ function updatePreviewLayer(input) {
       currentVisibleIn = ['scan', 'immersive'];
       mesh.userData.visibleIn = currentVisibleIn;
     }
-    
-    console.log('Visibility toggle:', layerKey, mode, value, 'current:', [...currentVisibleIn]);
-    
     if (value && !currentVisibleIn.includes(mode)) {
       currentVisibleIn.push(mode);
     } else if (!value) {
       const idx = currentVisibleIn.indexOf(mode);
       if (idx > -1) currentVisibleIn.splice(idx, 1);
     }
-    
-    console.log('After toggle:', [...currentVisibleIn]);
-    
     // Update mesh visibility based on current preview mode
     const currentMode = preview.mode || state.previewMode || 'immersive';
     const newVisible = currentVisibleIn.includes(currentMode);
-    console.log('Setting mesh.visible:', newVisible, 'mode:', currentMode);
     mesh.visible = newVisible;
     
     // Update card visual indicator
@@ -3626,6 +4693,53 @@ function updatePreviewLayer(input) {
       else if (prop === 'smoothness') mesh.material.uniforms.smoothness.value = value;
       else if (prop === 'spill') mesh.material.uniforms.spill.value = value;
     }
+  } else if (prop === 'loop') {
+    const videoInfo = preview.videos?.find(v => v.layerKey === layerKey);
+    if (videoInfo?.video) videoInfo.video.loop = value;
+  } else if (prop === 'muted') {
+    const videoInfo = preview.videos?.find(v => v.layerKey === layerKey);
+    if (videoInfo?.video) videoInfo.video.muted = value;
+  } else if (prop === 'chromaKey' || prop === 'chromaKeyText') {
+    // Sync color picker and text input
+    const card = input.closest('.preview-asset-card');
+    if (prop === 'chromaKey') {
+      const textInput = card.querySelector('[data-prop="chromaKeyText"]');
+      if (textInput) textInput.value = input.value;
+    } else {
+      const colorInput = card.querySelector('[data-prop="chromaKey"]');
+      if (colorInput && /^#[0-9a-fA-F]{6}$/.test(input.value)) colorInput.value = input.value;
+    }
+    // Update shader uniform (uniform is named keyColor, not chromaKey)
+    if (mesh.material?.uniforms?.keyColor) {
+      const hex = input.value;
+      if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+        const r = parseInt(hex.slice(1, 3), 16) / 255;
+        const g = parseInt(hex.slice(3, 5), 16) / 255;
+        const b = parseInt(hex.slice(5, 7), 16) / 255;
+        mesh.material.uniforms.keyColor.value.set(r, g, b);
+      }
+    }
+  } else if (prop === 'chromaKeyEnabled') {
+    // Toggle chroma keying — requires scene reload to swap material
+    const char = getSelectedCharacter();
+    if (char?.layers?.[layerKey]) {
+      if (value) {
+        const card = input.closest('.preview-asset-card');
+        const colorInput = card.querySelector('[data-prop="chromaKey"]');
+        char.layers[layerKey].chromaKey = colorInput?.value || '#00FF00';
+        char.layers[layerKey].tolerance = char.layers[layerKey].tolerance ?? 0.4;
+        char.layers[layerKey].smoothness = char.layers[layerKey].smoothness ?? 0.08;
+        char.layers[layerKey].spill = char.layers[layerKey].spill ?? 0.5;
+      } else {
+        delete char.layers[layerKey].chromaKey;
+        delete char.layers[layerKey].tolerance;
+        delete char.layers[layerKey].smoothness;
+        delete char.layers[layerKey].spill;
+      }
+      markUnsaved();
+      loadPreviewAssets(char);
+      return;
+    }
   }
   
   // Auto-save to data if enabled
@@ -3638,22 +4752,48 @@ function updatePreviewLayer(input) {
         char.layers[layerKey].scaleX = value;
       } else if (prop === 'scaleY') {
         char.layers[layerKey].scaleY = value;
+      } else if (prop === 'scaleZ') {
+        char.layers[layerKey].scaleZ = value;
       } else if (prop.startsWith('position.')) {
         if (!char.layers[layerKey].position) {
           char.layers[layerKey].position = { x: 0, y: 0, z: 0 };
         }
         const axis = prop.split('.')[1];
         char.layers[layerKey].position[axis] = value;
+      } else if (prop.startsWith('rotation.')) {
+        if (!char.layers[layerKey].rotation) {
+          char.layers[layerKey].rotation = { x: 0, y: 0, z: 0 };
+        }
+        const axis = prop.split('.')[1];
+        char.layers[layerKey].rotation[axis] = value;
+      } else if (prop === 'curveAxis') {
+        char.layers[layerKey].curveAxis = value;
+      } else if (prop === 'curvature') {
+        char.layers[layerKey].curvature = value;
+        // Clean up old properties if present
+        delete char.layers[layerKey].wrapShape;
+        delete char.layers[layerKey].wrapRadius;
+      } else if (prop === 'order') {
+        char.layers[layerKey].order = value;
       } else if (prop === 'billboard') {
         char.layers[layerKey].billboard = value;
+      } else if (prop === 'volume') {
+        char.layers[layerKey].volume = value;
+      } else if (prop === 'loop') {
+        char.layers[layerKey].loop = value;
+      } else if (prop === 'muted') {
+        char.layers[layerKey].muted = value;
+      } else if (prop === 'chromaKey' || prop === 'chromaKeyText') {
+        const hex = input.value;
+        if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+          char.layers[layerKey].chromaKey = hex;
+        }
       } else if (prop === 'tolerance') {
         char.layers[layerKey].tolerance = value;
       } else if (prop === 'smoothness') {
         char.layers[layerKey].smoothness = value;
       } else if (prop === 'spill') {
         char.layers[layerKey].spill = value;
-      } else if (prop === 'volume') {
-        char.layers[layerKey].volume = value;
       } else if (prop.startsWith('visibleIn.')) {
         // Save visibleIn array from mesh userData
         const mesh = preview.meshes.find(m => m.userData.layerKey === layerKey);

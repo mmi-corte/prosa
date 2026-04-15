@@ -18,12 +18,12 @@
       "descriptionCorsican": "Guardiana di l'acque sacre di Corsica, A Fata vighjula nantu à e surgente è i fiumi di l'isula.",
       "region": "CORSE",
       "themeColor": "#1e88e5",
-      "portrait": "assets/img/characters/fata_char.png",
+      "portrait": "assets/img/characters/fata/fata_char.png",
       "assets": {
         "2d": [
           {
             "id": "background",
-            "path": "assets/img/characters/backgroundfata.png",
+            "path": "assets/img/characters/fata/fata_bg.jpg",
             "scale": 2.5,
             "position": {
               "x": 0,
@@ -39,11 +39,12 @@
             "visibleIn": [
               "scan"
             ],
-            "billboard": false
+            "billboard": false,
+            "order": 2
           },
           {
             "id": "middleground",
-            "path": "assets/img/characters/middlegroundfata.png",
+            "path": "assets/img/characters/fata/fata_layer_mid.png",
             "scale": 1.8,
             "position": {
               "x": 0,
@@ -59,11 +60,12 @@
             "visibleIn": [
               "scan"
             ],
-            "billboard": false
+            "billboard": false,
+            "order": 3
           },
           {
             "id": "character",
-            "path": "assets/img/characters/fata_char.png",
+            "path": "assets/img/characters/fata/fata_char.png",
             "scale": 1,
             "position": {
               "x": -0.3,
@@ -79,11 +81,12 @@
             "visibleIn": [
               "scan"
             ],
-            "billboard": false
+            "billboard": false,
+            "order": 4
           },
           {
             "id": "foreground",
-            "path": "assets/img/characters/foregroundfata.png",
+            "path": "assets/img/characters/fata/fata_layer_fg.png",
             "scale": 1.59,
             "position": {
               "x": 0,
@@ -99,7 +102,32 @@
             "visibleIn": [
               "scan"
             ],
-            "billboard": false
+            "billboard": false,
+            "order": 5
+          },
+          {
+            "id": "ground",
+            "path": "assets\\img\\characters\\fata\\rockwater.png",
+            "scale": 3.83,
+            "opacity": 1,
+            "position": {
+              "x": -0.73,
+              "y": -1,
+              "z": 0
+            },
+            "rotation": {
+              "x": 90,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "order": 0,
+            "scaleY": 1.82,
+            "scaleX": 1.47
           }
         ],
         "3d": [
@@ -117,27 +145,35 @@
               "y": 0,
               "z": 0
             },
-            "visibleIn": [
-              "immersive"
-            ],
-            "billboard": false
+            "visibleIn": [],
+            "billboard": false,
+            "order": 6
           }
         ]
       },
       "layers": {
         "background": {
-          "path": "assets/img/characters/backgroundfata.png",
-          "scale": 5,
+          "path": "assets/img/characters/fata/fata_layer_bg.png",
+          "scale": 9.4,
           "position": {
             "x": 0,
-            "y": -0.08,
-            "z": -3.15
+            "y": -0.05,
+            "z": -3.87
           },
-          "order": 0,
+          "order": 1,
           "visibleIn": [
             "immersive"
           ],
-          "billboard": false
+          "billboard": false,
+          "scaleY": 1.43,
+          "scaleX": 0.92,
+          "rotation": {
+            "x": 0,
+            "y": -7,
+            "z": 2
+          },
+          "curvature": 2.3,
+          "scaleZ": 4.57
         },
         "waterfall": {
           "type": "video",
@@ -146,15 +182,15 @@
           "tolerance": 0.4,
           "smoothness": 0.08,
           "spill": 0.5,
-          "scale": 1.6,
+          "scale": 4.6,
           "position": {
-            "x": -0.24,
-            "y": 0.39,
-            "z": -3.08
+            "x": -0.54,
+            "y": 1.21,
+            "z": -3.81
           },
           "loop": true,
           "muted": true,
-          "order": 1.5,
+          "order": 7,
           "visibleIn": [
             "immersive"
           ],
@@ -162,42 +198,59 @@
           "billboard": false
         },
         "middleground": {
-          "path": "assets/img/characters/middlegroundfata.png",
-          "scale": 3.5,
+          "path": "assets/img/characters/fata/fata_layer_mid.png",
+          "scale": 6.4,
           "position": {
-            "x": 0,
-            "y": 0.08,
-            "z": -2.63
+            "x": -0.24,
+            "y": 1,
+            "z": -1.82
           },
-          "order": 1,
+          "order": 8,
           "visibleIn": [
             "immersive"
           ],
-          "billboard": false
+          "billboard": false,
+          "scaleX": 1.19,
+          "curvature": 2.3,
+          "scaleZ": 1.87,
+          "scaleY": 1.5
         },
         "character": {
-          "path": "assets/img/characters/fata_char.png",
-          "scale": 1.1,
+          "path": "assets/img/characters/fata/fata_char.png",
+          "scale": 2.4,
           "position": {
-            "x": -0.73,
-            "y": 0.34,
-            "z": -1.73
+            "x": -1.49,
+            "y": 0.48,
+            "z": -0.79
           },
-          "order": 2,
-          "visibleIn": []
+          "order": 9,
+          "visibleIn": [
+            "immersive"
+          ],
+          "billboard": false,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
         },
         "foreground": {
-          "path": "assets/img/characters/foregroundfata.png",
-          "scale": 1.9,
-          "scaleX": 1.38,
+          "path": "assets/img/characters/fata/fata_layer_fg.png",
+          "scale": 3,
+          "scaleX": 2.34,
           "position": {
-            "x": 0,
-            "y": 0.32,
-            "z": -1.63
+            "x": -0.28,
+            "y": 0.44,
+            "z": -0.11
           },
-          "order": 3,
-          "visibleIn": [],
-          "billboard": false
+          "order": 10,
+          "visibleIn": [
+            "immersive"
+          ],
+          "billboard": false,
+          "scaleZ": 1.5,
+          "curvature": 2.8,
+          "scaleY": 1.61
         }
       },
       "sounds": {
@@ -205,21 +258,23 @@
           "path": "assets/sound/water_running.mp3",
           "volume": 0.8,
           "loop": true,
-          "refDistance": 2,
+          "refDistance": 2.5,
           "rolloffFactor": 1.5,
-          "maxDistance": 15,
+          "maxDistance": 5.5,
           "visibleIn": [
             "immersive"
-          ]
-        },
-        "intro": {
-          "path": "assets/sound/water_running.mp3",
-          "volume": 0,
-          "loop": true,
-          "visibleIn": [
-            "scan",
-            "immersive"
-          ]
+          ],
+          "coneAngle": 45,
+          "rotation": {
+            "x": -4,
+            "y": 169,
+            "z": 0
+          },
+          "position": {
+            "x": -0.7,
+            "y": 0.4,
+            "z": -3.8
+          }
         }
       },
       "interaction": {
@@ -235,7 +290,16 @@
           "fr": "Les eaux que je protège coulent depuis l'aube des temps. Elles ont vu naître et mourir des empires, ont abreuvé des générations de Corses.",
           "co": "L'acque chì pruteghju scorenu dapoi l'alba di i tempi. Anu vistu nasce è more imperi, anu abbeveratu generazioni di Corsi."
         }
-      }
+      },
+      "sceneTransform": {
+        "scale": 1.25,
+        "position": {
+          "x": 0,
+          "y": 0.9,
+          "z": 1.4
+        }
+      },
+      "arEnabled": false
     },
     {
       "id": "strega",
@@ -244,17 +308,17 @@
       "descriptionCorsican": "Prodigia di l'isula di Prosa, a Strega hè incaricata di mantene a sterilità di e terre di Corsica.",
       "region": "CORSE",
       "themeColor": "#10032e",
-      "portrait": "assets/img/characters/strega_char.png",
+      "portrait": "assets/img/characters/strega/strega_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/strega_char.png",
+            "path": "assets/img/characters/strega/strega_char.png",
             "scale": 1.76,
             "position": {
               "x": 0,
-              "y": 0.17,
-              "z": 0
+              "y": 0.37,
+              "z": 0.16
             },
             "rotation": {
               "x": 0,
@@ -265,15 +329,16 @@
             "visibleIn": [
               "immersive",
               "scan"
-            ]
+            ],
+            "billboard": false
           },
           {
             "id": "background",
-            "path": "assets/img/characters/strega_bg.png",
-            "scale": 1.88,
+            "path": "assets/img/characters/strega/strega_bg.jpg",
+            "scale": 1.75,
             "position": {
-              "x": 0,
-              "y": 0,
+              "x": 0.33,
+              "y": 0.33,
               "z": -0.1
             },
             "rotation": {
@@ -281,16 +346,23 @@
               "y": 0,
               "z": 0
             },
-            "opacity": 0.8
+            "opacity": 0.8,
+            "billboard": false,
+            "scaleZ": 1.43,
+            "curvature": 3
           }
         ],
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/SON1.mp3",
+        "voice": {
+          "path": "assets/sound/strega_aha.mp3",
           "volume": 0.7,
-          "loop": false
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -311,7 +383,7 @@
       "descriptionCorsican": "A Signadora hè una guaritrice di 60 anni, chì a so faccia marcata da u sole sparisce spessu sottu à un velu neru usatu. Vestita d'un scialle beige, frequenta a vechja funtana di Corti per curà i malati cù e so preghiere è e so erbe. À a so cintura pende una fiala d'oliu d'aliva rarezza ch'ella adopra per diagnosticà u male.",
       "region": "CORSE",
       "themeColor": "#8B7355",
-      "portrait": "assets/img/characters/signadora_char.png",
+      "portrait": "assets/img/characters/signadora/signadora_char.png",
       "marker": {
         "file": "assets/markers/signadora.mind",
         "targetIndex": 0
@@ -320,7 +392,7 @@
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/signadora_char.png",
+            "path": "assets/img/characters/signadora/signadora_char.png",
             "scale": 0.6,
             "position": {
               "x": -0.4,
@@ -336,7 +408,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/signadora_bg.png",
+            "path": "assets/img/characters/signadora/signadora_bg.png",
             "scale": 1.11,
             "position": {
               "x": -0.33,
@@ -355,10 +427,30 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
+        "ambient": {
           "path": "assets/sound/fountain.mp3",
-          "volume": 0.7,
-          "loop": true
+          "volume": 0.5,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
+        },
+        "steps": {
+          "path": "assets/sound/signadora_grass_steps.wav",
+          "volume": 0.6,
+          "loop": true,
+          "visibleIn": [
+            "immersive"
+          ]
+        },
+        "clamp": {
+          "path": "assets/sound/signadora_clamp.wav",
+          "volume": 0.5,
+          "loop": false,
+          "visibleIn": [
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -379,12 +471,12 @@
       "descriptionCorsican": "U Fulettu puderia esse un zitellu d'una decina d'anni. Porta un fasciu biancu nant'à u fronte. A so particularità a più rimarchevule hè ch'ellu li manca u bracciu mancu, rimpiazzatu da una prutesi di ferru. Vivu cum'è u ventu, astutu è burlone, li piace à fà scherzi – à spessu gattivi.",
       "region": "CORSE",
       "themeColor": "#7CB342",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/fulettu/fulettu_card.jpg",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/fulettu/fulettu_card.jpg",
             "scale": 1,
             "position": {
               "x": 0,
@@ -400,7 +492,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/fulettu/fulettu_card.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -418,10 +510,22 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
+        "laughter": {
+          "path": "assets/sound/fulettu_laughter.mp3",
           "volume": 0.7,
-          "loop": false
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
+        },
+        "squeak": {
+          "path": "assets/sound/fulettu_squeak.wav",
+          "volume": 0.5,
+          "loop": false,
+          "visibleIn": [
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -442,12 +546,12 @@
       "descriptionCorsican": "A Squadra d'Arozza hè un'unità d'elita, chì opera in Corti, cunsacrata corpu è anima à A Strega. Portanu un maschera à gasu è un'armatura tattica greve piatta sottu à un longu mantellu scuru, chì a so fodera di culore verde àcidu crea un cuntrastu forte.",
       "region": "CORSE",
       "themeColor": "#2E7D32",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/squadra_darozza/squadra_darozza_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/squadra_darozza/squadra_darozza_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -463,7 +567,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/squadra_darozza/squadra_darozza_card.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -481,10 +585,14 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
+        "march": {
+          "path": "assets/sound/squadra_march.wav",
           "volume": 0.7,
-          "loop": false
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -505,12 +613,12 @@
       "descriptionCorsican": "U Magu hè un omu sapiente di Prosa, incaricatu di i mulini à ventu è di tuttu ciò chì tocca à a medicina, mischjendu sapè tecnicu è erbe.",
       "region": "CORSE",
       "themeColor": "#5D4037",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/magu/magu_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/magu/magu_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -526,7 +634,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/magu/magu_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -544,10 +652,14 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
-          "volume": 0.7,
-          "loop": false
+        "vials": {
+          "path": "assets/sound/magu_vials.wav",
+          "volume": 0.6,
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -568,12 +680,12 @@
       "descriptionCorsican": "À l'età di 45 anni, st'anzianu capu di u guvernu di l'isula di Prosa, chjamatu U Sarpu à Sette Capi, hè diventatu una figura tragica, incarnendu u Mazzeru à u core d'un mondu dopu à l'apocalisse.",
       "region": "CORSE",
       "themeColor": "#37474F",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/mazzeru/mazzeru_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/mazzeru/mazzeru_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -589,7 +701,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/mazzeru/mazzeru_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -607,10 +719,22 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
-          "volume": 0.7,
-          "loop": false
+        "gun_loading": {
+          "path": "assets/sound/mazzeru_gun_loading.mp3",
+          "volume": 0.6,
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
+        },
+        "rustling": {
+          "path": "assets/sound/mazzeru_rustling.mp3",
+          "volume": 0.5,
+          "loop": true,
+          "visibleIn": [
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -631,12 +755,12 @@
       "descriptionCorsican": "À l'età di 40 anni, U Strigone hè un omu calculatore, d'una eleganza fredda, chì cumanda e forze militare di Prosa da a cima di a so torre di vetru. Hè u Sarpu à Sette Capi.",
       "region": "CORSE",
       "themeColor": "#1A237E",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/strigone/strigone_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/strigone/strigone_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -652,7 +776,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/strigone/strigone_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -670,10 +794,14 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
-          "volume": 0.7,
-          "loop": false
+        "leather": {
+          "path": "assets/sound/strigone_leather.wav",
+          "volume": 0.6,
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -691,15 +819,15 @@
       "id": "spallistu",
       "name": "U Spallistu",
       "description": "U Spallistu est un berger d'une cinquantaine d'années, dont le regard usé semble porter le poids d'un siècle. Figure solitaire, il ne se sépare jamais de son bâton en bois de châtaignier au sommet duquel pendent des omoplates de moutons.",
-      "descriptionCorsican": "U Spallistu hè un pastore d'una cinquantina d'anni, cù un sguardu stancu chì pare purtà u pesu d'un seculu. Porta un mantellu fattu di pelli d'animali.",
+      "descriptionCorsican": "U Spallistu hè un pastore d'una cinquantina d'anni, c�� un sguardu stancu chì pare purtà u pesu d'un seculu. Porta un mantellu fattu di pelli d'animali.",
       "region": "CORSE",
       "themeColor": "#795548",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/spallistu/spallistu_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/spallistu/spallistu_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -715,7 +843,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/spallistu/spallistu_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -733,10 +861,14 @@
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
+        "bone_crack": {
+          "path": "assets/sound/spallistu_bone_crack.mp3",
           "volume": 0.7,
-          "loop": false
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ]
         }
       },
       "subtitles": {
@@ -757,40 +889,179 @@
       "descriptionCorsican": "L'Orcu hè una forza di a natura, massicciu è imponente, un colossu zittu chì feghja longamente à quelli chì li parlanu, prima d'apre a bocca.",
       "region": "CORSE",
       "themeColor": "#4E342E",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/orcu/orcu_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
-            "scale": 1,
+            "path": "assets/img/characters/orcu/orcu_char.png",
+            "scale": 2.13,
             "position": {
-              "x": 0,
-              "y": 0,
-              "z": 0
+              "x": -0.77,
+              "y": -0.36,
+              "z": -0.02
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0
             },
-            "opacity": 1
+            "opacity": 1,
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "order": 6
+          },
+          {
+            "id": "orcu_tente",
+            "path": "assets\\img\\characters\\orcu\\orcu_layer_cabane.png",
+            "scale": 2.21,
+            "opacity": 1,
+            "position": {
+              "x": -0.38,
+              "y": -0.32,
+              "z": -0.15
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "curvature": 1.2,
+            "scaleZ": 0.85,
+            "order": 5,
+            "scaleX": 1.32,
+            "scaleY": 1.19
+          },
+          {
+            "id": "bateau",
+            "path": "assets\\img\\characters\\orcu\\orcu_bateau.png",
+            "scale": 2.49,
+            "opacity": 1,
+            "position": {
+              "x": 1.63,
+              "y": 0.1,
+              "z": -1.24
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "order": 4
+          },
+          {
+            "id": "orcu_mer",
+            "path": "assets\\img\\characters\\orcu\\orcu_mer.png",
+            "scale": 6.48,
+            "opacity": 1,
+            "position": {
+              "x": 0.4,
+              "y": -0.68,
+              "z": -1.5
+            },
+            "rotation": {
+              "x": -77,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "curvature": 1,
+            "scaleZ": 1.01,
+            "billboard": false,
+            "curveAxis": "y",
+            "order": 2
+          },
+          {
+            "id": "middleground_orcu",
+            "path": "assets\\img\\characters\\orcu\\orcu_middleground.png",
+            "scale": 5.78,
+            "opacity": 1,
+            "position": {
+              "x": -4.24,
+              "y": 1.44,
+              "z": -3.68
+            },
+            "rotation": {
+              "x": 0,
+              "y": 34,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "curvature": 1.8,
+            "scaleZ": 1.63,
+            "order": 3
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
-            "scale": 1.5,
+            "path": "assets\\img\\characters\\orcu\\orcu_layer_montagne.png",
+            "scale": 10,
+            "opacity": 1,
             "position": {
-              "x": 0,
-              "y": 0,
-              "z": -0.1
+              "x": -12.63,
+              "y": -2.32,
+              "z": -5
             },
             "rotation": {
               "x": 0,
+              "y": 4,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "curvature": 2,
+            "scaleZ": 3.33,
+            "order": 1,
+            "scaleX": 2.18,
+            "scaleY": 3.52
+          },
+          {
+            "id": "sand",
+            "path": "assets\\img\\characters\\orcu\\sand.jpg",
+            "scale": 9.29,
+            "opacity": 1,
+            "position": {
+              "x": -0.79,
+              "y": -1.08,
+              "z": 0
+            },
+            "rotation": {
+              "x": -83,
               "y": 0,
               "z": 0
             },
-            "opacity": 0.8
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "curvature": 0,
+            "scaleZ": 3.47,
+            "scaleX": 1.06,
+            "curveAxis": "y",
+            "order": 0
           }
         ],
         "3d": [
@@ -808,23 +1079,84 @@
               "y": 0,
               "z": 0
             },
-            "visibleIn": [
-              "immersive"
-            ],
+            "visibleIn": [],
             "billboard": false,
             "animation": {
               "clipName": "Armature|Sit_Cross_Legged_on_Floor|baselayer",
               "speed": 1,
               "loop": true
-            }
+            },
+            "order": 8
           }
         ]
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
+        "breathing": {
+          "path": "assets/sound/orcu_breathing.wav",
+          "volume": 0.8,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "coneAngle": 30,
+          "position": {
+            "x": -1.2,
+            "y": 0.2,
+            "z": -0.1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 201,
+            "z": 0
+          },
+          "maxDistance": 2
+        },
+        "sea": {
+          "path": "assets\\sound\\orcu_mer.wav",
+          "volume": 0.6,
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2.1,
+          "rolloffFactor": 1.5,
+          "maxDistance": 8.5,
+          "position": {
+            "x": 5,
+            "y": 0.1,
+            "z": -4.7
+          },
+          "rotation": {
+            "x": -2,
+            "y": 144,
+            "z": -1
+          },
+          "coneAngle": 20
+        },
+        "fire": {
+          "path": "assets\\sound\\campfire.wav",
           "volume": 0.7,
-          "loop": false
+          "loop": false,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 3,
+          "coneAngle": 60,
+          "rotation": {
+            "x": 165,
+            "y": -32,
+            "z": 0
+          },
+          "position": {
+            "x": -2.5,
+            "y": -0.7,
+            "z": 0
+          }
         }
       },
       "subtitles": {
@@ -836,7 +1168,46 @@
           "fr": "Je suis une force de la nature, né des vagues et des rochers. Peu parlent en ma présence... car mes silences pèsent plus lourd que les mots. Si tu es digne, suis-moi.",
           "co": "Sò una forza di a natura, natu di l'onde è di e rocce. Pochi parlanu in a mo presenza... perchè i mo silenzii pesanu più di e parolle. S'ellu si degnu, seguimi."
         }
-      }
+      },
+      "sceneTransform": {
+        "scale": 1.46,
+        "position": {
+          "x": 0.6,
+          "y": 1,
+          "z": -2.6
+        }
+      },
+      "layers": {
+        "flamme": {
+          "path": "assets\\video\\flame.mp4",
+          "scale": 1.1,
+          "order": 7,
+          "position": {
+            "x": -2.44,
+            "y": -0.24,
+            "z": 0.12
+          },
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "type": "video",
+          "loop": true,
+          "muted": true,
+          "chromaKey": "#007500",
+          "tolerance": 0.4,
+          "smoothness": 0.08,
+          "spill": 0.5,
+          "billboard": false,
+          "scaleX": 0.47,
+          "rotation": {
+            "x": 0,
+            "y": 15,
+            "z": 0
+          }
+        }
+      },
+      "arEnabled": true
     },
     {
       "id": "lou_garagai",
@@ -845,12 +1216,12 @@
       "descriptionProvencal": "Vièi òme sempre armat de soun coutel, counoais cado camin e cado groto, e sap esploita lou terren per sa survìo.",
       "region": "PROVENCE",
       "themeColor": "#6D4C41",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/lou_garagai/lou_garagai_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/lou_garagai/lou_garagai_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -866,7 +1237,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/lou_garagai/lou_garagai_bg.png",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -908,12 +1279,12 @@
       "descriptionProvencal": "Òme discret au mantèu usat que pòrto de tracei de brulòri e de graissa e dount lou regard perçant repèro tout ço que pòu se sauva, e là ounte tout se truco, eu remedou.",
       "region": "PROVENCE",
       "themeColor": "#FF5722",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/drac/drac_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/drac/drac_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -929,7 +1300,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/drac/drac_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -962,7 +1333,8 @@
           "fr": "Là où tout se brise, moi je répare. Mon manteau porte les traces de mille machines ressuscitées. Dans ce monde de ruines, l'ingéniosité est la seule monnaie.",
           "oc": "Là ounte tout se truco, ieu remedou. Moun manteu porto lei tracei de milo machino ressuscitado. Dins aqueu mounde de ruino, l'engèni es la soulet mounedò."
         }
-      }
+      },
+      "arEnabled": false
     },
     {
       "id": "cabro_dor",
@@ -971,12 +1343,12 @@
       "descriptionProvencal": "Pòrto d'abit en pèu de cabro, roubust e souple. Se desplaço em' uno agilitat instintivo e em discrecioun. Imagi de grimpairiso dei nauturo, soun fusi à luneto es sempre prest.",
       "region": "PROVENCE",
       "themeColor": "#FFD700",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/cabro_dor/cabro_dor_card.jpg",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/cabro_dor/cabro_dor_card.jpg",
             "scale": 1,
             "position": {
               "x": 0,
@@ -992,7 +1364,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/cabro_dor/cabro_dor_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1034,12 +1406,12 @@
       "descriptionProvencal": "Pichot cat negre e maigre, emé d'iue d'un blanc perçant. Sa demarcho fluido e silenciouso. Se glisso entre lei ruino, observant e parfes voulant de nutritura.",
       "region": "PROVENCE",
       "themeColor": "#212121",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/matagot/matagot_char_ruelle.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/matagot/matagot_char_ruelle.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1055,7 +1427,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/matagot/matagot_bg_ruelle.png",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1097,12 +1469,12 @@
       "descriptionProvencal": "Vièio fremo au dòs voutat, man tacado de sevo e d'òli. Pòrto un tablié usat e de vestit emé de mòutiu de flour estilisado. Soun regard perçant escruto lei que venon cerca soun ajudo.",
       "region": "PROVENCE",
       "themeColor": "#9C27B0",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/fada_lavandula/fada_lavandula_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/fada_lavandula/fada_lavandula_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1118,7 +1490,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/fada_lavandula/fada_lavandula_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1160,12 +1532,12 @@
       "descriptionProvencal": "Gyptis e Protis formon un duo respectat. Sei vestit soun ournat de mòutiu inspirat de coco e de vaguo estilisado, simbòu de stabiletat e d'ancragi.",
       "region": "PROVENCE",
       "themeColor": "#0288D1",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/gyptis_e_protis/gyptis_e_protis_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/gyptis_e_protis/gyptis_e_protis_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1181,7 +1553,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/gyptis_e_protis/gyptis_e_protis_bg.png",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1223,12 +1595,12 @@
       "descriptionProvencal": "Camioun de guerro improuvisado, la Tarasco avanço coumo uno bèstio mecanico. Là ounte passo, resto plus que lou silènci e la cendre.",
       "region": "PROVENCE",
       "themeColor": "#B71C1C",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/tarasca/tarasca_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/tarasca/tarasca_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1244,7 +1616,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/tarasca/tarasca_card.png",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1286,12 +1658,12 @@
       "descriptionProvencal": "Un brumoul dense e jaunastre cargat d'oudour de metan e de purritudò. Soun oudour atiro de noumbrous serp. Fai pas de brut, mai marco quei que la traverson.",
       "region": "PROVENCE",
       "themeColor": "#827717",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/coulobre/coulobre_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/coulobre/coulobre_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1307,7 +1679,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/coulobre/coulobre_scene.png",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1349,49 +1721,275 @@
       "descriptionProvencal": "Òme grand au visagi mascat per un fòulard, soun chivau maigrit es cubèrt de cicatris coumo eu. Mostro cap d'emoucioun, e sei passagi laisson darriè eu la destrucioun.",
       "region": "PROVENCE",
       "themeColor": "#424242",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/lou_drape/lou_drape_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
-            "scale": 1,
+            "path": "assets/img/characters/lou_drape/lou_drape_char.png",
+            "scale": 3.44,
             "position": {
-              "x": 0,
-              "y": 0,
-              "z": 0
+              "x": 1.63,
+              "y": 1.7,
+              "z": -1
             },
             "rotation": {
               "x": 0,
-              "y": 0,
+              "y": -16,
               "z": 0
             },
-            "opacity": 1
+            "opacity": 1,
+            "billboard": false,
+            "order": 6
           },
           {
-            "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
-            "scale": 1.5,
+            "id": "foreground",
+            "path": "assets\\img\\characters\\lou_drape\\drape_foreground.png",
+            "scale": 3.57,
+            "opacity": 1,
             "position": {
               "x": 0,
-              "y": 0,
-              "z": -0.1
+              "y": 2.11,
+              "z": -1.49
             },
             "rotation": {
               "x": 0,
               "y": 0,
               "z": 0
             },
-            "opacity": 0.8
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "scaleX": 1.25,
+            "scaleY": 1.35,
+            "curveAxis": "x",
+            "curvature": 2.1,
+            "scaleZ": 2.1,
+            "order": 7
+          },
+          {
+            "id": "middle",
+            "path": "assets\\img\\characters\\lou_drape\\drape_middle.png",
+            "scale": 4.63,
+            "opacity": 1,
+            "position": {
+              "x": 0,
+              "y": 0.23,
+              "z": -3.01
+            },
+            "rotation": {
+              "x": -79,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "scaleX": 1.05,
+            "scaleY": 1.36,
+            "curvature": 1.9,
+            "curveAxis": "y",
+            "scaleZ": 1.22,
+            "order": 3
+          },
+          {
+            "id": "treeleft",
+            "path": "assets\\img\\characters\\lou_drape\\drape_arbre_gauche.png",
+            "scale": 3.76,
+            "opacity": 1,
+            "position": {
+              "x": -6.66,
+              "y": 3.67,
+              "z": -2.72
+            },
+            "rotation": {
+              "x": 0,
+              "y": 31,
+              "z": -16
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "order": 5,
+            "scaleY": 1.83,
+            "scaleX": 0.97
+          },
+          {
+            "id": "treeright",
+            "path": "assets\\img\\characters\\lou_drape\\drape_arbre_droit.png",
+            "scale": 6.54,
+            "opacity": 1,
+            "position": {
+              "x": 6.47,
+              "y": 2.56,
+              "z": -3
+            },
+            "rotation": {
+              "x": -7,
+              "y": -38,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "order": 4,
+            "scaleX": 1.22
+          },
+          {
+            "id": "fondgauche",
+            "path": "assets\\img\\characters\\lou_drape\\drape_fond_gauche.png",
+            "scale": 10,
+            "opacity": 1,
+            "position": {
+              "x": -4,
+              "y": 5.85,
+              "z": -6
+            },
+            "rotation": {
+              "x": 0,
+              "y": 13,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "billboard": false,
+            "scaleX": 1.19,
+            "scaleY": 1.25,
+            "order": 2,
+            "curvature": 2.1,
+            "scaleZ": 3.97
+          },
+          {
+            "id": "fonddroit",
+            "path": "assets\\img\\characters\\lou_drape\\drape_fond_droit.png",
+            "scale": 8.2,
+            "opacity": 1,
+            "position": {
+              "x": 3.5,
+              "y": 4.28,
+              "z": -6.04
+            },
+            "rotation": {
+              "x": 0,
+              "y": -15,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "order": 1,
+            "billboard": false,
+            "curvature": 2.5,
+            "scaleZ": 2.7
+          },
+          {
+            "id": "ground",
+            "path": "assets\\img\\characters\\lou_drape\\dryground.jpg",
+            "scale": 9.58,
+            "opacity": 1,
+            "position": {
+              "x": 0,
+              "y": -0.08,
+              "z": 0
+            },
+            "rotation": {
+              "x": 93,
+              "y": 0,
+              "z": 0
+            },
+            "visibleIn": [
+              "scan",
+              "immersive"
+            ],
+            "order": 0,
+            "billboard": false,
+            "scaleX": 1.28,
+            "curvature": 1.1,
+            "scaleY": 1.65
           }
         ],
         "3d": []
       },
       "sounds": {
-        "intro": {
-          "path": "assets/sound/placeholder.mp3",
+        "wind": {
+          "path": "assets\\sound\\wind.wav",
           "volume": 0.7,
-          "loop": false
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 11.5,
+          "rotation": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "z": -7
+          },
+          "coneAngle": 50
+        },
+        "horse": {
+          "path": "assets\\sound\\horse.wav",
+          "volume": 0.2,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 3,
+          "rotation": {
+            "x": 192,
+            "y": 27,
+            "z": 0
+          },
+          "coneAngle": 40,
+          "position": {
+            "x": 0.7,
+            "y": 2.3,
+            "z": -1.2
+          }
+        },
+        "gun": {
+          "path": "assets\\sound\\revolver.wav",
+          "volume": 0.55,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 2,
+          "rotation": {
+            "x": 180,
+            "y": 14,
+            "z": 0
+          },
+          "coneAngle": 35,
+          "position": {
+            "x": 1.4,
+            "y": 2.3,
+            "z": -1
+          }
         }
       },
       "subtitles": {
@@ -1403,7 +2001,15 @@
           "fr": "Je ne montre aucune émotion car il n'en reste plus. Mon cheval amaigri et moi sommes les derniers témoins d'un monde révolu. Nous chevauchons vers l'oubli.",
           "oc": "Mostrou cap d'emoucioun car n'en resto plus. Moun chivau maigrit e ieu sian lei darnièi testemunis d'un mounde revoulut. Chevauchau vers l'oublit."
         }
-      }
+      },
+      "sceneTransform": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": -3.4
+        }
+      },
+      "arEnabled": true
     },
     {
       "id": "livia",
@@ -1414,12 +2020,12 @@
       "region": "CORSE",
       "characterType": "player",
       "themeColor": "#D84315",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/livia/livia_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/livia/livia_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1435,7 +2041,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/livia/livia_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1479,12 +2085,12 @@
       "region": "CORSE",
       "characterType": "player",
       "themeColor": "#00ACC1",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/orsetta/orsetta_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/orsetta/orsetta_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1500,7 +2106,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/orsetta/orsetta_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1544,12 +2150,12 @@
       "region": "CORSE",
       "characterType": "player",
       "themeColor": "#33691E",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/bastianu/bastianu_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/bastianu/bastianu_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1565,7 +2171,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/bastianu/bastianu_bg.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1608,12 +2214,12 @@
       "region": "PROVENCE",
       "characterType": "player",
       "themeColor": "#1565C0",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/marc/marc_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/marc/marc_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1629,7 +2235,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/marc/marc_card.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1672,12 +2278,12 @@
       "region": "PROVENCE",
       "characterType": "player",
       "themeColor": "#F57C00",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/leo/leo_char.png",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/leo/leo_char.png",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1693,7 +2299,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/leo/leo_card.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,
@@ -1736,12 +2342,12 @@
       "region": "PROVENCE",
       "characterType": "player",
       "themeColor": "#00897B",
-      "portrait": "assets/img/characters/placeholder_char.png",
+      "portrait": "assets/img/characters/valerie/valerie_card.jpg",
       "assets": {
         "2d": [
           {
             "id": "character",
-            "path": "assets/img/characters/placeholder_char.png",
+            "path": "assets/img/characters/valerie/valerie_card.jpg",
             "scale": 1,
             "position": {
               "x": 0,
@@ -1757,7 +2363,7 @@
           },
           {
             "id": "background",
-            "path": "assets/img/characters/placeholder_bg.png",
+            "path": "assets/img/characters/valerie/valerie_card.jpg",
             "scale": 1.5,
             "position": {
               "x": 0,

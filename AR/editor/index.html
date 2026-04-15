@@ -32,8 +32,11 @@
         <button class="btn btn-secondary" id="import-btn">
           <span class="icon">📁</span><span class="btn-text"> Import</span>
         </button>
+        <button class="btn btn-success" id="save-btn" title="Save to server">
+          <span class="icon">💾</span><span class="btn-text"> Save</span>
+        </button>
         <button class="btn btn-primary" id="export-btn">
-          <span class="icon">💾</span><span class="btn-text"> Export</span>
+          <span class="icon">📥</span><span class="btn-text"> Export</span>
         </button>
       </div>
     </header>
@@ -122,6 +125,14 @@
                   <option value="">NPC</option>
                   <option value="player">Player Character</option>
                 </select>
+              </div>
+              <div class="form-group">
+                <label>AR Experience</label>
+                <label class="toggle-switch" title="Show AR button in the main app for this character">
+                  <input type="checkbox" id="char-ar-enabled">
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Show AR button in app</span>
+                </label>
               </div>
             </div>
           </section>
@@ -296,6 +307,7 @@
           <input type="radio" name="preview-mode" value="immersive"> 🥽 Immersive Mode
         </label>
         <button class="btn btn-small btn-secondary" id="preview-reset">🔄 Reset View</button>
+        <button class="btn btn-small btn-success" id="preview-save">💾 Save</button>
       </div>
       <button class="preview-close" id="preview-close">&times;</button>
     </div>

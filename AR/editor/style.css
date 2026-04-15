@@ -131,6 +131,15 @@ body {
   background: var(--accent-secondary);
 }
 
+.btn-success {
+  background: var(--accent-success);
+  color: white;
+}
+
+.btn-success:hover {
+  background: #16a34a;
+}
+
 .btn-secondary {
   background: var(--bg-tertiary);
   color: var(--text-primary);
@@ -1134,6 +1143,48 @@ body {
   font-size: 0.875rem;
 }
 
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-switch .toggle-slider {
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle-switch .toggle-slider::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--accent-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::after {
+  transform: translateX(16px);
+}
+
 /* ============================================
    Empty List State
    ============================================ */
@@ -1692,6 +1743,24 @@ body {
   gap: var(--spacing-sm);
 }
 
+/* Add asset buttons in preview */
+.preview-add-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.preview-add-btns .btn {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  flex: 1 1 calc(50% - 3px);
+  min-width: 0;
+  text-align: center;
+}
+
 /* Asset control card */
 .preview-asset-card {
   background: var(--bg-tertiary);
@@ -1710,6 +1779,65 @@ body {
 
 .preview-asset-card-header:hover {
   background: var(--border-color);
+}
+
+.scene-card {
+  border: 1px solid var(--accent-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.scene-card .preview-asset-card-header:hover {
+  opacity: 0.9;
+}
+
+.preview-order-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  font-size: 14px;
+  user-select: none;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.drag-handle:hover {
+  color: var(--text-primary);
+}
+
+.preview-asset-card.dragging {
+  opacity: 0.4;
+}
+
+.preview-asset-card.drag-over {
+  border-top: 2px solid var(--accent-primary);
+}
+
+.preview-asset-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-delete-asset {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.btn-delete-asset:hover {
+  background: rgba(198, 48, 50, 0.3);
+  color: #c63032;
 }
 
 .preview-asset-name {
@@ -1802,6 +1930,23 @@ body {
   border: none;
 }
 
+/* Shape select dropdown */
+.preview-shape-select {
+  width: 100%;
+  padding: 4px 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.preview-shape-select:focus {
+  border-color: var(--accent-primary);
+}
+
 /* XYZ control row */
 .preview-xyz-row {
   display: grid;
@@ -1843,6 +1988,25 @@ body {
 .preview-xyz-input.z label { color: #3b82f6; }
 
 /* Checkbox toggle control */
+.preview-axis-toggle {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.preview-axis-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.preview-axis-toggle input[type="radio"] {
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
 .preview-checkbox-label {
   display: flex;
   align-items: center;

@@ -134,6 +134,15 @@ function renderCharactersGrid(charactersEntries) {
         nameEl.textContent = char.name
 
         card.append(mediaWrapper, nameEl)
+
+        if (char.arEnabled) {
+            const arBadge = document.createElement('div')
+            arBadge.className = "character-card-ar-badge"
+            arBadge.title = "Expérience AR disponible"
+            arBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/><circle cx="12" cy="12" r="2"/></svg> AR`
+            card.appendChild(arBadge)
+        }
+
         card.addEventListener("click", () => navigate('univers-prosa/encyclopedie-details', () => goToCharacterDetail(key, char)))
         charactersGrid.appendChild(card)
     })
@@ -163,6 +172,7 @@ function goToCharacterDetail(key, char) {
                         <img src="" alt="" class="language-flag" id="flagSecond">
                     </div>
                 </div>
+                ${char.arEnabled ? `
                 <button class="character-ar-button" id="characterARButton" title="Voir en Réalité Augmentée">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
@@ -170,7 +180,7 @@ function goToCharacterDetail(key, char) {
                         <circle cx="12" cy="12" r="2"/>
                     </svg>
                     <span>AR</span>
-                </button>
+                </button>` : ''}
             </div>
         </div>
 

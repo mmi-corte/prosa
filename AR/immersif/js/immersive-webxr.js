@@ -32,6 +32,7 @@ let gltfLoader, textureLoader;
 let characterData = null;
 let jsonSettings = null;
 let characterGroup = null;
+let contentGroup = null;
 let characterLayers = [];
 let characterSound = null;
 let videoTextures = [];
@@ -52,13 +53,6 @@ let lastHitPosition = new THREE.Vector3();
 let fallbackPlaceRequested = false;
 let moveAnimation = null;
 
-// Subtitle state
-let currentLanguage = 'fr';
-let subtitleElement = null;
-let subtitleTextElement = null;
-let currentSubtitleKey = null;
-let subtitleTimeout = null;
-let hasShownGreeting = false;
 
 // ============================================
 // iOS Detection & WebXR Viewer Redirect
@@ -382,8 +376,8 @@ function placeCharacterInFront() {
   dir.y = 0; // Keep on same horizontal plane
   dir.normalize();
 
-  const pos = camera.position.clone().add(dir.multiplyScalar(2));
-  pos.y = camera.position.y - 1.5; // Approximate ground level
+  const pos = camera.position.clone().add(dir.multiplyScalar(1));
+  pos.y = camera.position.y - 1.2; // Approximate ground level
 
   characterGroup.position.copy(pos);
   faceCharacterToCamera();
@@ -450,10 +444,6 @@ function onSelectTap() {
     duration: 300
   };
 
-  // Reset proximity/greeting since character moved
-  hasShownGreeting = false;
-  hideSubtitle();
-
   console.log('Character repositioning to:', pos.toArray().map(v => v.toFixed(2)));
 }
 
@@ -494,45 +484,6 @@ function setupUI() {
       console.log('Mute button clicked');
       toggleMute();
     });
-  }
-  
-  // Subtitle elements - ensure hidden initially
-  subtitleElement = document.getElementById('subtitles');
-  subtitleTextElement = document.getElementById('subtitleText');
-  if (subtitleElement) {
-    subtitleElement.classList.remove('visible');
-  }
-  if (subtitleTextElement) {
-    subtitleTextElement.textContent = '';
-  }
-  
-  // Language toggle - ensure hidden initially
-  const langToggle = document.getElementById('language-toggle');
-  const langLabel = document.getElementById('lang-label');
-  if (langToggle) {
-    langToggle.classList.remove('visible');
-    langToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Language toggle clicked! Current:', currentLanguage);
-      currentLanguage = currentLanguage === 'fr' ? 'co' : 'fr';
-      console.log('New language:', currentLanguage);
-      if (langLabel) langLabel.textContent = currentLanguage.toUpperCase();
-      // Update current subtitle if visible
-      if (subtitleElement?.classList.contains('visible') && currentSubtitleKey) {
-        showSubtitle(currentSubtitleKey);
-      }
-    });
-    // Also add touchstart for mobile
-    langToggle.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      console.log('Language toggle touched!');
-      currentLanguage = currentLanguage === 'fr' ? 'co' : 'fr';
-      if (langLabel) langLabel.textContent = currentLanguage.toUpperCase();
-      if (subtitleElement?.classList.contains('visible') && currentSubtitleKey) {
-        showSubtitle(currentSubtitleKey);
-      }
-    }, { passive: false });
   }
   
   // Hide loading, show start
@@ -661,9 +612,7 @@ async function startARSession() {
       }, 500);
     }
     
-    // Show language toggle, back button, and mute button
-    const langToggle = document.getElementById('language-toggle');
-    if (langToggle) langToggle.classList.add('visible');
+    // Show back button and mute button
     const arBackBtn = document.getElementById('ar-back-btn');
     if (arBackBtn) arBackBtn.classList.add('visible');
     const arMuteBtn = document.getElementById('ar-mute-btn');
@@ -701,12 +650,8 @@ function onSessionEnd() {
   }
 
   stopAllAudio();
-  hideSubtitle();
-  hasShownGreeting = false;
-  
-  // Hide language toggle, back button, and mute button
-  const langToggle = document.getElementById('language-toggle');
-  if (langToggle) langToggle.classList.remove('visible');
+
+  // Hide back button and mute button
   const arBackBtn = document.getElementById('ar-back-btn');
   if (arBackBtn) arBackBtn.classList.remove('visible');
   const arMuteBtn = document.getElementById('ar-mute-btn');
@@ -761,9 +706,6 @@ function onXRFrame(time, frame) {
 
   // Update video textures
   updateVideoTextures();
-
-  // Check proximity for subtitles
-  checkCharacterProximity();
 
   // Render - Three.js handles everything including camera passthrough
   renderer.render(scene, camera);
@@ -947,11 +889,38 @@ function setupCharacterScene() {
     return;
   }
   
-  // Create character group at origin
+  // Create character group at origin (positioned by AR hit-test)
   characterGroup = new THREE.Group();
   characterGroup.position.set(0, 0, 0);
   scene.add(characterGroup);
-  
+
+  // Apply scene-level transform offset from editor (nested group preserves AR placement)
+  const st = characterData.sceneTransform;
+  if (st) {
+    const offsetGroup = new THREE.Group();
+    if (st.position) {
+      offsetGroup.position.set(st.position.x || 0, st.position.y || 0, st.position.z || 0);
+    }
+    if (st.rotation) {
+      offsetGroup.rotation.set(
+        THREE.MathUtils.degToRad(st.rotation.x || 0),
+        THREE.MathUtils.degToRad(st.rotation.y || 0),
+        THREE.MathUtils.degToRad(st.rotation.z || 0)
+      );
+    }
+    if (st.scale) {
+      offsetGroup.scale.setScalar(st.scale);
+    }
+    characterGroup.add(offsetGroup);
+    // Store the content target — asset loaders use this
+    contentGroup = offsetGroup;
+  }
+
+  // Set content group — if no sceneTransform, assets go directly into characterGroup
+  if (!contentGroup) {
+    contentGroup = characterGroup;
+  }
+
   // Check for layers (legacy fata format) or assets.2d (newer format)
   const hasLayers = characterData.layers && Object.keys(characterData.layers).length > 0;
   const assets2d = characterData.assets?.['2d'] || [];
@@ -965,23 +934,27 @@ function setupCharacterScene() {
       .map(([key, layer]) => ({ key, ...layer }))
       .sort((a, b) => (a.order || 0) - (b.order || 0));
     
-    sortedLayers.forEach(layer => {
+    sortedLayers.forEach((layer, index) => {
       console.log('Processing layer:', layer.key, 'visibleIn:', layer.visibleIn);
       if (!isVisibleInMode(layer, 'immersive')) {
         console.log('  -> Skipped (not visible in immersive)');
         return;
       }
-      
+
+      // Assign fallback order from sorted index if not explicitly set
+      if (layer.order == null) layer.order = index;
+
       const assetPath = CONFIG.assetBasePath + layer.path;
-      
+
       if (layer.type === 'video') {
         loadVideoLayer(layer.key, layer, assetPath);
       } else {
         loadImageLayer(layer.key, layer, assetPath);
       }
     });
-  } else if (assets2d.length > 0) {
-    // Newer format: load from assets.2d array
+  }
+  if (assets2d.length > 0) {
+    // Load from assets.2d array
     console.log('Setting up assets.2d (newer format):', assets2d.length, 'assets');
     
     // Sort by z position (background first)
@@ -997,9 +970,12 @@ function setupCharacterScene() {
         console.log('  -> Skipped (not visible in immersive)');
         return;
       }
-      
+
+      // Assign fallback order from sorted index if not explicitly set
+      if (asset.order == null) asset.order = index;
+
       const assetPath = CONFIG.assetBasePath + asset.path;
-      
+
       if (asset.type === 'video') {
         loadVideoLayer(asset.id, asset, assetPath);
       } else {
@@ -1108,7 +1084,7 @@ function loadGLTFModel(id, config, path) {
         console.log('Animation started for 3D model:', id);
       }
       
-      characterGroup.add(model);
+      contentGroup.add(model);
       console.log('Loaded 3D model:', id);
     },
     progress => {
@@ -1119,6 +1095,53 @@ function loadGLTFModel(id, config, path) {
       console.error('Failed to load 3D model:', id, error);
     }
   );
+}
+
+/**
+ * Migrate old wrapShape/wrapRadius to curvature value (radians).
+ */
+function migrateCurvature(obj) {
+  if (obj.curvature != null) return obj.curvature;
+  const shape = obj.wrapShape || 'plane';
+  if (shape === 'plane' || !shape) return 0;
+  if (shape === 'half-cylinder') return Math.PI;
+  if (shape === 'cylinder-270') return Math.PI * 1.5;
+  if (shape === 'cylinder') return Math.PI * 2;
+  if (shape === 'bend') return obj.wrapRadius || 2;
+  return 0;
+}
+
+/**
+ * Build a PlaneGeometry bent into a circular arc.
+ * bendAngle in radians: 0 = flat, PI = half-circle, 2*PI = full circle.
+ */
+function buildBentPlane(width, height, bendAngle, curveAxis) {
+  if (!bendAngle || bendAngle <= 0.01) return new THREE.PlaneGeometry(width, height);
+
+  const isVertical = curveAxis === 'y';
+  const span = isVertical ? height : width;
+  const segments = Math.max(32, Math.round(bendAngle * 16));
+  const segX = isVertical ? 1 : segments;
+  const segY = isVertical ? segments : 1;
+  const geo = new THREE.PlaneGeometry(width, height, segX, segY);
+  const pos = geo.attributes.position;
+  const R = span / (2 * Math.sin(bendAngle / 2));
+
+  for (let i = 0; i < pos.count; i++) {
+    const coord = isVertical ? pos.getY(i) : pos.getX(i);
+    const angle = (coord / span) * bendAngle;
+    const newCoord = R * Math.sin(angle);
+    const newZ = R * (1 - Math.cos(angle));
+    if (isVertical) {
+      pos.setY(i, newCoord);
+    } else {
+      pos.setX(i, newCoord);
+    }
+    pos.setZ(i, newZ);
+  }
+  pos.needsUpdate = true;
+  geo.computeVertexNormals();
+  return geo;
 }
 
 function loadImageLayer(key, config, path) {
@@ -1141,33 +1164,57 @@ function loadImageLayer(key, config, path) {
       texture.colorSpace = THREE.SRGBColorSpace;
       
       const aspect = texture.image.width / texture.image.height;
-      let height = config.scale || 2;
-      let width = height * aspect;
-      
-      if (config.scaleX) width *= config.scaleX;
-      if (config.scaleY) height *= config.scaleY;
-      
-      const geo = new THREE.PlaneGeometry(width, height);
+      const scale = config.scale || 1;
+      const scaleX = config.scaleX || 1;
+      const scaleY = config.scaleY || 1;
+      const scaleZ = config.scaleZ || 1;
+
+      // Curvature support — geometry at unit size, scale via mesh.scale (matches editor)
+      const curvature = migrateCurvature(config);
+      const curveAxis = config.curveAxis || 'x';
+      const geo = curvature > 0.01
+        ? buildBentPlane(aspect, 1, curvature, curveAxis)
+        : new THREE.PlaneGeometry(aspect, 1);
+
       const mat = new THREE.MeshBasicMaterial({
         map: texture,
         transparent: true,
+        opacity: config.opacity ?? 1,
         side: THREE.DoubleSide,
-        depthWrite: false
+        depthWrite: false,
+        depthTest: false,
+        alphaTest: 0.01
       });
-      
+
       const mesh = new THREE.Mesh(geo, mat);
       mesh.frustumCulled = false;
+      mesh.scale.set(scale * scaleX, scale * scaleY, scaleZ);
       mesh.position.set(
         config.position?.x ?? 0,
         config.position?.y ?? 0,
         config.position?.z ?? 0
       );
+
+      // Rotation (degrees to radians)
+      const rot = config.rotation || {};
+      mesh.rotation.set(
+        THREE.MathUtils.degToRad(rot.x || 0),
+        THREE.MathUtils.degToRad(rot.y || 0),
+        THREE.MathUtils.degToRad(rot.z || 0)
+      );
+
+      // Render order for stable layer compositing
+      if (config.order != null) {
+        mesh.renderOrder = Math.round(config.order * 10);
+      }
+
       mesh.userData.layerName = key;
-      mesh.userData.billboard = config.billboard !== false; // default true
-    
-      characterGroup.add(mesh);
+      mesh.userData.billboard = config.billboard !== false;
+      mesh.userData.hasCurvature = curvature > 0.01;
+
+      contentGroup.add(mesh);
       characterLayers.push(mesh);
-      
+
       console.log('Loaded image layer:', key, 'billboard:', mesh.userData.billboard);
     },
     undefined,
@@ -1247,14 +1294,14 @@ function loadVideoLayer(key, config, path) {
     videoTexture.generateMipmaps = false;
     
     const aspect = video.videoWidth / video.videoHeight;
-    let height = config.scale || 2;
-    let width = height * aspect;
-    
-    if (config.scaleX) width *= config.scaleX;
-    if (config.scaleY) height *= config.scaleY;
-    
-    const geo = new THREE.PlaneGeometry(width, height);
-    
+    const scale = config.scale || 1;
+    const scaleX = config.scaleX || 1;
+    const scaleY = config.scaleY || 1;
+    const scaleZ = config.scaleZ || 1;
+
+    // Unit-size geometry, scale via mesh.scale (matches editor)
+    const geo = new THREE.PlaneGeometry(aspect, 1);
+
     let mat;
     if (config.chromaKey) {
       const keyColor = new THREE.Color(config.chromaKey);
@@ -1270,30 +1317,48 @@ function loadVideoLayer(key, config, path) {
         fragmentShader: ChromaKeyShader.fragmentShader,
         transparent: true,
         side: THREE.DoubleSide,
-        depthWrite: false
+        depthWrite: false,
+        depthTest: false
       });
     } else {
       mat = new THREE.MeshBasicMaterial({
         map: videoTexture,
         transparent: true,
+        opacity: config.opacity ?? 1,
         side: THREE.DoubleSide,
-        depthWrite: false
+        depthWrite: false,
+        depthTest: false
       });
     }
-    
+
     const mesh = new THREE.Mesh(geo, mat);
     mesh.frustumCulled = false;
+    mesh.scale.set(scale * scaleX, scale * scaleY, scaleZ);
     mesh.position.set(
       config.position?.x ?? 0,
       config.position?.y ?? 0,
       config.position?.z ?? 0
     );
+
+    // Rotation (degrees to radians)
+    const rot = config.rotation || {};
+    mesh.rotation.set(
+      THREE.MathUtils.degToRad(rot.x || 0),
+      THREE.MathUtils.degToRad(rot.y || 0),
+      THREE.MathUtils.degToRad(rot.z || 0)
+    );
+
+    // Render order for stable layer compositing
+    if (config.order != null) {
+      mesh.renderOrder = Math.round(config.order * 10);
+    }
+
     mesh.userData.layerName = key;
     mesh.userData.isVideo = true;
     mesh.userData.video = video;
-    mesh.userData.billboard = config.billboard !== false; // default true
-    
-    characterGroup.add(mesh);
+    mesh.userData.billboard = config.billboard !== false;
+
+    contentGroup.add(mesh);
     characterLayers.push(mesh);
     videoTextures.push({ texture: videoTexture, video, mesh });
     
@@ -1341,98 +1406,121 @@ let isMuted = false;
 
 function setupCharacterSound() {
   if (!characterData?.sounds) return;
-  
-  // Try ambient first, then intro, then any first sound
-  let soundConfig = characterData.sounds.ambient;
-  let soundKey = 'ambient';
-  
-  if (!soundConfig) {
-    soundConfig = characterData.sounds.intro;
-    soundKey = 'intro';
-  }
-  
-  if (!soundConfig) {
-    // Use first available sound
-    const soundKeys = Object.keys(characterData.sounds);
-    if (soundKeys.length > 0) {
-      soundKey = soundKeys[0];
-      soundConfig = characterData.sounds[soundKey];
-    }
-  }
-  
-  if (!soundConfig) return;
-  
-  // Check visibility
-  if (soundConfig.visibleIn && !soundConfig.visibleIn.includes('immersive')) {
-    console.log('Sound', soundKey, 'not visible in immersive mode');
-    return;
-  }
-  
-  const soundPath = CONFIG.assetBasePath + soundConfig.path;
-  console.log('Loading character sound:', soundKey, soundPath);
-  
+
+  const sounds = characterData.sounds;
+  const soundKeys = Object.keys(sounds);
+  if (soundKeys.length === 0) return;
+
   // Create AudioListener if not exists
   if (!camera.userData.audioListener) {
     const listener = new THREE.AudioListener();
     camera.add(listener);
     camera.userData.audioListener = listener;
   }
-  
-  // Use HTMLAudioElement for better iOS compatibility
-  audioElement = document.createElement('audio');
-  audioElement.src = soundPath;
-  audioElement.loop = soundConfig.loop !== false; // Default to true unless explicitly false
-  audioElement.preload = 'auto';
-  audioElement.crossOrigin = 'anonymous';
-  audioElement.setAttribute('playsinline', '');
-  
-  // Add to DOM for iOS
-  audioElement.style.display = 'none';
-  document.body.appendChild(audioElement);
-  
-  audioElement.addEventListener('canplaythrough', () => {
-    console.log('Audio ready, setting up spatial audio');
-    
-    // Create PositionalAudio and use MediaElementSource for spatialization
-    characterSound = new THREE.PositionalAudio(camera.userData.audioListener);
-    characterSound.setMediaElementSource(audioElement);
-    characterSound.setRefDistance(soundConfig.refDistance || 1);
-    characterSound.setMaxDistance(soundConfig.maxDistance || 10);
-    characterSound.setDistanceModel('inverse');
-    characterSound.setRolloffFactor(soundConfig.rolloff || 1);
-    
-    // Attach to character group for spatial positioning
-    characterGroup.add(characterSound);
-    
-    // Set volume via gain
-    characterSound.setVolume(soundConfig.volume !== undefined ? soundConfig.volume : 0.8);
-    
-    tryPlayAudio();
-  }, { once: true });
-  
-  audioElement.addEventListener('error', (e) => {
-    console.error('Audio load error:', e.target?.error?.message || e);
+
+  soundKeys.forEach(key => {
+    const soundConfig = sounds[key];
+    if (!soundConfig?.path) return;
+
+    // Check visibility
+    if (soundConfig.visibleIn && !soundConfig.visibleIn.includes('immersive')) {
+      console.log('Sound', key, 'not visible in immersive mode, skipping');
+      return;
+    }
+
+    const soundPath = CONFIG.assetBasePath + soundConfig.path;
+    console.log('Loading character sound:', key, soundPath);
+
+    const audio = document.createElement('audio');
+    audio.src = soundPath;
+    audio.loop = soundConfig.loop !== false;
+    audio.preload = 'auto';
+    audio.crossOrigin = 'anonymous';
+    audio.setAttribute('playsinline', '');
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+
+    audio.addEventListener('canplaythrough', () => {
+      console.log('Audio ready:', key);
+
+      const positionalAudio = new THREE.PositionalAudio(camera.userData.audioListener);
+      positionalAudio.setMediaElementSource(audio);
+      positionalAudio.setRefDistance(soundConfig.refDistance || 1);
+      positionalAudio.setMaxDistance(soundConfig.maxDistance || 10);
+      positionalAudio.setDistanceModel('inverse');
+      positionalAudio.setRolloffFactor(soundConfig.rolloff || 1);
+
+      // Apply directional cone if configured
+      if (soundConfig.coneAngle) {
+        const inner = soundConfig.coneAngle;
+        const outer = Math.min(360, inner * 1.5);
+        positionalAudio.setDirectionalCone(inner, outer, 0.2);
+      }
+
+      // Position relative to character
+      if (soundConfig.position) {
+        positionalAudio.position.set(
+          soundConfig.position.x || 0,
+          soundConfig.position.y || 0,
+          soundConfig.position.z || 0
+        );
+      }
+
+      // Rotation (degrees to radians)
+      if (soundConfig.rotation) {
+        positionalAudio.rotation.set(
+          THREE.MathUtils.degToRad(soundConfig.rotation.x || 0),
+          THREE.MathUtils.degToRad(soundConfig.rotation.y || 0),
+          THREE.MathUtils.degToRad(soundConfig.rotation.z || 0)
+        );
+      }
+
+      positionalAudio.setVolume(soundConfig.volume !== undefined ? soundConfig.volume : 0.8);
+      contentGroup.add(positionalAudio);
+
+      // Store first sound as characterSound for legacy references
+      if (!characterSound) {
+        characterSound = positionalAudio;
+        audioElement = audio;
+      }
+
+      // Store all sounds for cleanup
+      if (!characterGroup.userData.allSounds) {
+        characterGroup.userData.allSounds = [];
+      }
+      characterGroup.userData.allSounds.push({ audio, positionalAudio, key });
+
+      // Try to play
+      audio.play().then(() => {
+        console.log('Spatial audio playing:', key);
+      }).catch(e => {
+        console.warn('Audio autoplay blocked:', key, e.message);
+        const retryAudio = () => {
+          audio.play().catch(() => {});
+          document.removeEventListener('touchstart', retryAudio);
+          document.removeEventListener('click', retryAudio);
+        };
+        document.addEventListener('touchstart', retryAudio, { once: true });
+        document.addEventListener('click', retryAudio, { once: true });
+      });
+    }, { once: true });
+
+    audio.addEventListener('error', (e) => {
+      console.error('Audio load error:', key, e.target?.error?.message || e);
+    });
+
+    audio.load();
   });
-  
-  audioElement.load();
 }
 
 function tryPlayAudio() {
-  if (!audioElement) return;
-  
-  audioElement.play().then(() => {
-    console.log('Spatial audio playing');
-  }).catch(e => {
-    console.warn('Audio autoplay blocked:', e.message);
-    // Retry on user interaction
-    const retryAudio = () => {
-      audioElement?.play().catch(() => {});
-      document.removeEventListener('touchstart', retryAudio);
-      document.removeEventListener('click', retryAudio);
-    };
-    document.addEventListener('touchstart', retryAudio, { once: true });
-    document.addEventListener('click', retryAudio, { once: true });
-  });
+  // Play all sounds
+  const allSounds = characterGroup?.userData?.allSounds || [];
+  if (allSounds.length > 0) {
+    allSounds.forEach(s => s.audio.play().catch(() => {}));
+  } else if (audioElement) {
+    audioElement.play().catch(() => {});
+  }
 }
 
 function resumeAudioContext() {
@@ -1449,12 +1537,18 @@ function resumeAudioContext() {
 }
 
 function stopAllAudio() {
-  if (audioElement) {
+  // Stop all character sounds
+  const allSounds = characterGroup?.userData?.allSounds || [];
+  allSounds.forEach(s => {
+    s.audio.pause();
+    s.audio.currentTime = 0;
+    if (s.positionalAudio?.isPlaying) s.positionalAudio.stop();
+  });
+  // Fallback for legacy single sound
+  if (allSounds.length === 0 && audioElement) {
     audioElement.pause();
     audioElement.currentTime = 0;
-  }
-  if (characterSound?.isPlaying) {
-    characterSound.stop();
+    if (characterSound?.isPlaying) characterSound.stop();
   }
   videoTextures.forEach(vt => {
     if (vt.video) vt.video.pause();
@@ -1466,10 +1560,13 @@ function toggleMute() {
     isMuted = !isMuted;
     console.log('toggleMute called, isMuted:', isMuted);
     
-    // Mute/unmute the audio element directly
-    if (audioElement) {
+    // Mute/unmute all audio elements
+    const allSounds = characterGroup?.userData?.allSounds || [];
+    allSounds.forEach(s => {
+      s.audio.muted = isMuted;
+    });
+    if (allSounds.length === 0 && audioElement) {
       audioElement.muted = isMuted;
-      console.log('audioElement muted:', audioElement.muted);
     }
     
     // Mute/unmute via AudioListener gain node
@@ -1516,9 +1613,10 @@ function toggleMute() {
 // ============================================
 function updateBillboards() {
   if (!characterGroup || !camera) return;
-  
+
   characterLayers.forEach(layer => {
-    // Only billboard if not explicitly disabled (default is true)
+    // Skip billboard for curved meshes or explicitly disabled
+    if (layer.userData.hasCurvature) return;
     if (layer.userData.billboard !== false) {
       layer.lookAt(camera.position);
     }
@@ -1531,127 +1629,6 @@ function updateVideoTextures() {
       vt.texture.needsUpdate = true;
     }
   });
-}
-
-function checkCharacterProximity() {
-  if (!characterGroup) {
-    return;
-  }
-  
-  // Check if character has subtitles configured
-  if (!characterData?.subtitles || Object.keys(characterData.subtitles).length === 0) {
-    return;
-  }
-  
-  const charPos = new THREE.Vector3();
-  characterGroup.getWorldPosition(charPos);
-  
-  // Get camera world position (in WebXR, camera is tracked)
-  const camPos = new THREE.Vector3();
-  camera.getWorldPosition(camPos);
-  
-  const distance = camPos.distanceTo(charPos);
-  const triggerDistance = characterData.interaction?.subtitleTriggerDistance || 2.5;
-  
-  // Debug log occasionally
-  if (frameCount % 60 === 0) {
-    console.log('Proximity - cam:', camPos.toArray().map(v => v.toFixed(2)), 
-                'char:', charPos.toArray().map(v => v.toFixed(2)),
-                'dist:', distance.toFixed(2), 'trigger:', triggerDistance);
-  }
-  
-  // Show greeting when approaching
-  if (distance < triggerDistance) {
-    if (!hasShownGreeting) {
-      hasShownGreeting = true;
-      console.log('Triggering greeting subtitle at distance:', distance.toFixed(2));
-      showSubtitle('greeting');
-    }
-  } else {
-    // Reset when moving away
-    if (hasShownGreeting && distance > triggerDistance + 1) {
-      hasShownGreeting = false;
-      hideSubtitle();
-    }
-  }
-}
-
-function showSubtitle(key, duration = 8000) {
-  console.log('showSubtitle called with key:', key);
-  console.log('subtitleElement:', subtitleElement);
-  console.log('subtitleTextElement:', subtitleTextElement);
-  console.log('characterData.subtitles:', characterData?.subtitles);
-  
-  if (!characterData?.subtitles?.[key]) {
-    console.warn('Subtitle not found:', key);
-    return;
-  }
-  
-  const subtitleData = characterData.subtitles[key];
-  const text = subtitleData[currentLanguage] || subtitleData.fr || subtitleData.co;
-  
-  if (!text) {
-    console.warn('No text for subtitle:', key, 'in language:', currentLanguage);
-    return;
-  }
-  
-  currentSubtitleKey = key;
-  
-  if (subtitleTextElement) {
-    subtitleTextElement.textContent = text;
-    console.log('Set subtitle text to:', text);
-  } else {
-    console.error('subtitleTextElement is null!');
-  }
-  
-  if (subtitleElement) {
-    subtitleElement.classList.add('visible');
-    console.log('Added visible class, classList:', subtitleElement.classList);
-  } else {
-    console.error('subtitleElement is null!');
-  }
-  
-  // Clear previous timeout
-  if (subtitleTimeout) {
-    clearTimeout(subtitleTimeout);
-  }
-  
-  // Auto-hide after duration (unless duration is 0 for permanent)
-  if (duration > 0) {
-    subtitleTimeout = setTimeout(() => {
-      // Try to show next dialogue if available
-      const nextKey = getNextSubtitleKey(key);
-      if (nextKey && hasShownGreeting) {
-        showSubtitle(nextKey);
-      } else {
-        hideSubtitle();
-      }
-    }, duration);
-  }
-  
-  console.log('Showing subtitle:', key, '-', text.substring(0, 50) + '...');
-}
-
-function getNextSubtitleKey(currentKey) {
-  if (!characterData?.subtitles) return null;
-  
-  const keys = Object.keys(characterData.subtitles);
-  const currentIndex = keys.indexOf(currentKey);
-  
-  // Return next key if exists
-  if (currentIndex >= 0 && currentIndex < keys.length - 1) {
-    return keys[currentIndex + 1];
-  }
-  return null;
-}
-
-function hideSubtitle() {
-  if (subtitleElement) subtitleElement.classList.remove('visible');
-  currentSubtitleKey = null;
-  if (subtitleTimeout) {
-    clearTimeout(subtitleTimeout);
-    subtitleTimeout = null;
-  }
 }
 
 // ============================================

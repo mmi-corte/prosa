@@ -5,7 +5,28 @@
       "Bash(cp games-playtests/corte/case_6_signadora/style.css games-playtests/prosa/case_11_tour/style.css)",
       "Bash(cp games-playtests/corte/case_6_signadora/script.js games-playtests/prosa/case_11_tour/script.js)",
       "Bash(cp games-playtests/corte/case_13_strega2/styles.css games-playtests/prosa/case_12_drac/styles.css)",
-      "Bash(cp games-playtests/corte/case_13_strega2/script.js games-playtests/prosa/case_12_drac/script.js)"
+      "Bash(cp games-playtests/corte/case_13_strega2/script.js games-playtests/prosa/case_12_drac/script.js)",
+      "Bash(cp '__TRACKED_VAR__/LA FÉE LAVANDULA - fait/FEE_LAVANDULA.jpg' fada_lavandula/fada_lavandula_card.jpg)",
+      "Bash(cp '__TRACKED_VAR__/LA FÉE LAVANDULA - fait/BACKGROUND_FEE_LAVANDULA.jpg' fada_lavandula/fada_lavandula_bg.jpg)",
+      "Bash(cp '__TRACKED_VAR__/LA FÉE LAVANDULA - fait/FEE_LAVANDULA sans fond.png' fada_lavandula/fada_lavandula_char.png)",
+      "Bash(cp '__TRACKED_VAR__/LA FÉE LAVANDULA - fait/CARTE_FEE_LAVANDULA.jpg' fada_lavandula/fada_lavandula_carte.jpg)",
+      "Bash(cp '__TRACKED_VAR__/LA FÉE LAVANDULA - fait/Fada Lavandula_CARTE CASE LIEU CIMETIERE.png' fada_lavandula/fada_lavandula_carte_cimetiere.png)",
+      "Bash(cp '__TRACKED_VAR__/LE MATAGOT - fait/MATAGOT RUE D ALGER.png' matagot/matagot_scene_rue.png)",
+      "Bash(cp '__TRACKED_VAR__/LE MATAGOT - fait/PARC ALEXANDRE/MATAGOT CMJN PARC ALEXANDRE.png' matagot/matagot_card_parc.png)",
+      "Bash(cp '__TRACKED_VAR__/LE MATAGOT - fait/PARC ALEXANDRE/MATAGOT DECOR CMJN PARC ALEXANDRE.png' matagot/matagot_bg_parc.png)",
+      "Bash(cp '__TRACKED_VAR__/LE MATAGOT - fait/PARC ALEXANDRE/MATAGOT SANS FOND CMJN PARC ALEXANDRE.png' matagot/matagot_char_parc.png)",
+      "Bash(cp '__TRACKED_VAR__/LE MATAGOT - fait/RUELLE/MATAGOT FINAL  CMJN.png' matagot/matagot_card_ruelle.png)",
+      "Bash(cp '__TRACKED_VAR__/TARASQUE - fait/tarraske.png' tarasca/tarasca_card.png)",
+      "Bash(cp '__TRACKED_VAR__/TARASQUE - fait/staraske sans fond.png' tarasca/tarasca_char.png)",
+      "Bash(cp '__TRACKED_VAR__/TARASQUE - fait/tarraske sans fond.png' tarasca/tarasca_char_alt.png)",
+      "Bash(cp '__TRACKED_VAR__/POSTE DE MAINTENANCE - fait/maintenance toulon & gardes.png' maintenance/maintenance_card.png)",
+      "Bash(cp '__TRACKED_VAR__/POSTE DE MAINTENANCE - fait/maintenance toulonsans le mec de la maintenance.png' maintenance/maintenance_bg.png)",
+      "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DARIUS - fait/darius cmjn.png' darius/darius_card.png)",
+      "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DARIUS - fait/darius cmjn sans fond 2.png' darius/darius_char.png)",
+      "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DARIUS - fait/darius fond uniquement cmjn.png' darius/darius_bg.png)",
+      "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DOCTEUR VALERIE - fait/CARTE_VALERIE.jpg' valerie/valerie_card.jpg)",
+      "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/GASPARD_PLAGE/GASPARD_PLAGE.jpg' gaspard/gaspard_card.jpg)",
+      "Bash(node -e ':*)"
     ]
   }
 }
