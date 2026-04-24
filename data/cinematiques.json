@@ -1,6 +1,14 @@
 [
   {
     "id": 1,
+    "title": "Cinématique d'introduction",
+    "video": "assets/cinematiques/cinematique1.mp4",
+    "image": "assets/cinematiques/cinematique1.png",
+    "description": "Cinématique d'introduction de PROSA.",
+    "season": "Introduction"
+  },
+  {
+    "id": 2,
     "title": "Test",
     "video": "assets/cinematiques/test.mp4",
     "image": "assets/cinematiques/test.png",

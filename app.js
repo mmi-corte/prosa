@@ -100,6 +100,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => appLoadingScreen.remove(), 600);
   }
 
+  showMobileOnlyWarning()
+
   appLogger.perf('Total app initialization', performance.now() - initStart);
 
   // ====================================
@@ -113,6 +115,36 @@ window.addEventListener('DOMContentLoaded', async () => {
     navigate('menu', menuView)
   });
 });
+
+function showMobileOnlyWarning() {
+  if (localStorage.getItem('mobileOnlyWarningDismissed') === 'true') return
+
+  const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches
+  const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  if (isTouchPrimary || isMobileUA) return
+
+  const overlay = document.createElement('div')
+  overlay.id = 'mobile-only-warning'
+  overlay.innerHTML = `
+    <div class="mobile-only-warning-box">
+      <h2>Expérience mobile recommandée</h2>
+      <p>PROSA est conçu pour une utilisation sur téléphone. L'expérience sur ordinateur peut être dégradée : mise en page, contrôles tactiles, caméra et capteurs peuvent ne pas fonctionner comme prévu.</p>
+      <button class="mobile-only-warning-btn" type="button">J'ai compris</button>
+    </div>
+  `
+  document.body.appendChild(overlay)
+
+  const dismiss = () => {
+    localStorage.setItem('mobileOnlyWarningDismissed', 'true')
+    overlay.classList.add('hidden')
+    setTimeout(() => overlay.remove(), 300)
+  }
+
+  overlay.querySelector('.mobile-only-warning-btn').addEventListener('click', dismiss)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) dismiss()
+  })
+}
 
 
 // ====================================

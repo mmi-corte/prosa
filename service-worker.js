@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-prosa-game-v16';
+const CACHE_NAME = 'cache-prosa-game-v21';
 // Service Worker logging utilise toujours le même système
 // (les SWs n'ont pas accès à localStorage directement lors du démarrage)
 const logSW = (...args) => {
