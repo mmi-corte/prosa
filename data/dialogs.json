@@ -1725,7 +1725,7 @@
           }
         ],
         "nextActionType": "dialog",
-        "nextAction": "2"
+        "nextAction": "3"
       },
       "3": {
         "default": {
