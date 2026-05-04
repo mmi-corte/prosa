@@ -26,7 +26,13 @@
       "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DARIUS - fait/darius fond uniquement cmjn.png' darius/darius_bg.png)",
       "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/DOCTEUR VALERIE - fait/CARTE_VALERIE.jpg' valerie/valerie_card.jpg)",
       "Bash(cp '__TRACKED_VAR__/PERSONNAGES JOUEURS/GASPARD_PLAGE/GASPARD_PLAGE.jpg' gaspard/gaspard_card.jpg)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "Bash(grep -cn \"'\\\\\\\\.\\\\\\\\./' + layer\\\\\\\\.path\\\\|'\\\\\\\\.\\\\\\\\./' + asset\\\\\\\\.path\\\\|'\\\\\\\\.\\\\\\\\./' + sound\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
+      "Bash(grep -n \"'\\\\\\\\.\\\\\\\\./' + layer\\\\\\\\.path\\\\|'\\\\\\\\.\\\\\\\\./' + asset\\\\\\\\.path\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
+      "Bash(grep -n \"layer\\\\\\\\.path\\\\\\\\s*=\\\\|\\\\\\\\.path\\\\\\\\s*=\\\\\\\\s*\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
+      "Bash(grep -n \"imageConfig\\\\\\\\.path\\\\|config\\\\\\\\.path\\\\|asset\\\\\\\\.path\\\\|character\\\\\\\\.markers\" c:/Users/darym/prosa/prosa/AR/js/card-scanner.js)",
+      "Bash(grep -n \"assetBasePath\\\\|asset\\\\\\\\.path\\\\|config\\\\\\\\.path\" c:/Users/darym/prosa/prosa/AR/immersif/js/immersive-webxr.js)",
+      "Bash(grep -n \"soundKey\\\\\\\\]\\\\\\\\.path\\\\|prop === 'path'\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)"
     ]
   }
 }

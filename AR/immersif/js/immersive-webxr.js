@@ -944,7 +944,7 @@ function setupCharacterScene() {
       // Assign fallback order from sorted index if not explicitly set
       if (layer.order == null) layer.order = index;
 
-      const assetPath = CONFIG.assetBasePath + layer.path;
+      const assetPath = CONFIG.assetBasePath + normalizePath(layer.path);
 
       if (layer.type === 'video') {
         loadVideoLayer(layer.key, layer, assetPath);
@@ -974,7 +974,7 @@ function setupCharacterScene() {
       // Assign fallback order from sorted index if not explicitly set
       if (asset.order == null) asset.order = index;
 
-      const assetPath = CONFIG.assetBasePath + asset.path;
+      const assetPath = CONFIG.assetBasePath + normalizePath(asset.path);
 
       if (asset.type === 'video') {
         loadVideoLayer(asset.id, asset, assetPath);
@@ -998,7 +998,7 @@ function setupCharacterScene() {
       console.log('  -> Skipped 3D asset (not visible in immersive):', asset.id);
       return;
     }
-    const assetPath = CONFIG.assetBasePath + asset.path;
+    const assetPath = CONFIG.assetBasePath + normalizePath(asset.path);
     loadGLTFModel(asset.id, asset, assetPath);
   });
   
@@ -1176,15 +1176,18 @@ function loadImageLayer(key, config, path) {
         ? buildBentPlane(aspect, 1, curvature, curveAxis)
         : new THREE.PlaneGeometry(aspect, 1);
 
-      const mat = new THREE.MeshBasicMaterial({
-        map: texture,
-        transparent: true,
-        opacity: config.opacity ?? 1,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-        depthTest: false,
-        alphaTest: 0.01
-      });
+      const useBlur = needsFxShader(config);
+      const mat = useBlur
+        ? makeBlurMaterial(texture, config, texture.image.width, texture.image.height)
+        : new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            opacity: config.opacity ?? 1,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            depthTest: false,
+            alphaTest: 0.01
+          });
 
       const mesh = new THREE.Mesh(geo, mat);
       mesh.frustumCulled = false;
@@ -1224,8 +1227,8 @@ function loadImageLayer(key, config, path) {
   );
 }
 
-// Chroma key shader
-const ChromaKeyShader = {
+// Unified FX shader: optional blur + chroma key + edge smoothing.
+const BlurShader = {
   vertexShader: `
     varying vec2 vUv;
     void main() {
@@ -1235,32 +1238,120 @@ const ChromaKeyShader = {
   `,
   fragmentShader: `
     uniform sampler2D tDiffuse;
+    uniform float blurAmount;
+    uniform float edgeSmoothing;
+    uniform float useChroma;
     uniform vec3 keyColor;
     uniform float similarity;
     uniform float smoothness;
     uniform float spill;
+    uniform vec2 texSize;
+    uniform float opacity;
     varying vec2 vUv;
-    
+
     vec2 RGBtoUV(vec3 rgb) {
       return vec2(
         rgb.r * -0.169 + rgb.g * -0.331 + rgb.b * 0.5 + 0.5,
-        rgb.r * 0.5 + rgb.g * -0.419 + rgb.b * -0.081 + 0.5
+        rgb.r *  0.5   + rgb.g * -0.419 + rgb.b * -0.081 + 0.5
       );
     }
-    
+
     void main() {
-      vec4 texColor = texture2D(tDiffuse, vUv);
-      float chromaDist = distance(RGBtoUV(texColor.rgb), RGBtoUV(keyColor));
-      float alpha = smoothstep(similarity, similarity + smoothness, chromaDist);
-      
-      float convergence = abs(texColor.g - mix(texColor.r, texColor.b, 0.5));
-      float spillMask = smoothstep(0.0, spill, convergence);
-      texColor.g = mix(texColor.g, mix(texColor.r, texColor.b, 0.5), (1.0 - spillMask) * 0.5);
-      
-      gl_FragColor = vec4(texColor.rgb, texColor.a * alpha);
+      vec4 texColor;
+      if (blurAmount <= 0.001) {
+        texColor = texture2D(tDiffuse, vUv);
+      } else {
+        vec2 d = blurAmount / texSize;
+        vec4 sum = vec4(0.0);
+        float total = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            sum += texture2D(tDiffuse, vUv + vec2(fx*d.x, fy*d.y)) * w;
+            total += w;
+          }
+        }
+        texColor = sum / total;
+      }
+
+      float chromaAlpha = 1.0;
+      if (useChroma > 0.5) {
+        float chromaDist = distance(RGBtoUV(texColor.rgb), RGBtoUV(keyColor));
+        chromaAlpha = smoothstep(similarity, similarity + smoothness, chromaDist);
+        float convergence = abs(texColor.g - mix(texColor.r, texColor.b, 0.5));
+        float spillMask = smoothstep(0.0, spill, convergence);
+        texColor.g = mix(texColor.g, mix(texColor.r, texColor.b, 0.5), (1.0 - spillMask) * 0.5);
+      }
+
+      float finalAlpha = texColor.a * chromaAlpha;
+
+      if (edgeSmoothing > 0.001) {
+        vec2 e = edgeSmoothing / texSize;
+        float alphaSum = 0.0;
+        float aTotal = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            float a;
+            if (useChroma > 0.5) {
+              vec3 c = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).rgb;
+              float dist = distance(RGBtoUV(c), RGBtoUV(keyColor));
+              a = smoothstep(similarity, similarity + smoothness, dist);
+            } else {
+              a = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).a;
+            }
+            alphaSum += a * w;
+            aTotal += w;
+          }
+        }
+        float softAlpha = alphaSum / aTotal;
+        finalAlpha = min(finalAlpha, smoothstep(0.0, 0.6, softAlpha));
+      }
+
+      gl_FragColor = vec4(texColor.rgb, finalAlpha * opacity);
     }
   `
 };
+
+function makeBlurMaterial(texture, config, texW, texH) {
+  const hasChroma = !!config.chromaKey;
+  const keyColor = hasChroma ? new THREE.Color(config.chromaKey) : new THREE.Color(0x00ff00);
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      tDiffuse: { value: texture },
+      blurAmount: { value: config.blur || 0 },
+      edgeSmoothing: { value: config.edgeSmoothing || 0 },
+      useChroma: { value: hasChroma ? 1.0 : 0.0 },
+      keyColor: { value: keyColor },
+      similarity: { value: config.tolerance ?? 0.4 },
+      smoothness: { value: config.smoothness ?? 0.08 },
+      spill: { value: config.spill ?? 0.5 },
+      texSize: { value: new THREE.Vector2(texW || 1024, texH || 1024) },
+      opacity: { value: config.opacity ?? 1 }
+    },
+    vertexShader: BlurShader.vertexShader,
+    fragmentShader: BlurShader.fragmentShader,
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    depthTest: false
+  });
+}
+
+function needsFxShader(config) {
+  // Always use the FX shader so config consistency is preserved between editor preview
+  // and runtime, and so blur/edge sliders update live.
+  // Shader fast-paths to a single texture sample when both effects are 0.
+  return true;
+}
+
+function normalizePath(p) {
+  return typeof p === 'string' ? p.replace(/\\/g, '/') : p;
+}
 
 function loadVideoLayer(key, config, path) {
   console.log('Loading video layer:', key, path);
@@ -1271,6 +1362,7 @@ function loadVideoLayer(key, config, path) {
   video.loop = config.loop !== false;
   video.muted = true; // MUST be muted for iOS autoplay
   video.playsInline = true;
+  video.playbackRate = config.speed || 1;
   video.autoplay = true;
   video.setAttribute('playsinline', '');
   video.setAttribute('webkit-playsinline', ''); // iOS Safari
@@ -1302,34 +1394,8 @@ function loadVideoLayer(key, config, path) {
     // Unit-size geometry, scale via mesh.scale (matches editor)
     const geo = new THREE.PlaneGeometry(aspect, 1);
 
-    let mat;
-    if (config.chromaKey) {
-      const keyColor = new THREE.Color(config.chromaKey);
-      mat = new THREE.ShaderMaterial({
-        uniforms: {
-          tDiffuse: { value: videoTexture },
-          keyColor: { value: keyColor },
-          similarity: { value: config.tolerance || 0.4 },
-          smoothness: { value: config.smoothness || 0.08 },
-          spill: { value: config.spill || 0.1 }
-        },
-        vertexShader: ChromaKeyShader.vertexShader,
-        fragmentShader: ChromaKeyShader.fragmentShader,
-        transparent: true,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-        depthTest: false
-      });
-    } else {
-      mat = new THREE.MeshBasicMaterial({
-        map: videoTexture,
-        transparent: true,
-        opacity: config.opacity ?? 1,
-        side: THREE.DoubleSide,
-        depthWrite: false,
-        depthTest: false
-      });
-    }
+    // Unified FX shader handles chroma key, blur, edge smoothing — and the no-effect case.
+    const mat = makeBlurMaterial(videoTexture, config, video.videoWidth, video.videoHeight);
 
     const mesh = new THREE.Mesh(geo, mat);
     mesh.frustumCulled = false;
@@ -1428,7 +1494,7 @@ function setupCharacterSound() {
       return;
     }
 
-    const soundPath = CONFIG.assetBasePath + soundConfig.path;
+    const soundPath = CONFIG.assetBasePath + normalizePath(soundConfig.path);
     console.log('Loading character sound:', key, soundPath);
 
     const audio = document.createElement('audio');

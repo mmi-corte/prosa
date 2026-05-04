@@ -28,6 +28,130 @@ let textureLoader;
 
 // Track loaded content per character
 const characterAnchors = {};
+
+const BlurShader = {
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float blurAmount;
+    uniform float edgeSmoothing;
+    uniform float useChroma;
+    uniform vec3 keyColor;
+    uniform float similarity;
+    uniform float smoothness;
+    uniform float spill;
+    uniform vec2 texSize;
+    uniform float opacity;
+    varying vec2 vUv;
+
+    vec2 RGBtoUV(vec3 rgb) {
+      return vec2(
+        rgb.r * -0.169 + rgb.g * -0.331 + rgb.b * 0.5 + 0.5,
+        rgb.r *  0.5   + rgb.g * -0.419 + rgb.b * -0.081 + 0.5
+      );
+    }
+
+    void main() {
+      vec4 texColor;
+      if (blurAmount <= 0.001) {
+        texColor = texture2D(tDiffuse, vUv);
+      } else {
+        vec2 d = blurAmount / texSize;
+        vec4 sum = vec4(0.0);
+        float total = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            sum += texture2D(tDiffuse, vUv + vec2(fx*d.x, fy*d.y)) * w;
+            total += w;
+          }
+        }
+        texColor = sum / total;
+      }
+
+      float chromaAlpha = 1.0;
+      if (useChroma > 0.5) {
+        float chromaDist = distance(RGBtoUV(texColor.rgb), RGBtoUV(keyColor));
+        chromaAlpha = smoothstep(similarity, similarity + smoothness, chromaDist);
+        float convergence = abs(texColor.g - mix(texColor.r, texColor.b, 0.5));
+        float spillMask = smoothstep(0.0, spill, convergence);
+        texColor.g = mix(texColor.g, mix(texColor.r, texColor.b, 0.5), (1.0 - spillMask) * 0.5);
+      }
+
+      float finalAlpha = texColor.a * chromaAlpha;
+
+      if (edgeSmoothing > 0.001) {
+        vec2 e = edgeSmoothing / texSize;
+        float alphaSum = 0.0;
+        float aTotal = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            float a;
+            if (useChroma > 0.5) {
+              vec3 c = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).rgb;
+              float dist = distance(RGBtoUV(c), RGBtoUV(keyColor));
+              a = smoothstep(similarity, similarity + smoothness, dist);
+            } else {
+              a = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).a;
+            }
+            alphaSum += a * w;
+            aTotal += w;
+          }
+        }
+        float softAlpha = alphaSum / aTotal;
+        finalAlpha = min(finalAlpha, smoothstep(0.0, 0.6, softAlpha));
+      }
+
+      gl_FragColor = vec4(texColor.rgb, finalAlpha * opacity);
+    }
+  `
+};
+
+function makeBlurMaterial(texture, config, texW, texH) {
+  const hasChroma = !!config.chromaKey;
+  const keyColor = hasChroma ? new THREE.Color(config.chromaKey) : new THREE.Color(0x00ff00);
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      tDiffuse: { value: texture },
+      blurAmount: { value: config.blur || 0 },
+      edgeSmoothing: { value: config.edgeSmoothing || 0 },
+      useChroma: { value: hasChroma ? 1.0 : 0.0 },
+      keyColor: { value: keyColor },
+      similarity: { value: config.tolerance ?? 0.4 },
+      smoothness: { value: config.smoothness ?? 0.08 },
+      spill: { value: config.spill ?? 0.5 },
+      texSize: { value: new THREE.Vector2(texW || 1024, texH || 1024) },
+      opacity: { value: config.opacity ?? 1 }
+    },
+    vertexShader: BlurShader.vertexShader,
+    fragmentShader: BlurShader.fragmentShader,
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    depthTest: false
+  });
+}
+
+function needsFxShader(config) {
+  // Always use the FX shader for consistency with editor preview & immersive engine.
+  // Shader fast-paths to a single texture sample when both effects are 0.
+  return true;
+}
+
+function normalizePath(p) {
+  return typeof p === 'string' ? p.replace(/\\/g, '/') : p;
+}
 const characterContent = {};
 const activeCharacters = {};
 const playedIntros = {};
@@ -421,7 +545,7 @@ async function loadSingle2DImage(imageConfig, contentGroup, characterId) {
   console.log('Loading 2D image:', imageConfig.path, 'for', characterId);
   
   try {
-    const texture = await textureLoader.loadAsync(imageConfig.path);
+    const texture = await textureLoader.loadAsync(normalizePath(imageConfig.path));
     console.log('Texture loaded successfully:', imageConfig.path);
     
     // Get aspect ratio from texture
@@ -439,14 +563,17 @@ async function loadSingle2DImage(imageConfig, contentGroup, characterId) {
     const planeHeight = scale;
     
     const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      opacity: imageConfig.opacity !== undefined ? imageConfig.opacity : 1,
-      side: THREE.DoubleSide,
-      depthWrite: true
-    });
-    
+    const useBlur = needsFxShader(imageConfig);
+    const material = useBlur
+      ? makeBlurMaterial(texture, imageConfig, imageWidth, imageHeight)
+      : new THREE.MeshBasicMaterial({
+          map: texture,
+          transparent: true,
+          opacity: imageConfig.opacity !== undefined ? imageConfig.opacity : 1,
+          side: THREE.DoubleSide,
+          depthWrite: true
+        });
+
     const plane = new THREE.Mesh(geometry, material);
     
     // Position the plane - lift it up from marker surface

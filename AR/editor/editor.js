@@ -1424,7 +1424,7 @@ function save2DAsset(char, index, visibleIn) {
   
   const asset = {
     id: document.getElementById('modal-asset-id').value,
-    path: document.getElementById('modal-asset-path').value,
+    path: normalizePath(document.getElementById('modal-asset-path').value),
     scale: parseFloat(document.getElementById('modal-asset-scale').value) || 1,
     opacity: parseFloat(document.getElementById('modal-asset-opacity').value) || 1,
     position: {
@@ -1453,7 +1453,7 @@ function save3DAsset(char, index, visibleIn) {
   
   const asset = {
     id: document.getElementById('modal-asset-id').value,
-    path: document.getElementById('modal-asset-path').value,
+    path: normalizePath(document.getElementById('modal-asset-path').value),
     scale: {
       x: parseFloat(document.getElementById('modal-scale-x').value) || 0.1,
       y: parseFloat(document.getElementById('modal-scale-y').value) || 0.1,
@@ -1496,7 +1496,7 @@ function saveLayer(char, existingKey, visibleIn) {
   const isVideo = document.getElementById('modal-layer-type').value === 'video';
   
   const layer = {
-    path: document.getElementById('modal-asset-path').value,
+    path: normalizePath(document.getElementById('modal-asset-path').value),
     scale: parseFloat(document.getElementById('modal-layer-scale').value) || 2,
     order: parseFloat(document.getElementById('modal-layer-order').value) || 0,
     position: {
@@ -1540,7 +1540,7 @@ function saveSound(char, existingKey, visibleIn) {
   }
   
   const sound = {
-    path: document.getElementById('modal-asset-path').value,
+    path: normalizePath(document.getElementById('modal-asset-path').value),
     volume: parseFloat(document.getElementById('modal-sound-volume').value) || 0.7,
     loop: document.getElementById('modal-sound-loop').value === 'true',
     visibleIn
@@ -2086,15 +2086,10 @@ const thumbnailRenderer = {
   }
 };
 
-// Chroma key shader for green screen removal in preview
-const ChromaKeyShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    keyColor: { value: new THREE.Color(0x00ff00) },
-    similarity: { value: 0.4 },
-    smoothness: { value: 0.08 },
-    spill: { value: 0.1 }
-  },
+
+// Unified FX shader: optional blur + chroma key + edge smoothing.
+// Each effect short-circuits when its driving uniform is at its zero value.
+const BlurShader = {
   vertexShader: `
     varying vec2 vUv;
     void main() {
@@ -2104,30 +2099,119 @@ const ChromaKeyShader = {
   `,
   fragmentShader: `
     uniform sampler2D tDiffuse;
+    uniform float blurAmount;
+    uniform float edgeSmoothing;
+    uniform float useChroma;
     uniform vec3 keyColor;
     uniform float similarity;
     uniform float smoothness;
     uniform float spill;
+    uniform vec2 texSize;
+    uniform float opacity;
     varying vec2 vUv;
-    
+
     vec2 RGBtoUV(vec3 rgb) {
       return vec2(
         rgb.r * -0.169 + rgb.g * -0.331 + rgb.b * 0.5 + 0.5,
-        rgb.r * 0.5 + rgb.g * -0.419 + rgb.b * -0.081 + 0.5
+        rgb.r *  0.5   + rgb.g * -0.419 + rgb.b * -0.081 + 0.5
       );
     }
-    
+
     void main() {
-      vec4 texColor = texture2D(tDiffuse, vUv);
-      float chromaDist = distance(RGBtoUV(texColor.rgb), RGBtoUV(keyColor));
-      float alpha = smoothstep(similarity, similarity + smoothness, chromaDist);
-      float convergence = abs(texColor.g - mix(texColor.r, texColor.b, 0.5));
-      float spillMask = smoothstep(0.0, spill, convergence);
-      texColor.g = mix(texColor.g, mix(texColor.r, texColor.b, 0.5), (1.0 - spillMask) * 0.5);
-      gl_FragColor = vec4(texColor.rgb, texColor.a * alpha);
+      vec4 texColor;
+      if (blurAmount <= 0.001) {
+        texColor = texture2D(tDiffuse, vUv);
+      } else {
+        vec2 d = blurAmount / texSize;
+        vec4 sum = vec4(0.0);
+        float total = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            sum += texture2D(tDiffuse, vUv + vec2(fx*d.x, fy*d.y)) * w;
+            total += w;
+          }
+        }
+        texColor = sum / total;
+      }
+
+      float chromaAlpha = 1.0;
+      if (useChroma > 0.5) {
+        float chromaDist = distance(RGBtoUV(texColor.rgb), RGBtoUV(keyColor));
+        chromaAlpha = smoothstep(similarity, similarity + smoothness, chromaDist);
+        float convergence = abs(texColor.g - mix(texColor.r, texColor.b, 0.5));
+        float spillMask = smoothstep(0.0, spill, convergence);
+        texColor.g = mix(texColor.g, mix(texColor.r, texColor.b, 0.5), (1.0 - spillMask) * 0.5);
+      }
+
+      float finalAlpha = texColor.a * chromaAlpha;
+
+      if (edgeSmoothing > 0.001) {
+        vec2 e = edgeSmoothing / texSize;
+        float alphaSum = 0.0;
+        float aTotal = 0.0;
+        for (int x = -2; x <= 2; x++) {
+          for (int y = -2; y <= 2; y++) {
+            float fx = float(x);
+            float fy = float(y);
+            float w = exp(-(fx*fx + fy*fy) * 0.4);
+            float a;
+            if (useChroma > 0.5) {
+              vec3 c = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).rgb;
+              float dist = distance(RGBtoUV(c), RGBtoUV(keyColor));
+              a = smoothstep(similarity, similarity + smoothness, dist);
+            } else {
+              a = texture2D(tDiffuse, vUv + vec2(fx*e.x, fy*e.y)).a;
+            }
+            alphaSum += a * w;
+            aTotal += w;
+          }
+        }
+        float softAlpha = alphaSum / aTotal;
+        finalAlpha = min(finalAlpha, smoothstep(0.0, 0.6, softAlpha));
+      }
+
+      gl_FragColor = vec4(texColor.rgb, finalAlpha * opacity);
     }
   `
 };
+
+function makeBlurMaterial(texture, config, texW, texH) {
+  const hasChroma = !!config.chromaKey;
+  const keyColor = hasChroma ? new THREE.Color(config.chromaKey) : new THREE.Color(0x00ff00);
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      tDiffuse: { value: texture },
+      blurAmount: { value: config.blur || 0 },
+      edgeSmoothing: { value: config.edgeSmoothing || 0 },
+      useChroma: { value: hasChroma ? 1.0 : 0.0 },
+      keyColor: { value: keyColor },
+      similarity: { value: config.tolerance ?? 0.4 },
+      smoothness: { value: config.smoothness ?? 0.08 },
+      spill: { value: config.spill ?? 0.5 },
+      texSize: { value: new THREE.Vector2(texW || 1024, texH || 1024) },
+      opacity: { value: config.opacity ?? 1 }
+    },
+    vertexShader: BlurShader.vertexShader,
+    fragmentShader: BlurShader.fragmentShader,
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    depthTest: false
+  });
+}
+
+function needsFxShader(config) {
+  // Always use the FX shader so blur/edge sliders update live without scene reload.
+  // The shader fast-paths to a single texture sample when both effects are 0.
+  return true;
+}
+
+function normalizePath(p) {
+  return typeof p === 'string' ? p.replace(/\\/g, '/') : p;
+}
 
 function openPreview() {
   const char = getSelectedCharacter();
@@ -2362,7 +2446,7 @@ function loadPreviewAssets(char) {
       const shouldBeVisible = !asset.visibleIn || asset.visibleIn.includes('scan');
       
       const promise = new Promise((resolve) => {
-        const assetPath = '../' + asset.path;
+        const assetPath = '../' + normalizePath(asset.path);
         textureLoader.load(assetPath, (texture) => {
           const ratio = texture.image.width / texture.image.height;
           const scale = asset.scale || 1;
@@ -2370,15 +2454,18 @@ function loadPreviewAssets(char) {
           const curveAxis = asset.curveAxis || 'x';
           const shape = curvature > 0.01 ? 'bend' : 'plane';
           const geo = buildWrapGeometry(shape, curvature, ratio, curveAxis);
-          const mat = new THREE.MeshBasicMaterial({
-            map: texture,
-            transparent: true,
-            opacity: asset.opacity ?? 1,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-            depthTest: false,
-            alphaTest: 0.01
-          });
+          const useBlur = needsFxShader(asset);
+          const mat = useBlur
+            ? makeBlurMaterial(texture, asset, texture.image.width, texture.image.height)
+            : new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
+                opacity: asset.opacity ?? 1,
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                depthTest: false,
+                alphaTest: 0.01
+              });
           const mesh = new THREE.Mesh(geo, mat);
           const scaleX = asset.scaleX || 1;
           const scaleY = asset.scaleY || 1;
@@ -2425,7 +2512,7 @@ function loadPreviewAssets(char) {
       
       const promise = new Promise((resolve) => {
         const loader = new THREE.GLTFLoader();
-        const assetPath = '../' + asset.path;
+        const assetPath = '../' + normalizePath(asset.path);
         loader.load(assetPath, (gltf) => {
           const model = gltf.scene;
           const scale = asset.scale || 1;
@@ -2529,11 +2616,12 @@ function loadPreviewAssets(char) {
           if (isVideo) {
             // Create video texture - wait for metadata before creating mesh
             const video = document.createElement('video');
-            video.src = '../' + layer.path;
+            video.src = '../' + normalizePath(layer.path);
             video.crossOrigin = 'anonymous';
             video.loop = layer.loop ?? true;
             video.muted = true;
             video.playsInline = true;
+            video.playbackRate = layer.speed || 1;
             
             video.addEventListener('loadedmetadata', () => {
               const videoTexture = new THREE.VideoTexture(video);
@@ -2548,34 +2636,8 @@ function loadPreviewAssets(char) {
               const scale = layer.scale || 1;
               const geo = new THREE.PlaneGeometry(aspect, 1);
               
-              // Use chroma key shader if chromaKey is specified
-              let mat;
-              if (layer.chromaKey) {
-                const keyColor = new THREE.Color(layer.chromaKey);
-                mat = new THREE.ShaderMaterial({
-                  uniforms: {
-                    tDiffuse: { value: videoTexture },
-                    keyColor: { value: keyColor },
-                    similarity: { value: layer.tolerance || 0.4 },
-                    smoothness: { value: layer.smoothness || 0.08 },
-                    spill: { value: layer.spill || 0.1 }
-                  },
-                  vertexShader: ChromaKeyShader.vertexShader,
-                  fragmentShader: ChromaKeyShader.fragmentShader,
-                  transparent: true,
-                  side: THREE.DoubleSide,
-                  depthWrite: false,
-                  depthTest: false
-                });
-              } else {
-                mat = new THREE.MeshBasicMaterial({
-                  map: videoTexture,
-                  transparent: true,
-                  side: THREE.DoubleSide,
-                  depthWrite: false,
-                  depthTest: false
-                });
-              }
+              // Unified FX shader handles chroma key, blur, edge smoothing — and the no-effect case.
+              const mat = makeBlurMaterial(videoTexture, layer, video.videoWidth, video.videoHeight);
               const mesh = new THREE.Mesh(geo, mat);
               // Apply scaleX/scaleY for stretch if specified (like in-game)
               const scaleX = layer.scaleX || 1;
@@ -2612,14 +2674,21 @@ function loadPreviewAssets(char) {
             });
             
             video.addEventListener('error', (e) => {
-              console.error('Video load error:', layer.path, e);
+              const codes = { 1: 'aborted', 2: 'network', 3: 'decode', 4: 'src/codec not supported' };
+              const errCode = video.error?.code;
+              console.error(
+                'Video load error:',
+                video.src,
+                '— code', errCode, codes[errCode] || 'unknown',
+                video.error?.message || ''
+              );
               resolve();
             });
             
             video.load();
             
           } else {
-            const assetPath = '../' + layer.path;
+            const assetPath = '../' + normalizePath(layer.path);
             textureLoader.load(assetPath, (texture) => {
               const ratio = texture.image.width / texture.image.height;
               const scale = layer.scale || 1;
@@ -2627,14 +2696,17 @@ function loadPreviewAssets(char) {
               const curveAxisL = layer.curveAxis || 'x';
               const lShape = curvature > 0.01 ? 'bend' : 'plane';
               const geo = buildWrapGeometry(lShape, curvature, ratio, curveAxisL);
-              const mat = new THREE.MeshBasicMaterial({
-                map: texture,
-                transparent: true,
-                side: THREE.DoubleSide,
-                depthWrite: false,
-                depthTest: false,
-                alphaTest: 0.01
-              });
+              const useBlur = needsFxShader(layer);
+              const mat = useBlur
+                ? makeBlurMaterial(texture, layer, texture.image.width, texture.image.height)
+                : new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                    depthTest: false,
+                    alphaTest: 0.01
+                  });
               const mesh = new THREE.Mesh(geo, mat);
               // Apply scaleX/scaleY for stretch if specified (like in-game)
               const scaleX = layer.scaleX || 1;
@@ -2687,7 +2759,7 @@ function loadPreviewAssets(char) {
         const shouldBeVisible = !asset.visibleIn || asset.visibleIn.includes('immersive');
         
         const promise = new Promise((resolve) => {
-          const assetPath = '../' + asset.path;
+          const assetPath = '../' + normalizePath(asset.path);
           textureLoader.load(assetPath, (texture) => {
             const ratio = texture.image.width / texture.image.height;
             const scale = asset.scale || 1;
@@ -2695,15 +2767,18 @@ function loadPreviewAssets(char) {
             const curveAxisI = asset.curveAxis || 'x';
             const iShape = curvature > 0.01 ? 'bend' : 'plane';
             const geo = buildWrapGeometry(iShape, curvature, ratio, curveAxisI);
-            const mat = new THREE.MeshBasicMaterial({
-              map: texture,
-              transparent: true,
-              opacity: asset.opacity ?? 1,
-              side: THREE.DoubleSide,
-              depthWrite: false,
-              depthTest: false,
-              alphaTest: 0.01
-            });
+            const useBlur = (asset.blur || 0) > 0;
+            const mat = useBlur
+              ? makeBlurMaterial(texture, asset, texture.image.width, texture.image.height)
+              : new THREE.MeshBasicMaterial({
+                  map: texture,
+                  transparent: true,
+                  opacity: asset.opacity ?? 1,
+                  side: THREE.DoubleSide,
+                  depthWrite: false,
+                  depthTest: false,
+                  alphaTest: 0.01
+                });
             const mesh = new THREE.Mesh(geo, mat);
             const scaleX = asset.scaleX || 1;
             const scaleY = asset.scaleY || 1;
@@ -2750,7 +2825,7 @@ function loadPreviewAssets(char) {
       
       const promise = new Promise((resolve) => {
         const loader = new THREE.GLTFLoader();
-        const assetPath = '../' + asset.path;
+        const assetPath = '../' + normalizePath(asset.path);
         loader.load(assetPath, (gltf) => {
           const model = gltf.scene;
           const scale = asset.scale || 1;
@@ -3381,12 +3456,38 @@ function createAssetControlCard(asset, assetType, index, icon) {
           <span>Opacity</span>
           <span class="preview-control-value" id="opacity-val-${assetType}-${index}">${(asset.opacity ?? 1).toFixed(2)}</span>
         </div>
-        <input type="range" class="preview-slider" 
-          min="0" max="1" step="0.01" 
+        <input type="range" class="preview-slider"
+          min="0" max="1" step="0.01"
           value="${asset.opacity ?? 1}"
           data-prop="opacity" data-type="${assetType}" data-index="${index}"
           oninput="updatePreviewAsset(this)">
       </div>
+      ${assetType === '2d' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Blur</span>
+          <span class="preview-control-value" id="blur-val-${assetType}-${index}">${(asset.blur || 0).toFixed(0)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="30" step="1"
+          value="${asset.blur || 0}"
+          data-prop="blur" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">0 = sharp · higher = more blur (pixels)</small>
+      </div>
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Edge Smoothing</span>
+          <span class="preview-control-value" id="edgeSmoothing-val-${assetType}-${index}">${(asset.edgeSmoothing || 0).toFixed(0)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="20" step="1"
+          value="${asset.edgeSmoothing || 0}"
+          data-prop="edgeSmoothing" data-type="${assetType}" data-index="${index}"
+          oninput="updatePreviewAsset(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">Softens hard alpha edges of cutout images</small>
+      </div>
+      ` : ''}
 
       <div class="preview-control-group">
         <label class="preview-checkbox-label">
@@ -3727,6 +3828,47 @@ function createLayerControlCard(key, layer, icon) {
       ` : ''}
 
       <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Blur</span>
+          <span class="preview-control-value" id="blur-val-layer-${key}">${(layer.blur || 0).toFixed(0)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="30" step="1"
+          value="${layer.blur || 0}"
+          data-prop="blur" data-layer="${key}"
+          oninput="updatePreviewLayer(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">0 = sharp · higher = more blur (pixels)</small>
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Edge Smoothing</span>
+          <span class="preview-control-value" id="edgeSmoothing-val-layer-${key}">${(layer.edgeSmoothing || 0).toFixed(0)}</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="20" step="1"
+          value="${layer.edgeSmoothing || 0}"
+          data-prop="edgeSmoothing" data-layer="${key}"
+          oninput="updatePreviewLayer(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">Softens hard alpha edges (works with chroma key too)</small>
+      </div>
+
+      ${layer.type === 'video' ? `
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Playback Speed</span>
+          <span class="preview-control-value" id="speed-val-layer-${key}">${(layer.speed || 1).toFixed(2)}x</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0.25" max="3" step="0.05"
+          value="${layer.speed || 1}"
+          data-prop="speed" data-layer="${key}"
+          oninput="updatePreviewLayer(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">1.00 = normal speed</small>
+      </div>
+      ` : ''}
+
+      <div class="preview-control-group">
         <label class="preview-checkbox-label">
           <input type="checkbox" ${layer.billboard !== false ? 'checked' : ''}
             data-prop="billboard" data-layer="${key}"
@@ -3734,7 +3876,7 @@ function createLayerControlCard(key, layer, icon) {
           <span>Always face camera (billboard)</span>
         </label>
       </div>
-      
+
       <div class="preview-control-group">
         <div class="preview-control-label"><span>Visibility</span></div>
         <div class="preview-visibility-row">
@@ -4061,7 +4203,7 @@ function updatePreviewSound(input) {
   if (audioInfo?.audio) {
     if (prop === 'volume') audioInfo.audio.volume = value;
     else if (prop === 'loop') audioInfo.audio.loop = value;
-    else if (prop === 'path') { audioInfo.audio.src = '../' + value; }
+    else if (prop === 'path') { audioInfo.audio.src = '../' + normalizePath(value); }
   }
 
   // Update 3D sound indicator mesh
@@ -4121,7 +4263,7 @@ function updatePreviewSound(input) {
       } else if (prop === 'loop') {
         char.sounds[soundKey].loop = value;
       } else if (prop === 'path') {
-        char.sounds[soundKey].path = value;
+        char.sounds[soundKey].path = normalizePath(value);
       } else if (prop.startsWith('visibleIn.')) {
         const mode = prop.split('.')[1];
         let currentVisibleIn = char.sounds[soundKey].visibleIn;
@@ -4418,7 +4560,40 @@ function updatePreviewAsset(input) {
     if (!mesh.userData.baseRotation) mesh.userData.baseRotation = { x: 0, y: 0, z: 0 };
     mesh.userData.baseRotation[axis] = value;
   } else if (prop === 'opacity') {
-    if (mesh.material) mesh.material.opacity = value;
+    if (mesh.material) {
+      mesh.material.opacity = value;
+      if (mesh.material.uniforms?.opacity) mesh.material.uniforms.opacity.value = value;
+    }
+  } else if (prop === 'blur') {
+    // Live update if shader material; otherwise reload to swap material
+    if (mesh.material?.uniforms?.blurAmount) {
+      mesh.material.uniforms.blurAmount.value = value;
+      const valDisplay = document.getElementById(`blur-val-${assetType}-${index}`);
+      if (valDisplay) valDisplay.textContent = value.toFixed(0);
+    } else if (value > 0) {
+      // Switching from basic material to shader requires scene reload
+      const char = getSelectedCharacter();
+      if (char?.assets?.[assetType]?.[index]) {
+        char.assets[assetType][index].blur = value;
+        markUnsaved();
+        loadPreviewAssets(char);
+        return;
+      }
+    }
+  } else if (prop === 'edgeSmoothing') {
+    if (mesh.material?.uniforms?.edgeSmoothing) {
+      mesh.material.uniforms.edgeSmoothing.value = value;
+      const valDisplay = document.getElementById(`edgeSmoothing-val-${assetType}-${index}`);
+      if (valDisplay) valDisplay.textContent = value.toFixed(0);
+    } else if (value > 0) {
+      const char = getSelectedCharacter();
+      if (char?.assets?.[assetType]?.[index]) {
+        char.assets[assetType][index].edgeSmoothing = value;
+        markUnsaved();
+        loadPreviewAssets(char);
+        return;
+      }
+    }
   } else if (prop === 'order') {
     mesh.renderOrder = Math.round(value * 10);
   } else if (prop === 'billboard') {
@@ -4521,6 +4696,10 @@ function updatePreviewAsset(input) {
         char.assets[assetType][index].rotation[axis] = value;
       } else if (prop === 'opacity') {
         char.assets[assetType][index].opacity = value;
+      } else if (prop === 'blur') {
+        char.assets[assetType][index].blur = value;
+      } else if (prop === 'edgeSmoothing') {
+        char.assets[assetType][index].edgeSmoothing = value;
       } else if (prop === 'order') {
         char.assets[assetType][index].order = value;
       } else if (prop === 'billboard') {
@@ -4637,6 +4816,40 @@ function updatePreviewLayer(input) {
     if (valDisplay) valDisplay.textContent = value.toFixed(1);
   } else if (prop === 'order') {
     mesh.renderOrder = Math.round(value * 10);
+  } else if (prop === 'blur') {
+    // Live update if shader material; otherwise reload to swap material
+    const valDisplay = document.getElementById(`blur-val-layer-${layerKey}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(0);
+    if (mesh.material?.uniforms?.blurAmount) {
+      mesh.material.uniforms.blurAmount.value = value;
+    } else if (value > 0) {
+      const char = getSelectedCharacter();
+      if (char?.layers?.[layerKey]) {
+        char.layers[layerKey].blur = value;
+        markUnsaved();
+        loadPreviewAssets(char);
+        return;
+      }
+    }
+  } else if (prop === 'edgeSmoothing') {
+    const valDisplay = document.getElementById(`edgeSmoothing-val-layer-${layerKey}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(0);
+    if (mesh.material?.uniforms?.edgeSmoothing) {
+      mesh.material.uniforms.edgeSmoothing.value = value;
+    } else if (value > 0) {
+      const char = getSelectedCharacter();
+      if (char?.layers?.[layerKey]) {
+        char.layers[layerKey].edgeSmoothing = value;
+        markUnsaved();
+        loadPreviewAssets(char);
+        return;
+      }
+    }
+  } else if (prop === 'speed') {
+    const valDisplay = document.getElementById(`speed-val-layer-${layerKey}`);
+    if (valDisplay) valDisplay.textContent = value.toFixed(2) + 'x';
+    const videoInfo = preview.videos?.find(v => v.layerKey === layerKey);
+    if (videoInfo?.video) videoInfo.video.playbackRate = value;
   } else if (prop === 'billboard') {
     // Store billboard setting on mesh userData for preview render loop
     mesh.userData.billboard = value;
@@ -4720,25 +4933,36 @@ function updatePreviewLayer(input) {
       }
     }
   } else if (prop === 'chromaKeyEnabled') {
-    // Toggle chroma keying — requires scene reload to swap material
+    // Live toggle via uniform — unified shader handles both states.
     const char = getSelectedCharacter();
     if (char?.layers?.[layerKey]) {
       if (value) {
         const card = input.closest('.preview-asset-card');
         const colorInput = card.querySelector('[data-prop="chromaKey"]');
-        char.layers[layerKey].chromaKey = colorInput?.value || '#00FF00';
+        const hex = colorInput?.value || '#00FF00';
+        char.layers[layerKey].chromaKey = hex;
         char.layers[layerKey].tolerance = char.layers[layerKey].tolerance ?? 0.4;
         char.layers[layerKey].smoothness = char.layers[layerKey].smoothness ?? 0.08;
         char.layers[layerKey].spill = char.layers[layerKey].spill ?? 0.5;
+        if (mesh.material?.uniforms?.useChroma) {
+          mesh.material.uniforms.useChroma.value = 1.0;
+          if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+            const r = parseInt(hex.slice(1, 3), 16) / 255;
+            const g = parseInt(hex.slice(3, 5), 16) / 255;
+            const b = parseInt(hex.slice(5, 7), 16) / 255;
+            mesh.material.uniforms.keyColor.value.set(r, g, b);
+          }
+        }
       } else {
         delete char.layers[layerKey].chromaKey;
         delete char.layers[layerKey].tolerance;
         delete char.layers[layerKey].smoothness;
         delete char.layers[layerKey].spill;
+        if (mesh.material?.uniforms?.useChroma) {
+          mesh.material.uniforms.useChroma.value = 0.0;
+        }
       }
       markUnsaved();
-      loadPreviewAssets(char);
-      return;
     }
   }
   
@@ -4775,6 +4999,12 @@ function updatePreviewLayer(input) {
         delete char.layers[layerKey].wrapRadius;
       } else if (prop === 'order') {
         char.layers[layerKey].order = value;
+      } else if (prop === 'blur') {
+        char.layers[layerKey].blur = value;
+      } else if (prop === 'edgeSmoothing') {
+        char.layers[layerKey].edgeSmoothing = value;
+      } else if (prop === 'speed') {
+        char.layers[layerKey].speed = value;
       } else if (prop === 'billboard') {
         char.layers[layerKey].billboard = value;
       } else if (prop === 'volume') {

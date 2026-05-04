@@ -127,7 +127,8 @@
             "billboard": false,
             "order": 0,
             "scaleY": 2.48,
-            "scaleX": 1.49
+            "scaleX": 1.49,
+            "edgeSmoothing": 1
           }
         ],
         "3d": [
@@ -173,15 +174,17 @@
             "z": 2
           },
           "curvature": 2.3,
-          "scaleZ": 4.57
+          "scaleZ": 4.57,
+          "blur": 1,
+          "edgeSmoothing": 10
         },
         "waterfall": {
           "type": "video",
           "path": "assets/video/waterfall_greenscreen.mp4",
           "chromaKey": "#00FF00",
           "tolerance": 0.4,
-          "smoothness": 0.08,
-          "spill": 0.5,
+          "smoothness": 0.074,
+          "spill": 0.81,
           "scale": 4.6,
           "position": {
             "x": -0.54,
@@ -195,7 +198,9 @@
             "immersive"
           ],
           "scaleX": 1,
-          "billboard": false
+          "billboard": false,
+          "edgeSmoothing": 3,
+          "blur": 1
         },
         "middleground": {
           "path": "assets/img/characters/fata/fata_layer_mid.png",
@@ -213,7 +218,8 @@
           "scaleX": 1.24,
           "curvature": 2.3,
           "scaleZ": 1.87,
-          "scaleY": 1.5
+          "scaleY": 1.5,
+          "edgeSmoothing": 5
         },
         "character": {
           "path": "assets/img/characters/fata/fata_char.png",
@@ -255,7 +261,38 @@
             "x": -72,
             "y": 0,
             "z": 0
-          }
+          },
+          "edgeSmoothing": 10
+        },
+        "sky": {
+          "path": "assets\\video\\clouds.mp4",
+          "scale": 50,
+          "order": 0,
+          "position": {
+            "x": 0,
+            "y": 20,
+            "z": -5
+          },
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "type": "video",
+          "loop": true,
+          "muted": true,
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "billboard": true,
+          "chromaKey": "#00ff00",
+          "tolerance": 0.4,
+          "smoothness": 0.127,
+          "spill": 0.5,
+          "speed": 0.25,
+          "edgeSmoothing": 16,
+          "blur": 0
         }
       },
       "sounds": {
