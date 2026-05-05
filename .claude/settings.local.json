@@ -32,7 +32,10 @@
       "Bash(grep -n \"layer\\\\\\\\.path\\\\\\\\s*=\\\\|\\\\\\\\.path\\\\\\\\s*=\\\\\\\\s*\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
       "Bash(grep -n \"imageConfig\\\\\\\\.path\\\\|config\\\\\\\\.path\\\\|asset\\\\\\\\.path\\\\|character\\\\\\\\.markers\" c:/Users/darym/prosa/prosa/AR/js/card-scanner.js)",
       "Bash(grep -n \"assetBasePath\\\\|asset\\\\\\\\.path\\\\|config\\\\\\\\.path\" c:/Users/darym/prosa/prosa/AR/immersif/js/immersive-webxr.js)",
-      "Bash(grep -n \"soundKey\\\\\\\\]\\\\\\\\.path\\\\|prop === 'path'\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)"
+      "Bash(grep -n \"soundKey\\\\\\\\]\\\\\\\\.path\\\\|prop === 'path'\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
+      "Bash(grep -n \"createSoundControlCard\\\\|preview\\\\.audios\\\\|sound\\\\\\\\.loop\\\\|audio\\\\\\\\.loop\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)",
+      "Bash(grep -n \"allSounds\\\\\\\\b\" c:/Users/darym/prosa/prosa/AR/immersif/js/immersive-webxr.js)",
+      "Bash(grep -n \"preview\\\\\\\\.audios = \\\\\\\\[\\\\\\\\]\" c:/Users/darym/prosa/prosa/AR/editor/editor.js)"
     ]
   }
 }

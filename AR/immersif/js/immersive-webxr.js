@@ -1353,6 +1353,34 @@ function normalizePath(p) {
   return typeof p === 'string' ? p.replace(/\\/g, '/') : p;
 }
 
+// Configure looping with optional inter-loop pause (seconds). When pause > 0,
+// native HTMLMediaElement loop is disabled and we restart manually after a timeout.
+function applyAudioLoopBehavior(audio, sound) {
+  if (!audio) return;
+  if (audio._loopTimeout) {
+    clearTimeout(audio._loopTimeout);
+    audio._loopTimeout = null;
+  }
+  if (audio._loopEndedHandler) {
+    audio.removeEventListener('ended', audio._loopEndedHandler);
+    audio._loopEndedHandler = null;
+  }
+  const wantLoop = sound.loop !== false;
+  const pauseSec = Math.max(0, sound.loopPause || 0);
+  if (wantLoop && pauseSec > 0) {
+    audio.loop = false;
+    const handler = () => {
+      audio._loopTimeout = setTimeout(() => {
+        try { audio.currentTime = 0; audio.play().catch(() => {}); } catch (_) {}
+      }, pauseSec * 1000);
+    };
+    audio._loopEndedHandler = handler;
+    audio.addEventListener('ended', handler);
+  } else {
+    audio.loop = wantLoop;
+  }
+}
+
 function loadVideoLayer(key, config, path) {
   console.log('Loading video layer:', key, path);
   
@@ -1499,12 +1527,12 @@ function setupCharacterSound() {
 
     const audio = document.createElement('audio');
     audio.src = soundPath;
-    audio.loop = soundConfig.loop !== false;
     audio.preload = 'auto';
     audio.crossOrigin = 'anonymous';
     audio.setAttribute('playsinline', '');
     audio.style.display = 'none';
     document.body.appendChild(audio);
+    applyAudioLoopBehavior(audio, soundConfig);
 
     audio.addEventListener('canplaythrough', () => {
       console.log('Audio ready:', key);

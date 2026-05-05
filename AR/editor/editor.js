@@ -2213,6 +2213,35 @@ function normalizePath(p) {
   return typeof p === 'string' ? p.replace(/\\/g, '/') : p;
 }
 
+// Configure audio looping with optional pause between repeats.
+// When loopPause > 0, native audio.loop is bypassed and we restart manually
+// after a setTimeout, so callers can change the gap live.
+function applyAudioLoopBehavior(audio, sound) {
+  if (!audio) return;
+  if (audio._loopTimeout) {
+    clearTimeout(audio._loopTimeout);
+    audio._loopTimeout = null;
+  }
+  if (audio._loopEndedHandler) {
+    audio.removeEventListener('ended', audio._loopEndedHandler);
+    audio._loopEndedHandler = null;
+  }
+  const wantLoop = sound.loop !== false;
+  const pauseSec = Math.max(0, sound.loopPause || 0);
+  if (wantLoop && pauseSec > 0) {
+    audio.loop = false;
+    const handler = () => {
+      audio._loopTimeout = setTimeout(() => {
+        try { audio.currentTime = 0; audio.play().catch(() => {}); } catch (_) {}
+      }, pauseSec * 1000);
+    };
+    audio._loopEndedHandler = handler;
+    audio.addEventListener('ended', handler);
+  } else {
+    audio.loop = wantLoop;
+  }
+}
+
 function openPreview() {
   const char = getSelectedCharacter();
   if (!char) {
@@ -2254,6 +2283,14 @@ function closePreview() {
     if (a.audio) {
       a.audio.pause();
       a.audio.currentTime = 0;
+      if (a.audio._loopTimeout) {
+        clearTimeout(a.audio._loopTimeout);
+        a.audio._loopTimeout = null;
+      }
+      if (a.audio._loopEndedHandler) {
+        a.audio.removeEventListener('ended', a.audio._loopEndedHandler);
+        a.audio._loopEndedHandler = null;
+      }
     }
   });
   preview.audios = [];
@@ -2388,7 +2425,18 @@ function loadPreviewAssets(char) {
   // Stop and clean up any existing audios
   if (preview.audios) {
     preview.audios.forEach(a => {
-      if (a.audio) { a.audio.pause(); a.audio.src = ''; }
+      if (a.audio) {
+        a.audio.pause();
+        a.audio.src = '';
+        if (a.audio._loopTimeout) {
+          clearTimeout(a.audio._loopTimeout);
+          a.audio._loopTimeout = null;
+        }
+        if (a.audio._loopEndedHandler) {
+          a.audio.removeEventListener('ended', a.audio._loopEndedHandler);
+          a.audio._loopEndedHandler = null;
+        }
+      }
     });
   }
   preview.audios = [];
@@ -4000,11 +4048,11 @@ function createSoundControlCard(key, sound) {
   // Create audio element for preview
   let audioEl = preview.audios.find(a => a.key === key)?.audio;
   if (!audioEl) {
-    audioEl = new Audio('../' + sound.path);
-    audioEl.loop = sound.loop ?? true;
+    audioEl = new Audio('../' + normalizePath(sound.path));
     audioEl.volume = sound.volume ?? 0.5;
     preview.audios.push({ key, audio: audioEl });
   }
+  applyAudioLoopBehavior(audioEl, sound);
   
   card.innerHTML = `
     <div class="preview-asset-card-header" onclick="this.parentElement.classList.toggle('expanded')">
@@ -4030,6 +4078,19 @@ function createSoundControlCard(key, sound) {
             onchange="updatePreviewSound(this)">
           <span>Loop</span>
         </label>
+      </div>
+
+      <div class="preview-control-group">
+        <div class="preview-control-label">
+          <span>Loop Pause</span>
+          <span class="preview-control-value" id="loopPause-val-sound-${key}">${(sound.loopPause || 0).toFixed(1)}s</span>
+        </div>
+        <input type="range" class="preview-slider"
+          min="0" max="10" step="0.1"
+          value="${sound.loopPause || 0}"
+          data-prop="loopPause" data-sound="${key}"
+          oninput="updatePreviewSound(this)">
+        <small style="color:var(--text-secondary);font-size:11px;">Silence between loop iterations (seconds). 0 = seamless.</small>
       </div>
 
       <div class="preview-control-group">
@@ -4201,9 +4262,20 @@ function updatePreviewSound(input) {
   // Update audio element
   const audioInfo = preview.audios.find(a => a.key === soundKey);
   if (audioInfo?.audio) {
-    if (prop === 'volume') audioInfo.audio.volume = value;
-    else if (prop === 'loop') audioInfo.audio.loop = value;
-    else if (prop === 'path') { audioInfo.audio.src = '../' + normalizePath(value); }
+    if (prop === 'volume') {
+      audioInfo.audio.volume = value;
+    } else if (prop === 'loop' || prop === 'loopPause') {
+      const char = getSelectedCharacter();
+      const soundData = char?.sounds?.[soundKey] || {};
+      const merged = { ...soundData, [prop]: value };
+      applyAudioLoopBehavior(audioInfo.audio, merged);
+      if (prop === 'loopPause') {
+        const valDisplay = document.getElementById(`loopPause-val-sound-${soundKey}`);
+        if (valDisplay) valDisplay.textContent = value.toFixed(1) + 's';
+      }
+    } else if (prop === 'path') {
+      audioInfo.audio.src = '../' + normalizePath(value);
+    }
   }
 
   // Update 3D sound indicator mesh
@@ -4262,6 +4334,8 @@ function updatePreviewSound(input) {
         char.sounds[soundKey].rolloffFactor = value;
       } else if (prop === 'loop') {
         char.sounds[soundKey].loop = value;
+      } else if (prop === 'loopPause') {
+        char.sounds[soundKey].loopPause = value;
       } else if (prop === 'path') {
         char.sounds[soundKey].path = normalizePath(value);
       } else if (prop.startsWith('visibleIn.')) {
