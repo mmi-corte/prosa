@@ -317,6 +317,52 @@
             "y": 0.3,
             "z": -4.9
           }
+        },
+        "birds": {
+          "path": "assets/sound/birds.wav",
+          "volume": 0.7,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 7,
+          "coneAngle": 45,
+          "position": {
+            "x": 3.4,
+            "y": 3.1,
+            "z": -4.7
+          },
+          "rotation": {
+            "x": 19,
+            "y": 155,
+            "z": 0
+          }
+        },
+        "frogs": {
+          "path": "assets/sound/frogs.mp3",
+          "volume": 0.7,
+          "loop": true,
+          "visibleIn": [
+            "scan",
+            "immersive"
+          ],
+          "refDistance": 2,
+          "rolloffFactor": 1.5,
+          "maxDistance": 7,
+          "rotation": {
+            "x": 16,
+            "y": 32,
+            "z": 0
+          },
+          "position": {
+            "x": 1.8,
+            "y": -1,
+            "z": 7.1
+          },
+          "coneAngle": 35
         }
       },
       "interaction": {
@@ -980,7 +1026,8 @@
             "scaleZ": 0.85,
             "order": 5,
             "scaleX": 1.32,
-            "scaleY": 1.19
+            "scaleY": 1.19,
+            "edgeSmoothing": 20
           },
           {
             "id": "bateau",
@@ -1002,7 +1049,8 @@
               "immersive"
             ],
             "billboard": false,
-            "order": 4
+            "order": 4,
+            "edgeSmoothing": 6
           },
           {
             "id": "orcu_mer",
@@ -1027,7 +1075,8 @@
             "scaleZ": 1.01,
             "billboard": false,
             "curveAxis": "y",
-            "order": 2
+            "order": 2,
+            "edgeSmoothing": 20
           },
           {
             "id": "middleground_orcu",
@@ -1051,7 +1100,8 @@
             "billboard": false,
             "curvature": 1.8,
             "scaleZ": 1.63,
-            "order": 3
+            "order": 3,
+            "edgeSmoothing": 20
           },
           {
             "id": "background",
@@ -1077,7 +1127,8 @@
             "scaleZ": 3.33,
             "order": 1,
             "scaleX": 2.18,
-            "scaleY": 3.52
+            "scaleY": 3.52,
+            "edgeSmoothing": 9
           },
           {
             "id": "sand",
@@ -1103,7 +1154,8 @@
             "scaleZ": 3.47,
             "scaleX": 1.06,
             "curveAxis": "y",
-            "order": 0
+            "order": 0,
+            "edgeSmoothing": 20
           }
         ],
         "3d": [
@@ -1809,7 +1861,9 @@
             "curveAxis": "x",
             "curvature": 2.1,
             "scaleZ": 2.1,
-            "order": 7
+            "order": 7,
+            "edgeSmoothing": 20,
+            "blur": 0
           },
           {
             "id": "middle",
@@ -1836,7 +1890,8 @@
             "curvature": 1.9,
             "curveAxis": "y",
             "scaleZ": 1.22,
-            "order": 3
+            "order": 3,
+            "edgeSmoothing": 15
           },
           {
             "id": "treeleft",
@@ -1860,7 +1915,8 @@
             "billboard": false,
             "order": 5,
             "scaleY": 1.83,
-            "scaleX": 0.97
+            "scaleX": 0.97,
+            "edgeSmoothing": 14
           },
           {
             "id": "treeright",
@@ -1883,7 +1939,8 @@
             ],
             "billboard": false,
             "order": 4,
-            "scaleX": 1.22
+            "scaleX": 1.22,
+            "edgeSmoothing": 20
           },
           {
             "id": "fondgauche",
@@ -1909,7 +1966,8 @@
             "scaleY": 1.25,
             "order": 2,
             "curvature": 2.1,
-            "scaleZ": 3.97
+            "scaleZ": 3.97,
+            "edgeSmoothing": 10
           },
           {
             "id": "fonddroit",
@@ -1933,7 +1991,8 @@
             "order": 1,
             "billboard": false,
             "curvature": 2.5,
-            "scaleZ": 2.7
+            "scaleZ": 2.7,
+            "edgeSmoothing": 10
           },
           {
             "id": "ground",
@@ -1958,7 +2017,8 @@
             "billboard": false,
             "scaleX": 1.28,
             "curvature": 1.1,
-            "scaleY": 1.65
+            "scaleY": 1.65,
+            "edgeSmoothing": 20
           }
         ],
         "3d": []
