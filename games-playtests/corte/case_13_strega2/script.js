@@ -207,7 +207,7 @@ const game = {
 
         if (this.hpPlayer <= 0) {
             this.isRunning = false;
-            document.getElementById('fail-reason').innerText = reason;
+            document.getElementById('fail-reason').innerText = "A Strega vous a vaincu.";
             this.ui.screens.gameOver.classList.remove('hidden');
             this.queueFinish(false);
         } else {

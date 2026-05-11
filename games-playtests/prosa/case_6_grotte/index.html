@@ -298,8 +298,7 @@
         <h1 style="color: #666">NOIR TOTAL</h1>
         <p>Un rocher vous assomme. Tout devient froid...</p>
         <h2>Direction: Prison de Prosa</h2>
-        <button class="btn" onclick="location.reload()">Réessayer</button>
-        <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">Abandonner</button>
+        <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">Continuer</button>
     </div>
 
     <!-- ÉCRAN VICTOIRE -->
@@ -334,7 +333,7 @@
     const CONSTANTS = {
         PLAYER_SPEED: 0.8, // Facteur de vitesse relative à la largeur d'écran
         GRAVITY: 0.5,
-        DURATION: 30000, // 30 sec
+        DURATION: 15000, // 15 sec (réduit de moitié)
         COLORS: {
             bg: '#0d0c09',
             rock: '#545042',

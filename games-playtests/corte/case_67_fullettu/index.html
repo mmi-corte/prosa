@@ -67,22 +67,15 @@
             <button class="btn btn-success" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">
                 CONTINUER
             </button>
-            <button class="btn" onclick="location.reload()" style="margin-top:8px;">
-                Rejouer
-            </button>
         </div>
 
         <div id="fail-screen" class="hidden screen-transition screen-overlay">
             <h1 class="fail-title">PERDU DE VUE</h1>
             <div class="screen-content">
                 <p>Le temps est écoulé. U Fulettu a disparu dans la brume.</p>
-                <p>Vous devez recommencer depuis le début.</p>
             </div>
-            <button class="btn btn-danger" onclick="Game.reset()">
-                Réessayer
-            </button>
-            <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" style="margin-top:8px;background:transparent;color:#888;border-color:#555;">
-                ABANDONNER
+            <button class="btn btn-danger" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">
+                CONTINUER
             </button>
         </div>
     </div>

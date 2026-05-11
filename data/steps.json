@@ -39,7 +39,7 @@
       "action": "1",
       "end": {
         "1": {
-          "type": "win",
+          "type": "continue",
           "nextStep": "04",
           "unlockStep": "141",
           "unlockedStepId": "14"

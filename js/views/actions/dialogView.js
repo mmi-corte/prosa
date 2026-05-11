@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { charactersData, dialogsData } from "../../loadData.js";
@@ -96,6 +96,7 @@ export function dialogView(action) {
                 currentAudio.pause();
                 currentAudio = null;
             }
+            stopNarrationTts();
 
             currentDialogIndex += 1;
             if (data.dialog.length > currentDialogIndex) {
@@ -167,6 +168,9 @@ function updateDialog() {
         }
     }
 
+    // Cancel any narration carrying over from the previous line
+    stopNarrationTts();
+
     if (voiceFile) {
         // Play voice audio with typewriter effect (sound muted)
         currentAudio = new Audio(`./assets/steps/${activePlayer.localisation}/${activeStepId}/${voiceFile}`);
@@ -175,7 +179,126 @@ function updateDialog() {
     } else {
         // No voice, use typewriter effect with sound
         typeWriteEffect(textBox, activeText, currentPitch);
+
+        // Narrator passages (no character, no recorded voice) → read aloud via TTS
+        if (!characterId && settings.narrationTts) {
+            speakNarrationTts(activeText);
+        }
     }
+}
+
+// meSpeak.js — offline French TTS that ships its own voice. Independent of
+// the browser's Web Speech API, which is unreliable on Firefox/Windows and
+// any system without a French voice installed.
+// Loaded from jsdelivr (npm "mespeak" package), with permissive CORS headers.
+const MESPEAK_BASE = 'https://cdn.jsdelivr.net/npm/mespeak';
+let meSpeakReady = false;
+let meSpeakLoadingPromise = null;
+
+function loadMeSpeak() {
+    if (meSpeakReady) return Promise.resolve(true);
+    if (meSpeakLoadingPromise) return meSpeakLoadingPromise;
+
+    meSpeakLoadingPromise = new Promise((resolve) => {
+        const onLibReady = () => {
+            if (!window.meSpeak) {
+                console.warn('[TTS] meSpeak global not present after script load');
+                resolve(false);
+                return;
+            }
+            try {
+                // Config and voice both fetch async — wait for config before requesting voice,
+                // otherwise meSpeak.speak() fires before the config arrives.
+                window.meSpeak.loadConfig(`${MESPEAK_BASE}/mespeak_config.json`, (configStatus) => {
+                    const configOk = configStatus === true || (typeof configStatus === 'string' && /loaded/i.test(configStatus));
+                    if (!configOk) {
+                        console.warn('[TTS] meSpeak config failed to load:', configStatus);
+                        resolve(false);
+                        return;
+                    }
+                    window.meSpeak.loadVoice(`${MESPEAK_BASE}/voices/fr.json`, (voiceStatus) => {
+                        const voiceOk = voiceStatus === true || (typeof voiceStatus === 'string' && /loaded/i.test(voiceStatus));
+                        if (voiceOk) {
+                            meSpeakReady = true;
+                            console.log('[TTS] meSpeak config + French voice loaded');
+                            resolve(true);
+                        } else {
+                            console.warn('[TTS] meSpeak voice failed to load:', voiceStatus);
+                            resolve(false);
+                        }
+                    });
+                });
+            } catch (e) {
+                console.warn('[TTS] meSpeak config/voice load threw:', e);
+                resolve(false);
+            }
+        };
+
+        if (window.meSpeak) {
+            onLibReady();
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = `${MESPEAK_BASE}/mespeak.js`;
+        script.async = true;
+        script.onload = onLibReady;
+        script.onerror = () => {
+            console.warn('[TTS] meSpeak library failed to load from CDN');
+            resolve(false);
+        };
+        document.head.appendChild(script);
+    });
+    return meSpeakLoadingPromise;
+}
+
+function cleanTtsText(text) {
+    if (!text) return '';
+    return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+let currentTtsAudio = null;
+
+function speakNarrationTts(text) {
+    const clean = cleanTtsText(text);
+    if (!clean) return;
+
+    loadMeSpeak().then((ok) => {
+        if (!ok) return;
+        try { stopNarrationTts(); } catch (_) {}
+
+        // canPlay() == false means the AudioContext isn't ready (autoplay policy).
+        // Should be true after the user has clicked any dialog.
+        const canPlay = typeof window.meSpeak.canPlay === 'function' ? window.meSpeak.canPlay() : 'unknown';
+        console.log('[TTS] speak →', clean.slice(0, 60), '| canPlay:', canPlay);
+
+        try {
+            const result = window.meSpeak.speak(
+                clean,
+                { pitch: 50, speed: 160, amplitude: 100 },
+                (success) => {
+                    console.log('[TTS] speak callback success:', success);
+                }
+            );
+            console.log('[TTS] speak() returned:', typeof result, result && (result.byteLength || result.length || result));
+        } catch (e) {
+            console.warn('[TTS] meSpeak.speak threw:', e);
+        }
+    });
+}
+
+function stopNarrationTts() {
+    if (currentTtsAudio) {
+        try {
+            currentTtsAudio.pause();
+            currentTtsAudio.src = '';
+        } catch (_) {}
+        currentTtsAudio = null;
+    }
+}
+
+// Expose so the settings toggle can cut narration mid-playback when disabled.
+if (typeof window !== 'undefined') {
+    window.__prosaStopNarration = stopNarrationTts;
 }
 
 function getCharacterDetails(characterId) {

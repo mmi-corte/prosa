@@ -52,6 +52,18 @@ window.addEventListener('DOMContentLoaded', async () => {
   appLogger.log('🎮 Starting app initialization...');
   const initStart = performance.now();
 
+  // Kick off TTS voice loading early — getVoices() is async-populated in Chromium.
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    try { window.speechSynthesis.getVoices(); } catch (_) {}
+    window.speechSynthesis.addEventListener?.('voiceschanged', () => {
+      try {
+        const voices = window.speechSynthesis.getVoices() || [];
+        const fr = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('fr'));
+        appLogger.log(`🗣️ TTS voices loaded (${voices.length} total, ${fr.length} fr): ${fr.map(v => v.name).join(', ') || 'none'}`);
+      } catch (_) {}
+    });
+  }
+
   // Initialize language manager first (async to load translations)
   appLogger.log('📝 Loading language manager...');
   const langStart = performance.now();
@@ -156,6 +168,7 @@ export const settings = {
   vibration: true,
   camera: false,
   lightMode: false,
+  narrationTts: true,
 }
 // Load settings from localStorage if they exists
 settings.music = parseInt(localStorage.getItem('settingMusic')) || settings.music;
@@ -163,6 +176,8 @@ settings.sfx = parseInt(localStorage.getItem('settingSfx')) || settings.sfx;
 settings.vibration = localStorage.getItem('settingVibration') === 'true' || settings.vibration;
 settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.camera;
 settings.lightMode = localStorage.getItem('settingLightMode') === 'true';
+const storedTts = localStorage.getItem('settingNarrationTts');
+settings.narrationTts = storedTts === null ? settings.narrationTts : storedTts === 'true';
 
 // Apply light mode if saved - do it immediately
 if (document.body) {

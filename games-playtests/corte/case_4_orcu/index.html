@@ -298,8 +298,7 @@
             <p style="opacity: 0.7;">Le système n'a pas atteint le seuil critique.</p>
             
             <div style="margin-top: auto; width: 100%;">
-                <button class="btn-action" style="background: transparent; border: 1px solid #c63032; color: #c63032;" onclick="location.reload()">RÉESSAYER</button>
-                <button class="btn-action" style="background: transparent; border: 1px solid #555; color: #888; margin-top: 8px;" onclick="if(window.parent)window.parent.postMessage({type:'GAME_COMPLETE',success:false},'*')">ABANDONNER</button>
+                <button class="btn-action" style="background: transparent; border: 1px solid #555; color: #888; margin-top: 8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">ABANDONNER</button>
             </div>
         </div>
     </div>
@@ -424,7 +423,10 @@
             },
 
             next: function() {
-                if(window.parent) window.parent.postMessage({type:'GAME_COMPLETE', success:true}, '*');
+                if(window.finishGame) window.finishGame(true);
+                else ((new URLSearchParams(window.location.search)).get('from')==='minigames'
+                    ? window.location.href='../../../index.html#univers-prosa/mini-jeux'
+                    : history.back());
             }
         };
     </script>

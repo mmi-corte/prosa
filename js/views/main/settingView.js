@@ -44,6 +44,13 @@ export function settingView() {
           <span class="toggle-knob"></span>
         </button>
       </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Narration vocale</label>
+        <button class="toggle-switch" id="narrationTtsToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
     </div>
     `
 
@@ -53,12 +60,14 @@ export function settingView() {
   const sfxSlider = document.getElementById('sfxSlider')
   const cameraToggle = document.getElementById('cameraToggle')
   const lightModeToggle = document.getElementById('lightModeToggle')
+  const narrationTtsToggle = document.getElementById('narrationTtsToggle')
 
   // Set initial values from settings
   musicSlider.value = settings.music || 70;
   sfxSlider.value = settings.sfx || 80;
   cameraToggle.classList.toggle('active', settings.camera);
   lightModeToggle.classList.toggle('active', settings.lightMode);
+  narrationTtsToggle.classList.toggle('active', settings.narrationTts);
 
   //Musique
   musicSlider.addEventListener('input', (e) => {
@@ -79,6 +88,16 @@ export function settingView() {
     localStorage.setItem('settingLightMode', settings.lightMode);
   })
 
+  //Narration TTS
+  narrationTtsToggle.addEventListener("click", () => {
+    toggleSetting(narrationTtsToggle, "narrationTts")
+    localStorage.setItem('settingNarrationTts', settings.narrationTts);
+    // Cut any narration in progress when disabling
+    if (!settings.narrationTts && typeof window.__prosaStopNarration === 'function') {
+      window.__prosaStopNarration();
+    }
+  })
+
   function toggleSetting(toggle, key) {
     toggle.classList.toggle("active")
     settings[key] = toggle.classList.contains("active")
@@ -90,5 +109,6 @@ export function settingView() {
     localStorage.setItem('settingSfx', settings.sfx);
     localStorage.setItem('settingCamera', settings.camera);
     localStorage.setItem('settingLightMode', settings.lightMode);
+    localStorage.setItem('settingNarrationTts', settings.narrationTts);
   }
 }

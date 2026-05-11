@@ -275,8 +275,7 @@
         <!-- ECHEC PHASE 1 -->
         <div id="p1-fail-screen" class="overlay hidden">
             <h1 style="color: var(--danger); border-color: var(--danger);">Intrusion Détectée</h1>
-            <button class="btn btn-danger" onclick="location.reload()">Réessayer</button>
-            <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" style="margin-top:8px;background:transparent;color:#888;border-color:#555;">ABANDONNER</button>
+            <button class="btn btn-danger" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">Continuer</button>
         </div>
 
         <!-- JEU PHASE 1 -->
@@ -349,8 +348,7 @@
                 <!-- ECHEC P2 -->
                 <div id="p2-fail-overlay" class="hidden" style="position: absolute; inset: 0; background: rgba(30,0,0,0.95); z-index: 70; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <h1 style="color: var(--danger); font-family: 'VT323'; border: none; font-size: 3rem;">EXPOSITION MORTELLE</h1>
-                    <button class="btn btn-danger" style="font-family: 'VT323'; font-size: 1.5rem;" onclick="retryPhase2()">RÉINITIALISER</button>
-                    <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())" style="margin-top:8px;background:transparent;color:#888;border-color:#555;font-family:'VT323';font-size:1.2rem;">ABANDONNER</button>
+                    <button class="btn btn-danger" style="font-family: 'VT323'; font-size: 1.5rem;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
                 </div>
 
                 <!-- ZONE CÂBLAGE -->
@@ -368,7 +366,7 @@
                     </div>
                     <div id="voltage-text" style="color: #333; font-size: 3rem; margin-top: 15px; font-family: 'VT323';">0V</div>
                     
-                    <button id="finish-btn" class="hidden btn" style="margin-top: 15px; font-family: 'VT323'; font-size: 1.5rem; border-color: var(--success); color: var(--success);" onclick="finishGame()">ÉVACUATION</button>
+                    <button id="finish-btn" class="hidden btn" style="margin-top: 15px; font-family: 'VT323'; font-size: 1.5rem; border-color: var(--success); color: var(--success);" onclick="showFinalScreen()">ÉVACUATION</button>
                 </div>
             </div>
         </div>
@@ -380,7 +378,6 @@
         <p>Alimentation rétablie à 100%.</p>
         <p>Porte ouverte. Évasion en cours.</p>
         <button class="btn" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
-        <button class="btn" onclick="location.reload()" style="margin-top:8px;background:transparent;color:#888;border-color:#555;">Rejouer</button>
     </div>
 
     <script>
@@ -735,7 +732,7 @@
             }, 30);
         }
 
-        function finishGame() {
+        function showFinalScreen() {
             document.getElementById('final-screen').classList.remove('hidden');
         }
 

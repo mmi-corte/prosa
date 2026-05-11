@@ -54,7 +54,6 @@
         </div>
         
         <button class="btn-action" onclick="game.start()">COMMENCER</button>
-        <button class="text-xs text-[#626247] text-center w-full mt-4 p-2" onclick="game.end(true, 'Carte des Vents')">[DEV] Passer</button>
     </div>
 </div>
 
@@ -70,7 +69,6 @@
         </div>
         
         <button id="btn-continue" class="btn-action hidden" onclick="if(window.finishGame) window.finishGame(true); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
-        <button class="btn-action" onclick="location.reload()">REJOUER</button>
         <button id="btn-abandon" class="btn-action hidden" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">ABANDONNER</button>
     </div>
 </div>

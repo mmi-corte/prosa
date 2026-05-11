@@ -4180,3 +4180,52 @@ body.light-mode .char-select-btn.current {
 .mobile-only-warning-btn:active {
   transform: scale(0.97);
 }
+
+/* ========== INTRO CINEMATIC ========== */
+.intro-cinematic-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.intro-cinematic-overlay.fade-out {
+  opacity: 0;
+}
+
+.intro-cinematic-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.intro-cinematic-skip {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ece4cb;
+  border: 1px solid rgba(236, 228, 203, 0.4);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.04em;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.intro-cinematic-skip:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.intro-cinematic-skip:active {
+  transform: scale(0.97);
+}

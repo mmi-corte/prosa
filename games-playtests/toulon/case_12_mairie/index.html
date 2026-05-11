@@ -526,8 +526,7 @@
                 <div style="font-size: 50px; color: var(--accent-red); font-weight: bold;">!</div>
             </div>
             <p>L'alarme a été déclenchée.</p>
-            <button class="btn" onclick="resetGame()">RÉESSAYER</button>
-            <button class="btn" style="background:transparent;color:#888;border-color:#555;margin-top:8px;" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">ABANDONNER</button>
+            <button class="btn" onclick="if(window.finishGame) window.finishGame(false); else ((new URLSearchParams(window.location.search)).get('from')==='minigames' ? window.location.href='../../../index.html#univers-prosa/mini-jeux' : history.back())">CONTINUER</button>
         </div>
 
     </div>

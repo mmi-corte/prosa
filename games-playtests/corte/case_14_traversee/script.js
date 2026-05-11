@@ -6,7 +6,7 @@ const game = {
     dpr: window.devicePixelRatio || 1, // Retina support
 
     conf: {
-        totalDist: 1200,
+        totalDist: 600, // réduit de moitié (était 1200)
         speedBase: 6,
         spawnRate: 40 // Frames
     },

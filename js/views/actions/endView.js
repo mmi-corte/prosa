@@ -36,7 +36,7 @@ export function endView(action, special_end = false) {
 
         //Avancez à la case X, mais continuez votre tour
         case "continue":
-            showEndModal("Avancez à la case", activeStep.end[action].nextStep, "et continuez votre tour")
+            showEndModal("Avancez à la case", activeStep.end[action].nextStep, "et continuez votre tour", { keepActivePlayer: true })
             break;
 
         //Vous êtes bloqué pendant X tours
@@ -55,7 +55,7 @@ export function endView(action, special_end = false) {
     }
 }
 
-function showEndModal(text01, text02, text03 = null) {
+function showEndModal(text01, text02, text03 = null, options = {}) {
 
     const wrapper = document.createElement('div')
     wrapper.classList.add('endWrapper')
@@ -81,7 +81,9 @@ function showEndModal(text01, text02, text03 = null) {
     setTimeout(() => wrapper.classList.add("show"), 10)
 
     wrapper.addEventListener('click', () => {
-        unsetActivePlayer()
+        if (!options.keepActivePlayer) {
+            unsetActivePlayer()
+        }
         history.replaceState({ view: 'menu' }, "", "#menu")
         menuView()
     })

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-prosa-game-v25';
+const CACHE_NAME = 'cache-prosa-game-v40';
 // Service Worker logging utilise toujours le même système
 // (les SWs n'ont pas accès à localStorage directement lors du démarrage)
 const logSW = (...args) => {
@@ -113,6 +113,11 @@ self.addEventListener('fetch', (event) => {
 
   // Exclure AR (network-only)
   if (url.pathname.includes('/AR/')) {
+    return;
+  }
+
+  // Exclure jsdelivr (CDN tiers) - network only, browser handles caching
+  if (url.hostname === 'cdn.jsdelivr.net' || url.hostname.endsWith('.jsdelivr.net')) {
     return;
   }
 

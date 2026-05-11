@@ -1778,12 +1778,14 @@
           {
             "text": {
               "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
-            }
+            },
+            "character": "sebastien"
           },
           {
             "text": {
               "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
-            }
+            },
+            "character": "sebastien"
           }
         ],
         "nextActionType": "riddle",
@@ -1799,12 +1801,14 @@
           {
             "text": {
               "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
-            }
+            },
+            "character": "sebastien"
           },
           {
             "text": {
               "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est sont elles.\""
-            }
+            },
+            "character": "sebastien"
           }
         ],
         "nextActionType": "end",

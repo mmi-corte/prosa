@@ -28,19 +28,70 @@ export function initView() {
 
     clearContainer();
 
-    wrapper = document.createElement('div');
-    wrapper.classList.add('initWrapper');
-    gameContainer.append(wrapper);
+    const startInitFlow = () => {
+        wrapper = document.createElement('div');
+        wrapper.classList.add('initWrapper');
+        gameContainer.append(wrapper);
 
-    initTextContainer = document.createElement('p');
-    wrapper.appendChild(initTextContainer);
+        initTextContainer = document.createElement('p');
+        wrapper.appendChild(initTextContainer);
 
-    initContainer = document.createElement('div');
-    initContainer.classList.add('initScreen1');
-    wrapper.appendChild(initContainer)
+        initContainer = document.createElement('div');
+        initContainer.classList.add('initScreen1');
+        wrapper.appendChild(initContainer)
 
-    // Load difficulty screen first
-    navigate('nouvelle-partie/choix-difficulte', difficultyView())
+        // Load difficulty screen first
+        navigate('nouvelle-partie/choix-difficulte', difficultyView())
+    }
+
+    if (localStorage.getItem('introCinematicWatched') === 'true') {
+        startInitFlow()
+    } else {
+        playIntroCinematic(() => {
+            localStorage.setItem('introCinematicWatched', 'true')
+            startInitFlow()
+        })
+    }
+}
+
+function playIntroCinematic(onComplete) {
+    const overlay = document.createElement('div')
+    overlay.className = 'intro-cinematic-overlay'
+    overlay.innerHTML = `
+        <video class="intro-cinematic-video" autoplay playsinline preload="auto">
+            <source src="./assets/cinematiques/cinematique1.mp4" type="video/mp4">
+        </video>
+        <button class="intro-cinematic-skip" type="button">Passer ▶</button>
+    `
+    document.body.appendChild(overlay)
+
+    const video = overlay.querySelector('video')
+    const skipBtn = overlay.querySelector('.intro-cinematic-skip')
+
+    let finished = false
+    const finish = () => {
+        if (finished) return
+        finished = true
+        try { video.pause() } catch (_) {}
+        overlay.classList.add('fade-out')
+        setTimeout(() => {
+            overlay.remove()
+            if (typeof onComplete === 'function') onComplete()
+        }, 300)
+    }
+
+    video.addEventListener('ended', finish)
+    video.addEventListener('error', finish)
+    skipBtn.addEventListener('click', finish)
+
+    // Best-effort autoplay; fallback to user gesture
+    video.play().catch(() => {
+        const resume = () => {
+            video.play().catch(() => {})
+            overlay.removeEventListener('click', resume)
+        }
+        overlay.addEventListener('click', resume, { once: true })
+    })
 }
 
 export function clearInitContainer() {

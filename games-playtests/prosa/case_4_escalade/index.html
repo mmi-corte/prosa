@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Prosa - Case 4 : Le Mur de 100m</title>
+    <title>Prosa - Case 4 : Le Mur de 50m</title>
     <style>
         /* --- FONTS & COLORS --- */
         @font-face {
@@ -211,7 +211,7 @@
         <div class="stat-box" style="text-align: left;">
             <div class="label">Altitude</div>
             <div class="value"><span id="score-el">0</span><span class="unit">m</span></div>
-            <div id="objective">OBJECTIF: 100m</div>
+            <div id="objective">OBJECTIF: 50m</div>
         </div>
         <div class="stat-box" style="text-align: right;">
             <div class="label">Grip</div>
@@ -230,7 +230,7 @@
         <!-- Start Screen -->
         <div id="start-screen" class="card interactive">
             <h1>L'Ascension</h1>
-            <p>Objectif : Grimper <strong>100 mètres</strong>.</p>
+            <p>Objectif : Grimper <strong>50 mètres</strong>.</p>
             
             <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
                 <p style="color: var(--fg); margin: 5px 0;">Regarde l'anneau qui rétrécit...</p>
@@ -248,9 +248,8 @@
         <div id="game-over-screen" class="card interactive hidden">
             <h1 class="danger">Chute !</h1>
             <p>Tu as manqué de force.</p>
-            <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 100m</p>
-            <button id="btn-retry">Réessayer</button>
-            <button id="btn-abandon" style="background:transparent;color:#888;border:1px solid #555;padding:10px 20px;margin-top:8px;cursor:pointer;font-family:inherit;">Abandonner</button>
+            <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 50m</p>
+            <button id="btn-abandon">Continuer</button>
         </div>
 
         <!-- Victory -->
@@ -325,7 +324,7 @@
         var game = {
             state: 'MENU', 
             altitude: 0,
-            targetAltitude: 100, // OBJECTIF 100M
+            targetAltitude: 50, // OBJECTIF 50M (réduit de moitié)
             grip: 100,
             
             // Configuration de la difficulté
@@ -438,9 +437,9 @@
                     bgOffset += (climb * 5); // Effet visuel de montée
                     var self = this;
                     // Délai avant la prochaine prise (plus court si on est haut pour stresser)
-                    var delay = 600 - (this.altitude * 2);
-                    if(delay < 300) delay = 300;
-                    
+                    var delay = 1100 - (this.altitude * 4);
+                    if(delay < 700) delay = 700;
+
                     setTimeout(function(){ self.spawnHold(); }, delay);
                 }
             },
@@ -460,7 +459,7 @@
                     this.gameOver();
                 } else {
                     var self = this;
-                    setTimeout(function(){ self.spawnHold(); }, 800);
+                    setTimeout(function(){ self.spawnHold(); }, 1100);
                 }
             },
 
@@ -550,9 +549,6 @@
         // Buttons
         var btnStart = document.getElementById('btn-start');
         if(btnStart) btnStart.addEventListener('click', function() { game.start(); });
-
-        var btnRetry = document.getElementById('btn-retry');
-        if(btnRetry) btnRetry.addEventListener('click', function() { game.start(); });
 
         var btnNext = document.getElementById('btn-next');
         if(btnNext) btnNext.addEventListener('click', function() {
