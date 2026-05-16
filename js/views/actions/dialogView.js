@@ -178,7 +178,7 @@ function updateDialog() {
         typeWriteEffect(textBox, activeText, currentPitch, true);
     } else {
         // No voice, use typewriter effect with sound
-        typeWriteEffect(textBox, activeText, currentPitch);
+        typeWriteEffect(textBox, activeText, currentPitch, !settings.typewriterSound);
 
         if (settings.narrationTts) {
             speakNarrationTts(activeText, currentPitch);
@@ -226,7 +226,7 @@ function speakNarrationTts(text, characterPitch = 400) {
         utterance.lang = 'fr-FR';
         utterance.rate = 1.0;
         utterance.pitch = speechPitch;
-        utterance.volume = 1.0;
+        utterance.volume = (settings.narration ?? 80) / 100;
         if (voice) utterance.voice = voice;
         window.speechSynthesis.speak(utterance);
     });

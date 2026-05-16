@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { aleasRiddlesData } from "../../loadData.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
@@ -57,7 +57,7 @@ export function aleasRiddleView() {
 
 async function displayRiddle() {
     //Type write question
-    await typeWriteEffect(questionContainer, getTranslation(selectedRiddle.question))
+    await typeWriteEffect(questionContainer, getTranslation(selectedRiddle.question), undefined, !settings.typewriterSound)
 
     renderChoices()
 }

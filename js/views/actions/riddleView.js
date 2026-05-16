@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
 import { riddlesData } from "../../loadData.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
@@ -63,7 +63,7 @@ async function displayRiddle() {
         questionContainer,
         getTranslation(selectedRiddle.question),
         undefined,
-        Boolean(voiceFile)
+        Boolean(voiceFile) || !settings.typewriterSound
     )
 
     renderChoices()

@@ -166,14 +166,19 @@ function showMobileOnlyWarning() {
 export const settings = {
   music: 70,
   sfx: 80,
+  narration: 80,
   vibration: true,
   camera: false,
   lightMode: false,
   narrationTts: true,
+  typewriterSound: true,
 }
 // Load settings from localStorage if they exists
 settings.music = parseInt(localStorage.getItem('settingMusic')) || settings.music;
 settings.sfx = parseInt(localStorage.getItem('settingSfx')) || settings.sfx;
+settings.narration = parseInt(localStorage.getItem('settingNarration')) || settings.narration;
+const storedTwSound = localStorage.getItem('settingTypewriterSound');
+settings.typewriterSound = storedTwSound === null ? settings.typewriterSound : storedTwSound === 'true';
 settings.vibration = localStorage.getItem('settingVibration') === 'true' || settings.vibration;
 settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.camera;
 settings.lightMode = localStorage.getItem('settingLightMode') === 'true';

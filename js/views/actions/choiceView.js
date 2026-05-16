@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { activeStepId, callAction } from "../../gameEventHandler.js";
 import { choicesData } from "../../loadData.js";
 import { typeWriteEffect } from "../../typeWriteEffect.js";
@@ -16,7 +16,7 @@ export async function choiceView(action) {
     const questionContainer = document.createElement('p')
     questionContainer.classList.add('actionQuestion')
     wrapper.appendChild(questionContainer)
-    await typeWriteEffect(questionContainer, getTranslation(data.question.fr))
+    await typeWriteEffect(questionContainer, getTranslation(data.question.fr), undefined, !settings.typewriterSound)
 
     const choiceContainer = document.createElement('div')
     choiceContainer.classList.add('actionChoices')

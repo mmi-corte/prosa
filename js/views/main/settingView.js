@@ -1,4 +1,5 @@
 import { gameContainer, settings, vibrate, applyLightMode } from "../../../app.js";
+import { updateMusicVolume, toggleMusicMute, isMusicMuted } from "../../musicManager.js";
 import { showBackButton } from "../components/backButton.js";
 
 export function settingView() {
@@ -16,19 +17,25 @@ export function settingView() {
   container.innerHTML = `
     <div class="settings-panel">
 
+      <button class="close-modal-btn" id="settingsCloseBtn" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
       <div class="setting-item">
         <label class="setting-label">Musique</label>
+        <button class="toggle-switch" id="musicMuteToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+
+      <div class="setting-item" id="musicSliderItem">
         <div class="slider-container">
           <input type="range" min="0" max="100" value="70" class="slider" id="musicSlider" />
         </div>
       </div>
 
-      <div class="setting-item">
-        <label class="setting-label">Effets sonores</label>
-        <div class="slider-container">
-          <input type="range" min="0" max="100" value="80" class="slider" id="sfxSlider" />
-        </div>
-      </div>
 
 
       <div class="setting-item">
@@ -46,8 +53,21 @@ export function settingView() {
       </div>
 
       <div class="setting-item">
-        <label class="setting-label">Narration vocale</label>
+        <label class="setting-label">Narration</label>
         <button class="toggle-switch" id="narrationTtsToggle">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+
+      <div class="setting-item" id="narrationSliderItem">
+        <div class="slider-container">
+          <input type="range" min="0" max="100" value="80" class="slider" id="narrationSlider" />
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <label class="setting-label">Son des touches</label>
+        <button class="toggle-switch" id="typewriterSoundToggle">
           <span class="toggle-knob"></span>
         </button>
       </div>
@@ -56,27 +76,55 @@ export function settingView() {
 
   gameContainer.appendChild(container)
 
+  document.getElementById('settingsCloseBtn').addEventListener('click', () => {
+    saveSettings();
+    container.remove();
+  });
+
   const musicSlider = document.getElementById('musicSlider')
-  const sfxSlider = document.getElementById('sfxSlider')
+  const musicSliderItem = document.getElementById('musicSliderItem')
+  const narrationSlider = document.getElementById('narrationSlider')
+  const narrationSliderItem = document.getElementById('narrationSliderItem')
+  const typewriterSoundToggle = document.getElementById('typewriterSoundToggle')
   const cameraToggle = document.getElementById('cameraToggle')
   const lightModeToggle = document.getElementById('lightModeToggle')
   const narrationTtsToggle = document.getElementById('narrationTtsToggle')
+  const musicMuteToggle = document.getElementById('musicMuteToggle')
 
   // Set initial values from settings
   musicSlider.value = settings.music || 70;
-  sfxSlider.value = settings.sfx || 80;
+  narrationSlider.value = settings.narration || 80;
   cameraToggle.classList.toggle('active', settings.camera);
   lightModeToggle.classList.toggle('active', settings.lightMode);
   narrationTtsToggle.classList.toggle('active', settings.narrationTts);
+  musicMuteToggle.classList.toggle('active', !isMusicMuted());
+  musicSliderItem.style.display = isMusicMuted() ? 'none' : '';
+  narrationSliderItem.style.display = settings.narrationTts ? '' : 'none';
+  typewriterSoundToggle.classList.toggle('active', settings.typewriterSound);
 
   //Musique
   musicSlider.addEventListener('input', (e) => {
     settings.music = parseInt(e.target.value);
+    updateMusicVolume();
   });
-  //SFX
-  sfxSlider.addEventListener('input', (e) => {
-    settings.sfx = parseInt(e.target.value);
+  //Narration
+  narrationSlider.addEventListener('input', (e) => {
+    settings.narration = parseInt(e.target.value);
   });
+  //Mute musique
+  musicMuteToggle.addEventListener('click', () => {
+    const nowMuted = toggleMusicMute();
+    musicMuteToggle.classList.toggle('active', !nowMuted);
+    musicSliderItem.style.display = nowMuted ? 'none' : '';
+    vibrate(30);
+  });
+
+  //Son touches typewriter
+  typewriterSoundToggle.addEventListener('click', () => {
+    toggleSetting(typewriterSoundToggle, 'typewriterSound');
+    localStorage.setItem('settingTypewriterSound', settings.typewriterSound);
+  });
+
   //Camera
   cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
 
@@ -90,12 +138,14 @@ export function settingView() {
 
   //Narration TTS
   narrationTtsToggle.addEventListener("click", () => {
-    toggleSetting(narrationTtsToggle, "narrationTts")
+    settings.narrationTts = !settings.narrationTts;
+    narrationTtsToggle.classList.toggle('active', settings.narrationTts);
+    narrationSliderItem.style.display = settings.narrationTts ? '' : 'none';
     localStorage.setItem('settingNarrationTts', settings.narrationTts);
-    // Cut any narration in progress when disabling
     if (!settings.narrationTts && typeof window.__prosaStopNarration === 'function') {
       window.__prosaStopNarration();
     }
+    vibrate(30);
   })
 
   function toggleSetting(toggle, key) {
@@ -106,7 +156,7 @@ export function settingView() {
 
   function saveSettings() {
     localStorage.setItem('settingMusic', settings.music);
-    localStorage.setItem('settingSfx', settings.sfx);
+    localStorage.setItem('settingNarration', settings.narration);
     localStorage.setItem('settingCamera', settings.camera);
     localStorage.setItem('settingLightMode', settings.lightMode);
     localStorage.setItem('settingNarrationTts', settings.narrationTts);
