@@ -211,7 +211,7 @@
         <div class="stat-box" style="text-align: left;">
             <div class="label">Altitude</div>
             <div class="value"><span id="score-el">0</span><span class="unit">m</span></div>
-            <div id="objective">OBJECTIF: 50m</div>
+            <div id="objective">OBJECTIF: 70m</div>
         </div>
         <div class="stat-box" style="text-align: right;">
             <div class="label">Grip</div>
@@ -230,7 +230,7 @@
         <!-- Start Screen -->
         <div id="start-screen" class="card interactive">
             <h1>L'Ascension</h1>
-            <p>Objectif : Grimper <strong>50 mètres</strong>.</p>
+            <p>Objectif : Grimper <strong>70 mètres</strong>.</p>
             
             <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
                 <p style="color: var(--fg); margin: 5px 0;">Regarde l'anneau qui rétrécit...</p>
@@ -248,7 +248,7 @@
         <div id="game-over-screen" class="card interactive hidden">
             <h1 class="danger">Chute !</h1>
             <p>Tu as manqué de force.</p>
-            <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 50m</p>
+            <p>Altitude atteinte : <span id="final-score" class="highlight">0m</span> / 70m</p>
             <button id="btn-abandon">Continuer</button>
         </div>
 
@@ -322,22 +322,22 @@
          * 3. GAME LOGIC
          */
         var game = {
-            state: 'MENU', 
+            state: 'MENU',
             altitude: 0,
-            targetAltitude: 50, // OBJECTIF 50M (réduit de moitié)
+            targetAltitude: 70, // OBJECTIF 70M
             grip: 100,
             
             // Configuration de la difficulté
             gripDecayBase: 0.15, // Perte passive de grip par frame
             gripReward: 15,      // Gain de grip par succès
-            gripPenalty: 25,     // Perte de grip par échec
+            gripPenalty: 15,     // Perte de grip par échec
 
             hold: {
                 active: false,
                 x: 0, y: 0,
                 radius: 45,
                 ringRadius: 100,
-                shrinkSpeed: 2,
+                shrinkSpeed: 1.1,
                 color: C.primary
             },
 
@@ -377,7 +377,7 @@
                 this.hold.radius = 45 - (progress * 15); // 45 -> 30
                 
                 // Plus on monte, plus ça va vite
-                this.hold.shrinkSpeed = 1.5 + (progress * 2.0); // 1.5 -> 3.5
+                this.hold.shrinkSpeed = 1.1 + (progress * 0.7); // 1.1 -> 1.8
 
                 this.hold.ringRadius = this.hold.radius * 3;
                 this.hold.active = true;
@@ -397,8 +397,8 @@
                 
                 // Seuils de tolérance (pixels)
                 // J'ai légèrement augmenté la zone "Parfaite" pour correspondre au visuel bleu
-                var perfectZone = 25; 
-                var goodZone = 55;
+                var perfectZone = 40;
+                var goodZone = 75;
 
                 if (diff < perfectZone) {
                     this.success("PARFAIT !", 2); // 2 = Excellent
@@ -640,12 +640,12 @@
                     
                     // Couleur de l'anneau : Rouge si loin, Vert si proche
                     var diff = Math.abs(h.ringRadius - h.radius);
-                    
+
                     // J'ai aligné les couleurs avec les zones de réussite
-                    if (diff < 25) { // Correspond à perfectZone
+                    if (diff < 40) { // Correspond à perfectZone
                         ctx.strokeStyle = C.green; // BLEU/CYAN (PERFECT)
                         ctx.lineWidth = 6;
-                    } else if (diff < 55) { // Correspond à goodZone
+                    } else if (diff < 75) { // Correspond à goodZone
                         ctx.strokeStyle = C.fg; // BLANC (BIEN)
                         ctx.lineWidth = 4;
                     } else {
