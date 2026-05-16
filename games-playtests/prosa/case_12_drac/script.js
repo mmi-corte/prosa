@@ -47,9 +47,7 @@ const game = {
     storyIndex: 0,
 
     goToStory: function() {
-        this.storyIndex = 0;
-        this.setPhase('STORY');
-        this.renderStory();
+        this.setPhase('CHOICE');
     },
 
     renderStory: function() {
