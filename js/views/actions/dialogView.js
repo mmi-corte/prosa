@@ -180,9 +180,8 @@ function updateDialog() {
         // No voice, use typewriter effect with sound
         typeWriteEffect(textBox, activeText, currentPitch);
 
-        // Narrator passages (no character, no recorded voice) → read aloud via TTS
-        if (!characterId && settings.narrationTts) {
-            speakNarrationTts(activeText);
+        if (settings.narrationTts) {
+            speakNarrationTts(activeText, currentPitch);
         }
     }
 }
@@ -212,18 +211,21 @@ function getFrenchVoice() {
     });
 }
 
-function speakNarrationTts(text) {
+function speakNarrationTts(text, characterPitch = 400) {
     if (!('speechSynthesis' in window)) return;
     const clean = cleanTtsText(text);
     if (!clean) return;
 
     stopNarrationTts();
 
+    // Map oscillator Hz (250-800) to Web Speech API pitch (0-2), 400Hz → 1.0
+    const speechPitch = Math.max(0.1, Math.min(2, characterPitch / 400));
+
     getFrenchVoice().then((voice) => {
         const utterance = new SpeechSynthesisUtterance(clean);
         utterance.lang = 'fr-FR';
         utterance.rate = 1.0;
-        utterance.pitch = 1.0;
+        utterance.pitch = speechPitch;
         utterance.volume = 1.0;
         if (voice) utterance.voice = voice;
         window.speechSynthesis.speak(utterance);

@@ -17,6 +17,7 @@ export const headerLeft = document.getElementById('headerLeft')
 
 export function clearContainer() {
   gameContainer.innerHTML = ''
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
   if (headerLeft) {
     removeBackButton()
   }
