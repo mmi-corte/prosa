@@ -11,8 +11,10 @@ import { aleasView } from "./aleasView.js"
 import { minigamesView } from "./minigamesView.js"
 import { navigate } from "../../../router.js"
 import { showBackButton } from "../components/backButton.js"
+import { stopMusic } from "../../musicManager.js"
 
 export function menuView() {
+  stopMusic();
   // Vérifier immédiatement si le joueur a perdu (batterie à 0)
   if (gameInitialized && difficultyState !== null && difficultyState !== undefined && difficultyState <= 0) {
     navigate('gameover', gameOverView)

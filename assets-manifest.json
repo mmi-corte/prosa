@@ -51,6 +51,10 @@
     "./data/tokens.json"
   ],
   "normal": [
+    "./assets/music/Foret_magique.mp3",
+    "./assets/music/Inquietude.mp3",
+    "./assets/music/La_Ruina_v2_Final.mp3",
+    "./assets/music/L_espoir_de_prosa_3.mp3",
     "./assets/characters/AStrega.webp",
     "./assets/characters/Coulobre.webp",
     "./assets/characters/Fata.webp",

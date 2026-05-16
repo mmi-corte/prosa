@@ -10,6 +10,7 @@ import { setLanguage } from "./langageManager.js";
 import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
 import { tokenView } from "./views/actions/tokenView.js";
 import { navigate } from "../router.js";
+import { startMusic, stopMusic } from "./musicManager.js";
 
 let activePlayerId
 export let activePlayer
@@ -97,27 +98,35 @@ export function callAction(actionType, action = null) {
 
     switch (actionType) {
         case "dialog":
+            startMusic();
             dialogView(action);
             break;
         case "choice":
+            startMusic();
             choiceView(action);
             break;
         case "riddle":
+            startMusic();
             riddleView(action);
             break;
         case "game":
+            startMusic();
             gameView(action);
             break;
         case "token":
+            startMusic();
             tokenView(action);
             break;
+        case "aleasRiddle":
+            startMusic();
+            aleasRiddleView();
+            break;
         case "ar":
+            stopMusic();
             break;
         case "end":
+            stopMusic();
             endView(action)
-            break;
-        case "aleasRiddle":
-            aleasRiddleView();
             break;
         case "special_end":
             startStep(actionType, action)
