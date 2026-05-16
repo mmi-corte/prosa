@@ -1,7 +1,7 @@
 # PROSA AR Project - Context Summary & Architecture
 
 **Project**: PROSA AR - Mythical Character Encounters in Augmented Reality  
-**Last Updated**: March 2026  
+**Last Updated**: May 2026  
 **Stack**: Vanilla JavaScript, Three.js 0.169, WebXR, MindAR, Lottie animations
 
 ---
@@ -70,6 +70,24 @@ lou_drape ← drape
 - Removed "Rencontrez A Fata" demo link from scan AR (`AR/index.html`)
 - Previously in top-left, now removed to reduce clutter
 
+### 8. **Dialog TTS System (Web Speech API)**
+- **Replaced meSpeak.js entirely** with native Web Speech API
+- TTS fires for ALL dialog lines without a `voice` file (narrator AND character lines)
+- Pitch per character: maps `characters.json` oscillator Hz values to Web Speech API pitch (÷400, clamped 0.1–2)
+- French voice resolved once via `getFrenchVoice()` (handles async `voiceschanged` event)
+- `speechSynthesis.cancel()` called in `clearContainer()` (app.js) → TTS stops on any view change
+- Setting `narrationTts` in user settings controls TTS on/off; `window.__prosaStopNarration` exposed for settings toggle
+- **Offline**: works natively — uses OS-installed voices, no network required
+
+### 9. **Background Music System**
+- New `js/musicManager.js` singleton — 4 ambient tracks in `assets/music/`
+- `startMusic()`: picks a random track (≠ previous), plays on loop at low volume; no-op if already playing
+- Volume: `(settings.music / 100) × 0.18` — quiet background, respects user volume setting
+- Music plays during: `dialog`, `choice`, `riddle`, `game`, `token`, `aleasRiddle`
+- Music stops on: `end`, `ar` actions, and `menuView()`
+- Tracks preloaded in PWA via `assets-manifest.json` (priority `normal`, after ~2.5s)
+- Service worker version bumped to `v41` to invalidate old cache
+
 ---
 
 ## Application Architecture
@@ -93,10 +111,12 @@ prosa/
 ├── js/
 │   ├── initGame.js              # Game initialization
 │   ├── loadData.js              # Data loading
+│   ├── musicManager.js          # Background music singleton (startMusic/stopMusic)
 │   ├── views/
 │   │   ├── main/
 │   │   │   └── charactersView.js # Encyclopedia with AR button
 │   │   ├── actions/
+│   │   │   └── dialogView.js    # Dialog renderer + Web Speech API TTS
 │   │   ├── components/
 │   │   └── Temp/
 │   └── ...other utilities
@@ -109,6 +129,11 @@ prosa/
 │   │   └── ...
 │   ├── characters/              # Character images
 │   ├── fonts/
+│   ├── music/                   # Background ambient tracks (4 MP3s)
+│   │   ├── Foret_magique.mp3
+│   │   ├── Inquietude.mp3
+│   │   ├── La_Ruina_v2_Final.mp3
+│   │   └── L_espoir_de_prosa_3.mp3
 │   └── ...
 │
 ├── AR/                           # AR Module (Card Scanning)
@@ -452,11 +477,11 @@ npm start  # Runs on port 8000
 
 ## Future Enhancement Ideas
 
-1. **Dialog System**: Interactive conversations in immersive mode
-2. **Gesture Recognition**: Hand tracking for interactions
-3. **Multiplayer**: Multiple users in same AR space (Croquet.io)
-4. **Analytics**: Track which characters are most viewed
-5. **Localization**: Support for multiple languages (Corsican, French, Italian)
+1. **Gesture Recognition**: Hand tracking for interactions
+2. **Multiplayer**: Multiple users in same AR space (Croquet.io)
+3. **Analytics**: Track which characters are most viewed
+4. **Localization**: Support for multiple languages (Corsican, French, Italian)
+5. **Music fade**: Add fade-in/fade-out to `musicManager.js` for smoother transitions
 
 ---
 
