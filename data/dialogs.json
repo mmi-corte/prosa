@@ -16,12 +16,12 @@
           },
           {
             "text": {
-              "fr": "Au-dessus des travailleurs, trois gardes de A Squadra d'Arozza (Les revenants) surveillent la scène, immobiles, l'arme en évidence, prêts à intervenir au moindre faux pas."
+              "fr": "Au-dessus des travailleurs, trois gardes d'A Squadra d'Arozza (Les revenants) surveillent la scène, immobiles, l'arme en évidence, prêts à intervenir au moindre faux pas."
             }
           },
           {
             "text": {
-              "fr": "Vous vous approchez du premier travailleur que vous croisez espérant récupérer des informations."
+              "fr": "Vous vous approchez du premier travailleur que vous croisez, espérant récupérer des informations."
             }
           },
           {
@@ -46,7 +46,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous parler au premier travailleur, celui-ci creuse un troue avec une pelle."
+              "fr": "Vous parlez au premier travailleur, celui-ci creuse un trou avec une pelle."
             }
           },
           {
@@ -80,7 +80,7 @@
           },
           {
             "text": {
-              "fr": "\"J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrais avec toi.\""
+              "fr": "\"J’ai dit non au clan. Alors ils m’ont laissé ça… le travail, la honte. Aide-moi… et je me battrai avec toi.\""
             },
             "character": "travailleur_corte",
             "voice": "Case_10_travailleur_3.mp3"
@@ -273,7 +273,7 @@
           },
           {
             "text": {
-              "fr": "L’atmosphère est calme mais tendue : chacun sait que le clan les surveille. Le travailleur marteau raconte au camp l’altercation."
+              "fr": "L’atmosphère est calme mais tendue : chacun sait que le clan les surveille. Le travailleur au marteau raconte au camp l’altercation."
             }
           }
         ],
@@ -290,7 +290,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Le clan dangereux et nous utilise depuis trop longtemps pour assoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.\"",
+              "fr": "\"Le clan est dangereux et nous utilise depuis trop longtemps pour asseoir sa domination en Corse. Demain nous marcherons sur la route du cimetière. Prouve ta valeur si tu veux nous accompagner.\"",
               "cor": "\"U clan hè periculosu è ci utiliza da troppu tempu per assittà a so duminazione in Corsica. Dumane marchjemu nantu à a strada di u cimiteru. Prova a to valenza s'è ti vo li accumpagnà.\""
             },
             "character": "chef_travailleur_corte",
@@ -312,7 +312,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent de A Squadra d’Arrozza, vous devez faire face à A Strega."
+              "fr": "Vous êtes prêt. Pendant que vos alliés s’occupent d'A Squadra d’Arozza, vous devez faire face à A Strega."
             }
           }
         ],
@@ -329,7 +329,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'as prédit, mais ton chemin s'arrête ici.\"",
+              "fr": "\"Corte est à moi, tu n'es qu'un fou. Je ne sais pas ce qu'U Spallistu t'a prédit, mais ton chemin s'arrête ici.\"",
               "cor": "\"Corti hè à mè, ùn si chè un pazzu. Ùn sò micca ciò chì U Spallistu t'hà predettu, mà u to caminu si ferma quì.\""
             },
             "character": "strega",
@@ -396,7 +396,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoir volé A Strega et continuez votre quête vers Prosa. "
+              "fr": "Vous obtenez un fragment de la pierre de l’Orcu après avoir volé A Strega et continuez votre quête vers Prosa."
             }
           }
         ],
@@ -423,7 +423,7 @@
           },
           {
             "text": {
-              "fr": "Après avoir remis la pierre à l'Orcu, vous et le colosse quittez la plage à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
+              "fr": "Après avoir remis la pierre à l'Orcu, vous quittez la plage avec le colosse à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
             }
           }
         ],
@@ -492,7 +492,7 @@
           },
           {
             "text": {
-              "fr": "Après avoir remis la pierre à l'Orcu, vous et le colosse quittez la plage à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
+              "fr": "Après avoir remis la pierre à l'Orcu, vous quittez la plage avec le colsse à bord d'une modeste embarcation. Le vent souffle doucement. Les vagues caressent la coque du petit bateau."
             }
           },
           {
@@ -555,7 +555,7 @@
           },
           {
             "text": {
-              "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air gentil plus que menaçant. Il s’appelle U Fulettu."
+              "fr": "Vous lui demandez son nom et la raison de son espionnage en essayant d’avoir l’air plus gentil que menaçant. Il s’appelle U Fulettu."
             },
             "foreground": "fullettu_2.webp"
           },
@@ -579,7 +579,7 @@
           },
           {
             "text": {
-              "fr": "Vous lui dite que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
+              "fr": "Vous lui dites que vous êtes ici, pour rejoindre une île où la nourriture est abondante."
             },
             "foreground": "fullettu_2.webp"
           },
@@ -710,7 +710,7 @@
           },
           {
             "text": {
-              "fr": "La voix se perd dans un flot de grésillement."
+              "fr": "La voix se perd dans un flot de grésillements."
             }
           }
         ],
@@ -734,8 +734,8 @@
           },
           {
             "text": {
-              "fr": "\"Mais l'île n'est pas un refuge. C'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
-              "cor": "\"Mà l'isula ùn hè micca un rifugiu. Hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
+              "fr": "\"Mais l'île n'est pas un refuge, c'est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt.\"",
+              "cor": "\"Mà l'isula ùn hè micca un rifugiu, hè una dittatura chì hà sceltu di pruspirà… mentre chì u restu di u mondu si more.\""
             },
             "character": "radio"
           },
@@ -783,7 +783,7 @@
           },
           {
             "text": {
-              "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume"
+              "fr": "Un bruit vous interpelle, vous levez la tête et apercevez A Fata di u Fiume."
             },
             "foreground": "fata_1.webp"
           },
@@ -798,7 +798,7 @@
           },
           {
             "text": {
-              "fr": "Vous connaissez la réputation de A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
+              "fr": "Vous connaissez la réputation d'A Fata et savez que vous pouvez lui faire confiance. Vous lui racontez ce que le message radio vous a appris."
             },
             "foreground": "fata_1.webp"
           },
@@ -842,7 +842,7 @@
           },
           {
             "text": {
-              "fr": "Vous expliquez à A Fata que voulez changez les choses mais ne savez pas par où commencez."
+              "fr": "Vous expliquez à A Fata que vous voulez changer les choses mais vous ne savez pas par où commencer."
             }
           },
           {
@@ -912,7 +912,7 @@
           },
           {
             "text": {
-              "fr": "Vous faites un pas en arrière effrayé."
+              "fr": "Vous faites un pas en arrière, effrayé."
             }
           },
           {
@@ -968,7 +968,7 @@
           },
           {
             "text": {
-              "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid:"
+              "fr": "Vous devinez qu’il s’agit d'U Spallistu. Celui-ci vous fixe longuement, comme s’il lisait à travers vous. Puis, il déclare d’un ton froid :"
             },
             "foreground": "spallistu.webp"
           },
@@ -1145,12 +1145,12 @@
         "dialog": [
           {
             "text": {
-              "fr": "A votre approche, la Signadora semble soulagée de vous voir. A ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
+              "fr": "À votre approche, la Signadora semble soulagée de vous voir. À ses côtés, un jeune homme d'une vingtaine d'années, allongé et souffrant."
             }
           },
           {
             "text": {
-              "fr": "\"On ne te vois pas souvent par ici jeune homme. Tu as l'air troublé… que veux-tu ?\"",
+              "fr": "\"On ne te voit pas souvent par ici, jeune homme. Tu as l'air troublé… que veux-tu ?\"",
               "cor": "\"Ùn ti si vede spessu da sti parti, o giuvanottu. Pari frasturniatu… chì voli ?\""
             },
             "character": "signadora",
@@ -1231,7 +1231,7 @@
           },
           {
             "text": {
-              "fr": "Les bancs renversés servent de barricades improvisées. Et de nombreux cartons sont présents."
+              "fr": "Les bancs renversés servent de barricades improvisées et de nombreux cartons sont présents."
             }
           },
           {
@@ -1349,7 +1349,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "\"Merci pour ton aide. je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
+              "fr": "\"Merci pour ton aide. Je suis l’armurier de Corte. Depuis des mois, les rebelles me demandaient de l’aide, mais j’ai toujours refusé par peur des représailles.\"",
               "cor": "\"Grazie pè u to aiutu. Sò l’armaghjolu di Corti. Da mesi, i ribelli mi dumandavanu aiutu, ma aghju sempre rinunciatu per paura di e ripercussione.\""
             },
             "character": "armurier_corte",
@@ -1425,7 +1425,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous rentrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
+              "fr": "Vous entrez dans le Frac, l'intérieur du bâtiment est silencieux, déserté depuis longtemps, ses salles d'exposition transformées en couloirs sombres où résonnent des pas imaginaires.",
               "cor": "Entrate in u Frac, l'internu di u bastimentu hè silenziu, abbandunatu dapoi tantu tempu, e so sale d'esposizione trasformate in corridori scuri induve risonanu passi imaginarii."
             }
           },
@@ -1463,7 +1463,7 @@
           },
           {
             "text": {
-              "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé au niveau de la statue de Pascal Paoli."
+              "fr": "En le suivant, vous rejoignez finalement un camp de travailleurs situé près de la statue de Pascal Paoli."
             }
           }
         ],
@@ -1538,7 +1538,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "L’Orcu apparaît à vos côtés, immobile et silencieux. Il explique qu’il repart sur Corte pour garder le passage vers Prosa ouvert."
+              "fr": "L’Orcu apparaît à vos côtés, immobile et silencieux. Il explique qu’il repart à Corte pour garder le passage vers Prosa ouvert."
             }
           },
           {
@@ -1548,7 +1548,7 @@
           },
           {
             "text": {
-              "fr": "Là-bas, vous pourrez surement y trouver un passage qu’utilise les travailleurs pour escalader la montagne et se rendre au centre de l’île."
+              "fr": "Là-bas, vous pourrez sûrement y trouver un passage qu’utilisent les travailleurs pour escalader la montagne et se rendre au centre de l’île."
             }
           }
         ],
@@ -1572,7 +1572,7 @@
           },
           {
             "text": {
-              "fr": "Vos mains sont liées par des menottes grossières. La cellule est étroite, trop basse,comme si elle avait été taillée pour écraser toute volonté."
+              "fr": "Vos mains sont liées par des menottes grossières. La cellule est étroite, trop basse, comme si elle avait été taillée pour écraser toute volonté."
             }
           },
           {
@@ -1778,14 +1778,12 @@
           {
             "text": {
               "fr": "\"Ces yeux… Cette détermination... Gyptis avait le même regard. Tu n'es pas lui… mais tu portes la même flamme.\""
-            },
-            "character": "sebastien"
+            }
           },
           {
             "text": {
               "fr": "\"Réponds-moi : es-tu vraiment prêt ?\""
-            },
-            "character": "sebastien"
+            }
           }
         ],
         "nextActionType": "riddle",
@@ -1801,14 +1799,12 @@
           {
             "text": {
               "fr": "\"La réponse est correcte ! Je vais donc t’indiquer la cathédrale.\""
-            },
-            "character": "sebastien"
+            }
           },
           {
             "text": {
-              "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, c'est sont elles.\""
-            },
-            "character": "sebastien"
+              "fr": "\"Li Lavandiero de Niue connaissent les anciens secrets. Si quelqu'un peut t'aider à atteindre le port, ce sont elles.\""
+            }
           }
         ],
         "nextActionType": "end",
@@ -1855,7 +1851,7 @@
           },
           {
             "text": {
-              "fr": "\"Sois attentif en chemin, il parait qu’il existe un dépôt secret dans le coin. Mais avant tout, tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
+              "fr": "\"Sois attentif en chemin, il paraît qu’il existe un dépôt secret dans le coin. Mais avant tout, tu devrais rester ici pour te reposer et continuer ton chemin demain matin.\""
             },
             "character": "lavandiero",
             "foreground": "lavandiero.webp"
@@ -2048,7 +2044,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "L’officier se laisse convaincre. Votre badge, Votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnement."
+              "fr": "L’officier se laisse convaincre. Votre badge, votre tenue et vos réponses suffisent à valider votre identité. Vous traversez le port avec une confiance de façade pour éviter d’autres questionnements."
             },
             "foreground": "soldat_flrp.webp"
           }
@@ -2071,7 +2067,7 @@
           },
           {
             "text": {
-              "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation"
+              "fr": "Le masque tombe. Vous êtes arrêté sur-le-champ et envoyé en prison à Prosa, accusé de menace et rébellion envers l'organisation."
             },
             "foreground": "soldat_flrp.webp"
           }
@@ -2152,7 +2148,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Avant de suivre Li Lavandiero de Niue , vous remarquez un passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
+              "fr": "Avant de suivre Li Lavandiero de Niue, vous remarquez un passage secret. À l'intérieur, vous découvrez un dépôt rempli de matériel et de divers équipements."
             }
           },
           {
@@ -2208,13 +2204,13 @@
           },
           {
             "text": {
-              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meure. J’ai tenté de résister mais j’ai échoué… \""
+              "fr": "\"Mais l’île n’est pas un refuge. C’est une dictature qui a choisi de prospérer… pendant que le reste du monde se meurt. J’ai tenté de résister, mais j’ai échoué… \""
             },
             "character": "radio"
           },
           {
             "text": {
-              "fr": "\"J’ai besoin de vous. Rejoignez Prosa et continuer ma révolution !\""
+              "fr": "\"J’ai besoin de vous. Rejoignez Prosa et continuez ma révolution !\""
             },
             "character": "radio"
           }
@@ -2239,7 +2235,7 @@
           },
           {
             "text": {
-              "fr": "L’un d’eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n’est libre et l’île, réel ou non vous apparait soudain comme une évidence."
+              "fr": "L’un d’eux trébuche et est brutalement relevé, contraint de continuer. Ici, personne n’est libre et l’île, réelle ou non, vous apparaît soudain comme une évidence."
             }
           },
           {
@@ -2260,7 +2256,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous décidez parler à ses deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiable et bienveillants. Vous décidez de leur raconter le message radio et votre intention de trouver l’île."
+              "fr": "Vous décidez de parler à ces deux inconnus. Ils s’appellent Gyptis et Protis et vous semblent fiables et bienveillants. Vous décidez de leur raconter le message radio et votre intention de trouver l’île."
             },
             "foreground": "gyptis_protis.webp"
           },
@@ -2273,7 +2269,7 @@
           },
           {
             "text": {
-              "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la La Fédération Li Rais de Prouvènço de Toulon, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie du U Sarpu a Sette Capi.\""
+              "fr": "\"Gyptis a raison, Toulon est sous le contrôle de la La Fédération Li Rais de Prouvènço de Toulon, La Fédération Li Rais de Prouvènço. Un des chefs de cette organisation, Lou Drapé, fait partie d'U Sarpu a Sette Capi.\""
             },
             "character": "protis",
             "foreground": "gyptis_protis.webp"
@@ -2287,7 +2283,7 @@
           },
           {
             "text": {
-              "fr": "Vous les regardez remplit de détermination sans rien dire."
+              "fr": "Vous les regardez rempli de détermination sans rien dire."
             },
             "foreground": "gyptis_protis.webp"
           },
@@ -2300,7 +2296,7 @@
           },
           {
             "text": {
-              "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port\""
+              "fr": "\"Ce lieu sera un point clé sur ton chemin vers le port.\""
             },
             "character": "gyptis",
             "foreground": "gyptis_protis.webp"
@@ -2321,7 +2317,7 @@
           },
           {
             "text": {
-              "fr": "Vous les remercier sincèrement pour leur aide et continuez votre chemin."
+              "fr": "Vous les remerciez sincèrement pour leur aide et continuez votre chemin."
             },
             "foreground": "gyptis_protis.webp"
           }
@@ -2373,7 +2369,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre de celui-ci, une jeune femme est agenouillée devant une sépulture. Lorsqu’il s’approche, elle se redresse brusquement et braque une arbalète."
+              "fr": "Vous sortez du tunnel et atteignez le vieux cimetière. Au centre de celui-ci, une jeune femme est agenouillée devant une sépulture. Lorsque vous vous approchez, elle se redresse brusquement et braque une arbalète."
             }
           },
           {
@@ -2410,7 +2406,7 @@
           },
           {
             "text": {
-              "fr": "Vous lui faite remarquer qu’elle ne pourra pas la dissimuler éternellement et qu’il vaut mieux s’en débarrasser. Vous lui proposez votre aide en échange de son soutien pour poursuivre votre route vers le port."
+              "fr": "Vous lui faites remarquer qu’elle ne pourra pas la dissimuler éternellement et qu’il vaut mieux s’en débarrasser. Vous lui proposez votre aide en échange de son soutien pour poursuivre votre route vers le port."
             }
           },
           {
@@ -2449,7 +2445,7 @@
           },
           {
             "text": {
-              "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement"
+              "fr": "Elle vous indique le chemin, mais ne peut vous accompagner. Le cœur lourd, vous vous éloignez, meurtri physiquement et moralement."
             },
             "foreground": "sainte_marthe.webp"
           }
@@ -2490,7 +2486,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Dans une ruelle étroite, une silhouette noire surgit l’animal est trop grand pour être un simple chat. Immobile, il semble vous observer. Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage."
+              "fr": "Dans une ruelle étroite, une silhouette noire surgit, l’animal est trop grand pour être un simple chat. Immobile, il semble vous observer. Vous pensez reconnaître un Matagot, une créature des légendes provençales, associée au mauvais présage."
             },
             "foreground": "matagot.webp"
           },
@@ -2518,7 +2514,7 @@
           },
           {
             "text": {
-              "fr": "Les allées encombrée forment un véritable labyrinthe et le Matagot, comme fière de vous avoir amenez au centre de ce labyrinthe, s’enfuit à travers une ouverture trop étroite pour le suivre."
+              "fr": "Les allées encombrées forment un véritable labyrinthe et le Matagot, comme fier de vous avoir amenés au centre de ce labyrinthe, s’enfuit à travers une ouverture trop étroite pour le suivre."
             }
           }
         ],
@@ -2596,7 +2592,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous observez des wagons qui circulent sans jamais s’arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, il n’a qu’une option, sauter dans un wagon en marche."
+              "fr": "Vous observez des wagons qui circulent sans jamais s’arrêter, guidés par des silhouettes énigmatiques, les Railadors. Pour poursuivre vers le port sans être repéré, il n’y a qu’une option, sauter dans un wagon en marche."
             }
           }
         ],
@@ -2711,7 +2707,7 @@
           },
           {
             "text": {
-              "fr": "Grâce au masque à gaz, votre traversée vers les sous-terrains se trouve grandment facilitée."
+              "fr": "Grâce au masque à gaz, votre traversée vers les sous-terrains se trouve grandement facilitée."
             },
             "foreground": "masque.webp"
           }
@@ -2755,7 +2751,7 @@
           },
           {
             "text": {
-              "fr": "Sans le masque à gaz, vous êtes contraint de traverser la Coulobre sans protection. L’odeur nauséabonde et les effets toxiques vous affaiblissent et vous ont considérablement ralenti."
+              "fr": "Sans le masque à gaz, vous êtes contraint de traverser la Coulobre sans protection. L’odeur nauséabonde et les effets toxiques vous affaiblissent et vous ont considérablement ralentis."
             }
           }
         ],
@@ -2784,7 +2780,7 @@
           },
           {
             "text": {
-              "fr": "Elle s’impose immédiatement. Vous entendez les murmures des soldats: c’est la Cabro d’Or, une figure majeure de l’organisation Prosa, venue à Toulon pour des affaires internes."
+              "fr": "Elle s’impose immédiatement. Vous entendez les murmures des soldats : c’est la Cabro d’Or, une figure majeure de l’organisation Prosa, venue à Toulon pour des affaires internes."
             },
             "foreground": "cabro_dor.webp"
           },
@@ -2809,14 +2805,14 @@
           },
           {
             "text": {
-              "fr": "\"Peu auraient pris ce risque. Garde l’œil ouvert. Je devine aisément tes intention jeune homme.\""
+              "fr": "\"Peu auraient pris ce risque. Garde l’œil ouvert. Je devine aisément tes intentions jeune homme.\""
             },
             "character": "cabro_dor",
             "foreground": "cabro_dor.webp"
           },
           {
             "text": {
-              "fr": "Sans un mot de plus, elle s’éloigne. Les frères vous remercient et vous indique la direction de l’Opéra de Toulon."
+              "fr": "Sans un mot de plus, elle s’éloigne. Les frères vous remercient et vous indiquent la direction de l’Opéra de Toulon."
             }
           }
         ],
@@ -2942,7 +2938,7 @@
           },
           {
             "text": {
-              "fr": "Là-bas, vous pourrez surement y trouver un passage qu’utilise les travailleurs pour traverser la montagne et vous rendre au centre de l’île."
+              "fr": "Là-bas, vous pourrez sûrement y trouver un passage qu’utilisent les travailleurs pour traverser la montagne et vous rendre au centre de l’île."
             }
           }
         ],
@@ -2966,7 +2962,7 @@
           },
           {
             "text": {
-              "fr": "Vos mains sont liées par des menottes grossières. La cellule est étroite, trop basse,comme si elle avait été taillée pour écraser toute volonté."
+              "fr": "Vos mains sont liées par des menottes grossières. La cellule est étroite, trop basse, comme si elle avait été taillée pour écraser toute volonté."
             }
           },
           {
@@ -3249,7 +3245,7 @@
           },
           {
             "text": {
-              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’une des têtes de l’organisation de Prosa : Le Drac."
             }
           },
           {
@@ -3282,7 +3278,7 @@
           },
           {
             "text": {
-              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’organisations têtes de l’organisation de Prosa : Le Drac."
+              "fr": "Une silhouette se détache de l’ombre, avançant sans la moindre précipitation. L’une des têtes de l’organisation de Prosa : Le Drac."
             }
           },
           {
@@ -3491,7 +3487,7 @@
           },
           {
             "text": {
-              "fr": "Le chef des armée U Strigone propose un jeu où l’issue n’en laissera qu’un seul d’entre vous vivant. Une façon « élégante » d’en finir, dit-il, comme si la mort pouvait être un raffinement."
+              "fr": "Le chef des armées U Strigone propose un jeu où l’issue n’en laissera qu’un seul d’entre vous vivant. Une façon « élégante » d’en finir, dit-il, comme si la mort pouvait être un raffinement."
             }
           }
         ],
@@ -3554,18 +3550,18 @@
           },
           {
             "text": {
-              "fr": "Vous êtes surpris mais ne laissez rien transparaitre pour qu’il continue de parler."
+              "fr": "Vous êtes surpris mais ne laissez rien transparaître pour qu’il continue de parler."
             }
           },
           {
             "text": {
-              "fr": "\"Sinon ce sont des moulins à vent immense qui sont notre principale source d’alimentation. On produit une quantité d’électricité énorme…\""
+              "fr": "\"Sinon ce sont des moulins à vent immenses qui sont notre principale source d’alimentation. On produit une quantité d’électricité énorme…\""
             },
             "character": "technicien_prosa"
           },
           {
             "text": {
-              "fr": "Vous orientez la conversation pour qu’il vous explique comment traverser la chaine de montagne."
+              "fr": "Vous orientez la conversation pour qu’il vous explique comment traverser la chaîne de montagnes."
             }
           },
           {
@@ -3589,7 +3585,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous vous diriger vers ce qui semble être un bâtiment de maintenances de câbles. Vous comprenez très vite que Prosa pompe l’énergie de la Provence via des câbles sous-marins."
+              "fr": "Vous vous dirigez vers ce qui semble être un bâtiment de maintenance de câbles. Vous comprenez très vite que Prosa pompe l’énergie de la Provence via des câbles sous-marins."
             }
           },
           {
@@ -3677,7 +3673,7 @@
           },
           {
             "text": {
-              "fr": "\"Gény c’est mon frère d’arme, une vraie tête. Alphonse Lévy sait toujours quoi dire, et surtout quand le dire.\""
+              "fr": "\"Gény c’est mon frère d’armes, une vraie tête. Alphonse Lévy sait toujours quoi dire, et surtout quand le dire.\""
             },
             "character": "gaspard"
           },
@@ -3813,7 +3809,7 @@
           },
           {
             "text": {
-              "fr": "Vous découvrez un visage marqué par le temps et la souffrance ses yeux sont cachés par un bandeau, signes évidents de la cécité qui le frappe."
+              "fr": "Vous découvrez un visage marqué par le temps et la souffrance. Ses yeux sont cachés par un bandeau, signe évident de la cécité qui le frappe."
             }
           },
           {
@@ -3950,7 +3946,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "A l’entrée de la grotte personne n’est présent."
+              "fr": "À l’entrée de la grotte, personne n’est présent."
             }
           },
           {
@@ -4003,7 +3999,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous sortez de la grotte, essoufflé mais victorieux. Celle-ci s’effondre derrière vous violement."
+              "fr": "Vous sortez de la grotte, essoufflé mais victorieux. Celle-ci s’effondre derrière vous violemment."
             }
           },
           {
@@ -4025,7 +4021,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Vous empruntez le chemin que Gaspard vous à indiqué en direction de la grotte."
+              "fr": "Vous empruntez le chemin que Gaspard vous a indiqué en direction de la grotte."
             }
           },
           {
@@ -4049,7 +4045,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Lorsque vous arrivez au sommet, devant vous, la chaine de montagnes s’étire comme une longue colonne vertébrale, et sur toute sa crête se dressent d’immenses moulins à vent."
+              "fr": "Lorsque vous arrivez au sommet, devant vous, la chaîne de montagnes s’étire comme une longue colonne vertébrale, et sur toute sa crête se dressent d’immenses moulins à vent."
             }
           },
           {
@@ -4249,7 +4245,7 @@
         "dialog": [
           {
             "text": {
-              "fr": "Une fois sa fiabilité prouvée, les rebelles l’accueil à bras ouvert. Vous quitterez ce refuge demain pour frapper au cœur de Prosa."
+              "fr": "Une fois sa fiabilité prouvée, les rebelles l’accueillent à bras ouverts. Vous quitterez ce refuge demain pour frapper au cœur de Prosa."
             }
           },
           {
