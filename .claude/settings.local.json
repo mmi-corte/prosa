@@ -81,7 +81,8 @@
       "Bash(curl -s \"https://registry.npmjs.org/mespeak/latest\")",
       "Bash(curl -s -o /dev/null -w \"config: %{http_code}\\\\n\" \"https://cdn.jsdelivr.net/npm/mespeak/mespeak_config.json\")",
       "Bash(curl -s -o /dev/null -w \"fr voice: %{http_code}\\\\n\" \"https://cdn.jsdelivr.net/npm/mespeak/voices/fr.json\")",
-      "Bash(grep -n \"MESPEAK_BASE\\\\\\\\|mespeak\\\\\\\\.\" c:/Users/darym/prosa/prosa/js/views/actions/dialogView.js)"
+      "Bash(grep -n \"MESPEAK_BASE\\\\\\\\|mespeak\\\\\\\\.\" c:/Users/darym/prosa/prosa/js/views/actions/dialogView.js)",
+      "Bash(grep -rn \"AR/index.html\\\\|AR/index\\\\|/AR/\\\\\\\\\\\\\"\\\\|\\\\\\\\./AR\\\\\\\\b\" c:/Users/darym/prosa/prosa/js/ c:/Users/darym/prosa/prosa/index.html c:/Users/darym/prosa/prosa/app.js c:/Users/darym/prosa/prosa/router.js)"
     ]
   }
 }

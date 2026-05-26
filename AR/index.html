@@ -3,26 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Scanner de Cartes - PROSA</title>
-  
-  <!-- Base path detection for GitHub Pages / local compatibility -->
-  <script>
-    window.BASE_PATH = (function() {
-      var path = window.location.pathname;
-      if (path.startsWith('/prosa/')) {
-        return '/prosa';
-      }
-      return '';
-    })();
-    window.resolvePath = function(path) {
-      if (path.startsWith('/')) {
-        return window.BASE_PATH + path;
-      }
-      return path;
-    };
-  </script>
+  <title>Expériences AR - PROSA</title>
 
-  <!-- PROSA Font -->
   <style>
     @font-face {
       font-family: 'Futura';
@@ -32,95 +14,403 @@
       font-style: normal;
       font-display: swap;
     }
-  </style>
-  
-  <!-- Import Map for ES Modules -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-        "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+
+    :root {
+      --background: #1a1812;
+      --foreground: #ece4cb;
+      --card: #252218;
+      --primary: #626247;
+      --primary-light: #7a7a5a;
+      --border: #3a3830;
+      --muted: #2a2820;
+      --muted-foreground: #9a9680;
+      --accent: #c63032;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Futura', 'Inter', system-ui, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .back-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .back-btn:hover { background: var(--muted); }
+    .back-btn:active { transform: scale(0.95); }
+
+    .page-title {
+      font-size: 1.6rem;
+      margin: 0;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      padding: 0 20px 16px;
+      color: var(--muted-foreground);
+      font-size: 0.95rem;
+    }
+
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 0 20px 32px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 480px) {
+      .characters-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
-  </script>
-  
-  <link rel="stylesheet" href="css/cards.css">
-  
-  <!-- Main App (ES Module) - loads JSON config internally -->
-  <script type="module" src="js/card-scanner.js"></script>
+
+    .character-card {
+      aspect-ratio: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .character-card:hover {
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+
+    .character-card-image {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      border-radius: 11px 11px 0 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .character-card-image video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      scale: 1.12;
+      display: block;
+    }
+
+    .character-card-name {
+      padding: 8px;
+      font-size: 0.85rem;
+      text-align: center;
+      font-weight: 600;
+      background: var(--muted);
+      color: var(--foreground);
+      border-radius: 0 0 11px 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .character-card-ar-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(99, 102, 241, 0.9);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 3px 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted-foreground);
+    }
+
+    /* Compatibility modal */
+    .ar-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 24, 18, 0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .ar-modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ar-modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      max-width: 460px;
+      width: 100%;
+      color: var(--foreground);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .ar-modal h2 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .ar-modal p {
+      margin: 0 0 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--muted-foreground);
+    }
+
+    .ar-modal p strong {
+      color: var(--foreground);
+    }
+
+    .ar-modal-link {
+      color: #81cbd6;
+      text-decoration: underline;
+      word-break: break-word;
+    }
+
+    .ar-modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .ar-modal-actions button {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s ease, transform 0.1s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .ar-modal-cancel {
+      background: transparent;
+      color: var(--muted-foreground);
+      border: 1px solid var(--border);
+    }
+
+    .ar-modal-cancel:hover { background: var(--muted); }
+
+    .ar-modal-confirm {
+      background: var(--primary);
+      color: var(--foreground);
+      border: none;
+    }
+
+    .ar-modal-confirm:hover { background: var(--primary-light); }
+    .ar-modal-confirm:active, .ar-modal-cancel:active { transform: scale(0.97); }
+  </style>
 </head>
 <body>
-  <!-- AR Container -->
-  <div id="ar-container"></div>
-  
-  <!-- Scanning Animation -->
-  <div id="scan-animation">
-    <div class="scan-line"></div>
-  </div>
 
-  <!-- UI Overlay -->
-  <div id="ui-overlay">
-    <!-- Back Button (top left, consistent with main app) -->
-    <button id="back-btn" class="control-btn back-btn-topleft" title="Retour">
+  <header class="header">
+    <button class="back-btn" id="backBtn" aria-label="Retour">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </button>
+    <h1 class="page-title">Expériences AR</h1>
+  </header>
 
-    <!-- Control Buttons (top right) -->
-    <div id="control-buttons">
-      <button id="mute-btn" class="control-btn" title="Mute/Unmute">
-        <svg id="sound-on-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        </svg>
-        <svg id="sound-off-icon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-      </button>
-      <!-- More Info Button with hint -->
-      <div id="zoom-hint-container" class="zoom-hint-container hidden">
-        <button id="zoom-btn" class="control-btn zoom-bounce" title="Plus d'infos">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 16v-4"></path>
-            <path d="M12 8h.01"></path>
-          </svg>
-        </button>
-        <div class="zoom-arrow">
-          <span>Plus d'infos</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5"></path>
-            <path d="M5 12l7-7 7 7"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Expanded Info Modal (fullscreen description) -->
-    <div id="info-modal" class="hidden">
-      <div class="modal-content">
-        <div class="modal-header">
-          <img id="modal-portrait" src="" alt="Portrait du personnage">
-          <h2 id="modal-character-name"></h2>
-          <button id="lang-toggle-btn" class="lang-toggle-btn" title="Passer en Corse">
-            <img src="assets/img/corsu.png" alt="CO" class="lang-icon" id="corsican-flag">
-            <span class="lang-icon hidden" id="french-flag">🇫🇷</span>
-          </button>
-          <button id="close-modal-btn">✕</button>
-        </div>
-        <div class="modal-body">
-          <p id="modal-description"></p>
-        </div>
+  <p class="subtitle">Choisissez un personnage pour lancer son expérience en réalité augmentée.</p>
+
+  <main>
+    <div class="characters-grid" id="charactersGrid"></div>
+  </main>
+
+  <!-- Compatibility warning modal -->
+  <div class="ar-modal-overlay" id="arWarningModal" role="dialog" aria-modal="true">
+    <div class="ar-modal">
+      <h2>Avant de lancer l'expérience</h2>
+      <p>
+        L'expérience de réalité augmentée fonctionne sur la plupart des appareils Android récents équipés de Chrome.
+      </p>
+      <p>
+        <strong>Sur iPhone</strong>, WebXR n'est pas pris en charge par défaut. Pour profiter de l'expérience, installez l'application
+        <a class="ar-modal-link" href="https://apps.apple.com/app/webxr-viewer/id1295998056" target="_blank" rel="noopener">
+          Mozilla WebXR Viewer
+        </a>
+        depuis l'App Store, puis ouvrez ce lien depuis l'application.
+      </p>
+      <div class="ar-modal-actions">
+        <button class="ar-modal-cancel" id="arCancelBtn" type="button">Annuler</button>
+        <button class="ar-modal-confirm" id="arConfirmBtn" type="button">Continuer</button>
       </div>
     </div>
   </div>
 
-  <!-- Audio Elements (for non-spatial sounds) -->
-  <div id="audio-container"></div>
+  <script>
+    const MAIN_CHARS_URL = '../data/characters.json';
+    const grid = document.getElementById('charactersGrid');
+    const modal = document.getElementById('arWarningModal');
+    const cancelBtn = document.getElementById('arCancelBtn');
+    const confirmBtn = document.getElementById('arConfirmBtn');
+    const backBtn = document.getElementById('backBtn');
+
+    let pendingCharacterKey = null;
+
+    function isIOSDevice() {
+      const ua = navigator.userAgent || '';
+      if (/iPhone|iPad|iPod/i.test(ua)) return true;
+      // iPadOS 13+ reports a desktop Safari UA; detect via Mac UA + touch screen.
+      if (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+      return false;
+    }
+
+    backBtn.addEventListener('click', () => {
+      window.location.href = '../index.html#univers-prosa/encyclopedie';
+    });
+
+    async function loadCharacters() {
+      try {
+        const res = await fetch(MAIN_CHARS_URL, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('Failed to load characters.json: ' + res.status);
+        const data = await res.json();
+
+        const arEntries = Object.entries(data).filter(([, char]) => char && char.arEnabled);
+
+        if (!arEntries.length) {
+          grid.innerHTML = '<div class="empty-state">Aucune expérience AR disponible pour le moment.</div>';
+          return;
+        }
+
+        arEntries.forEach(([key, char]) => grid.appendChild(buildCard(key, char)));
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = '<div class="empty-state">Impossible de charger les expériences AR.</div>';
+      }
+    }
+
+    function buildCard(key, char) {
+      const card = document.createElement('div');
+      card.className = 'character-card';
+
+      const media = document.createElement('div');
+      media.className = 'character-card-image';
+
+      const mediaPath = char.image || char.media || '';
+      const isVideo = /\.(mp4|webm|ogg)$/i.test(mediaPath);
+
+      if (isVideo) {
+        const video = document.createElement('video');
+        video.src = `../assets/characters/${mediaPath}`;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.setAttribute('aria-label', char.name || key);
+        media.appendChild(video);
+      } else if (mediaPath) {
+        media.style.backgroundImage = `url('../assets/characters/${mediaPath}')`;
+      }
+
+      const badge = document.createElement('div');
+      badge.className = 'character-card-ar-badge';
+      badge.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+          <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg> AR
+      `;
+      card.appendChild(badge);
+
+      const name = document.createElement('div');
+      name.className = 'character-card-name';
+      name.textContent = char.name || key;
+
+      card.append(media, name);
+
+      card.addEventListener('click', () => {
+        if (isIOSDevice()) {
+          openWarningFor(key);
+        } else {
+          launchExperience(key);
+        }
+      });
+
+      return card;
+    }
+
+    function launchExperience(key) {
+      window.location.href = `./immersif/index.html?character=${encodeURIComponent(key)}`;
+    }
+
+    function openWarningFor(key) {
+      pendingCharacterKey = key;
+      modal.classList.add('visible');
+    }
+
+    function closeWarning() {
+      modal.classList.remove('visible');
+      pendingCharacterKey = null;
+    }
+
+    cancelBtn.addEventListener('click', closeWarning);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeWarning();
+    });
+    confirmBtn.addEventListener('click', () => {
+      const key = pendingCharacterKey;
+      if (!key) return;
+      launchExperience(key);
+    });
+
+    loadCharacters();
+  </script>
 </body>
 </html>
