@@ -2,7 +2,8 @@ import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { aleasRiddlesData } from "../../loadData.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
-import { callAction } from "../../gameEventHandler.js";
+import { activePlayer, activeStepId } from "../../gameEventHandler.js";
+import { chooseRiddleIndex, players } from "../../initGame.js";
 import { menuView } from "../main/menuView.js";
 import { decrementDifficultyState } from "../../initGame.js";
 import { correctAnswerModal } from "../components/correctAnswerModal.js";
@@ -37,10 +38,15 @@ export function aleasRiddleView() {
     choiceContainer.classList.add('actionChoices')
     wrapper.appendChild(choiceContainer)
 
-    // Select one random riddle from available riddles (object keys)
+    // Rotate aleas riddles by player and game session as well.
     const riddleKeys = Object.keys(data)
-    const randomKey = riddleKeys[Math.floor(Math.random() * riddleKeys.length)]
-    selectedRiddle = data[randomKey]
+    const playerIndex = Math.max(0, Object.values(players).indexOf(activePlayer))
+    const riddleIndex = chooseRiddleIndex(
+        riddleKeys.length,
+        `aleas:${activePlayer.localisation}:${activeStepId}`,
+        playerIndex
+    )
+    selectedRiddle = data[riddleKeys[riddleIndex]]
     choicesRendered = false
 
     displayRiddle()

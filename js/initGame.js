@@ -103,6 +103,7 @@ export async function initGame() {
         localStorage.removeItem('playersData')
         localStorage.removeItem('globalDifficulty')
         localStorage.removeItem('difficultyState')
+        localStorage.removeItem('riddleGameSeed')
         console.log("No valid stored game data found.")
         return false;
     }
@@ -162,8 +163,10 @@ export function resetGame() {
     //Reset difficulty indicator
     localStorage.removeItem('globalDifficulty')
     localStorage.removeItem('difficultyState')
+    localStorage.removeItem('riddleGameSeed')
     globalDifficulty = null
     difficultyState = null
+    riddleGameSeed = 0
 
     //Reset global game state
     gameInitialized = false

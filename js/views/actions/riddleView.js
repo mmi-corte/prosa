@@ -1,5 +1,6 @@
 import { clearContainer, gameContainer, settings } from "../../../app.js";
 import { activePlayer, activeStepId, callAction } from "../../gameEventHandler.js";
+import { chooseRiddleIndex, players } from "../../initGame.js";
 import { riddlesData } from "../../loadData.js";
 import { typeWriteEffect, isTyping, skipTypeWrite } from "../../typeWriteEffect.js";
 import { getTranslation } from "../../langageManager.js";
@@ -33,9 +34,16 @@ export async function riddleView(action) {
     choiceContainer.classList.add('actionChoices')
     wrapper.appendChild(choiceContainer)
 
-    // Select one random riddle from available riddles
-    const randomIndex = Math.floor(Math.random() * data.text.length)
-    selectedRiddle = data.text[randomIndex]
+    // Rotate riddles by player and game session instead of rolling independently.
+    // This guarantees different questions for different players when the step has
+    // enough of them, and a different rotation on every new game.
+    const playerIndex = Math.max(0, Object.values(players).indexOf(activePlayer))
+    const riddleIndex = chooseRiddleIndex(
+        data.text.length,
+        `${activePlayer.localisation}:${activeStepId}:${action}`,
+        playerIndex
+    )
+    selectedRiddle = data.text[riddleIndex]
     choicesRendered = false
 
     displayRiddle()
