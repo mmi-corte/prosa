@@ -34,8 +34,13 @@ export async function initGame() {
 
     const validDifficulty = Number.isFinite(storedDifficulty) && storedDifficulty > 0
     const validDifficultyState = Number.isFinite(storedDifficultyState) && storedDifficultyState >= 0
+    // Player data is saved as an array of player objects by savePlayerData().
+    // Accept both arrays and legacy keyed maps so a completed character
+    // selection is correctly restored as an initialized game.
     const validPlayers = storedPlayers && typeof storedPlayers === 'object' &&
-        !Array.isArray(storedPlayers) && Object.keys(storedPlayers).length > 0
+        (Array.isArray(storedPlayers)
+            ? storedPlayers.length > 0
+            : Object.keys(storedPlayers).length > 0)
 
     if (validPlayers && validDifficulty && validDifficultyState) {
         console.log("Found stored game data, initializing game with saved data...")

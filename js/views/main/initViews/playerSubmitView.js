@@ -349,7 +349,7 @@ async function submit(selectedPlayers) {
     console.log(selectedPlayers)
     savePlayerData(selectedPlayers)
     await initGame()
-    navigate('menu', menuView(), true)
+    navigate('menu', menuView, true)
 }
 
 // Vérifier l'équilibre entre Corte (1) et Toulon (2)
