@@ -1,7 +1,7 @@
 import { gameContainer, headerLeft } from "../../../../app.js";
 import { gameInitialized, initGame, savePlayerData, globalDifficulty, setDifficulty } from "../../../initGame.js";
 import { fetchPlayerCharacters } from "../../../loadData.js";
-import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
+import { clearInitContainer, ensureInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { menuView } from "../menuView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { showConfirmationModal } from "../../components/confirmationModal.js";
@@ -21,6 +21,7 @@ export async function playerSubmitView(selectedPlayers) {
         return
     }
 
+    ensureInitContainer()
     clearInitContainer()
     initContainer.classList.add('initScreen3');
 
@@ -54,7 +55,8 @@ export async function playerSubmitView(selectedPlayers) {
         showDifficultyModal(selectedPlayers, difficultyValue)
     }
 
-    changeDifficultyBtn.addEventListener('click', handleDifficultyChange)
+    // Only the section needs the listener: the button bubbles into it. Binding
+    // both opened two stacked modals and left an invisible click blocker behind.
     difficultySection.addEventListener('click', handleDifficultyChange)
 
     difficultySection.append(difficultyLabel, difficultyValue, changeDifficultyBtn)
@@ -130,7 +132,12 @@ function renderEditablePlayerList(container, players) {
     })
 }
 
+function removeExistingModal() {
+    document.querySelectorAll('.modal-overlay').forEach(modal => modal.remove())
+}
+
 function showCharacterSelectModal(selectedPlayers, playerIndex, playerListEl) {
+    removeExistingModal()
     const modalOverlay = document.createElement('div')
     modalOverlay.classList.add('modal-overlay')
 
@@ -283,6 +290,7 @@ function getDifficultyLabel(value) {
 }
 
 function showDifficultyModal(selectedPlayers, difficultyValueEl) {
+    removeExistingModal()
     const modalOverlay = document.createElement('div')
     modalOverlay.classList.add('modal-overlay')
 
@@ -362,6 +370,7 @@ function checkRegionBalance(players) {
 
 // Afficher le popup d'erreur d'équilibre
 function showBalanceErrorPopup(players, onReset) {
+    removeExistingModal()
     const totalPlayers = players.length
     const corteCount = players.filter(p => p.localisation === 1).length
     const toulonCount = players.filter(p => p.localisation === 2).length
@@ -388,7 +397,7 @@ function showBalanceErrorPopup(players, onReset) {
 
     initContainer.appendChild(modalOverlay)
 
-    document.getElementById('continueEditBtn').addEventListener('click', () => {
+    modalOverlay.querySelector('#continueEditBtn').addEventListener('click', () => {
         modalOverlay.remove()
     })
 }

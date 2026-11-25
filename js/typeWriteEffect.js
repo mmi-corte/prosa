@@ -1,4 +1,5 @@
 let typingTimeout = ""
+let resolveTyping = null
 export let isTyping = ""
 const defaultDelay = 30
 
@@ -12,6 +13,14 @@ const defaultDelay = 30
  */
 export function typeWriteEffect(container, text, pitch = 400, muted = false) {
     return new Promise((resolve) => {
+        // Resolve any previous typewriter still pending (e.g. skipped by a tap)
+        // so callers waiting on it can finish instead of hanging forever.
+        if (resolveTyping) {
+            const pending = resolveTyping
+            resolveTyping = null
+            pending()
+        }
+        resolveTyping = resolve
         container.innerHTML = "";
         isTyping = true;
         let i = 0;
@@ -63,6 +72,7 @@ export function typeWriteEffect(container, text, pitch = 400, muted = false) {
                 typingTimeout = setTimeout(type, currentDelay);
             } else {
                 isTyping = false;
+                if (resolveTyping === resolve) resolveTyping = null;
                 resolve()
             }
         }
@@ -74,6 +84,11 @@ export function typeWriteEffect(container, text, pitch = 400, muted = false) {
 export function skipTypeWrite() {
     clearTimeout(typingTimeout);
     isTyping = false;
+    if (resolveTyping) {
+        const pending = resolveTyping
+        resolveTyping = null
+        pending()
+    }
 }
 
 // AudioContext créé en lazy (seulement quand utilisé)

@@ -1,10 +1,11 @@
 import { gameContainer } from "../../../../app.js";
 import { setLanguage } from "../../../langageManager.js";
-import { clearInitContainer, initContainer, initTextContainer } from "../initView.js";
+import { clearInitContainer, ensureInitContainer, initContainer, initTextContainer } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
 
 export function langueCorseView(playerCount) {
     console.log("Language selection view loaded");
+    ensureInitContainer();
     clearInitContainer();
     initContainer.classList.add('initScreen1-5'); // A language selection screen
 

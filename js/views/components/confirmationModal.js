@@ -6,9 +6,12 @@ import { navigate } from "../../../router.js";
  * @param {Function} onConfirm - Callback optionnel avant la navigation
  */
 export function showConfirmationModal(targetRoute, targetFunction, onConfirm = null) {
+    // Never stack confirmations: a second overlay would swallow every click.
+    document.querySelectorAll('.confirmation-modal-overlay').forEach(modal => modal.remove());
+
     // Créer l'overlay
     const modalOverlay = document.createElement('div');
-    modalOverlay.classList.add('modal-overlay');
+    modalOverlay.classList.add('modal-overlay', 'confirmation-modal-overlay');
     
     // Créer le contenu du modal
     const modalContent = document.createElement('div');
@@ -42,8 +45,8 @@ export function showConfirmationModal(targetRoute, targetFunction, onConfirm = n
     h3.style.margin = '0 0 20px 0';
     
     // Récupérer les boutons
-    const confirmBtn = document.getElementById('confirmBtn');
-    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = modalOverlay.querySelector('#confirmBtn');
+    const cancelBtn = modalOverlay.querySelector('#cancelBtn');
     
     // Hover effects
     confirmBtn.addEventListener('mouseenter', () => {

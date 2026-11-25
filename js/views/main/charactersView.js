@@ -104,6 +104,7 @@ export function charactersView(preventReload = false) {
 
 function renderCharactersGrid(charactersEntries) {
     const charactersGrid = document.getElementById('charactersGrid')
+    if (!charactersGrid) return
     charactersGrid.innerHTML = ""
 
     charactersEntries.forEach(([key, char]) => {

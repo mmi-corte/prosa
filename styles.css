@@ -2222,6 +2222,7 @@ body.light-mode .logo-main {
   z-index: 10;
   transition: .2s ease-in-out;
   opacity: 0;
+  pointer-events: none;
   backdrop-filter: blur(25px);
   background-color: rgba(116, 100, 83, 0.7);
   align-items: start;
@@ -2555,6 +2556,7 @@ body.light-mode .logo-main {
   gap: 10px;
   transition: .2s ease-in-out;
   opacity: 0;
+  pointer-events: none;
   backdrop-filter: blur(25px);
   background-color: rgba(0, 0, 0, 0.25);
 }
@@ -2562,6 +2564,7 @@ body.light-mode .logo-main {
 .endWrapper.show,
 .detailContainer.show {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .endWrapper .text_indication {
@@ -4196,6 +4199,8 @@ body.light-mode .char-select-btn.current {
 
 .intro-cinematic-overlay.fade-out {
   opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .intro-cinematic-video {

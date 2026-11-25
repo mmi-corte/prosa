@@ -15,12 +15,28 @@ const preloadLogger = window.preloadLog
 export const gameContainer = document.getElementById('gameContainer')
 export const headerLeft = document.getElementById('headerLeft')
 
+const viewCleanups = new Set()
+
+/** Register teardown work for listeners/timers owned by the current view. */
+export function registerViewCleanup(cleanup) {
+  if (typeof cleanup === 'function') viewCleanups.add(cleanup)
+}
+
 export function clearContainer() {
+  viewCleanups.forEach((cleanup) => {
+    try { cleanup() } catch (error) { console.warn('View cleanup failed:', error) }
+  })
+  viewCleanups.clear()
   gameContainer.innerHTML = ''
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
   if (headerLeft) {
     removeBackButton()
   }
+  // Minigames hide the whole header while their iframe is displayed. Restore it
+  // on every view change so settings/logo/back stay reachable even when a game
+  // is exited via browser Back/Forward instead of a completion message.
+  const header = document.querySelector('.header')
+  if (header) header.style.display = ''
 }
 
 window.initProsaLogoLottie = function initProsaLogoLottie() {

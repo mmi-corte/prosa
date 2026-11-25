@@ -1,4 +1,4 @@
-import { clearContainer, gameContainer } from "../../../app.js";
+import { clearContainer, gameContainer, registerViewCleanup } from "../../../app.js";
 import { callAction } from "../../gameEventHandler.js";
 import { decrementDifficultyState, isGameOver } from "../../initGame.js";
 import { gamesData } from "../../loadData.js";
@@ -103,4 +103,12 @@ export function gameView(action) {
     };
 
     window.addEventListener('message', handleMessage);
+
+    // The iframe can be torn down by any navigation (including browser Back).
+    // Always detach this listener and unhide the header on the next view change.
+    registerViewCleanup(() => {
+        window.removeEventListener('message', handleMessage);
+        const header = document.querySelector('.header');
+        if (header) header.style.display = '';
+    });
 }

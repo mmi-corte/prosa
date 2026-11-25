@@ -70,9 +70,11 @@ function playIntroCinematic(onComplete) {
     const skipBtn = overlay.querySelector('.intro-cinematic-skip')
 
     let finished = false
+    let hardStopTimer
     const finish = () => {
         if (finished) return
         finished = true
+        clearTimeout(hardStopTimer)
         try { video.pause() } catch (_) {}
         overlay.classList.add('fade-out')
         setTimeout(() => {
@@ -80,6 +82,9 @@ function playIntroCinematic(onComplete) {
             if (typeof onComplete === 'function') onComplete()
         }, 300)
     }
+
+    // Stalled/blocked video must never leave a full-screen click blocker behind.
+    hardStopTimer = setTimeout(finish, 15000)
 
     video.addEventListener('ended', finish)
     video.addEventListener('error', finish)
@@ -95,7 +100,29 @@ function playIntroCinematic(onComplete) {
     })
 }
 
+/**
+ * Init views append their controls to cached nodes. clearContainer() detaches
+ * those nodes on every navigation (including Back/Forward), so rebuild them
+ * when an init route is entered directly.
+ */
+export function ensureInitContainer() {
+    if (!wrapper?.isConnected || !initTextContainer?.isConnected || !initContainer?.isConnected) {
+        wrapper = document.createElement('div')
+        wrapper.classList.add('initWrapper')
+        gameContainer.appendChild(wrapper)
+
+        initTextContainer = document.createElement('p')
+        wrapper.appendChild(initTextContainer)
+
+        initContainer = document.createElement('div')
+        initContainer.classList.add('initScreen1')
+        wrapper.appendChild(initContainer)
+    }
+    return initContainer
+}
+
 export function clearInitContainer() {
+    ensureInitContainer()
     if (initContainer) {
         initContainer.classList.remove(...initContainer.classList)
         initTextContainer.innerHTML = null

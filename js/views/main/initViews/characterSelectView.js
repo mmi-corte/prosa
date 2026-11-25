@@ -1,6 +1,6 @@
 import { gameContainer } from "../../../../app.js";
 import { fetchPlayerCharacters } from "../../../loadData.js";
-import { clearInitContainer, initContainer, initPlayerCount, initTextContainer, setInitPlayerCount } from "../initView.js";
+import { clearInitContainer, ensureInitContainer, initContainer, initPlayerCount, initTextContainer, setInitPlayerCount } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { playerSubmitView } from "./playerSubmitView.js";
 import { getTranslation, setLanguage } from "../../../langageManager.js";
@@ -17,6 +17,7 @@ let charactersByRegion = {}
 let currentInitPlayerCount
 
 export async function characterSelectView() {
+    ensureInitContainer()
     clearInitContainer()
     showBackButton()
     initContainer.classList.add('initScreen2');

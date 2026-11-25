@@ -1,4 +1,4 @@
-import { clearInitContainer, initContainer, initPlayerCount, initTextContainer, setInitPlayerCount } from "../initView.js";
+import { clearInitContainer, ensureInitContainer, initContainer, initPlayerCount, initTextContainer, setInitPlayerCount } from "../initView.js";
 import { characterSelectView } from "./characterSelectView.js";
 import { gameInitialized } from "../../../initGame.js";
 import { menuView } from "../menuView.js";
@@ -14,6 +14,7 @@ export function playerCountView() {
         return
     }
 
+    ensureInitContainer();
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerText = "Nombre de joueurs";

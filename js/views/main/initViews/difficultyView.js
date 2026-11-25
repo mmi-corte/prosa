@@ -1,4 +1,4 @@
-import { clearInitContainer, initContainer, initDifficulty, initSequence, initTextContainer, setInitDifficulty } from "../initView.js";
+import { clearInitContainer, ensureInitContainer, initContainer, initDifficulty, initSequence, initTextContainer, setInitDifficulty } from "../initView.js";
 import { playerCountView } from "./playerCountView.js";
 import { menuView } from "../menuView.js";
 import { gameContainer } from "../../../../app.js";
@@ -19,6 +19,7 @@ export function difficultyView() {
     removeBackButton()
     showBackButton(() => showConfirmationModal("menu", menuView))
 
+    ensureInitContainer();
     clearInitContainer();
     initContainer.classList.add('initScreen1');
     initTextContainer.innerHTML = `
@@ -96,6 +97,8 @@ export function difficultyView() {
     // Afficher la modal au premier choix de la difficulté
     if (!initDifficulty) {
         setTimeout(() => {
+            // The user may have navigated away during the delay.
+            if (!window.location.hash.includes('choix-difficulte') || !initContainer?.isConnected) return;
             showInfoModal();
         }, 300);
     }
@@ -103,6 +106,7 @@ export function difficultyView() {
 
 
 function showInfoModal() {
+    document.querySelectorAll('.modal-overlay').forEach(modal => modal.remove());
     const modalOverlay = document.createElement('div');
     modalOverlay.classList.add('modal-overlay');
 

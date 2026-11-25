@@ -46,6 +46,7 @@ export function seasonsView() {
 
 function renderCinematicsGrid(cinematicsData) {
     const cinematicsGrid = document.getElementById('cinematicsGrid')
+    if (!cinematicsGrid) return
     cinematicsGrid.innerHTML = ""
 
     cinematicsData.forEach(cinematic => {
