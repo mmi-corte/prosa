@@ -4,6 +4,49 @@ import { stepsData } from "../../loadData.js";
 import { showBackButton } from "../components/backButton.js";
 import { playerSelectView } from "./playerSelectView.js";
 
+const SUCCESS_FEEDBACK_MS = 700
+
+function preloadImage(src) {
+    return new Promise((resolve) => {
+        const img = new Image()
+        img.onload = resolve
+        img.onerror = resolve
+        img.src = src
+    })
+}
+
+async function preloadStepAssets(fullStepId) {
+    if (!activePlayer) return
+    const localisation = activePlayer.localisation
+    const baseStepId = fullStepId.substring(0, 2)
+    const urls = new Set()
+
+    const addUrl = (file) => {
+        if (file) urls.add(`./assets/steps/${localisation}/${baseStepId}/${file}`)
+    }
+
+    addUrl(stepsData[localisation]?.[fullStepId]?.default?.backgroundUrl)
+
+    // Dialog actions reference backgrounds and foregrounds that are not all in
+    // the startup manifest. Warm them while the success feedback is visible.
+    try {
+        const response = await fetch('./data/dialogs.json', { cache: 'force-cache' })
+        if (response.ok) {
+            const dialogs = await response.json()
+            const actions = dialogs?.[localisation]?.[baseStepId] || {}
+            Object.values(actions).forEach((action) => {
+                addUrl(action?.default?.backgroundUrl)
+                addUrl(action?.default?.foregroundUrl)
+                ;(action?.dialog || []).forEach((line) => addUrl(line.foreground))
+            })
+        }
+    } catch (_) {
+        // Prefetch is best-effort; dialogView still handles load failures.
+    }
+
+    await Promise.all([...urls].map(preloadImage))
+}
+
 export function codeView() {
     clearContainer()
     showBackButton()
@@ -126,12 +169,20 @@ export function codeView() {
         setTimeout(() => overlay.classList.add("show"), 10)
         vibrate([50, 100, 50])
 
-        setTimeout(() => {
+        // Start loading the step's images during the success feedback. The
+        // step is only rendered once the feedback clears, so no typing audio
+        // plays behind the overlay, but the background is already cached.
+        const minFeedback = new Promise((resolve) => setTimeout(resolve, SUCCESS_FEEDBACK_MS))
+        Promise.all([
+            Promise.race([preloadStepAssets(stepId), minFeedback]),
+            minFeedback
+        ]).then(() => {
             overlay.classList.remove('show')
-            overlay.remove()
-            //Start the step
-            startStep(stepId)
-        }, 1500)
+            setTimeout(() => {
+                overlay.remove()
+                startStep(stepId)
+            }, 300)
+        })
     }
 
     function codeError() {
