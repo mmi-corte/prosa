@@ -2,7 +2,11 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { execFile } = require('child_process');
+
+const EDITOR_TOKEN = process.env.PROSA_EDITOR_TOKEN || 'prosa-editor-dev';
+const MAX_SAVE_BODY = 2 * 1024 * 1024;
+const RANGE_EXTENSIONS = new Set(['.mp4', '.webm', '.ogg', '.mp3', '.wav', '.m4a']);
 
 // Generate self-signed certificate
 const forge = require('node-forge');
@@ -91,7 +95,10 @@ const mimeTypes = {
   '.css': 'text/css',
   '.json': 'application/json',
   '.png': 'image/png',
-  '.jpg': 'image/jpg',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.wav': 'audio/wav',
@@ -99,6 +106,9 @@ const mimeTypes = {
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
   '.woff': 'application/font-woff',
+  '.woff2': 'font/woff2',
+  '.ogg': 'audio/ogg',
+  '.aac': 'audio/aac',
   '.ttf': 'application/font-ttf',
   '.eot': 'application/vnd.ms-fontobject',
   '.otf': 'application/font-otf',
@@ -108,37 +118,181 @@ const mimeTypes = {
   '.mind': 'application/octet-stream'
 };
 
-// Case-insensitive file path resolver
+// Check that a resolved path stays inside the served directory
+function isInsideRoot(candidate, root) {
+  return candidate === root || candidate.startsWith(root + path.sep);
+}
+
+// Case-insensitive file path resolver (never returns a path outside __dirname)
 function findFilePathCaseInsensitive(requestedPath) {
-  // If file exists with exact case, return it
-  if (fs.existsSync(requestedPath)) {
-    return requestedPath;
+  const root = path.resolve(__dirname);
+  const resolved = path.resolve(requestedPath);
+  if (!isInsideRoot(resolved, root)) {
+    return root;
   }
-  
-  // Split into parts and try to match each part case-insensitively
-  const parts = requestedPath.split(/[/\\]/);
-  let currentPath = '.';
-  
-  for (let i = 1; i < parts.length; i++) {
-    const part = parts[i];
-    if (!part) continue;
-    
+
+  // If file exists with exact case, return it
+  if (fs.existsSync(resolved)) {
+    return resolved;
+  }
+
+  // Match each segment case-insensitively, starting from the root
+  const relative = path.relative(root, resolved);
+  if (!relative) return root;
+  const parts = relative.split(/[/\\]/).filter(Boolean);
+  let currentPath = root;
+
+  for (const part of parts) {
     try {
       const entries = fs.readdirSync(currentPath);
       const match = entries.find(entry => entry.toLowerCase() === part.toLowerCase());
-      
-      if (match) {
-        currentPath = path.join(currentPath, match);
-      } else {
-        // No match found, return original path (will result in 404)
-        return requestedPath;
+      if (!match) {
+        // No match found - keep the in-root path (will result in 404)
+        return resolved;
       }
+      currentPath = path.join(currentPath, match);
     } catch (e) {
-      return requestedPath;
+      return resolved;
     }
   }
-  
+
   return currentPath;
+}
+
+// Decode and resolve a request pathname, rejecting malformed or traversal paths
+function resolveRequestPath(urlPath, res) {
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(urlPath);
+  } catch (err) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('400 - Bad Request');
+    return null;
+  }
+
+  if (decodedPath === '/' || decodedPath === '') {
+    decodedPath = '/index.html';
+  } else if (decodedPath === '/immersive' || decodedPath === '/immersive/') {
+    decodedPath = '/immersive.html';
+  }
+
+  let filePath = path.resolve(__dirname, '.' + decodedPath);
+  if (!isInsideRoot(filePath, __dirname)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('403 - Forbidden');
+    return null;
+  }
+
+  filePath = findFilePathCaseInsensitive(filePath);
+  if (!isInsideRoot(filePath, __dirname)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('403 - Forbidden');
+    return null;
+  }
+
+  return filePath;
+}
+
+// Parse a strict Range header: bytes=start-end, bytes=start-, or bytes=-suffix
+function parseByteRange(rangeHeader, fileSize) {
+  const match = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader);
+  if (!match || (!match[1] && !match[2])) return null;
+
+  let start;
+  let end;
+  if (!match[1]) {
+    const suffix = Number(match[2]);
+    if (!Number.isSafeInteger(suffix) || suffix <= 0 || fileSize === 0) return null;
+    start = Math.max(0, fileSize - suffix);
+    end = fileSize - 1;
+  } else {
+    start = Number(match[1]);
+    end = match[2] ? Number(match[2]) : fileSize - 1;
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end)) return null;
+  }
+
+  if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end)) return null;
+  if (start < 0 || start > end || end >= fileSize) return null;
+  return { start, end };
+}
+
+// Stream a file with an error handler so stream failures cannot crash the process
+function pipeFile(filePath, res, options) {
+  const file = fs.createReadStream(filePath, options);
+  file.on('error', err => {
+    console.error('Stream error:', err.message);
+    if (!res.headersSent) {
+      res.writeHead(500);
+      res.end('Server Error');
+    } else {
+      res.destroy(err);
+    }
+  });
+  file.pipe(res);
+}
+
+// Authenticated editor save endpoint (shared by HTTPS and HTTP handlers)
+function handleSaveCharacters(req, res) {
+  if (req.headers['x-editor-token'] !== EDITOR_TOKEN) {
+    res.writeHead(401, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Unauthorized' }));
+    return;
+  }
+
+  const chunks = [];
+  let bodyLength = 0;
+  let tooLarge = false;
+
+  req.on('data', chunk => {
+    if (tooLarge) return;
+    bodyLength += chunk.length;
+    if (bodyLength > MAX_SAVE_BODY) {
+      tooLarge = true;
+      res.writeHead(413, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Payload too large' }));
+      req.destroy();
+      return;
+    }
+    chunks.push(chunk);
+  });
+
+  req.on('end', () => {
+    if (tooLarge) return;
+
+    let data;
+    try {
+      data = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Invalid JSON' }));
+      console.log('❌ Save failed: invalid JSON');
+      return;
+    }
+
+    if (!data || typeof data !== 'object' || Array.isArray(data) ||
+        !Object.prototype.hasOwnProperty.call(data, 'version') ||
+        !Object.prototype.hasOwnProperty.call(data, 'settings') ||
+        !Array.isArray(data.characters)) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Invalid characters data' }));
+      console.log('❌ Save failed: invalid characters data');
+      return;
+    }
+
+    try {
+      const filePath = path.join(__dirname, 'data', 'characters.json');
+      const tmpPath = filePath + '.tmp';
+      fs.writeFileSync(tmpPath, JSON.stringify(data, null, 2), 'utf8');
+      fs.renameSync(tmpPath, filePath);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+      console.log('✅ characters.json saved');
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+      console.log('❌ Save failed:', err.message);
+    }
+  });
 }
 
 // Create HTTPS server
@@ -151,9 +305,8 @@ const server = https.createServer(options, (req, res) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.writeHead(204, {
-      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
+      'Access-Control-Allow-Headers': 'Content-Type, X-Editor-Token'
     });
     res.end();
     return;
@@ -161,42 +314,13 @@ const server = https.createServer(options, (req, res) => {
 
   // Handle API: Save characters.json
   if (req.method === 'POST' && urlPath === '/api/save-characters') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      try {
-        const data = JSON.parse(body);
-        const filePath = path.join(__dirname, 'AR', 'data', 'characters.json');
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-        res.writeHead(200, {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        });
-        res.end(JSON.stringify({ success: true }));
-        console.log('✅ characters.json saved');
-      } catch (err) {
-        res.writeHead(500, {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        });
-        res.end(JSON.stringify({ error: err.message }));
-        console.log('❌ Save failed:', err.message);
-      }
-    });
+    handleSaveCharacters(req, res);
     return;
   }
 
-  let filePath = '.' + urlPath;
-  
-  // Default to index.html for root
-  if (filePath === './') {
-    filePath = './index.html';
-  } else if (filePath === './immersive' || filePath === './immersive/') {
-    filePath = './immersive.html';
-  }
-
-  // Resolve case-insensitive path
-  filePath = findFilePathCaseInsensitive(filePath);
+  // Decode, resolve and validate the requested path
+  const filePath = resolveRequestPath(urlPath, res);
+  if (!filePath) return;
 
   // If it's a directory without trailing slash, redirect to add the slash
   // This ensures relative paths in HTML resolve correctly
@@ -222,28 +346,31 @@ const server = https.createServer(options, (req, res) => {
     return;
   }
 
-  // Handle video files with range request support
-  if (extname === '.mp4' || extname === '.webm' || extname === '.ogg') {
+  // Handle video/audio files with range request support
+  if (RANGE_EXTENSIONS.has(extname)) {
     const stat = fs.statSync(filePath);
     const fileSize = stat.size;
     const range = req.headers.range;
 
     if (range) {
-      // Parse range header
-      const parts = range.replace(/bytes=/, '').split('-');
-      const start = parseInt(parts[0], 10);
-      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-      const chunkSize = (end - start) + 1;
-
-      const file = fs.createReadStream(filePath, { start, end });
+      const parsedRange = parseByteRange(range, fileSize);
+      if (!parsedRange) {
+        res.writeHead(416, {
+          'Content-Range': `bytes */${fileSize}`,
+          'Accept-Ranges': 'bytes'
+        });
+        res.end();
+        return;
+      }
+      const { start, end } = parsedRange;
       res.writeHead(206, {
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
         'Accept-Ranges': 'bytes',
-        'Content-Length': chunkSize,
+        'Content-Length': end - start + 1,
         'Content-Type': contentType,
         'Access-Control-Allow-Origin': '*'
       });
-      file.pipe(res);
+      pipeFile(filePath, res, { start, end });
     } else {
       // No range requested - send full file
       res.writeHead(200, {
@@ -252,7 +379,7 @@ const server = https.createServer(options, (req, res) => {
         'Content-Type': contentType,
         'Access-Control-Allow-Origin': '*'
       });
-      fs.createReadStream(filePath).pipe(res);
+      pipeFile(filePath, res);
     }
     return;
   }
@@ -276,15 +403,20 @@ const server = https.createServer(options, (req, res) => {
   });
 });
 
-const PORT = 8443;
+const PORT = Number(process.env.PORT) || 8443;
 const HOST = '0.0.0.0';
 
-// Function to launch URL via ADB
+// Function to launch URL via ADB (opt-in with PROSA_ADB=1)
 function launchADB(url) {
+  if (process.env.PROSA_ADB !== '1') {
+    console.log('ℹ️  ADB launch skipped (set PROSA_ADB=1 to enable)');
+    return;
+  }
+
   console.log('\n🔌 Attempting to launch on Android device via ADB...');
   
   // Check if device is connected
-  exec('adb devices', (error, stdout, stderr) => {
+  execFile('adb', ['devices'], (error, stdout, stderr) => {
     if (error) {
       console.log('⚠️  ADB not found or not in PATH');
       return;
@@ -299,8 +431,7 @@ function launchADB(url) {
     console.log(`✅ Found ${lines.length} connected device(s)`);
     
     // Launch URL in Chrome on the device
-    const adbCommand = `adb shell am start -a android.intent.action.VIEW -d "${url}"`;
-    exec(adbCommand, (error, stdout, stderr) => {
+    execFile('adb', ['shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', url], (error, stdout, stderr) => {
       if (error) {
         console.log('⚠️  Failed to launch URL on device:', error.message);
       } else {
@@ -337,16 +468,26 @@ const httpHandler = (req, res) => {
 
   // Parse URL (remove query string)
   let urlPath = req.url.split('?')[0];
-  let filePath = '.' + urlPath;
-  
-  if (filePath === './') {
-    filePath = './index.html';
-  } else if (filePath === './immersive' || filePath === './immersive/') {
-    filePath = './immersive.html';
+
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, X-Editor-Token'
+    });
+    res.end();
+    return;
   }
 
-  // Resolve case-insensitive path
-  filePath = findFilePathCaseInsensitive(filePath);
+  // Handle API: Save characters.json
+  if (req.method === 'POST' && urlPath === '/api/save-characters') {
+    handleSaveCharacters(req, res);
+    return;
+  }
+
+  // Decode, resolve and validate the requested path
+  const filePath = resolveRequestPath(urlPath, res);
+  if (!filePath) return;
 
   // If it's a directory without trailing slash, redirect to add the slash
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory() && !urlPath.endsWith('/')) {
@@ -364,7 +505,7 @@ const httpHandler = (req, res) => {
   const contentType = mimeTypes[extname] || 'application/octet-stream';
 
   // Handle video/audio files with range request support (required for iOS)
-  if (extname === '.mp4' || extname === '.mp3' || extname === '.webm' || extname === '.wav') {
+  if (RANGE_EXTENSIONS.has(extname)) {
     if (!fs.existsSync(filePath)) {
       res.writeHead(404);
       res.end('Not found');
@@ -376,20 +517,24 @@ const httpHandler = (req, res) => {
     const range = req.headers.range;
     
     if (range) {
-      const parts = range.replace(/bytes=/, '').split('-');
-      const start = parseInt(parts[0], 10);
-      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-      const chunkSize = (end - start) + 1;
-      const file = fs.createReadStream(filePath, { start, end });
-      
+      const parsedRange = parseByteRange(range, fileSize);
+      if (!parsedRange) {
+        res.writeHead(416, {
+          'Content-Range': `bytes */${fileSize}`,
+          'Accept-Ranges': 'bytes'
+        });
+        res.end();
+        return;
+      }
+      const { start, end } = parsedRange;
       res.writeHead(206, {
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
         'Accept-Ranges': 'bytes',
-        'Content-Length': chunkSize,
+        'Content-Length': end - start + 1,
         'Content-Type': contentType,
         'Access-Control-Allow-Origin': '*'
       });
-      file.pipe(res);
+      pipeFile(filePath, res, { start, end });
     } else {
       res.writeHead(200, {
         'Content-Length': fileSize,
@@ -397,7 +542,7 @@ const httpHandler = (req, res) => {
         'Content-Type': contentType,
         'Access-Control-Allow-Origin': '*'
       });
-      fs.createReadStream(filePath).pipe(res);
+      pipeFile(filePath, res);
     }
     return;
   }
@@ -422,7 +567,7 @@ const httpHandler = (req, res) => {
 };
 
 const httpServer = http.createServer(httpHandler);
-const HTTP_PORT = 8080;
+const HTTP_PORT = Number(process.env.HTTP_PORT) || 8080;
 
 httpServer.listen(HTTP_PORT, HOST, () => {
   const localIP = getLocalIP();

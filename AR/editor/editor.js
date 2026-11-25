@@ -1776,10 +1776,15 @@ async function autoSave() {
   const localData = { ...data, _savedAt: new Date().toISOString() };
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(localData));
   
+  const editorToken = localStorage.getItem('prosaEditorToken') || 'prosa-editor-dev';
+
   try {
     const response = await fetch('/api/save-characters', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Editor-Token': editorToken
+      },
       body: JSON.stringify(data)
     });
     
@@ -1791,17 +1796,28 @@ async function autoSave() {
         statusEl.textContent = '✅ Saved';
         setTimeout(() => { statusEl.textContent = ''; }, 2000);
       }
-    } else {
-      throw new Error('Server error');
+      return true;
     }
+
+    // The server responded but refused the save - keep changes marked unsaved
+    const message = `❌ Server refused save (${response.status})` +
+      (response.status === 401 ? ' — check token' : '');
+    console.error(message);
+    state.unsavedChanges = true;
+    if (statusEl) {
+      statusEl.textContent = message;
+      setTimeout(() => { statusEl.textContent = ''; }, 5000);
+    }
+    return false;
   } catch (error) {
-    // Server not available (GitHub Pages) - localStorage already saved
-    console.log('Server save unavailable, using localStorage');
+    // Network failure (e.g. GitHub Pages) - localStorage backup already saved
+    console.log('Server save unavailable, using localStorage:', error);
     state.unsavedChanges = false;
     if (statusEl) {
       statusEl.textContent = '💾 Local';
       setTimeout(() => { statusEl.textContent = ''; }, 2000);
     }
+    return true;
   }
 }
 
@@ -1822,9 +1838,9 @@ async function saveNow() {
   state.unsavedChanges = true; // force save even if already synced
   const btn = document.getElementById('save-btn');
   if (btn) btn.querySelector('.btn-text').textContent = ' Saving...';
-  await autoSave();
+  const saved = await autoSave();
   if (btn) {
-    btn.querySelector('.btn-text').textContent = ' Saved!';
+    btn.querySelector('.btn-text').textContent = saved ? ' Saved!' : ' Failed';
     setTimeout(() => { btn.querySelector('.btn-text').textContent = ' Save'; }, 2000);
   }
 }

@@ -2,6 +2,7 @@ import { clearContainer, gameContainer } from "../../../app.js";
 import { navigate } from "../../../router.js";
 import { gameInitialized, setDifficulty } from "../../initGame.js";
 import { difficultyView } from "./initViews/difficultyView.js";
+import { menuView } from "./menuView.js";
 
 export let wrapper;
 export let initTextContainer;
@@ -14,7 +15,7 @@ export let selectedPlayers = []
 export function initView() {
     //If game already initialized, ignore init sequence
     if (gameInitialized) {
-        navigate("menu", () => menuView())
+        navigate("menu", menuView)
         return
     }
 
@@ -41,7 +42,7 @@ export function initView() {
         wrapper.appendChild(initContainer)
 
         // Load difficulty screen first
-        navigate('nouvelle-partie/choix-difficulte', difficultyView())
+        navigate('nouvelle-partie/choix-difficulte', difficultyView)
     }
 
     if (localStorage.getItem('introCinematicWatched') === 'true') {

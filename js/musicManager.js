@@ -12,7 +12,9 @@ const MUSIC_VOLUME_RATIO = 0.18;
 
 let audio = null;
 let currentTrackIndex = -1;
-let muted = false;
+
+// Mute state lives in settings so it survives reloads like every other preference.
+const isMuted = () => settings.musicMuted === true;
 
 export function startMusic() {
     if (audio && !audio.paused) return;
@@ -30,7 +32,7 @@ export function startMusic() {
 
     audio = new Audio(TRACKS[currentTrackIndex]);
     audio.loop = true;
-    audio.volume = muted ? 0 : (settings.music / 100) * MUSIC_VOLUME_RATIO;
+    audio.volume = isMuted() ? 0 : (settings.music / 100) * MUSIC_VOLUME_RATIO;
     audio.play().catch(() => {});
 }
 
@@ -43,15 +45,15 @@ export function stopMusic() {
 
 export function updateMusicVolume() {
     if (!audio) return;
-    audio.volume = muted ? 0 : (settings.music / 100) * MUSIC_VOLUME_RATIO;
+    audio.volume = isMuted() ? 0 : (settings.music / 100) * MUSIC_VOLUME_RATIO;
 }
 
 export function toggleMusicMute() {
-    muted = !muted;
+    settings.musicMuted = !isMuted();
     updateMusicVolume();
-    return muted;
+    return settings.musicMuted;
 }
 
 export function isMusicMuted() {
-    return muted;
+    return isMuted();
 }

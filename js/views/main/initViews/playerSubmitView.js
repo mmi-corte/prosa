@@ -12,12 +12,12 @@ let charactersByRegion = {}
 
 export async function playerSubmitView(selectedPlayers) {
     if (gameInitialized) {
-        navigate('menu', menuView(), true)
+        navigate('menu', menuView, true)
         return
     }
 
     if (!selectedPlayers) {
-        navigate('nouvelle-partie/choix-personnage', characterSelectView(), false)
+        navigate('nouvelle-partie/choix-personnage', characterSelectView, false)
         return
     }
 

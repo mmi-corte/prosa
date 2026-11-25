@@ -95,10 +95,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     navigate(initialHash, () => callView(initialHash));
   } else if (gameInitialized) {
     appLogger.log('🎯 Resuming previous game...');
-    navigate('resume', progressionView())
+    navigate('resume', progressionView)
   } else {
     appLogger.log('🎯 Opening main menu...');
-    navigate('menu', menuView())
+    navigate('menu', menuView)
   }
 
   if (window.initProsaLogoLottie) {
@@ -122,7 +122,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // ====================================
   const headerLogo = document.getElementById('header-logo');
 
-  headerLogo.addEventListener('click', (e) => {
+  headerLogo?.addEventListener('click', (e) => {
     e.preventDefault();
     appLogger.log('🏠 Navigating to menu');
     navigate('menu', menuView)
@@ -167,23 +167,49 @@ export const settings = {
   music: 70,
   sfx: 80,
   narration: 80,
+  musicMuted: false,
   vibration: true,
   camera: false,
   lightMode: false,
   narrationTts: true,
   typewriterSound: true,
 }
-// Load settings from localStorage if they exists
-settings.music = parseInt(localStorage.getItem('settingMusic')) || settings.music;
-settings.sfx = parseInt(localStorage.getItem('settingSfx')) || settings.sfx;
-settings.narration = parseInt(localStorage.getItem('settingNarration')) || settings.narration;
-const storedTwSound = localStorage.getItem('settingTypewriterSound');
-settings.typewriterSound = storedTwSound === null ? settings.typewriterSound : storedTwSound === 'true';
-settings.vibration = localStorage.getItem('settingVibration') === 'true' || settings.vibration;
-settings.camera = localStorage.getItem('settingCamera') === 'true' || settings.camera;
-settings.lightMode = localStorage.getItem('settingLightMode') === 'true';
-const storedTts = localStorage.getItem('settingNarrationTts');
-settings.narrationTts = storedTts === null ? settings.narrationTts : storedTts === 'true';
+
+// Explicit null checks: 0 and false are valid saved values and must not fall back to defaults.
+function readNumberSetting(key, fallback) {
+  const raw = localStorage.getItem(key)
+  if (raw === null) return fallback
+  const value = Number(raw)
+  return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : fallback
+}
+
+function readBooleanSetting(key, fallback) {
+  const raw = localStorage.getItem(key)
+  return raw === null ? fallback : raw === 'true'
+}
+
+settings.music = readNumberSetting('settingMusic', settings.music)
+settings.sfx = readNumberSetting('settingSfx', settings.sfx)
+settings.narration = readNumberSetting('settingNarration', settings.narration)
+settings.musicMuted = readBooleanSetting('settingMusicMuted', settings.musicMuted)
+settings.typewriterSound = readBooleanSetting('settingTypewriterSound', settings.typewriterSound)
+settings.vibration = readBooleanSetting('settingVibration', settings.vibration)
+settings.camera = readBooleanSetting('settingCamera', settings.camera)
+settings.lightMode = readBooleanSetting('settingLightMode', settings.lightMode)
+settings.narrationTts = readBooleanSetting('settingNarrationTts', settings.narrationTts)
+
+/** Persist every user preference in one place. */
+export function saveSettings() {
+  localStorage.setItem('settingMusic', settings.music)
+  localStorage.setItem('settingSfx', settings.sfx)
+  localStorage.setItem('settingNarration', settings.narration)
+  localStorage.setItem('settingMusicMuted', settings.musicMuted)
+  localStorage.setItem('settingTypewriterSound', settings.typewriterSound)
+  localStorage.setItem('settingVibration', settings.vibration)
+  localStorage.setItem('settingCamera', settings.camera)
+  localStorage.setItem('settingLightMode', settings.lightMode)
+  localStorage.setItem('settingNarrationTts', settings.narrationTts)
+}
 
 // Apply light mode if saved - do it immediately
 if (document.body) {
@@ -213,7 +239,6 @@ const settingButton = document.getElementById('settingButton')
 if (settingButton) {
   settingButton.addEventListener('click', () => {
     navigate('parametres', settingView)
-    settingView()
   })
 }
 

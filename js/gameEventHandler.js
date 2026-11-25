@@ -11,6 +11,7 @@ import { aleasRiddleView } from "./views/actions/aleasRiddleView.js";
 import { tokenView } from "./views/actions/tokenView.js";
 import { navigate } from "../router.js";
 import { startMusic, stopMusic } from "./musicManager.js";
+import { showBackButton } from "./views/components/backButton.js";
 
 let activePlayerId
 export let activePlayer
@@ -136,6 +137,50 @@ export function callAction(actionType, action = null) {
             menuView()
             break;
     }
+
+    // Header arrow stays available during a step, but now points to the next step
+    // instead of rewinding browser history. Minigames hide the header themselves.
+    const stepActions = ['dialog', 'choice', 'riddle', 'token', 'aleasRiddle', 'end', 'special_end']
+    if (stepActions.includes(actionType) && activeStep) {
+        showBackButton()
+    }
+}
+
+/**
+ * Resolve and start the step that follows the current one.
+ * Used by the header arrow while a step is displayed.
+ * @returns {boolean} true when an advance could be started
+ */
+export function advanceToNextStep() {
+    if (!activeStep || !activePlayer) return false;
+
+    // Most steps expose several endings ("win", "still", "lose"). The forward
+    // navigation follows the winning path, falling back to any other ending
+    // that declares a next step.
+    const endings = Object.values(activeStep.end || {});
+    const targetEnd =
+        endings.find(end => end.type === 'win') ||
+        endings.find(end => end.type === 'continue') ||
+        endings.find(end => end.type === 'prosa_landing') ||
+        endings.find(end => end.nextStep);
+
+    const rawNextStep = targetEnd?.nextStep;
+    if (!rawNextStep) return false;
+
+    if (targetEnd.unlockedStepId && targetEnd.unlockStep) {
+        addUnlockedStep(targetEnd.unlockedStepId, targetEnd.unlockStep);
+    }
+    if (targetEnd.type === 'prosa_landing') {
+        changePlayerLocalisation(3);
+    }
+
+    const normalizedStep = String(rawNextStep).padStart(2, '0');
+    checkStepExist(normalizedStep).then((stepId) => {
+        if (stepId) {
+            startStep(stepId);
+        }
+    });
+    return true;
 }
 
 export function addUnlockedStep(stepId, unlockedStepId) {

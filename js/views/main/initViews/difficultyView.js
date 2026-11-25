@@ -79,7 +79,7 @@ export function difficultyView() {
     submitButton.style.opacity = '0';
     submitButton.addEventListener('click', () => {
         if (initDifficulty) {
-            navigate('nouvelle-partie/nombre-joueur', playerCountView())
+            navigate('nouvelle-partie/nombre-joueur', playerCountView)
         }
     });
 

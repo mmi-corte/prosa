@@ -1,4 +1,4 @@
-import { gameContainer, settings, vibrate, applyLightMode } from "../../../app.js";
+import { gameContainer, settings, vibrate, applyLightMode, saveSettings as saveAppSettings } from "../../../app.js";
 import { updateMusicVolume, toggleMusicMute, isMusicMuted } from "../../musicManager.js";
 import { showBackButton } from "../components/backButton.js";
 
@@ -77,7 +77,7 @@ export function settingView() {
   gameContainer.appendChild(container)
 
   document.getElementById('settingsCloseBtn').addEventListener('click', () => {
-    saveSettings();
+    saveAppSettings();
     container.remove();
   });
 
@@ -92,8 +92,8 @@ export function settingView() {
   const musicMuteToggle = document.getElementById('musicMuteToggle')
 
   // Set initial values from settings
-  musicSlider.value = settings.music || 70;
-  narrationSlider.value = settings.narration || 80;
+  musicSlider.value = settings.music;
+  narrationSlider.value = settings.narration;
   cameraToggle.classList.toggle('active', settings.camera);
   lightModeToggle.classList.toggle('active', settings.lightMode);
   narrationTtsToggle.classList.toggle('active', settings.narrationTts);
@@ -104,36 +104,41 @@ export function settingView() {
 
   //Musique
   musicSlider.addEventListener('input', (e) => {
-    settings.music = parseInt(e.target.value);
+    settings.music = parseInt(e.target.value, 10);
     updateMusicVolume();
+    saveAppSettings();
   });
   //Narration
   narrationSlider.addEventListener('input', (e) => {
-    settings.narration = parseInt(e.target.value);
+    settings.narration = parseInt(e.target.value, 10);
+    saveAppSettings();
   });
   //Mute musique
   musicMuteToggle.addEventListener('click', () => {
     const nowMuted = toggleMusicMute();
     musicMuteToggle.classList.toggle('active', !nowMuted);
     musicSliderItem.style.display = nowMuted ? 'none' : '';
+    saveAppSettings();
     vibrate(30);
   });
 
   //Son touches typewriter
   typewriterSoundToggle.addEventListener('click', () => {
     toggleSetting(typewriterSoundToggle, 'typewriterSound');
-    localStorage.setItem('settingTypewriterSound', settings.typewriterSound);
+    saveAppSettings();
   });
 
   //Camera
-  cameraToggle.addEventListener("click", () => toggleSetting(cameraToggle, "camera"))
+  cameraToggle.addEventListener("click", () => {
+    toggleSetting(cameraToggle, "camera")
+    saveAppSettings()
+  })
 
   //Light Mode
   lightModeToggle.addEventListener("click", () => {
     toggleSetting(lightModeToggle, "lightMode")
     applyLightMode()
-    // Sauvegarder immédiatement pour que le mode persiste
-    localStorage.setItem('settingLightMode', settings.lightMode);
+    saveAppSettings()
   })
 
   //Narration TTS
@@ -141,7 +146,7 @@ export function settingView() {
     settings.narrationTts = !settings.narrationTts;
     narrationTtsToggle.classList.toggle('active', settings.narrationTts);
     narrationSliderItem.style.display = settings.narrationTts ? '' : 'none';
-    localStorage.setItem('settingNarrationTts', settings.narrationTts);
+    saveAppSettings();
     if (!settings.narrationTts && typeof window.__prosaStopNarration === 'function') {
       window.__prosaStopNarration();
     }
@@ -152,13 +157,5 @@ export function settingView() {
     toggle.classList.toggle("active")
     settings[key] = toggle.classList.contains("active")
     vibrate(30)
-  }
-
-  function saveSettings() {
-    localStorage.setItem('settingMusic', settings.music);
-    localStorage.setItem('settingNarration', settings.narration);
-    localStorage.setItem('settingCamera', settings.camera);
-    localStorage.setItem('settingLightMode', settings.lightMode);
-    localStorage.setItem('settingNarrationTts', settings.narrationTts);
   }
 }

@@ -43,7 +43,7 @@ export function progressionView() {
 
   newGameBtn.addEventListener('click', () => {
     resetGame()
-    navigate('menu', menuView(), true)
+    navigate('menu', menuView, true)
   })
 
   resumeGameBtn.addEventListener('click', () => {

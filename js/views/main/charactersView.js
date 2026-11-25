@@ -445,11 +445,12 @@ function closeCharacterDetail(skipNavigate = false) {
     isClosingCharacterDetail = true
 
     if (characterDetailOverlay) {
+        const overlay = characterDetailOverlay
+        characterDetailOverlay = null
         if (!skipNavigate) {
             navigate('univers-prosa/encyclopedie', () => charactersView(true))
         }
-        characterDetailOverlay.remove()
-        characterDetailOverlay = null
+        overlay.remove()
     }
 
     isClosingCharacterDetail = false

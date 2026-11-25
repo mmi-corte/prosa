@@ -29,17 +29,13 @@ export function gameOverView() {
     // Event listeners
     document.getElementById('yesBtn').addEventListener('click', () => {
         resetGame();
-        // Attendre que resetGame se termine
-        setTimeout(() => {
-            console.log('Navigating to init view');
-            navigate('init', () => initView());
-        }, 100);
+        navigate('init', initView);
     });
 
     document.getElementById('noBtn').addEventListener('click', () => {
-        // Retour à l'accueil ou menu principal
+        // Retour à l'accueil ou menu principal (relative so subpath deployments work)
         resetGame();
-        window.location.href = '/';
+        window.location.href = './index.html#menu';
     });
 }
 

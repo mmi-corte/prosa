@@ -99,7 +99,7 @@ function renderCharacterGrid() {
             btn.innerHTML = character.name
 
             btn.addEventListener('click', () => {
-                navigate('nouvelle-partie/choix-personnage/details', showCharacterDetails(region.id, character.id))
+                navigate('nouvelle-partie/choix-personnage/details', () => showCharacterDetails(region.id, character.id))
 
             });
 

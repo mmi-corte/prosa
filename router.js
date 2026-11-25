@@ -9,29 +9,45 @@ import { characterSelectView } from "./js/views/main/initViews/characterSelectVi
 import { difficultyView } from "./js/views/main/initViews/difficultyView.js"
 import { playerCountView } from "./js/views/main/initViews/playerCountView.js"
 import { playerSubmitView } from "./js/views/main/initViews/playerSubmitView.js"
-import { menuView } from "./js/views/main/menuView.js"
+import { menuView, showDiscoverPage } from "./js/views/main/menuView.js"
 import { playerSelectView } from "./js/views/main/playerSelectView.js"
 import { progressionView } from "./js/views/main/progressionView.js"
 import { qrView } from "./js/views/main/qrView.js"
 import { seasonsView } from "./js/views/main/seasonsView.js"
 import { settingView } from "./js/views/main/settingView.js"
 import { minigamesView } from "./js/views/main/minigamesView.js"
+import { initView } from "./js/views/main/initView.js"
+import { activeStep, callAction } from "./js/gameEventHandler.js"
+
+// Re-render the current gameplay step when the user returns to it via Back/Forward.
+function stepView() {
+    if (!activeStep) {
+        menuView()
+        return
+    }
+    callAction(activeStep.actionType, activeStep.action)
+}
 
 // ====================================
 const viewRoutes = {
     'menu': menuView,
     'jeu/code': codeView,
     'jeu/choix-joueur': playerSelectView,
+    'jeu/etape': stepView,
     'resume': progressionView,
     'qr': qrView,
     'parametres': settingView,
     'gameover': gameOverView,
     'aleas': aleasView,
     'aleas/enigme': aleasView,
+    'aleas/confirm-augmentation': aleasView,
+    'init': initView,
     'nouvelle-partie/choix-difficulte': difficultyView,
     'nouvelle-partie/nombre-joueur': playerCountView,
     'nouvelle-partie/choix-personnage': characterSelectView,
+    'nouvelle-partie/choix-personnage/details': characterSelectView,
     'nouvelle-partie/confirmation': characterSelectView,
+    'univers-prosa': showDiscoverPage,
     'univers-prosa/encyclopedie': charactersView,
     'univers-prosa/encyclopedie-details': charactersView,
     'univers-prosa/saisons': seasonsView,
@@ -68,6 +84,7 @@ export function callView(viewName) {
     //Handle exceprions
     if (viewName === 'univers-prosa/encyclopedie') {
         const preventReload = lastViewName === 'univers-prosa/encyclopedie-details'
+        lastViewName = viewName
         charactersView(preventReload)
         return
     }
@@ -79,9 +96,11 @@ export function callView(viewName) {
         } catch (e) {
             console.warn('Could not replace history state:', e)
         }
+        lastViewName = 'menu'
         menuView?.()
         return
     }
+    lastViewName = viewName
     viewFunction?.()
 }
 
@@ -91,5 +110,4 @@ export function callView(viewName) {
 window.addEventListener('popstate', (event) => {
     const viewName = event.state ? event.state.view : 'menu'
     callView(viewName)
-    lastViewName = viewName
 })

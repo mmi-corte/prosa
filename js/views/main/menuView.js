@@ -103,14 +103,14 @@ export function menuView() {
 
   //Discover button
   document.getElementById('discoverBtn').addEventListener('click', () => {
-    navigate("univers-prosa", () => showDiscoverPage())
+    navigate("univers-prosa", showDiscoverPage)
   })
 }
 
 
 
 // Page "L'univers de Prosa" (full page)
-function showDiscoverPage() {
+export function showDiscoverPage() {
   clearContainer()
   showBackButton()
 

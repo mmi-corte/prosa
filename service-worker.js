@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cache-prosa-game-v42';
+const CACHE_NAME = 'cache-prosa-game-v43';
 // Service Worker logging utilise toujours le même système
 // (les SWs n'ont pas accès à localStorage directement lors du démarrage)
 const logSW = (...args) => {
@@ -10,6 +10,7 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './app.js',
+  './router.js',
   './styles.css',
   './manifest.json',
   './assets-manifest.json',
@@ -22,6 +23,7 @@ const ASSETS_TO_CACHE = [
   './js/initGame.js',
   './js/langageManager.js',
   './js/loadData.js',
+  './js/musicManager.js',
   './js/typeWriteEffect.js',
 
   // Views JS
@@ -33,6 +35,7 @@ const ASSETS_TO_CACHE = [
   './js/views/actions/gameView.js',
   './js/views/actions/riddleView.js',
   './js/views/actions/tokenView.js',
+  './js/views/components/backButton.js',
   './js/views/components/confirmationModal.js',
   './js/views/components/correctAnswerModal.js',
   './js/views/components/difficultyIncreaseModal.js',
@@ -47,9 +50,9 @@ const ASSETS_TO_CACHE = [
   './js/views/main/initViews/langueCorseView.js',
   './js/views/main/initViews/playerCountView.js',
   './js/views/main/initViews/playerSubmitView.js',
-  './js/views/main/langueCorseView.js',
   './js/views/main/loadingView.js',
   './js/views/main/menuView.js',
+  './js/views/main/minigamesView.js',
   './js/views/main/playerSelectView.js',
   './js/views/main/progressionView.js',
   './js/views/main/qrView.js',
@@ -66,9 +69,9 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       logSW(`📦 Caching ${ASSETS_TO_CACHE.length} bootstrap files to ${CACHE_NAME}...`);
-      return cache.addAll(ASSETS_TO_CACHE).catch((error) => {
-        console.error('[Service Worker] ❌ Cache installation error:', error);
-      });
+      // Fail the install if any bootstrap file is missing: a partial cache is worse
+      // than no cache because offline failures become silent and confusing.
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
   self.skipWaiting();
@@ -90,6 +93,12 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
+  // Exclure AR (network-only) - must run before the navigation branch so AR pages
+  // are never stored in the main app cache.
+  if (url.pathname.includes('/AR/')) {
+    return;
+  }
+
   // **Navigation (HTML) - network first avec fallback cache**
   if (event.request.mode === 'navigate') {
     event.respondWith(
@@ -103,16 +112,12 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         })
-        .catch(() => {
+        .catch(async () => {
           logSW(`⚠️ Offline HTML, using cache: ${url.pathname}`);
-          return caches.match(event.request) || caches.match('./index.html');
+          const cached = await caches.match(event.request);
+          return cached || caches.match('./index.html');
         })
     );
-    return;
-  }
-
-  // Exclure AR (network-only)
-  if (url.pathname.includes('/AR/')) {
     return;
   }
 
@@ -275,7 +280,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         }).catch(() => {
           logSW(`⚠️ Offline - pas de cache pour: ${event.request.url}`);
-          return undefined;
+          return new Response('Offline', { status: 503, statusText: 'Offline' });
         });
       })
     );
@@ -285,17 +290,16 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('activate', (event) => {
   logSW('🚀 Activating Service Worker...');
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(
+    caches.keys()
+      .then((keyList) => Promise.all(
         keyList.map((key) => {
           if (key !== CACHE_NAME) {
             logSW(`🗑️ Deleting old cache: ${key}`);
             return caches.delete(key);
           }
         })
-      );
-    })
+      ))
+      .then(() => self.clients.claim())
+      .then(() => logSW(`✅ Service Worker activated with cache: ${CACHE_NAME}`))
   );
-  self.clients.claim();
-  logSW(`✅ Service Worker activated with cache: ${CACHE_NAME}`);
 });

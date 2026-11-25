@@ -21,6 +21,6 @@ export function playerSelectView() {
 
     renderPlayerList(wrapper, players, true, (playerIndex) => {
         setActivePlayer(playerIndex)
-        navigate('jeu/code', codeView())
+        navigate('jeu/code', codeView)
     })
 }

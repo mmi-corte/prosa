@@ -60,7 +60,7 @@ function showConfirmModal() {
     clearContainer()
     difficultyIncreaseModal(() => {
       history.replaceState({ view: 'aleas' }, "", "#aleas")
-      navigate('menu', menuView())
+      navigate('menu', menuView)
     })
   })
   buttonsContainer.appendChild(confirmButton)
