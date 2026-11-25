@@ -156,6 +156,7 @@ function updateDialog() {
     }
 
     let currentPitch = 400; // Default pitch
+    let currentGender = null;
 
     if (characterId) {
         const currentCharacter = getCharacterDetails(characterId);
@@ -165,6 +166,7 @@ function updateDialog() {
             characterName.style.color = currentCharacter.color || '#FFFFFF';
             characterNameBox.classList.add('shown')
             currentPitch = currentCharacter.pitch || 400;
+            currentGender = currentCharacter.gender || null;
         }
     }
 
@@ -181,7 +183,7 @@ function updateDialog() {
         typeWriteEffect(textBox, activeText, currentPitch, !settings.typewriterSound);
 
         if (settings.narrationTts) {
-            speakNarrationTts(activeText, currentPitch);
+            speakNarrationTts(activeText, currentPitch, currentGender);
         }
     }
 }
@@ -191,16 +193,35 @@ function cleanTtsText(text) {
     return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-let frenchVoice = null;
+const frenchVoiceCache = new Map();
 
-// Resolve French voice once, handling the async voiceschanged event on some browsers.
-function getFrenchVoice() {
-    if (frenchVoice) return Promise.resolve(frenchVoice);
+// Some browsers expose a gender property, others only encode it in the voice name.
+function isFemaleVoice(voice) {
+    if (voice.gender && /female/i.test(voice.gender)) return true;
+    const label = `${voice.name || ''} ${voice.voiceURI || ''}`;
+    return /(female|femme|hortense|amelie|amélie|anna|victoria|samantha|zira|susan|karen|moira|tessa|otilia|lucia|serena|elvira|fiona)/i.test(label);
+}
+
+function isMaleVoice(voice) {
+    if (voice.gender && /male/i.test(voice.gender)) return true;
+    const label = `${voice.name || ''} ${voice.voiceURI || ''}`;
+    return /(male|homme|paul|thomas|nicolas|olivier|daniel|alex|david|mark|george|rishi)/i.test(label);
+}
+
+// Resolve a French voice once per requested gender, handling async voiceschanged.
+function getFrenchVoice(gender = null) {
+    const cacheKey = gender || 'default';
+    if (frenchVoiceCache.has(cacheKey)) return Promise.resolve(frenchVoiceCache.get(cacheKey));
     return new Promise((resolve) => {
         const pick = () => {
             const voices = window.speechSynthesis.getVoices();
-            frenchVoice = voices.find(v => v.lang === 'fr-FR') || voices.find(v => v.lang.startsWith('fr')) || null;
-            resolve(frenchVoice);
+            const french = voices.filter(v => v.lang === 'fr-FR' || v.lang.startsWith('fr'));
+            let selected = null;
+            if (gender === 'female') selected = french.find(isFemaleVoice);
+            if (gender === 'male') selected = french.find(isMaleVoice);
+            selected = selected || french[0] || null;
+            frenchVoiceCache.set(cacheKey, selected);
+            resolve(selected);
         };
         const voices = window.speechSynthesis.getVoices();
         if (voices.length > 0) {
@@ -211,7 +232,7 @@ function getFrenchVoice() {
     });
 }
 
-function speakNarrationTts(text, characterPitch = 400) {
+function speakNarrationTts(text, characterPitch = 400, gender = null) {
     if (!('speechSynthesis' in window)) return;
     const clean = cleanTtsText(text);
     if (!clean) return;
@@ -221,7 +242,7 @@ function speakNarrationTts(text, characterPitch = 400) {
     // Map oscillator Hz (250-800) to Web Speech API pitch (0-2), 400Hz → 1.0
     const speechPitch = Math.max(0.1, Math.min(2, characterPitch / 400));
 
-    getFrenchVoice().then((voice) => {
+    getFrenchVoice(gender).then((voice) => {
         const utterance = new SpeechSynthesisUtterance(clean);
         utterance.lang = 'fr-FR';
         utterance.rate = 1.0;
