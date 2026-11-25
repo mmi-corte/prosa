@@ -6,6 +6,43 @@ export let gameInitialized = false
 export let globalDifficulty
 export let difficultyState
 export let playedDialogs
+export let riddleGameSeed = 0
+
+function hashString(value) {
+  let hash = 2166136261
+  for (let i = 0; i < value.length; i++) {
+    hash ^= value.charCodeAt(i)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+function createRiddleGameSeed() {
+  const values = new Uint32Array(1)
+  if (globalThis.crypto?.getRandomValues) {
+    globalThis.crypto.getRandomValues(values)
+    return values[0] >>> 0
+  }
+  return ((Date.now() >>> 0) ^ Math.floor(Math.random() * 0xffffffff)) >>> 0 || 1
+}
+
+function ensureRiddleGameSeed() {
+  const stored = Number(localStorage.getItem('riddleGameSeed'))
+  if (!Number.isFinite(stored) || stored <= 0) {
+    riddleGameSeed = createRiddleGameSeed()
+    localStorage.setItem('riddleGameSeed', String(riddleGameSeed))
+  } else {
+    riddleGameSeed = stored >>> 0
+  }
+  return riddleGameSeed
+}
+
+/** Pick a riddle index that varies per player and per game session. */
+export function chooseRiddleIndex(count, key = '', playerIndex = 0) {
+  const total = Math.max(0, Number(count) || 0)
+  if (total <= 1) return 0
+  return (riddleGameSeed + hashString(String(key)) + Math.max(0, playerIndex)) % total
+}
 
 /** Read and parse a JSON value from localStorage without ever throwing. */
 function readStoredJson(key, fallback = null) {
@@ -58,6 +95,7 @@ export async function initGame() {
         await fetchSteps()
         await fetchAleasRiddles()
         playedDialogs = readStoredJson('playedDialogs', {})
+        ensureRiddleGameSeed()
         console.log("Successfully loaded player data from storage.", players);
         return true
     } else {
